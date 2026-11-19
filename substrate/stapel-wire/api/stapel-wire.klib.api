@@ -1,0 +1,393 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-wire>
+final enum class stapel.wire/AuthRequirement : kotlin/Enum<stapel.wire/AuthRequirement> { // stapel.wire/AuthRequirement|null[0]
+    enum entry None // stapel.wire/AuthRequirement.None|null[0]
+    enum entry Optional // stapel.wire/AuthRequirement.Optional|null[0]
+    enum entry Required // stapel.wire/AuthRequirement.Required|null[0]
+
+    final val entries // stapel.wire/AuthRequirement.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.wire/AuthRequirement> // stapel.wire/AuthRequirement.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.wire/AuthRequirement // stapel.wire/AuthRequirement.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.wire/AuthRequirement> // stapel.wire/AuthRequirement.values|values#static(){}[0]
+}
+
+final enum class stapel.wire/BodyEncoding : kotlin/Enum<stapel.wire/BodyEncoding> { // stapel.wire/BodyEncoding|null[0]
+    enum entry Form // stapel.wire/BodyEncoding.Form|null[0]
+    enum entry Json // stapel.wire/BodyEncoding.Json|null[0]
+    enum entry Multipart // stapel.wire/BodyEncoding.Multipart|null[0]
+    enum entry None // stapel.wire/BodyEncoding.None|null[0]
+
+    final val entries // stapel.wire/BodyEncoding.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.wire/BodyEncoding> // stapel.wire/BodyEncoding.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.wire/BodyEncoding // stapel.wire/BodyEncoding.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.wire/BodyEncoding> // stapel.wire/BodyEncoding.values|values#static(){}[0]
+}
+
+final enum class stapel.wire/CacheScope : kotlin/Enum<stapel.wire/CacheScope> { // stapel.wire/CacheScope|null[0]
+    enum entry App // stapel.wire/CacheScope.App|null[0]
+    enum entry User // stapel.wire/CacheScope.User|null[0]
+
+    final val entries // stapel.wire/CacheScope.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.wire/CacheScope> // stapel.wire/CacheScope.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.wire/CacheScope // stapel.wire/CacheScope.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.wire/CacheScope> // stapel.wire/CacheScope.values|values#static(){}[0]
+}
+
+final enum class stapel.wire/OperationKind : kotlin/Enum<stapel.wire/OperationKind> { // stapel.wire/OperationKind|null[0]
+    enum entry Mutation // stapel.wire/OperationKind.Mutation|null[0]
+    enum entry Query // stapel.wire/OperationKind.Query|null[0]
+
+    final val entries // stapel.wire/OperationKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.wire/OperationKind> // stapel.wire/OperationKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.wire/OperationKind // stapel.wire/OperationKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.wire/OperationKind> // stapel.wire/OperationKind.values|values#static(){}[0]
+}
+
+final enum class stapel.wire/PageStyle : kotlin/Enum<stapel.wire/PageStyle> { // stapel.wire/PageStyle|null[0]
+    enum entry Anchor // stapel.wire/PageStyle.Anchor|null[0]
+    enum entry LimitOffset // stapel.wire/PageStyle.LimitOffset|null[0]
+    enum entry PageNumber // stapel.wire/PageStyle.PageNumber|null[0]
+    enum entry RevisionPage // stapel.wire/PageStyle.RevisionPage|null[0]
+
+    final val entries // stapel.wire/PageStyle.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.wire/PageStyle> // stapel.wire/PageStyle.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.wire/PageStyle // stapel.wire/PageStyle.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.wire/PageStyle> // stapel.wire/PageStyle.values|values#static(){}[0]
+}
+
+final enum class stapel.wire/ResponseKind : kotlin/Enum<stapel.wire/ResponseKind> { // stapel.wire/ResponseKind|null[0]
+    enum entry Binary // stapel.wire/ResponseKind.Binary|null[0]
+    enum entry Empty // stapel.wire/ResponseKind.Empty|null[0]
+    enum entry Json // stapel.wire/ResponseKind.Json|null[0]
+    enum entry Text // stapel.wire/ResponseKind.Text|null[0]
+
+    final val entries // stapel.wire/ResponseKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.wire/ResponseKind> // stapel.wire/ResponseKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.wire/ResponseKind // stapel.wire/ResponseKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.wire/ResponseKind> // stapel.wire/ResponseKind.values|values#static(){}[0]
+}
+
+abstract interface <#A: out kotlin/Any?> stapel.wire/Page { // stapel.wire/Page|null[0]
+    abstract val items // stapel.wire/Page.items|{}items[0]
+        abstract fun <get-items>(): kotlin.collections/List<#A> // stapel.wire/Page.items.<get-items>|<get-items>(){}[0]
+    abstract val nextCursor // stapel.wire/Page.nextCursor|{}nextCursor[0]
+        abstract fun <get-nextCursor>(): stapel.wire/PageCursor? // stapel.wire/Page.nextCursor.<get-nextCursor>|<get-nextCursor>(){}[0]
+    abstract val prevCursor // stapel.wire/Page.prevCursor|{}prevCursor[0]
+        abstract fun <get-prevCursor>(): stapel.wire/PageCursor? // stapel.wire/Page.prevCursor.<get-prevCursor>|<get-prevCursor>(){}[0]
+    abstract val total // stapel.wire/Page.total|{}total[0]
+        abstract fun <get-total>(): kotlin/Int? // stapel.wire/Page.total.<get-total>|<get-total>(){}[0]
+}
+
+abstract interface <#A: out stapel.result/StapelError> stapel.wire/ErrorDecoder { // stapel.wire/ErrorDecoder|null[0]
+    abstract fun domain(stapel.result/ErrorEnvelope): #A // stapel.wire/ErrorDecoder.domain|domain(stapel.result.ErrorEnvelope){}[0]
+    abstract fun transport(stapel.result/TransportFailure): #A // stapel.wire/ErrorDecoder.transport|transport(stapel.result.TransportFailure){}[0]
+}
+
+abstract interface stapel.wire/ApiTransport { // stapel.wire/ApiTransport|null[0]
+    abstract fun url(stapel.wire/OperationSpec<*, *, *>, stapel.wire/OperationCall<*>): kotlin/String // stapel.wire/ApiTransport.url|url(stapel.wire.OperationSpec<*,*,*>;stapel.wire.OperationCall<*>){}[0]
+    abstract suspend fun <#A1: kotlin/Any?, #B1: kotlin/Any?, #C1: stapel.result/StapelError> download(stapel.wire/OperationSpec<#A1, kotlin/Unit, #C1>, stapel.wire/OperationCall<#A1>, kotlin.coroutines/SuspendFunction1<stapel.wire/BinaryBody, #B1>): stapel.result/StapelResult<#B1, #C1> // stapel.wire/ApiTransport.download|download(stapel.wire.OperationSpec<0:0,kotlin.Unit,0:2>;stapel.wire.OperationCall<0:0>;kotlin.coroutines.SuspendFunction1<stapel.wire.BinaryBody,0:1>){0§<kotlin.Any?>;1§<kotlin.Any?>;2§<stapel.result.StapelError>}[0]
+    abstract suspend fun <#A1: kotlin/Any?, #B1: kotlin/Any?, #C1: stapel.result/StapelError> execute(stapel.wire/OperationSpec<#A1, #B1, #C1>, stapel.wire/OperationCall<#A1>): stapel.result/StapelResult<#B1, #C1> // stapel.wire/ApiTransport.execute|execute(stapel.wire.OperationSpec<0:0,0:1,0:2>;stapel.wire.OperationCall<0:0>){0§<kotlin.Any?>;1§<kotlin.Any?>;2§<stapel.result.StapelError>}[0]
+}
+
+abstract interface stapel.wire/BinaryBody { // stapel.wire/BinaryBody|null[0]
+    abstract val contentLength // stapel.wire/BinaryBody.contentLength|{}contentLength[0]
+        abstract fun <get-contentLength>(): kotlin/Long? // stapel.wire/BinaryBody.contentLength.<get-contentLength>|<get-contentLength>(){}[0]
+    abstract val contentType // stapel.wire/BinaryBody.contentType|{}contentType[0]
+        abstract fun <get-contentType>(): kotlin/String? // stapel.wire/BinaryBody.contentType.<get-contentType>|<get-contentType>(){}[0]
+
+    abstract suspend fun readBytes(): kotlin/ByteArray // stapel.wire/BinaryBody.readBytes|readBytes(){}[0]
+    abstract suspend fun writeTo(kotlinx.io/RawSink) // stapel.wire/BinaryBody.writeTo|writeTo(kotlinx.io.RawSink){}[0]
+}
+
+abstract interface stapel.wire/WireEnum { // stapel.wire/WireEnum|null[0]
+    abstract val wire // stapel.wire/WireEnum.wire|{}wire[0]
+        abstract fun <get-wire>(): kotlin/String // stapel.wire/WireEnum.wire.<get-wire>|<get-wire>(){}[0]
+}
+
+sealed interface <#A: out kotlin/Any?> stapel.wire/Maybe { // stapel.wire/Maybe|null[0]
+    final class <#A1: out kotlin/Any?> Present : stapel.wire/Maybe<#A1> { // stapel.wire/Maybe.Present|null[0]
+        constructor <init>(#A1) // stapel.wire/Maybe.Present.<init>|<init>(1:0){}[0]
+
+        final val value // stapel.wire/Maybe.Present.value|{}value[0]
+            final fun <get-value>(): #A1 // stapel.wire/Maybe.Present.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): #A1 // stapel.wire/Maybe.Present.component1|component1(){}[0]
+        final fun copy(#A1 = ...): stapel.wire/Maybe.Present<#A1> // stapel.wire/Maybe.Present.copy|copy(1:0){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/Maybe.Present.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.wire/Maybe.Present.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.wire/Maybe.Present.toString|toString(){}[0]
+    }
+
+    final object Absent : stapel.wire/Maybe<kotlin/Nothing> { // stapel.wire/Maybe.Absent|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/Maybe.Absent.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.wire/Maybe.Absent.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.wire/Maybe.Absent.toString|toString(){}[0]
+    }
+
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // stapel.wire/Maybe.Companion|null[0]
+        final fun <#A2: kotlin/Any> ofNullable(#A2?): stapel.wire/Maybe<#A2> // stapel.wire/Maybe.Companion.ofNullable|ofNullable(0:0?){0§<kotlin.Any>}[0]
+        final fun <#A2: kotlin/Any?> serializer(kotlinx.serialization/KSerializer<#A2>): kotlinx.serialization/KSerializer<stapel.wire/Maybe<#A2>> // stapel.wire/Maybe.Companion.serializer|serializer(kotlinx.serialization.KSerializer<0:0>){0§<kotlin.Any?>}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // stapel.wire/Maybe.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+}
+
+sealed interface stapel.wire/FormPart { // stapel.wire/FormPart|null[0]
+    abstract val name // stapel.wire/FormPart.name|{}name[0]
+        abstract fun <get-name>(): kotlin/String // stapel.wire/FormPart.name.<get-name>|<get-name>(){}[0]
+
+    final class File : stapel.wire/FormPart { // stapel.wire/FormPart.File|null[0]
+        constructor <init>(kotlin/String, stapel.wire/FilePart) // stapel.wire/FormPart.File.<init>|<init>(kotlin.String;stapel.wire.FilePart){}[0]
+
+        final val file // stapel.wire/FormPart.File.file|{}file[0]
+            final fun <get-file>(): stapel.wire/FilePart // stapel.wire/FormPart.File.file.<get-file>|<get-file>(){}[0]
+        final val name // stapel.wire/FormPart.File.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.wire/FormPart.File.name.<get-name>|<get-name>(){}[0]
+    }
+
+    final class Text : stapel.wire/FormPart { // stapel.wire/FormPart.Text|null[0]
+        constructor <init>(kotlin/String, kotlin/String) // stapel.wire/FormPart.Text.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+        final val name // stapel.wire/FormPart.Text.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.wire/FormPart.Text.name.<get-name>|<get-name>(){}[0]
+        final val value // stapel.wire/FormPart.Text.value|{}value[0]
+            final fun <get-value>(): kotlin/String // stapel.wire/FormPart.Text.value.<get-value>|<get-value>(){}[0]
+    }
+}
+
+abstract class <#A: kotlin/Any> stapel.wire/BlankAsNullSerializer : kotlinx.serialization/KSerializer<#A?> { // stapel.wire/BlankAsNullSerializer|null[0]
+    constructor <init>(kotlinx.serialization/KSerializer<#A>, kotlin/Boolean) // stapel.wire/BlankAsNullSerializer.<init>|<init>(kotlinx.serialization.KSerializer<1:0>;kotlin.Boolean){}[0]
+
+    open val descriptor // stapel.wire/BlankAsNullSerializer.descriptor|{}descriptor[0]
+        open fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.wire/BlankAsNullSerializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+    open fun deserialize(kotlinx.serialization.encoding/Decoder): #A? // stapel.wire/BlankAsNullSerializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+    open fun serialize(kotlinx.serialization.encoding/Encoder, #A?) // stapel.wire/BlankAsNullSerializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;1:0?){}[0]
+}
+
+abstract class <#A: kotlin/Any> stapel.wire/UnionSerializer : kotlinx.serialization/KSerializer<#A> { // stapel.wire/UnionSerializer|null[0]
+    constructor <init>(kotlin/String) // stapel.wire/UnionSerializer.<init>|<init>(kotlin.String){}[0]
+
+    open val descriptor // stapel.wire/UnionSerializer.descriptor|{}descriptor[0]
+        open fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.wire/UnionSerializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+    abstract fun select(kotlinx.serialization.json/JsonObject): kotlinx.serialization/KSerializer<out #A>? // stapel.wire/UnionSerializer.select|select(kotlinx.serialization.json.JsonObject){}[0]
+    abstract fun serializerOf(#A): kotlinx.serialization/KSerializer<out #A>? // stapel.wire/UnionSerializer.serializerOf|serializerOf(1:0){}[0]
+    open fun deserialize(kotlinx.serialization.encoding/Decoder): #A // stapel.wire/UnionSerializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+    open fun rawOf(#A): kotlinx.serialization.json/JsonObject? // stapel.wire/UnionSerializer.rawOf|rawOf(1:0){}[0]
+    open fun serialize(kotlinx.serialization.encoding/Encoder, #A) // stapel.wire/UnionSerializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;1:0){}[0]
+    open fun unknown(kotlinx.serialization.json/JsonObject): #A? // stapel.wire/UnionSerializer.unknown|unknown(kotlinx.serialization.json.JsonObject){}[0]
+}
+
+abstract class <#A: stapel.wire/WireEnum> stapel.wire/WireEnumSerializer : kotlinx.serialization/KSerializer<#A> { // stapel.wire/WireEnumSerializer|null[0]
+    constructor <init>(kotlin/String, kotlin/Function1<kotlin/String, #A>) // stapel.wire/WireEnumSerializer.<init>|<init>(kotlin.String;kotlin.Function1<kotlin.String,1:0>){}[0]
+
+    open val descriptor // stapel.wire/WireEnumSerializer.descriptor|{}descriptor[0]
+        open fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.wire/WireEnumSerializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+    open fun deserialize(kotlinx.serialization.encoding/Decoder): #A // stapel.wire/WireEnumSerializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+    open fun serialize(kotlinx.serialization.encoding/Encoder, #A) // stapel.wire/WireEnumSerializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;1:0){}[0]
+}
+
+final class <#A: kotlin/Any?, #B: kotlin/Any?, #C: out stapel.result/StapelError> stapel.wire/OperationSpec { // stapel.wire/OperationSpec|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String, kotlin/String, stapel.wire/OperationKind, stapel.wire/AuthRequirement, stapel.wire/BodyEncoding, kotlinx.serialization/KSerializer<#A>?, stapel.wire/ResponseKind, kotlin.collections/Map<kotlin/Int, kotlinx.serialization/KSerializer<out #B>?>, stapel.wire/ErrorDecoder<#C>, kotlin/String? = ..., stapel.wire/CaptchaRequirement? = ..., kotlin/String? = ...) // stapel.wire/OperationSpec.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;kotlin.String;stapel.wire.OperationKind;stapel.wire.AuthRequirement;stapel.wire.BodyEncoding;kotlinx.serialization.KSerializer<1:0>?;stapel.wire.ResponseKind;kotlin.collections.Map<kotlin.Int,kotlinx.serialization.KSerializer<out|1:1>?>;stapel.wire.ErrorDecoder<1:2>;kotlin.String?;stapel.wire.CaptchaRequirement?;kotlin.String?){}[0]
+
+    final val auth // stapel.wire/OperationSpec.auth|{}auth[0]
+        final fun <get-auth>(): stapel.wire/AuthRequirement // stapel.wire/OperationSpec.auth.<get-auth>|<get-auth>(){}[0]
+    final val body // stapel.wire/OperationSpec.body|{}body[0]
+        final fun <get-body>(): kotlinx.serialization/KSerializer<#A>? // stapel.wire/OperationSpec.body.<get-body>|<get-body>(){}[0]
+    final val bodyEncoding // stapel.wire/OperationSpec.bodyEncoding|{}bodyEncoding[0]
+        final fun <get-bodyEncoding>(): stapel.wire/BodyEncoding // stapel.wire/OperationSpec.bodyEncoding.<get-bodyEncoding>|<get-bodyEncoding>(){}[0]
+    final val capability // stapel.wire/OperationSpec.capability|{}capability[0]
+        final fun <get-capability>(): kotlin/String? // stapel.wire/OperationSpec.capability.<get-capability>|<get-capability>(){}[0]
+    final val captcha // stapel.wire/OperationSpec.captcha|{}captcha[0]
+        final fun <get-captcha>(): stapel.wire/CaptchaRequirement? // stapel.wire/OperationSpec.captcha.<get-captcha>|<get-captcha>(){}[0]
+    final val errors // stapel.wire/OperationSpec.errors|{}errors[0]
+        final fun <get-errors>(): stapel.wire/ErrorDecoder<#C> // stapel.wire/OperationSpec.errors.<get-errors>|<get-errors>(){}[0]
+    final val id // stapel.wire/OperationSpec.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.wire/OperationSpec.id.<get-id>|<get-id>(){}[0]
+    final val kind // stapel.wire/OperationSpec.kind|{}kind[0]
+        final fun <get-kind>(): stapel.wire/OperationKind // stapel.wire/OperationSpec.kind.<get-kind>|<get-kind>(){}[0]
+    final val method // stapel.wire/OperationSpec.method|{}method[0]
+        final fun <get-method>(): kotlin/String // stapel.wire/OperationSpec.method.<get-method>|<get-method>(){}[0]
+    final val module // stapel.wire/OperationSpec.module|{}module[0]
+        final fun <get-module>(): kotlin/String // stapel.wire/OperationSpec.module.<get-module>|<get-module>(){}[0]
+    final val path // stapel.wire/OperationSpec.path|{}path[0]
+        final fun <get-path>(): kotlin/String // stapel.wire/OperationSpec.path.<get-path>|<get-path>(){}[0]
+    final val responseKind // stapel.wire/OperationSpec.responseKind|{}responseKind[0]
+        final fun <get-responseKind>(): stapel.wire/ResponseKind // stapel.wire/OperationSpec.responseKind.<get-responseKind>|<get-responseKind>(){}[0]
+    final val success // stapel.wire/OperationSpec.success|{}success[0]
+        final fun <get-success>(): kotlin.collections/Map<kotlin/Int, kotlinx.serialization/KSerializer<out #B>?> // stapel.wire/OperationSpec.success.<get-success>|<get-success>(){}[0]
+    final val verificationScope // stapel.wire/OperationSpec.verificationScope|{}verificationScope[0]
+        final fun <get-verificationScope>(): kotlin/String? // stapel.wire/OperationSpec.verificationScope.<get-verificationScope>|<get-verificationScope>(){}[0]
+}
+
+final class <#A: kotlin/Any?, #B: stapel.result/StapelError> stapel.wire/Pager { // stapel.wire/Pager|null[0]
+    constructor <init>(kotlin.coroutines/SuspendFunction1<stapel.wire/PageCursor?, stapel.result/StapelResult<stapel.wire/Page<#A>, #B>>) // stapel.wire/Pager.<init>|<init>(kotlin.coroutines.SuspendFunction1<stapel.wire.PageCursor?,stapel.result.StapelResult<stapel.wire.Page<1:0>,1:1>>){}[0]
+
+    final val hasNext // stapel.wire/Pager.hasNext|{}hasNext[0]
+        final fun <get-hasNext>(): kotlin/Boolean // stapel.wire/Pager.hasNext.<get-hasNext>|<get-hasNext>(){}[0]
+
+    final var total // stapel.wire/Pager.total|{}total[0]
+        final fun <get-total>(): kotlin/Int? // stapel.wire/Pager.total.<get-total>|<get-total>(){}[0]
+
+    final fun reset() // stapel.wire/Pager.reset|reset(){}[0]
+    final suspend fun next(): stapel.result/StapelResult<kotlin.collections/List<#A>, #B> // stapel.wire/Pager.next|next(){}[0]
+}
+
+final class <#A: kotlin/Any?> stapel.wire/MaybeSerializer : kotlinx.serialization/KSerializer<stapel.wire/Maybe<#A>> { // stapel.wire/MaybeSerializer|null[0]
+    constructor <init>(kotlinx.serialization/KSerializer<#A>) // stapel.wire/MaybeSerializer.<init>|<init>(kotlinx.serialization.KSerializer<1:0>){}[0]
+
+    final val descriptor // stapel.wire/MaybeSerializer.descriptor|{}descriptor[0]
+        final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.wire/MaybeSerializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+    final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.wire/Maybe<#A> // stapel.wire/MaybeSerializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+    final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.wire/Maybe<#A>) // stapel.wire/MaybeSerializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.wire.Maybe<1:0>){}[0]
+}
+
+final class <#A: kotlin/Any?> stapel.wire/OperationCall { // stapel.wire/OperationCall|null[0]
+    constructor <init>(kotlin.collections/List<kotlin/String> = ..., kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String?>> = ..., kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String?>> = ..., #A? = ..., kotlin.collections/List<stapel.wire/FormPart> = ..., kotlin/Function2<kotlin/Long, kotlin/Long?, kotlin/Unit>? = ...) // stapel.wire/OperationCall.<init>|<init>(kotlin.collections.List<kotlin.String>;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String?>>;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String?>>;1:0?;kotlin.collections.List<stapel.wire.FormPart>;kotlin.Function2<kotlin.Long,kotlin.Long?,kotlin.Unit>?){}[0]
+
+    final val body // stapel.wire/OperationCall.body|{}body[0]
+        final fun <get-body>(): #A? // stapel.wire/OperationCall.body.<get-body>|<get-body>(){}[0]
+    final val headers // stapel.wire/OperationCall.headers|{}headers[0]
+        final fun <get-headers>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String?>> // stapel.wire/OperationCall.headers.<get-headers>|<get-headers>(){}[0]
+    final val onProgress // stapel.wire/OperationCall.onProgress|{}onProgress[0]
+        final fun <get-onProgress>(): kotlin/Function2<kotlin/Long, kotlin/Long?, kotlin/Unit>? // stapel.wire/OperationCall.onProgress.<get-onProgress>|<get-onProgress>(){}[0]
+    final val parts // stapel.wire/OperationCall.parts|{}parts[0]
+        final fun <get-parts>(): kotlin.collections/List<stapel.wire/FormPart> // stapel.wire/OperationCall.parts.<get-parts>|<get-parts>(){}[0]
+    final val pathParams // stapel.wire/OperationCall.pathParams|{}pathParams[0]
+        final fun <get-pathParams>(): kotlin.collections/List<kotlin/String> // stapel.wire/OperationCall.pathParams.<get-pathParams>|<get-pathParams>(){}[0]
+    final val query // stapel.wire/OperationCall.query|{}query[0]
+        final fun <get-query>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String?>> // stapel.wire/OperationCall.query.<get-query>|<get-query>(){}[0]
+}
+
+final class stapel.wire/CacheHint { // stapel.wire/CacheHint|null[0]
+    constructor <init>(kotlin/String?, kotlin/String?, stapel.wire/CacheScope, kotlin/Boolean, kotlin/String?) // stapel.wire/CacheHint.<init>|<init>(kotlin.String?;kotlin.String?;stapel.wire.CacheScope;kotlin.Boolean;kotlin.String?){}[0]
+
+    final val offline // stapel.wire/CacheHint.offline|{}offline[0]
+        final fun <get-offline>(): kotlin/String? // stapel.wire/CacheHint.offline.<get-offline>|<get-offline>(){}[0]
+    final val persistence // stapel.wire/CacheHint.persistence|{}persistence[0]
+        final fun <get-persistence>(): kotlin/String? // stapel.wire/CacheHint.persistence.<get-persistence>|<get-persistence>(){}[0]
+    final val policy // stapel.wire/CacheHint.policy|{}policy[0]
+        final fun <get-policy>(): kotlin/String? // stapel.wire/CacheHint.policy.<get-policy>|<get-policy>(){}[0]
+    final val scope // stapel.wire/CacheHint.scope|{}scope[0]
+        final fun <get-scope>(): stapel.wire/CacheScope // stapel.wire/CacheHint.scope.<get-scope>|<get-scope>(){}[0]
+    final val sensitive // stapel.wire/CacheHint.sensitive|{}sensitive[0]
+        final fun <get-sensitive>(): kotlin/Boolean // stapel.wire/CacheHint.sensitive.<get-sensitive>|<get-sensitive>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/CacheHint.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.wire/CacheHint.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.wire/CacheHint.toString|toString(){}[0]
+}
+
+final class stapel.wire/CacheKey { // stapel.wire/CacheKey|null[0]
+    final val args // stapel.wire/CacheKey.args|{}args[0]
+        final fun <get-args>(): kotlin/String? // stapel.wire/CacheKey.args.<get-args>|<get-args>(){}[0]
+    final val namespace // stapel.wire/CacheKey.namespace|{}namespace[0]
+        final fun <get-namespace>(): kotlin/String // stapel.wire/CacheKey.namespace.<get-namespace>|<get-namespace>(){}[0]
+    final val path // stapel.wire/CacheKey.path|{}path[0]
+        final fun <get-path>(): kotlin.collections/List<kotlin/String> // stapel.wire/CacheKey.path.<get-path>|<get-path>(){}[0]
+    final val scope // stapel.wire/CacheKey.scope|{}scope[0]
+        final fun <get-scope>(): stapel.wire/CacheScope // stapel.wire/CacheKey.scope.<get-scope>|<get-scope>(){}[0]
+    final val storageKey // stapel.wire/CacheKey.storageKey|{}storageKey[0]
+        final fun <get-storageKey>(): kotlin/String // stapel.wire/CacheKey.storageKey.<get-storageKey>|<get-storageKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/CacheKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.wire/CacheKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.wire/CacheKey.toString|toString(){}[0]
+
+    final object Companion { // stapel.wire/CacheKey.Companion|null[0]
+        final fun of(kotlin/String, kotlin/Array<out kotlin/String>..., kotlinx.serialization.json/JsonElement? = ..., stapel.wire/CacheScope = ...): stapel.wire/CacheKey // stapel.wire/CacheKey.Companion.of|of(kotlin.String;kotlin.Array<out|kotlin.String>...;kotlinx.serialization.json.JsonElement?;stapel.wire.CacheScope){}[0]
+    }
+}
+
+final class stapel.wire/CaptchaRequirement { // stapel.wire/CaptchaRequirement|null[0]
+    constructor <init>(kotlin/String, kotlin/String?, kotlin/String?) // stapel.wire/CaptchaRequirement.<init>|<init>(kotlin.String;kotlin.String?;kotlin.String?){}[0]
+
+    final val action // stapel.wire/CaptchaRequirement.action|{}action[0]
+        final fun <get-action>(): kotlin/String // stapel.wire/CaptchaRequirement.action.<get-action>|<get-action>(){}[0]
+    final val field // stapel.wire/CaptchaRequirement.field|{}field[0]
+        final fun <get-field>(): kotlin/String? // stapel.wire/CaptchaRequirement.field.<get-field>|<get-field>(){}[0]
+    final val header // stapel.wire/CaptchaRequirement.header|{}header[0]
+        final fun <get-header>(): kotlin/String? // stapel.wire/CaptchaRequirement.header.<get-header>|<get-header>(){}[0]
+}
+
+final class stapel.wire/FilePart { // stapel.wire/FilePart|null[0]
+    constructor <init>(kotlin/String, kotlin/String?, kotlin/Long?, kotlin/Function0<kotlinx.io/RawSource>) // stapel.wire/FilePart.<init>|<init>(kotlin.String;kotlin.String?;kotlin.Long?;kotlin.Function0<kotlinx.io.RawSource>){}[0]
+
+    final val contentType // stapel.wire/FilePart.contentType|{}contentType[0]
+        final fun <get-contentType>(): kotlin/String? // stapel.wire/FilePart.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val fileName // stapel.wire/FilePart.fileName|{}fileName[0]
+        final fun <get-fileName>(): kotlin/String // stapel.wire/FilePart.fileName.<get-fileName>|<get-fileName>(){}[0]
+    final val open // stapel.wire/FilePart.open|{}open[0]
+        final fun <get-open>(): kotlin/Function0<kotlinx.io/RawSource> // stapel.wire/FilePart.open.<get-open>|<get-open>(){}[0]
+    final val size // stapel.wire/FilePart.size|{}size[0]
+        final fun <get-size>(): kotlin/Long? // stapel.wire/FilePart.size.<get-size>|<get-size>(){}[0]
+}
+
+final class stapel.wire/KeyPattern { // stapel.wire/KeyPattern|null[0]
+    final val namespace // stapel.wire/KeyPattern.namespace|{}namespace[0]
+        final fun <get-namespace>(): kotlin/String // stapel.wire/KeyPattern.namespace.<get-namespace>|<get-namespace>(){}[0]
+    final val pathPrefix // stapel.wire/KeyPattern.pathPrefix|{}pathPrefix[0]
+        final fun <get-pathPrefix>(): kotlin.collections/List<kotlin/String> // stapel.wire/KeyPattern.pathPrefix.<get-pathPrefix>|<get-pathPrefix>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/KeyPattern.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.wire/KeyPattern.hashCode|hashCode(){}[0]
+    final fun matches(stapel.wire/CacheKey): kotlin/Boolean // stapel.wire/KeyPattern.matches|matches(stapel.wire.CacheKey){}[0]
+    final fun toString(): kotlin/String // stapel.wire/KeyPattern.toString|toString(){}[0]
+
+    final object Companion { // stapel.wire/KeyPattern.Companion|null[0]
+        final fun exact(stapel.wire/CacheKey): stapel.wire/KeyPattern // stapel.wire/KeyPattern.Companion.exact|exact(stapel.wire.CacheKey){}[0]
+        final fun of(kotlin/String, kotlin/Array<out kotlin/String>...): stapel.wire/KeyPattern // stapel.wire/KeyPattern.Companion.of|of(kotlin.String;kotlin.Array<out|kotlin.String>...){}[0]
+    }
+}
+
+final value class stapel.wire/Decimal { // stapel.wire/Decimal|null[0]
+    constructor <init>(kotlin/String) // stapel.wire/Decimal.<init>|<init>(kotlin.String){}[0]
+
+    final val text // stapel.wire/Decimal.text|{}text[0]
+        final fun <get-text>(): kotlin/String // stapel.wire/Decimal.text.<get-text>|<get-text>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/Decimal.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.wire/Decimal.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.wire/Decimal.toString|toString(){}[0]
+
+    final object Companion { // stapel.wire/Decimal.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.wire/Decimal> // stapel.wire/Decimal.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final value class stapel.wire/PageCursor { // stapel.wire/PageCursor|null[0]
+    constructor <init>(kotlin/String) // stapel.wire/PageCursor.<init>|<init>(kotlin.String){}[0]
+
+    final val text // stapel.wire/PageCursor.text|{}text[0]
+        final fun <get-text>(): kotlin/String // stapel.wire/PageCursor.text.<get-text>|<get-text>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/PageCursor.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.wire/PageCursor.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.wire/PageCursor.toString|toString(){}[0]
+
+    final object Companion { // stapel.wire/PageCursor.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.wire/PageCursor> // stapel.wire/PageCursor.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final const val stapel.wire/CODEGEN_RUNTIME_ABI // stapel.wire/CODEGEN_RUNTIME_ABI|{}CODEGEN_RUNTIME_ABI[0]
+    final fun <get-CODEGEN_RUNTIME_ABI>(): kotlin/Int // stapel.wire/CODEGEN_RUNTIME_ABI.<get-CODEGEN_RUNTIME_ABI>|<get-CODEGEN_RUNTIME_ABI>(){}[0]
+
+final val stapel.wire/WireJson // stapel.wire/WireJson|{}WireJson[0]
+    final fun <get-WireJson>(): kotlinx.serialization.json/Json // stapel.wire/WireJson.<get-WireJson>|<get-WireJson>(){}[0]
+
+final fun <#A: kotlin/Any?> (stapel.wire/Maybe<#A>).stapel.wire/getOrNull(): #A? // stapel.wire/getOrNull|getOrNull@stapel.wire.Maybe<0:0>(){0§<kotlin.Any?>}[0]
