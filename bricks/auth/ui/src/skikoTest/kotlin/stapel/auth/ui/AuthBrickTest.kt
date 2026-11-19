@@ -116,6 +116,19 @@ class AuthBrickTest {
     }
 
     @Test
+    fun authAloneKeepsTheAccountMenuSoSignOutStaysReachable() {
+        // No library hangs anything from account.root, so the section is not installed; the menu (and
+        // its sign-out) stays in topbar.end, only its "Account" action goes. Resolved as the host does.
+        app(AuthBrick()).use { app ->
+            val nav = stapel.navigation.resolveNav(app.contributions.map { it.manifest })
+            val menu = nav.embeds.single { it.id.value == AuthNavIds.ACCOUNT_MENU }
+            assertEquals(AuthNavIds.AccountMenuSlot, menu.slot)
+            assertEquals(null, menu.opens)
+            assertTrue(DestinationId("account.root") !in nav.byId)
+        }
+    }
+
+    @Test
     fun theContentRestoresTheSessionAndShowsSignIn() = runComposeUiTest {
         val app = app(AuthBrick())
         try {

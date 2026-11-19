@@ -32,6 +32,15 @@
   never nests its children, so the web app has no URL for them either; the web skips them
   silently, here the drop is listed in `ResolvedNav.dropped`. Give such a screen its own absolute
   path, or hang it from a relative-path parent, to route it on both platforms.
+- **Embeds whose target is missing.** An embed whose `opens` destination is not installed stays in
+  its slot with `opens = null` (listed in `dropped` as `<id>#opens`): an app with auth alone keeps
+  the account menu and its sign-out, without the "Account" action. Same as the web: the planner
+  never drops an embed for its `opens`, and `AccountMenu` there offers sign-out only without
+  `onOpen`. An embed is dropped only for a web-only slot or a missing `scope`.
+- **Path join.** A child's path joins its parent's with exactly one slash (`"/c/:id"` under
+  `"/gallery"` is `/gallery/c/:id`; under a start page with the empty path `""` it is `/c/:id`).
+  The planner concatenates with `/`, which gives `//` for those two shapes; no registry entry
+  uses them, so the shared fixtures are unaffected.
 - **Do not:** add Compose, lifecycle or Koin here (dependency-direction gate); depend on another brick
   — name foreign parents by id string; mutate `NavState` outside `reduceNav`; collect
   `ExternalUris.incoming` or a result flow from two places.

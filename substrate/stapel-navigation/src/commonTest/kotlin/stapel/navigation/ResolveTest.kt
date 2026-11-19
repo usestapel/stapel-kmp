@@ -80,8 +80,42 @@ class ResolveTest {
             ),
         )
         val nav = resolveNav(listOf(authManifest, appManifest, embeds))
-        assertEquals(listOf("e.menu"), nav.embeds.map { it.id.value })
-        assertEquals(setOf("e.ghost", "e.web"), nav.dropped.map { it.id }.toSet())
+        assertEquals(listOf("e.ghost", "e.menu"), nav.embeds.map { it.id.value })
+        assertEquals(DestinationId("account.root"), nav.embeds.single { it.id.value == "e.menu" }.opens)
+        assertEquals(setOf("e.ghost#opens", "e.web"), nav.dropped.map { it.id }.toSet())
+    }
+
+    @Test
+    fun anEmbedWhoseTargetIsNotInstalledKeepsItsSlotAndLosesOnlyItsOpenAction() {
+        // An account menu whose section is not installed still carries sign-out.
+        val menu = NavManifest(
+            "t:e", "0", emptyList(),
+            listOf(EmbedSpec(EmbedId("auth.account_menu"), SlotId("topbar.end"), 90, EmbedSurface.Member, opens = DestinationId("account.root"))),
+        )
+        val nav = resolveNav(listOf(authManifest, menu))
+        val kept = nav.embeds.single()
+        assertEquals("auth.account_menu", kept.id.value)
+        assertEquals(null, kept.opens)
+        assertEquals(EmbedSurface.Member, kept.surface)
+        assertEquals("topbar.end", kept.slot.value)
+        assertTrue("auth.account_menu#opens" in nav.dropped.map { it.id })
+    }
+
+    @Test
+    fun childPathsJoinWithExactlyOneSlash() {
+        val home = NavManifest(
+            "t:g", "0",
+            listOf(
+                dest("g.home", "", LoginRoute.serializer(), PathCodec.constant(LoginRoute), requiresAuth = false),
+                dest("g.catalog", "/c/:catalog", SecurityRoute.serializer(), PathCodec.constant(SecurityRoute), requiresAuth = false, placement = Placement.Submenu(DestinationId("g.home"))),
+            ),
+        )
+        val nav = resolveNav(listOf(home))
+        assertEquals("/", nav.byId.getValue(DestinationId("g.home")).absolutePath)
+        assertEquals("/c/:catalog", nav.byId.getValue(DestinationId("g.catalog")).absolutePath)
+        assertEquals("/gallery/c/:catalog", joinPath("/gallery", "/c/:catalog"))
+        assertEquals("/app", joinPath("/app", ""))
+        assertEquals("/", joinPath("/", ""))
     }
 
     @Test

@@ -129,7 +129,7 @@ class GalleryUiTest {
         onNodeWithTag("gallery.copy-id").performClick()
         assertEquals(listOf("ui/button"), copied)
         onNodeWithTag("gallery.copy-link").performClick()
-        assertTrue(copied.last().startsWith("stapel-showcase://gallery/s/ui/button"), copied.last())
+        assertTrue(copied.last().startsWith("stapel-showcase://s/ui/button"), copied.last())
         onNodeWithTag("gallery.tabs").assertExists()
     }
 

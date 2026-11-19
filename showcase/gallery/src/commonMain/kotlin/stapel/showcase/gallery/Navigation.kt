@@ -38,7 +38,7 @@ data class StoryRoute(
     val controls: Map<String, String> = emptyMap(),
 ) : Route
 
-/** The custom scheme of gallery links: `stapel-showcase://gallery/s/ui/button?skin=Foundation`. */
+/** The custom scheme of gallery links: `stapel-showcase://s/ui/button?skin=Foundation`. */
 const val GALLERY_SCHEME: String = "stapel-showcase"
 
 /** Deep-link configuration of the gallery (custom scheme only). */
@@ -51,12 +51,11 @@ val galleryPolicy: NavPolicy = NavPolicy(signIn = null, home = HOME)
 
 /**
  * Turns a page path into a gallery link: `/s/ui/button?skin=Foundation` (story), `/c/auth`
- * (catalogue), `/` (start); the `/gallery` prefix and a full `stapel-showcase://` link are accepted too.
+ * (catalogue), `/` (start); a full `stapel-showcase://` link is accepted too.
  */
 fun galleryLink(pathOrUri: String): String {
     if (pathOrUri.startsWith("$GALLERY_SCHEME:")) return pathOrUri
-    val path = pathOrUri.removePrefix("/").removePrefix("gallery").removePrefix("/")
-    return "$GALLERY_SCHEME://gallery" + if (path.isEmpty()) "" else "/$path"
+    return "$GALLERY_SCHEME://" + pathOrUri.removePrefix("/")
 }
 
 private fun first(q: Map<String, List<String>>, key: String): String? = q[key]?.firstOrNull()?.takeIf { it.isNotEmpty() }
@@ -68,7 +67,7 @@ internal fun galleryContribution(
     story: @Composable ScreenScope.(StoryRoute) -> Unit,
 ): NavContribution = navContribution("stapel-showcase-gallery", "0") {
     destination<HomeRoute>(
-        id = HOME.value, path = "gallery", labelKey = "Gallery", icon = NavIcon("home"),
+        id = HOME.value, path = "", labelKey = "Gallery", icon = NavIcon("home"),
         codec = PathCodec.constant(HomeRoute), requiresAuth = false,
     ) { home() }
     destination<CatalogRoute>(

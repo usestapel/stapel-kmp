@@ -127,7 +127,10 @@ public class ResolvedNav internal constructor(
     public val containerRoots: List<DestinationId>,
     /** Orphans and unmountable entries, with the reason. */
     public val dropped: List<DroppedEntry>,
-    /** Embeds whose targets are installed, sorted by (slot, order, id). */
+    /**
+     * Embeds whose slot and scope are installed, sorted by (slot, order, id); an embed whose `opens`
+     * target is not installed is kept with `opens = null` (listed in [dropped] as `<id>#opens`).
+     */
     public val embeds: List<EmbedSpec>,
     /** The manifests resolved, in the order given. */
     public val manifests: List<NavManifest>,
@@ -338,8 +341,8 @@ public fun resolveNav(
         val kids = childrenOf[top.id].orEmpty().sortedWith(sortKey)
         val base: String = when {
             top.path.isAbsolute -> top.path.raw
-            top.surface == Surface.Public -> "/" + top.path.raw
-            else -> member + "/" + top.path.raw
+            top.surface == Surface.Public -> joinPath("/", top.path.raw)
+            else -> joinPath(member, top.path.raw)
         }
         val resolvedKids = if (top.path.isAbsolute) {
             kids.forEach {
@@ -347,7 +350,7 @@ public fun resolveNav(
             }
             emptyList()
         } else {
-            kids.map { k -> k.resolve("$base/${k.path.raw}", top.id, emptyList()) }
+            kids.map { k -> k.resolve(joinPath(base, k.path.raw), top.id, emptyList()) }
         }
         val resolvedTop = top.resolve(base, null, resolvedKids)
         tops += resolvedTop
@@ -368,8 +371,12 @@ public fun resolveNav(
     for (m in manifests) for (e in m.embeds) {
         when {
             e.slot.value in WEB_ONLY_SLOTS -> dropped += DroppedEntry(e.id.value, "slot '${e.slot}' is web-only")
-            e.opens != null && e.opens !in byId -> dropped += DroppedEntry(e.id.value, "opens '${e.opens}', which is not installed")
             e.scope != null && e.scope !in byId -> dropped += DroppedEntry(e.id.value, "scope '${e.scope}' is not installed")
+            e.opens != null && e.opens !in byId -> {
+                // The embed stays (an account menu still signs out); only its open action goes.
+                dropped += DroppedEntry("${e.id.value}#opens", "opens '${e.opens}', which is not installed; the embed is kept without it")
+                embeds += EmbedSpec(e.id, e.slot, e.order, e.surface, e.widths, opens = null, scope = e.scope, routeParams = e.routeParams)
+            }
             else -> embeds += e
         }
     }
@@ -384,6 +391,20 @@ public fun resolveNav(
         manifests = manifests,
         byRouteClass = byRouteClass.filterValues { it in byId },
     )
+}
+
+/**
+ * `parent` + `/` + `child` with exactly one slash between them and none at the end (the root stays
+ * `/`): a child written with a leading slash, or a top with an empty path (the start page at `/`),
+ * never yields `//`, which no link matches.
+ */
+internal fun joinPath(parent: String, child: String): String {
+    val head = parent.trimEnd('/')
+    val tail = child.trim('/')
+    return when {
+        tail.isEmpty() -> head.ifEmpty { "/" }
+        else -> "$head/$tail"
+    }
 }
 
 private fun Working.resolve(path: String, parent: DestinationId?, children: List<ResolvedDestination>) = ResolvedDestination(

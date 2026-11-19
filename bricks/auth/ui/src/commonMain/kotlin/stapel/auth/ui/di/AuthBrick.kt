@@ -63,7 +63,11 @@ public class AuthBrick(
             AuthSignIn(auth, onSignedIn = {})
         },
         security = { AuthSessions(remember(context) { context.koin.get<StapelAuth>() }) },
-        accountMenu = { AuthAccountMenu(remember(context) { context.koin.get<StapelAuth>() }, onOpen = { open() }) },
+        accountMenu = {
+            // "Account" only when the account section is installed; sign-out is always there.
+            val onOpen: (() -> Unit)? = if (spec.opens != null) ({ open() }) else null
+            AuthAccountMenu(remember(context) { context.koin.get<StapelAuth>() }, onOpen = onOpen)
+        },
     )
 
     /** The sign-in owner: the session's navigation image, its restore, and the way back after an expiry. */

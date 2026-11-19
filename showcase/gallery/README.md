@@ -9,7 +9,7 @@ edit). Run it:
     ./gradlew :showcase:desktop:run --args="--open /s/ui/button?skin=Foundation&mode=Both"
 
 - **Navigation** on `stapel-navigation`: start page, a page per catalogue (its families), a page per
-  story; every page has a route and a link (`stapel-showcase://gallery/s/<catalogue>/<story>?…`).
+  story; every page has a route and a link (`stapel-showcase://s/<catalogue>/<story>?…`, the start page at `stapel-showcase://`).
   Search over titles, ids, groups and descriptions.
 - **Global controls**, applied to every canvas and mirrored in links: skin (Material 3 / Foundation),
   theme preset, light / dark / both side by side, locale (every locale a catalogue ships), size class
