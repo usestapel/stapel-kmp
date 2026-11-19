@@ -202,6 +202,8 @@ internal class RoomCacheStore(private val dao: EntryDao) : CacheStore {
 
     override suspend fun deletePrefix(keyPrefix: String): Int = dao.deletePrefix(keyPrefix)
 
+    override suspend fun keys(keyPrefix: String): List<String> = dao.keys(keyPrefix)
+
     override suspend fun count(): Int = dao.count()
 
     override suspend fun clear(): Unit = dao.clear()

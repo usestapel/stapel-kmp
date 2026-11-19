@@ -6,12 +6,73 @@
 // - Show declarations: true
 
 // Library unique name: <io.github.usestapel:stapel-cache>
+final enum class stapel.cache/MissReason : kotlin/Enum<stapel.cache/MissReason> { // stapel.cache/MissReason|null[0]
+    enum entry Absent // stapel.cache/MissReason.Absent|null[0]
+    enum entry NoPartition // stapel.cache/MissReason.NoPartition|null[0]
+    enum entry SchemaMismatch // stapel.cache/MissReason.SchemaMismatch|null[0]
+    enum entry Undecodable // stapel.cache/MissReason.Undecodable|null[0]
+
+    final val entries // stapel.cache/MissReason.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.cache/MissReason> // stapel.cache/MissReason.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.cache/MissReason // stapel.cache/MissReason.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.cache/MissReason> // stapel.cache/MissReason.values|values#static(){}[0]
+}
+
+final enum class stapel.cache/NotPersistedReason : kotlin/Enum<stapel.cache/NotPersistedReason> { // stapel.cache/NotPersistedReason|null[0]
+    enum entry StoreError // stapel.cache/NotPersistedReason.StoreError|null[0]
+    enum entry TooLarge // stapel.cache/NotPersistedReason.TooLarge|null[0]
+
+    final val entries // stapel.cache/NotPersistedReason.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.cache/NotPersistedReason> // stapel.cache/NotPersistedReason.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.cache/NotPersistedReason // stapel.cache/NotPersistedReason.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.cache/NotPersistedReason> // stapel.cache/NotPersistedReason.values|values#static(){}[0]
+}
+
+final enum class stapel.cache/Persistence : kotlin/Enum<stapel.cache/Persistence> { // stapel.cache/Persistence|null[0]
+    enum entry Durable // stapel.cache/Persistence.Durable|null[0]
+    enum entry MemoryOnly // stapel.cache/Persistence.MemoryOnly|null[0]
+    enum entry Never // stapel.cache/Persistence.Never|null[0]
+
+    final val entries // stapel.cache/Persistence.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.cache/Persistence> // stapel.cache/Persistence.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.cache/Persistence // stapel.cache/Persistence.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.cache/Persistence> // stapel.cache/Persistence.values|values#static(){}[0]
+}
+
+final enum class stapel.cache/Refetch : kotlin/Enum<stapel.cache/Refetch> { // stapel.cache/Refetch|null[0]
+    enum entry Active // stapel.cache/Refetch.Active|null[0]
+    enum entry None // stapel.cache/Refetch.None|null[0]
+
+    final val entries // stapel.cache/Refetch.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.cache/Refetch> // stapel.cache/Refetch.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.cache/Refetch // stapel.cache/Refetch.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.cache/Refetch> // stapel.cache/Refetch.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.cache/CacheObserver { // stapel.cache/CacheObserver|null[0]
+    abstract fun onEvent(stapel.cache/CacheEvent) // stapel.cache/CacheObserver.onEvent|onEvent(stapel.cache.CacheEvent){}[0]
+
+    final object Companion { // stapel.cache/CacheObserver.Companion|null[0]
+        final val None // stapel.cache/CacheObserver.Companion.None|{}None[0]
+            final fun <get-None>(): stapel.cache/CacheObserver // stapel.cache/CacheObserver.Companion.None.<get-None>|<get-None>(){}[0]
+    }
+}
+
+abstract fun interface stapel.cache/WipeHook { // stapel.cache/WipeHook|null[0]
+    abstract suspend fun onWipe(stapel.cache/WipeTarget) // stapel.cache/WipeHook.onWipe|onWipe(stapel.cache.WipeTarget){}[0]
+}
+
 abstract interface stapel.cache/CacheStore { // stapel.cache/CacheStore|null[0]
     abstract suspend fun clear() // stapel.cache/CacheStore.clear|clear(){}[0]
     abstract suspend fun count(): kotlin/Int // stapel.cache/CacheStore.count|count(){}[0]
     abstract suspend fun delete(kotlin/String) // stapel.cache/CacheStore.delete|delete(kotlin.String){}[0]
     abstract suspend fun deletePrefix(kotlin/String): kotlin/Int // stapel.cache/CacheStore.deletePrefix|deletePrefix(kotlin.String){}[0]
     abstract suspend fun get(kotlin/String): stapel.cache/StoredEntry? // stapel.cache/CacheStore.get|get(kotlin.String){}[0]
+    abstract suspend fun keys(kotlin/String): kotlin.collections/List<kotlin/String> // stapel.cache/CacheStore.keys|keys(kotlin.String){}[0]
     abstract suspend fun markInvalidated(kotlin/String): kotlin/Int // stapel.cache/CacheStore.markInvalidated|markInvalidated(kotlin.String){}[0]
     abstract suspend fun put(stapel.cache/StoredEntry) // stapel.cache/CacheStore.put|put(stapel.cache.StoredEntry){}[0]
 }
@@ -23,6 +84,256 @@ abstract interface stapel.cache/CacheStoreFactory { // stapel.cache/CacheStoreFa
     abstract suspend fun destroy(stapel.cache/PartitionId) // stapel.cache/CacheStoreFactory.destroy|destroy(stapel.cache.PartitionId){}[0]
     abstract suspend fun listPartitions(): kotlin.collections/List<stapel.cache/PartitionId> // stapel.cache/CacheStoreFactory.listPartitions|listPartitions(){}[0]
     abstract suspend fun open(stapel.cache/PartitionId): stapel.cache/PartitionStores // stapel.cache/CacheStoreFactory.open|open(stapel.cache.PartitionId){}[0]
+}
+
+abstract interface stapel.cache/ManagedStapelCache : stapel.cache/StapelCache { // stapel.cache/ManagedStapelCache|null[0]
+    abstract fun addWipeHook(stapel.cache/WipeHook): kotlin/AutoCloseable // stapel.cache/ManagedStapelCache.addWipeHook|addWipeHook(stapel.cache.WipeHook){}[0]
+    abstract fun onForeground() // stapel.cache/ManagedStapelCache.onForeground|onForeground(){}[0]
+    abstract suspend fun close() // stapel.cache/ManagedStapelCache.close|close(){}[0]
+    abstract suspend fun setAccount(kotlin/String?) // stapel.cache/ManagedStapelCache.setAccount|setAccount(kotlin.String?){}[0]
+    abstract suspend fun wipe(stapel.cache/WipeTarget): stapel.cache/WipeReport // stapel.cache/ManagedStapelCache.wipe|wipe(stapel.cache.WipeTarget){}[0]
+}
+
+abstract interface stapel.cache/StapelCache { // stapel.cache/StapelCache|null[0]
+    abstract val capabilities // stapel.cache/StapelCache.capabilities|{}capabilities[0]
+        abstract fun <get-capabilities>(): stapel.cache/CacheCapabilities // stapel.cache/StapelCache.capabilities.<get-capabilities>|<get-capabilities>(){}[0]
+
+    abstract fun <#A1: kotlin/Any?, #B1: stapel.result/StapelError> observe(stapel.cache/QuerySpec<#A1>, stapel.cache/ReadOptions = ..., kotlin.coroutines/SuspendFunction0<stapel.result/StapelResult<#A1, #B1>>): kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<#A1>> // stapel.cache/StapelCache.observe|observe(stapel.cache.QuerySpec<0:0>;stapel.cache.ReadOptions;kotlin.coroutines.SuspendFunction0<stapel.result.StapelResult<0:0,0:1>>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
+    abstract suspend fun <#A1: kotlin/Any?, #B1: stapel.result/StapelError> get(stapel.cache/QuerySpec<#A1>, stapel.cache/ReadOptions = ..., kotlin.coroutines/SuspendFunction0<stapel.result/StapelResult<#A1, #B1>>): stapel.result/StapelResult<#A1, stapel.result/StapelError> // stapel.cache/StapelCache.get|get(stapel.cache.QuerySpec<0:0>;stapel.cache.ReadOptions;kotlin.coroutines.SuspendFunction0<stapel.result.StapelResult<0:0,0:1>>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
+    abstract suspend fun <#A1: kotlin/Any?> peek(stapel.cache/QuerySpec<#A1>): stapel.result.state/Resource.Ready<#A1>? // stapel.cache/StapelCache.peek|peek(stapel.cache.QuerySpec<0:0>){0§<kotlin.Any?>}[0]
+    abstract suspend fun <#A1: kotlin/Any?> update(stapel.cache/QuerySpec<#A1>, kotlin/Function1<#A1, #A1>): kotlin/Boolean // stapel.cache/StapelCache.update|update(stapel.cache.QuerySpec<0:0>;kotlin.Function1<0:0,0:0>){0§<kotlin.Any?>}[0]
+    abstract suspend fun <#A1: kotlin/Any?> write(stapel.cache/QuerySpec<#A1>, #A1) // stapel.cache/StapelCache.write|write(stapel.cache.QuerySpec<0:0>;0:0){0§<kotlin.Any?>}[0]
+    abstract suspend fun invalidate(stapel.wire/KeyPattern, stapel.cache/Refetch = ...): kotlin/Int // stapel.cache/StapelCache.invalidate|invalidate(stapel.wire.KeyPattern;stapel.cache.Refetch){}[0]
+    abstract suspend fun remove(stapel.wire/KeyPattern): kotlin/Int // stapel.cache/StapelCache.remove|remove(stapel.wire.KeyPattern){}[0]
+}
+
+sealed interface stapel.cache/CacheEvent { // stapel.cache/CacheEvent|null[0]
+    final class Degraded : stapel.cache/CacheEvent { // stapel.cache/CacheEvent.Degraded|null[0]
+        constructor <init>(kotlin/String) // stapel.cache/CacheEvent.Degraded.<init>|<init>(kotlin.String){}[0]
+
+        final val reason // stapel.cache/CacheEvent.Degraded.reason|{}reason[0]
+            final fun <get-reason>(): kotlin/String // stapel.cache/CacheEvent.Degraded.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.cache/CacheEvent.Degraded.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.cache/CacheEvent.Degraded // stapel.cache/CacheEvent.Degraded.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/CacheEvent.Degraded.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/CacheEvent.Degraded.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/CacheEvent.Degraded.toString|toString(){}[0]
+    }
+
+    final class Fetch : stapel.cache/CacheEvent { // stapel.cache/CacheEvent.Fetch|null[0]
+        constructor <init>(stapel.wire/CacheKey, kotlin/Long, stapel.result/StapelError?) // stapel.cache/CacheEvent.Fetch.<init>|<init>(stapel.wire.CacheKey;kotlin.Long;stapel.result.StapelError?){}[0]
+
+        final val durationMillis // stapel.cache/CacheEvent.Fetch.durationMillis|{}durationMillis[0]
+            final fun <get-durationMillis>(): kotlin/Long // stapel.cache/CacheEvent.Fetch.durationMillis.<get-durationMillis>|<get-durationMillis>(){}[0]
+        final val error // stapel.cache/CacheEvent.Fetch.error|{}error[0]
+            final fun <get-error>(): stapel.result/StapelError? // stapel.cache/CacheEvent.Fetch.error.<get-error>|<get-error>(){}[0]
+        final val key // stapel.cache/CacheEvent.Fetch.key|{}key[0]
+            final fun <get-key>(): stapel.wire/CacheKey // stapel.cache/CacheEvent.Fetch.key.<get-key>|<get-key>(){}[0]
+
+        final fun component1(): stapel.wire/CacheKey // stapel.cache/CacheEvent.Fetch.component1|component1(){}[0]
+        final fun component2(): kotlin/Long // stapel.cache/CacheEvent.Fetch.component2|component2(){}[0]
+        final fun component3(): stapel.result/StapelError? // stapel.cache/CacheEvent.Fetch.component3|component3(){}[0]
+        final fun copy(stapel.wire/CacheKey = ..., kotlin/Long = ..., stapel.result/StapelError? = ...): stapel.cache/CacheEvent.Fetch // stapel.cache/CacheEvent.Fetch.copy|copy(stapel.wire.CacheKey;kotlin.Long;stapel.result.StapelError?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/CacheEvent.Fetch.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/CacheEvent.Fetch.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/CacheEvent.Fetch.toString|toString(){}[0]
+    }
+
+    final class Hit : stapel.cache/CacheEvent { // stapel.cache/CacheEvent.Hit|null[0]
+        constructor <init>(stapel.wire/CacheKey, kotlin/Boolean) // stapel.cache/CacheEvent.Hit.<init>|<init>(stapel.wire.CacheKey;kotlin.Boolean){}[0]
+
+        final val key // stapel.cache/CacheEvent.Hit.key|{}key[0]
+            final fun <get-key>(): stapel.wire/CacheKey // stapel.cache/CacheEvent.Hit.key.<get-key>|<get-key>(){}[0]
+        final val stale // stapel.cache/CacheEvent.Hit.stale|{}stale[0]
+            final fun <get-stale>(): kotlin/Boolean // stapel.cache/CacheEvent.Hit.stale.<get-stale>|<get-stale>(){}[0]
+
+        final fun component1(): stapel.wire/CacheKey // stapel.cache/CacheEvent.Hit.component1|component1(){}[0]
+        final fun component2(): kotlin/Boolean // stapel.cache/CacheEvent.Hit.component2|component2(){}[0]
+        final fun copy(stapel.wire/CacheKey = ..., kotlin/Boolean = ...): stapel.cache/CacheEvent.Hit // stapel.cache/CacheEvent.Hit.copy|copy(stapel.wire.CacheKey;kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/CacheEvent.Hit.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/CacheEvent.Hit.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/CacheEvent.Hit.toString|toString(){}[0]
+    }
+
+    final class Invalidated : stapel.cache/CacheEvent { // stapel.cache/CacheEvent.Invalidated|null[0]
+        constructor <init>(stapel.wire/KeyPattern, kotlin/Int) // stapel.cache/CacheEvent.Invalidated.<init>|<init>(stapel.wire.KeyPattern;kotlin.Int){}[0]
+
+        final val matched // stapel.cache/CacheEvent.Invalidated.matched|{}matched[0]
+            final fun <get-matched>(): kotlin/Int // stapel.cache/CacheEvent.Invalidated.matched.<get-matched>|<get-matched>(){}[0]
+        final val pattern // stapel.cache/CacheEvent.Invalidated.pattern|{}pattern[0]
+            final fun <get-pattern>(): stapel.wire/KeyPattern // stapel.cache/CacheEvent.Invalidated.pattern.<get-pattern>|<get-pattern>(){}[0]
+
+        final fun component1(): stapel.wire/KeyPattern // stapel.cache/CacheEvent.Invalidated.component1|component1(){}[0]
+        final fun component2(): kotlin/Int // stapel.cache/CacheEvent.Invalidated.component2|component2(){}[0]
+        final fun copy(stapel.wire/KeyPattern = ..., kotlin/Int = ...): stapel.cache/CacheEvent.Invalidated // stapel.cache/CacheEvent.Invalidated.copy|copy(stapel.wire.KeyPattern;kotlin.Int){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/CacheEvent.Invalidated.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/CacheEvent.Invalidated.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/CacheEvent.Invalidated.toString|toString(){}[0]
+    }
+
+    final class Miss : stapel.cache/CacheEvent { // stapel.cache/CacheEvent.Miss|null[0]
+        constructor <init>(stapel.wire/CacheKey, stapel.cache/MissReason) // stapel.cache/CacheEvent.Miss.<init>|<init>(stapel.wire.CacheKey;stapel.cache.MissReason){}[0]
+
+        final val key // stapel.cache/CacheEvent.Miss.key|{}key[0]
+            final fun <get-key>(): stapel.wire/CacheKey // stapel.cache/CacheEvent.Miss.key.<get-key>|<get-key>(){}[0]
+        final val reason // stapel.cache/CacheEvent.Miss.reason|{}reason[0]
+            final fun <get-reason>(): stapel.cache/MissReason // stapel.cache/CacheEvent.Miss.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): stapel.wire/CacheKey // stapel.cache/CacheEvent.Miss.component1|component1(){}[0]
+        final fun component2(): stapel.cache/MissReason // stapel.cache/CacheEvent.Miss.component2|component2(){}[0]
+        final fun copy(stapel.wire/CacheKey = ..., stapel.cache/MissReason = ...): stapel.cache/CacheEvent.Miss // stapel.cache/CacheEvent.Miss.copy|copy(stapel.wire.CacheKey;stapel.cache.MissReason){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/CacheEvent.Miss.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/CacheEvent.Miss.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/CacheEvent.Miss.toString|toString(){}[0]
+    }
+
+    final class NotPersisted : stapel.cache/CacheEvent { // stapel.cache/CacheEvent.NotPersisted|null[0]
+        constructor <init>(stapel.wire/CacheKey, stapel.cache/NotPersistedReason) // stapel.cache/CacheEvent.NotPersisted.<init>|<init>(stapel.wire.CacheKey;stapel.cache.NotPersistedReason){}[0]
+
+        final val key // stapel.cache/CacheEvent.NotPersisted.key|{}key[0]
+            final fun <get-key>(): stapel.wire/CacheKey // stapel.cache/CacheEvent.NotPersisted.key.<get-key>|<get-key>(){}[0]
+        final val reason // stapel.cache/CacheEvent.NotPersisted.reason|{}reason[0]
+            final fun <get-reason>(): stapel.cache/NotPersistedReason // stapel.cache/CacheEvent.NotPersisted.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): stapel.wire/CacheKey // stapel.cache/CacheEvent.NotPersisted.component1|component1(){}[0]
+        final fun component2(): stapel.cache/NotPersistedReason // stapel.cache/CacheEvent.NotPersisted.component2|component2(){}[0]
+        final fun copy(stapel.wire/CacheKey = ..., stapel.cache/NotPersistedReason = ...): stapel.cache/CacheEvent.NotPersisted // stapel.cache/CacheEvent.NotPersisted.copy|copy(stapel.wire.CacheKey;stapel.cache.NotPersistedReason){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/CacheEvent.NotPersisted.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/CacheEvent.NotPersisted.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/CacheEvent.NotPersisted.toString|toString(){}[0]
+    }
+
+    final class Wiped : stapel.cache/CacheEvent { // stapel.cache/CacheEvent.Wiped|null[0]
+        constructor <init>(stapel.cache/WipeTarget, kotlin/Int) // stapel.cache/CacheEvent.Wiped.<init>|<init>(stapel.cache.WipeTarget;kotlin.Int){}[0]
+
+        final val partitions // stapel.cache/CacheEvent.Wiped.partitions|{}partitions[0]
+            final fun <get-partitions>(): kotlin/Int // stapel.cache/CacheEvent.Wiped.partitions.<get-partitions>|<get-partitions>(){}[0]
+        final val target // stapel.cache/CacheEvent.Wiped.target|{}target[0]
+            final fun <get-target>(): stapel.cache/WipeTarget // stapel.cache/CacheEvent.Wiped.target.<get-target>|<get-target>(){}[0]
+
+        final fun component1(): stapel.cache/WipeTarget // stapel.cache/CacheEvent.Wiped.component1|component1(){}[0]
+        final fun component2(): kotlin/Int // stapel.cache/CacheEvent.Wiped.component2|component2(){}[0]
+        final fun copy(stapel.cache/WipeTarget = ..., kotlin/Int = ...): stapel.cache/CacheEvent.Wiped // stapel.cache/CacheEvent.Wiped.copy|copy(stapel.cache.WipeTarget;kotlin.Int){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/CacheEvent.Wiped.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/CacheEvent.Wiped.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/CacheEvent.Wiped.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.cache/ReadPolicy { // stapel.cache/ReadPolicy|null[0]
+    final class CacheFirst : stapel.cache/ReadPolicy { // stapel.cache/ReadPolicy.CacheFirst|null[0]
+        constructor <init>(kotlin.time/Duration, kotlin.time/Duration = ...) // stapel.cache/ReadPolicy.CacheFirst.<init>|<init>(kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+        final val freshFor // stapel.cache/ReadPolicy.CacheFirst.freshFor|{}freshFor[0]
+            final fun <get-freshFor>(): kotlin.time/Duration // stapel.cache/ReadPolicy.CacheFirst.freshFor.<get-freshFor>|<get-freshFor>(){}[0]
+        final val retainFor // stapel.cache/ReadPolicy.CacheFirst.retainFor|{}retainFor[0]
+            final fun <get-retainFor>(): kotlin.time/Duration // stapel.cache/ReadPolicy.CacheFirst.retainFor.<get-retainFor>|<get-retainFor>(){}[0]
+
+        final fun component1(): kotlin.time/Duration // stapel.cache/ReadPolicy.CacheFirst.component1|component1(){}[0]
+        final fun component2(): kotlin.time/Duration // stapel.cache/ReadPolicy.CacheFirst.component2|component2(){}[0]
+        final fun copy(kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.cache/ReadPolicy.CacheFirst // stapel.cache/ReadPolicy.CacheFirst.copy|copy(kotlin.time.Duration;kotlin.time.Duration){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/ReadPolicy.CacheFirst.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/ReadPolicy.CacheFirst.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/ReadPolicy.CacheFirst.toString|toString(){}[0]
+    }
+
+    final class NetworkFirst : stapel.cache/ReadPolicy { // stapel.cache/ReadPolicy.NetworkFirst|null[0]
+        constructor <init>(kotlin.time/Duration) // stapel.cache/ReadPolicy.NetworkFirst.<init>|<init>(kotlin.time.Duration){}[0]
+
+        final val retainFor // stapel.cache/ReadPolicy.NetworkFirst.retainFor|{}retainFor[0]
+            final fun <get-retainFor>(): kotlin.time/Duration // stapel.cache/ReadPolicy.NetworkFirst.retainFor.<get-retainFor>|<get-retainFor>(){}[0]
+
+        final fun component1(): kotlin.time/Duration // stapel.cache/ReadPolicy.NetworkFirst.component1|component1(){}[0]
+        final fun copy(kotlin.time/Duration = ...): stapel.cache/ReadPolicy.NetworkFirst // stapel.cache/ReadPolicy.NetworkFirst.copy|copy(kotlin.time.Duration){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/ReadPolicy.NetworkFirst.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/ReadPolicy.NetworkFirst.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/ReadPolicy.NetworkFirst.toString|toString(){}[0]
+    }
+
+    final class StaleWhileRevalidate : stapel.cache/ReadPolicy { // stapel.cache/ReadPolicy.StaleWhileRevalidate|null[0]
+        constructor <init>(kotlin.time/Duration, kotlin.time/Duration) // stapel.cache/ReadPolicy.StaleWhileRevalidate.<init>|<init>(kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+        final val freshFor // stapel.cache/ReadPolicy.StaleWhileRevalidate.freshFor|{}freshFor[0]
+            final fun <get-freshFor>(): kotlin.time/Duration // stapel.cache/ReadPolicy.StaleWhileRevalidate.freshFor.<get-freshFor>|<get-freshFor>(){}[0]
+        final val retainFor // stapel.cache/ReadPolicy.StaleWhileRevalidate.retainFor|{}retainFor[0]
+            final fun <get-retainFor>(): kotlin.time/Duration // stapel.cache/ReadPolicy.StaleWhileRevalidate.retainFor.<get-retainFor>|<get-retainFor>(){}[0]
+
+        final fun component1(): kotlin.time/Duration // stapel.cache/ReadPolicy.StaleWhileRevalidate.component1|component1(){}[0]
+        final fun component2(): kotlin.time/Duration // stapel.cache/ReadPolicy.StaleWhileRevalidate.component2|component2(){}[0]
+        final fun copy(kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.cache/ReadPolicy.StaleWhileRevalidate // stapel.cache/ReadPolicy.StaleWhileRevalidate.copy|copy(kotlin.time.Duration;kotlin.time.Duration){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/ReadPolicy.StaleWhileRevalidate.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/ReadPolicy.StaleWhileRevalidate.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/ReadPolicy.StaleWhileRevalidate.toString|toString(){}[0]
+    }
+
+    final object Companion { // stapel.cache/ReadPolicy.Companion|null[0]
+        final val Default // stapel.cache/ReadPolicy.Companion.Default|{}Default[0]
+            final fun <get-Default>(): stapel.cache/ReadPolicy // stapel.cache/ReadPolicy.Companion.Default.<get-Default>|<get-Default>(){}[0]
+        final val Immutable // stapel.cache/ReadPolicy.Companion.Immutable|{}Immutable[0]
+            final fun <get-Immutable>(): stapel.cache/ReadPolicy // stapel.cache/ReadPolicy.Companion.Immutable.<get-Immutable>|<get-Immutable>(){}[0]
+    }
+
+    final object NetworkOnly : stapel.cache/ReadPolicy { // stapel.cache/ReadPolicy.NetworkOnly|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/ReadPolicy.NetworkOnly.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/ReadPolicy.NetworkOnly.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/ReadPolicy.NetworkOnly.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.cache/WipeTarget { // stapel.cache/WipeTarget|null[0]
+    final class Account : stapel.cache/WipeTarget { // stapel.cache/WipeTarget.Account|null[0]
+        constructor <init>(kotlin/String) // stapel.cache/WipeTarget.Account.<init>|<init>(kotlin.String){}[0]
+
+        final val accountId // stapel.cache/WipeTarget.Account.accountId|{}accountId[0]
+            final fun <get-accountId>(): kotlin/String // stapel.cache/WipeTarget.Account.accountId.<get-accountId>|<get-accountId>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.cache/WipeTarget.Account.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.cache/WipeTarget.Account // stapel.cache/WipeTarget.Account.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/WipeTarget.Account.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/WipeTarget.Account.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/WipeTarget.Account.toString|toString(){}[0]
+    }
+
+    final object AllAccounts : stapel.cache/WipeTarget { // stapel.cache/WipeTarget.AllAccounts|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/WipeTarget.AllAccounts.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/WipeTarget.AllAccounts.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/WipeTarget.AllAccounts.toString|toString(){}[0]
+    }
+
+    final object Everything : stapel.cache/WipeTarget { // stapel.cache/WipeTarget.Everything|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/WipeTarget.Everything.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/WipeTarget.Everything.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/WipeTarget.Everything.toString|toString(){}[0]
+    }
+}
+
+final class <#A: kotlin/Any?> stapel.cache/QuerySpec { // stapel.cache/QuerySpec|null[0]
+    constructor <init>(stapel.wire/CacheKey, kotlinx.serialization/KSerializer<#A>, kotlin/String, stapel.cache/ReadPolicy = ..., stapel.cache/Persistence = ...) // stapel.cache/QuerySpec.<init>|<init>(stapel.wire.CacheKey;kotlinx.serialization.KSerializer<1:0>;kotlin.String;stapel.cache.ReadPolicy;stapel.cache.Persistence){}[0]
+
+    final val key // stapel.cache/QuerySpec.key|{}key[0]
+        final fun <get-key>(): stapel.wire/CacheKey // stapel.cache/QuerySpec.key.<get-key>|<get-key>(){}[0]
+    final val persistence // stapel.cache/QuerySpec.persistence|{}persistence[0]
+        final fun <get-persistence>(): stapel.cache/Persistence // stapel.cache/QuerySpec.persistence.<get-persistence>|<get-persistence>(){}[0]
+    final val policy // stapel.cache/QuerySpec.policy|{}policy[0]
+        final fun <get-policy>(): stapel.cache/ReadPolicy // stapel.cache/QuerySpec.policy.<get-policy>|<get-policy>(){}[0]
+    final val schemaHash // stapel.cache/QuerySpec.schemaHash|{}schemaHash[0]
+        final fun <get-schemaHash>(): kotlin/String // stapel.cache/QuerySpec.schemaHash.<get-schemaHash>|<get-schemaHash>(){}[0]
+    final val serializer // stapel.cache/QuerySpec.serializer|{}serializer[0]
+        final fun <get-serializer>(): kotlinx.serialization/KSerializer<#A> // stapel.cache/QuerySpec.serializer.<get-serializer>|<get-serializer>(){}[0]
+
+    final fun toString(): kotlin/String // stapel.cache/QuerySpec.toString|toString(){}[0]
+}
+
+final class stapel.cache/CacheCapabilities { // stapel.cache/CacheCapabilities|null[0]
+    constructor <init>(kotlin/Boolean, kotlin/Boolean) // stapel.cache/CacheCapabilities.<init>|<init>(kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val durable // stapel.cache/CacheCapabilities.durable|{}durable[0]
+        final fun <get-durable>(): kotlin/Boolean // stapel.cache/CacheCapabilities.durable.<get-durable>|<get-durable>(){}[0]
+    final val offlineQueue // stapel.cache/CacheCapabilities.offlineQueue|{}offlineQueue[0]
+        final fun <get-offlineQueue>(): kotlin/Boolean // stapel.cache/CacheCapabilities.offlineQueue.<get-offlineQueue>|<get-offlineQueue>(){}[0]
+
+    final fun toString(): kotlin/String // stapel.cache/CacheCapabilities.toString|toString(){}[0]
 }
 
 final class stapel.cache/MemoryCacheStoreFactory : stapel.cache/CacheStoreFactory { // stapel.cache/MemoryCacheStoreFactory|null[0]
@@ -64,6 +375,37 @@ final class stapel.cache/PartitionStores { // stapel.cache/PartitionStores|null[
         final fun <get-entries>(): stapel.cache/CacheStore // stapel.cache/PartitionStores.entries.<get-entries>|<get-entries>(){}[0]
 }
 
+final class stapel.cache/ReadOptions { // stapel.cache/ReadOptions|null[0]
+    constructor <init>(stapel.cache/ReadPolicy? = ..., kotlin.time/Duration? = ...) // stapel.cache/ReadOptions.<init>|<init>(stapel.cache.ReadPolicy?;kotlin.time.Duration?){}[0]
+
+    final val policy // stapel.cache/ReadOptions.policy|{}policy[0]
+        final fun <get-policy>(): stapel.cache/ReadPolicy? // stapel.cache/ReadOptions.policy.<get-policy>|<get-policy>(){}[0]
+    final val pollEvery // stapel.cache/ReadOptions.pollEvery|{}pollEvery[0]
+        final fun <get-pollEvery>(): kotlin.time/Duration? // stapel.cache/ReadOptions.pollEvery.<get-pollEvery>|<get-pollEvery>(){}[0]
+
+    final object Companion { // stapel.cache/ReadOptions.Companion|null[0]
+        final val Default // stapel.cache/ReadOptions.Companion.Default|{}Default[0]
+            final fun <get-Default>(): stapel.cache/ReadOptions // stapel.cache/ReadOptions.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class stapel.cache/StapelCacheConfig { // stapel.cache/StapelCacheConfig|null[0]
+    constructor <init>(kotlinx.serialization.json/Json, kotlinx.coroutines/CoroutineScope, kotlin.time/Clock, stapel.cache/CacheStoreFactory = ..., stapel.cache/CacheObserver = ..., kotlin/Long = ...) // stapel.cache/StapelCacheConfig.<init>|<init>(kotlinx.serialization.json.Json;kotlinx.coroutines.CoroutineScope;kotlin.time.Clock;stapel.cache.CacheStoreFactory;stapel.cache.CacheObserver;kotlin.Long){}[0]
+
+    final val clock // stapel.cache/StapelCacheConfig.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // stapel.cache/StapelCacheConfig.clock.<get-clock>|<get-clock>(){}[0]
+    final val json // stapel.cache/StapelCacheConfig.json|{}json[0]
+        final fun <get-json>(): kotlinx.serialization.json/Json // stapel.cache/StapelCacheConfig.json.<get-json>|<get-json>(){}[0]
+    final val maxEntryBytes // stapel.cache/StapelCacheConfig.maxEntryBytes|{}maxEntryBytes[0]
+        final fun <get-maxEntryBytes>(): kotlin/Long // stapel.cache/StapelCacheConfig.maxEntryBytes.<get-maxEntryBytes>|<get-maxEntryBytes>(){}[0]
+    final val observer // stapel.cache/StapelCacheConfig.observer|{}observer[0]
+        final fun <get-observer>(): stapel.cache/CacheObserver // stapel.cache/StapelCacheConfig.observer.<get-observer>|<get-observer>(){}[0]
+    final val scope // stapel.cache/StapelCacheConfig.scope|{}scope[0]
+        final fun <get-scope>(): kotlinx.coroutines/CoroutineScope // stapel.cache/StapelCacheConfig.scope.<get-scope>|<get-scope>(){}[0]
+    final val storeFactory // stapel.cache/StapelCacheConfig.storeFactory|{}storeFactory[0]
+        final fun <get-storeFactory>(): stapel.cache/CacheStoreFactory // stapel.cache/StapelCacheConfig.storeFactory.<get-storeFactory>|<get-storeFactory>(){}[0]
+}
+
 final class stapel.cache/StoredEntry { // stapel.cache/StoredEntry|null[0]
     constructor <init>(kotlin/String, kotlin/String, kotlin/ByteArray, kotlin/String, kotlin/Long, kotlin/Boolean) // stapel.cache/StoredEntry.<init>|<init>(kotlin.String;kotlin.String;kotlin.ByteArray;kotlin.String;kotlin.Long;kotlin.Boolean){}[0]
 
@@ -85,3 +427,15 @@ final class stapel.cache/StoredEntry { // stapel.cache/StoredEntry|null[0]
     final fun toString(): kotlin/String // stapel.cache/StoredEntry.toString|toString(){}[0]
     final fun withInvalidated(kotlin/Boolean): stapel.cache/StoredEntry // stapel.cache/StoredEntry.withInvalidated|withInvalidated(kotlin.Boolean){}[0]
 }
+
+final class stapel.cache/WipeReport { // stapel.cache/WipeReport|null[0]
+    constructor <init>(kotlin/Int) // stapel.cache/WipeReport.<init>|<init>(kotlin.Int){}[0]
+
+    final val partitions // stapel.cache/WipeReport.partitions|{}partitions[0]
+        final fun <get-partitions>(): kotlin/Int // stapel.cache/WipeReport.partitions.<get-partitions>|<get-partitions>(){}[0]
+
+    final fun toString(): kotlin/String // stapel.cache/WipeReport.toString|toString(){}[0]
+}
+
+final fun stapel.cache/StapelCache(stapel.cache/StapelCacheConfig): stapel.cache/ManagedStapelCache // stapel.cache/StapelCache|StapelCache(stapel.cache.StapelCacheConfig){}[0]
+final suspend fun <#A: kotlin/Any?> (kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<#A>>).stapel.cache/firstSettled(): stapel.result/StapelResult<#A, stapel.result/StapelError> // stapel.cache/firstSettled|firstSettled@kotlinx.coroutines.flow.Flow<stapel.result.state.Resource<0:0>>(){0§<kotlin.Any?>}[0]

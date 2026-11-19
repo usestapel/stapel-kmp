@@ -111,6 +111,18 @@ public object CacheStoreContract {
                 expectEqual(2, s.count(), "remaining count")
             }
         },
+        "keys lists by segment prefix only" to { f ->
+            withStore(f) { s ->
+                seedPrefixFixture(s)
+                expectEqual(
+                    setOf(key("chat", "conv"), key("chat", "conv", "{\"page\":2}")),
+                    s.keys(key("chat", "conv")).toSet(),
+                    "keys under chat/conv",
+                )
+                expectEqual(4, s.keys("").size, "keys under the empty prefix")
+                expectEqual(0, s.keys(key("absent")).size, "keys under an absent prefix")
+            }
+        },
         "empty prefix matches every entry" to { f ->
             withStore(f) { s ->
                 seedPrefixFixture(s)

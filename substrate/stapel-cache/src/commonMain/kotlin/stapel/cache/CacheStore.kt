@@ -75,6 +75,9 @@ public interface CacheStore {
     /** Delete every entry whose key starts with [keyPrefix]; returns how many were deleted. */
     public suspend fun deletePrefix(keyPrefix: String): Int
 
+    /** Keys of every entry whose key starts with [keyPrefix], in no particular order. */
+    public suspend fun keys(keyPrefix: String): List<String>
+
     /** Number of stored entries. */
     public suspend fun count(): Int
 

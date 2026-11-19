@@ -38,6 +38,15 @@ class CacheStoreContractTest {
     }
 
     @Test
+    fun keyListingWithoutSegmentBoundaryIsCaught() = runTest {
+        assertCaught("keys lists by segment prefix only") {
+            Broken { s -> object : CacheStore by s {
+                override suspend fun keys(keyPrefix: String) = s.keys(keyPrefix.trimEnd('\u001F'))
+            } }
+        }
+    }
+
+    @Test
     fun lossyPayloadIsCaught() = runTest {
         assertCaught("empty and large payloads round-trip") {
             Broken { s -> object : CacheStore by s {

@@ -62,6 +62,9 @@ internal class MemoryCacheStore : CacheStore {
         matched.size
     }
 
+    override suspend fun keys(keyPrefix: String): List<String> =
+        lock.withLock { entries.keys.filter { it.startsWith(keyPrefix) } }
+
     override suspend fun count(): Int = lock.withLock { entries.size }
 
     override suspend fun clear() {

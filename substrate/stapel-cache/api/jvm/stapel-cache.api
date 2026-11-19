@@ -1,9 +1,120 @@
+public final class stapel/cache/CacheCapabilities {
+	public fun <init> (ZZ)V
+	public final fun getDurable ()Z
+	public final fun getOfflineQueue ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cache/CacheEvent {
+}
+
+public final class stapel/cache/CacheEvent$Degraded : stapel/cache/CacheEvent {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cache/CacheEvent$Degraded;
+	public static synthetic fun copy$default (Lstapel/cache/CacheEvent$Degraded;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cache/CacheEvent$Degraded;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/CacheEvent$Fetch : stapel/cache/CacheEvent {
+	public fun <init> (Lstapel/wire/CacheKey;JLstapel/result/StapelError;)V
+	public final fun component1 ()Lstapel/wire/CacheKey;
+	public final fun component2 ()J
+	public final fun component3 ()Lstapel/result/StapelError;
+	public final fun copy (Lstapel/wire/CacheKey;JLstapel/result/StapelError;)Lstapel/cache/CacheEvent$Fetch;
+	public static synthetic fun copy$default (Lstapel/cache/CacheEvent$Fetch;Lstapel/wire/CacheKey;JLstapel/result/StapelError;ILjava/lang/Object;)Lstapel/cache/CacheEvent$Fetch;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDurationMillis ()J
+	public final fun getError ()Lstapel/result/StapelError;
+	public final fun getKey ()Lstapel/wire/CacheKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/CacheEvent$Hit : stapel/cache/CacheEvent {
+	public fun <init> (Lstapel/wire/CacheKey;Z)V
+	public final fun component1 ()Lstapel/wire/CacheKey;
+	public final fun component2 ()Z
+	public final fun copy (Lstapel/wire/CacheKey;Z)Lstapel/cache/CacheEvent$Hit;
+	public static synthetic fun copy$default (Lstapel/cache/CacheEvent$Hit;Lstapel/wire/CacheKey;ZILjava/lang/Object;)Lstapel/cache/CacheEvent$Hit;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Lstapel/wire/CacheKey;
+	public final fun getStale ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/CacheEvent$Invalidated : stapel/cache/CacheEvent {
+	public fun <init> (Lstapel/wire/KeyPattern;I)V
+	public final fun component1 ()Lstapel/wire/KeyPattern;
+	public final fun component2 ()I
+	public final fun copy (Lstapel/wire/KeyPattern;I)Lstapel/cache/CacheEvent$Invalidated;
+	public static synthetic fun copy$default (Lstapel/cache/CacheEvent$Invalidated;Lstapel/wire/KeyPattern;IILjava/lang/Object;)Lstapel/cache/CacheEvent$Invalidated;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMatched ()I
+	public final fun getPattern ()Lstapel/wire/KeyPattern;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/CacheEvent$Miss : stapel/cache/CacheEvent {
+	public fun <init> (Lstapel/wire/CacheKey;Lstapel/cache/MissReason;)V
+	public final fun component1 ()Lstapel/wire/CacheKey;
+	public final fun component2 ()Lstapel/cache/MissReason;
+	public final fun copy (Lstapel/wire/CacheKey;Lstapel/cache/MissReason;)Lstapel/cache/CacheEvent$Miss;
+	public static synthetic fun copy$default (Lstapel/cache/CacheEvent$Miss;Lstapel/wire/CacheKey;Lstapel/cache/MissReason;ILjava/lang/Object;)Lstapel/cache/CacheEvent$Miss;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Lstapel/wire/CacheKey;
+	public final fun getReason ()Lstapel/cache/MissReason;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/CacheEvent$NotPersisted : stapel/cache/CacheEvent {
+	public fun <init> (Lstapel/wire/CacheKey;Lstapel/cache/NotPersistedReason;)V
+	public final fun component1 ()Lstapel/wire/CacheKey;
+	public final fun component2 ()Lstapel/cache/NotPersistedReason;
+	public final fun copy (Lstapel/wire/CacheKey;Lstapel/cache/NotPersistedReason;)Lstapel/cache/CacheEvent$NotPersisted;
+	public static synthetic fun copy$default (Lstapel/cache/CacheEvent$NotPersisted;Lstapel/wire/CacheKey;Lstapel/cache/NotPersistedReason;ILjava/lang/Object;)Lstapel/cache/CacheEvent$NotPersisted;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Lstapel/wire/CacheKey;
+	public final fun getReason ()Lstapel/cache/NotPersistedReason;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/CacheEvent$Wiped : stapel/cache/CacheEvent {
+	public fun <init> (Lstapel/cache/WipeTarget;I)V
+	public final fun component1 ()Lstapel/cache/WipeTarget;
+	public final fun component2 ()I
+	public final fun copy (Lstapel/cache/WipeTarget;I)Lstapel/cache/CacheEvent$Wiped;
+	public static synthetic fun copy$default (Lstapel/cache/CacheEvent$Wiped;Lstapel/cache/WipeTarget;IILjava/lang/Object;)Lstapel/cache/CacheEvent$Wiped;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPartitions ()I
+	public final fun getTarget ()Lstapel/cache/WipeTarget;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cache/CacheObserver {
+	public static final field Companion Lstapel/cache/CacheObserver$Companion;
+	public abstract fun onEvent (Lstapel/cache/CacheEvent;)V
+}
+
+public final class stapel/cache/CacheObserver$Companion {
+	public final fun getNone ()Lstapel/cache/CacheObserver;
+}
+
 public abstract interface class stapel/cache/CacheStore {
 	public abstract fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun count (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun delete (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun deletePrefix (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun get (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun keys (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun markInvalidated (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun put (Lstapel/cache/StoredEntry;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
@@ -15,12 +126,38 @@ public abstract interface class stapel/cache/CacheStoreFactory {
 	public abstract fun open (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public abstract interface class stapel/cache/ManagedStapelCache : stapel/cache/StapelCache {
+	public abstract fun addWipeHook (Lstapel/cache/WipeHook;)Ljava/lang/AutoCloseable;
+	public abstract fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun onForeground ()V
+	public abstract fun setAccount (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun wipe (Lstapel/cache/WipeTarget;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class stapel/cache/MemoryCacheStoreFactory : stapel/cache/CacheStoreFactory {
 	public fun <init> ()V
 	public fun destroy (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getDurable ()Z
 	public fun listPartitions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun open (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/MissReason : java/lang/Enum {
+	public static final field Absent Lstapel/cache/MissReason;
+	public static final field NoPartition Lstapel/cache/MissReason;
+	public static final field SchemaMismatch Lstapel/cache/MissReason;
+	public static final field Undecodable Lstapel/cache/MissReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/cache/MissReason;
+	public static fun values ()[Lstapel/cache/MissReason;
+}
+
+public final class stapel/cache/NotPersistedReason : java/lang/Enum {
+	public static final field StoreError Lstapel/cache/NotPersistedReason;
+	public static final field TooLarge Lstapel/cache/NotPersistedReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/cache/NotPersistedReason;
+	public static fun values ()[Lstapel/cache/NotPersistedReason;
 }
 
 public final class stapel/cache/PartitionId {
@@ -44,6 +181,137 @@ public final class stapel/cache/PartitionStores {
 	public final fun getEntries ()Lstapel/cache/CacheStore;
 }
 
+public final class stapel/cache/Persistence : java/lang/Enum {
+	public static final field Durable Lstapel/cache/Persistence;
+	public static final field MemoryOnly Lstapel/cache/Persistence;
+	public static final field Never Lstapel/cache/Persistence;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/cache/Persistence;
+	public static fun values ()[Lstapel/cache/Persistence;
+}
+
+public final class stapel/cache/QuerySpec {
+	public fun <init> (Lstapel/wire/CacheKey;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lstapel/cache/ReadPolicy;Lstapel/cache/Persistence;)V
+	public synthetic fun <init> (Lstapel/wire/CacheKey;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lstapel/cache/ReadPolicy;Lstapel/cache/Persistence;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKey ()Lstapel/wire/CacheKey;
+	public final fun getPersistence ()Lstapel/cache/Persistence;
+	public final fun getPolicy ()Lstapel/cache/ReadPolicy;
+	public final fun getSchemaHash ()Ljava/lang/String;
+	public final fun getSerializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/ReadOptions {
+	public static final field Companion Lstapel/cache/ReadOptions$Companion;
+	public fun <init> ()V
+	public synthetic fun <init> (Lstapel/cache/ReadPolicy;Lkotlin/time/Duration;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lstapel/cache/ReadPolicy;Lkotlin/time/Duration;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getPolicy ()Lstapel/cache/ReadPolicy;
+	public final fun getPollEvery-FghU774 ()Lkotlin/time/Duration;
+}
+
+public final class stapel/cache/ReadOptions$Companion {
+	public final fun getDefault ()Lstapel/cache/ReadOptions;
+}
+
+public abstract interface class stapel/cache/ReadPolicy {
+	public static final field Companion Lstapel/cache/ReadPolicy$Companion;
+}
+
+public final class stapel/cache/ReadPolicy$CacheFirst : stapel/cache/ReadPolicy {
+	public synthetic fun <init> (JJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-UwyO8pc ()J
+	public final fun component2-UwyO8pc ()J
+	public final fun copy-QTBD994 (JJ)Lstapel/cache/ReadPolicy$CacheFirst;
+	public static synthetic fun copy-QTBD994$default (Lstapel/cache/ReadPolicy$CacheFirst;JJILjava/lang/Object;)Lstapel/cache/ReadPolicy$CacheFirst;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFreshFor-UwyO8pc ()J
+	public final fun getRetainFor-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/ReadPolicy$Companion {
+	public final fun getDefault ()Lstapel/cache/ReadPolicy;
+	public final fun getImmutable ()Lstapel/cache/ReadPolicy;
+}
+
+public final class stapel/cache/ReadPolicy$NetworkFirst : stapel/cache/ReadPolicy {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-UwyO8pc ()J
+	public final fun copy-LRDsOJo (J)Lstapel/cache/ReadPolicy$NetworkFirst;
+	public static synthetic fun copy-LRDsOJo$default (Lstapel/cache/ReadPolicy$NetworkFirst;JILjava/lang/Object;)Lstapel/cache/ReadPolicy$NetworkFirst;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRetainFor-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/ReadPolicy$NetworkOnly : stapel/cache/ReadPolicy {
+	public static final field INSTANCE Lstapel/cache/ReadPolicy$NetworkOnly;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/ReadPolicy$StaleWhileRevalidate : stapel/cache/ReadPolicy {
+	public synthetic fun <init> (JJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-UwyO8pc ()J
+	public final fun component2-UwyO8pc ()J
+	public final fun copy-QTBD994 (JJ)Lstapel/cache/ReadPolicy$StaleWhileRevalidate;
+	public static synthetic fun copy-QTBD994$default (Lstapel/cache/ReadPolicy$StaleWhileRevalidate;JJILjava/lang/Object;)Lstapel/cache/ReadPolicy$StaleWhileRevalidate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFreshFor-UwyO8pc ()J
+	public final fun getRetainFor-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/Refetch : java/lang/Enum {
+	public static final field Active Lstapel/cache/Refetch;
+	public static final field None Lstapel/cache/Refetch;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/cache/Refetch;
+	public static fun values ()[Lstapel/cache/Refetch;
+}
+
+public abstract interface class stapel/cache/StapelCache {
+	public abstract fun get (Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun get$default (Lstapel/cache/StapelCache;Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getCapabilities ()Lstapel/cache/CacheCapabilities;
+	public abstract fun invalidate (Lstapel/wire/KeyPattern;Lstapel/cache/Refetch;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun invalidate$default (Lstapel/cache/StapelCache;Lstapel/wire/KeyPattern;Lstapel/cache/Refetch;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun observe (Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun observe$default (Lstapel/cache/StapelCache;Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun peek (Lstapel/cache/QuerySpec;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun remove (Lstapel/wire/KeyPattern;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun update (Lstapel/cache/QuerySpec;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun write (Lstapel/cache/QuerySpec;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/StapelCache$DefaultImpls {
+	public static synthetic fun get$default (Lstapel/cache/StapelCache;Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun invalidate$default (Lstapel/cache/StapelCache;Lstapel/wire/KeyPattern;Lstapel/cache/Refetch;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun observe$default (Lstapel/cache/StapelCache;Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class stapel/cache/StapelCacheConfig {
+	public fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/coroutines/CoroutineScope;Lkotlin/time/Clock;Lstapel/cache/CacheStoreFactory;Lstapel/cache/CacheObserver;J)V
+	public synthetic fun <init> (Lkotlinx/serialization/json/Json;Lkotlinx/coroutines/CoroutineScope;Lkotlin/time/Clock;Lstapel/cache/CacheStoreFactory;Lstapel/cache/CacheObserver;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getJson ()Lkotlinx/serialization/json/Json;
+	public final fun getMaxEntryBytes ()J
+	public final fun getObserver ()Lstapel/cache/CacheObserver;
+	public final fun getScope ()Lkotlinx/coroutines/CoroutineScope;
+	public final fun getStoreFactory ()Lstapel/cache/CacheStoreFactory;
+}
+
+public final class stapel/cache/StapelCacheKt {
+	public static final fun StapelCache (Lstapel/cache/StapelCacheConfig;)Lstapel/cache/ManagedStapelCache;
+	public static final fun firstSettled (Lkotlinx/coroutines/flow/Flow;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class stapel/cache/StoredEntry {
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLjava/lang/String;JZ)V
 	public fun equals (Ljava/lang/Object;)Z
@@ -56,5 +324,43 @@ public final class stapel/cache/StoredEntry {
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 	public final fun withInvalidated (Z)Lstapel/cache/StoredEntry;
+}
+
+public abstract interface class stapel/cache/WipeHook {
+	public abstract fun onWipe (Lstapel/cache/WipeTarget;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/WipeReport {
+	public fun <init> (I)V
+	public final fun getPartitions ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cache/WipeTarget {
+}
+
+public final class stapel/cache/WipeTarget$Account : stapel/cache/WipeTarget {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cache/WipeTarget$Account;
+	public static synthetic fun copy$default (Lstapel/cache/WipeTarget$Account;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cache/WipeTarget$Account;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccountId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/WipeTarget$AllAccounts : stapel/cache/WipeTarget {
+	public static final field INSTANCE Lstapel/cache/WipeTarget$AllAccounts;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/WipeTarget$Everything : stapel/cache/WipeTarget {
+	public static final field INSTANCE Lstapel/cache/WipeTarget$Everything;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 

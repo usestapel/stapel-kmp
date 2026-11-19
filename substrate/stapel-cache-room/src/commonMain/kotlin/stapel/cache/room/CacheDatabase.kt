@@ -55,6 +55,9 @@ internal interface EntryDao {
     @Query("DELETE FROM entry WHERE $PREFIX")
     suspend fun deletePrefix(prefix: String): Int
 
+    @Query("SELECT `key` FROM entry WHERE $PREFIX")
+    suspend fun keys(prefix: String): List<String>
+
     @Query("SELECT COUNT(*) FROM entry")
     suspend fun count(): Int
 
