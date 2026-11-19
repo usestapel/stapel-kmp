@@ -16,6 +16,7 @@ kotlin {
         commonMain.dependencies {
             api(projects.stapelUi)
             api(projects.stapelNavigationCompose)
+            api(projects.stapelMviCompose)
         }
         getByName("skikoTest").dependencies {
             // Tests render every screen with both shipped skins; test classpaths are not dependency edges.

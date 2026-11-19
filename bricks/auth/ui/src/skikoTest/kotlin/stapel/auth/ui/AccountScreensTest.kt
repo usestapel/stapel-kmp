@@ -100,7 +100,7 @@ class AccountScreensTest {
         sessions = Resource.Failed(refusal("error.500.internal", 500))
         waitForIdle()
         onNodeWithText("Try again").performClick()
-        onNodeWithText("Refresh").performClick()
+        onNodeWithTag(AuthTestTags.SESSIONS_REFRESH).performClick()
         assertEquals(listOf<SessionsEvent>(SessionsEvent.Refresh, SessionsEvent.Refresh), events.all)
     }
 

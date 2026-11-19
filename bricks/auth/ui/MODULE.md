@@ -6,6 +6,12 @@
   `ForcedPasswordChangeScreen`, `LockedScreen`, `GuestUpgradeScreen`, `SessionsScreen`,
   `SignOutConfirmDialog`, `AccountMenu` take a state class and emit events; only typed text lives in
   the composable. The binding to the domain presenters maps presenter state → these states.
+- **Bindings:** `AuthSignIn`, `AuthSessions`, `AuthAccountMenu`, `AuthGuestWall` map the domain
+  presenters (`stapel.auth.presentation`) onto the screen states and events, through
+  `AuthPresenterFactory` (installed by the bindings, chained to the app's factory). The screens never
+  see a presenter. `AuthNavBridge` adapts the session to navigation and reopens the screens a session
+  ended on when it ended involuntarily (expired, revoked): navigation's reducer resets on every
+  sign-out because it cannot see the reason.
 - **Override table:** `AuthScreens` / `DefaultAuthScreens` / `LocalAuthScreens`. The sign-in screen
   draws its steps through `LocalAuthScreens`, so replacing a step replaces it inside the default screen.
 - **Auth widgets:** `AuthSkin` through `StapelSkin.extension(AuthSkinKey)` (session row, method

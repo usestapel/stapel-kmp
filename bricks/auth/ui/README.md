@@ -16,10 +16,18 @@ CompositionLocalProvider(LocalStapelErrorText provides ErrorTextResolver(myCatal
         SignInScreen(state, onEvent = { event -> /* hand to the sign-in presenter */ })
     }
 }
-// Navigation: ids and paths of the web pair (auth.login → /login, auth.security → security).
-val auth = authNavContribution(version, signIn = { route -> … }, security = { … }, accountMenu = { … })
+// Bound to the domain (stapel-auth) and to navigation: ids and paths of the web pair.
+val bridge = AuthNavBridge(stapelAuth, appScope)            // NavAuthSource + return after an involuntary sign-out
+val auth = authNavContribution(version,
+    signIn = { AuthSignIn(stapelAuth, onSignedIn = {}) },
+    security = { AuthSessions(stapelAuth) },
+    accountMenu = { AuthAccountMenu(stapelAuth, onOpen = { open() }) })
+// rememberStapelNavigator(listOf(auth, …), NavPolicy(signIn = AuthNavIds.Login), bridge).also(bridge::attach)
 ```
 
 Replace one screen: `object MyScreens : AuthScreens by DefaultAuthScreens { override fun OtpCode(…) }`,
 provided through `LocalAuthScreens`. Replace auth's own widgets (session row, method button): return
 your `AuthSkin` from `StapelSkin.extension(AuthSkinKey)`.
+
+A runnable example (stories of every state, and the live app against a local backend) is
+`bricks/auth/demo`: `./gradlew :stapel-auth-ui-demo:run [--args="--base-url http://127.0.0.1:18731/"]`.

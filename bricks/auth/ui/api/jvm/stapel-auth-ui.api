@@ -5,6 +5,16 @@ public final class stapel/auth/ui/AccountScreensKt {
 	public static final fun SignOutConfirmDialog (Lstapel/auth/ui/SignOutConfirmState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
 }
 
+public final class stapel/auth/ui/AuthBindingsKt {
+	public static final fun AuthAccountMenu (Lstapel/auth/StapelAuth;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;II)V
+	public static final fun AuthGuestWall (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
+	public static final fun AuthSessions (Lstapel/auth/StapelAuth;Lkotlin/time/Clock;Landroidx/compose/runtime/Composer;II)V
+	public static final fun AuthSignIn (Lstapel/auth/StapelAuth;Lkotlin/jvm/functions/Function0;Lstapel/auth/ui/AuthSlots;Lkotlin/time/Clock;Landroidx/compose/runtime/Composer;II)V
+	public static final fun ProvideAuthPresenters (Lstapel/auth/StapelAuth;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static final fun rememberSignOut (Lstapel/auth/StapelAuth;Landroidx/compose/runtime/Composer;I)Lkotlin/jvm/functions/Function0;
+	public static final fun toNotice (Lstapel/auth/session/SignOutReason;)Lstapel/auth/ui/AuthNotice;
+}
+
 public final class stapel/auth/ui/AuthErrorTextsRu : stapel/result/text/ErrorCatalog {
 	public static final field $stable I
 	public static final field INSTANCE Lstapel/auth/ui/AuthErrorTextsRu;
@@ -12,6 +22,18 @@ public final class stapel/auth/ui/AuthErrorTextsRu : stapel/result/text/ErrorCat
 	public fun getOwner ()Ljava/lang/String;
 	public fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
 	public fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/auth/ui/AuthNavBridge : stapel/navigation/NavAuthSource {
+	public static final field $stable I
+	public fun <init> (Lstapel/auth/StapelAuth;Lkotlinx/coroutines/CoroutineScope;)V
+	public final fun attach (Lstapel/navigation/StapelNavigator;)V
+	public fun authState ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getReturnTo ()Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public final class stapel/auth/ui/AuthNavBridgeKt {
+	public static final fun toNavAuthState (Lstapel/auth/session/AuthState;)Lstapel/navigation/NavAuthState;
 }
 
 public final class stapel/auth/ui/AuthNavIds {
@@ -41,6 +63,13 @@ public final class stapel/auth/ui/AuthNotice : java/lang/Enum {
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/ui/AuthNotice;
 	public static fun values ()[Lstapel/auth/ui/AuthNotice;
+}
+
+public final class stapel/auth/ui/AuthPresenterFactory : stapel/mvi/compose/PresenterFactory {
+	public static final field $stable I
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/compose/PresenterFactory;)V
+	public synthetic fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/compose/PresenterFactory;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun create (Lkotlin/reflect/KClass;Lstapel/mvi/PresenterContext;Ljava/util/List;)Lstapel/mvi/Presenter;
 }
 
 public abstract interface class stapel/auth/ui/AuthScreens {
@@ -102,6 +131,7 @@ public final class stapel/auth/ui/AuthTestTags {
 	public static final field REVOKE_CONFIRM Ljava/lang/String;
 	public static final field SEND_CODE Ljava/lang/String;
 	public static final field SESSIONS Ljava/lang/String;
+	public static final field SESSIONS_REFRESH Ljava/lang/String;
 	public static final field SESSION_ROW Ljava/lang/String;
 	public static final field SIGN_IN Ljava/lang/String;
 	public static final field SIGN_OUT_CONFIRM Ljava/lang/String;

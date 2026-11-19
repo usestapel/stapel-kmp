@@ -84,7 +84,13 @@ public fun SessionsScreen(state: SessionsState, onEvent: (SessionsEvent) -> Unit
                 AuthHeading(stapelString(AuthUiStrings.SessionsTitle))
                 AuthHint(stapelString(AuthUiStrings.SessionsSubtitle))
                 // Pull-to-refresh is the touch gesture; this is the same action for pointer and assistive input.
-                StapelButton(refreshLabel, { onEvent(SessionsEvent.Refresh) }, variant = ButtonVariant.Text, leadingIcon = StapelIconIds.Refresh)
+                StapelButton(
+                    refreshLabel,
+                    { onEvent(SessionsEvent.Refresh) },
+                    variant = ButtonVariant.Text,
+                    leadingIcon = StapelIconIds.Refresh,
+                    testTag = AuthTestTags.SESSIONS_REFRESH,
+                )
                 state.actionError?.let { ErrorState(it, onDismiss = { onEvent(SessionsEvent.DismissError) }, testTag = AuthTestTags.FORM_ERROR) }
                 val authSkin = StapelTheme.skin.extension(AuthSkinKey)
                 LoadList(

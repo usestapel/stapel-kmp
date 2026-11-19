@@ -133,6 +133,9 @@ public object AuthTestTags {
     /** The sessions screen root. */
     public const val SESSIONS: String = "auth.sessions"
 
+    /** The sessions screen's refresh action. */
+    public const val SESSIONS_REFRESH: String = "auth.sessions.refresh"
+
     /** A session row: suffix `.<id>`. */
     public const val SESSION_ROW: String = "auth.sessions.row"
 
