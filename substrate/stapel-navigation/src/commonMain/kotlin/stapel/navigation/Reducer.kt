@@ -48,6 +48,27 @@ public sealed interface NavCommand {
      * @property auth the new state.
      */
     public data class AuthChanged(public val auth: NavAuthState) : NavCommand
+
+    /**
+     * Finishes a multi-screen flow in one step: every entry of [flow] leaves every stack, together
+     * with whatever was opened above the flow's lowest visible entry (a help page opened from a
+     * wizard step goes with the wizard). Entries are grouped by the destinations' `FlowId`, the same
+     * grouping that scopes the flow's presenter owner, so the owner leaves with them.
+     *
+     * - The flow at the root of a tab: the tab keeps its root (the screen that started the flow).
+     * - The flow inside an overlay (a sheet or dialog flow): the overlay closes, the screen below stays.
+     * - The flow is the sign-in flow a guard opened: [NavState.pendingReturn] is kept, so the refused
+     *   target is opened as soon as the session arrives ([AuthChanged]), whichever comes first.
+     * - The flow's first entry is the root of its stack: the stack falls back to the default route —
+     *   the tab's own root route, or the start state for the current auth (home / sign-in) when the
+     *   tab host is not shown or the tab root itself belongs to the flow.
+     *
+     * A flow with no entry on any stack leaves the state unchanged (finishing twice is harmless).
+     *
+     * @property flow the flow to finish; null = the flow of the topmost entry (unchanged state when
+     *   that entry belongs to no flow).
+     */
+    public data class FinishFlow(public val flow: FlowId? = null) : NavCommand
 }
 
 /**
@@ -105,6 +126,7 @@ private class Reducer(val nav: ResolvedNav, val policy: NavPolicy, val guard: Ro
             guarded(state, command.routes, command.routes) { openStack(state, command.routes) }
         }
         is NavCommand.AuthChanged -> authChanged(state, command.auth)
+        is NavCommand.FinishFlow -> NavReduction(finishFlow(state, command.flow))
     }
 
     /** Runs the guard over [checked]; on Allow applies [open], otherwise records the refusal. */
@@ -128,7 +150,7 @@ private class Reducer(val nav: ResolvedNav, val policy: NavPolicy, val guard: Ro
             ?: return NavReduction(state, GuardDecision.Deny(REASON_SIGN_IN_UNAVAILABLE))
         val decision = GuardDecision.SignIn(mode, returnTo)
         val withReturn = state.copy(pendingReturn = returnTo)
-        val already = (withReturn.root + withReturn.overlays).any { nav.destinationOf(it.route)?.id == signInId }
+        val already = (withReturn.root + withReturn.overlays).any(::isSignIn)
         if (already) return NavReduction(withReturn, decision)
         val layer = if (mode == UnauthenticatedMode.Wall) Layer.Overlay else Layer.Root
         return NavReduction(withReturn.pushTo(layer, route), decision)
@@ -177,7 +199,8 @@ private class Reducer(val nav: ResolvedNav, val policy: NavPolicy, val guard: Ro
             }
             else -> return state
         }
-        return if (isSignIn(popped)) next.copy(pendingReturn = null) else next
+        // Leaving the last screen of the sign-in flow abandons it; stepping back inside the flow does not.
+        return if (isSignIn(popped) && next.visible.none(::isSignIn)) next.copy(pendingReturn = null) else next
     }
 
     private fun backTo(state: NavState, command: NavCommand.BackTo): NavState {
@@ -280,8 +303,54 @@ private class Reducer(val nav: ResolvedNav, val policy: NavPolicy, val guard: Ro
         }
     }
 
-    private fun isSignIn(entry: StackEntry): Boolean =
-        policy.signIn != null && nav.destinationOf(entry.route)?.id == policy.signIn
+    private fun finishFlow(state: NavState, requested: FlowId?): NavState {
+        val flow = requested ?: state.top?.let(::flowOf) ?: return state
+        fun inFlow(entry: StackEntry) = flowOf(entry) == flow
+        val visible = state.visible
+        val cut = visible.indexOfFirst(::inFlow)
+        val tabSize = state.selectedStack.size
+        var next = state
+        if (cut >= 0) {
+            next = when {
+                cut >= tabSize + state.root.size -> next.copy(overlays = state.overlays.take(cut - tabSize - state.root.size))
+                cut >= tabSize -> next.copy(root = state.root.take(cut - tabSize), overlays = emptyList())
+                else -> next.withStack(Layer.Tab, state.selectedStack.take(cut)).copy(root = emptyList(), overlays = emptyList())
+            }
+        }
+        // Entries of the flow on stacks that are not shown (other tabs) leave too: the flow's owner is
+        // shared, so it is released only once no entry of the flow is left anywhere.
+        val selected = next.selectedTab
+        val tabStacks = next.tabStacks
+            .mapValues { (tab, stack) -> if (tab == selected) stack else stack.take(stack.indexOfFirst(::inFlow).takeIf { it >= 0 } ?: stack.size) }
+            .filter { (tab, stack) -> stack.isNotEmpty() || tab == selected }
+        next = next.copy(tabStacks = tabStacks)
+        if (next == state) return state
+        return fallBack(next, flow)
+    }
+
+    /** A shown stack that [finishFlow] emptied is refilled with its default route, never with the finished flow. */
+    private fun fallBack(state: NavState, flow: FlowId): NavState {
+        if (state.visible.isNotEmpty()) return state
+        val tab = state.selectedTab
+            ?: return initialState(nav, policy, state.auth, state.nextUid).copy(pendingReturn = state.pendingReturn)
+        val cleared = state.copy(tabStacks = state.tabStacks - tab)
+        val tabRoot = nav.defaultRoute(tab)
+        if (tabRoot != null && nav.destinationOf(tabRoot)?.spec?.flow != flow) return cleared.ensureTabStack(nav, tab)
+        val other = policy.home?.takeIf { it in state.tabs && it != tab } ?: state.tabs.firstOrNull { it != tab }
+            ?: return cleared.ensureTabStack(nav, tab)
+        return cleared.ensureTabStack(nav, other).copy(selectedTab = other)
+    }
+
+    private fun flowOf(entry: StackEntry): FlowId? = nav.destinationOf(entry.route)?.spec?.flow
+
+    /** The sign-in destination's entries and the entries of its flow (a multi-screen sign-in). */
+    private fun isSignIn(entry: StackEntry): Boolean {
+        val signIn = policy.signIn ?: return false
+        val dest = nav.destinationOf(entry.route) ?: return false
+        if (dest.id == signIn) return true
+        val signInFlow = nav.byId[signIn]?.spec?.flow ?: return false
+        return dest.spec?.flow == signInFlow
+    }
 
     private fun NavState.replaceTabStack(tab: DestinationId, routes: List<Route>): NavState {
         var s = copy(selectedTab = tab, tabStacks = tabStacks + (tab to emptyList()))

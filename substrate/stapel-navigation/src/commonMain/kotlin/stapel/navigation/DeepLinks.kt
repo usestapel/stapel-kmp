@@ -28,12 +28,22 @@ public data class DeepLinkMatch(public val target: DestinationId, public val sta
 
 /**
  * Turns URIs into stacks and routes into URIs, using the same absolute paths as the web routes.
- * When two paths match, the one with more literal segments wins, then (order, id).
+ * A destination's aliases (`DestinationSpec.aliases`) are matched too, so a short or older link opens
+ * the same stack through the same guard; links made by [uriFor] always use the canonical path.
+ * When several patterns match, the one with more literal segments wins, then a canonical path over
+ * an alias, then (order, id).
  */
 public class DeepLinkResolver(private val nav: ResolvedNav, private val config: DeepLinkConfig) {
     private val candidates: List<Pair<ResolvedDestination, PathPattern>> = nav.byId.values
-        .map { it to PathPattern(it.absolutePath) }
-        .sortedWith(compareBy({ -it.second.literalCount }, { it.first.order }, { it.first.id.value }))
+        .flatMap { d -> listOf(d to PathPattern(d.absolutePath)) + d.spec?.aliases.orEmpty().map { d to it } }
+        .sortedWith(
+            compareBy(
+                { -it.second.literalCount },
+                { if (it.second.raw == it.first.absolutePath) 0 else 1 },
+                { it.first.order },
+                { it.first.id.value },
+            ),
+        )
 
     /** The stack for [uri], or null when it is not one of the app's links or matches no destination. */
     public fun resolve(uri: String): DeepLinkMatch? {

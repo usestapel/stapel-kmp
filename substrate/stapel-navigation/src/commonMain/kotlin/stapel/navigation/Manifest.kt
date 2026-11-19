@@ -33,6 +33,10 @@ import kotlin.reflect.KClass
  * @property flow presenter scope shared with other destinations of the same flow.
  * @property pageSlots page slots this screen renders.
  * @property requires capabilities without which the screen is replaced by a named placeholder.
+ * @property aliases additional absolute path patterns that open this destination from a link (a
+ *   short or older form, a push payload path); parsed with [codec] like the canonical path. Mobile
+ *   only: the canonical address ([path], `ResolvedNav.addressOf`, `DeepLinkResolver.uriFor`) never
+ *   changes, and the web route plan has no aliases.
  */
 public class DestinationSpec<R : Route>(
     public val id: DestinationId,
@@ -53,6 +57,7 @@ public class DestinationSpec<R : Route>(
     public val flow: FlowId? = null,
     public val pageSlots: Set<SlotId> = emptySet(),
     public val requires: Set<CapabilityKey> = emptySet(),
+    public val aliases: List<PathPattern> = emptyList(),
 ) {
     /** The declared surface, or the one derived from [requiresAuth]. */
     public val resolvedSurface: Surface get() = surface.orDerivedFrom(requiresAuth)
@@ -104,6 +109,13 @@ public fun Surface?.orDerivedFrom(requiresAuth: Boolean): Surface =
 private val manifestJson = Json { prettyPrint = true }
 
 /**
+ * Entry fields [toJson] writes that the web `nav-manifest.json` does not have. The shared route-plan
+ * fixtures (web parity) carry none of them, so they can never change a routed path; a reader of the
+ * web shape ignores them.
+ */
+public val MOBILE_ONLY_ENTRY_FIELDS: Set<String> = setOf("presentation", "pane", "flow", "pageSlots", "requires", "aliases")
+
+/**
  * Wire form for the scaffold and Studio: the web `nav-manifest.json` shape (`package`, `version`,
  * `entries` with `route.path` and `placement.level`), minus `component`, plus the mobile fields and
  * `embeds`. Deterministic: same manifest, same text.
@@ -145,6 +157,7 @@ private fun JsonObjectBuilder.destinationFields(d: DestinationSpec<*>) {
     put("pane", d.pane.name.lowercase())
     d.flow?.let { put("flow", it.value) }
     if (d.pageSlots.isNotEmpty()) put("pageSlots", buildJsonArray { d.pageSlots.map { it.value }.sorted().forEach { add(kotlinx.serialization.json.JsonPrimitive(it)) } })
+    if (d.aliases.isNotEmpty()) put("aliases", buildJsonArray { d.aliases.forEach { add(kotlinx.serialization.json.JsonPrimitive(it.raw)) } })
     if (d.requires.isNotEmpty()) put("requires", buildJsonArray { d.requires.map { it.value }.sorted().forEach { add(kotlinx.serialization.json.JsonPrimitive(it)) } })
 }
 

@@ -87,8 +87,9 @@ public final class stapel/navigation/DestinationId$Companion {
 }
 
 public final class stapel/navigation/DestinationSpec {
-	public synthetic fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlinx/serialization/KSerializer;Lstapel/navigation/PathPattern;Lstapel/navigation/PathCodec;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/Placement;ZZILstapel/navigation/Surface;Ljava/lang/String;Lstapel/navigation/Presentation;Lstapel/navigation/PaneRole;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlinx/serialization/KSerializer;Lstapel/navigation/PathPattern;Lstapel/navigation/PathCodec;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/Placement;ZZILstapel/navigation/Surface;Ljava/lang/String;Lstapel/navigation/Presentation;Lstapel/navigation/PaneRole;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlinx/serialization/KSerializer;Lstapel/navigation/PathPattern;Lstapel/navigation/PathCodec;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/Placement;ZZILstapel/navigation/Surface;Ljava/lang/String;Lstapel/navigation/Presentation;Lstapel/navigation/PaneRole;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlinx/serialization/KSerializer;Lstapel/navigation/PathPattern;Lstapel/navigation/PathCodec;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/Placement;ZZILstapel/navigation/Surface;Ljava/lang/String;Lstapel/navigation/Presentation;Lstapel/navigation/PaneRole;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;Ljava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAliases ()Ljava/util/List;
 	public final fun getCodec ()Lstapel/navigation/PathCodec;
 	public final fun getFlow-C6wEUI8 ()Ljava/lang/String;
 	public final fun getIcon-SiOSXmI ()Ljava/lang/String;
@@ -229,6 +230,7 @@ public final class stapel/navigation/GuardKt {
 }
 
 public final class stapel/navigation/ManifestKt {
+	public static final fun getMOBILE_ONLY_ENTRY_FIELDS ()Ljava/util/Set;
 	public static final fun orDerivedFrom (Lstapel/navigation/Surface;Z)Lstapel/navigation/Surface;
 	public static final fun toJson (Lstapel/navigation/NavManifest;)Ljava/lang/String;
 }
@@ -283,6 +285,19 @@ public final class stapel/navigation/NavCommand$BackTo : stapel/navigation/NavCo
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getId-x5gaQ_A ()Ljava/lang/String;
 	public final fun getInclusive ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavCommand$FinishFlow : stapel/navigation/NavCommand {
+	public fun <init> ()V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-C6wEUI8 ()Ljava/lang/String;
+	public final fun copy-ciJ38V0 (Ljava/lang/String;)Lstapel/navigation/NavCommand$FinishFlow;
+	public static synthetic fun copy-ciJ38V0$default (Lstapel/navigation/NavCommand$FinishFlow;Ljava/lang/String;ILjava/lang/Object;)Lstapel/navigation/NavCommand$FinishFlow;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFlow-C6wEUI8 ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -485,6 +500,10 @@ public abstract interface class stapel/navigation/Navigator {
 	public abstract fun backTo-ucCSUhI (Ljava/lang/String;Z)Z
 	public static synthetic fun backTo-ucCSUhI$default (Lstapel/navigation/Navigator;Ljava/lang/String;ZILjava/lang/Object;)Z
 	public abstract fun backWithResult (Lstapel/navigation/ResultKey;Ljava/lang/Object;)V
+	public abstract fun finishFlow-ciJ38V0 (Ljava/lang/String;)Z
+	public static synthetic fun finishFlow-ciJ38V0$default (Lstapel/navigation/Navigator;Ljava/lang/String;ILjava/lang/Object;)Z
+	public abstract fun finishFlowWithResult-6JygYb8 (Lstapel/navigation/ResultKey;Ljava/lang/Object;Ljava/lang/String;)Z
+	public static synthetic fun finishFlowWithResult-6JygYb8$default (Lstapel/navigation/Navigator;Lstapel/navigation/ResultKey;Ljava/lang/Object;Ljava/lang/String;ILjava/lang/Object;)Z
 	public abstract fun getState ()Lkotlinx/coroutines/flow/StateFlow;
 	public abstract fun navigate (Lstapel/navigation/Route;Z)V
 	public static synthetic fun navigate$default (Lstapel/navigation/Navigator;Lstapel/navigation/Route;ZILjava/lang/Object;)V
@@ -496,6 +515,8 @@ public abstract interface class stapel/navigation/Navigator {
 
 public final class stapel/navigation/Navigator$DefaultImpls {
 	public static synthetic fun backTo-ucCSUhI$default (Lstapel/navigation/Navigator;Ljava/lang/String;ZILjava/lang/Object;)Z
+	public static synthetic fun finishFlow-ciJ38V0$default (Lstapel/navigation/Navigator;Ljava/lang/String;ILjava/lang/Object;)Z
+	public static synthetic fun finishFlowWithResult-6JygYb8$default (Lstapel/navigation/Navigator;Lstapel/navigation/ResultKey;Ljava/lang/Object;Ljava/lang/String;ILjava/lang/Object;)Z
 	public static synthetic fun navigate$default (Lstapel/navigation/Navigator;Lstapel/navigation/Route;ZILjava/lang/Object;)V
 }
 
@@ -706,6 +727,8 @@ public final class stapel/navigation/StapelNavigator : stapel/navigation/Navigat
 	public fun backTo-ucCSUhI (Ljava/lang/String;Z)Z
 	public fun backWithResult (Lstapel/navigation/ResultKey;Ljava/lang/Object;)V
 	public final fun dispatch (Lstapel/navigation/NavCommand;)Lstapel/navigation/NavReduction;
+	public fun finishFlow-ciJ38V0 (Ljava/lang/String;)Z
+	public fun finishFlowWithResult-6JygYb8 (Lstapel/navigation/ResultKey;Ljava/lang/Object;Ljava/lang/String;)Z
 	public final fun getLastRefusal ()Lkotlinx/coroutines/flow/StateFlow;
 	public final fun getNav ()Lstapel/navigation/ResolvedNav;
 	public final fun getPolicy ()Lstapel/navigation/NavPolicy;

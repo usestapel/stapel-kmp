@@ -48,6 +48,19 @@ public interface Navigator {
 
     /** Results delivered under [key]; each result reaches one collector exactly once. */
     public fun <T : Any> results(key: ResultKey<T>): Flow<T>
+
+    /**
+     * Finishes [flow] (null = the flow of the topmost entry) in one step; see [NavCommand.FinishFlow].
+     * False when no entry of the flow was on any stack.
+     */
+    public fun finishFlow(flow: FlowId? = null): Boolean
+
+    /**
+     * [finishFlow], then delivers [value] under [key] to the screen the flow returns to (the one that
+     * started it). Nothing is delivered when the flow was not on any stack, so a stale result never
+     * reaches a later collector.
+     */
+    public fun <T : Any> finishFlowWithResult(key: ResultKey<T>, value: T, flow: FlowId? = null): Boolean
 }
 
 /**
@@ -121,6 +134,14 @@ public class StapelNavigator(
     override fun <T : Any> backWithResult(key: ResultKey<T>, value: T) {
         channel(key.name).trySend(value)
         back()
+    }
+
+    override fun finishFlow(flow: FlowId?): Boolean = changed { dispatch(NavCommand.FinishFlow(flow)) }
+
+    override fun <T : Any> finishFlowWithResult(key: ResultKey<T>, value: T, flow: FlowId?): Boolean {
+        val finished = finishFlow(flow)
+        if (finished) channel(key.name).trySend(value)
+        return finished
     }
 
     @Suppress("UNCHECKED_CAST")

@@ -15,3 +15,7 @@ Python planner is the reference: if the two disagree, the Kotlin port is wrong o
 - `expected.unrouted` is computed from the planner's output (input ids it did not route), not by
   re-implementing the rule.
 - Never edit a JSON file by hand; re-run the script and commit the result.
+- Mobile-only manifest fields (`MOBILE_ONLY_ENTRY_FIELDS`: `presentation`, `pane`, `flow`,
+  `pageSlots`, `requires`, `aliases`) are not in the planner's input and are not compared. For
+  `aliases` the replay additionally resolves every case with a synthetic alias on each entry and
+  requires the same routed paths: an alias is an extra way in, never a different canonical path.

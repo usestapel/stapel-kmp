@@ -62,6 +62,9 @@ class RoutePlanFixtureTest {
                 "$name: dropped = unrouted",
             )
             assertTrue(nav.dropped.all { it.reason.isNotBlank() }, "$name: every drop names its reason")
+            // Aliases are mobile-only (the planner has none): declaring them never moves a routed path.
+            val aliased = resolveNav(manifestsOf(case, withAliases = true), icons = icons, knownIds = known)
+            assertEquals(routes, aliased.byId.entries.associate { it.key.value to it.value.absolutePath }, "$name: aliases moved a path")
             if (name == "synthetic-child-of-absolute-top-is-not-routed") {
                 // Parity with the web plan, which skips such children silently; here the reason is explicit.
                 assertTrue(nav.dropped.isNotEmpty(), name)
@@ -73,24 +76,24 @@ class RoutePlanFixtureTest {
 
     private class Unrepresentable(message: String) : Exception(message)
 
-    private fun manifestsOf(case: JsonObject): List<NavManifest> = case.getValue("input").jsonArray.map { pairEl ->
+    private fun manifestsOf(case: JsonObject, withAliases: Boolean = false): List<NavManifest> = case.getValue("input").jsonArray.map { pairEl ->
         val pair = pairEl.jsonObject
         NavManifest(
             artifact = pair.getValue("package").jsonPrimitive.content,
             version = pair.getValue("version").jsonPrimitive.content,
-            destinations = pair.getValue("nav").jsonArray.map { specOf(it.jsonObject) },
+            destinations = pair.getValue("nav").jsonArray.map { specOf(it.jsonObject, withAliases) },
         )
     }
 
-    private fun specOf(e: JsonObject): DestinationSpec<*> {
+    private fun specOf(e: JsonObject, withAliases: Boolean): DestinationSpec<*> {
         val id = e.getValue("id").jsonPrimitive.content
         val route = e.getValue("route").jsonObject
         if ("index" in route) throw Unrepresentable("$id: route.index")
         val type = FIXTURE_ROUTES[id] ?: fail("no generated route type for $id")
-        return typed(type, e, id, route.getValue("path").jsonPrimitive.content)
+        return typed(type, e, id, route.getValue("path").jsonPrimitive.content, if (withAliases) listOf(PathPattern("/~alias/$id")) else emptyList())
     }
 
-    private fun <R : Route> typed(type: FixtureRouteType<R>, e: JsonObject, id: String, path: String): DestinationSpec<R> {
+    private fun <R : Route> typed(type: FixtureRouteType<R>, e: JsonObject, id: String, path: String, aliases: List<PathPattern>): DestinationSpec<R> {
         val placement = e.getValue("placement").jsonObject
         return DestinationSpec(
             id = DestinationId(id),
@@ -110,6 +113,7 @@ class RoutePlanFixtureTest {
             order = e.getValue("order").jsonPrimitive.int,
             surface = e["surface"]?.jsonPrimitive?.content?.let { s -> Surface.entries.single { it.name.lowercase() == s } },
             shortLabelKey = e["shortLabelKey"]?.jsonPrimitive?.content,
+            aliases = aliases,
         )
     }
 }

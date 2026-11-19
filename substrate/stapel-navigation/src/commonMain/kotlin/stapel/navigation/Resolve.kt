@@ -219,8 +219,10 @@ private val WEB_ONLY_SLOTS = setOf("browsebar", "footer")
  * its path to its parent's. Children of an absolute-path top get no route (as in the planner).
  *
  * Throws [NavContractException] for a duplicate id, a duplicate route type, an icon outside [icons],
- * a page-slot embed without `scope` or a chrome-slot embed with one, and — when [knownIds] is given —
- * a parent that neither an installed library, a container root nor [knownIds] declares. A parent in
+ * a page-slot embed without `scope` or a chrome-slot embed with one, a relative alias, two aliases
+ * (of any libraries) or an alias and a routed path that match the same URLs — naming both owners —
+ * and, when [knownIds] is given, a parent that neither an installed library, a container root nor
+ * [knownIds] declares. A parent in
  * [knownIds] that is not installed is an orphan: dropped with the reason.
  *
  * @param knownIds every destination id any library of the platform declares (the registry); null
@@ -268,6 +270,19 @@ public fun resolveNav(
                 problems += "${d.id}: placement.parentId '$parent' is declared by no library and by no container root " +
                     "(${containerIds.map { it.value }.sorted().joinToString(", ")})"
             }
+        }
+    }
+    val aliasOwners = HashMap<String, Triple<DestinationId, String, PathPattern>>()
+    for (m in manifests) for (d in m.destinations) for (alias in d.aliases) {
+        if (!alias.isAbsolute) {
+            problems += "${d.id}: alias '$alias' must be an absolute path"
+            continue
+        }
+        val other = aliasOwners[alias.shape]
+        if (other == null) {
+            aliasOwners[alias.shape] = Triple(d.id, m.artifact, alias)
+        } else {
+            problems += "${d.id}: alias '$alias' (${m.artifact}) matches the same links as alias '${other.third}' of ${other.first} (${other.second})"
         }
     }
     for (m in manifests) for (e in m.embeds) {
@@ -339,6 +354,15 @@ public fun resolveNav(
         byId[top.id] = resolvedTop
         resolvedKids.forEach { byId[it.id] = it }
     }
+
+    val canonicalShapes = byId.values.associateBy { PathPattern(it.absolutePath).shape }
+    for (d in byId.values) for (alias in d.spec?.aliases.orEmpty()) {
+        val owner = canonicalShapes[alias.shape] ?: continue
+        val ownerArtifact = owner.spec?.let { s -> manifests.firstOrNull { s in it.destinations }?.artifact } ?: "container"
+        val aliasArtifact = manifests.first { d.spec in it.destinations }.artifact
+        problems += "${d.id}: alias '$alias' ($aliasArtifact) matches the same links as the path '${owner.absolutePath}' of ${owner.id} ($ownerArtifact)"
+    }
+    if (problems.isNotEmpty()) throw NavContractException(problems)
 
     val embeds = mutableListOf<EmbedSpec>()
     for (m in manifests) for (e in m.embeds) {

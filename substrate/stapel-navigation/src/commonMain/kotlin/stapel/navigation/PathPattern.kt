@@ -16,6 +16,9 @@ public class PathPattern(public val raw: String) {
     /** Parameter names in order of appearance. */
     public val params: List<String> = segments.filter { it.startsWith(":") }.map { it.substring(1) }
 
+    /** The URL set this pattern matches, independent of parameter names (`/t/:` for `/t/:id`). */
+    internal val shape: String = (if (isAbsolute) "/" else "") + segments.joinToString("/") { if (it.startsWith(":")) ":" else it }
+
     /** Number of literal (non-parameter) segments; more literals = a more specific pattern. */
     public val literalCount: Int = segments.count { !it.startsWith(":") }
 
