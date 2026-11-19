@@ -1,0 +1,23 @@
+public abstract interface class stapel/di/SessionScopeHandle {
+	public abstract fun getCurrent ()Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public final class stapel/di/SessionScopeKt {
+	public static final fun bindSessionScope (Lorg/koin/core/Koin;Lkotlinx/coroutines/flow/Flow;Lkotlinx/coroutines/CoroutineScope;)Lstapel/di/SessionScopeHandle;
+	public static final fun sessionScopeId (J)Ljava/lang/String;
+}
+
+public final class stapel/di/StapelKoinKt {
+	public static final fun sessionScoped (Lorg/koin/core/module/Module;Lkotlin/jvm/functions/Function1;)V
+	public static final fun stapelKoin (Ljava/util/List;Ljava/util/List;Z)Lorg/koin/core/KoinApplication;
+	public static synthetic fun stapelKoin$default (Ljava/util/List;Ljava/util/List;ZILjava/lang/Object;)Lorg/koin/core/KoinApplication;
+}
+
+public final class stapel/di/StapelQualifiers {
+	public static final field INSTANCE Lstapel/di/StapelQualifiers;
+	public final fun contribution (Ljava/lang/String;)Lorg/koin/core/qualifier/Qualifier;
+	public final fun getAppScope ()Lorg/koin/core/qualifier/Qualifier;
+	public final fun getSessionScope ()Lorg/koin/core/qualifier/Qualifier;
+	public final fun module (Ljava/lang/String;)Lorg/koin/core/qualifier/Qualifier;
+}
+

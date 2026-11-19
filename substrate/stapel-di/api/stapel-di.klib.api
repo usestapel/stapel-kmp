@@ -1,0 +1,28 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-di>
+abstract interface stapel.di/SessionScopeHandle { // stapel.di/SessionScopeHandle|null[0]
+    abstract val current // stapel.di/SessionScopeHandle.current|{}current[0]
+        abstract fun <get-current>(): kotlinx.coroutines.flow/StateFlow<org.koin.core.scope/Scope?> // stapel.di/SessionScopeHandle.current.<get-current>|<get-current>(){}[0]
+}
+
+final object stapel.di/StapelQualifiers { // stapel.di/StapelQualifiers|null[0]
+    final val AppScope // stapel.di/StapelQualifiers.AppScope|{}AppScope[0]
+        final fun <get-AppScope>(): org.koin.core.qualifier/Qualifier // stapel.di/StapelQualifiers.AppScope.<get-AppScope>|<get-AppScope>(){}[0]
+    final val SessionScope // stapel.di/StapelQualifiers.SessionScope|{}SessionScope[0]
+        final fun <get-SessionScope>(): org.koin.core.qualifier/Qualifier // stapel.di/StapelQualifiers.SessionScope.<get-SessionScope>|<get-SessionScope>(){}[0]
+
+    final fun contribution(kotlin/String): org.koin.core.qualifier/Qualifier // stapel.di/StapelQualifiers.contribution|contribution(kotlin.String){}[0]
+    final fun module(kotlin/String): org.koin.core.qualifier/Qualifier // stapel.di/StapelQualifiers.module|module(kotlin.String){}[0]
+}
+
+final fun (org.koin.core.module/Module).stapel.di/sessionScoped(kotlin/Function1<org.koin.dsl/ScopeDSL, kotlin/Unit>) // stapel.di/sessionScoped|sessionScoped@org.koin.core.module.Module(kotlin.Function1<org.koin.dsl.ScopeDSL,kotlin.Unit>){}[0]
+final fun (org.koin.core/Koin).stapel.di/bindSessionScope(kotlinx.coroutines.flow/Flow<kotlin/Long?>, kotlinx.coroutines/CoroutineScope): stapel.di/SessionScopeHandle // stapel.di/bindSessionScope|bindSessionScope@org.koin.core.Koin(kotlinx.coroutines.flow.Flow<kotlin.Long?>;kotlinx.coroutines.CoroutineScope){}[0]
+final fun stapel.di/sessionScopeId(kotlin/Long): kotlin/String // stapel.di/sessionScopeId|sessionScopeId(kotlin.Long){}[0]
+final fun stapel.di/stapelKoin(kotlin.collections/List<org.koin.core.module/Module>, kotlin.collections/List<org.koin.core.module/Module> = ..., kotlin/Boolean = ...): org.koin.core/KoinApplication // stapel.di/stapelKoin|stapelKoin(kotlin.collections.List<org.koin.core.module.Module>;kotlin.collections.List<org.koin.core.module.Module>;kotlin.Boolean){}[0]
+final inline fun <#A: reified kotlin/Any> (org.koin.core.module/Module).stapel.di/contribute(kotlin/String, noinline kotlin/Function2<org.koin.core.scope/Scope, org.koin.core.parameter/ParametersHolder, #A>) // stapel.di/contribute|contribute@org.koin.core.module.Module(kotlin.String;kotlin.Function2<org.koin.core.scope.Scope,org.koin.core.parameter.ParametersHolder,0:0>){0§<kotlin.Any>}[0]
