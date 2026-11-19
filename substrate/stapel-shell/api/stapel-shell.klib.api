@@ -57,9 +57,18 @@ final class stapel.shell/SlotPlan { // stapel.shell/SlotPlan|null[0]
     }
 }
 
+final object stapel.shell/ShellDefaults { // stapel.shell/ShellDefaults|null[0]
+    final val windowInsets // stapel.shell/ShellDefaults.windowInsets|{}windowInsets[0]
+        final fun <get-windowInsets>(androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.foundation.layout/WindowInsets // stapel.shell/ShellDefaults.windowInsets.<get-windowInsets>|<get-windowInsets>(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
 final object stapel.shell/ShellTags { // stapel.shell/ShellTags|null[0]
     final const val BottomBar // stapel.shell/ShellTags.BottomBar|{}BottomBar[0]
         final fun <get-BottomBar>(): kotlin/String // stapel.shell/ShellTags.BottomBar.<get-BottomBar>|<get-BottomBar>(){}[0]
+    final const val Content // stapel.shell/ShellTags.Content|{}Content[0]
+        final fun <get-Content>(): kotlin/String // stapel.shell/ShellTags.Content.<get-Content>|<get-Content>(){}[0]
+    final const val DetailPlaceholder // stapel.shell/ShellTags.DetailPlaceholder|{}DetailPlaceholder[0]
+        final fun <get-DetailPlaceholder>(): kotlin/String // stapel.shell/ShellTags.DetailPlaceholder.<get-DetailPlaceholder>|<get-DetailPlaceholder>(){}[0]
     final const val Drawer // stapel.shell/ShellTags.Drawer|{}Drawer[0]
         final fun <get-Drawer>(): kotlin/String // stapel.shell/ShellTags.Drawer.<get-Drawer>|<get-Drawer>(){}[0]
     final const val MoreSheet // stapel.shell/ShellTags.MoreSheet|{}MoreSheet[0]
@@ -98,16 +107,18 @@ final object stapel.shell/Slots { // stapel.shell/Slots|null[0]
 }
 
 final val stapel.shell/stapel_shell_ShellConfig$stableprop // stapel.shell/stapel_shell_ShellConfig$stableprop|#static{}stapel_shell_ShellConfig$stableprop[0]
+final val stapel.shell/stapel_shell_ShellDefaults$stableprop // stapel.shell/stapel_shell_ShellDefaults$stableprop|#static{}stapel_shell_ShellDefaults$stableprop[0]
 final val stapel.shell/stapel_shell_ShellTags$stableprop // stapel.shell/stapel_shell_ShellTags$stableprop|#static{}stapel_shell_ShellTags$stableprop[0]
 final val stapel.shell/stapel_shell_SlotPlan$stableprop // stapel.shell/stapel_shell_SlotPlan$stableprop|#static{}stapel_shell_SlotPlan$stableprop[0]
 final val stapel.shell/stapel_shell_Slots$stableprop // stapel.shell/stapel_shell_Slots$stableprop|#static{}stapel_shell_Slots$stableprop[0]
 
 final fun stapel.shell/SectionScreen(stapel.navigation/DestinationId, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/SectionScreen|SectionScreen(stapel.navigation.DestinationId;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.shell/StapelShell(stapel.navigation/StapelNavigator, stapel.shell/ShellConfig, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/StapelShell|StapelShell(stapel.navigation.StapelNavigator;stapel.shell.ShellConfig;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.shell/StapelShell(stapel.shell/ShellConfig, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/StapelShell|StapelShell(stapel.shell.ShellConfig;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.shell/StapelShell(stapel.navigation/StapelNavigator, stapel.shell/ShellConfig, androidx.compose.ui/Modifier?, androidx.compose.foundation.layout/WindowInsets?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/StapelShell|StapelShell(stapel.navigation.StapelNavigator;stapel.shell.ShellConfig;androidx.compose.ui.Modifier?;androidx.compose.foundation.layout.WindowInsets?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.shell/StapelShell(stapel.shell/ShellConfig, androidx.compose.ui/Modifier?, androidx.compose.foundation.layout/WindowInsets?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/StapelShell|StapelShell(stapel.shell.ShellConfig;androidx.compose.ui.Modifier?;androidx.compose.foundation.layout.WindowInsets?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.shell/UnavailableScreen(stapel.navigation/ResolvedDestination, kotlin.collections/Set<stapel.navigation/CapabilityKey>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.shell/UnavailableScreen|UnavailableScreen(stapel.navigation.ResolvedDestination;kotlin.collections.Set<stapel.navigation.CapabilityKey>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 final fun stapel.shell/shellTemplatesJson(): kotlin/String // stapel.shell/shellTemplatesJson|shellTemplatesJson(){}[0]
 final fun stapel.shell/stapel_shell_ShellConfig$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_ShellConfig$stableprop_getter|stapel_shell_ShellConfig$stableprop_getter(){}[0]
+final fun stapel.shell/stapel_shell_ShellDefaults$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_ShellDefaults$stableprop_getter|stapel_shell_ShellDefaults$stableprop_getter(){}[0]
 final fun stapel.shell/stapel_shell_ShellTags$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_ShellTags$stableprop_getter|stapel_shell_ShellTags$stableprop_getter(){}[0]
 final fun stapel.shell/stapel_shell_SlotPlan$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_SlotPlan$stableprop_getter|stapel_shell_SlotPlan$stableprop_getter(){}[0]
 final fun stapel.shell/stapel_shell_Slots$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_Slots$stableprop_getter|stapel_shell_Slots$stableprop_getter(){}[0]

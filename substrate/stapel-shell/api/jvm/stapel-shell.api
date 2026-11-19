@@ -5,10 +5,11 @@ public abstract interface class stapel/shell/BadgeSource {
 public final class stapel/shell/ComposableSingletons$ShellKt {
 	public static final field INSTANCE Lstapel/shell/ComposableSingletons$ShellKt;
 	public fun <init> ()V
+	public final fun getLambda$-123119995$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda$-1382041852$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function5;
-	public final fun getLambda$1157898903$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda$1934780118$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$462595519$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$-1682695421$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2119224227$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$2017341606$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$633993055$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
 }
 
@@ -32,16 +33,24 @@ public final class stapel/shell/ShellConfig {
 	public final fun getTemplate ()Lstapel/shell/ShellTemplate;
 }
 
+public final class stapel/shell/ShellDefaults {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/shell/ShellDefaults;
+	public final fun getWindowInsets (Landroidx/compose/runtime/Composer;I)Landroidx/compose/foundation/layout/WindowInsets;
+}
+
 public final class stapel/shell/ShellKt {
 	public static final fun SectionScreen-D2mBrW0 (Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
-	public static final fun StapelShell (Lstapel/navigation/StapelNavigator;Lstapel/shell/ShellConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
-	public static final fun StapelShell (Lstapel/shell/ShellConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelShell (Lstapel/navigation/StapelNavigator;Lstapel/shell/ShellConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/WindowInsets;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelShell (Lstapel/shell/ShellConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/WindowInsets;Landroidx/compose/runtime/Composer;II)V
 	public static final fun UnavailableScreen (Lstapel/navigation/ResolvedDestination;Ljava/util/Set;Landroidx/compose/runtime/Composer;I)V
 }
 
 public final class stapel/shell/ShellTags {
 	public static final field $stable I
 	public static final field BottomBar Ljava/lang/String;
+	public static final field Content Ljava/lang/String;
+	public static final field DetailPlaceholder Ljava/lang/String;
 	public static final field Drawer Ljava/lang/String;
 	public static final field INSTANCE Lstapel/shell/ShellTags;
 	public static final field MoreSheet Ljava/lang/String;

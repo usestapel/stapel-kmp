@@ -5,6 +5,14 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,6 +40,7 @@ import stapel.navigation.DestinationId
 import stapel.navigation.EmbedSpec
 import stapel.navigation.GuardDecision
 import stapel.navigation.NavIcon
+import stapel.navigation.NavState
 import stapel.navigation.Presentation
 import stapel.navigation.ResolvedDestination
 import stapel.navigation.StapelNavigator
@@ -82,20 +91,51 @@ public object ShellTags {
 
     /** The placeholder of a destination that cannot be shown. */
     public const val Unavailable: String = "stapel.shell.unavailable"
+
+    /** The area between the chrome where screens are drawn. */
+    public const val Content: String = "stapel.shell.content"
+
+    /** The detail pane's placeholder while a list is shown without a detail (wide windows). */
+    public const val DetailPlaceholder: String = "stapel.shell.detail_placeholder"
 }
 
 private val LocalShellLabel = staticCompositionLocalOf<@Composable (String) -> String> { { it } }
 
-/** The app shell: creates the navigator from [config] and draws chrome + navigation host. */
+/**
+ * The app shell: creates the navigator from [config] and draws chrome + navigation host.
+ *
+ * @param windowInsets the insets the chrome keeps clear (status and navigation bars, display
+ *   cutout); see the other overload.
+ */
 @Composable
-public fun StapelShell(config: ShellConfig, modifier: Modifier = Modifier) {
+public fun StapelShell(config: ShellConfig, modifier: Modifier = Modifier, windowInsets: WindowInsets = ShellDefaults.windowInsets) {
     val navigator = rememberStapelNavigator(config.contributions, config.policy, config.auth, config.deepLinks, config.overrides)
-    StapelShell(navigator, config, modifier)
+    StapelShell(navigator, config, modifier, windowInsets)
 }
 
-/** The app shell around an existing [navigator] (an app that keeps it, a test). */
+/** Defaults of [StapelShell]. */
+public object ShellDefaults {
+    /** System bars and display cutout: what the chrome keeps clear. The keyboard is left to the screens. */
+    public val windowInsets: WindowInsets
+        @Composable get() = WindowInsets.systemBars.union(WindowInsets.displayCutout)
+}
+
+/**
+ * The app shell around an existing [navigator] (an app that keeps it, a test).
+ *
+ * Insets: each chrome keeps [windowInsets] clear on the sides it touches and consumes them for the
+ * content, so a screen's own safe-area padding (`StapelPage`) is not applied twice — top bar: top
+ * and both sides; bottom bar: bottom and both sides; rail / drawer: start, top and bottom (the top
+ * bar beside it then takes only the top and the end). Sides no chrome touches (the bottom without a
+ * bar, the keyboard) stay with the screen.
+ */
 @Composable
-public fun StapelShell(navigator: StapelNavigator, config: ShellConfig, modifier: Modifier = Modifier) {
+public fun StapelShell(
+    navigator: StapelNavigator,
+    config: ShellConfig,
+    modifier: Modifier = Modifier,
+    windowInsets: WindowInsets = ShellDefaults.windowInsets,
+) {
     CompositionLocalProvider(LocalShellLabel provides config.label, LocalNavigator provides navigator) {
         val state by navigator.state.collectAsState()
         val size = StapelTheme.layout.sizeClass
@@ -108,21 +148,36 @@ public fun StapelShell(navigator: StapelNavigator, config: ShellConfig, modifier
         var moreOpen by rememberSaveable { mutableStateOf(false) }
         val badges = badgeCounts(config)
 
+        val side = windowInsets.only(WindowInsetsSides.Start + WindowInsetsSides.Vertical)
+        val hasSide = chrome == Chrome.Rail || chrome == Chrome.Drawer
+        val topBarShown = topBarShown(navigator, state)
+        val bottomBarShown = chrome == Chrome.BottomBar
+        val contentConsumes = when {
+            topBarShown && bottomBarShown -> windowInsets.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Vertical)
+            topBarShown -> windowInsets.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
+            bottomBarShown -> windowInsets.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom)
+            else -> WindowInsets(0, 0, 0, 0)
+        }
+
         Box(modifier.fillMaxSize().background(StapelTheme.colors.surface)) {
             Row(Modifier.fillMaxSize()) {
                 when (chrome) {
-                    Chrome.Rail -> Column(Modifier.fillMaxHeight().testTag(ShellTags.Rail)) {
+                    Chrome.Rail -> Column(Modifier.fillMaxHeight().windowInsetsPadding(side).testTag(ShellTags.Rail)) {
                         EmbedSlot(Slots.SidenavHead, navigator, config.contributions, filter = embedFilter)
                         StapelTheme.skin.NavigationRail(navigationSpec(navigator, state.tabs, state.selectedTab?.value, badges, short = false), Modifier.weight(1f))
                         EmbedSlot(Slots.SidenavFoot, navigator, config.contributions, filter = embedFilter)
                     }
-                    Chrome.Drawer -> Drawer(navigator, config, state.tabs, state.selectedTab, embedFilter)
+                    Chrome.Drawer -> Drawer(navigator, config, state.tabs, state.selectedTab, embedFilter, Modifier.windowInsetsPadding(side))
                     else -> Unit
                 }
-                Column(Modifier.weight(1f).fillMaxHeight()) {
-                    TopBar(navigator, config, embedFilter)
+                // The rail / drawer took the start side (and the vertical sides on its own column).
+                val main = if (hasSide) Modifier.consumeWindowInsets(windowInsets.only(WindowInsetsSides.Start)) else Modifier
+                Column(main.weight(1f).fillMaxHeight()) {
+                    if (topBarShown) {
+                        TopBar(navigator, config, embedFilter, Modifier.windowInsetsPadding(windowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)))
+                    }
                     Refusal(navigator)
-                    Box(Modifier.weight(1f).fillMaxWidth()) {
+                    Box(Modifier.weight(1f).fillMaxWidth().consumeWindowInsets(contentConsumes).testTag(ShellTags.Content)) {
                         StapelNavHost(
                             navigator = navigator,
                             contributions = config.contributions,
@@ -131,6 +186,8 @@ public fun StapelShell(navigator: StapelNavigator, config: ShellConfig, modifier
                             unavailable = { d, missing -> UnavailableScreen(d, missing) },
                             waiting = { WaitScreen() },
                             section = { SectionScreen(it.id) },
+                            width = width,
+                            detailPlaceholder = { DetailPlaceholder() },
                         )
                     }
                     if (chrome == Chrome.BottomBar) {
@@ -140,7 +197,9 @@ public fun StapelShell(navigator: StapelNavigator, config: ShellConfig, modifier
                         val spec = navigationSpec(navigator, bar, selected, badges, short = true, more = overflow.isNotEmpty()) { id ->
                             if (id == MORE_ID) moreOpen = true else navigator.selectTab(DestinationId(id))
                         }
-                        StapelTheme.skin.NavigationBar(spec, Modifier.testTag(ShellTags.BottomBar))
+                        Box(Modifier.windowInsetsPadding(windowInsets.only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal))) {
+                            StapelTheme.skin.NavigationBar(spec, Modifier.testTag(ShellTags.BottomBar))
+                        }
                     }
                 }
             }
@@ -191,17 +250,23 @@ private fun navigationSpec(
 /** The neutral nav icon key is a `StapelIcon` id (same vocabulary); an id the icon set lacks draws its fallback. */
 internal fun NavIcon.toStapelIcon(): StapelIcon = StapelIcon(key)
 
+/** The top bar shows for a screen or cover on top; a dialog or sheet on top hides it. */
+private fun topBarShown(navigator: StapelNavigator, state: NavState): Boolean {
+    val top = state.top ?: return false
+    val destination = navigator.nav.destinationOf(top.route) ?: return false
+    return destination.presentation == Presentation.Screen || destination.presentation == Presentation.Cover
+}
+
 @Composable
-private fun TopBar(navigator: StapelNavigator, config: ShellConfig, filter: (EmbedSpec) -> Boolean) {
+private fun TopBar(navigator: StapelNavigator, config: ShellConfig, filter: (EmbedSpec) -> Boolean, modifier: Modifier) {
     val state by navigator.state.collectAsState()
     val top = state.top ?: return
     val destination = navigator.nav.destinationOf(top.route) ?: return
-    if (destination.presentation != Presentation.Screen && destination.presentation != Presentation.Cover) return
     val label = LocalShellLabel.current
     val canGoBack = state.visible.size > 1
     val hasCenter = navigator.nav.embeds.any { it.slot == Slots.TopbarCenter && filter(it) }
     Row(
-        Modifier.fillMaxWidth().background(StapelTheme.colors.surfaceRaised).testTag(ShellTags.TopBar).padding(horizontal = 4.dp),
+        Modifier.fillMaxWidth().background(StapelTheme.colors.surfaceRaised).then(modifier).testTag(ShellTags.TopBar).padding(horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (canGoBack) StapelIconButton(StapelIconIds.ArrowBack, label("shell.nav.back"), { navigator.back() })
@@ -224,10 +289,11 @@ private fun Drawer(
     tabs: List<DestinationId>,
     selected: DestinationId?,
     filter: (EmbedSpec) -> Boolean,
+    insets: Modifier,
 ) {
     val label = LocalShellLabel.current
     StapelSurface(Modifier.width(280.dp).fillMaxHeight(), elevation = ElevationStep.None, testTag = ShellTags.Drawer) {
-        Column {
+        Column(insets) {
             EmbedSlot(Slots.SidenavHead, navigator, config.contributions, filter = filter)
             for (id in tabs) {
                 val d = navigator.nav.byId[id] ?: continue
@@ -305,6 +371,13 @@ private fun Refusal(navigator: StapelNavigator) {
     if (dismissed) return
     val label = LocalShellLabel.current
     StapelBanner(StapelTone.Warning, label(deny.reasonKey), onDismiss = { dismissed = true }, testTag = ShellTags.Refusal)
+}
+
+@Composable
+private fun DetailPlaceholder() {
+    Box(Modifier.fillMaxSize().background(StapelTheme.colors.surfaceRaised).testTag(ShellTags.DetailPlaceholder), contentAlignment = Alignment.Center) {
+        StapelText(LocalShellLabel.current("shell.detail.empty"))
+    }
 }
 
 @Composable
