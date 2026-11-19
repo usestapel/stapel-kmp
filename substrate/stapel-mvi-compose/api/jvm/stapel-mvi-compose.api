@@ -1,0 +1,20 @@
+public final class stapel/mvi/compose/CollectKt {
+	public static final fun CollectEffects (Lstapel/mvi/Store;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static final fun collectState (Lstapel/mvi/Store;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/State;
+}
+
+public abstract interface class stapel/mvi/compose/PresenterFactory {
+	public abstract fun create (Lkotlin/reflect/KClass;Lstapel/mvi/PresenterContext;Ljava/util/List;)Lstapel/mvi/Presenter;
+}
+
+public final class stapel/mvi/compose/RememberPresenterKt {
+	public static final fun getLocalPresenterFactory ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun rememberPresenter (Lkotlin/reflect/KClass;Ljava/util/List;Ljava/lang/String;Landroidx/lifecycle/ViewModelStoreOwner;Landroidx/compose/runtime/Composer;II)Lstapel/mvi/Presenter;
+}
+
+public final class stapel/mvi/compose/di/KoinPresenterFactory : stapel/mvi/compose/PresenterFactory {
+	public static final field $stable I
+	public fun <init> (Lorg/koin/core/Koin;)V
+	public fun create (Lkotlin/reflect/KClass;Lstapel/mvi/PresenterContext;Ljava/util/List;)Lstapel/mvi/Presenter;
+}
+

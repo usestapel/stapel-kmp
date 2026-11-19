@@ -1,0 +1,27 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-mvi-compose>
+abstract interface stapel.mvi.compose/PresenterFactory { // stapel.mvi.compose/PresenterFactory|null[0]
+    abstract fun <#A1: stapel.mvi/Presenter<*, *, *>> create(kotlin.reflect/KClass<#A1>, stapel.mvi/PresenterContext, kotlin.collections/List<kotlin/Any?>): #A1 // stapel.mvi.compose/PresenterFactory.create|create(kotlin.reflect.KClass<0:0>;stapel.mvi.PresenterContext;kotlin.collections.List<kotlin.Any?>){0§<stapel.mvi.Presenter<*,*,*>>}[0]
+}
+
+final class stapel.mvi.compose.di/KoinPresenterFactory : stapel.mvi.compose/PresenterFactory { // stapel.mvi.compose.di/KoinPresenterFactory|null[0]
+    constructor <init>(org.koin.core/Koin) // stapel.mvi.compose.di/KoinPresenterFactory.<init>|<init>(org.koin.core.Koin){}[0]
+
+    final fun <#A1: stapel.mvi/Presenter<*, *, *>> create(kotlin.reflect/KClass<#A1>, stapel.mvi/PresenterContext, kotlin.collections/List<kotlin/Any?>): #A1 // stapel.mvi.compose.di/KoinPresenterFactory.create|create(kotlin.reflect.KClass<0:0>;stapel.mvi.PresenterContext;kotlin.collections.List<kotlin.Any?>){0§<stapel.mvi.Presenter<*,*,*>>}[0]
+}
+
+final val stapel.mvi.compose.di/stapel_mvi_compose_di_KoinPresenterFactory$stableprop // stapel.mvi.compose.di/stapel_mvi_compose_di_KoinPresenterFactory$stableprop|#static{}stapel_mvi_compose_di_KoinPresenterFactory$stableprop[0]
+final val stapel.mvi.compose/LocalPresenterFactory // stapel.mvi.compose/LocalPresenterFactory|{}LocalPresenterFactory[0]
+    final fun <get-LocalPresenterFactory>(): androidx.compose.runtime/ProvidableCompositionLocal<stapel.mvi.compose/PresenterFactory> // stapel.mvi.compose/LocalPresenterFactory.<get-LocalPresenterFactory>|<get-LocalPresenterFactory>(){}[0]
+
+final fun <#A: kotlin/Any> (stapel.mvi/Store<#A, *, *>).stapel.mvi.compose/collectState(androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.runtime/State<#A> // stapel.mvi.compose/collectState|collectState@stapel.mvi.Store<0:0,*,*>(androidx.compose.runtime.Composer?;kotlin.Int){0§<kotlin.Any>}[0]
+final fun <#A: kotlin/Any> (stapel.mvi/Store<*, *, #A>).stapel.mvi.compose/CollectEffects(kotlin.coroutines/SuspendFunction1<#A, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.mvi.compose/CollectEffects|CollectEffects@stapel.mvi.Store<*,*,0:0>(kotlin.coroutines.SuspendFunction1<0:0,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){0§<kotlin.Any>}[0]
+final fun <#A: stapel.mvi/Presenter<*, *, *>> stapel.mvi.compose/rememberPresenter(kotlin.reflect/KClass<#A>, kotlin.collections/List<kotlin/Any?>, kotlin/String?, androidx.lifecycle/ViewModelStoreOwner?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int): #A // stapel.mvi.compose/rememberPresenter|rememberPresenter(kotlin.reflect.KClass<0:0>;kotlin.collections.List<kotlin.Any?>;kotlin.String?;androidx.lifecycle.ViewModelStoreOwner?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§<stapel.mvi.Presenter<*,*,*>>}[0]
+final fun stapel.mvi.compose.di/stapel_mvi_compose_di_KoinPresenterFactory$stableprop_getter(): kotlin/Int // stapel.mvi.compose.di/stapel_mvi_compose_di_KoinPresenterFactory$stableprop_getter|stapel_mvi_compose_di_KoinPresenterFactory$stableprop_getter(){}[0]
+final inline fun <#A: reified stapel.mvi/Presenter<*, *, *>> stapel.mvi.compose/rememberPresenter(kotlin/Array<out kotlin/Any?>..., kotlin/String?, androidx.lifecycle/ViewModelStoreOwner?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int): #A // stapel.mvi.compose/rememberPresenter|rememberPresenter(kotlin.Array<out|kotlin.Any?>...;kotlin.String?;androidx.lifecycle.ViewModelStoreOwner?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§<stapel.mvi.Presenter<*,*,*>>}[0]
