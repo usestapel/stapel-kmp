@@ -1,0 +1,178 @@
+{
+  "declared": [
+    "account.appeals",
+    "account.billing",
+    "account.language",
+    "account.privacy",
+    "account.root",
+    "admin.auth_audit",
+    "admin.moderation",
+    "admin.moderation-appeals",
+    "admin.privacy",
+    "admin.root",
+    "admin.service_keys",
+    "admin.sso_orgs",
+    "admin.staff_roles",
+    "admin.usage",
+    "admin.users_create",
+    "auth.login",
+    "auth.qr_confirm",
+    "auth.security",
+    "calendar.availability",
+    "calendar.month",
+    "categories.catalog",
+    "categories.category",
+    "chat.conversations",
+    "feed.author",
+    "feed.home",
+    "feed.post",
+    "forms.builder",
+    "forms.list",
+    "forms.responses",
+    "listings.compose",
+    "listings.detail",
+    "listings.favorites",
+    "listings.mine",
+    "moderation.policy",
+    "notifications.feed",
+    "notifications.push",
+    "profiles.connections",
+    "profiles.contacts",
+    "profiles.language",
+    "profiles.notifications",
+    "profiles.public",
+    "profiles.settings",
+    "public.privacy-request",
+    "recordings.detail",
+    "recordings.list",
+    "reservations.agenda",
+    "reservations.book",
+    "reservations.detail",
+    "reservations.mine",
+    "reservations.schedule",
+    "search.ranking",
+    "search.results",
+    "share.view",
+    "video.rooms",
+    "workspaces.audit",
+    "workspaces.invitations",
+    "workspaces.invite",
+    "workspaces.list",
+    "workspaces.members",
+    "workspaces.settings"
+  ],
+  "expected": {
+    "containerRoots": [
+      "account.root",
+      "admin.root"
+    ],
+    "routes": {
+      "account.appeals": "/app/account/appeals",
+      "account.root": "/app/account",
+      "admin.moderation": "/app/admin/moderation",
+      "admin.moderation-appeals": "/app/admin/moderation-appeals",
+      "admin.root": "/app/admin",
+      "moderation.policy": "/policy"
+    },
+    "unrouted": []
+  },
+  "icons": [
+    "AppstoreOutlined",
+    "AuditOutlined",
+    "BellOutlined",
+    "ClockCircleOutlined",
+    "FolderOpenOutlined",
+    "FolderOutlined",
+    "HeartOutlined",
+    "HomeOutlined",
+    "LoginOutlined",
+    "MessageOutlined",
+    "OrderedListOutlined",
+    "PlusOutlined",
+    "ProfileOutlined",
+    "QrcodeOutlined",
+    "SafetyCertificateOutlined",
+    "SearchOutlined",
+    "SettingOutlined",
+    "ShoppingCartOutlined",
+    "TagOutlined",
+    "UserOutlined"
+  ],
+  "input": [
+    {
+      "nav": [
+        {
+          "icon": "SafetyCertificateOutlined",
+          "id": "moderation.policy",
+          "labelKey": "moderation.nav.policy",
+          "menuVisibleDefault": false,
+          "order": 90,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": false,
+          "route": {
+            "path": "policy"
+          },
+          "surface": "public"
+        },
+        {
+          "icon": "AuditOutlined",
+          "id": "account.appeals",
+          "labelKey": "moderation.nav.appeals",
+          "menuVisibleDefault": true,
+          "order": 40,
+          "placement": {
+            "level": "submenu",
+            "parentId": "account.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "appeals"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "SafetyCertificateOutlined",
+          "id": "admin.moderation",
+          "labelKey": "moderation.nav.moderation",
+          "menuVisibleDefault": true,
+          "order": 20,
+          "placement": {
+            "level": "submenu",
+            "parentId": "admin.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "moderation"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "AuditOutlined",
+          "id": "admin.moderation-appeals",
+          "labelKey": "moderation.nav.appeals",
+          "menuVisibleDefault": true,
+          "order": 21,
+          "placement": {
+            "level": "submenu",
+            "parentId": "admin.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "moderation-appeals"
+          },
+          "surface": "member"
+        }
+      ],
+      "package": "@stapel/moderation-react",
+      "version": "0.4.0"
+    }
+  ],
+  "name": "registry-moderation-alone",
+  "source": {
+    "commit": "741df8d74c520c4213676b997611d2df144e500a",
+    "function": "stapel_tools._frontend_templates.build_nav_route_plan",
+    "repo": "usestapel/stapel-tools"
+  }
+}

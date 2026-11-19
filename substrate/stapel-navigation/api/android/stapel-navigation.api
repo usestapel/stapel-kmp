@@ -1,0 +1,744 @@
+public final class stapel/navigation/CapabilityKey {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/navigation/CapabilityKey;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/ContainerRoot {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getIcon-SiOSXmI ()Ljava/lang/String;
+	public final fun getId-x5gaQ_A ()Ljava/lang/String;
+	public final fun getLabelKey ()Ljava/lang/String;
+	public final fun getOrder ()I
+	public final fun getPath ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/ContainerRoots {
+	public static final field INSTANCE Lstapel/navigation/ContainerRoots;
+	public final fun getAccount ()Lstapel/navigation/ContainerRoot;
+	public final fun getAdmin ()Lstapel/navigation/ContainerRoot;
+	public final fun getAll ()Ljava/util/List;
+}
+
+public final class stapel/navigation/DeepLinkConfig {
+	public fun <init> (Ljava/util/Set;Ljava/util/Set;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/Set;Ljava/util/Set;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBasePath ()Ljava/lang/String;
+	public final fun getHosts ()Ljava/util/Set;
+	public final fun getSchemes ()Ljava/util/Set;
+}
+
+public final class stapel/navigation/DeepLinkMatch {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-x5gaQ_A ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy-ucCSUhI (Ljava/lang/String;Ljava/util/List;)Lstapel/navigation/DeepLinkMatch;
+	public static synthetic fun copy-ucCSUhI$default (Lstapel/navigation/DeepLinkMatch;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lstapel/navigation/DeepLinkMatch;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getStack ()Ljava/util/List;
+	public final fun getTarget-x5gaQ_A ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/DeepLinkResolver {
+	public fun <init> (Lstapel/navigation/ResolvedNav;Lstapel/navigation/DeepLinkConfig;)V
+	public final fun resolve (Ljava/lang/String;)Lstapel/navigation/DeepLinkMatch;
+	public final fun uriFor (Lstapel/navigation/Route;Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun uriFor$default (Lstapel/navigation/DeepLinkResolver;Lstapel/navigation/Route;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class stapel/navigation/DestinationId {
+	public static final field Companion Lstapel/navigation/DestinationId$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/navigation/DestinationId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/navigation/DestinationId$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/navigation/DestinationId$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize-HKNcjRc (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize-FmhAx_g (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/DestinationId$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/DestinationSpec {
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlinx/serialization/KSerializer;Lstapel/navigation/PathPattern;Lstapel/navigation/PathCodec;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/Placement;ZZILstapel/navigation/Surface;Ljava/lang/String;Lstapel/navigation/Presentation;Lstapel/navigation/PaneRole;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlinx/serialization/KSerializer;Lstapel/navigation/PathPattern;Lstapel/navigation/PathCodec;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/Placement;ZZILstapel/navigation/Surface;Ljava/lang/String;Lstapel/navigation/Presentation;Lstapel/navigation/PaneRole;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCodec ()Lstapel/navigation/PathCodec;
+	public final fun getFlow-C6wEUI8 ()Ljava/lang/String;
+	public final fun getIcon-SiOSXmI ()Ljava/lang/String;
+	public final fun getId-x5gaQ_A ()Ljava/lang/String;
+	public final fun getLabelKey ()Ljava/lang/String;
+	public final fun getMenuVisibleDefault ()Z
+	public final fun getOrder ()I
+	public final fun getPageSlots ()Ljava/util/Set;
+	public final fun getPane ()Lstapel/navigation/PaneRole;
+	public final fun getPath ()Lstapel/navigation/PathPattern;
+	public final fun getPlacement ()Lstapel/navigation/Placement;
+	public final fun getPresentation ()Lstapel/navigation/Presentation;
+	public final fun getRequires ()Ljava/util/Set;
+	public final fun getRequiresAuth ()Z
+	public final fun getResolvedSurface ()Lstapel/navigation/Surface;
+	public final fun getRouteClass ()Lkotlin/reflect/KClass;
+	public final fun getSerializer ()Lkotlinx/serialization/KSerializer;
+	public final fun getShortLabelKey ()Ljava/lang/String;
+	public final fun getSurface ()Lstapel/navigation/Surface;
+}
+
+public final class stapel/navigation/DroppedEntry {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lstapel/navigation/DroppedEntry;
+	public static synthetic fun copy$default (Lstapel/navigation/DroppedEntry;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/navigation/DroppedEntry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Ljava/lang/String;
+	public final fun getReason ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/EmbedId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/navigation/EmbedId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/EmbedSpec {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILstapel/navigation/EmbedSurface;Ljava/util/Set;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILstapel/navigation/EmbedSurface;Ljava/util/Set;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getId-iNjZtOw ()Ljava/lang/String;
+	public final fun getOpens-5yCdS2M ()Ljava/lang/String;
+	public final fun getOrder ()I
+	public final fun getRouteParams ()Ljava/util/Map;
+	public final fun getScope-5yCdS2M ()Ljava/lang/String;
+	public final fun getSlot-EmFWfVM ()Ljava/lang/String;
+	public final fun getSurface ()Lstapel/navigation/EmbedSurface;
+	public final fun getWidths ()Ljava/util/Set;
+}
+
+public final class stapel/navigation/EmbedSurface : java/lang/Enum {
+	public static final field Any Lstapel/navigation/EmbedSurface;
+	public static final field Member Lstapel/navigation/EmbedSurface;
+	public static final field Public Lstapel/navigation/EmbedSurface;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/navigation/EmbedSurface;
+	public static fun values ()[Lstapel/navigation/EmbedSurface;
+}
+
+public final class stapel/navigation/ExternalUris {
+	public static final field INSTANCE Lstapel/navigation/ExternalUris;
+	public final fun getIncoming ()Lkotlinx/coroutines/flow/Flow;
+	public final fun offer (Ljava/lang/String;)V
+}
+
+public final class stapel/navigation/FlowId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/navigation/FlowId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/navigation/GuardDecision {
+}
+
+public final class stapel/navigation/GuardDecision$Allow : stapel/navigation/GuardDecision {
+	public static final field INSTANCE Lstapel/navigation/GuardDecision$Allow;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/GuardDecision$Deny : stapel/navigation/GuardDecision {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/navigation/GuardDecision$Deny;
+	public static synthetic fun copy$default (Lstapel/navigation/GuardDecision$Deny;Ljava/lang/String;ILjava/lang/Object;)Lstapel/navigation/GuardDecision$Deny;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReasonKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/GuardDecision$SignIn : stapel/navigation/GuardDecision {
+	public fun <init> (Lstapel/navigation/UnauthenticatedMode;Ljava/util/List;)V
+	public final fun component1 ()Lstapel/navigation/UnauthenticatedMode;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lstapel/navigation/UnauthenticatedMode;Ljava/util/List;)Lstapel/navigation/GuardDecision$SignIn;
+	public static synthetic fun copy$default (Lstapel/navigation/GuardDecision$SignIn;Lstapel/navigation/UnauthenticatedMode;Ljava/util/List;ILjava/lang/Object;)Lstapel/navigation/GuardDecision$SignIn;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMode ()Lstapel/navigation/UnauthenticatedMode;
+	public final fun getReturnTo ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/GuardDecision$Wait : stapel/navigation/GuardDecision {
+	public static final field INSTANCE Lstapel/navigation/GuardDecision$Wait;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/GuardKt {
+	public static final field REASON_NOT_A_TAB Ljava/lang/String;
+	public static final field REASON_NO_MANDATE Ljava/lang/String;
+	public static final field REASON_SIGN_IN_UNAVAILABLE Ljava/lang/String;
+	public static final field REASON_UNKNOWN_DESTINATION Ljava/lang/String;
+	public static final fun getDefaultRouteGuard ()Lstapel/navigation/RouteGuard;
+}
+
+public final class stapel/navigation/ManifestKt {
+	public static final fun orDerivedFrom (Lstapel/navigation/Surface;Z)Lstapel/navigation/Surface;
+	public static final fun toJson (Lstapel/navigation/NavManifest;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/navigation/NavAuthSource {
+	public abstract fun authState ()Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public final class stapel/navigation/NavAuthState : java/lang/Enum {
+	public static final field Anonymous Lstapel/navigation/NavAuthState;
+	public static final field Companion Lstapel/navigation/NavAuthState$Companion;
+	public static final field Guest Lstapel/navigation/NavAuthState;
+	public static final field Member Lstapel/navigation/NavAuthState;
+	public static final field Unresolved Lstapel/navigation/NavAuthState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/navigation/NavAuthState;
+	public static fun values ()[Lstapel/navigation/NavAuthState;
+}
+
+public final class stapel/navigation/NavAuthState$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/navigation/NavCommand {
+}
+
+public final class stapel/navigation/NavCommand$AuthChanged : stapel/navigation/NavCommand {
+	public fun <init> (Lstapel/navigation/NavAuthState;)V
+	public final fun component1 ()Lstapel/navigation/NavAuthState;
+	public final fun copy (Lstapel/navigation/NavAuthState;)Lstapel/navigation/NavCommand$AuthChanged;
+	public static synthetic fun copy$default (Lstapel/navigation/NavCommand$AuthChanged;Lstapel/navigation/NavAuthState;ILjava/lang/Object;)Lstapel/navigation/NavCommand$AuthChanged;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAuth ()Lstapel/navigation/NavAuthState;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavCommand$Back : stapel/navigation/NavCommand {
+	public static final field INSTANCE Lstapel/navigation/NavCommand$Back;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavCommand$BackTo : stapel/navigation/NavCommand {
+	public synthetic fun <init> (Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;ZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-x5gaQ_A ()Ljava/lang/String;
+	public final fun component2 ()Z
+	public final fun copy-ucCSUhI (Ljava/lang/String;Z)Lstapel/navigation/NavCommand$BackTo;
+	public static synthetic fun copy-ucCSUhI$default (Lstapel/navigation/NavCommand$BackTo;Ljava/lang/String;ZILjava/lang/Object;)Lstapel/navigation/NavCommand$BackTo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId-x5gaQ_A ()Ljava/lang/String;
+	public final fun getInclusive ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavCommand$OpenStack : stapel/navigation/NavCommand {
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lstapel/navigation/NavCommand$OpenStack;
+	public static synthetic fun copy$default (Lstapel/navigation/NavCommand$OpenStack;Ljava/util/List;ILjava/lang/Object;)Lstapel/navigation/NavCommand$OpenStack;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRoutes ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavCommand$Push : stapel/navigation/NavCommand {
+	public fun <init> (Lstapel/navigation/Route;Z)V
+	public synthetic fun <init> (Lstapel/navigation/Route;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/navigation/Route;
+	public final fun component2 ()Z
+	public final fun copy (Lstapel/navigation/Route;Z)Lstapel/navigation/NavCommand$Push;
+	public static synthetic fun copy$default (Lstapel/navigation/NavCommand$Push;Lstapel/navigation/Route;ZILjava/lang/Object;)Lstapel/navigation/NavCommand$Push;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRoute ()Lstapel/navigation/Route;
+	public final fun getSingleTop ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavCommand$ReplaceAll : stapel/navigation/NavCommand {
+	public fun <init> (Lstapel/navigation/Route;)V
+	public final fun component1 ()Lstapel/navigation/Route;
+	public final fun copy (Lstapel/navigation/Route;)Lstapel/navigation/NavCommand$ReplaceAll;
+	public static synthetic fun copy$default (Lstapel/navigation/NavCommand$ReplaceAll;Lstapel/navigation/Route;ILjava/lang/Object;)Lstapel/navigation/NavCommand$ReplaceAll;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRoute ()Lstapel/navigation/Route;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavCommand$SelectTab : stapel/navigation/NavCommand {
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-x5gaQ_A ()Ljava/lang/String;
+	public final fun copy-aXi8Ia0 (Ljava/lang/String;)Lstapel/navigation/NavCommand$SelectTab;
+	public static synthetic fun copy-aXi8Ia0$default (Lstapel/navigation/NavCommand$SelectTab;Ljava/lang/String;ILjava/lang/Object;)Lstapel/navigation/NavCommand$SelectTab;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId-x5gaQ_A ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavContractException : java/lang/IllegalStateException {
+	public fun <init> (Ljava/util/List;)V
+	public final fun getProblems ()Ljava/util/List;
+}
+
+public final class stapel/navigation/NavIcon {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/navigation/NavIcon;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavIcons {
+	public static final field INSTANCE Lstapel/navigation/NavIcons;
+	public final fun getAll ()Ljava/util/Set;
+	public final fun getApps-SiOSXmI ()Ljava/lang/String;
+	public final fun getAudit-SiOSXmI ()Ljava/lang/String;
+	public final fun getBell-SiOSXmI ()Ljava/lang/String;
+	public final fun getCart-SiOSXmI ()Ljava/lang/String;
+	public final fun getClock-SiOSXmI ()Ljava/lang/String;
+	public final fun getFolder-SiOSXmI ()Ljava/lang/String;
+	public final fun getFolderOpen-SiOSXmI ()Ljava/lang/String;
+	public final fun getHeart-SiOSXmI ()Ljava/lang/String;
+	public final fun getHome-SiOSXmI ()Ljava/lang/String;
+	public final fun getListOrdered-SiOSXmI ()Ljava/lang/String;
+	public final fun getLogin-SiOSXmI ()Ljava/lang/String;
+	public final fun getMessage-SiOSXmI ()Ljava/lang/String;
+	public final fun getPlus-SiOSXmI ()Ljava/lang/String;
+	public final fun getProfile-SiOSXmI ()Ljava/lang/String;
+	public final fun getQr-SiOSXmI ()Ljava/lang/String;
+	public final fun getSearch-SiOSXmI ()Ljava/lang/String;
+	public final fun getSettings-SiOSXmI ()Ljava/lang/String;
+	public final fun getShieldCheck-SiOSXmI ()Ljava/lang/String;
+	public final fun getTag-SiOSXmI ()Ljava/lang/String;
+	public final fun getUser-SiOSXmI ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavManifest {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getArtifact ()Ljava/lang/String;
+	public final fun getDestinations ()Ljava/util/List;
+	public final fun getEmbeds ()Ljava/util/List;
+	public final fun getVersion ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavOverride {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Boolean;Ljava/lang/Integer;Lstapel/navigation/Surface;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/Boolean;Ljava/lang/Integer;Lstapel/navigation/Surface;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMenuVisible ()Ljava/lang/Boolean;
+	public final fun getOrder ()Ljava/lang/Integer;
+	public final fun getRequiresAuth ()Ljava/lang/Boolean;
+	public final fun getSurface ()Lstapel/navigation/Surface;
+}
+
+public final class stapel/navigation/NavOverrides {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getById ()Ljava/util/Map;
+}
+
+public final class stapel/navigation/NavPolicy {
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/navigation/UnauthenticatedMode;Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/navigation/UnauthenticatedMode;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getHome-5yCdS2M ()Ljava/lang/String;
+	public final fun getMaxTabs ()I
+	public final fun getSignIn-5yCdS2M ()Ljava/lang/String;
+	public final fun getUnauthenticated ()Lstapel/navigation/UnauthenticatedMode;
+}
+
+public final class stapel/navigation/NavReduction {
+	public fun <init> (Lstapel/navigation/NavState;Lstapel/navigation/GuardDecision;)V
+	public synthetic fun <init> (Lstapel/navigation/NavState;Lstapel/navigation/GuardDecision;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/navigation/NavState;
+	public final fun component2 ()Lstapel/navigation/GuardDecision;
+	public final fun copy (Lstapel/navigation/NavState;Lstapel/navigation/GuardDecision;)Lstapel/navigation/NavReduction;
+	public static synthetic fun copy$default (Lstapel/navigation/NavReduction;Lstapel/navigation/NavState;Lstapel/navigation/GuardDecision;ILjava/lang/Object;)Lstapel/navigation/NavReduction;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRefused ()Lstapel/navigation/GuardDecision;
+	public final fun getState ()Lstapel/navigation/NavState;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/NavState {
+	public static final field Companion Lstapel/navigation/NavState$Companion;
+	public synthetic fun <init> (Lstapel/navigation/NavAuthState;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lstapel/navigation/NavAuthState;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/navigation/NavAuthState;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4-5yCdS2M ()Ljava/lang/String;
+	public final fun component5 ()Ljava/util/Map;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()J
+	public final fun copy-6S2EoRY (Lstapel/navigation/NavAuthState;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;J)Lstapel/navigation/NavState;
+	public static synthetic fun copy-6S2EoRY$default (Lstapel/navigation/NavState;Lstapel/navigation/NavAuthState;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;JILjava/lang/Object;)Lstapel/navigation/NavState;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAuth ()Lstapel/navigation/NavAuthState;
+	public final fun getNextUid ()J
+	public final fun getOverlays ()Ljava/util/List;
+	public final fun getPendingReturn ()Ljava/util/List;
+	public final fun getRoot ()Ljava/util/List;
+	public final fun getSelectedStack ()Ljava/util/List;
+	public final fun getSelectedTab-5yCdS2M ()Ljava/lang/String;
+	public final fun getTabHostActive ()Z
+	public final fun getTabStacks ()Ljava/util/Map;
+	public final fun getTabs ()Ljava/util/List;
+	public final fun getTop ()Lstapel/navigation/StackEntry;
+	public final fun getVisible ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/navigation/NavState$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/navigation/NavState$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/navigation/NavState;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/navigation/NavState;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/NavState$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/NavStateCodec {
+	public fun <init> (Ljava/util/List;)V
+	public final fun decode (Ljava/lang/String;)Lstapel/navigation/NavState;
+	public final fun encode (Lstapel/navigation/NavState;)Ljava/lang/String;
+	public final fun getJson ()Lkotlinx/serialization/json/Json;
+}
+
+public abstract interface class stapel/navigation/Navigator {
+	public abstract fun back ()Z
+	public abstract fun backTo-ucCSUhI (Ljava/lang/String;Z)Z
+	public static synthetic fun backTo-ucCSUhI$default (Lstapel/navigation/Navigator;Ljava/lang/String;ZILjava/lang/Object;)Z
+	public abstract fun backWithResult (Lstapel/navigation/ResultKey;Ljava/lang/Object;)V
+	public abstract fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun navigate (Lstapel/navigation/Route;Z)V
+	public static synthetic fun navigate$default (Lstapel/navigation/Navigator;Lstapel/navigation/Route;ZILjava/lang/Object;)V
+	public abstract fun open (Ljava/lang/String;)Z
+	public abstract fun replaceAll (Lstapel/navigation/Route;)V
+	public abstract fun results (Lstapel/navigation/ResultKey;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun selectTab-aXi8Ia0 (Ljava/lang/String;)V
+}
+
+public final class stapel/navigation/Navigator$DefaultImpls {
+	public static synthetic fun backTo-ucCSUhI$default (Lstapel/navigation/Navigator;Ljava/lang/String;ZILjava/lang/Object;)Z
+	public static synthetic fun navigate$default (Lstapel/navigation/Navigator;Lstapel/navigation/Route;ZILjava/lang/Object;)V
+}
+
+public final class stapel/navigation/PaneRole : java/lang/Enum {
+	public static final field Detail Lstapel/navigation/PaneRole;
+	public static final field List Lstapel/navigation/PaneRole;
+	public static final field Single Lstapel/navigation/PaneRole;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/navigation/PaneRole;
+	public static fun values ()[Lstapel/navigation/PaneRole;
+}
+
+public final class stapel/navigation/PathCodec {
+	public static final field Companion Lstapel/navigation/PathCodec$Companion;
+	public fun <init> (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;)V
+	public final fun getFormat ()Lkotlin/jvm/functions/Function1;
+	public final fun getParse ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class stapel/navigation/PathCodec$Companion {
+	public final fun constant (Lstapel/navigation/Route;)Lstapel/navigation/PathCodec;
+}
+
+public final class stapel/navigation/PathPattern {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun format (Ljava/util/Map;)Ljava/lang/String;
+	public final fun getLiteralCount ()I
+	public final fun getParams ()Ljava/util/List;
+	public final fun getRaw ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isAbsolute ()Z
+	public final fun match (Ljava/util/List;)Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/navigation/Placement {
+}
+
+public final class stapel/navigation/Placement$Submenu : stapel/navigation/Placement {
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-x5gaQ_A ()Ljava/lang/String;
+	public final fun copy-aXi8Ia0 (Ljava/lang/String;)Lstapel/navigation/Placement$Submenu;
+	public static synthetic fun copy-aXi8Ia0$default (Lstapel/navigation/Placement$Submenu;Ljava/lang/String;ILjava/lang/Object;)Lstapel/navigation/Placement$Submenu;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getParentId-x5gaQ_A ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/Placement$Top : stapel/navigation/Placement {
+	public static final field INSTANCE Lstapel/navigation/Placement$Top;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/Presentation : java/lang/Enum {
+	public static final field Cover Lstapel/navigation/Presentation;
+	public static final field Dialog Lstapel/navigation/Presentation;
+	public static final field Screen Lstapel/navigation/Presentation;
+	public static final field Sheet Lstapel/navigation/Presentation;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/navigation/Presentation;
+	public static fun values ()[Lstapel/navigation/Presentation;
+}
+
+public final class stapel/navigation/ReducerKt {
+	public static final fun initialNavState (Lstapel/navigation/ResolvedNav;Lstapel/navigation/NavPolicy;Lstapel/navigation/NavAuthState;)Lstapel/navigation/NavState;
+	public static final fun reduceNav (Lstapel/navigation/NavState;Lstapel/navigation/NavCommand;Lstapel/navigation/ResolvedNav;Lstapel/navigation/NavPolicy;Lstapel/navigation/RouteGuard;)Lstapel/navigation/NavReduction;
+	public static synthetic fun reduceNav$default (Lstapel/navigation/NavState;Lstapel/navigation/NavCommand;Lstapel/navigation/ResolvedNav;Lstapel/navigation/NavPolicy;Lstapel/navigation/RouteGuard;ILjava/lang/Object;)Lstapel/navigation/NavReduction;
+}
+
+public final class stapel/navigation/ResolveKt {
+	public static final fun resolveNav (Ljava/util/List;Lstapel/navigation/NavOverrides;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;)Lstapel/navigation/ResolvedNav;
+	public static synthetic fun resolveNav$default (Ljava/util/List;Lstapel/navigation/NavOverrides;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;ILjava/lang/Object;)Lstapel/navigation/ResolvedNav;
+}
+
+public final class stapel/navigation/ResolvedDestination {
+	public synthetic fun <init> (Lstapel/navigation/DestinationSpec;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/Surface;ZIZLjava/lang/String;Ljava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAbsolutePath ()Ljava/lang/String;
+	public final fun getChildren ()Ljava/util/List;
+	public final fun getIcon-SiOSXmI ()Ljava/lang/String;
+	public final fun getId-x5gaQ_A ()Ljava/lang/String;
+	public final fun getLabelKey ()Ljava/lang/String;
+	public final fun getMenuVisible ()Z
+	public final fun getOrder ()I
+	public final fun getParent-5yCdS2M ()Ljava/lang/String;
+	public final fun getPresentation ()Lstapel/navigation/Presentation;
+	public final fun getRequiresAuth ()Z
+	public final fun getShortLabelKey ()Ljava/lang/String;
+	public final fun getSpec ()Lstapel/navigation/DestinationSpec;
+	public final fun getSurface ()Lstapel/navigation/Surface;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/ResolvedNav {
+	public final fun addressOf (Lstapel/navigation/Route;)Lstapel/navigation/RouteAddress;
+	public final fun defaultRoute-aXi8Ia0 (Ljava/lang/String;)Lstapel/navigation/Route;
+	public final fun destinationOf (Lstapel/navigation/Route;)Lstapel/navigation/ResolvedDestination;
+	public final fun getById ()Ljava/util/Map;
+	public final fun getContainerRoots ()Ljava/util/List;
+	public final fun getDropped ()Ljava/util/List;
+	public final fun getEmbeds ()Ljava/util/List;
+	public final fun getManifests ()Ljava/util/List;
+	public final fun getTops ()Ljava/util/List;
+	public final fun menuFor (Lstapel/navigation/NavAuthState;)Ljava/util/List;
+	public final fun syntheticStack (Lstapel/navigation/Route;)Ljava/util/List;
+	public final fun tabsFor (Lstapel/navigation/NavAuthState;)Ljava/util/List;
+}
+
+public final class stapel/navigation/ResultKey {
+	public fun <init> (Ljava/lang/String;Lkotlinx/serialization/KSerializer;)V
+	public final fun getName ()Ljava/lang/String;
+	public final fun getSerializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/navigation/Route {
+}
+
+public final class stapel/navigation/RouteAddress {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Map;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/util/Map;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getPath ()Ljava/util/Map;
+	public final fun getQuery ()Ljava/util/Map;
+}
+
+public abstract interface class stapel/navigation/RouteGuard {
+	public abstract fun check (Lstapel/navigation/ResolvedDestination;Lstapel/navigation/NavAuthState;Lstapel/navigation/NavPolicy;)Lstapel/navigation/GuardDecision;
+}
+
+public final class stapel/navigation/SectionRoute : stapel/navigation/Route {
+	public static final field Companion Lstapel/navigation/SectionRoute$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-x5gaQ_A ()Ljava/lang/String;
+	public final fun copy-aXi8Ia0 (Ljava/lang/String;)Lstapel/navigation/SectionRoute;
+	public static synthetic fun copy-aXi8Ia0$default (Lstapel/navigation/SectionRoute;Ljava/lang/String;ILjava/lang/Object;)Lstapel/navigation/SectionRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId-x5gaQ_A ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/navigation/SectionRoute$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/navigation/SectionRoute$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/navigation/SectionRoute;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/navigation/SectionRoute;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/SectionRoute$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/SlotId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/navigation/SlotId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public static final fun isPageSlot-impl (Ljava/lang/String;)Z
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class stapel/navigation/StackEntry {
+	public static final field Companion Lstapel/navigation/StackEntry$Companion;
+	public fun <init> (Ljava/lang/String;Lstapel/navigation/Route;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/navigation/Route;
+	public final fun copy (Ljava/lang/String;Lstapel/navigation/Route;)Lstapel/navigation/StackEntry;
+	public static synthetic fun copy$default (Lstapel/navigation/StackEntry;Ljava/lang/String;Lstapel/navigation/Route;ILjava/lang/Object;)Lstapel/navigation/StackEntry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRoute ()Lstapel/navigation/Route;
+	public final fun getUid ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/navigation/StackEntry$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/navigation/StackEntry$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/navigation/StackEntry;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/navigation/StackEntry;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/StackEntry$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/navigation/StapelNavigator : stapel/navigation/Navigator {
+	public fun <init> (Lstapel/navigation/ResolvedNav;Lstapel/navigation/NavPolicy;Lstapel/navigation/NavAuthSource;Lkotlinx/coroutines/CoroutineScope;Lstapel/navigation/DeepLinkResolver;Lstapel/navigation/RouteGuard;Lstapel/navigation/NavState;)V
+	public synthetic fun <init> (Lstapel/navigation/ResolvedNav;Lstapel/navigation/NavPolicy;Lstapel/navigation/NavAuthSource;Lkotlinx/coroutines/CoroutineScope;Lstapel/navigation/DeepLinkResolver;Lstapel/navigation/RouteGuard;Lstapel/navigation/NavState;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun back ()Z
+	public fun backTo-ucCSUhI (Ljava/lang/String;Z)Z
+	public fun backWithResult (Lstapel/navigation/ResultKey;Ljava/lang/Object;)V
+	public final fun dispatch (Lstapel/navigation/NavCommand;)Lstapel/navigation/NavReduction;
+	public final fun getLastRefusal ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getNav ()Lstapel/navigation/ResolvedNav;
+	public final fun getPolicy ()Lstapel/navigation/NavPolicy;
+	public fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public fun navigate (Lstapel/navigation/Route;Z)V
+	public fun open (Ljava/lang/String;)Z
+	public fun replaceAll (Lstapel/navigation/Route;)V
+	public fun results (Lstapel/navigation/ResultKey;)Lkotlinx/coroutines/flow/Flow;
+	public fun selectTab-aXi8Ia0 (Ljava/lang/String;)V
+}
+
+public final class stapel/navigation/Surface : java/lang/Enum {
+	public static final field Member Lstapel/navigation/Surface;
+	public static final field Public Lstapel/navigation/Surface;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/navigation/Surface;
+	public static fun values ()[Lstapel/navigation/Surface;
+}
+
+public final class stapel/navigation/UnauthenticatedMode : java/lang/Enum {
+	public static final field Redirect Lstapel/navigation/UnauthenticatedMode;
+	public static final field Wall Lstapel/navigation/UnauthenticatedMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/navigation/UnauthenticatedMode;
+	public static fun values ()[Lstapel/navigation/UnauthenticatedMode;
+}
+
+public final class stapel/navigation/WidthClass : java/lang/Enum {
+	public static final field Desktop Lstapel/navigation/WidthClass;
+	public static final field Phone Lstapel/navigation/WidthClass;
+	public static final field Tablet Lstapel/navigation/WidthClass;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/navigation/WidthClass;
+	public static fun values ()[Lstapel/navigation/WidthClass;
+}
+

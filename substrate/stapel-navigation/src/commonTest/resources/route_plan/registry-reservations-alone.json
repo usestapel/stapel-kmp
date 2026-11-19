@@ -1,0 +1,192 @@
+{
+  "declared": [
+    "account.appeals",
+    "account.billing",
+    "account.language",
+    "account.privacy",
+    "account.root",
+    "admin.auth_audit",
+    "admin.moderation",
+    "admin.moderation-appeals",
+    "admin.privacy",
+    "admin.root",
+    "admin.service_keys",
+    "admin.sso_orgs",
+    "admin.staff_roles",
+    "admin.usage",
+    "admin.users_create",
+    "auth.login",
+    "auth.qr_confirm",
+    "auth.security",
+    "calendar.availability",
+    "calendar.month",
+    "categories.catalog",
+    "categories.category",
+    "chat.conversations",
+    "feed.author",
+    "feed.home",
+    "feed.post",
+    "forms.builder",
+    "forms.list",
+    "forms.responses",
+    "listings.compose",
+    "listings.detail",
+    "listings.favorites",
+    "listings.mine",
+    "moderation.policy",
+    "notifications.feed",
+    "notifications.push",
+    "profiles.connections",
+    "profiles.contacts",
+    "profiles.language",
+    "profiles.notifications",
+    "profiles.public",
+    "profiles.settings",
+    "public.privacy-request",
+    "recordings.detail",
+    "recordings.list",
+    "reservations.agenda",
+    "reservations.book",
+    "reservations.detail",
+    "reservations.mine",
+    "reservations.schedule",
+    "search.ranking",
+    "search.results",
+    "share.view",
+    "video.rooms",
+    "workspaces.audit",
+    "workspaces.invitations",
+    "workspaces.invite",
+    "workspaces.list",
+    "workspaces.members",
+    "workspaces.settings"
+  ],
+  "expected": {
+    "containerRoots": [
+      "account.root"
+    ],
+    "routes": {
+      "account.root": "/app/account",
+      "reservations.agenda": "/app/account/agenda",
+      "reservations.book": "/book/:bookableType/:bookableKey",
+      "reservations.detail": "/reservations/:id",
+      "reservations.mine": "/app/account/reservations",
+      "reservations.schedule": "/app/account/listings/:id/schedule"
+    },
+    "unrouted": []
+  },
+  "icons": [
+    "AppstoreOutlined",
+    "AuditOutlined",
+    "BellOutlined",
+    "ClockCircleOutlined",
+    "FolderOpenOutlined",
+    "FolderOutlined",
+    "HeartOutlined",
+    "HomeOutlined",
+    "LoginOutlined",
+    "MessageOutlined",
+    "OrderedListOutlined",
+    "PlusOutlined",
+    "ProfileOutlined",
+    "QrcodeOutlined",
+    "SafetyCertificateOutlined",
+    "SearchOutlined",
+    "SettingOutlined",
+    "ShoppingCartOutlined",
+    "TagOutlined",
+    "UserOutlined"
+  ],
+  "input": [
+    {
+      "nav": [
+        {
+          "icon": "ClockCircleOutlined",
+          "id": "reservations.book",
+          "labelKey": "reservations.nav.book",
+          "menuVisibleDefault": false,
+          "order": 63,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": false,
+          "route": {
+            "path": "/book/:bookableType/:bookableKey"
+          },
+          "surface": "public"
+        },
+        {
+          "icon": "ClockCircleOutlined",
+          "id": "reservations.mine",
+          "labelKey": "reservations.nav.mine",
+          "menuVisibleDefault": true,
+          "order": 41,
+          "placement": {
+            "level": "submenu",
+            "parentId": "account.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "reservations"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "ClockCircleOutlined",
+          "id": "reservations.detail",
+          "labelKey": "reservations.nav.detail",
+          "menuVisibleDefault": false,
+          "order": 64,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "/reservations/:id"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "OrderedListOutlined",
+          "id": "reservations.agenda",
+          "labelKey": "reservations.nav.agenda",
+          "menuVisibleDefault": true,
+          "order": 42,
+          "placement": {
+            "level": "submenu",
+            "parentId": "account.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "agenda"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "SettingOutlined",
+          "id": "reservations.schedule",
+          "labelKey": "reservations.nav.schedule",
+          "menuVisibleDefault": false,
+          "order": 43,
+          "placement": {
+            "level": "submenu",
+            "parentId": "account.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "listings/:id/schedule"
+          },
+          "surface": "member"
+        }
+      ],
+      "package": "@stapel/reservations-react",
+      "version": "0.1.0"
+    }
+  ],
+  "name": "registry-reservations-alone",
+  "source": {
+    "commit": "741df8d74c520c4213676b997611d2df144e500a",
+    "function": "stapel_tools._frontend_templates.build_nav_route_plan",
+    "repo": "usestapel/stapel-tools"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "commit": "741df8d74c520c4213676b997611d2df144e500a",
+  "cases": [
+    "registry-auth-alone",
+    "registry-billing-alone",
+    "registry-calendar-alone",
+    "registry-categories-alone",
+    "registry-chat-alone",
+    "registry-forms-alone",
+    "registry-gdpr-alone",
+    "registry-translate-alone",
+    "registry-listings-alone",
+    "registry-moderation-alone",
+    "registry-notifications-alone",
+    "registry-profiles-alone",
+    "registry-recordings-alone",
+    "registry-search-alone",
+    "registry-video-alone",
+    "registry-workspaces-alone",
+    "registry-feed-alone",
+    "registry-reservations-alone",
+    "registry-all",
+    "registry-auth-profiles-notifications",
+    "synthetic-public-relative-top-hoists-children",
+    "synthetic-child-of-absolute-top-is-not-routed",
+    "synthetic-grandchild-is-an-orphan",
+    "synthetic-order-ties-sort-by-id",
+    "synthetic-derived-surface-public-when-auth-not-required",
+    "synthetic-error-unknown-icon",
+    "synthetic-error-undeclared-parent",
+    "synthetic-error-route-index"
+  ]
+}

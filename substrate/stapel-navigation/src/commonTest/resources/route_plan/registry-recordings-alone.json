@@ -1,0 +1,155 @@
+{
+  "declared": [
+    "account.appeals",
+    "account.billing",
+    "account.language",
+    "account.privacy",
+    "account.root",
+    "admin.auth_audit",
+    "admin.moderation",
+    "admin.moderation-appeals",
+    "admin.privacy",
+    "admin.root",
+    "admin.service_keys",
+    "admin.sso_orgs",
+    "admin.staff_roles",
+    "admin.usage",
+    "admin.users_create",
+    "auth.login",
+    "auth.qr_confirm",
+    "auth.security",
+    "calendar.availability",
+    "calendar.month",
+    "categories.catalog",
+    "categories.category",
+    "chat.conversations",
+    "feed.author",
+    "feed.home",
+    "feed.post",
+    "forms.builder",
+    "forms.list",
+    "forms.responses",
+    "listings.compose",
+    "listings.detail",
+    "listings.favorites",
+    "listings.mine",
+    "moderation.policy",
+    "notifications.feed",
+    "notifications.push",
+    "profiles.connections",
+    "profiles.contacts",
+    "profiles.language",
+    "profiles.notifications",
+    "profiles.public",
+    "profiles.settings",
+    "public.privacy-request",
+    "recordings.detail",
+    "recordings.list",
+    "reservations.agenda",
+    "reservations.book",
+    "reservations.detail",
+    "reservations.mine",
+    "reservations.schedule",
+    "search.ranking",
+    "search.results",
+    "share.view",
+    "video.rooms",
+    "workspaces.audit",
+    "workspaces.invitations",
+    "workspaces.invite",
+    "workspaces.list",
+    "workspaces.members",
+    "workspaces.settings"
+  ],
+  "expected": {
+    "containerRoots": [],
+    "routes": {
+      "recordings.detail": "/app/recordings/:recordingId",
+      "recordings.list": "/app/recordings",
+      "share.view": "/share/:linkToken"
+    },
+    "unrouted": []
+  },
+  "icons": [
+    "AppstoreOutlined",
+    "AuditOutlined",
+    "BellOutlined",
+    "ClockCircleOutlined",
+    "FolderOpenOutlined",
+    "FolderOutlined",
+    "HeartOutlined",
+    "HomeOutlined",
+    "LoginOutlined",
+    "MessageOutlined",
+    "OrderedListOutlined",
+    "PlusOutlined",
+    "ProfileOutlined",
+    "QrcodeOutlined",
+    "SafetyCertificateOutlined",
+    "SearchOutlined",
+    "SettingOutlined",
+    "ShoppingCartOutlined",
+    "TagOutlined",
+    "UserOutlined"
+  ],
+  "input": [
+    {
+      "nav": [
+        {
+          "icon": "FolderOpenOutlined",
+          "id": "recordings.list",
+          "labelKey": "recordings.list.heading",
+          "menuVisibleDefault": true,
+          "order": 40,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "recordings"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "ProfileOutlined",
+          "id": "recordings.detail",
+          "labelKey": "recordings.detail.heading",
+          "menuVisibleDefault": false,
+          "order": 41,
+          "placement": {
+            "level": "submenu",
+            "parentId": "recordings.list"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": ":recordingId"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "AppstoreOutlined",
+          "id": "share.view",
+          "labelKey": "recordings.share.heading",
+          "menuVisibleDefault": false,
+          "order": 90,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": false,
+          "route": {
+            "path": "share/:linkToken"
+          },
+          "surface": "public"
+        }
+      ],
+      "package": "@stapel/recordings-react",
+      "version": "0.11.2"
+    }
+  ],
+  "name": "registry-recordings-alone",
+  "source": {
+    "commit": "741df8d74c520c4213676b997611d2df144e500a",
+    "function": "stapel_tools._frontend_templates.build_nav_route_plan",
+    "repo": "usestapel/stapel-tools"
+  }
+}

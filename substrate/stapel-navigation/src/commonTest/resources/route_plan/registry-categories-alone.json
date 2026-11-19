@@ -1,0 +1,138 @@
+{
+  "declared": [
+    "account.appeals",
+    "account.billing",
+    "account.language",
+    "account.privacy",
+    "account.root",
+    "admin.auth_audit",
+    "admin.moderation",
+    "admin.moderation-appeals",
+    "admin.privacy",
+    "admin.root",
+    "admin.service_keys",
+    "admin.sso_orgs",
+    "admin.staff_roles",
+    "admin.usage",
+    "admin.users_create",
+    "auth.login",
+    "auth.qr_confirm",
+    "auth.security",
+    "calendar.availability",
+    "calendar.month",
+    "categories.catalog",
+    "categories.category",
+    "chat.conversations",
+    "feed.author",
+    "feed.home",
+    "feed.post",
+    "forms.builder",
+    "forms.list",
+    "forms.responses",
+    "listings.compose",
+    "listings.detail",
+    "listings.favorites",
+    "listings.mine",
+    "moderation.policy",
+    "notifications.feed",
+    "notifications.push",
+    "profiles.connections",
+    "profiles.contacts",
+    "profiles.language",
+    "profiles.notifications",
+    "profiles.public",
+    "profiles.settings",
+    "public.privacy-request",
+    "recordings.detail",
+    "recordings.list",
+    "reservations.agenda",
+    "reservations.book",
+    "reservations.detail",
+    "reservations.mine",
+    "reservations.schedule",
+    "search.ranking",
+    "search.results",
+    "share.view",
+    "video.rooms",
+    "workspaces.audit",
+    "workspaces.invitations",
+    "workspaces.invite",
+    "workspaces.list",
+    "workspaces.members",
+    "workspaces.settings"
+  ],
+  "expected": {
+    "containerRoots": [],
+    "routes": {
+      "categories.catalog": "/c",
+      "categories.category": "/c/:slug"
+    },
+    "unrouted": []
+  },
+  "icons": [
+    "AppstoreOutlined",
+    "AuditOutlined",
+    "BellOutlined",
+    "ClockCircleOutlined",
+    "FolderOpenOutlined",
+    "FolderOutlined",
+    "HeartOutlined",
+    "HomeOutlined",
+    "LoginOutlined",
+    "MessageOutlined",
+    "OrderedListOutlined",
+    "PlusOutlined",
+    "ProfileOutlined",
+    "QrcodeOutlined",
+    "SafetyCertificateOutlined",
+    "SearchOutlined",
+    "SettingOutlined",
+    "ShoppingCartOutlined",
+    "TagOutlined",
+    "UserOutlined"
+  ],
+  "input": [
+    {
+      "nav": [
+        {
+          "icon": "AppstoreOutlined",
+          "id": "categories.catalog",
+          "labelKey": "categories.catalog.title",
+          "menuVisibleDefault": true,
+          "order": 5,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": false,
+          "route": {
+            "path": "/c"
+          },
+          "surface": "public"
+        },
+        {
+          "icon": "FolderOpenOutlined",
+          "id": "categories.category",
+          "labelKey": "categories.category.title",
+          "menuVisibleDefault": false,
+          "order": 6,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": false,
+          "route": {
+            "path": "/c/:slug"
+          },
+          "surface": "public"
+        }
+      ],
+      "package": "@stapel/categories-react",
+      "version": "0.36.0"
+    }
+  ],
+  "name": "registry-categories-alone",
+  "source": {
+    "commit": "741df8d74c520c4213676b997611d2df144e500a",
+    "function": "stapel_tools._frontend_templates.build_nav_route_plan",
+    "repo": "usestapel/stapel-tools"
+  }
+}

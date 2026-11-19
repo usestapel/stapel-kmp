@@ -1,0 +1,886 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-navigation>
+final enum class stapel.navigation/EmbedSurface : kotlin/Enum<stapel.navigation/EmbedSurface> { // stapel.navigation/EmbedSurface|null[0]
+    enum entry Any // stapel.navigation/EmbedSurface.Any|null[0]
+    enum entry Member // stapel.navigation/EmbedSurface.Member|null[0]
+    enum entry Public // stapel.navigation/EmbedSurface.Public|null[0]
+
+    final val entries // stapel.navigation/EmbedSurface.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.navigation/EmbedSurface> // stapel.navigation/EmbedSurface.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.navigation/EmbedSurface // stapel.navigation/EmbedSurface.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.navigation/EmbedSurface> // stapel.navigation/EmbedSurface.values|values#static(){}[0]
+}
+
+final enum class stapel.navigation/NavAuthState : kotlin/Enum<stapel.navigation/NavAuthState> { // stapel.navigation/NavAuthState|null[0]
+    enum entry Anonymous // stapel.navigation/NavAuthState.Anonymous|null[0]
+    enum entry Guest // stapel.navigation/NavAuthState.Guest|null[0]
+    enum entry Member // stapel.navigation/NavAuthState.Member|null[0]
+    enum entry Unresolved // stapel.navigation/NavAuthState.Unresolved|null[0]
+
+    final val entries // stapel.navigation/NavAuthState.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.navigation/NavAuthState> // stapel.navigation/NavAuthState.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.navigation/NavAuthState // stapel.navigation/NavAuthState.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.navigation/NavAuthState> // stapel.navigation/NavAuthState.values|values#static(){}[0]
+
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // stapel.navigation/NavAuthState.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.navigation/NavAuthState> // stapel.navigation/NavAuthState.Companion.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // stapel.navigation/NavAuthState.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+}
+
+final enum class stapel.navigation/PaneRole : kotlin/Enum<stapel.navigation/PaneRole> { // stapel.navigation/PaneRole|null[0]
+    enum entry Detail // stapel.navigation/PaneRole.Detail|null[0]
+    enum entry List // stapel.navigation/PaneRole.List|null[0]
+    enum entry Single // stapel.navigation/PaneRole.Single|null[0]
+
+    final val entries // stapel.navigation/PaneRole.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.navigation/PaneRole> // stapel.navigation/PaneRole.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.navigation/PaneRole // stapel.navigation/PaneRole.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.navigation/PaneRole> // stapel.navigation/PaneRole.values|values#static(){}[0]
+}
+
+final enum class stapel.navigation/Presentation : kotlin/Enum<stapel.navigation/Presentation> { // stapel.navigation/Presentation|null[0]
+    enum entry Cover // stapel.navigation/Presentation.Cover|null[0]
+    enum entry Dialog // stapel.navigation/Presentation.Dialog|null[0]
+    enum entry Screen // stapel.navigation/Presentation.Screen|null[0]
+    enum entry Sheet // stapel.navigation/Presentation.Sheet|null[0]
+
+    final val entries // stapel.navigation/Presentation.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.navigation/Presentation> // stapel.navigation/Presentation.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.navigation/Presentation // stapel.navigation/Presentation.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.navigation/Presentation> // stapel.navigation/Presentation.values|values#static(){}[0]
+}
+
+final enum class stapel.navigation/Surface : kotlin/Enum<stapel.navigation/Surface> { // stapel.navigation/Surface|null[0]
+    enum entry Member // stapel.navigation/Surface.Member|null[0]
+    enum entry Public // stapel.navigation/Surface.Public|null[0]
+
+    final val entries // stapel.navigation/Surface.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.navigation/Surface> // stapel.navigation/Surface.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.navigation/Surface // stapel.navigation/Surface.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.navigation/Surface> // stapel.navigation/Surface.values|values#static(){}[0]
+}
+
+final enum class stapel.navigation/UnauthenticatedMode : kotlin/Enum<stapel.navigation/UnauthenticatedMode> { // stapel.navigation/UnauthenticatedMode|null[0]
+    enum entry Redirect // stapel.navigation/UnauthenticatedMode.Redirect|null[0]
+    enum entry Wall // stapel.navigation/UnauthenticatedMode.Wall|null[0]
+
+    final val entries // stapel.navigation/UnauthenticatedMode.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.navigation/UnauthenticatedMode> // stapel.navigation/UnauthenticatedMode.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.navigation/UnauthenticatedMode // stapel.navigation/UnauthenticatedMode.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.navigation/UnauthenticatedMode> // stapel.navigation/UnauthenticatedMode.values|values#static(){}[0]
+}
+
+final enum class stapel.navigation/WidthClass : kotlin/Enum<stapel.navigation/WidthClass> { // stapel.navigation/WidthClass|null[0]
+    enum entry Desktop // stapel.navigation/WidthClass.Desktop|null[0]
+    enum entry Phone // stapel.navigation/WidthClass.Phone|null[0]
+    enum entry Tablet // stapel.navigation/WidthClass.Tablet|null[0]
+
+    final val entries // stapel.navigation/WidthClass.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.navigation/WidthClass> // stapel.navigation/WidthClass.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.navigation/WidthClass // stapel.navigation/WidthClass.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.navigation/WidthClass> // stapel.navigation/WidthClass.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.navigation/NavAuthSource { // stapel.navigation/NavAuthSource|null[0]
+    abstract fun authState(): kotlinx.coroutines.flow/StateFlow<stapel.navigation/NavAuthState> // stapel.navigation/NavAuthSource.authState|authState(){}[0]
+}
+
+abstract fun interface stapel.navigation/RouteGuard { // stapel.navigation/RouteGuard|null[0]
+    abstract fun check(stapel.navigation/ResolvedDestination, stapel.navigation/NavAuthState, stapel.navigation/NavPolicy): stapel.navigation/GuardDecision // stapel.navigation/RouteGuard.check|check(stapel.navigation.ResolvedDestination;stapel.navigation.NavAuthState;stapel.navigation.NavPolicy){}[0]
+}
+
+abstract interface stapel.navigation/Navigator { // stapel.navigation/Navigator|null[0]
+    abstract val state // stapel.navigation/Navigator.state|{}state[0]
+        abstract fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.navigation/NavState> // stapel.navigation/Navigator.state.<get-state>|<get-state>(){}[0]
+
+    abstract fun <#A1: kotlin/Any> backWithResult(stapel.navigation/ResultKey<#A1>, #A1) // stapel.navigation/Navigator.backWithResult|backWithResult(stapel.navigation.ResultKey<0:0>;0:0){0§<kotlin.Any>}[0]
+    abstract fun <#A1: kotlin/Any> results(stapel.navigation/ResultKey<#A1>): kotlinx.coroutines.flow/Flow<#A1> // stapel.navigation/Navigator.results|results(stapel.navigation.ResultKey<0:0>){0§<kotlin.Any>}[0]
+    abstract fun back(): kotlin/Boolean // stapel.navigation/Navigator.back|back(){}[0]
+    abstract fun backTo(stapel.navigation/DestinationId, kotlin/Boolean = ...): kotlin/Boolean // stapel.navigation/Navigator.backTo|backTo(stapel.navigation.DestinationId;kotlin.Boolean){}[0]
+    abstract fun navigate(stapel.navigation/Route, kotlin/Boolean = ...) // stapel.navigation/Navigator.navigate|navigate(stapel.navigation.Route;kotlin.Boolean){}[0]
+    abstract fun open(kotlin/String): kotlin/Boolean // stapel.navigation/Navigator.open|open(kotlin.String){}[0]
+    abstract fun replaceAll(stapel.navigation/Route) // stapel.navigation/Navigator.replaceAll|replaceAll(stapel.navigation.Route){}[0]
+    abstract fun selectTab(stapel.navigation/DestinationId) // stapel.navigation/Navigator.selectTab|selectTab(stapel.navigation.DestinationId){}[0]
+}
+
+abstract interface stapel.navigation/Route // stapel.navigation/Route|null[0]
+
+sealed interface stapel.navigation/GuardDecision { // stapel.navigation/GuardDecision|null[0]
+    final class Deny : stapel.navigation/GuardDecision { // stapel.navigation/GuardDecision.Deny|null[0]
+        constructor <init>(kotlin/String) // stapel.navigation/GuardDecision.Deny.<init>|<init>(kotlin.String){}[0]
+
+        final val reasonKey // stapel.navigation/GuardDecision.Deny.reasonKey|{}reasonKey[0]
+            final fun <get-reasonKey>(): kotlin/String // stapel.navigation/GuardDecision.Deny.reasonKey.<get-reasonKey>|<get-reasonKey>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.navigation/GuardDecision.Deny.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.navigation/GuardDecision.Deny // stapel.navigation/GuardDecision.Deny.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/GuardDecision.Deny.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/GuardDecision.Deny.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/GuardDecision.Deny.toString|toString(){}[0]
+    }
+
+    final class SignIn : stapel.navigation/GuardDecision { // stapel.navigation/GuardDecision.SignIn|null[0]
+        constructor <init>(stapel.navigation/UnauthenticatedMode, kotlin.collections/List<stapel.navigation/Route>) // stapel.navigation/GuardDecision.SignIn.<init>|<init>(stapel.navigation.UnauthenticatedMode;kotlin.collections.List<stapel.navigation.Route>){}[0]
+
+        final val mode // stapel.navigation/GuardDecision.SignIn.mode|{}mode[0]
+            final fun <get-mode>(): stapel.navigation/UnauthenticatedMode // stapel.navigation/GuardDecision.SignIn.mode.<get-mode>|<get-mode>(){}[0]
+        final val returnTo // stapel.navigation/GuardDecision.SignIn.returnTo|{}returnTo[0]
+            final fun <get-returnTo>(): kotlin.collections/List<stapel.navigation/Route> // stapel.navigation/GuardDecision.SignIn.returnTo.<get-returnTo>|<get-returnTo>(){}[0]
+
+        final fun component1(): stapel.navigation/UnauthenticatedMode // stapel.navigation/GuardDecision.SignIn.component1|component1(){}[0]
+        final fun component2(): kotlin.collections/List<stapel.navigation/Route> // stapel.navigation/GuardDecision.SignIn.component2|component2(){}[0]
+        final fun copy(stapel.navigation/UnauthenticatedMode = ..., kotlin.collections/List<stapel.navigation/Route> = ...): stapel.navigation/GuardDecision.SignIn // stapel.navigation/GuardDecision.SignIn.copy|copy(stapel.navigation.UnauthenticatedMode;kotlin.collections.List<stapel.navigation.Route>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/GuardDecision.SignIn.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/GuardDecision.SignIn.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/GuardDecision.SignIn.toString|toString(){}[0]
+    }
+
+    final object Allow : stapel.navigation/GuardDecision { // stapel.navigation/GuardDecision.Allow|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/GuardDecision.Allow.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/GuardDecision.Allow.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/GuardDecision.Allow.toString|toString(){}[0]
+    }
+
+    final object Wait : stapel.navigation/GuardDecision { // stapel.navigation/GuardDecision.Wait|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/GuardDecision.Wait.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/GuardDecision.Wait.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/GuardDecision.Wait.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.navigation/NavCommand { // stapel.navigation/NavCommand|null[0]
+    final class AuthChanged : stapel.navigation/NavCommand { // stapel.navigation/NavCommand.AuthChanged|null[0]
+        constructor <init>(stapel.navigation/NavAuthState) // stapel.navigation/NavCommand.AuthChanged.<init>|<init>(stapel.navigation.NavAuthState){}[0]
+
+        final val auth // stapel.navigation/NavCommand.AuthChanged.auth|{}auth[0]
+            final fun <get-auth>(): stapel.navigation/NavAuthState // stapel.navigation/NavCommand.AuthChanged.auth.<get-auth>|<get-auth>(){}[0]
+
+        final fun component1(): stapel.navigation/NavAuthState // stapel.navigation/NavCommand.AuthChanged.component1|component1(){}[0]
+        final fun copy(stapel.navigation/NavAuthState = ...): stapel.navigation/NavCommand.AuthChanged // stapel.navigation/NavCommand.AuthChanged.copy|copy(stapel.navigation.NavAuthState){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavCommand.AuthChanged.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/NavCommand.AuthChanged.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/NavCommand.AuthChanged.toString|toString(){}[0]
+    }
+
+    final class BackTo : stapel.navigation/NavCommand { // stapel.navigation/NavCommand.BackTo|null[0]
+        constructor <init>(stapel.navigation/DestinationId, kotlin/Boolean = ...) // stapel.navigation/NavCommand.BackTo.<init>|<init>(stapel.navigation.DestinationId;kotlin.Boolean){}[0]
+
+        final val id // stapel.navigation/NavCommand.BackTo.id|{}id[0]
+            final fun <get-id>(): stapel.navigation/DestinationId // stapel.navigation/NavCommand.BackTo.id.<get-id>|<get-id>(){}[0]
+        final val inclusive // stapel.navigation/NavCommand.BackTo.inclusive|{}inclusive[0]
+            final fun <get-inclusive>(): kotlin/Boolean // stapel.navigation/NavCommand.BackTo.inclusive.<get-inclusive>|<get-inclusive>(){}[0]
+
+        final fun component1(): stapel.navigation/DestinationId // stapel.navigation/NavCommand.BackTo.component1|component1(){}[0]
+        final fun component2(): kotlin/Boolean // stapel.navigation/NavCommand.BackTo.component2|component2(){}[0]
+        final fun copy(stapel.navigation/DestinationId = ..., kotlin/Boolean = ...): stapel.navigation/NavCommand.BackTo // stapel.navigation/NavCommand.BackTo.copy|copy(stapel.navigation.DestinationId;kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavCommand.BackTo.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/NavCommand.BackTo.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/NavCommand.BackTo.toString|toString(){}[0]
+    }
+
+    final class OpenStack : stapel.navigation/NavCommand { // stapel.navigation/NavCommand.OpenStack|null[0]
+        constructor <init>(kotlin.collections/List<stapel.navigation/Route>) // stapel.navigation/NavCommand.OpenStack.<init>|<init>(kotlin.collections.List<stapel.navigation.Route>){}[0]
+
+        final val routes // stapel.navigation/NavCommand.OpenStack.routes|{}routes[0]
+            final fun <get-routes>(): kotlin.collections/List<stapel.navigation/Route> // stapel.navigation/NavCommand.OpenStack.routes.<get-routes>|<get-routes>(){}[0]
+
+        final fun component1(): kotlin.collections/List<stapel.navigation/Route> // stapel.navigation/NavCommand.OpenStack.component1|component1(){}[0]
+        final fun copy(kotlin.collections/List<stapel.navigation/Route> = ...): stapel.navigation/NavCommand.OpenStack // stapel.navigation/NavCommand.OpenStack.copy|copy(kotlin.collections.List<stapel.navigation.Route>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavCommand.OpenStack.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/NavCommand.OpenStack.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/NavCommand.OpenStack.toString|toString(){}[0]
+    }
+
+    final class Push : stapel.navigation/NavCommand { // stapel.navigation/NavCommand.Push|null[0]
+        constructor <init>(stapel.navigation/Route, kotlin/Boolean = ...) // stapel.navigation/NavCommand.Push.<init>|<init>(stapel.navigation.Route;kotlin.Boolean){}[0]
+
+        final val route // stapel.navigation/NavCommand.Push.route|{}route[0]
+            final fun <get-route>(): stapel.navigation/Route // stapel.navigation/NavCommand.Push.route.<get-route>|<get-route>(){}[0]
+        final val singleTop // stapel.navigation/NavCommand.Push.singleTop|{}singleTop[0]
+            final fun <get-singleTop>(): kotlin/Boolean // stapel.navigation/NavCommand.Push.singleTop.<get-singleTop>|<get-singleTop>(){}[0]
+
+        final fun component1(): stapel.navigation/Route // stapel.navigation/NavCommand.Push.component1|component1(){}[0]
+        final fun component2(): kotlin/Boolean // stapel.navigation/NavCommand.Push.component2|component2(){}[0]
+        final fun copy(stapel.navigation/Route = ..., kotlin/Boolean = ...): stapel.navigation/NavCommand.Push // stapel.navigation/NavCommand.Push.copy|copy(stapel.navigation.Route;kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavCommand.Push.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/NavCommand.Push.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/NavCommand.Push.toString|toString(){}[0]
+    }
+
+    final class ReplaceAll : stapel.navigation/NavCommand { // stapel.navigation/NavCommand.ReplaceAll|null[0]
+        constructor <init>(stapel.navigation/Route) // stapel.navigation/NavCommand.ReplaceAll.<init>|<init>(stapel.navigation.Route){}[0]
+
+        final val route // stapel.navigation/NavCommand.ReplaceAll.route|{}route[0]
+            final fun <get-route>(): stapel.navigation/Route // stapel.navigation/NavCommand.ReplaceAll.route.<get-route>|<get-route>(){}[0]
+
+        final fun component1(): stapel.navigation/Route // stapel.navigation/NavCommand.ReplaceAll.component1|component1(){}[0]
+        final fun copy(stapel.navigation/Route = ...): stapel.navigation/NavCommand.ReplaceAll // stapel.navigation/NavCommand.ReplaceAll.copy|copy(stapel.navigation.Route){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavCommand.ReplaceAll.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/NavCommand.ReplaceAll.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/NavCommand.ReplaceAll.toString|toString(){}[0]
+    }
+
+    final class SelectTab : stapel.navigation/NavCommand { // stapel.navigation/NavCommand.SelectTab|null[0]
+        constructor <init>(stapel.navigation/DestinationId) // stapel.navigation/NavCommand.SelectTab.<init>|<init>(stapel.navigation.DestinationId){}[0]
+
+        final val id // stapel.navigation/NavCommand.SelectTab.id|{}id[0]
+            final fun <get-id>(): stapel.navigation/DestinationId // stapel.navigation/NavCommand.SelectTab.id.<get-id>|<get-id>(){}[0]
+
+        final fun component1(): stapel.navigation/DestinationId // stapel.navigation/NavCommand.SelectTab.component1|component1(){}[0]
+        final fun copy(stapel.navigation/DestinationId = ...): stapel.navigation/NavCommand.SelectTab // stapel.navigation/NavCommand.SelectTab.copy|copy(stapel.navigation.DestinationId){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavCommand.SelectTab.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/NavCommand.SelectTab.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/NavCommand.SelectTab.toString|toString(){}[0]
+    }
+
+    final object Back : stapel.navigation/NavCommand { // stapel.navigation/NavCommand.Back|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavCommand.Back.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/NavCommand.Back.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/NavCommand.Back.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.navigation/Placement { // stapel.navigation/Placement|null[0]
+    final class Submenu : stapel.navigation/Placement { // stapel.navigation/Placement.Submenu|null[0]
+        constructor <init>(stapel.navigation/DestinationId) // stapel.navigation/Placement.Submenu.<init>|<init>(stapel.navigation.DestinationId){}[0]
+
+        final val parentId // stapel.navigation/Placement.Submenu.parentId|{}parentId[0]
+            final fun <get-parentId>(): stapel.navigation/DestinationId // stapel.navigation/Placement.Submenu.parentId.<get-parentId>|<get-parentId>(){}[0]
+
+        final fun component1(): stapel.navigation/DestinationId // stapel.navigation/Placement.Submenu.component1|component1(){}[0]
+        final fun copy(stapel.navigation/DestinationId = ...): stapel.navigation/Placement.Submenu // stapel.navigation/Placement.Submenu.copy|copy(stapel.navigation.DestinationId){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/Placement.Submenu.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/Placement.Submenu.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/Placement.Submenu.toString|toString(){}[0]
+    }
+
+    final object Top : stapel.navigation/Placement { // stapel.navigation/Placement.Top|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/Placement.Top.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.navigation/Placement.Top.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.navigation/Placement.Top.toString|toString(){}[0]
+    }
+}
+
+final class <#A: kotlin/Any> stapel.navigation/ResultKey { // stapel.navigation/ResultKey|null[0]
+    constructor <init>(kotlin/String, kotlinx.serialization/KSerializer<#A>) // stapel.navigation/ResultKey.<init>|<init>(kotlin.String;kotlinx.serialization.KSerializer<1:0>){}[0]
+
+    final val name // stapel.navigation/ResultKey.name|{}name[0]
+        final fun <get-name>(): kotlin/String // stapel.navigation/ResultKey.name.<get-name>|<get-name>(){}[0]
+    final val serializer // stapel.navigation/ResultKey.serializer|{}serializer[0]
+        final fun <get-serializer>(): kotlinx.serialization/KSerializer<#A> // stapel.navigation/ResultKey.serializer.<get-serializer>|<get-serializer>(){}[0]
+}
+
+final class <#A: stapel.navigation/Route> stapel.navigation/DestinationSpec { // stapel.navigation/DestinationSpec|null[0]
+    constructor <init>(stapel.navigation/DestinationId, kotlin.reflect/KClass<#A>, kotlinx.serialization/KSerializer<#A>, stapel.navigation/PathPattern, stapel.navigation/PathCodec<#A>, kotlin/String, stapel.navigation/NavIcon, stapel.navigation/Placement, kotlin/Boolean, kotlin/Boolean, kotlin/Int, stapel.navigation/Surface? = ..., kotlin/String? = ..., stapel.navigation/Presentation = ..., stapel.navigation/PaneRole = ..., stapel.navigation/FlowId? = ..., kotlin.collections/Set<stapel.navigation/SlotId> = ..., kotlin.collections/Set<stapel.navigation/CapabilityKey> = ...) // stapel.navigation/DestinationSpec.<init>|<init>(stapel.navigation.DestinationId;kotlin.reflect.KClass<1:0>;kotlinx.serialization.KSerializer<1:0>;stapel.navigation.PathPattern;stapel.navigation.PathCodec<1:0>;kotlin.String;stapel.navigation.NavIcon;stapel.navigation.Placement;kotlin.Boolean;kotlin.Boolean;kotlin.Int;stapel.navigation.Surface?;kotlin.String?;stapel.navigation.Presentation;stapel.navigation.PaneRole;stapel.navigation.FlowId?;kotlin.collections.Set<stapel.navigation.SlotId>;kotlin.collections.Set<stapel.navigation.CapabilityKey>){}[0]
+
+    final val codec // stapel.navigation/DestinationSpec.codec|{}codec[0]
+        final fun <get-codec>(): stapel.navigation/PathCodec<#A> // stapel.navigation/DestinationSpec.codec.<get-codec>|<get-codec>(){}[0]
+    final val flow // stapel.navigation/DestinationSpec.flow|{}flow[0]
+        final fun <get-flow>(): stapel.navigation/FlowId? // stapel.navigation/DestinationSpec.flow.<get-flow>|<get-flow>(){}[0]
+    final val icon // stapel.navigation/DestinationSpec.icon|{}icon[0]
+        final fun <get-icon>(): stapel.navigation/NavIcon // stapel.navigation/DestinationSpec.icon.<get-icon>|<get-icon>(){}[0]
+    final val id // stapel.navigation/DestinationSpec.id|{}id[0]
+        final fun <get-id>(): stapel.navigation/DestinationId // stapel.navigation/DestinationSpec.id.<get-id>|<get-id>(){}[0]
+    final val labelKey // stapel.navigation/DestinationSpec.labelKey|{}labelKey[0]
+        final fun <get-labelKey>(): kotlin/String // stapel.navigation/DestinationSpec.labelKey.<get-labelKey>|<get-labelKey>(){}[0]
+    final val menuVisibleDefault // stapel.navigation/DestinationSpec.menuVisibleDefault|{}menuVisibleDefault[0]
+        final fun <get-menuVisibleDefault>(): kotlin/Boolean // stapel.navigation/DestinationSpec.menuVisibleDefault.<get-menuVisibleDefault>|<get-menuVisibleDefault>(){}[0]
+    final val order // stapel.navigation/DestinationSpec.order|{}order[0]
+        final fun <get-order>(): kotlin/Int // stapel.navigation/DestinationSpec.order.<get-order>|<get-order>(){}[0]
+    final val pageSlots // stapel.navigation/DestinationSpec.pageSlots|{}pageSlots[0]
+        final fun <get-pageSlots>(): kotlin.collections/Set<stapel.navigation/SlotId> // stapel.navigation/DestinationSpec.pageSlots.<get-pageSlots>|<get-pageSlots>(){}[0]
+    final val pane // stapel.navigation/DestinationSpec.pane|{}pane[0]
+        final fun <get-pane>(): stapel.navigation/PaneRole // stapel.navigation/DestinationSpec.pane.<get-pane>|<get-pane>(){}[0]
+    final val path // stapel.navigation/DestinationSpec.path|{}path[0]
+        final fun <get-path>(): stapel.navigation/PathPattern // stapel.navigation/DestinationSpec.path.<get-path>|<get-path>(){}[0]
+    final val placement // stapel.navigation/DestinationSpec.placement|{}placement[0]
+        final fun <get-placement>(): stapel.navigation/Placement // stapel.navigation/DestinationSpec.placement.<get-placement>|<get-placement>(){}[0]
+    final val presentation // stapel.navigation/DestinationSpec.presentation|{}presentation[0]
+        final fun <get-presentation>(): stapel.navigation/Presentation // stapel.navigation/DestinationSpec.presentation.<get-presentation>|<get-presentation>(){}[0]
+    final val requires // stapel.navigation/DestinationSpec.requires|{}requires[0]
+        final fun <get-requires>(): kotlin.collections/Set<stapel.navigation/CapabilityKey> // stapel.navigation/DestinationSpec.requires.<get-requires>|<get-requires>(){}[0]
+    final val requiresAuth // stapel.navigation/DestinationSpec.requiresAuth|{}requiresAuth[0]
+        final fun <get-requiresAuth>(): kotlin/Boolean // stapel.navigation/DestinationSpec.requiresAuth.<get-requiresAuth>|<get-requiresAuth>(){}[0]
+    final val resolvedSurface // stapel.navigation/DestinationSpec.resolvedSurface|{}resolvedSurface[0]
+        final fun <get-resolvedSurface>(): stapel.navigation/Surface // stapel.navigation/DestinationSpec.resolvedSurface.<get-resolvedSurface>|<get-resolvedSurface>(){}[0]
+    final val routeClass // stapel.navigation/DestinationSpec.routeClass|{}routeClass[0]
+        final fun <get-routeClass>(): kotlin.reflect/KClass<#A> // stapel.navigation/DestinationSpec.routeClass.<get-routeClass>|<get-routeClass>(){}[0]
+    final val serializer // stapel.navigation/DestinationSpec.serializer|{}serializer[0]
+        final fun <get-serializer>(): kotlinx.serialization/KSerializer<#A> // stapel.navigation/DestinationSpec.serializer.<get-serializer>|<get-serializer>(){}[0]
+    final val shortLabelKey // stapel.navigation/DestinationSpec.shortLabelKey|{}shortLabelKey[0]
+        final fun <get-shortLabelKey>(): kotlin/String? // stapel.navigation/DestinationSpec.shortLabelKey.<get-shortLabelKey>|<get-shortLabelKey>(){}[0]
+    final val surface // stapel.navigation/DestinationSpec.surface|{}surface[0]
+        final fun <get-surface>(): stapel.navigation/Surface? // stapel.navigation/DestinationSpec.surface.<get-surface>|<get-surface>(){}[0]
+}
+
+final class <#A: stapel.navigation/Route> stapel.navigation/PathCodec { // stapel.navigation/PathCodec|null[0]
+    constructor <init>(kotlin/Function2<kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin.collections/Map<kotlin/String, kotlin.collections/List<kotlin/String>>, #A?>, kotlin/Function1<#A, stapel.navigation/RouteAddress>) // stapel.navigation/PathCodec.<init>|<init>(kotlin.Function2<kotlin.collections.Map<kotlin.String,kotlin.String>,kotlin.collections.Map<kotlin.String,kotlin.collections.List<kotlin.String>>,1:0?>;kotlin.Function1<1:0,stapel.navigation.RouteAddress>){}[0]
+
+    final val format // stapel.navigation/PathCodec.format|{}format[0]
+        final fun <get-format>(): kotlin/Function1<#A, stapel.navigation/RouteAddress> // stapel.navigation/PathCodec.format.<get-format>|<get-format>(){}[0]
+    final val parse // stapel.navigation/PathCodec.parse|{}parse[0]
+        final fun <get-parse>(): kotlin/Function2<kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin.collections/Map<kotlin/String, kotlin.collections/List<kotlin/String>>, #A?> // stapel.navigation/PathCodec.parse.<get-parse>|<get-parse>(){}[0]
+
+    final object Companion { // stapel.navigation/PathCodec.Companion|null[0]
+        final fun <#A2: stapel.navigation/Route> constant(#A2): stapel.navigation/PathCodec<#A2> // stapel.navigation/PathCodec.Companion.constant|constant(0:0){0§<stapel.navigation.Route>}[0]
+    }
+}
+
+final class stapel.navigation/ContainerRoot { // stapel.navigation/ContainerRoot|null[0]
+    constructor <init>(stapel.navigation/DestinationId, kotlin/String, stapel.navigation/NavIcon, kotlin/String, kotlin/Int) // stapel.navigation/ContainerRoot.<init>|<init>(stapel.navigation.DestinationId;kotlin.String;stapel.navigation.NavIcon;kotlin.String;kotlin.Int){}[0]
+
+    final val icon // stapel.navigation/ContainerRoot.icon|{}icon[0]
+        final fun <get-icon>(): stapel.navigation/NavIcon // stapel.navigation/ContainerRoot.icon.<get-icon>|<get-icon>(){}[0]
+    final val id // stapel.navigation/ContainerRoot.id|{}id[0]
+        final fun <get-id>(): stapel.navigation/DestinationId // stapel.navigation/ContainerRoot.id.<get-id>|<get-id>(){}[0]
+    final val labelKey // stapel.navigation/ContainerRoot.labelKey|{}labelKey[0]
+        final fun <get-labelKey>(): kotlin/String // stapel.navigation/ContainerRoot.labelKey.<get-labelKey>|<get-labelKey>(){}[0]
+    final val order // stapel.navigation/ContainerRoot.order|{}order[0]
+        final fun <get-order>(): kotlin/Int // stapel.navigation/ContainerRoot.order.<get-order>|<get-order>(){}[0]
+    final val path // stapel.navigation/ContainerRoot.path|{}path[0]
+        final fun <get-path>(): kotlin/String // stapel.navigation/ContainerRoot.path.<get-path>|<get-path>(){}[0]
+}
+
+final class stapel.navigation/DeepLinkConfig { // stapel.navigation/DeepLinkConfig|null[0]
+    constructor <init>(kotlin.collections/Set<kotlin/String>, kotlin.collections/Set<kotlin/String>, kotlin/String = ...) // stapel.navigation/DeepLinkConfig.<init>|<init>(kotlin.collections.Set<kotlin.String>;kotlin.collections.Set<kotlin.String>;kotlin.String){}[0]
+
+    final val basePath // stapel.navigation/DeepLinkConfig.basePath|{}basePath[0]
+        final fun <get-basePath>(): kotlin/String // stapel.navigation/DeepLinkConfig.basePath.<get-basePath>|<get-basePath>(){}[0]
+    final val hosts // stapel.navigation/DeepLinkConfig.hosts|{}hosts[0]
+        final fun <get-hosts>(): kotlin.collections/Set<kotlin/String> // stapel.navigation/DeepLinkConfig.hosts.<get-hosts>|<get-hosts>(){}[0]
+    final val schemes // stapel.navigation/DeepLinkConfig.schemes|{}schemes[0]
+        final fun <get-schemes>(): kotlin.collections/Set<kotlin/String> // stapel.navigation/DeepLinkConfig.schemes.<get-schemes>|<get-schemes>(){}[0]
+}
+
+final class stapel.navigation/DeepLinkMatch { // stapel.navigation/DeepLinkMatch|null[0]
+    constructor <init>(stapel.navigation/DestinationId, kotlin.collections/List<stapel.navigation/Route>) // stapel.navigation/DeepLinkMatch.<init>|<init>(stapel.navigation.DestinationId;kotlin.collections.List<stapel.navigation.Route>){}[0]
+
+    final val stack // stapel.navigation/DeepLinkMatch.stack|{}stack[0]
+        final fun <get-stack>(): kotlin.collections/List<stapel.navigation/Route> // stapel.navigation/DeepLinkMatch.stack.<get-stack>|<get-stack>(){}[0]
+    final val target // stapel.navigation/DeepLinkMatch.target|{}target[0]
+        final fun <get-target>(): stapel.navigation/DestinationId // stapel.navigation/DeepLinkMatch.target.<get-target>|<get-target>(){}[0]
+
+    final fun component1(): stapel.navigation/DestinationId // stapel.navigation/DeepLinkMatch.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<stapel.navigation/Route> // stapel.navigation/DeepLinkMatch.component2|component2(){}[0]
+    final fun copy(stapel.navigation/DestinationId = ..., kotlin.collections/List<stapel.navigation/Route> = ...): stapel.navigation/DeepLinkMatch // stapel.navigation/DeepLinkMatch.copy|copy(stapel.navigation.DestinationId;kotlin.collections.List<stapel.navigation.Route>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/DeepLinkMatch.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/DeepLinkMatch.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/DeepLinkMatch.toString|toString(){}[0]
+}
+
+final class stapel.navigation/DeepLinkResolver { // stapel.navigation/DeepLinkResolver|null[0]
+    constructor <init>(stapel.navigation/ResolvedNav, stapel.navigation/DeepLinkConfig) // stapel.navigation/DeepLinkResolver.<init>|<init>(stapel.navigation.ResolvedNav;stapel.navigation.DeepLinkConfig){}[0]
+
+    final fun resolve(kotlin/String): stapel.navigation/DeepLinkMatch? // stapel.navigation/DeepLinkResolver.resolve|resolve(kotlin.String){}[0]
+    final fun uriFor(stapel.navigation/Route, kotlin/String? = ...): kotlin/String? // stapel.navigation/DeepLinkResolver.uriFor|uriFor(stapel.navigation.Route;kotlin.String?){}[0]
+}
+
+final class stapel.navigation/DroppedEntry { // stapel.navigation/DroppedEntry|null[0]
+    constructor <init>(kotlin/String, kotlin/String) // stapel.navigation/DroppedEntry.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val id // stapel.navigation/DroppedEntry.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.navigation/DroppedEntry.id.<get-id>|<get-id>(){}[0]
+    final val reason // stapel.navigation/DroppedEntry.reason|{}reason[0]
+        final fun <get-reason>(): kotlin/String // stapel.navigation/DroppedEntry.reason.<get-reason>|<get-reason>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.navigation/DroppedEntry.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.navigation/DroppedEntry.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ...): stapel.navigation/DroppedEntry // stapel.navigation/DroppedEntry.copy|copy(kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/DroppedEntry.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/DroppedEntry.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/DroppedEntry.toString|toString(){}[0]
+}
+
+final class stapel.navigation/EmbedSpec { // stapel.navigation/EmbedSpec|null[0]
+    constructor <init>(stapel.navigation/EmbedId, stapel.navigation/SlotId, kotlin/Int, stapel.navigation/EmbedSurface = ..., kotlin.collections/Set<stapel.navigation/WidthClass>? = ..., stapel.navigation/DestinationId? = ..., stapel.navigation/DestinationId? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.navigation/EmbedSpec.<init>|<init>(stapel.navigation.EmbedId;stapel.navigation.SlotId;kotlin.Int;stapel.navigation.EmbedSurface;kotlin.collections.Set<stapel.navigation.WidthClass>?;stapel.navigation.DestinationId?;stapel.navigation.DestinationId?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val id // stapel.navigation/EmbedSpec.id|{}id[0]
+        final fun <get-id>(): stapel.navigation/EmbedId // stapel.navigation/EmbedSpec.id.<get-id>|<get-id>(){}[0]
+    final val opens // stapel.navigation/EmbedSpec.opens|{}opens[0]
+        final fun <get-opens>(): stapel.navigation/DestinationId? // stapel.navigation/EmbedSpec.opens.<get-opens>|<get-opens>(){}[0]
+    final val order // stapel.navigation/EmbedSpec.order|{}order[0]
+        final fun <get-order>(): kotlin/Int // stapel.navigation/EmbedSpec.order.<get-order>|<get-order>(){}[0]
+    final val routeParams // stapel.navigation/EmbedSpec.routeParams|{}routeParams[0]
+        final fun <get-routeParams>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.navigation/EmbedSpec.routeParams.<get-routeParams>|<get-routeParams>(){}[0]
+    final val scope // stapel.navigation/EmbedSpec.scope|{}scope[0]
+        final fun <get-scope>(): stapel.navigation/DestinationId? // stapel.navigation/EmbedSpec.scope.<get-scope>|<get-scope>(){}[0]
+    final val slot // stapel.navigation/EmbedSpec.slot|{}slot[0]
+        final fun <get-slot>(): stapel.navigation/SlotId // stapel.navigation/EmbedSpec.slot.<get-slot>|<get-slot>(){}[0]
+    final val surface // stapel.navigation/EmbedSpec.surface|{}surface[0]
+        final fun <get-surface>(): stapel.navigation/EmbedSurface // stapel.navigation/EmbedSpec.surface.<get-surface>|<get-surface>(){}[0]
+    final val widths // stapel.navigation/EmbedSpec.widths|{}widths[0]
+        final fun <get-widths>(): kotlin.collections/Set<stapel.navigation/WidthClass>? // stapel.navigation/EmbedSpec.widths.<get-widths>|<get-widths>(){}[0]
+}
+
+final class stapel.navigation/NavContractException : kotlin/IllegalStateException { // stapel.navigation/NavContractException|null[0]
+    constructor <init>(kotlin.collections/List<kotlin/String>) // stapel.navigation/NavContractException.<init>|<init>(kotlin.collections.List<kotlin.String>){}[0]
+
+    final val problems // stapel.navigation/NavContractException.problems|{}problems[0]
+        final fun <get-problems>(): kotlin.collections/List<kotlin/String> // stapel.navigation/NavContractException.problems.<get-problems>|<get-problems>(){}[0]
+}
+
+final class stapel.navigation/NavManifest { // stapel.navigation/NavManifest|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/List<stapel.navigation/DestinationSpec<*>>, kotlin.collections/List<stapel.navigation/EmbedSpec> = ...) // stapel.navigation/NavManifest.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.List<stapel.navigation.DestinationSpec<*>>;kotlin.collections.List<stapel.navigation.EmbedSpec>){}[0]
+
+    final val artifact // stapel.navigation/NavManifest.artifact|{}artifact[0]
+        final fun <get-artifact>(): kotlin/String // stapel.navigation/NavManifest.artifact.<get-artifact>|<get-artifact>(){}[0]
+    final val destinations // stapel.navigation/NavManifest.destinations|{}destinations[0]
+        final fun <get-destinations>(): kotlin.collections/List<stapel.navigation/DestinationSpec<*>> // stapel.navigation/NavManifest.destinations.<get-destinations>|<get-destinations>(){}[0]
+    final val embeds // stapel.navigation/NavManifest.embeds|{}embeds[0]
+        final fun <get-embeds>(): kotlin.collections/List<stapel.navigation/EmbedSpec> // stapel.navigation/NavManifest.embeds.<get-embeds>|<get-embeds>(){}[0]
+    final val version // stapel.navigation/NavManifest.version|{}version[0]
+        final fun <get-version>(): kotlin/String // stapel.navigation/NavManifest.version.<get-version>|<get-version>(){}[0]
+}
+
+final class stapel.navigation/NavOverride { // stapel.navigation/NavOverride|null[0]
+    constructor <init>(kotlin/Boolean? = ..., kotlin/Int? = ..., stapel.navigation/Surface? = ..., kotlin/Boolean? = ...) // stapel.navigation/NavOverride.<init>|<init>(kotlin.Boolean?;kotlin.Int?;stapel.navigation.Surface?;kotlin.Boolean?){}[0]
+
+    final val menuVisible // stapel.navigation/NavOverride.menuVisible|{}menuVisible[0]
+        final fun <get-menuVisible>(): kotlin/Boolean? // stapel.navigation/NavOverride.menuVisible.<get-menuVisible>|<get-menuVisible>(){}[0]
+    final val order // stapel.navigation/NavOverride.order|{}order[0]
+        final fun <get-order>(): kotlin/Int? // stapel.navigation/NavOverride.order.<get-order>|<get-order>(){}[0]
+    final val requiresAuth // stapel.navigation/NavOverride.requiresAuth|{}requiresAuth[0]
+        final fun <get-requiresAuth>(): kotlin/Boolean? // stapel.navigation/NavOverride.requiresAuth.<get-requiresAuth>|<get-requiresAuth>(){}[0]
+    final val surface // stapel.navigation/NavOverride.surface|{}surface[0]
+        final fun <get-surface>(): stapel.navigation/Surface? // stapel.navigation/NavOverride.surface.<get-surface>|<get-surface>(){}[0]
+}
+
+final class stapel.navigation/NavOverrides { // stapel.navigation/NavOverrides|null[0]
+    constructor <init>(kotlin.collections/Map<stapel.navigation/DestinationId, stapel.navigation/NavOverride> = ...) // stapel.navigation/NavOverrides.<init>|<init>(kotlin.collections.Map<stapel.navigation.DestinationId,stapel.navigation.NavOverride>){}[0]
+
+    final val byId // stapel.navigation/NavOverrides.byId|{}byId[0]
+        final fun <get-byId>(): kotlin.collections/Map<stapel.navigation/DestinationId, stapel.navigation/NavOverride> // stapel.navigation/NavOverrides.byId.<get-byId>|<get-byId>(){}[0]
+}
+
+final class stapel.navigation/NavPolicy { // stapel.navigation/NavPolicy|null[0]
+    constructor <init>(stapel.navigation/DestinationId?, stapel.navigation/UnauthenticatedMode = ..., stapel.navigation/DestinationId? = ..., kotlin/Int = ...) // stapel.navigation/NavPolicy.<init>|<init>(stapel.navigation.DestinationId?;stapel.navigation.UnauthenticatedMode;stapel.navigation.DestinationId?;kotlin.Int){}[0]
+
+    final val home // stapel.navigation/NavPolicy.home|{}home[0]
+        final fun <get-home>(): stapel.navigation/DestinationId? // stapel.navigation/NavPolicy.home.<get-home>|<get-home>(){}[0]
+    final val maxTabs // stapel.navigation/NavPolicy.maxTabs|{}maxTabs[0]
+        final fun <get-maxTabs>(): kotlin/Int // stapel.navigation/NavPolicy.maxTabs.<get-maxTabs>|<get-maxTabs>(){}[0]
+    final val signIn // stapel.navigation/NavPolicy.signIn|{}signIn[0]
+        final fun <get-signIn>(): stapel.navigation/DestinationId? // stapel.navigation/NavPolicy.signIn.<get-signIn>|<get-signIn>(){}[0]
+    final val unauthenticated // stapel.navigation/NavPolicy.unauthenticated|{}unauthenticated[0]
+        final fun <get-unauthenticated>(): stapel.navigation/UnauthenticatedMode // stapel.navigation/NavPolicy.unauthenticated.<get-unauthenticated>|<get-unauthenticated>(){}[0]
+}
+
+final class stapel.navigation/NavReduction { // stapel.navigation/NavReduction|null[0]
+    constructor <init>(stapel.navigation/NavState, stapel.navigation/GuardDecision? = ...) // stapel.navigation/NavReduction.<init>|<init>(stapel.navigation.NavState;stapel.navigation.GuardDecision?){}[0]
+
+    final val refused // stapel.navigation/NavReduction.refused|{}refused[0]
+        final fun <get-refused>(): stapel.navigation/GuardDecision? // stapel.navigation/NavReduction.refused.<get-refused>|<get-refused>(){}[0]
+    final val state // stapel.navigation/NavReduction.state|{}state[0]
+        final fun <get-state>(): stapel.navigation/NavState // stapel.navigation/NavReduction.state.<get-state>|<get-state>(){}[0]
+
+    final fun component1(): stapel.navigation/NavState // stapel.navigation/NavReduction.component1|component1(){}[0]
+    final fun component2(): stapel.navigation/GuardDecision? // stapel.navigation/NavReduction.component2|component2(){}[0]
+    final fun copy(stapel.navigation/NavState = ..., stapel.navigation/GuardDecision? = ...): stapel.navigation/NavReduction // stapel.navigation/NavReduction.copy|copy(stapel.navigation.NavState;stapel.navigation.GuardDecision?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavReduction.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/NavReduction.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/NavReduction.toString|toString(){}[0]
+}
+
+final class stapel.navigation/NavState { // stapel.navigation/NavState|null[0]
+    constructor <init>(stapel.navigation/NavAuthState, kotlin.collections/List<stapel.navigation/StackEntry> = ..., kotlin.collections/List<stapel.navigation/DestinationId> = ..., stapel.navigation/DestinationId? = ..., kotlin.collections/Map<stapel.navigation/DestinationId, kotlin.collections/List<stapel.navigation/StackEntry>> = ..., kotlin.collections/List<stapel.navigation/StackEntry> = ..., kotlin.collections/List<stapel.navigation/Route>? = ..., kotlin/Long = ...) // stapel.navigation/NavState.<init>|<init>(stapel.navigation.NavAuthState;kotlin.collections.List<stapel.navigation.StackEntry>;kotlin.collections.List<stapel.navigation.DestinationId>;stapel.navigation.DestinationId?;kotlin.collections.Map<stapel.navigation.DestinationId,kotlin.collections.List<stapel.navigation.StackEntry>>;kotlin.collections.List<stapel.navigation.StackEntry>;kotlin.collections.List<stapel.navigation.Route>?;kotlin.Long){}[0]
+
+    final val auth // stapel.navigation/NavState.auth|{}auth[0]
+        final fun <get-auth>(): stapel.navigation/NavAuthState // stapel.navigation/NavState.auth.<get-auth>|<get-auth>(){}[0]
+    final val nextUid // stapel.navigation/NavState.nextUid|{}nextUid[0]
+        final fun <get-nextUid>(): kotlin/Long // stapel.navigation/NavState.nextUid.<get-nextUid>|<get-nextUid>(){}[0]
+    final val overlays // stapel.navigation/NavState.overlays|{}overlays[0]
+        final fun <get-overlays>(): kotlin.collections/List<stapel.navigation/StackEntry> // stapel.navigation/NavState.overlays.<get-overlays>|<get-overlays>(){}[0]
+    final val pendingReturn // stapel.navigation/NavState.pendingReturn|{}pendingReturn[0]
+        final fun <get-pendingReturn>(): kotlin.collections/List<stapel.navigation/Route>? // stapel.navigation/NavState.pendingReturn.<get-pendingReturn>|<get-pendingReturn>(){}[0]
+    final val root // stapel.navigation/NavState.root|{}root[0]
+        final fun <get-root>(): kotlin.collections/List<stapel.navigation/StackEntry> // stapel.navigation/NavState.root.<get-root>|<get-root>(){}[0]
+    final val selectedStack // stapel.navigation/NavState.selectedStack|{}selectedStack[0]
+        final fun <get-selectedStack>(): kotlin.collections/List<stapel.navigation/StackEntry> // stapel.navigation/NavState.selectedStack.<get-selectedStack>|<get-selectedStack>(){}[0]
+    final val selectedTab // stapel.navigation/NavState.selectedTab|{}selectedTab[0]
+        final fun <get-selectedTab>(): stapel.navigation/DestinationId? // stapel.navigation/NavState.selectedTab.<get-selectedTab>|<get-selectedTab>(){}[0]
+    final val tabHostActive // stapel.navigation/NavState.tabHostActive|{}tabHostActive[0]
+        final fun <get-tabHostActive>(): kotlin/Boolean // stapel.navigation/NavState.tabHostActive.<get-tabHostActive>|<get-tabHostActive>(){}[0]
+    final val tabStacks // stapel.navigation/NavState.tabStacks|{}tabStacks[0]
+        final fun <get-tabStacks>(): kotlin.collections/Map<stapel.navigation/DestinationId, kotlin.collections/List<stapel.navigation/StackEntry>> // stapel.navigation/NavState.tabStacks.<get-tabStacks>|<get-tabStacks>(){}[0]
+    final val tabs // stapel.navigation/NavState.tabs|{}tabs[0]
+        final fun <get-tabs>(): kotlin.collections/List<stapel.navigation/DestinationId> // stapel.navigation/NavState.tabs.<get-tabs>|<get-tabs>(){}[0]
+    final val top // stapel.navigation/NavState.top|{}top[0]
+        final fun <get-top>(): stapel.navigation/StackEntry? // stapel.navigation/NavState.top.<get-top>|<get-top>(){}[0]
+    final val visible // stapel.navigation/NavState.visible|{}visible[0]
+        final fun <get-visible>(): kotlin.collections/List<stapel.navigation/StackEntry> // stapel.navigation/NavState.visible.<get-visible>|<get-visible>(){}[0]
+
+    final fun component1(): stapel.navigation/NavAuthState // stapel.navigation/NavState.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<stapel.navigation/StackEntry> // stapel.navigation/NavState.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/List<stapel.navigation/DestinationId> // stapel.navigation/NavState.component3|component3(){}[0]
+    final fun component4(): stapel.navigation/DestinationId? // stapel.navigation/NavState.component4|component4(){}[0]
+    final fun component5(): kotlin.collections/Map<stapel.navigation/DestinationId, kotlin.collections/List<stapel.navigation/StackEntry>> // stapel.navigation/NavState.component5|component5(){}[0]
+    final fun component6(): kotlin.collections/List<stapel.navigation/StackEntry> // stapel.navigation/NavState.component6|component6(){}[0]
+    final fun component7(): kotlin.collections/List<stapel.navigation/Route>? // stapel.navigation/NavState.component7|component7(){}[0]
+    final fun component8(): kotlin/Long // stapel.navigation/NavState.component8|component8(){}[0]
+    final fun copy(stapel.navigation/NavAuthState = ..., kotlin.collections/List<stapel.navigation/StackEntry> = ..., kotlin.collections/List<stapel.navigation/DestinationId> = ..., stapel.navigation/DestinationId? = ..., kotlin.collections/Map<stapel.navigation/DestinationId, kotlin.collections/List<stapel.navigation/StackEntry>> = ..., kotlin.collections/List<stapel.navigation/StackEntry> = ..., kotlin.collections/List<stapel.navigation/Route>? = ..., kotlin/Long = ...): stapel.navigation/NavState // stapel.navigation/NavState.copy|copy(stapel.navigation.NavAuthState;kotlin.collections.List<stapel.navigation.StackEntry>;kotlin.collections.List<stapel.navigation.DestinationId>;stapel.navigation.DestinationId?;kotlin.collections.Map<stapel.navigation.DestinationId,kotlin.collections.List<stapel.navigation.StackEntry>>;kotlin.collections.List<stapel.navigation.StackEntry>;kotlin.collections.List<stapel.navigation.Route>?;kotlin.Long){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavState.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/NavState.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/NavState.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.navigation/NavState> { // stapel.navigation/NavState.$serializer|null[0]
+        final val descriptor // stapel.navigation/NavState.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.navigation/NavState.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.navigation/NavState.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.navigation/NavState // stapel.navigation/NavState.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.navigation/NavState) // stapel.navigation/NavState.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.navigation.NavState){}[0]
+    }
+
+    final object Companion { // stapel.navigation/NavState.Companion|null[0]
+        final val $childSerializers // stapel.navigation/NavState.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.navigation/NavState> // stapel.navigation/NavState.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.navigation/NavStateCodec { // stapel.navigation/NavStateCodec|null[0]
+    constructor <init>(kotlin.collections/List<stapel.navigation/NavManifest>) // stapel.navigation/NavStateCodec.<init>|<init>(kotlin.collections.List<stapel.navigation.NavManifest>){}[0]
+
+    final val json // stapel.navigation/NavStateCodec.json|{}json[0]
+        final fun <get-json>(): kotlinx.serialization.json/Json // stapel.navigation/NavStateCodec.json.<get-json>|<get-json>(){}[0]
+
+    final fun decode(kotlin/String): stapel.navigation/NavState // stapel.navigation/NavStateCodec.decode|decode(kotlin.String){}[0]
+    final fun encode(stapel.navigation/NavState): kotlin/String // stapel.navigation/NavStateCodec.encode|encode(stapel.navigation.NavState){}[0]
+}
+
+final class stapel.navigation/PathPattern { // stapel.navigation/PathPattern|null[0]
+    constructor <init>(kotlin/String) // stapel.navigation/PathPattern.<init>|<init>(kotlin.String){}[0]
+
+    final val isAbsolute // stapel.navigation/PathPattern.isAbsolute|{}isAbsolute[0]
+        final fun <get-isAbsolute>(): kotlin/Boolean // stapel.navigation/PathPattern.isAbsolute.<get-isAbsolute>|<get-isAbsolute>(){}[0]
+    final val literalCount // stapel.navigation/PathPattern.literalCount|{}literalCount[0]
+        final fun <get-literalCount>(): kotlin/Int // stapel.navigation/PathPattern.literalCount.<get-literalCount>|<get-literalCount>(){}[0]
+    final val params // stapel.navigation/PathPattern.params|{}params[0]
+        final fun <get-params>(): kotlin.collections/List<kotlin/String> // stapel.navigation/PathPattern.params.<get-params>|<get-params>(){}[0]
+    final val raw // stapel.navigation/PathPattern.raw|{}raw[0]
+        final fun <get-raw>(): kotlin/String // stapel.navigation/PathPattern.raw.<get-raw>|<get-raw>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/PathPattern.equals|equals(kotlin.Any?){}[0]
+    final fun format(kotlin.collections/Map<kotlin/String, kotlin/String>): kotlin/String // stapel.navigation/PathPattern.format|format(kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/PathPattern.hashCode|hashCode(){}[0]
+    final fun match(kotlin.collections/List<kotlin/String>): kotlin.collections/Map<kotlin/String, kotlin/String>? // stapel.navigation/PathPattern.match|match(kotlin.collections.List<kotlin.String>){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/PathPattern.toString|toString(){}[0]
+}
+
+final class stapel.navigation/ResolvedDestination { // stapel.navigation/ResolvedDestination|null[0]
+    constructor <init>(stapel.navigation/DestinationSpec<*>?, stapel.navigation/DestinationId, kotlin/String, kotlin/String?, stapel.navigation/NavIcon, kotlin/String, stapel.navigation/Surface, kotlin/Boolean, kotlin/Int, kotlin/Boolean, stapel.navigation/DestinationId?, kotlin.collections/List<stapel.navigation/ResolvedDestination>) // stapel.navigation/ResolvedDestination.<init>|<init>(stapel.navigation.DestinationSpec<*>?;stapel.navigation.DestinationId;kotlin.String;kotlin.String?;stapel.navigation.NavIcon;kotlin.String;stapel.navigation.Surface;kotlin.Boolean;kotlin.Int;kotlin.Boolean;stapel.navigation.DestinationId?;kotlin.collections.List<stapel.navigation.ResolvedDestination>){}[0]
+
+    final val absolutePath // stapel.navigation/ResolvedDestination.absolutePath|{}absolutePath[0]
+        final fun <get-absolutePath>(): kotlin/String // stapel.navigation/ResolvedDestination.absolutePath.<get-absolutePath>|<get-absolutePath>(){}[0]
+    final val children // stapel.navigation/ResolvedDestination.children|{}children[0]
+        final fun <get-children>(): kotlin.collections/List<stapel.navigation/ResolvedDestination> // stapel.navigation/ResolvedDestination.children.<get-children>|<get-children>(){}[0]
+    final val icon // stapel.navigation/ResolvedDestination.icon|{}icon[0]
+        final fun <get-icon>(): stapel.navigation/NavIcon // stapel.navigation/ResolvedDestination.icon.<get-icon>|<get-icon>(){}[0]
+    final val id // stapel.navigation/ResolvedDestination.id|{}id[0]
+        final fun <get-id>(): stapel.navigation/DestinationId // stapel.navigation/ResolvedDestination.id.<get-id>|<get-id>(){}[0]
+    final val labelKey // stapel.navigation/ResolvedDestination.labelKey|{}labelKey[0]
+        final fun <get-labelKey>(): kotlin/String // stapel.navigation/ResolvedDestination.labelKey.<get-labelKey>|<get-labelKey>(){}[0]
+    final val menuVisible // stapel.navigation/ResolvedDestination.menuVisible|{}menuVisible[0]
+        final fun <get-menuVisible>(): kotlin/Boolean // stapel.navigation/ResolvedDestination.menuVisible.<get-menuVisible>|<get-menuVisible>(){}[0]
+    final val order // stapel.navigation/ResolvedDestination.order|{}order[0]
+        final fun <get-order>(): kotlin/Int // stapel.navigation/ResolvedDestination.order.<get-order>|<get-order>(){}[0]
+    final val parent // stapel.navigation/ResolvedDestination.parent|{}parent[0]
+        final fun <get-parent>(): stapel.navigation/DestinationId? // stapel.navigation/ResolvedDestination.parent.<get-parent>|<get-parent>(){}[0]
+    final val presentation // stapel.navigation/ResolvedDestination.presentation|{}presentation[0]
+        final fun <get-presentation>(): stapel.navigation/Presentation // stapel.navigation/ResolvedDestination.presentation.<get-presentation>|<get-presentation>(){}[0]
+    final val requiresAuth // stapel.navigation/ResolvedDestination.requiresAuth|{}requiresAuth[0]
+        final fun <get-requiresAuth>(): kotlin/Boolean // stapel.navigation/ResolvedDestination.requiresAuth.<get-requiresAuth>|<get-requiresAuth>(){}[0]
+    final val shortLabelKey // stapel.navigation/ResolvedDestination.shortLabelKey|{}shortLabelKey[0]
+        final fun <get-shortLabelKey>(): kotlin/String? // stapel.navigation/ResolvedDestination.shortLabelKey.<get-shortLabelKey>|<get-shortLabelKey>(){}[0]
+    final val spec // stapel.navigation/ResolvedDestination.spec|{}spec[0]
+        final fun <get-spec>(): stapel.navigation/DestinationSpec<*>? // stapel.navigation/ResolvedDestination.spec.<get-spec>|<get-spec>(){}[0]
+    final val surface // stapel.navigation/ResolvedDestination.surface|{}surface[0]
+        final fun <get-surface>(): stapel.navigation/Surface // stapel.navigation/ResolvedDestination.surface.<get-surface>|<get-surface>(){}[0]
+
+    final fun toString(): kotlin/String // stapel.navigation/ResolvedDestination.toString|toString(){}[0]
+}
+
+final class stapel.navigation/ResolvedNav { // stapel.navigation/ResolvedNav|null[0]
+    final val byId // stapel.navigation/ResolvedNav.byId|{}byId[0]
+        final fun <get-byId>(): kotlin.collections/Map<stapel.navigation/DestinationId, stapel.navigation/ResolvedDestination> // stapel.navigation/ResolvedNav.byId.<get-byId>|<get-byId>(){}[0]
+    final val containerRoots // stapel.navigation/ResolvedNav.containerRoots|{}containerRoots[0]
+        final fun <get-containerRoots>(): kotlin.collections/List<stapel.navigation/DestinationId> // stapel.navigation/ResolvedNav.containerRoots.<get-containerRoots>|<get-containerRoots>(){}[0]
+    final val dropped // stapel.navigation/ResolvedNav.dropped|{}dropped[0]
+        final fun <get-dropped>(): kotlin.collections/List<stapel.navigation/DroppedEntry> // stapel.navigation/ResolvedNav.dropped.<get-dropped>|<get-dropped>(){}[0]
+    final val embeds // stapel.navigation/ResolvedNav.embeds|{}embeds[0]
+        final fun <get-embeds>(): kotlin.collections/List<stapel.navigation/EmbedSpec> // stapel.navigation/ResolvedNav.embeds.<get-embeds>|<get-embeds>(){}[0]
+    final val manifests // stapel.navigation/ResolvedNav.manifests|{}manifests[0]
+        final fun <get-manifests>(): kotlin.collections/List<stapel.navigation/NavManifest> // stapel.navigation/ResolvedNav.manifests.<get-manifests>|<get-manifests>(){}[0]
+    final val tops // stapel.navigation/ResolvedNav.tops|{}tops[0]
+        final fun <get-tops>(): kotlin.collections/List<stapel.navigation/ResolvedDestination> // stapel.navigation/ResolvedNav.tops.<get-tops>|<get-tops>(){}[0]
+
+    final fun addressOf(stapel.navigation/Route): stapel.navigation/RouteAddress? // stapel.navigation/ResolvedNav.addressOf|addressOf(stapel.navigation.Route){}[0]
+    final fun defaultRoute(stapel.navigation/DestinationId): stapel.navigation/Route? // stapel.navigation/ResolvedNav.defaultRoute|defaultRoute(stapel.navigation.DestinationId){}[0]
+    final fun destinationOf(stapel.navigation/Route): stapel.navigation/ResolvedDestination? // stapel.navigation/ResolvedNav.destinationOf|destinationOf(stapel.navigation.Route){}[0]
+    final fun menuFor(stapel.navigation/NavAuthState): kotlin.collections/List<stapel.navigation/ResolvedDestination> // stapel.navigation/ResolvedNav.menuFor|menuFor(stapel.navigation.NavAuthState){}[0]
+    final fun syntheticStack(stapel.navigation/Route): kotlin.collections/List<stapel.navigation/Route> // stapel.navigation/ResolvedNav.syntheticStack|syntheticStack(stapel.navigation.Route){}[0]
+    final fun tabsFor(stapel.navigation/NavAuthState): kotlin.collections/List<stapel.navigation/DestinationId> // stapel.navigation/ResolvedNav.tabsFor|tabsFor(stapel.navigation.NavAuthState){}[0]
+}
+
+final class stapel.navigation/RouteAddress { // stapel.navigation/RouteAddress|null[0]
+    constructor <init>(kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin.collections/Map<kotlin/String, kotlin.collections/List<kotlin/String>> = ...) // stapel.navigation/RouteAddress.<init>|<init>(kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.collections.Map<kotlin.String,kotlin.collections.List<kotlin.String>>){}[0]
+
+    final val path // stapel.navigation/RouteAddress.path|{}path[0]
+        final fun <get-path>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.navigation/RouteAddress.path.<get-path>|<get-path>(){}[0]
+    final val query // stapel.navigation/RouteAddress.query|{}query[0]
+        final fun <get-query>(): kotlin.collections/Map<kotlin/String, kotlin.collections/List<kotlin/String>> // stapel.navigation/RouteAddress.query.<get-query>|<get-query>(){}[0]
+}
+
+final class stapel.navigation/SectionRoute : stapel.navigation/Route { // stapel.navigation/SectionRoute|null[0]
+    constructor <init>(stapel.navigation/DestinationId) // stapel.navigation/SectionRoute.<init>|<init>(stapel.navigation.DestinationId){}[0]
+
+    final val id // stapel.navigation/SectionRoute.id|{}id[0]
+        final fun <get-id>(): stapel.navigation/DestinationId // stapel.navigation/SectionRoute.id.<get-id>|<get-id>(){}[0]
+
+    final fun component1(): stapel.navigation/DestinationId // stapel.navigation/SectionRoute.component1|component1(){}[0]
+    final fun copy(stapel.navigation/DestinationId = ...): stapel.navigation/SectionRoute // stapel.navigation/SectionRoute.copy|copy(stapel.navigation.DestinationId){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/SectionRoute.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/SectionRoute.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/SectionRoute.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.navigation/SectionRoute> { // stapel.navigation/SectionRoute.$serializer|null[0]
+        final val descriptor // stapel.navigation/SectionRoute.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.navigation/SectionRoute.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.navigation/SectionRoute.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.navigation/SectionRoute // stapel.navigation/SectionRoute.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.navigation/SectionRoute) // stapel.navigation/SectionRoute.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.navigation.SectionRoute){}[0]
+    }
+
+    final object Companion { // stapel.navigation/SectionRoute.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.navigation/SectionRoute> // stapel.navigation/SectionRoute.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.navigation/StackEntry { // stapel.navigation/StackEntry|null[0]
+    constructor <init>(kotlin/String, stapel.navigation/Route) // stapel.navigation/StackEntry.<init>|<init>(kotlin.String;stapel.navigation.Route){}[0]
+
+    final val route // stapel.navigation/StackEntry.route|{}route[0]
+        final fun <get-route>(): stapel.navigation/Route // stapel.navigation/StackEntry.route.<get-route>|<get-route>(){}[0]
+    final val uid // stapel.navigation/StackEntry.uid|{}uid[0]
+        final fun <get-uid>(): kotlin/String // stapel.navigation/StackEntry.uid.<get-uid>|<get-uid>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.navigation/StackEntry.component1|component1(){}[0]
+    final fun component2(): stapel.navigation/Route // stapel.navigation/StackEntry.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., stapel.navigation/Route = ...): stapel.navigation/StackEntry // stapel.navigation/StackEntry.copy|copy(kotlin.String;stapel.navigation.Route){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/StackEntry.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/StackEntry.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/StackEntry.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.navigation/StackEntry> { // stapel.navigation/StackEntry.$serializer|null[0]
+        final val descriptor // stapel.navigation/StackEntry.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.navigation/StackEntry.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.navigation/StackEntry.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.navigation/StackEntry // stapel.navigation/StackEntry.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.navigation/StackEntry) // stapel.navigation/StackEntry.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.navigation.StackEntry){}[0]
+    }
+
+    final object Companion { // stapel.navigation/StackEntry.Companion|null[0]
+        final val $childSerializers // stapel.navigation/StackEntry.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.navigation/StackEntry> // stapel.navigation/StackEntry.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.navigation/StapelNavigator : stapel.navigation/Navigator { // stapel.navigation/StapelNavigator|null[0]
+    constructor <init>(stapel.navigation/ResolvedNav, stapel.navigation/NavPolicy, stapel.navigation/NavAuthSource, kotlinx.coroutines/CoroutineScope, stapel.navigation/DeepLinkResolver? = ..., stapel.navigation/RouteGuard = ..., stapel.navigation/NavState? = ...) // stapel.navigation/StapelNavigator.<init>|<init>(stapel.navigation.ResolvedNav;stapel.navigation.NavPolicy;stapel.navigation.NavAuthSource;kotlinx.coroutines.CoroutineScope;stapel.navigation.DeepLinkResolver?;stapel.navigation.RouteGuard;stapel.navigation.NavState?){}[0]
+
+    final val lastRefusal // stapel.navigation/StapelNavigator.lastRefusal|{}lastRefusal[0]
+        final fun <get-lastRefusal>(): kotlinx.coroutines.flow/StateFlow<stapel.navigation/GuardDecision?> // stapel.navigation/StapelNavigator.lastRefusal.<get-lastRefusal>|<get-lastRefusal>(){}[0]
+    final val nav // stapel.navigation/StapelNavigator.nav|{}nav[0]
+        final fun <get-nav>(): stapel.navigation/ResolvedNav // stapel.navigation/StapelNavigator.nav.<get-nav>|<get-nav>(){}[0]
+    final val policy // stapel.navigation/StapelNavigator.policy|{}policy[0]
+        final fun <get-policy>(): stapel.navigation/NavPolicy // stapel.navigation/StapelNavigator.policy.<get-policy>|<get-policy>(){}[0]
+    final val state // stapel.navigation/StapelNavigator.state|{}state[0]
+        final fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.navigation/NavState> // stapel.navigation/StapelNavigator.state.<get-state>|<get-state>(){}[0]
+
+    final fun <#A1: kotlin/Any> backWithResult(stapel.navigation/ResultKey<#A1>, #A1) // stapel.navigation/StapelNavigator.backWithResult|backWithResult(stapel.navigation.ResultKey<0:0>;0:0){0§<kotlin.Any>}[0]
+    final fun <#A1: kotlin/Any> results(stapel.navigation/ResultKey<#A1>): kotlinx.coroutines.flow/Flow<#A1> // stapel.navigation/StapelNavigator.results|results(stapel.navigation.ResultKey<0:0>){0§<kotlin.Any>}[0]
+    final fun back(): kotlin/Boolean // stapel.navigation/StapelNavigator.back|back(){}[0]
+    final fun backTo(stapel.navigation/DestinationId, kotlin/Boolean): kotlin/Boolean // stapel.navigation/StapelNavigator.backTo|backTo(stapel.navigation.DestinationId;kotlin.Boolean){}[0]
+    final fun dispatch(stapel.navigation/NavCommand): stapel.navigation/NavReduction // stapel.navigation/StapelNavigator.dispatch|dispatch(stapel.navigation.NavCommand){}[0]
+    final fun navigate(stapel.navigation/Route, kotlin/Boolean) // stapel.navigation/StapelNavigator.navigate|navigate(stapel.navigation.Route;kotlin.Boolean){}[0]
+    final fun open(kotlin/String): kotlin/Boolean // stapel.navigation/StapelNavigator.open|open(kotlin.String){}[0]
+    final fun replaceAll(stapel.navigation/Route) // stapel.navigation/StapelNavigator.replaceAll|replaceAll(stapel.navigation.Route){}[0]
+    final fun selectTab(stapel.navigation/DestinationId) // stapel.navigation/StapelNavigator.selectTab|selectTab(stapel.navigation.DestinationId){}[0]
+}
+
+final value class stapel.navigation/CapabilityKey { // stapel.navigation/CapabilityKey|null[0]
+    constructor <init>(kotlin/String) // stapel.navigation/CapabilityKey.<init>|<init>(kotlin.String){}[0]
+
+    final val value // stapel.navigation/CapabilityKey.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.navigation/CapabilityKey.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/CapabilityKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/CapabilityKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/CapabilityKey.toString|toString(){}[0]
+}
+
+final value class stapel.navigation/DestinationId { // stapel.navigation/DestinationId|null[0]
+    constructor <init>(kotlin/String) // stapel.navigation/DestinationId.<init>|<init>(kotlin.String){}[0]
+
+    final val value // stapel.navigation/DestinationId.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.navigation/DestinationId.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/DestinationId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/DestinationId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/DestinationId.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.navigation/DestinationId> { // stapel.navigation/DestinationId.$serializer|null[0]
+        final val descriptor // stapel.navigation/DestinationId.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.navigation/DestinationId.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.navigation/DestinationId.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.navigation/DestinationId // stapel.navigation/DestinationId.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.navigation/DestinationId) // stapel.navigation/DestinationId.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.navigation.DestinationId){}[0]
+    }
+
+    final object Companion { // stapel.navigation/DestinationId.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.navigation/DestinationId> // stapel.navigation/DestinationId.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final value class stapel.navigation/EmbedId { // stapel.navigation/EmbedId|null[0]
+    constructor <init>(kotlin/String) // stapel.navigation/EmbedId.<init>|<init>(kotlin.String){}[0]
+
+    final val value // stapel.navigation/EmbedId.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.navigation/EmbedId.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/EmbedId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/EmbedId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/EmbedId.toString|toString(){}[0]
+}
+
+final value class stapel.navigation/FlowId { // stapel.navigation/FlowId|null[0]
+    constructor <init>(kotlin/String) // stapel.navigation/FlowId.<init>|<init>(kotlin.String){}[0]
+
+    final val value // stapel.navigation/FlowId.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.navigation/FlowId.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/FlowId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/FlowId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/FlowId.toString|toString(){}[0]
+}
+
+final value class stapel.navigation/NavIcon { // stapel.navigation/NavIcon|null[0]
+    constructor <init>(kotlin/String) // stapel.navigation/NavIcon.<init>|<init>(kotlin.String){}[0]
+
+    final val key // stapel.navigation/NavIcon.key|{}key[0]
+        final fun <get-key>(): kotlin/String // stapel.navigation/NavIcon.key.<get-key>|<get-key>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/NavIcon.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/NavIcon.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/NavIcon.toString|toString(){}[0]
+}
+
+final value class stapel.navigation/SlotId { // stapel.navigation/SlotId|null[0]
+    constructor <init>(kotlin/String) // stapel.navigation/SlotId.<init>|<init>(kotlin.String){}[0]
+
+    final val isPageSlot // stapel.navigation/SlotId.isPageSlot|{}isPageSlot[0]
+        final fun <get-isPageSlot>(): kotlin/Boolean // stapel.navigation/SlotId.isPageSlot.<get-isPageSlot>|<get-isPageSlot>(){}[0]
+    final val value // stapel.navigation/SlotId.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.navigation/SlotId.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.navigation/SlotId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.navigation/SlotId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.navigation/SlotId.toString|toString(){}[0]
+}
+
+final object stapel.navigation/ContainerRoots { // stapel.navigation/ContainerRoots|null[0]
+    final val Account // stapel.navigation/ContainerRoots.Account|{}Account[0]
+        final fun <get-Account>(): stapel.navigation/ContainerRoot // stapel.navigation/ContainerRoots.Account.<get-Account>|<get-Account>(){}[0]
+    final val Admin // stapel.navigation/ContainerRoots.Admin|{}Admin[0]
+        final fun <get-Admin>(): stapel.navigation/ContainerRoot // stapel.navigation/ContainerRoots.Admin.<get-Admin>|<get-Admin>(){}[0]
+    final val all // stapel.navigation/ContainerRoots.all|{}all[0]
+        final fun <get-all>(): kotlin.collections/List<stapel.navigation/ContainerRoot> // stapel.navigation/ContainerRoots.all.<get-all>|<get-all>(){}[0]
+}
+
+final object stapel.navigation/ExternalUris { // stapel.navigation/ExternalUris|null[0]
+    final val incoming // stapel.navigation/ExternalUris.incoming|{}incoming[0]
+        final fun <get-incoming>(): kotlinx.coroutines.flow/Flow<kotlin/String> // stapel.navigation/ExternalUris.incoming.<get-incoming>|<get-incoming>(){}[0]
+
+    final fun offer(kotlin/String) // stapel.navigation/ExternalUris.offer|offer(kotlin.String){}[0]
+}
+
+final object stapel.navigation/NavIcons { // stapel.navigation/NavIcons|null[0]
+    final val Apps // stapel.navigation/NavIcons.Apps|{}Apps[0]
+        final fun <get-Apps>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Apps.<get-Apps>|<get-Apps>(){}[0]
+    final val Audit // stapel.navigation/NavIcons.Audit|{}Audit[0]
+        final fun <get-Audit>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Audit.<get-Audit>|<get-Audit>(){}[0]
+    final val Bell // stapel.navigation/NavIcons.Bell|{}Bell[0]
+        final fun <get-Bell>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Bell.<get-Bell>|<get-Bell>(){}[0]
+    final val Cart // stapel.navigation/NavIcons.Cart|{}Cart[0]
+        final fun <get-Cart>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Cart.<get-Cart>|<get-Cart>(){}[0]
+    final val Clock // stapel.navigation/NavIcons.Clock|{}Clock[0]
+        final fun <get-Clock>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Clock.<get-Clock>|<get-Clock>(){}[0]
+    final val Folder // stapel.navigation/NavIcons.Folder|{}Folder[0]
+        final fun <get-Folder>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Folder.<get-Folder>|<get-Folder>(){}[0]
+    final val FolderOpen // stapel.navigation/NavIcons.FolderOpen|{}FolderOpen[0]
+        final fun <get-FolderOpen>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.FolderOpen.<get-FolderOpen>|<get-FolderOpen>(){}[0]
+    final val Heart // stapel.navigation/NavIcons.Heart|{}Heart[0]
+        final fun <get-Heart>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Heart.<get-Heart>|<get-Heart>(){}[0]
+    final val Home // stapel.navigation/NavIcons.Home|{}Home[0]
+        final fun <get-Home>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Home.<get-Home>|<get-Home>(){}[0]
+    final val ListOrdered // stapel.navigation/NavIcons.ListOrdered|{}ListOrdered[0]
+        final fun <get-ListOrdered>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.ListOrdered.<get-ListOrdered>|<get-ListOrdered>(){}[0]
+    final val Login // stapel.navigation/NavIcons.Login|{}Login[0]
+        final fun <get-Login>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Login.<get-Login>|<get-Login>(){}[0]
+    final val Message // stapel.navigation/NavIcons.Message|{}Message[0]
+        final fun <get-Message>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Message.<get-Message>|<get-Message>(){}[0]
+    final val Plus // stapel.navigation/NavIcons.Plus|{}Plus[0]
+        final fun <get-Plus>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Plus.<get-Plus>|<get-Plus>(){}[0]
+    final val Profile // stapel.navigation/NavIcons.Profile|{}Profile[0]
+        final fun <get-Profile>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Profile.<get-Profile>|<get-Profile>(){}[0]
+    final val Qr // stapel.navigation/NavIcons.Qr|{}Qr[0]
+        final fun <get-Qr>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Qr.<get-Qr>|<get-Qr>(){}[0]
+    final val Search // stapel.navigation/NavIcons.Search|{}Search[0]
+        final fun <get-Search>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Search.<get-Search>|<get-Search>(){}[0]
+    final val Settings // stapel.navigation/NavIcons.Settings|{}Settings[0]
+        final fun <get-Settings>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Settings.<get-Settings>|<get-Settings>(){}[0]
+    final val ShieldCheck // stapel.navigation/NavIcons.ShieldCheck|{}ShieldCheck[0]
+        final fun <get-ShieldCheck>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.ShieldCheck.<get-ShieldCheck>|<get-ShieldCheck>(){}[0]
+    final val Tag // stapel.navigation/NavIcons.Tag|{}Tag[0]
+        final fun <get-Tag>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.Tag.<get-Tag>|<get-Tag>(){}[0]
+    final val User // stapel.navigation/NavIcons.User|{}User[0]
+        final fun <get-User>(): stapel.navigation/NavIcon // stapel.navigation/NavIcons.User.<get-User>|<get-User>(){}[0]
+    final val all // stapel.navigation/NavIcons.all|{}all[0]
+        final fun <get-all>(): kotlin.collections/Set<stapel.navigation/NavIcon> // stapel.navigation/NavIcons.all.<get-all>|<get-all>(){}[0]
+}
+
+final const val stapel.navigation/REASON_NOT_A_TAB // stapel.navigation/REASON_NOT_A_TAB|{}REASON_NOT_A_TAB[0]
+    final fun <get-REASON_NOT_A_TAB>(): kotlin/String // stapel.navigation/REASON_NOT_A_TAB.<get-REASON_NOT_A_TAB>|<get-REASON_NOT_A_TAB>(){}[0]
+final const val stapel.navigation/REASON_NO_MANDATE // stapel.navigation/REASON_NO_MANDATE|{}REASON_NO_MANDATE[0]
+    final fun <get-REASON_NO_MANDATE>(): kotlin/String // stapel.navigation/REASON_NO_MANDATE.<get-REASON_NO_MANDATE>|<get-REASON_NO_MANDATE>(){}[0]
+final const val stapel.navigation/REASON_SIGN_IN_UNAVAILABLE // stapel.navigation/REASON_SIGN_IN_UNAVAILABLE|{}REASON_SIGN_IN_UNAVAILABLE[0]
+    final fun <get-REASON_SIGN_IN_UNAVAILABLE>(): kotlin/String // stapel.navigation/REASON_SIGN_IN_UNAVAILABLE.<get-REASON_SIGN_IN_UNAVAILABLE>|<get-REASON_SIGN_IN_UNAVAILABLE>(){}[0]
+final const val stapel.navigation/REASON_UNKNOWN_DESTINATION // stapel.navigation/REASON_UNKNOWN_DESTINATION|{}REASON_UNKNOWN_DESTINATION[0]
+    final fun <get-REASON_UNKNOWN_DESTINATION>(): kotlin/String // stapel.navigation/REASON_UNKNOWN_DESTINATION.<get-REASON_UNKNOWN_DESTINATION>|<get-REASON_UNKNOWN_DESTINATION>(){}[0]
+
+final val stapel.navigation/DefaultRouteGuard // stapel.navigation/DefaultRouteGuard|{}DefaultRouteGuard[0]
+    final fun <get-DefaultRouteGuard>(): stapel.navigation/RouteGuard // stapel.navigation/DefaultRouteGuard.<get-DefaultRouteGuard>|<get-DefaultRouteGuard>(){}[0]
+
+final fun (stapel.navigation/NavManifest).stapel.navigation/toJson(): kotlin/String // stapel.navigation/toJson|toJson@stapel.navigation.NavManifest(){}[0]
+final fun (stapel.navigation/Surface?).stapel.navigation/orDerivedFrom(kotlin/Boolean): stapel.navigation/Surface // stapel.navigation/orDerivedFrom|orDerivedFrom@stapel.navigation.Surface?(kotlin.Boolean){}[0]
+final fun stapel.navigation/initialNavState(stapel.navigation/ResolvedNav, stapel.navigation/NavPolicy, stapel.navigation/NavAuthState): stapel.navigation/NavState // stapel.navigation/initialNavState|initialNavState(stapel.navigation.ResolvedNav;stapel.navigation.NavPolicy;stapel.navigation.NavAuthState){}[0]
+final fun stapel.navigation/reduceNav(stapel.navigation/NavState, stapel.navigation/NavCommand, stapel.navigation/ResolvedNav, stapel.navigation/NavPolicy, stapel.navigation/RouteGuard = ...): stapel.navigation/NavReduction // stapel.navigation/reduceNav|reduceNav(stapel.navigation.NavState;stapel.navigation.NavCommand;stapel.navigation.ResolvedNav;stapel.navigation.NavPolicy;stapel.navigation.RouteGuard){}[0]
+final fun stapel.navigation/resolveNav(kotlin.collections/List<stapel.navigation/NavManifest>, stapel.navigation/NavOverrides = ..., kotlin/String = ..., kotlin.collections/Set<stapel.navigation/NavIcon> = ..., kotlin.collections/Set<stapel.navigation/DestinationId>? = ...): stapel.navigation/ResolvedNav // stapel.navigation/resolveNav|resolveNav(kotlin.collections.List<stapel.navigation.NavManifest>;stapel.navigation.NavOverrides;kotlin.String;kotlin.collections.Set<stapel.navigation.NavIcon>;kotlin.collections.Set<stapel.navigation.DestinationId>?){}[0]

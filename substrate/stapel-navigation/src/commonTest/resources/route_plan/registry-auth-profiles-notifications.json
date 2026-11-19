@@ -1,0 +1,378 @@
+{
+  "declared": [
+    "account.appeals",
+    "account.billing",
+    "account.language",
+    "account.privacy",
+    "account.root",
+    "admin.auth_audit",
+    "admin.moderation",
+    "admin.moderation-appeals",
+    "admin.privacy",
+    "admin.root",
+    "admin.service_keys",
+    "admin.sso_orgs",
+    "admin.staff_roles",
+    "admin.usage",
+    "admin.users_create",
+    "auth.login",
+    "auth.qr_confirm",
+    "auth.security",
+    "calendar.availability",
+    "calendar.month",
+    "categories.catalog",
+    "categories.category",
+    "chat.conversations",
+    "feed.author",
+    "feed.home",
+    "feed.post",
+    "forms.builder",
+    "forms.list",
+    "forms.responses",
+    "listings.compose",
+    "listings.detail",
+    "listings.favorites",
+    "listings.mine",
+    "moderation.policy",
+    "notifications.feed",
+    "notifications.push",
+    "profiles.connections",
+    "profiles.contacts",
+    "profiles.language",
+    "profiles.notifications",
+    "profiles.public",
+    "profiles.settings",
+    "public.privacy-request",
+    "recordings.detail",
+    "recordings.list",
+    "reservations.agenda",
+    "reservations.book",
+    "reservations.detail",
+    "reservations.mine",
+    "reservations.schedule",
+    "search.ranking",
+    "search.results",
+    "share.view",
+    "video.rooms",
+    "workspaces.audit",
+    "workspaces.invitations",
+    "workspaces.invite",
+    "workspaces.list",
+    "workspaces.members",
+    "workspaces.settings"
+  ],
+  "expected": {
+    "containerRoots": [
+      "admin.root"
+    ],
+    "routes": {
+      "admin.auth_audit": "/app/admin/auth-audit",
+      "admin.root": "/app/admin",
+      "admin.service_keys": "/app/admin/service-keys",
+      "admin.sso_orgs": "/app/admin/sso",
+      "admin.staff_roles": "/app/admin/staff-roles",
+      "admin.users_create": "/app/admin/create-account",
+      "auth.login": "/login",
+      "auth.qr_confirm": "/qr-confirm",
+      "auth.security": "/app/settings/security",
+      "notifications.feed": "/app/notifications",
+      "notifications.push": "/app/settings/settings/push",
+      "profiles.connections": "/app/connections",
+      "profiles.contacts": "/app/settings/contacts",
+      "profiles.language": "/app/settings/language",
+      "profiles.notifications": "/app/settings/notifications",
+      "profiles.public": "/u/:userId",
+      "profiles.settings": "/app/settings"
+    },
+    "unrouted": []
+  },
+  "icons": [
+    "AppstoreOutlined",
+    "AuditOutlined",
+    "BellOutlined",
+    "ClockCircleOutlined",
+    "FolderOpenOutlined",
+    "FolderOutlined",
+    "HeartOutlined",
+    "HomeOutlined",
+    "LoginOutlined",
+    "MessageOutlined",
+    "OrderedListOutlined",
+    "PlusOutlined",
+    "ProfileOutlined",
+    "QrcodeOutlined",
+    "SafetyCertificateOutlined",
+    "SearchOutlined",
+    "SettingOutlined",
+    "ShoppingCartOutlined",
+    "TagOutlined",
+    "UserOutlined"
+  ],
+  "input": [
+    {
+      "nav": [
+        {
+          "icon": "LoginOutlined",
+          "id": "auth.login",
+          "labelKey": "auth.nav.login",
+          "menuVisibleDefault": false,
+          "order": 0,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": false,
+          "route": {
+            "path": "/login"
+          }
+        },
+        {
+          "icon": "QrcodeOutlined",
+          "id": "auth.qr_confirm",
+          "labelKey": "auth.nav.qr_confirm",
+          "menuVisibleDefault": false,
+          "order": 1,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "/qr-confirm"
+          },
+          "surface": "public"
+        },
+        {
+          "icon": "SafetyCertificateOutlined",
+          "id": "auth.security",
+          "labelKey": "auth.nav.security",
+          "menuVisibleDefault": true,
+          "order": 10,
+          "placement": {
+            "level": "submenu",
+            "parentId": "profiles.settings"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "security"
+          }
+        },
+        {
+          "icon": "AppstoreOutlined",
+          "id": "admin.sso_orgs",
+          "labelKey": "auth.nav.admin_sso",
+          "menuVisibleDefault": true,
+          "order": 40,
+          "placement": {
+            "level": "submenu",
+            "parentId": "admin.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "sso"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "SafetyCertificateOutlined",
+          "id": "admin.service_keys",
+          "labelKey": "auth.nav.admin_service_keys",
+          "menuVisibleDefault": true,
+          "order": 41,
+          "placement": {
+            "level": "submenu",
+            "parentId": "admin.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "service-keys"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "UserOutlined",
+          "id": "admin.staff_roles",
+          "labelKey": "auth.nav.admin_staff_roles",
+          "menuVisibleDefault": true,
+          "order": 42,
+          "placement": {
+            "level": "submenu",
+            "parentId": "admin.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "staff-roles"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "PlusOutlined",
+          "id": "admin.users_create",
+          "labelKey": "auth.nav.admin_users",
+          "menuVisibleDefault": true,
+          "order": 43,
+          "placement": {
+            "level": "submenu",
+            "parentId": "admin.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "create-account"
+          },
+          "surface": "member"
+        },
+        {
+          "icon": "AuditOutlined",
+          "id": "admin.auth_audit",
+          "labelKey": "auth.nav.admin_audit",
+          "menuVisibleDefault": true,
+          "order": 44,
+          "placement": {
+            "level": "submenu",
+            "parentId": "admin.root"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "auth-audit"
+          },
+          "surface": "member"
+        }
+      ],
+      "package": "@stapel/auth-react",
+      "version": "0.28.1"
+    },
+    {
+      "nav": [
+        {
+          "icon": "UserOutlined",
+          "id": "profiles.settings",
+          "labelKey": "profiles.nav.settings",
+          "menuVisibleDefault": true,
+          "order": 90,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "settings"
+          }
+        },
+        {
+          "icon": "MessageOutlined",
+          "id": "profiles.language",
+          "labelKey": "profiles.nav.language",
+          "menuVisibleDefault": false,
+          "order": 20,
+          "placement": {
+            "level": "submenu",
+            "parentId": "profiles.settings"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "language"
+          }
+        },
+        {
+          "icon": "BellOutlined",
+          "id": "profiles.notifications",
+          "labelKey": "profiles.nav.notifications",
+          "menuVisibleDefault": false,
+          "order": 30,
+          "placement": {
+            "level": "submenu",
+            "parentId": "profiles.settings"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "notifications"
+          }
+        },
+        {
+          "icon": "MessageOutlined",
+          "id": "profiles.contacts",
+          "labelKey": "profiles.nav.contacts",
+          "menuVisibleDefault": true,
+          "order": 40,
+          "placement": {
+            "level": "submenu",
+            "parentId": "profiles.settings"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "contacts"
+          }
+        },
+        {
+          "icon": "HeartOutlined",
+          "id": "profiles.connections",
+          "labelKey": "profiles.nav.connections",
+          "menuVisibleDefault": true,
+          "order": 91,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "connections"
+          }
+        },
+        {
+          "icon": "ProfileOutlined",
+          "id": "profiles.public",
+          "labelKey": "profiles.nav.public_profile",
+          "menuVisibleDefault": false,
+          "order": 92,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": false,
+          "route": {
+            "path": "/u/:userId"
+          },
+          "surface": "public"
+        }
+      ],
+      "package": "@stapel/profiles-react",
+      "version": "0.27.1"
+    },
+    {
+      "nav": [
+        {
+          "icon": "BellOutlined",
+          "id": "notifications.feed",
+          "labelKey": "notifications.nav.feed",
+          "menuVisibleDefault": true,
+          "order": 20,
+          "placement": {
+            "level": "top"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "notifications"
+          }
+        },
+        {
+          "icon": "BellOutlined",
+          "id": "notifications.push",
+          "labelKey": "notifications.nav.push",
+          "menuVisibleDefault": true,
+          "order": 30,
+          "placement": {
+            "level": "submenu",
+            "parentId": "profiles.settings"
+          },
+          "requiresAuth": true,
+          "route": {
+            "path": "settings/push"
+          }
+        }
+      ],
+      "package": "@stapel/notifications-react",
+      "version": "0.13.1"
+    }
+  ],
+  "name": "registry-auth-profiles-notifications",
+  "source": {
+    "commit": "741df8d74c520c4213676b997611d2df144e500a",
+    "function": "stapel_tools._frontend_templates.build_nav_route_plan",
+    "repo": "usestapel/stapel-tools"
+  }
+}
