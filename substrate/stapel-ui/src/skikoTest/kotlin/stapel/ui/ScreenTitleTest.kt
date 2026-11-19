@@ -70,4 +70,20 @@ class ScreenTitleTest {
         waitForIdle()
         assertEquals(null, chrome.current)
     }
+
+    @Test
+    fun aTitledPageUnderAnOuterChromeHandsItsTitleUpAndDrawsNoSecondBar() = runComposeUiTest {
+        val chrome = StapelChromeTitle()
+        themed {
+            CompositionLocalProvider(LocalStapelChromeTitle provides chrome) {
+                StapelPage(title = "Orders", actions = listOf(stapel.ui.skin.IconButtonSpec(StapelIconIds.Search, "Search", {}))) {
+                    StapelText("body")
+                }
+            }
+        }
+        assertEquals("Orders", chrome.current)
+        assertEquals(0, count("Orders"), "the outer chrome draws it")
+        assertEquals(0, onAllNodes(hasTestTag(STAPEL_PAGE_TOP_BAR_TAG), useUnmergedTree = true).fetchSemanticsNodes().size)
+        onNodeWithTag(STAPEL_PAGE_ACTIONS_TAG).assertExists()
+    }
 }

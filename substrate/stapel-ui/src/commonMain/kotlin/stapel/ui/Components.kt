@@ -1,6 +1,7 @@
 package stapel.ui
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -453,6 +454,9 @@ public const val STAPEL_PAGE_CONTENT_TAG: String = "stapel.page.content"
 /** Test tag of [StapelPage]'s top bar when the page draws it from `title`. */
 public const val STAPEL_PAGE_TOP_BAR_TAG: String = "stapel.page.topbar"
 
+/** Test tag of [StapelPage]'s action row when an outer chrome owns the title (no bar of its own). */
+public const val STAPEL_PAGE_ACTIONS_TAG: String = "stapel.page.actions"
+
 /** Scroll distance over which a large title collapses into the bar. */
 public val LARGE_TITLE_COLLAPSE_DISTANCE: Dp = 96.dp
 
@@ -465,7 +469,10 @@ public val LARGE_TITLE_COLLAPSE_DISTANCE: Dp = 96.dp
  * - the top bar: a custom [topBar], or one drawn from [title] / [subtitle] / [navigation] / [actions];
  *   with [largeTitle] it collapses from a large title into the bar as the content scrolls. A bar drawn
  *   from [title] is the content's chrome title ([StapelChromeTitle]): a [StapelScreenTitle] inside
- *   replaces [title] in the bar instead of drawing a second heading;
+ *   replaces [title] in the bar instead of drawing a second heading. Hosted under an outer chrome that
+ *   names the screen ([LocalStapelChromeTitle], the app shell's bar), the page draws no bar of its own:
+ *   [title] goes to that chrome, [actions] stay as a row above the content, and [navigation] (back) is
+ *   the outer chrome's;
  * - pull-to-refresh around the content when [refresh] is given;
  * - the snackbar host over the content when [snackbars] is given (above the bottom bar and the keyboard).
  *
@@ -511,12 +518,25 @@ public fun StapelPage(
             }
         }
     }
+    // Under an outer chrome that already names the screen (the app shell's top bar), a page's `title` goes
+    // to that chrome and the page draws no second title bar; its actions stay, as a row above the content.
+    val outer = LocalStapelChromeTitle.current
+    val nested = outer != null && topBar == null && title != null
     // A page that draws its bar from `title` names the screens inside it: their StapelScreenTitle goes to the bar.
-    val ownTitle = if (topBar == null && title != null) remember { StapelChromeTitle() } else null
+    val ownTitle = if (!nested && topBar == null && title != null) remember { StapelChromeTitle() } else null
     Box(modifier.fillMaxSize().background(StapelTheme.colors.surface).windowInsetsPadding(insets)) {
         Column(Modifier.fillMaxSize()) {
             when {
                 topBar != null -> topBar()
+                nested -> {
+                    StapelScreenTitle(title)
+                    if (actions.isNotEmpty()) {
+                        Row(
+                            Modifier.fillMaxWidth().padding(horizontal = gutter).testTag(STAPEL_PAGE_ACTIONS_TAG),
+                            horizontalArrangement = Arrangement.End,
+                        ) { actions.forEach { StapelTheme.skin.IconButton(it, Modifier) } }
+                    }
+                }
                 title != null -> StapelTheme.skin.TopBar(
                     TopBarSpec(
                         ownTitle?.current ?: title, navigation, actions, STAPEL_PAGE_TOP_BAR_TAG, subtitle,

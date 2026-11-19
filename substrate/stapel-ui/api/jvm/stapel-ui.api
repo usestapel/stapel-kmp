@@ -7,6 +7,7 @@ public final class stapel/ui/ComponentColors {
 }
 
 public final class stapel/ui/ComponentsKt {
+	public static final field STAPEL_PAGE_ACTIONS_TAG Ljava/lang/String;
 	public static final field STAPEL_PAGE_CONTENT_TAG Ljava/lang/String;
 	public static final field STAPEL_PAGE_TOP_BAR_TAG Ljava/lang/String;
 	public static final fun StapelAvatar (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lstapel/ui/skin/AvatarSize;Lstapel/ui/StapelIcon;Ljava/lang/String;Lstapel/ui/skin/BadgeSpec;Lstapel/ui/skin/BadgePlacement;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V

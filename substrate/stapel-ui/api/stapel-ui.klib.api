@@ -1287,6 +1287,8 @@ final const val stapel.ui/PICKER_OPTION_TAG // stapel.ui/PICKER_OPTION_TAG|{}PIC
     final fun <get-PICKER_OPTION_TAG>(): kotlin/String // stapel.ui/PICKER_OPTION_TAG.<get-PICKER_OPTION_TAG>|<get-PICKER_OPTION_TAG>(){}[0]
 final const val stapel.ui/PICKER_SEARCH_TAG // stapel.ui/PICKER_SEARCH_TAG|{}PICKER_SEARCH_TAG[0]
     final fun <get-PICKER_SEARCH_TAG>(): kotlin/String // stapel.ui/PICKER_SEARCH_TAG.<get-PICKER_SEARCH_TAG>|<get-PICKER_SEARCH_TAG>(){}[0]
+final const val stapel.ui/STAPEL_PAGE_ACTIONS_TAG // stapel.ui/STAPEL_PAGE_ACTIONS_TAG|{}STAPEL_PAGE_ACTIONS_TAG[0]
+    final fun <get-STAPEL_PAGE_ACTIONS_TAG>(): kotlin/String // stapel.ui/STAPEL_PAGE_ACTIONS_TAG.<get-STAPEL_PAGE_ACTIONS_TAG>|<get-STAPEL_PAGE_ACTIONS_TAG>(){}[0]
 final const val stapel.ui/STAPEL_PAGE_CONTENT_TAG // stapel.ui/STAPEL_PAGE_CONTENT_TAG|{}STAPEL_PAGE_CONTENT_TAG[0]
     final fun <get-STAPEL_PAGE_CONTENT_TAG>(): kotlin/String // stapel.ui/STAPEL_PAGE_CONTENT_TAG.<get-STAPEL_PAGE_CONTENT_TAG>|<get-STAPEL_PAGE_CONTENT_TAG>(){}[0]
 final const val stapel.ui/STAPEL_PAGE_TOP_BAR_TAG // stapel.ui/STAPEL_PAGE_TOP_BAR_TAG|{}STAPEL_PAGE_TOP_BAR_TAG[0]

@@ -39,6 +39,7 @@ import stapel.result.StapelResult
 import stapel.runtime.PlatformContext
 import stapel.ui.StapelButton
 import stapel.ui.StapelPage
+import stapel.ui.StapelScreenTitle
 import stapel.ui.StapelText
 import stapel.ui.material3.StapelMaterialTheme
 import stapel.wire.ApiTransport
@@ -97,6 +98,9 @@ fun createShopApp(
     configure()
 }
 
+/** The home screen's title. */
+const val SHOP_HOME_TITLE: String = "Shop"
+
 /** The app UI. */
 @Composable
 fun ShopApp(app: StapelApp) {
@@ -113,22 +117,23 @@ fun shopScreens(context: BrickContext): NavContribution = navContribution("app:s
         id = "shop.order", path = "orders/:orderId", labelKey = "shop.nav.order", icon = NavIcons.Cart,
         codec = PathCodec(parse = { params, _ -> OrderRoute(params.getValue("orderId")) }, format = { r -> RouteAddress(path = mapOf("orderId" to r.orderId)) }),
         requiresAuth = true, menuVisibleDefault = false, order = 1,
-    ) { route -> StapelPage(Modifier.testTag("shop.order")) { StapelText("Order ${route.orderId}") } }
-    // A child of the container's account section: with it the section exists, and so does the top bar's
-    // account control (it opens the section, and an embed whose target is not installed is dropped).
+    ) { route -> StapelPage(Modifier.testTag("shop.order")) { StapelScreenTitle("Order ${route.orderId}") } }
+    // A child of the container's account section: with it the section exists, and the top bar's account
+    // control offers "Account" (without the section it offers sign-out only).
     destination<MyOrdersRoute>(
         id = "shop.my_orders", path = "orders", labelKey = "shop.nav.my_orders", icon = NavIcons.Cart,
         codec = PathCodec.constant(MyOrdersRoute), placement = Placement.Submenu(DestinationId("account.root")),
         requiresAuth = true, order = 2,
-    ) { StapelPage(Modifier.testTag("shop.my_orders")) { StapelText("My orders") } }
+    ) { StapelPage(Modifier.testTag("shop.my_orders")) { StapelScreenTitle("My orders") } }
 }
 
 @Composable
 private fun HomeScreen(context: BrickContext) {
     val scope = rememberCoroutineScope()
     var orders by remember { mutableStateOf<String?>(null) }
+    // Every screen titles itself once: in the shell the top bar shows it, hosted bare it is the heading.
     StapelPage(Modifier.testTag("shop.home")) {
-        StapelText("Shop")
+        StapelScreenTitle(SHOP_HOME_TITLE)
         orders?.let { StapelText(it, Modifier.testTag("shop.home.orders")) }
         StapelButton("Load orders", {
             scope.launch {

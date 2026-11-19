@@ -22,7 +22,8 @@
 - **Title:** the top bar names the screen on top: the text the screen published with
   `StapelScreenTitle` (stapel-ui; the shell provides `LocalStapelChromeTitle` to the content while the
   bar shows a title), else the destination's label (`ShellTags.Title`). With a `topbar.center` embed the
-  bar shows no title and screens draw their own heading.
+  bar shows no title and screens draw their own heading. One chrome title serves the whole host: in
+  two-pane list-detail the bar shows the most recently composed pane's title (the detail).
 - **Panes:** the shell passes its width class to `StapelNavHost`; list-detail is two-pane from
   `Tablet` up with `ShellTags.DetailPlaceholder` (label key `shell.detail.empty`) in an empty
   detail pane.

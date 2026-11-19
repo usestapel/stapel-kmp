@@ -1,6 +1,9 @@
 package shop
 
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.v2.runComposeUiTest
 import org.koin.dsl.module
 import stapel.app.di.StapelAppContent
@@ -11,8 +14,10 @@ import stapel.auth.testing.awaitTag
 import stapel.auth.testing.signInWithMockOtp
 import stapel.session.vault.InMemoryTokenVault
 import stapel.session.vault.TokenVault
+import stapel.shell.ShellTags
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
@@ -33,6 +38,9 @@ class SignInWalkTest {
             setContent { StapelAppContent(app) }
             signInWithMockOtp("walk+${Random.nextLong(1_000_000_000L)}@example.com")
             awaitTag("shop.home")
+            // One title: the shell's bar names the screen, the screen draws no second heading.
+            onNodeWithTag(ShellTags.Title).assertTextEquals(SHOP_HOME_TITLE)
+            assertEquals(1, onAllNodes(hasText(SHOP_HOME_TITLE)).fetchSemanticsNodes().size)
             // The account control (sign-out) is in the top bar once signed in.
             awaitTag(AuthTags.ACCOUNT_MENU)
             assertTrue(app.koin.get<StapelAuth>().session.state.value is AuthState.SignedIn)
