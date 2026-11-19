@@ -1,0 +1,113 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-shell>
+final enum class stapel.shell/ShellTemplate : kotlin/Enum<stapel.shell/ShellTemplate> { // stapel.shell/ShellTemplate|null[0]
+    enum entry AdaptiveTabs // stapel.shell/ShellTemplate.AdaptiveTabs|null[0]
+    enum entry Stack // stapel.shell/ShellTemplate.Stack|null[0]
+
+    final val entries // stapel.shell/ShellTemplate.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.shell/ShellTemplate> // stapel.shell/ShellTemplate.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.shell/ShellTemplate // stapel.shell/ShellTemplate.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.shell/ShellTemplate> // stapel.shell/ShellTemplate.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.shell/BadgeSource { // stapel.shell/BadgeSource|null[0]
+    abstract fun count(): kotlinx.coroutines.flow/Flow<kotlin/Int> // stapel.shell/BadgeSource.count|count(){}[0]
+}
+
+final class stapel.shell/ShellConfig { // stapel.shell/ShellConfig|null[0]
+    constructor <init>(kotlin.collections/List<stapel.navigation.compose/NavContribution>, stapel.shell/ShellTemplate = ..., stapel.shell/SlotPlan, stapel.navigation/NavPolicy, stapel.navigation/NavAuthSource, stapel.navigation/NavOverrides = ..., stapel.navigation/DeepLinkConfig? = ..., kotlin.collections/Map<stapel.navigation/DestinationId, stapel.shell/BadgeSource> = ..., kotlin.collections/Set<stapel.navigation/CapabilityKey> = ..., kotlin/Function3<kotlin/String, androidx.compose.runtime/Composer, kotlin/Int, kotlin/String>) // stapel.shell/ShellConfig.<init>|<init>(kotlin.collections.List<stapel.navigation.compose.NavContribution>;stapel.shell.ShellTemplate;stapel.shell.SlotPlan;stapel.navigation.NavPolicy;stapel.navigation.NavAuthSource;stapel.navigation.NavOverrides;stapel.navigation.DeepLinkConfig?;kotlin.collections.Map<stapel.navigation.DestinationId,stapel.shell.BadgeSource>;kotlin.collections.Set<stapel.navigation.CapabilityKey>;kotlin.Function3<kotlin.String,androidx.compose.runtime.Composer,kotlin.Int,kotlin.String>){}[0]
+
+    final val auth // stapel.shell/ShellConfig.auth|{}auth[0]
+        final fun <get-auth>(): stapel.navigation/NavAuthSource // stapel.shell/ShellConfig.auth.<get-auth>|<get-auth>(){}[0]
+    final val badges // stapel.shell/ShellConfig.badges|{}badges[0]
+        final fun <get-badges>(): kotlin.collections/Map<stapel.navigation/DestinationId, stapel.shell/BadgeSource> // stapel.shell/ShellConfig.badges.<get-badges>|<get-badges>(){}[0]
+    final val capabilities // stapel.shell/ShellConfig.capabilities|{}capabilities[0]
+        final fun <get-capabilities>(): kotlin.collections/Set<stapel.navigation/CapabilityKey> // stapel.shell/ShellConfig.capabilities.<get-capabilities>|<get-capabilities>(){}[0]
+    final val contributions // stapel.shell/ShellConfig.contributions|{}contributions[0]
+        final fun <get-contributions>(): kotlin.collections/List<stapel.navigation.compose/NavContribution> // stapel.shell/ShellConfig.contributions.<get-contributions>|<get-contributions>(){}[0]
+    final val deepLinks // stapel.shell/ShellConfig.deepLinks|{}deepLinks[0]
+        final fun <get-deepLinks>(): stapel.navigation/DeepLinkConfig? // stapel.shell/ShellConfig.deepLinks.<get-deepLinks>|<get-deepLinks>(){}[0]
+    final val label // stapel.shell/ShellConfig.label|{}label[0]
+        final fun <get-label>(): kotlin/Function3<kotlin/String, androidx.compose.runtime/Composer, kotlin/Int, kotlin/String> // stapel.shell/ShellConfig.label.<get-label>|<get-label>(){}[0]
+    final val overrides // stapel.shell/ShellConfig.overrides|{}overrides[0]
+        final fun <get-overrides>(): stapel.navigation/NavOverrides // stapel.shell/ShellConfig.overrides.<get-overrides>|<get-overrides>(){}[0]
+    final val policy // stapel.shell/ShellConfig.policy|{}policy[0]
+        final fun <get-policy>(): stapel.navigation/NavPolicy // stapel.shell/ShellConfig.policy.<get-policy>|<get-policy>(){}[0]
+    final val slots // stapel.shell/ShellConfig.slots|{}slots[0]
+        final fun <get-slots>(): stapel.shell/SlotPlan // stapel.shell/ShellConfig.slots.<get-slots>|<get-slots>(){}[0]
+    final val template // stapel.shell/ShellConfig.template|{}template[0]
+        final fun <get-template>(): stapel.shell/ShellTemplate // stapel.shell/ShellConfig.template.<get-template>|<get-template>(){}[0]
+}
+
+final class stapel.shell/SlotPlan { // stapel.shell/SlotPlan|null[0]
+    constructor <init>(kotlin.collections/Map<stapel.navigation/SlotId, kotlin.collections/List<stapel.navigation/EmbedId>>) // stapel.shell/SlotPlan.<init>|<init>(kotlin.collections.Map<stapel.navigation.SlotId,kotlin.collections.List<stapel.navigation.EmbedId>>){}[0]
+
+    final val filled // stapel.shell/SlotPlan.filled|{}filled[0]
+        final fun <get-filled>(): kotlin.collections/Map<stapel.navigation/SlotId, kotlin.collections/List<stapel.navigation/EmbedId>> // stapel.shell/SlotPlan.filled.<get-filled>|<get-filled>(){}[0]
+
+    final object Companion { // stapel.shell/SlotPlan.Companion|null[0]
+        final fun offered(stapel.shell/ShellTemplate, kotlin.collections/List<stapel.navigation.compose/NavContribution>): stapel.shell/SlotPlan // stapel.shell/SlotPlan.Companion.offered|offered(stapel.shell.ShellTemplate;kotlin.collections.List<stapel.navigation.compose.NavContribution>){}[0]
+    }
+}
+
+final object stapel.shell/ShellTags { // stapel.shell/ShellTags|null[0]
+    final const val BottomBar // stapel.shell/ShellTags.BottomBar|{}BottomBar[0]
+        final fun <get-BottomBar>(): kotlin/String // stapel.shell/ShellTags.BottomBar.<get-BottomBar>|<get-BottomBar>(){}[0]
+    final const val Drawer // stapel.shell/ShellTags.Drawer|{}Drawer[0]
+        final fun <get-Drawer>(): kotlin/String // stapel.shell/ShellTags.Drawer.<get-Drawer>|<get-Drawer>(){}[0]
+    final const val MoreSheet // stapel.shell/ShellTags.MoreSheet|{}MoreSheet[0]
+        final fun <get-MoreSheet>(): kotlin/String // stapel.shell/ShellTags.MoreSheet.<get-MoreSheet>|<get-MoreSheet>(){}[0]
+    final const val Rail // stapel.shell/ShellTags.Rail|{}Rail[0]
+        final fun <get-Rail>(): kotlin/String // stapel.shell/ShellTags.Rail.<get-Rail>|<get-Rail>(){}[0]
+    final const val Refusal // stapel.shell/ShellTags.Refusal|{}Refusal[0]
+        final fun <get-Refusal>(): kotlin/String // stapel.shell/ShellTags.Refusal.<get-Refusal>|<get-Refusal>(){}[0]
+    final const val TopBar // stapel.shell/ShellTags.TopBar|{}TopBar[0]
+        final fun <get-TopBar>(): kotlin/String // stapel.shell/ShellTags.TopBar.<get-TopBar>|<get-TopBar>(){}[0]
+    final const val Unavailable // stapel.shell/ShellTags.Unavailable|{}Unavailable[0]
+        final fun <get-Unavailable>(): kotlin/String // stapel.shell/ShellTags.Unavailable.<get-Unavailable>|<get-Unavailable>(){}[0]
+    final const val Waiting // stapel.shell/ShellTags.Waiting|{}Waiting[0]
+        final fun <get-Waiting>(): kotlin/String // stapel.shell/ShellTags.Waiting.<get-Waiting>|<get-Waiting>(){}[0]
+}
+
+final object stapel.shell/Slots { // stapel.shell/Slots|null[0]
+    final val Bottombar // stapel.shell/Slots.Bottombar|{}Bottombar[0]
+        final fun <get-Bottombar>(): stapel.navigation/SlotId // stapel.shell/Slots.Bottombar.<get-Bottombar>|<get-Bottombar>(){}[0]
+    final val PageActions // stapel.shell/Slots.PageActions|{}PageActions[0]
+        final fun <get-PageActions>(): stapel.navigation/SlotId // stapel.shell/Slots.PageActions.<get-PageActions>|<get-PageActions>(){}[0]
+    final val SheetFoot // stapel.shell/Slots.SheetFoot|{}SheetFoot[0]
+        final fun <get-SheetFoot>(): stapel.navigation/SlotId // stapel.shell/Slots.SheetFoot.<get-SheetFoot>|<get-SheetFoot>(){}[0]
+    final val SidenavFoot // stapel.shell/Slots.SidenavFoot|{}SidenavFoot[0]
+        final fun <get-SidenavFoot>(): stapel.navigation/SlotId // stapel.shell/Slots.SidenavFoot.<get-SidenavFoot>|<get-SidenavFoot>(){}[0]
+    final val SidenavHead // stapel.shell/Slots.SidenavHead|{}SidenavHead[0]
+        final fun <get-SidenavHead>(): stapel.navigation/SlotId // stapel.shell/Slots.SidenavHead.<get-SidenavHead>|<get-SidenavHead>(){}[0]
+    final val TopbarCenter // stapel.shell/Slots.TopbarCenter|{}TopbarCenter[0]
+        final fun <get-TopbarCenter>(): stapel.navigation/SlotId // stapel.shell/Slots.TopbarCenter.<get-TopbarCenter>|<get-TopbarCenter>(){}[0]
+    final val TopbarEnd // stapel.shell/Slots.TopbarEnd|{}TopbarEnd[0]
+        final fun <get-TopbarEnd>(): stapel.navigation/SlotId // stapel.shell/Slots.TopbarEnd.<get-TopbarEnd>|<get-TopbarEnd>(){}[0]
+    final val TopbarStart // stapel.shell/Slots.TopbarStart|{}TopbarStart[0]
+        final fun <get-TopbarStart>(): stapel.navigation/SlotId // stapel.shell/Slots.TopbarStart.<get-TopbarStart>|<get-TopbarStart>(){}[0]
+    final val chrome // stapel.shell/Slots.chrome|{}chrome[0]
+        final fun <get-chrome>(): kotlin.collections/List<stapel.navigation/SlotId> // stapel.shell/Slots.chrome.<get-chrome>|<get-chrome>(){}[0]
+}
+
+final val stapel.shell/stapel_shell_ShellConfig$stableprop // stapel.shell/stapel_shell_ShellConfig$stableprop|#static{}stapel_shell_ShellConfig$stableprop[0]
+final val stapel.shell/stapel_shell_ShellTags$stableprop // stapel.shell/stapel_shell_ShellTags$stableprop|#static{}stapel_shell_ShellTags$stableprop[0]
+final val stapel.shell/stapel_shell_SlotPlan$stableprop // stapel.shell/stapel_shell_SlotPlan$stableprop|#static{}stapel_shell_SlotPlan$stableprop[0]
+final val stapel.shell/stapel_shell_Slots$stableprop // stapel.shell/stapel_shell_Slots$stableprop|#static{}stapel_shell_Slots$stableprop[0]
+
+final fun stapel.shell/SectionScreen(stapel.navigation/DestinationId, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/SectionScreen|SectionScreen(stapel.navigation.DestinationId;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.shell/StapelShell(stapel.navigation/StapelNavigator, stapel.shell/ShellConfig, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/StapelShell|StapelShell(stapel.navigation.StapelNavigator;stapel.shell.ShellConfig;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.shell/StapelShell(stapel.shell/ShellConfig, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.shell/StapelShell|StapelShell(stapel.shell.ShellConfig;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.shell/UnavailableScreen(stapel.navigation/ResolvedDestination, kotlin.collections/Set<stapel.navigation/CapabilityKey>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.shell/UnavailableScreen|UnavailableScreen(stapel.navigation.ResolvedDestination;kotlin.collections.Set<stapel.navigation.CapabilityKey>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+final fun stapel.shell/shellTemplatesJson(): kotlin/String // stapel.shell/shellTemplatesJson|shellTemplatesJson(){}[0]
+final fun stapel.shell/stapel_shell_ShellConfig$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_ShellConfig$stableprop_getter|stapel_shell_ShellConfig$stableprop_getter(){}[0]
+final fun stapel.shell/stapel_shell_ShellTags$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_ShellTags$stableprop_getter|stapel_shell_ShellTags$stableprop_getter(){}[0]
+final fun stapel.shell/stapel_shell_SlotPlan$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_SlotPlan$stableprop_getter|stapel_shell_SlotPlan$stableprop_getter(){}[0]
+final fun stapel.shell/stapel_shell_Slots$stableprop_getter(): kotlin/Int // stapel.shell/stapel_shell_Slots$stableprop_getter|stapel_shell_Slots$stableprop_getter(){}[0]

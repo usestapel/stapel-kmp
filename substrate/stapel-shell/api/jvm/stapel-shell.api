@@ -1,0 +1,87 @@
+public abstract interface class stapel/shell/BadgeSource {
+	public abstract fun count ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class stapel/shell/ComposableSingletons$ShellKt {
+	public static final field INSTANCE Lstapel/shell/ComposableSingletons$ShellKt;
+	public fun <init> ()V
+	public final fun getLambda$-1382041852$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function5;
+	public final fun getLambda$1157898903$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1934780118$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$462595519$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$633993055$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class stapel/shell/ModelKt {
+	public static final fun shellTemplatesJson ()Ljava/lang/String;
+}
+
+public final class stapel/shell/ShellConfig {
+	public static final field $stable I
+	public fun <init> (Ljava/util/List;Lstapel/shell/ShellTemplate;Lstapel/shell/SlotPlan;Lstapel/navigation/NavPolicy;Lstapel/navigation/NavAuthSource;Lstapel/navigation/NavOverrides;Lstapel/navigation/DeepLinkConfig;Ljava/util/Map;Ljava/util/Set;Lkotlin/jvm/functions/Function3;)V
+	public synthetic fun <init> (Ljava/util/List;Lstapel/shell/ShellTemplate;Lstapel/shell/SlotPlan;Lstapel/navigation/NavPolicy;Lstapel/navigation/NavAuthSource;Lstapel/navigation/NavOverrides;Lstapel/navigation/DeepLinkConfig;Ljava/util/Map;Ljava/util/Set;Lkotlin/jvm/functions/Function3;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAuth ()Lstapel/navigation/NavAuthSource;
+	public final fun getBadges ()Ljava/util/Map;
+	public final fun getCapabilities ()Ljava/util/Set;
+	public final fun getContributions ()Ljava/util/List;
+	public final fun getDeepLinks ()Lstapel/navigation/DeepLinkConfig;
+	public final fun getLabel ()Lkotlin/jvm/functions/Function3;
+	public final fun getOverrides ()Lstapel/navigation/NavOverrides;
+	public final fun getPolicy ()Lstapel/navigation/NavPolicy;
+	public final fun getSlots ()Lstapel/shell/SlotPlan;
+	public final fun getTemplate ()Lstapel/shell/ShellTemplate;
+}
+
+public final class stapel/shell/ShellKt {
+	public static final fun SectionScreen-D2mBrW0 (Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelShell (Lstapel/navigation/StapelNavigator;Lstapel/shell/ShellConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelShell (Lstapel/shell/ShellConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun UnavailableScreen (Lstapel/navigation/ResolvedDestination;Ljava/util/Set;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class stapel/shell/ShellTags {
+	public static final field $stable I
+	public static final field BottomBar Ljava/lang/String;
+	public static final field Drawer Ljava/lang/String;
+	public static final field INSTANCE Lstapel/shell/ShellTags;
+	public static final field MoreSheet Ljava/lang/String;
+	public static final field Rail Ljava/lang/String;
+	public static final field Refusal Ljava/lang/String;
+	public static final field TopBar Ljava/lang/String;
+	public static final field Unavailable Ljava/lang/String;
+	public static final field Waiting Ljava/lang/String;
+}
+
+public final class stapel/shell/ShellTemplate : java/lang/Enum {
+	public static final field AdaptiveTabs Lstapel/shell/ShellTemplate;
+	public static final field Stack Lstapel/shell/ShellTemplate;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/shell/ShellTemplate;
+	public static fun values ()[Lstapel/shell/ShellTemplate;
+}
+
+public final class stapel/shell/SlotPlan {
+	public static final field $stable I
+	public static final field Companion Lstapel/shell/SlotPlan$Companion;
+	public fun <init> (Ljava/util/Map;)V
+	public final fun getFilled ()Ljava/util/Map;
+}
+
+public final class stapel/shell/SlotPlan$Companion {
+	public final fun offered (Lstapel/shell/ShellTemplate;Ljava/util/List;)Lstapel/shell/SlotPlan;
+}
+
+public final class stapel/shell/Slots {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/shell/Slots;
+	public final fun getBottombar-EmFWfVM ()Ljava/lang/String;
+	public final fun getChrome ()Ljava/util/List;
+	public final fun getPageActions-EmFWfVM ()Ljava/lang/String;
+	public final fun getSheetFoot-EmFWfVM ()Ljava/lang/String;
+	public final fun getSidenavFoot-EmFWfVM ()Ljava/lang/String;
+	public final fun getSidenavHead-EmFWfVM ()Ljava/lang/String;
+	public final fun getTopbarCenter-EmFWfVM ()Ljava/lang/String;
+	public final fun getTopbarEnd-EmFWfVM ()Ljava/lang/String;
+	public final fun getTopbarStart-EmFWfVM ()Ljava/lang/String;
+}
+
