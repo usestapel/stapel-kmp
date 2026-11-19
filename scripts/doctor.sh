@@ -60,14 +60,16 @@ if [ "$(git config core.hooksPath 2>/dev/null)" = ".githooks" ]; then
 else
     bad "git hooks not active" "scripts/setup-hooks.sh"
 fi
+# The pre-push hook's exposure lint (stapel-tools >= 0.82.0, which has --strict).
+LINT_FIX="uv tool install 'stapel-tools>=0.82.0'   (an older one: uv tool upgrade stapel-tools)"
 if command -v stapel-exposure-lint >/dev/null 2>&1; then
     if stapel-exposure-lint --help 2>/dev/null | grep -q -- '--strict'; then
         ok "stapel-exposure-lint on PATH (pre-push exposure stage active)"
     else
-        bad "stapel-exposure-lint on PATH is older than stapel-tools 0.82.0 (no --strict): the pre-push hook refuses" "pip install 'stapel-tools>=0.82.0' into the venv on PATH"
+        bad "stapel-exposure-lint on PATH is older than stapel-tools 0.82.0 (no --strict): the pre-push hook refuses" "$LINT_FIX"
     fi
 else
-    warn "stapel-exposure-lint not on PATH: the pre-push exposure stage is skipped on this machine"
+    bad "stapel-exposure-lint not on PATH: the pre-push hook needs it (stapel-tools >= 0.82.0)" "$LINT_FIX"
 fi
 if command -v stapel-hooks >/dev/null 2>&1; then
     if stapel-hooks doctor >/dev/null 2>&1; then ok "stapel-hooks doctor"; else warn "stapel-hooks doctor reports problems (run it for details)"; fi

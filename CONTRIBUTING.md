@@ -3,7 +3,10 @@
 Thanks for helping. The short version:
 
 1. `brew install openjdk@21`, then `source scripts/env.sh` and `scripts/doctor.sh`.
-2. `scripts/setup-hooks.sh` once per clone.
+2. `uv tool install 'stapel-tools>=0.82.0'` (the pre-push hook's
+   `stapel-exposure-lint`; an older install: `uv tool upgrade stapel-tools`), then
+   `scripts/setup-hooks.sh` once per clone — it fails with that line until the
+   lint is on PATH, and `scripts/doctor.sh` reports it too.
 3. Read [docs/adding-a-module.md](docs/adding-a-module.md) before creating a
    module, and [docs/gates.md](docs/gates.md) before calling something done.
 4. Run `./gradlew stapelCheckFast` for every change and `./gradlew stapelCheck`

@@ -126,7 +126,7 @@ while read -r local_ref local_sha remote_ref remote_sha; do
             echo ""
             echo "REFUSING to push: stapel-exposure-lint on PATH is older than stapel-tools 0.82.0"
             echo "(no --strict, does not recognise a Gradle repository). Install a newer one:"
-            echo "  pip install 'stapel-tools>=0.82.0'"
+            echo "  uv tool install 'stapel-tools>=0.82.0'   # an older one: uv tool upgrade stapel-tools"
             exit 1
         fi
         echo "Exposure lint on ${local_sha:0:12} (pushed tree + pushed commit messages)..."

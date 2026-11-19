@@ -64,6 +64,12 @@ jobs:
   ios:
     name: ios (simulator tests + Dokka gate + screenshot baselines)
     runs-on: macos-26
+    # macOS runners are the bottleneck: a newer commit's job supersedes this job while it is still
+    # QUEUED (GitHub keeps one pending job per group); a running job is never cancelled. ci-ok reports
+    # a superseded commit as superseded, never as green. Rule tested by build-logic CiWorkflowTest.
+    concurrency:
+      group: macos-ios-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     timeout-minutes: 45
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.4.app/Contents/Developer
@@ -94,6 +100,12 @@ jobs:
   publish-smoke:
     name: publish-smoke (staging repo + consumer by coordinates)
     runs-on: macos-26
+    # macOS runners are the bottleneck: a newer commit's job supersedes this job while it is still
+    # QUEUED (GitHub keeps one pending job per group); a running job is never cancelled. ci-ok reports
+    # a superseded commit as superseded, never as green. Rule tested by build-logic CiWorkflowTest.
+    concurrency:
+      group: macos-publish-smoke-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     timeout-minutes: 45
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.4.app/Contents/Developer
@@ -123,6 +135,12 @@ jobs:
     name: sample (shop-mobile built from the staging repo, every target)
     needs: [publish-smoke]
     runs-on: macos-26
+    # macOS runners are the bottleneck: a newer commit's job supersedes this job while it is still
+    # QUEUED (GitHub keeps one pending job per group); a running job is never cancelled. ci-ok reports
+    # a superseded commit as superseded, never as green. Rule tested by build-logic CiWorkflowTest.
+    concurrency:
+      group: macos-sample-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     timeout-minutes: 60
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.4.app/Contents/Developer
@@ -148,14 +166,26 @@ jobs:
           train="$(sed -n 's/^VERSION_NAME=//p' gradle.properties)"
           sample="$(sed -n 's/^stapel.version=//p' samples/shop-mobile/gradle.properties)"
           [ "$train" = "$sample" ] || { echo "samples/shop-mobile stapel.version=$sample, train $train"; exit 1; }
-      - name: Gates and builds (drift, nav gate, desktop, Android, iOS framework)
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Auth stand up (stapel-tools scaffold, prototype posture, 127.0.0.1:18731)
+        env:
+          K7_PYTHON: python3.12
+        run: bricks/auth/e2e/stand/stand.sh up
+      - name: Gates, builds and the sign-in walk on jvm + iOS simulator against the stand
         working-directory: samples/shop-mobile
         run: >
           ./gradlew :shared:stapelGenerateCheck :shared:checkStapelTokens :shared:jvmTest
           :shared:iosSimulatorArm64Test :desktopApp:jar :androidApp:assembleDebug
-          :shared:linkDebugFrameworkIosSimulatorArm64
-      - name: iOS app (xcodebuild), launch and deep link on a simulator
-        run: samples/shop-mobile/scripts/ios-smoke.sh
+          :shared:linkDebugFrameworkIosSimulatorArm64 -Pstapel.walk.baseUrl=http://127.0.0.1:18731/
+      - name: iOS app (xcodebuild), launch, deep link and the XCUITest suite on a simulator
+        env:
+          SHOP_STAND_URL: http://127.0.0.1:18731/
+        run: samples/shop-mobile/scripts/ios-smoke.sh --uitest
+      - name: Auth stand down
+        if: always()
+        run: bricks/auth/e2e/stand/stand.sh down
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
@@ -164,18 +194,38 @@ jobs:
             samples/shop-mobile/build/ios-smoke/*.png
             samples/shop-mobile/build/ios-smoke/*.log
             samples/shop-mobile/build/ios-smoke/*.txt
+            samples/shop-mobile/build/ios-smoke/uitest.xcresult
+            bricks/auth/e2e/build/stand/*.log
           retention-days: 14
 
-  # The ONE required check for branch protection. A skipped or cancelled job is red here.
+  # The ONE required check for branch protection. Green only when every job succeeded; a commit whose
+  # macOS job was superseded while queued is reported SUPERSEDED (red, never green); anything else red
+  # is FAILED. Verdict rules: scripts/ci-verdict.sh, tested by build-logic CiWorkflowTest.
   ci-ok:
     name: ci-ok
     if: always()
     needs: [build-logic, fast, ios, publish-smoke, sample]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     steps:
-      - name: All jobs succeeded
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: scripts
+      - name: Verdict
         env:
-          RESULTS: ${{ toJSON(needs.*.result) }}
+          NEEDS: ${{ toJSON(needs) }}
+          GH_TOKEN: ${{ github.token }}
+          THIS_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          echo "$RESULTS"
-          echo "$RESULTS" | jq -e 'length > 0 and all(.[]; . == "success")' > /dev/null || { echo "a required job did not succeed"; exit 1; }
+          set -o pipefail
+          JOBS="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs?per_page=100" --jq '.jobs')"
+          if [ -n "$PR_NUMBER" ]; then
+            LATEST_SHA="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '.head.sha')"
+          else
+            LATEST_SHA="$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq '.sha')"
+          fi
+          export JOBS LATEST_SHA
+          scripts/ci-verdict.sh | tee -a "$GITHUB_STEP_SUMMARY"
