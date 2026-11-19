@@ -269,4 +269,32 @@ class GatesFunctionalTest {
         assertContains(r.output, "org.jetbrains.androidx.navigation3:navigation3-ui:1.2.0 next to androidx.navigation3:navigation3-ui:1.2.0")
         assertContains(r.output, "REDIRECT_SHIMS")
     }
+
+    @Test
+    fun `ambient sources and swallowed cancellation fail checkSourceRules outside stapel-runtime`() {
+        val ambient = "package PKG\n/** A. */\npublic fun a(): Any = kotlinx.coroutines.Dispatchers.Default\n"
+        val fx = FixtureBuild("source-rules")
+            .module("substrate/stapel-runtime", substrate("implementation(libs.kotlinx.coroutines.core)"))
+            .module("substrate/stapel-result", substrate("implementation(libs.kotlinx.coroutines.core)"))
+            .file("substrate/stapel-runtime/src/commonMain/kotlin/stapel/runtime/A.kt", ambient.replace("PKG", "stapel.runtime"))
+            .file("substrate/stapel-result/src/commonMain/kotlin/stapel/result/A.kt", ambient.replace("PKG", "stapel.result"))
+            .file(
+                "substrate/stapel-result/src/commonMain/kotlin/stapel/result/B.kt",
+                "package stapel.result\n/** B. */\npublic suspend fun b(f: suspend () -> Unit): Unit { try { f() } catch (e: Exception) { println(e) } }\n",
+            )
+            .file("substrate/stapel-result/src/commonTest/kotlin/stapel/result/T.kt", ambient.replace("PKG", "stapel.result"))
+            .module("bricks/auth/e2e", "plugins { id(\"stapel.brick-e2e\") }")
+            .file(
+                "bricks/auth/e2e/src/test/kotlin/stapel/auth/e2e/E.kt",
+                "package stapel.auth.e2e\nclass E {\n    @org.junit.jupiter.api.Test\n    fun e() = listOf(1).add(2)\n}\n",
+            )
+        fx.succeeds(":stapel-runtime:checkSourceRules")
+        val r = fx.fails(":stapel-result:checkSourceRules")
+        assertContains(r.output, "src/commonMain/kotlin/stapel/result/A.kt:3: G-R1 Dispatchers.*")
+        assertContains(r.output, "src/commonMain/kotlin/stapel/result/B.kt:3: G-R2 catch (e: Exception) swallows CancellationException")
+        kotlin.test.assertFalse(r.output.contains("commonTest"), "test sources are not scanned for G-R1")
+        val e2e = fx.fails(":stapel-auth-e2e:checkSourceRules")
+        assertContains(e2e.output, "G-T1 test e has an expression body")
+    }
 }
+

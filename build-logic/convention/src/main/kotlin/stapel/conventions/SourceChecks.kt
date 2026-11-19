@@ -255,6 +255,27 @@ internal fun Project.registerSourceChecks(family: StapelFamily, names: StapelNam
         checks += "checkKoinLeak"
     }
 
+    if (family != StapelFamily.BOM) {
+        val moduleName = name
+        tasks.register("checkSourceRules", CheckSourceRules::class.java) {
+            group = STAPEL_GATES
+            description = "G-R1 no ambient time/dispatcher/random/locale outside stapel-runtime; G-R2 no swallowed " +
+                "cancellation (libraries); G-T1 expression-bodied JUnit 5 tests declare Unit (tools, e2e)."
+            projectPath.set(path)
+            projectName.set(moduleName)
+            sources.from(fileTree("src") { include("*Main/**/*.kt", "main/**/*.kt") })
+            testSources.from(fileTree("src") { include("*Test/**/*.kt", "test/**/*.kt") })
+            baselineFile.from(rootProject.file("gradle/source-rules-baseline.txt"))
+            ambientRule.set(moduleName != "stapel-runtime")
+            libraryRules.set(family in LIBRARY_FAMILIES)
+            junit5Rules.set(family == StapelFamily.TOOL || family == StapelFamily.E2E)
+            today.set(java.time.LocalDate.now().toString())
+            moduleDir.set(layout.projectDirectory)
+            stamp.set(gateDir.map { it.file("checkSourceRules") })
+        }
+        checks += "checkSourceRules"
+    }
+
     if (family in PURE_FAMILIES && !name.endsWith("-room")) {
         tasks.register("checkWasmReady", CheckWasmReady::class.java) {
             group = STAPEL_GATES

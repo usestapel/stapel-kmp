@@ -1,5 +1,6 @@
 package stapel.cache.testing
 
+import kotlin.coroutines.cancellation.CancellationException
 import stapel.cache.CacheStore
 import stapel.cache.CacheStoreFactory
 import stapel.cache.PartitionId
@@ -32,10 +33,18 @@ public object CacheStoreContract {
                 case(factory)
             } catch (e: AssertionError) {
                 failures += "$name: ${e.message}"
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 failures += "$name: unexpected ${e::class.simpleName}: ${e.message}"
             } finally {
-                runCatching { factory.listPartitions().forEach { factory.destroy(it) } }
+                try {
+                    factory.listPartitions().forEach { factory.destroy(it) }
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (_: Exception) {
+                    // Cleanup of a failed case; the case's own failure is already recorded.
+                }
             }
         }
         if (failures.isNotEmpty()) {

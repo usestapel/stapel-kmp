@@ -13,3 +13,6 @@
 - Error codes belong to `stapel-result`'s `ErrorTextResolver`; do not duplicate them here.
 - Bundles are hand-written Kotlin until the bundle generator (`src/i18n/*.json` → Kotlin) exists in
   `tools/codegen`.
+- **No platform reads:** without `initialLocale` the strings start in `defaultLocale`; the app feeds the
+  effective locale from `stapel-runtime`'s `LocaleProvider` (gate G-R1: only stapel-runtime reads the
+  platform locale).

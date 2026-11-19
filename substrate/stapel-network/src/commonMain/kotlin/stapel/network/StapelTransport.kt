@@ -31,8 +31,11 @@ public class NetworkDependencies(
     public val logger: StapelLogger = NoopLogger,
     /** Per-call telemetry. */
     public val telemetry: StapelTelemetry = StapelTelemetry.Noop,
-    /** Jitter source for retry backoff. */
-    public val random: Random = Random,
+    /**
+     * Jitter source for retry backoff. Default: seeded from the injected [clock] — a library never
+     * reaches for `Random.Default` (gate G-R1), and a test clock makes the jitter reproducible.
+     */
+    public val random: Random = Random(clock.now().toEpochMilliseconds()),
 )
 
 /**

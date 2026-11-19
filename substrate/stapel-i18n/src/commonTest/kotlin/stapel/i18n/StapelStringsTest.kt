@@ -25,6 +25,12 @@ class StapelStringsTest {
     }
 
     @Test
+    fun withoutAnInitialLocaleTheDefaultLocaleIsUsedNotThePlatform() {
+        assertEquals("ru", StapelStrings { defaultLocale = "ru"; register(floor) }.locale.value)
+        assertEquals("пол", StapelStrings { defaultLocale = "ru"; register(floor) }.t("k"))
+    }
+
+    @Test
     fun regionFallsBackToLanguageThenDefault() {
         val s = StapelStrings {
             initialLocale = "ru_ru"

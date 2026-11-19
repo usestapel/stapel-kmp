@@ -64,7 +64,11 @@ public class StapelStringsBuilder internal constructor() {
     /** The last locale of every lookup chain (`en`). */
     public var defaultLocale: String = "en"
 
-    /** The locale to start in; null = the platform locale. */
+    /**
+     * The locale to start in; null = [defaultLocale]. The app passes its effective locale
+     * (`LocaleProvider.locale` from stapel-runtime) and calls [StapelStrings.setLocale] on change:
+     * this library never reads the platform locale itself (gate G-R1).
+     */
     public var initialLocale: String? = null
 
     /** Remote copy loader, consulted by [StapelStrings.setLocale]. */
@@ -100,8 +104,6 @@ internal fun normalizeTag(tag: String): String {
     return (listOf(parts[0].lowercase()) + parts.drop(1).map { if (it.length == 2) it.uppercase() else it }).joinToString("-")
 }
 
-internal expect fun platformLocaleTag(): String
-
 private class DefaultStapelStrings(config: StapelStringsBuilder) : StapelStrings {
     private val defaultLocale = normalizeTag(config.defaultLocale)
     private val bundles = config.bundles.toList()
@@ -109,7 +111,7 @@ private class DefaultStapelStrings(config: StapelStringsBuilder) : StapelStrings
     private val loader = config.loader
     private val remote = mutableMapOf<String, I18nDictionary>()
     private val merged = mutableMapOf<String, Map<String, String>>()
-    private val state = MutableStateFlow(normalizeTag(config.initialLocale ?: platformLocaleTag()).ifEmpty { defaultLocale })
+    private val state = MutableStateFlow(normalizeTag(config.initialLocale ?: defaultLocale).ifEmpty { defaultLocale })
 
     override val locale: StateFlow<String> = state.asStateFlow()
 
