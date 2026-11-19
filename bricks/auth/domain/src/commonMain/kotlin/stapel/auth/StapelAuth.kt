@@ -12,6 +12,7 @@ import stapel.auth.session.AuthSession
 import stapel.auth.session.DefaultAuthSession
 import stapel.auth.session.StepUpController
 import stapel.cache.StapelCache
+import stapel.runtime.systemClock
 import stapel.session.SessionManager
 import kotlin.time.Clock
 
@@ -31,13 +32,11 @@ public enum class GuestPolicy {
  * @property methods client-side fence over what the server enables (null = everything the client can
  *   complete); a backend misconfiguration cannot surface a method the app was not built for.
  * @property attribution forwarded on calls that can register an account.
- * @property clock time source for challenge expiry and resend timers.
  */
 public class AuthConfig(
     public val guest: GuestPolicy = GuestPolicy.OnDemand,
     public val methods: Set<AuthMethodId>? = null,
     public val attribution: () -> SignupAttribution? = { null },
-    public val clock: Clock = Clock.System,
 )
 
 /**
@@ -53,6 +52,8 @@ public class AuthConfig(
  * @param scope application scope.
  * @param deviceId the installation id sent as `device_id` (guest dedup, per-device OTP cooldown).
  * @param stepUp the verification handler installed in the authenticated transport, when there is one.
+ * @param clock time source for challenge expiry, resend timers and freshness stamps: the app's runtime
+ *   clock (`authModule()` passes the graph's `Clock`); the default is the runtime's system clock.
  */
 public class StapelAuth(
     /** The generated client on the authenticated transport. */
@@ -67,8 +68,10 @@ public class StapelAuth(
     deviceId: suspend () -> String? = { null },
     /** Step-up verification, when installed. */
     public val stepUp: StepUpController? = null,
+    /** Time source for challenge expiry, resend timers and freshness stamps. */
+    public val clock: Clock = systemClock(),
 ) {
-    internal val sessionImpl: DefaultAuthSession = DefaultAuthSession(api, sessions, scope, config.clock, deviceId)
+    internal val sessionImpl: DefaultAuthSession = DefaultAuthSession(api, sessions, scope, clock, deviceId)
     internal val deviceIdSource: suspend () -> String? = deviceId
 
     /** Identity state, sign-out, guest. */

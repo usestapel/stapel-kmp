@@ -287,7 +287,7 @@ public class SessionsPresenter(private val auth: StapelAuth, context: PresenterC
         when (intent) {
             SessionsIntent.Refresh -> launch("refresh") {
                 when (val r = auth.devices.load()) {
-                    is StapelResult.Ok -> reduce { copy(sessions = Resource.Ready(r.value, stapel.result.state.Freshness.network(auth.config.clock.now().toEpochMilliseconds())), error = null) }
+                    is StapelResult.Ok -> reduce { copy(sessions = Resource.Ready(r.value, stapel.result.state.Freshness.network(auth.clock.now().toEpochMilliseconds())), error = null) }
                     is StapelResult.Err -> reduce { copy(error = r.error) }
                 }
             }

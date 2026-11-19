@@ -106,7 +106,7 @@ internal fun capabilities(
 /** The library wired over a scripted transport, a real session manager and a memory cache. */
 internal class Fixture(
     scope: TestScope,
-    config: (Clock) -> AuthConfig = { AuthConfig(clock = it) },
+    config: AuthConfig = AuthConfig(),
     platform: AuthPlatform = AuthPlatform(),
     refresher: TokenRefresher = TokenRefresher { RefreshOutcome.Transient("not scripted") },
 ) {
@@ -116,7 +116,7 @@ internal class Fixture(
     val vault = InMemoryTokenVault()
     val sessions: SessionManager = SessionManager(SessionDependencies(vault, scope.backgroundScope, clock), refresher)
     val cache: StapelCache = StapelCache(StapelCacheConfig(json = WireJson, scope = scope.backgroundScope, clock = clock))
-    val auth = StapelAuth(api, sessions, cache, scope.backgroundScope, config(clock), platform, deviceId = { "device-0123456789abcdef" })
+    val auth = StapelAuth(api, sessions, cache, scope.backgroundScope, config, platform, deviceId = { "device-0123456789abcdef" }, clock = clock)
     val context = PresenterContext(scope.backgroundScope)
 
     init {

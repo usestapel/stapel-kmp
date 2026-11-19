@@ -34,6 +34,7 @@ import stapel.session.SessionManager
 import stapel.session.TokenRefresher
 import stapel.session.platformInstallationIdentity
 import stapel.wire.ApiTransport
+import kotlin.time.Clock
 
 /**
  * The auth library's Koin module. Binds:
@@ -72,6 +73,7 @@ public fun authModule(
             platform = platform,
             deviceId = { identity.deviceId() },
             stepUp = get(),
+            clock = get<Clock>(),
         )
     }
     if (bindCacheToSession) {

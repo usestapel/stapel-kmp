@@ -102,7 +102,7 @@ internal class ChallengeTail(private val auth: StapelAuth) {
         }
     }
 
-    private fun expired(step: ChallengeStep): Boolean = auth.config.clock.now() >= step.challenge.expiresAt
+    private fun expired(step: ChallengeStep): Boolean = auth.clock.now() >= step.challenge.expiresAt
 }
 
 internal fun ChallengeStep.submitting(): ChallengeStep = when (this) {

@@ -150,7 +150,7 @@ public fun AuthSignIn(
     auth: StapelAuth,
     onSignedIn: () -> Unit,
     slots: AuthSlots = AuthSlots(),
-    clock: Clock = auth.config.clock,
+    clock: Clock = auth.clock,
 ) {
     ProvideAuthPresenters(auth) { BoundSignIn(auth, onSignedIn, slots, clock) }
 }
@@ -267,7 +267,7 @@ internal fun SessionDevice.toRow(fallbackTime: kotlin.time.Instant): SessionRowS
  * a suspicious session, sign out every other device (confirmed), refresh.
  */
 @Composable
-public fun AuthSessions(auth: StapelAuth, clock: Clock = auth.config.clock) {
+public fun AuthSessions(auth: StapelAuth, clock: Clock = auth.clock) {
     ProvideAuthPresenters(auth) {
         val presenter = rememberPresenter<SessionsPresenter>()
         val s by presenter.collectState()

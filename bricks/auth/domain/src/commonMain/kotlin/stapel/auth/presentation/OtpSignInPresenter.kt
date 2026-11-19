@@ -179,7 +179,7 @@ public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
             when (answer) {
                 is StapelResult.Ok -> {
                     val params = otp?.otp ?: FALLBACK_OTP
-                    val now = auth.config.clock.now()
+                    val now = auth.clock.now()
                     reduce {
                         OtpSignInState.CodeSent(
                             channel = channel,
@@ -229,7 +229,7 @@ public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
     private fun startTimer(resendAt: Instant) {
         launch(KEY_TIMER) {
             while (true) {
-                val remaining = (resendAt - auth.config.clock.now()).coerceAtLeast(Duration.ZERO)
+                val remaining = (resendAt - auth.clock.now()).coerceAtLeast(Duration.ZERO)
                 reduce { (this as? OtpSignInState.CodeSent)?.copy(resendIn = remaining) ?: this }
                 if (remaining == Duration.ZERO) break
                 delay(remaining.coerceAtMost(1.seconds))
@@ -239,7 +239,7 @@ public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
 
     private fun lockedOr(error: AuthError, channel: OtpChannel, identifier: String, otherwise: () -> OtpSignInState): OtpSignInState =
         if (error.reason in LOCKING) {
-            OtpSignInState.Locked(channel, identifier, error.retryAfter?.let { auth.config.clock.now() + it }, error)
+            OtpSignInState.Locked(channel, identifier, error.retryAfter?.let { auth.clock.now() + it }, error)
         } else {
             otherwise()
         }

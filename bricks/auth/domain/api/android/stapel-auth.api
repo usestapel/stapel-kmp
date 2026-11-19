@@ -1,9 +1,8 @@
 public final class stapel/auth/AuthConfig {
 	public fun <init> ()V
-	public fun <init> (Lstapel/auth/GuestPolicy;Ljava/util/Set;Lkotlin/jvm/functions/Function0;Lkotlin/time/Clock;)V
-	public synthetic fun <init> (Lstapel/auth/GuestPolicy;Ljava/util/Set;Lkotlin/jvm/functions/Function0;Lkotlin/time/Clock;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lstapel/auth/GuestPolicy;Ljava/util/Set;Lkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Lstapel/auth/GuestPolicy;Ljava/util/Set;Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getAttribution ()Lkotlin/jvm/functions/Function0;
-	public final fun getClock ()Lkotlin/time/Clock;
 	public final fun getGuest ()Lstapel/auth/GuestPolicy;
 	public final fun getMethods ()Ljava/util/Set;
 }
@@ -17,11 +16,12 @@ public final class stapel/auth/GuestPolicy : java/lang/Enum {
 }
 
 public final class stapel/auth/StapelAuth {
-	public fun <init> (Lstapel/auth/api/AuthApi;Lstapel/session/SessionManager;Lstapel/cache/StapelCache;Lkotlinx/coroutines/CoroutineScope;Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;Lkotlin/jvm/functions/Function1;Lstapel/auth/session/StepUpController;)V
-	public synthetic fun <init> (Lstapel/auth/api/AuthApi;Lstapel/session/SessionManager;Lstapel/cache/StapelCache;Lkotlinx/coroutines/CoroutineScope;Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;Lkotlin/jvm/functions/Function1;Lstapel/auth/session/StepUpController;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lstapel/auth/api/AuthApi;Lstapel/session/SessionManager;Lstapel/cache/StapelCache;Lkotlinx/coroutines/CoroutineScope;Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;Lkotlin/jvm/functions/Function1;Lstapel/auth/session/StepUpController;Lkotlin/time/Clock;)V
+	public synthetic fun <init> (Lstapel/auth/api/AuthApi;Lstapel/session/SessionManager;Lstapel/cache/StapelCache;Lkotlinx/coroutines/CoroutineScope;Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;Lkotlin/jvm/functions/Function1;Lstapel/auth/session/StepUpController;Lkotlin/time/Clock;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getAccount ()Lstapel/auth/repo/AccountRepository;
 	public final fun getApi ()Lstapel/auth/api/AuthApi;
 	public final fun getCapabilities ()Lstapel/auth/repo/CapabilitiesRepository;
+	public final fun getClock ()Lkotlin/time/Clock;
 	public final fun getConfig ()Lstapel/auth/AuthConfig;
 	public final fun getDevices ()Lstapel/auth/repo/SessionsRepository;
 	public final fun getPlatform ()Lstapel/auth/platform/AuthPlatform;

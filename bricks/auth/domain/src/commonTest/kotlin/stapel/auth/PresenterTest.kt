@@ -83,7 +83,7 @@ class PresenterTest {
 
     @Test
     fun theProjectFenceNarrowsTheServerList() = runTest {
-        val f = Fixture(this, config = { AuthConfig(methods = setOf(AuthMethodId.Phone), clock = it) }).start()
+        val f = Fixture(this, config = AuthConfig(methods = setOf(AuthMethodId.Phone))).start()
         val p = MethodChooserPresenter(f.auth, f.context)
         runCurrent()
         assertEquals(listOf(AuthMethodId.Phone), assertIs<MethodChooserState.Ready>(p.state.value).zones.all.map { it.id })
@@ -332,7 +332,7 @@ class PresenterTest {
 
     @Test
     fun guestPolicyOffRefusesWithoutACall() = runTest {
-        val f = Fixture(this, config = { AuthConfig(guest = GuestPolicy.Off, clock = it) }).start()
+        val f = Fixture(this, config = AuthConfig(guest = GuestPolicy.Off)).start()
         val p = GuestPresenter(f.auth, f.context)
         p.dispatch(GuestIntent.ContinueAsGuest)
         runCurrent()

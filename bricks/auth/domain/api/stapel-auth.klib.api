@@ -10947,12 +10947,10 @@ final class stapel.auth.session/StepUpController : stapel.network/VerificationHa
 }
 
 final class stapel.auth/AuthConfig { // stapel.auth/AuthConfig|null[0]
-    constructor <init>(stapel.auth/GuestPolicy = ..., kotlin.collections/Set<stapel.auth.model/AuthMethodId>? = ..., kotlin/Function0<stapel.auth.api.model/SignupAttribution?> = ..., kotlin.time/Clock = ...) // stapel.auth/AuthConfig.<init>|<init>(stapel.auth.GuestPolicy;kotlin.collections.Set<stapel.auth.model.AuthMethodId>?;kotlin.Function0<stapel.auth.api.model.SignupAttribution?>;kotlin.time.Clock){}[0]
+    constructor <init>(stapel.auth/GuestPolicy = ..., kotlin.collections/Set<stapel.auth.model/AuthMethodId>? = ..., kotlin/Function0<stapel.auth.api.model/SignupAttribution?> = ...) // stapel.auth/AuthConfig.<init>|<init>(stapel.auth.GuestPolicy;kotlin.collections.Set<stapel.auth.model.AuthMethodId>?;kotlin.Function0<stapel.auth.api.model.SignupAttribution?>){}[0]
 
     final val attribution // stapel.auth/AuthConfig.attribution|{}attribution[0]
         final fun <get-attribution>(): kotlin/Function0<stapel.auth.api.model/SignupAttribution?> // stapel.auth/AuthConfig.attribution.<get-attribution>|<get-attribution>(){}[0]
-    final val clock // stapel.auth/AuthConfig.clock|{}clock[0]
-        final fun <get-clock>(): kotlin.time/Clock // stapel.auth/AuthConfig.clock.<get-clock>|<get-clock>(){}[0]
     final val guest // stapel.auth/AuthConfig.guest|{}guest[0]
         final fun <get-guest>(): stapel.auth/GuestPolicy // stapel.auth/AuthConfig.guest.<get-guest>|<get-guest>(){}[0]
     final val methods // stapel.auth/AuthConfig.methods|{}methods[0]
@@ -10960,7 +10958,7 @@ final class stapel.auth/AuthConfig { // stapel.auth/AuthConfig|null[0]
 }
 
 final class stapel.auth/StapelAuth { // stapel.auth/StapelAuth|null[0]
-    constructor <init>(stapel.auth.api/AuthApi, stapel.session/SessionManager, stapel.cache/StapelCache, kotlinx.coroutines/CoroutineScope, stapel.auth/AuthConfig = ..., stapel.auth.platform/AuthPlatform = ..., kotlin.coroutines/SuspendFunction0<kotlin/String?> = ..., stapel.auth.session/StepUpController? = ...) // stapel.auth/StapelAuth.<init>|<init>(stapel.auth.api.AuthApi;stapel.session.SessionManager;stapel.cache.StapelCache;kotlinx.coroutines.CoroutineScope;stapel.auth.AuthConfig;stapel.auth.platform.AuthPlatform;kotlin.coroutines.SuspendFunction0<kotlin.String?>;stapel.auth.session.StepUpController?){}[0]
+    constructor <init>(stapel.auth.api/AuthApi, stapel.session/SessionManager, stapel.cache/StapelCache, kotlinx.coroutines/CoroutineScope, stapel.auth/AuthConfig = ..., stapel.auth.platform/AuthPlatform = ..., kotlin.coroutines/SuspendFunction0<kotlin/String?> = ..., stapel.auth.session/StepUpController? = ..., kotlin.time/Clock = ...) // stapel.auth/StapelAuth.<init>|<init>(stapel.auth.api.AuthApi;stapel.session.SessionManager;stapel.cache.StapelCache;kotlinx.coroutines.CoroutineScope;stapel.auth.AuthConfig;stapel.auth.platform.AuthPlatform;kotlin.coroutines.SuspendFunction0<kotlin.String?>;stapel.auth.session.StepUpController?;kotlin.time.Clock){}[0]
 
     final val account // stapel.auth/StapelAuth.account|{}account[0]
         final fun <get-account>(): stapel.auth.repo/AccountRepository // stapel.auth/StapelAuth.account.<get-account>|<get-account>(){}[0]
@@ -10968,6 +10966,8 @@ final class stapel.auth/StapelAuth { // stapel.auth/StapelAuth|null[0]
         final fun <get-api>(): stapel.auth.api/AuthApi // stapel.auth/StapelAuth.api.<get-api>|<get-api>(){}[0]
     final val capabilities // stapel.auth/StapelAuth.capabilities|{}capabilities[0]
         final fun <get-capabilities>(): stapel.auth.repo/CapabilitiesRepository // stapel.auth/StapelAuth.capabilities.<get-capabilities>|<get-capabilities>(){}[0]
+    final val clock // stapel.auth/StapelAuth.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // stapel.auth/StapelAuth.clock.<get-clock>|<get-clock>(){}[0]
     final val config // stapel.auth/StapelAuth.config|{}config[0]
         final fun <get-config>(): stapel.auth/AuthConfig // stapel.auth/StapelAuth.config.<get-config>|<get-config>(){}[0]
     final val devices // stapel.auth/StapelAuth.devices|{}devices[0]

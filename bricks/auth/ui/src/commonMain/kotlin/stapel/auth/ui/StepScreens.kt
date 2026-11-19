@@ -57,7 +57,8 @@ public fun OtpCodeScreen(state: OtpCodeState, onEvent: (SignInEvent) -> Unit, mo
             code.clearText()
             submitted = false
         }
-        runCatching { focus.requestFocus() }
+        // The field is attached in the composition this effect follows; an unattached requester is a no-op.
+        focus.requestFocus()
     }
     Column(modifier.fillMaxWidth().testTag(AuthTestTags.CODE_STEP), verticalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s3)) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s2), verticalAlignment = Alignment.CenterVertically) {
