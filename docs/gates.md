@@ -30,6 +30,8 @@ covers all modules.
 | `checkPublishedDescription` (published) | Central | `stapel { description }` missing | — |
 | `checkKoinLeak` | R6 | `org.koin` appears in main sources outside `<pkg>.di` | — |
 | `checkWasmReady` (pure families) | D2 | a `commonMain` external dependency is not in `gradle/wasm-ready.txt` | `gradle/wasm-ready.txt` |
+| `checkSourceRules` | G-R1/G-R2/G-T1 | library main sources outside `stapel-runtime` use `Dispatchers.*`, `Clock.System`, `System.currentTimeMillis`, `Random.Default` (or the `Random` companion as a value), `Uuid.random()`, platform locale or time zone (G-R1); any library main source uses `runCatching`, a `catch (Throwable/Exception)` not preceded by a rethrowing `CancellationException` clause (and not rethrowing itself), or a `CancellationException` clause that does not rethrow (G-R2); a JUnit 5 test (tools, e2e) with an expression body lacks `: Unit` (G-T1). Comments and strings are ignored. | `gradle/source-rules-baseline.txt` (dated exceptions; a stale line fails) |
+| `checkLibraryLines` (KMP modules) | one library line | a JetBrains module and its androidx twin resolve on one classpath: on klib/metadata classpaths always (duplicate `unique_name` breaks intermediate source sets), on jar classpaths unless the JetBrains artifact is a redirect | `REDIRECT_SHIMS` in build-logic, catalog `androidx-*` versions |
 | `checkDependencyDirection` sensor 1 | D6 | a declared main project edge breaks the layer table, the same-brick rule or the substrate rank order | `gradle/substrate-ranks.properties` |
 | `checkDependencyDirection` sensor 2 | D6/D9/R9/R1 | a resolved main compile/runtime classpath (any target) holds Compose / koin-compose / navigation in a pure module, Room/SQLite outside `*-room`, Material outside the skin, Coil on a brick-UI compile classpath, or a pre-release coordinate not on the allow-list in a published module | `gradle/material-allowed.txt`, `gradle/prerelease-allowlist.txt` |
 | `checkCatalog` (root) | R1 | a catalog version is a range/`+`/pre-release not on the allow-list; a depcheck exception expired | `gradle/libs.versions.toml`, allow-list, `gradle/depcheck-exceptions.toml` |
@@ -58,11 +60,38 @@ Test configurations are not edges. There is no per-module escape hatch; the
 only exception file is `gradle/depcheck-exceptions.toml` (empty, each entry
 with an expiry date).
 
+### One library line (lifecycle, savedstate, navigationevent)
+
+Compose Multiplatform 1.12.2 asks for both the androidx libraries
+(`androidx.lifecycle` 2.11.0, `androidx.savedstate` 1.4.0, …) and older
+JetBrains "redirect" artifacts (`org.jetbrains.androidx.lifecycle` 2.9.6,
+`org.jetbrains.compose.annotation-internal` 1.10.0, …). The redirects carry no
+code, but their metadata klibs share names with the androidx ones, which fails
+any `iosMain`/`skikoMain` compilation under `-Werror`. Every configuration
+substitutes them by their androidx targets (`REDIRECT_SHIMS`, versions from
+the catalog, taken from the published `.module` files), and
+`checkLibraryLines` fails when a twin pair shows up anyway. When Compose
+Multiplatform moves, re-read the `.module` files and move the catalog's
+`androidx-*` versions with it.
+
+### Tests that did not run
+
+- `verifyTestsRan` (in every test task) fails a module whose `commonTest` has
+  tests but whose target executed none.
+- JUnit 4 (Kotlin multiplatform tests on jvm/Android) fails a non-void test
+  method loudly; JUnit 5 (tools, e2e) skips it silently, which G-T1 prevents
+  statically. Counting declared `@Test` functions against executed ones per
+  target is not done: source sets map to targets differently (`skikoTest`
+  never runs on Android), so the count would need a per-target source map; the
+  static rule covers the one silent mode we know.
+
 ### What the gates cannot see
 
 - Reflection / service-loader / string-keyed coupling between modules (covered by
   the end-to-end run of a brick, not here).
 - Whether a KDoc is *true* — Dokka only proves it exists.
+- Ambient state reached indirectly (a third-party library reading the clock),
+  or through an alias the source scan does not know (`import … as X`).
 - Whether `wasm-ready.txt` is honest: the line is a reviewed claim with an
   evidence URL; there is no `wasmJs` compile in v0.
 - Android device behaviour: there is no emulator image; device tests are not

@@ -81,13 +81,41 @@ What the family plugin gives you, so you do not write it:
   (`gradle/substrate-ranks.properties` — a new substrate module needs a rank
   there, ask the build owner).
 - **Koin** only in the package `<module package>.di`, holding the one public
-  `<module>Module()` factory (R6, `checkKoinLeak`).
+  `<module>Module()` factory (R6, `checkKoinLeak`). The factory is a
+  **function, never a `val`**: a Koin `Module` value keeps its `single`
+  instances, so two applications (or two tests) loading one value share them.
+  Constructors stay plain; the factory only calls them with `get()`. Prove the
+  factory with a graph test that composes it through `stapelKoin` with the
+  modules it needs and resolves every binding (see
+  `substrate/stapel-cache-session/src/commonTest/.../GraphTest.kt`).
+- **No ambient platform state** in library main sources (`checkSourceRules`,
+  G-R1): take `StapelDispatchers`, `kotlin.time.Clock`, `IdGenerator`, a
+  seeded `Random`, `LocaleProvider` and `TimeZoneProvider` from
+  `stapel-runtime` — never `Dispatchers.*`, `Clock.System`, `Random.Default`,
+  `Locale.getDefault()`, `NSLocale.currentLocale`. Not even as a default
+  parameter value: derive one from an injected seam instead (e.g.
+  `Random(clock.now().toEpochMilliseconds())`).
+- **Never swallow cancellation** (G-R2): no `runCatching`; put
+  `catch (e: CancellationException) { throw e }` before any
+  `catch (e: Exception)` / `Throwable`.
 - **Pure libraries' `commonMain`** may only use dependencies listed in
   `gradle/wasm-ready.txt` (`checkWasmReady`).
 - **UI libraries are `commonMain`-only** unless
-  `stapel { platformSubject("why") }` (`checkSourceSets`). Compose UI tests
-  (`runComposeUiTest`) go to `src/skikoTest` (runs on jvm desktop + iOS
-  simulator; Android host tests do not run Compose UI).
+  `stapel { platformSubject("why") }` (`checkSourceSets`). With a subject,
+  put iOS code in `src/iosMain` (one set for both iOS targets): intermediate
+  source sets compile since the build substitutes the JetBrains lifecycle /
+  savedstate / navigationevent redirects by their androidx targets
+  (`checkLibraryLines`). If your code calls an API that only arrives through
+  such a redirect (for example `NavigationBackHandler` from
+  `androidx.navigationevent:navigationevent-compose`), declare the androidx
+  coordinate from the catalog: the common metadata compilation does not see a
+  module reached only through a substitution.
+- **Compose UI tests** (`runComposeUiTest` from
+  `androidx.compose.ui.test.v2`) go to `src/skikoTest`: they run on jvm
+  desktop (headless locally, under xvfb on Linux CI) and on the iOS simulator;
+  Android host tests do not run Compose UI. A skin is held to
+  `showcase/skin-contract` (`assertSkinContract`,
+  `assertTopBarSurvivesLargeText`); call them from the skin's own tests.
 - **Material** only in `stapel-ui-material3` (R9); brick UI never sees Coil.
 - **Room** only in `*-room` artifacts with `id("stapel.room")`; schemas are
   committed under `schemas/`. Proven on every target (Room 3.0.3 + KSP 2.3.14 +
@@ -104,6 +132,11 @@ What the family plugin gives you, so you do not write it:
   - Android host tests cannot load the bundled SQLite JNI library, so database
     tests go to `src/sqliteTest` (runs on jvm + iOS simulator); `commonTest`
     still runs on all three.
+- **Room** rules in short: Room types `internal`; one database per partition
+  owned by the storage library; `RoomCacheOptions.ioContext` is the app's
+  `StapelDispatchers.io` (no default); bump `STORE_FORMAT` whenever the stored
+  payload or key encoding changes (old files are recreated empty, the cache
+  is disposable).
 - **Generated code** (brick domain): `src/commonMain/generated/kotlin` is already
   a source root. Generated packages that are under the KDoc ratchet (R11) are
   declared with `stapel { ratchetedPackages.add("stapel\\.auth\\.api(\\..*)?") }`;
@@ -126,7 +159,45 @@ gen [--check] --module stapel-<brick> --brick <brick> --repo-root <abs path>
 (e.g. `stapel-tokens`) may register its own tasks with these two names in its
 own build file; the root lifecycle picks them up by name.
 
-## 5. Before you hand over
+## 5. A brick end to end
+
+1. **Pin the contract.** Copy the brick's committed contract files from the
+   backend repository at a released tag into `contracts/<brick>/`
+   (`schema.json`, `errors.json`, `flows.json`, `capabilities.json`) and write
+   `pin.json` with the repository, tag and the commit sha taken from
+   `git rev-parse '<tag>^{commit}'` output — never typed by hand. A contract
+   gap is fixed in the backend schema and re-pinned; the generator does not
+   paper over it.
+2. **Cache plan.** Write `contracts/<brick>/cache.json`: per query operation
+   its read policy, persistence, scope (user/app), sensitivity and offline
+   use; per mutation the key patterns it invalidates and whether it may be
+   queued offline. The generator turns it into `<Brick>Keys`, hints and
+   `<Brick>Invalidation`.
+3. **Generate.** `./gradlew :stapel-<brick>:stapelGenerate` writes
+   `bricks/<brick>/domain/src/commonMain/generated/kotlin`; commit the tree.
+   `stapelGenerateCheck` (part of `stapelCheckFast`) fails on any drift.
+   Undocumented schema elements are counted against the ratchet in
+   `contracts/<brick>/ratchet.json`; the count only goes down.
+4. **Domain** (`bricks/<brick>/domain`, hand-written next to the generated
+   tree): repositories over `stapel-cache` (`observe` with the generated keys
+   and hints, invalidation after mutations), presenters in `.presentation`
+   (state + effects, no navigator), the Koin factory `<brick>Module()`.
+   Tests use `stapel-testing` (`FakeApiTransport` by operation id,
+   `FakeTransport` under the real pipeline) and `stapel-cache-testing`.
+5. **UI** (`bricks/<brick>/ui`): stateless screens taking presenter state and
+   emitting intents, drawn only through `stapel-ui` wrappers (`StapelButton`,
+   `StapelTabs`, `StapelTopBar`, …) so any skin applies; strings in an
+   `I18nBundle` per locale; Compose UI tests in `src/skikoTest` under both
+   skins, at 200 % text in every shipped locale.
+6. **Demo** (`bricks/<brick>/demo`): stories for the showcase and a desktop
+   entry point; never published.
+7. **End to end** (`bricks/<brick>/e2e`): JUnit 5 tests against a real
+   backend started locally (`-Pstapel.e2e.baseUrl=…`); skipped without it.
+   Declare expression-bodied tests `(): Unit` (`fun x(): Unit = runBlocking
+   { … }`): JUnit 5 silently skips a test method that returns a value
+   (G-T1 catches it).
+
+## 6. Before you hand over
 
 ```sh
 source scripts/env.sh
