@@ -6,6 +6,198 @@
 // - Show declarations: true
 
 // Library unique name: <io.github.usestapel:stapel-auth>
+final enum class stapel.auth.error/AuthErrorReason : kotlin/Enum<stapel.auth.error/AuthErrorReason> { // stapel.auth.error/AuthErrorReason|null[0]
+    enum entry AccountDisabled // stapel.auth.error/AuthErrorReason.AccountDisabled|null[0]
+    enum entry AccountLocked // stapel.auth.error/AuthErrorReason.AccountLocked|null[0]
+    enum entry AlreadyTaken // stapel.auth.error/AuthErrorReason.AlreadyTaken|null[0]
+    enum entry Blocked // stapel.auth.error/AuthErrorReason.Blocked|null[0]
+    enum entry Cancelled // stapel.auth.error/AuthErrorReason.Cancelled|null[0]
+    enum entry CaptchaInvalid // stapel.auth.error/AuthErrorReason.CaptchaInvalid|null[0]
+    enum entry CaptchaRequired // stapel.auth.error/AuthErrorReason.CaptchaRequired|null[0]
+    enum entry ChallengeExpired // stapel.auth.error/AuthErrorReason.ChallengeExpired|null[0]
+    enum entry CodeExpired // stapel.auth.error/AuthErrorReason.CodeExpired|null[0]
+    enum entry InvalidCode // stapel.auth.error/AuthErrorReason.InvalidCode|null[0]
+    enum entry InvalidCredentials // stapel.auth.error/AuthErrorReason.InvalidCredentials|null[0]
+    enum entry InvalidInput // stapel.auth.error/AuthErrorReason.InvalidInput|null[0]
+    enum entry MockOtpAdmin // stapel.auth.error/AuthErrorReason.MockOtpAdmin|null[0]
+    enum entry Network // stapel.auth.error/AuthErrorReason.Network|null[0]
+    enum entry Other // stapel.auth.error/AuthErrorReason.Other|null[0]
+    enum entry PasswordChangeRequired // stapel.auth.error/AuthErrorReason.PasswordChangeRequired|null[0]
+    enum entry RateLimited // stapel.auth.error/AuthErrorReason.RateLimited|null[0]
+    enum entry RegistrationClosed // stapel.auth.error/AuthErrorReason.RegistrationClosed|null[0]
+    enum entry SsoRequired // stapel.auth.error/AuthErrorReason.SsoRequired|null[0]
+    enum entry Unauthenticated // stapel.auth.error/AuthErrorReason.Unauthenticated|null[0]
+    enum entry Unavailable // stapel.auth.error/AuthErrorReason.Unavailable|null[0]
+    enum entry Unsupported // stapel.auth.error/AuthErrorReason.Unsupported|null[0]
+
+    final val entries // stapel.auth.error/AuthErrorReason.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.error/AuthErrorReason> // stapel.auth.error/AuthErrorReason.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.error/AuthErrorReason // stapel.auth.error/AuthErrorReason.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.error/AuthErrorReason> // stapel.auth.error/AuthErrorReason.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/AuthMethodId : kotlin/Enum<stapel.auth.model/AuthMethodId> { // stapel.auth.model/AuthMethodId|null[0]
+    enum entry Email // stapel.auth.model/AuthMethodId.Email|null[0]
+    enum entry MagicLink // stapel.auth.model/AuthMethodId.MagicLink|null[0]
+    enum entry OAuth // stapel.auth.model/AuthMethodId.OAuth|null[0]
+    enum entry Passkey // stapel.auth.model/AuthMethodId.Passkey|null[0]
+    enum entry Password // stapel.auth.model/AuthMethodId.Password|null[0]
+    enum entry Phone // stapel.auth.model/AuthMethodId.Phone|null[0]
+    enum entry Qr // stapel.auth.model/AuthMethodId.Qr|null[0]
+    enum entry Sso // stapel.auth.model/AuthMethodId.Sso|null[0]
+    enum entry Unknown // stapel.auth.model/AuthMethodId.Unknown|null[0]
+
+    final val entries // stapel.auth.model/AuthMethodId.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/AuthMethodId> // stapel.auth.model/AuthMethodId.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/AuthMethodId // stapel.auth.model/AuthMethodId.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/AuthMethodId> // stapel.auth.model/AuthMethodId.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/AuthType : kotlin/Enum<stapel.auth.model/AuthType> { // stapel.auth.model/AuthType|null[0]
+    enum entry Anonymous // stapel.auth.model/AuthType.Anonymous|null[0]
+    enum entry Email // stapel.auth.model/AuthType.Email|null[0]
+    enum entry Login // stapel.auth.model/AuthType.Login|null[0]
+    enum entry OAuth // stapel.auth.model/AuthType.OAuth|null[0]
+    enum entry Phone // stapel.auth.model/AuthType.Phone|null[0]
+    enum entry Sso // stapel.auth.model/AuthType.Sso|null[0]
+    enum entry Unknown // stapel.auth.model/AuthType.Unknown|null[0]
+
+    final val entries // stapel.auth.model/AuthType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/AuthType> // stapel.auth.model/AuthType.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/AuthType // stapel.auth.model/AuthType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/AuthType> // stapel.auth.model/AuthType.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/DeviceType : kotlin/Enum<stapel.auth.model/DeviceType> { // stapel.auth.model/DeviceType|null[0]
+    enum entry Api // stapel.auth.model/DeviceType.Api|null[0]
+    enum entry Desktop // stapel.auth.model/DeviceType.Desktop|null[0]
+    enum entry Phone // stapel.auth.model/DeviceType.Phone|null[0]
+    enum entry Tablet // stapel.auth.model/DeviceType.Tablet|null[0]
+    enum entry Unknown // stapel.auth.model/DeviceType.Unknown|null[0]
+
+    final val entries // stapel.auth.model/DeviceType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/DeviceType> // stapel.auth.model/DeviceType.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/DeviceType // stapel.auth.model/DeviceType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/DeviceType> // stapel.auth.model/DeviceType.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/FirstLoginStep : kotlin/Enum<stapel.auth.model/FirstLoginStep> { // stapel.auth.model/FirstLoginStep|null[0]
+    enum entry MfaEnroll // stapel.auth.model/FirstLoginStep.MfaEnroll|null[0]
+    enum entry PasswordChange // stapel.auth.model/FirstLoginStep.PasswordChange|null[0]
+    enum entry Unknown // stapel.auth.model/FirstLoginStep.Unknown|null[0]
+
+    final val entries // stapel.auth.model/FirstLoginStep.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/FirstLoginStep> // stapel.auth.model/FirstLoginStep.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/FirstLoginStep // stapel.auth.model/FirstLoginStep.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/FirstLoginStep> // stapel.auth.model/FirstLoginStep.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/MethodInteraction : kotlin/Enum<stapel.auth.model/MethodInteraction> { // stapel.auth.model/MethodInteraction|null[0]
+    enum entry Inline // stapel.auth.model/MethodInteraction.Inline|null[0]
+    enum entry Modal // stapel.auth.model/MethodInteraction.Modal|null[0]
+    enum entry Redirect // stapel.auth.model/MethodInteraction.Redirect|null[0]
+    enum entry Unknown // stapel.auth.model/MethodInteraction.Unknown|null[0]
+
+    final val entries // stapel.auth.model/MethodInteraction.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/MethodInteraction> // stapel.auth.model/MethodInteraction.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/MethodInteraction // stapel.auth.model/MethodInteraction.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/MethodInteraction> // stapel.auth.model/MethodInteraction.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/MethodPlacement : kotlin/Enum<stapel.auth.model/MethodPlacement> { // stapel.auth.model/MethodPlacement|null[0]
+    enum entry Bottom // stapel.auth.model/MethodPlacement.Bottom|null[0]
+    enum entry Main // stapel.auth.model/MethodPlacement.Main|null[0]
+    enum entry Overflow // stapel.auth.model/MethodPlacement.Overflow|null[0]
+    enum entry Unknown // stapel.auth.model/MethodPlacement.Unknown|null[0]
+
+    final val entries // stapel.auth.model/MethodPlacement.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/MethodPlacement> // stapel.auth.model/MethodPlacement.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/MethodPlacement // stapel.auth.model/MethodPlacement.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/MethodPlacement> // stapel.auth.model/MethodPlacement.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/OtpChannel : kotlin/Enum<stapel.auth.model/OtpChannel> { // stapel.auth.model/OtpChannel|null[0]
+    enum entry Email // stapel.auth.model/OtpChannel.Email|null[0]
+    enum entry Phone // stapel.auth.model/OtpChannel.Phone|null[0]
+
+    final val entries // stapel.auth.model/OtpChannel.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/OtpChannel> // stapel.auth.model/OtpChannel.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/OtpChannel // stapel.auth.model/OtpChannel.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/OtpChannel> // stapel.auth.model/OtpChannel.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/PostureStage : kotlin/Enum<stapel.auth.model/PostureStage> { // stapel.auth.model/PostureStage|null[0]
+    enum entry Live // stapel.auth.model/PostureStage.Live|null[0]
+    enum entry Prototype // stapel.auth.model/PostureStage.Prototype|null[0]
+    enum entry Unknown // stapel.auth.model/PostureStage.Unknown|null[0]
+
+    final val entries // stapel.auth.model/PostureStage.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/PostureStage> // stapel.auth.model/PostureStage.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/PostureStage // stapel.auth.model/PostureStage.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/PostureStage> // stapel.auth.model/PostureStage.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.model/SignInKind : kotlin/Enum<stapel.auth.model/SignInKind> { // stapel.auth.model/SignInKind|null[0]
+    enum entry LoggedIn // stapel.auth.model/SignInKind.LoggedIn|null[0]
+    enum entry Merged // stapel.auth.model/SignInKind.Merged|null[0]
+    enum entry Modified // stapel.auth.model/SignInKind.Modified|null[0]
+    enum entry Other // stapel.auth.model/SignInKind.Other|null[0]
+    enum entry Registered // stapel.auth.model/SignInKind.Registered|null[0]
+    enum entry Rejected // stapel.auth.model/SignInKind.Rejected|null[0]
+
+    final val entries // stapel.auth.model/SignInKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.model/SignInKind> // stapel.auth.model/SignInKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.model/SignInKind // stapel.auth.model/SignInKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.model/SignInKind> // stapel.auth.model/SignInKind.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.session/LogoutResult : kotlin/Enum<stapel.auth.session/LogoutResult> { // stapel.auth.session/LogoutResult|null[0]
+    enum entry LocalOnly // stapel.auth.session/LogoutResult.LocalOnly|null[0]
+    enum entry RevokedOnServer // stapel.auth.session/LogoutResult.RevokedOnServer|null[0]
+
+    final val entries // stapel.auth.session/LogoutResult.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.session/LogoutResult> // stapel.auth.session/LogoutResult.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.session/LogoutResult // stapel.auth.session/LogoutResult.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.session/LogoutResult> // stapel.auth.session/LogoutResult.values|values#static(){}[0]
+}
+
+final enum class stapel.auth.session/SignOutReason : kotlin/Enum<stapel.auth.session/SignOutReason> { // stapel.auth.session/SignOutReason|null[0]
+    enum entry AccountDisabled // stapel.auth.session/SignOutReason.AccountDisabled|null[0]
+    enum entry Expired // stapel.auth.session/SignOutReason.Expired|null[0]
+    enum entry Other // stapel.auth.session/SignOutReason.Other|null[0]
+    enum entry Revoked // stapel.auth.session/SignOutReason.Revoked|null[0]
+    enum entry StorageLost // stapel.auth.session/SignOutReason.StorageLost|null[0]
+    enum entry UserRequested // stapel.auth.session/SignOutReason.UserRequested|null[0]
+
+    final val entries // stapel.auth.session/SignOutReason.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth.session/SignOutReason> // stapel.auth.session/SignOutReason.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth.session/SignOutReason // stapel.auth.session/SignOutReason.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth.session/SignOutReason> // stapel.auth.session/SignOutReason.values|values#static(){}[0]
+}
+
+final enum class stapel.auth/GuestPolicy : kotlin/Enum<stapel.auth/GuestPolicy> { // stapel.auth/GuestPolicy|null[0]
+    enum entry Off // stapel.auth/GuestPolicy.Off|null[0]
+    enum entry OnDemand // stapel.auth/GuestPolicy.OnDemand|null[0]
+
+    final val entries // stapel.auth/GuestPolicy.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.auth/GuestPolicy> // stapel.auth/GuestPolicy.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.auth/GuestPolicy // stapel.auth/GuestPolicy.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.auth/GuestPolicy> // stapel.auth/GuestPolicy.values|values#static(){}[0]
+}
+
 abstract interface stapel.auth.api/AuthApi { // stapel.auth.api/AuthApi|null[0]
     abstract suspend fun <#A1: kotlin/Any?> userDataExportDownload(stapel.auth.api.model/GDPRDownloadTokenRequest, kotlin.coroutines/SuspendFunction1<stapel.wire/BinaryBody, #A1>): stapel.result/StapelResult<#A1, stapel.auth.api.error/UserDataExportDownloadError> // stapel.auth.api/AuthApi.userDataExportDownload|userDataExportDownload(stapel.auth.api.model.GDPRDownloadTokenRequest;kotlin.coroutines.SuspendFunction1<stapel.wire.BinaryBody,0:0>){0§<kotlin.Any?>}[0]
     abstract suspend fun adminUsers(stapel.auth.api.model/AdminUserCreateRequest? = ...): stapel.result/StapelResult<stapel.auth.api.model/AdminUserCreateResponse, stapel.auth.api.error/AdminUsersError> // stapel.auth.api/AuthApi.adminUsers|adminUsers(stapel.auth.api.model.AdminUserCreateRequest?){}[0]
@@ -119,6 +311,38 @@ abstract interface stapel.auth.api/AuthApi { // stapel.auth.api/AuthApi|null[0]
     abstract suspend fun verificationComplete(kotlin/String, stapel.auth.api.model/VerificationComplete): stapel.result/StapelResult<stapel.auth.api.model/VerificationCompleteResponse, stapel.auth.api.error/VerificationCompleteError> // stapel.auth.api/AuthApi.verificationComplete|verificationComplete(kotlin.String;stapel.auth.api.model.VerificationComplete){}[0]
     abstract suspend fun verificationInitiate(kotlin/String, stapel.auth.api.model/VerificationInitiate): stapel.result/StapelResult<stapel.auth.api.model/VerificationInitiateResponse, stapel.auth.api.error/VerificationInitiateError> // stapel.auth.api/AuthApi.verificationInitiate|verificationInitiate(kotlin.String;stapel.auth.api.model.VerificationInitiate){}[0]
     abstract suspend fun verify(stapel.auth.api.model/TokenVerify): stapel.result/StapelResult<stapel.auth.api.model/TokenVerifyResponse, stapel.auth.api.error/VerifyError> // stapel.auth.api/AuthApi.verify|verify(stapel.auth.api.model.TokenVerify){}[0]
+}
+
+abstract interface stapel.auth.platform/ExternalUserAgent { // stapel.auth.platform/ExternalUserAgent|null[0]
+    abstract suspend fun authenticate(kotlin/String, kotlin/String): kotlin/String? // stapel.auth.platform/ExternalUserAgent.authenticate|authenticate(kotlin.String;kotlin.String){}[0]
+}
+
+abstract interface stapel.auth.platform/NativeIdentityProvider { // stapel.auth.platform/NativeIdentityProvider|null[0]
+    abstract val providerId // stapel.auth.platform/NativeIdentityProvider.providerId|{}providerId[0]
+        abstract fun <get-providerId>(): kotlin/String // stapel.auth.platform/NativeIdentityProvider.providerId.<get-providerId>|<get-providerId>(){}[0]
+
+    abstract suspend fun acquireToken(): kotlin/String? // stapel.auth.platform/NativeIdentityProvider.acquireToken|acquireToken(){}[0]
+}
+
+abstract interface stapel.auth.platform/PasskeyAuthenticator { // stapel.auth.platform/PasskeyAuthenticator|null[0]
+    abstract val isAvailable // stapel.auth.platform/PasskeyAuthenticator.isAvailable|{}isAvailable[0]
+        abstract fun <get-isAvailable>(): kotlin/Boolean // stapel.auth.platform/PasskeyAuthenticator.isAvailable.<get-isAvailable>|<get-isAvailable>(){}[0]
+
+    abstract suspend fun create(kotlin/String): kotlin/String? // stapel.auth.platform/PasskeyAuthenticator.create|create(kotlin.String){}[0]
+    abstract suspend fun get(kotlin/String): kotlin/String? // stapel.auth.platform/PasskeyAuthenticator.get|get(kotlin.String){}[0]
+}
+
+abstract interface stapel.auth.session/AuthSession { // stapel.auth.session/AuthSession|null[0]
+    abstract val changes // stapel.auth.session/AuthSession.changes|{}changes[0]
+        abstract fun <get-changes>(): kotlinx.coroutines.flow/SharedFlow<stapel.auth.session/SessionChange> // stapel.auth.session/AuthSession.changes.<get-changes>|<get-changes>(){}[0]
+    abstract val state // stapel.auth.session/AuthSession.state|{}state[0]
+        abstract fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.auth.session/AuthState> // stapel.auth.session/AuthSession.state.<get-state>|<get-state>(){}[0]
+
+    abstract suspend fun ensureGuest(): stapel.result/StapelResult<stapel.auth.model/AuthUser, stapel.auth.error/AuthError> // stapel.auth.session/AuthSession.ensureGuest|ensureGuest(){}[0]
+    abstract suspend fun logout(): stapel.auth.session/LogoutResult // stapel.auth.session/AuthSession.logout|logout(){}[0]
+    abstract suspend fun logoutEverywhere(): stapel.auth.session/SignOutEverywhereResult // stapel.auth.session/AuthSession.logoutEverywhere|logoutEverywhere(){}[0]
+    abstract suspend fun refreshUser(): stapel.result/StapelResult<stapel.auth.model/AuthUser, stapel.auth.error/AuthError> // stapel.auth.session/AuthSession.refreshUser|refreshUser(){}[0]
+    abstract suspend fun restore() // stapel.auth.session/AuthSession.restore|restore(){}[0]
 }
 
 sealed interface stapel.auth.api.error/AdminUsersError : stapel.auth.api.error/AuthApiError // stapel.auth.api.error/AdminUsersError|null[0]
@@ -4545,6 +4769,873 @@ sealed interface stapel.auth.api.model/TOTPDisableRequest { // stapel.auth.api.m
         final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // stapel.auth.api.model/TOTPDisableRequest.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
     }
 }
+
+sealed interface stapel.auth.model/SignInOutcome { // stapel.auth.model/SignInOutcome|null[0]
+    final class FirstLoginRequired : stapel.auth.model/SignInOutcome { // stapel.auth.model/SignInOutcome.FirstLoginRequired|null[0]
+        constructor <init>(stapel.auth.model/FirstLoginStep, stapel.auth.model/LoginChallenge) // stapel.auth.model/SignInOutcome.FirstLoginRequired.<init>|<init>(stapel.auth.model.FirstLoginStep;stapel.auth.model.LoginChallenge){}[0]
+
+        final val challenge // stapel.auth.model/SignInOutcome.FirstLoginRequired.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.auth.model/LoginChallenge // stapel.auth.model/SignInOutcome.FirstLoginRequired.challenge.<get-challenge>|<get-challenge>(){}[0]
+        final val requires // stapel.auth.model/SignInOutcome.FirstLoginRequired.requires|{}requires[0]
+            final fun <get-requires>(): stapel.auth.model/FirstLoginStep // stapel.auth.model/SignInOutcome.FirstLoginRequired.requires.<get-requires>|<get-requires>(){}[0]
+
+        final fun component1(): stapel.auth.model/FirstLoginStep // stapel.auth.model/SignInOutcome.FirstLoginRequired.component1|component1(){}[0]
+        final fun component2(): stapel.auth.model/LoginChallenge // stapel.auth.model/SignInOutcome.FirstLoginRequired.component2|component2(){}[0]
+        final fun copy(stapel.auth.model/FirstLoginStep = ..., stapel.auth.model/LoginChallenge = ...): stapel.auth.model/SignInOutcome.FirstLoginRequired // stapel.auth.model/SignInOutcome.FirstLoginRequired.copy|copy(stapel.auth.model.FirstLoginStep;stapel.auth.model.LoginChallenge){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/SignInOutcome.FirstLoginRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.model/SignInOutcome.FirstLoginRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.model/SignInOutcome.FirstLoginRequired.toString|toString(){}[0]
+    }
+
+    final class Session : stapel.auth.model/SignInOutcome { // stapel.auth.model/SignInOutcome.Session|null[0]
+        constructor <init>(stapel.auth.model/AuthUser, stapel.auth.model/SignInKind) // stapel.auth.model/SignInOutcome.Session.<init>|<init>(stapel.auth.model.AuthUser;stapel.auth.model.SignInKind){}[0]
+
+        final val kind // stapel.auth.model/SignInOutcome.Session.kind|{}kind[0]
+            final fun <get-kind>(): stapel.auth.model/SignInKind // stapel.auth.model/SignInOutcome.Session.kind.<get-kind>|<get-kind>(){}[0]
+        final val user // stapel.auth.model/SignInOutcome.Session.user|{}user[0]
+            final fun <get-user>(): stapel.auth.model/AuthUser // stapel.auth.model/SignInOutcome.Session.user.<get-user>|<get-user>(){}[0]
+
+        final fun component1(): stapel.auth.model/AuthUser // stapel.auth.model/SignInOutcome.Session.component1|component1(){}[0]
+        final fun component2(): stapel.auth.model/SignInKind // stapel.auth.model/SignInOutcome.Session.component2|component2(){}[0]
+        final fun copy(stapel.auth.model/AuthUser = ..., stapel.auth.model/SignInKind = ...): stapel.auth.model/SignInOutcome.Session // stapel.auth.model/SignInOutcome.Session.copy|copy(stapel.auth.model.AuthUser;stapel.auth.model.SignInKind){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/SignInOutcome.Session.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.model/SignInOutcome.Session.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.model/SignInOutcome.Session.toString|toString(){}[0]
+    }
+
+    final class TotpRequired : stapel.auth.model/SignInOutcome { // stapel.auth.model/SignInOutcome.TotpRequired|null[0]
+        constructor <init>(stapel.auth.model/LoginChallenge) // stapel.auth.model/SignInOutcome.TotpRequired.<init>|<init>(stapel.auth.model.LoginChallenge){}[0]
+
+        final val challenge // stapel.auth.model/SignInOutcome.TotpRequired.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.auth.model/LoginChallenge // stapel.auth.model/SignInOutcome.TotpRequired.challenge.<get-challenge>|<get-challenge>(){}[0]
+
+        final fun component1(): stapel.auth.model/LoginChallenge // stapel.auth.model/SignInOutcome.TotpRequired.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/LoginChallenge = ...): stapel.auth.model/SignInOutcome.TotpRequired // stapel.auth.model/SignInOutcome.TotpRequired.copy|copy(stapel.auth.model.LoginChallenge){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/SignInOutcome.TotpRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.model/SignInOutcome.TotpRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.model/SignInOutcome.TotpRequired.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.model/TotpProof { // stapel.auth.model/TotpProof|null[0]
+    final class BackupCode : stapel.auth.model/TotpProof { // stapel.auth.model/TotpProof.BackupCode|null[0]
+        constructor <init>(kotlin/String) // stapel.auth.model/TotpProof.BackupCode.<init>|<init>(kotlin.String){}[0]
+
+        final val value // stapel.auth.model/TotpProof.BackupCode.value|{}value[0]
+            final fun <get-value>(): kotlin/String // stapel.auth.model/TotpProof.BackupCode.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.model/TotpProof.BackupCode.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.auth.model/TotpProof.BackupCode // stapel.auth.model/TotpProof.BackupCode.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/TotpProof.BackupCode.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.model/TotpProof.BackupCode.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.model/TotpProof.BackupCode.toString|toString(){}[0]
+    }
+
+    final class Code : stapel.auth.model/TotpProof { // stapel.auth.model/TotpProof.Code|null[0]
+        constructor <init>(kotlin/String) // stapel.auth.model/TotpProof.Code.<init>|<init>(kotlin.String){}[0]
+
+        final val value // stapel.auth.model/TotpProof.Code.value|{}value[0]
+            final fun <get-value>(): kotlin/String // stapel.auth.model/TotpProof.Code.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.model/TotpProof.Code.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.auth.model/TotpProof.Code // stapel.auth.model/TotpProof.Code.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/TotpProof.Code.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.model/TotpProof.Code.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.model/TotpProof.Code.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/AuthEffect { // stapel.auth.presentation/AuthEffect|null[0]
+    final class SignedIn : stapel.auth.presentation/AuthEffect { // stapel.auth.presentation/AuthEffect.SignedIn|null[0]
+        constructor <init>(stapel.auth.model/SignInOutcome.Session) // stapel.auth.presentation/AuthEffect.SignedIn.<init>|<init>(stapel.auth.model.SignInOutcome.Session){}[0]
+
+        final val outcome // stapel.auth.presentation/AuthEffect.SignedIn.outcome|{}outcome[0]
+            final fun <get-outcome>(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/AuthEffect.SignedIn.outcome.<get-outcome>|<get-outcome>(){}[0]
+
+        final fun component1(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/AuthEffect.SignedIn.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/SignInOutcome.Session = ...): stapel.auth.presentation/AuthEffect.SignedIn // stapel.auth.presentation/AuthEffect.SignedIn.copy|copy(stapel.auth.model.SignInOutcome.Session){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/AuthEffect.SignedIn.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/AuthEffect.SignedIn.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/AuthEffect.SignedIn.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/ChallengeIntent : stapel.auth.presentation/LoginChallengeIntent, stapel.auth.presentation/OtpSignInIntent, stapel.auth.presentation/PasswordSignInIntent { // stapel.auth.presentation/ChallengeIntent|null[0]
+    final class SubmitNewPassword : stapel.auth.presentation/ChallengeIntent { // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword|null[0]
+        constructor <init>(kotlin/String) // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.<init>|<init>(kotlin.String){}[0]
+
+        final val newPassword // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.newPassword|{}newPassword[0]
+            final fun <get-newPassword>(): kotlin/String // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.newPassword.<get-newPassword>|<get-newPassword>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.auth.presentation/ChallengeIntent.SubmitNewPassword // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/ChallengeIntent.SubmitNewPassword.toString|toString(){}[0]
+    }
+
+    final class SubmitTotp : stapel.auth.presentation/ChallengeIntent { // stapel.auth.presentation/ChallengeIntent.SubmitTotp|null[0]
+        constructor <init>(stapel.auth.model/TotpProof) // stapel.auth.presentation/ChallengeIntent.SubmitTotp.<init>|<init>(stapel.auth.model.TotpProof){}[0]
+
+        final val proof // stapel.auth.presentation/ChallengeIntent.SubmitTotp.proof|{}proof[0]
+            final fun <get-proof>(): stapel.auth.model/TotpProof // stapel.auth.presentation/ChallengeIntent.SubmitTotp.proof.<get-proof>|<get-proof>(){}[0]
+
+        final fun component1(): stapel.auth.model/TotpProof // stapel.auth.presentation/ChallengeIntent.SubmitTotp.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/TotpProof = ...): stapel.auth.presentation/ChallengeIntent.SubmitTotp // stapel.auth.presentation/ChallengeIntent.SubmitTotp.copy|copy(stapel.auth.model.TotpProof){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/ChallengeIntent.SubmitTotp.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/ChallengeIntent.SubmitTotp.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/ChallengeIntent.SubmitTotp.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/ChallengeStep { // stapel.auth.presentation/ChallengeStep|null[0]
+    abstract val challenge // stapel.auth.presentation/ChallengeStep.challenge|{}challenge[0]
+        abstract fun <get-challenge>(): stapel.auth.model/LoginChallenge // stapel.auth.presentation/ChallengeStep.challenge.<get-challenge>|<get-challenge>(){}[0]
+
+    final class ForcedPasswordChange : stapel.auth.presentation/ChallengeStep { // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange|null[0]
+        constructor <init>(stapel.auth.model/LoginChallenge, kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...) // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.<init>|<init>(stapel.auth.model.LoginChallenge;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+
+        final val challenge // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.auth.model/LoginChallenge // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.challenge.<get-challenge>|<get-challenge>(){}[0]
+        final val error // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError? // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.error.<get-error>|<get-error>(){}[0]
+        final val submitting // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.submitting|{}submitting[0]
+            final fun <get-submitting>(): kotlin/Boolean // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.submitting.<get-submitting>|<get-submitting>(){}[0]
+
+        final fun component1(): stapel.auth.model/LoginChallenge // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.component1|component1(){}[0]
+        final fun component2(): kotlin/Boolean // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.component2|component2(){}[0]
+        final fun component3(): stapel.auth.error/AuthError? // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.component3|component3(){}[0]
+        final fun copy(stapel.auth.model/LoginChallenge = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...): stapel.auth.presentation/ChallengeStep.ForcedPasswordChange // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.copy|copy(stapel.auth.model.LoginChallenge;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/ChallengeStep.ForcedPasswordChange.toString|toString(){}[0]
+    }
+
+    final class MfaEnrollRequired : stapel.auth.presentation/ChallengeStep { // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired|null[0]
+        constructor <init>(stapel.auth.model/LoginChallenge) // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.<init>|<init>(stapel.auth.model.LoginChallenge){}[0]
+
+        final val challenge // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.auth.model/LoginChallenge // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.challenge.<get-challenge>|<get-challenge>(){}[0]
+
+        final fun component1(): stapel.auth.model/LoginChallenge // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/LoginChallenge = ...): stapel.auth.presentation/ChallengeStep.MfaEnrollRequired // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.copy|copy(stapel.auth.model.LoginChallenge){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/ChallengeStep.MfaEnrollRequired.toString|toString(){}[0]
+    }
+
+    final class Totp : stapel.auth.presentation/ChallengeStep { // stapel.auth.presentation/ChallengeStep.Totp|null[0]
+        constructor <init>(stapel.auth.model/LoginChallenge, kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...) // stapel.auth.presentation/ChallengeStep.Totp.<init>|<init>(stapel.auth.model.LoginChallenge;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+
+        final val challenge // stapel.auth.presentation/ChallengeStep.Totp.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.auth.model/LoginChallenge // stapel.auth.presentation/ChallengeStep.Totp.challenge.<get-challenge>|<get-challenge>(){}[0]
+        final val error // stapel.auth.presentation/ChallengeStep.Totp.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError? // stapel.auth.presentation/ChallengeStep.Totp.error.<get-error>|<get-error>(){}[0]
+        final val submitting // stapel.auth.presentation/ChallengeStep.Totp.submitting|{}submitting[0]
+            final fun <get-submitting>(): kotlin/Boolean // stapel.auth.presentation/ChallengeStep.Totp.submitting.<get-submitting>|<get-submitting>(){}[0]
+
+        final fun component1(): stapel.auth.model/LoginChallenge // stapel.auth.presentation/ChallengeStep.Totp.component1|component1(){}[0]
+        final fun component2(): kotlin/Boolean // stapel.auth.presentation/ChallengeStep.Totp.component2|component2(){}[0]
+        final fun component3(): stapel.auth.error/AuthError? // stapel.auth.presentation/ChallengeStep.Totp.component3|component3(){}[0]
+        final fun copy(stapel.auth.model/LoginChallenge = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...): stapel.auth.presentation/ChallengeStep.Totp // stapel.auth.presentation/ChallengeStep.Totp.copy|copy(stapel.auth.model.LoginChallenge;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/ChallengeStep.Totp.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/ChallengeStep.Totp.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/ChallengeStep.Totp.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/GuestIntent { // stapel.auth.presentation/GuestIntent|null[0]
+    final object ContinueAsGuest : stapel.auth.presentation/GuestIntent { // stapel.auth.presentation/GuestIntent.ContinueAsGuest|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/GuestIntent.ContinueAsGuest.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/GuestIntent.ContinueAsGuest.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/GuestIntent.ContinueAsGuest.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/GuestState { // stapel.auth.presentation/GuestState|null[0]
+    final class Done : stapel.auth.presentation/GuestState { // stapel.auth.presentation/GuestState.Done|null[0]
+        constructor <init>(stapel.auth.model/AuthUser) // stapel.auth.presentation/GuestState.Done.<init>|<init>(stapel.auth.model.AuthUser){}[0]
+
+        final val user // stapel.auth.presentation/GuestState.Done.user|{}user[0]
+            final fun <get-user>(): stapel.auth.model/AuthUser // stapel.auth.presentation/GuestState.Done.user.<get-user>|<get-user>(){}[0]
+
+        final fun component1(): stapel.auth.model/AuthUser // stapel.auth.presentation/GuestState.Done.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/AuthUser = ...): stapel.auth.presentation/GuestState.Done // stapel.auth.presentation/GuestState.Done.copy|copy(stapel.auth.model.AuthUser){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/GuestState.Done.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/GuestState.Done.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/GuestState.Done.toString|toString(){}[0]
+    }
+
+    final class Failed : stapel.auth.presentation/GuestState { // stapel.auth.presentation/GuestState.Failed|null[0]
+        constructor <init>(stapel.auth.error/AuthError) // stapel.auth.presentation/GuestState.Failed.<init>|<init>(stapel.auth.error.AuthError){}[0]
+
+        final val error // stapel.auth.presentation/GuestState.Failed.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError // stapel.auth.presentation/GuestState.Failed.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): stapel.auth.error/AuthError // stapel.auth.presentation/GuestState.Failed.component1|component1(){}[0]
+        final fun copy(stapel.auth.error/AuthError = ...): stapel.auth.presentation/GuestState.Failed // stapel.auth.presentation/GuestState.Failed.copy|copy(stapel.auth.error.AuthError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/GuestState.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/GuestState.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/GuestState.Failed.toString|toString(){}[0]
+    }
+
+    final object Creating : stapel.auth.presentation/GuestState { // stapel.auth.presentation/GuestState.Creating|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/GuestState.Creating.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/GuestState.Creating.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/GuestState.Creating.toString|toString(){}[0]
+    }
+
+    final object Idle : stapel.auth.presentation/GuestState { // stapel.auth.presentation/GuestState.Idle|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/GuestState.Idle.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/GuestState.Idle.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/GuestState.Idle.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/LoginChallengeIntent // stapel.auth.presentation/LoginChallengeIntent|null[0]
+
+sealed interface stapel.auth.presentation/LoginChallengeState { // stapel.auth.presentation/LoginChallengeState|null[0]
+    final class Challenge : stapel.auth.presentation/LoginChallengeState { // stapel.auth.presentation/LoginChallengeState.Challenge|null[0]
+        constructor <init>(stapel.auth.presentation/ChallengeStep) // stapel.auth.presentation/LoginChallengeState.Challenge.<init>|<init>(stapel.auth.presentation.ChallengeStep){}[0]
+
+        final val step // stapel.auth.presentation/LoginChallengeState.Challenge.step|{}step[0]
+            final fun <get-step>(): stapel.auth.presentation/ChallengeStep // stapel.auth.presentation/LoginChallengeState.Challenge.step.<get-step>|<get-step>(){}[0]
+
+        final fun component1(): stapel.auth.presentation/ChallengeStep // stapel.auth.presentation/LoginChallengeState.Challenge.component1|component1(){}[0]
+        final fun copy(stapel.auth.presentation/ChallengeStep = ...): stapel.auth.presentation/LoginChallengeState.Challenge // stapel.auth.presentation/LoginChallengeState.Challenge.copy|copy(stapel.auth.presentation.ChallengeStep){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/LoginChallengeState.Challenge.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/LoginChallengeState.Challenge.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/LoginChallengeState.Challenge.toString|toString(){}[0]
+    }
+
+    final class Done : stapel.auth.presentation/LoginChallengeState { // stapel.auth.presentation/LoginChallengeState.Done|null[0]
+        constructor <init>(stapel.auth.model/SignInOutcome.Session) // stapel.auth.presentation/LoginChallengeState.Done.<init>|<init>(stapel.auth.model.SignInOutcome.Session){}[0]
+
+        final val outcome // stapel.auth.presentation/LoginChallengeState.Done.outcome|{}outcome[0]
+            final fun <get-outcome>(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/LoginChallengeState.Done.outcome.<get-outcome>|<get-outcome>(){}[0]
+
+        final fun component1(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/LoginChallengeState.Done.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/SignInOutcome.Session = ...): stapel.auth.presentation/LoginChallengeState.Done // stapel.auth.presentation/LoginChallengeState.Done.copy|copy(stapel.auth.model.SignInOutcome.Session){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/LoginChallengeState.Done.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/LoginChallengeState.Done.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/LoginChallengeState.Done.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/MethodChooserIntent { // stapel.auth.presentation/MethodChooserIntent|null[0]
+    final object Refresh : stapel.auth.presentation/MethodChooserIntent { // stapel.auth.presentation/MethodChooserIntent.Refresh|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/MethodChooserIntent.Refresh.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/MethodChooserIntent.Refresh.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/MethodChooserIntent.Refresh.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/MethodChooserState { // stapel.auth.presentation/MethodChooserState|null[0]
+    final class Failed : stapel.auth.presentation/MethodChooserState { // stapel.auth.presentation/MethodChooserState.Failed|null[0]
+        constructor <init>(stapel.auth.error/AuthError) // stapel.auth.presentation/MethodChooserState.Failed.<init>|<init>(stapel.auth.error.AuthError){}[0]
+
+        final val error // stapel.auth.presentation/MethodChooserState.Failed.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError // stapel.auth.presentation/MethodChooserState.Failed.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): stapel.auth.error/AuthError // stapel.auth.presentation/MethodChooserState.Failed.component1|component1(){}[0]
+        final fun copy(stapel.auth.error/AuthError = ...): stapel.auth.presentation/MethodChooserState.Failed // stapel.auth.presentation/MethodChooserState.Failed.copy|copy(stapel.auth.error.AuthError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/MethodChooserState.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/MethodChooserState.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/MethodChooserState.Failed.toString|toString(){}[0]
+    }
+
+    final class Ready : stapel.auth.presentation/MethodChooserState { // stapel.auth.presentation/MethodChooserState.Ready|null[0]
+        constructor <init>(stapel.auth.presentation/MethodZones) // stapel.auth.presentation/MethodChooserState.Ready.<init>|<init>(stapel.auth.presentation.MethodZones){}[0]
+
+        final val zones // stapel.auth.presentation/MethodChooserState.Ready.zones|{}zones[0]
+            final fun <get-zones>(): stapel.auth.presentation/MethodZones // stapel.auth.presentation/MethodChooserState.Ready.zones.<get-zones>|<get-zones>(){}[0]
+
+        final fun component1(): stapel.auth.presentation/MethodZones // stapel.auth.presentation/MethodChooserState.Ready.component1|component1(){}[0]
+        final fun copy(stapel.auth.presentation/MethodZones = ...): stapel.auth.presentation/MethodChooserState.Ready // stapel.auth.presentation/MethodChooserState.Ready.copy|copy(stapel.auth.presentation.MethodZones){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/MethodChooserState.Ready.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/MethodChooserState.Ready.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/MethodChooserState.Ready.toString|toString(){}[0]
+    }
+
+    final object Loading : stapel.auth.presentation/MethodChooserState { // stapel.auth.presentation/MethodChooserState.Loading|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/MethodChooserState.Loading.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/MethodChooserState.Loading.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/MethodChooserState.Loading.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/OtpSignInIntent { // stapel.auth.presentation/OtpSignInIntent|null[0]
+    final class RequestCode : stapel.auth.presentation/OtpSignInIntent { // stapel.auth.presentation/OtpSignInIntent.RequestCode|null[0]
+        constructor <init>(stapel.auth.model/OtpChannel, kotlin/String) // stapel.auth.presentation/OtpSignInIntent.RequestCode.<init>|<init>(stapel.auth.model.OtpChannel;kotlin.String){}[0]
+
+        final val channel // stapel.auth.presentation/OtpSignInIntent.RequestCode.channel|{}channel[0]
+            final fun <get-channel>(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInIntent.RequestCode.channel.<get-channel>|<get-channel>(){}[0]
+        final val identifier // stapel.auth.presentation/OtpSignInIntent.RequestCode.identifier|{}identifier[0]
+            final fun <get-identifier>(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.RequestCode.identifier.<get-identifier>|<get-identifier>(){}[0]
+
+        final fun component1(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInIntent.RequestCode.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.RequestCode.component2|component2(){}[0]
+        final fun copy(stapel.auth.model/OtpChannel = ..., kotlin/String = ...): stapel.auth.presentation/OtpSignInIntent.RequestCode // stapel.auth.presentation/OtpSignInIntent.RequestCode.copy|copy(stapel.auth.model.OtpChannel;kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInIntent.RequestCode.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInIntent.RequestCode.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.RequestCode.toString|toString(){}[0]
+    }
+
+    final class SubmitCode : stapel.auth.presentation/OtpSignInIntent { // stapel.auth.presentation/OtpSignInIntent.SubmitCode|null[0]
+        constructor <init>(kotlin/String) // stapel.auth.presentation/OtpSignInIntent.SubmitCode.<init>|<init>(kotlin.String){}[0]
+
+        final val code // stapel.auth.presentation/OtpSignInIntent.SubmitCode.code|{}code[0]
+            final fun <get-code>(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.SubmitCode.code.<get-code>|<get-code>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.SubmitCode.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.auth.presentation/OtpSignInIntent.SubmitCode // stapel.auth.presentation/OtpSignInIntent.SubmitCode.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInIntent.SubmitCode.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInIntent.SubmitCode.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.SubmitCode.toString|toString(){}[0]
+    }
+
+    final object EditIdentifier : stapel.auth.presentation/OtpSignInIntent { // stapel.auth.presentation/OtpSignInIntent.EditIdentifier|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInIntent.EditIdentifier.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInIntent.EditIdentifier.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.EditIdentifier.toString|toString(){}[0]
+    }
+
+    final object Resend : stapel.auth.presentation/OtpSignInIntent { // stapel.auth.presentation/OtpSignInIntent.Resend|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInIntent.Resend.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInIntent.Resend.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInIntent.Resend.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState|null[0]
+    final class Challenge : stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState.Challenge|null[0]
+        constructor <init>(stapel.auth.presentation/ChallengeStep) // stapel.auth.presentation/OtpSignInState.Challenge.<init>|<init>(stapel.auth.presentation.ChallengeStep){}[0]
+
+        final val step // stapel.auth.presentation/OtpSignInState.Challenge.step|{}step[0]
+            final fun <get-step>(): stapel.auth.presentation/ChallengeStep // stapel.auth.presentation/OtpSignInState.Challenge.step.<get-step>|<get-step>(){}[0]
+
+        final fun component1(): stapel.auth.presentation/ChallengeStep // stapel.auth.presentation/OtpSignInState.Challenge.component1|component1(){}[0]
+        final fun copy(stapel.auth.presentation/ChallengeStep = ...): stapel.auth.presentation/OtpSignInState.Challenge // stapel.auth.presentation/OtpSignInState.Challenge.copy|copy(stapel.auth.presentation.ChallengeStep){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.Challenge.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInState.Challenge.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInState.Challenge.toString|toString(){}[0]
+    }
+
+    final class CodeSent : stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState.CodeSent|null[0]
+        constructor <init>(stapel.auth.model/OtpChannel, kotlin/String, kotlin/String, kotlin/Int, kotlin.time/Instant, kotlin.time/Duration, kotlin/Boolean, kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...) // stapel.auth.presentation/OtpSignInState.CodeSent.<init>|<init>(stapel.auth.model.OtpChannel;kotlin.String;kotlin.String;kotlin.Int;kotlin.time.Instant;kotlin.time.Duration;kotlin.Boolean;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+
+        final val canResend // stapel.auth.presentation/OtpSignInState.CodeSent.canResend|{}canResend[0]
+            final fun <get-canResend>(): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.CodeSent.canResend.<get-canResend>|<get-canResend>(){}[0]
+        final val channel // stapel.auth.presentation/OtpSignInState.CodeSent.channel|{}channel[0]
+            final fun <get-channel>(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.CodeSent.channel.<get-channel>|<get-channel>(){}[0]
+        final val codeLength // stapel.auth.presentation/OtpSignInState.CodeSent.codeLength|{}codeLength[0]
+            final fun <get-codeLength>(): kotlin/Int // stapel.auth.presentation/OtpSignInState.CodeSent.codeLength.<get-codeLength>|<get-codeLength>(){}[0]
+        final val error // stapel.auth.presentation/OtpSignInState.CodeSent.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError? // stapel.auth.presentation/OtpSignInState.CodeSent.error.<get-error>|<get-error>(){}[0]
+        final val expiresAt // stapel.auth.presentation/OtpSignInState.CodeSent.expiresAt|{}expiresAt[0]
+            final fun <get-expiresAt>(): kotlin.time/Instant // stapel.auth.presentation/OtpSignInState.CodeSent.expiresAt.<get-expiresAt>|<get-expiresAt>(){}[0]
+        final val identifier // stapel.auth.presentation/OtpSignInState.CodeSent.identifier|{}identifier[0]
+            final fun <get-identifier>(): kotlin/String // stapel.auth.presentation/OtpSignInState.CodeSent.identifier.<get-identifier>|<get-identifier>(){}[0]
+        final val isMock // stapel.auth.presentation/OtpSignInState.CodeSent.isMock|{}isMock[0]
+            final fun <get-isMock>(): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.CodeSent.isMock.<get-isMock>|<get-isMock>(){}[0]
+        final val maskedTarget // stapel.auth.presentation/OtpSignInState.CodeSent.maskedTarget|{}maskedTarget[0]
+            final fun <get-maskedTarget>(): kotlin/String // stapel.auth.presentation/OtpSignInState.CodeSent.maskedTarget.<get-maskedTarget>|<get-maskedTarget>(){}[0]
+        final val resendIn // stapel.auth.presentation/OtpSignInState.CodeSent.resendIn|{}resendIn[0]
+            final fun <get-resendIn>(): kotlin.time/Duration // stapel.auth.presentation/OtpSignInState.CodeSent.resendIn.<get-resendIn>|<get-resendIn>(){}[0]
+        final val verifying // stapel.auth.presentation/OtpSignInState.CodeSent.verifying|{}verifying[0]
+            final fun <get-verifying>(): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.CodeSent.verifying.<get-verifying>|<get-verifying>(){}[0]
+
+        final fun component1(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.CodeSent.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.presentation/OtpSignInState.CodeSent.component2|component2(){}[0]
+        final fun component3(): kotlin/String // stapel.auth.presentation/OtpSignInState.CodeSent.component3|component3(){}[0]
+        final fun component4(): kotlin/Int // stapel.auth.presentation/OtpSignInState.CodeSent.component4|component4(){}[0]
+        final fun component5(): kotlin.time/Instant // stapel.auth.presentation/OtpSignInState.CodeSent.component5|component5(){}[0]
+        final fun component6(): kotlin.time/Duration // stapel.auth.presentation/OtpSignInState.CodeSent.component6|component6(){}[0]
+        final fun component7(): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.CodeSent.component7|component7(){}[0]
+        final fun component8(): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.CodeSent.component8|component8(){}[0]
+        final fun component9(): stapel.auth.error/AuthError? // stapel.auth.presentation/OtpSignInState.CodeSent.component9|component9(){}[0]
+        final fun copy(stapel.auth.model/OtpChannel = ..., kotlin/String = ..., kotlin/String = ..., kotlin/Int = ..., kotlin.time/Instant = ..., kotlin.time/Duration = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...): stapel.auth.presentation/OtpSignInState.CodeSent // stapel.auth.presentation/OtpSignInState.CodeSent.copy|copy(stapel.auth.model.OtpChannel;kotlin.String;kotlin.String;kotlin.Int;kotlin.time.Instant;kotlin.time.Duration;kotlin.Boolean;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.CodeSent.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInState.CodeSent.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInState.CodeSent.toString|toString(){}[0]
+    }
+
+    final class Done : stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState.Done|null[0]
+        constructor <init>(stapel.auth.model/SignInOutcome.Session) // stapel.auth.presentation/OtpSignInState.Done.<init>|<init>(stapel.auth.model.SignInOutcome.Session){}[0]
+
+        final val outcome // stapel.auth.presentation/OtpSignInState.Done.outcome|{}outcome[0]
+            final fun <get-outcome>(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/OtpSignInState.Done.outcome.<get-outcome>|<get-outcome>(){}[0]
+
+        final fun component1(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/OtpSignInState.Done.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/SignInOutcome.Session = ...): stapel.auth.presentation/OtpSignInState.Done // stapel.auth.presentation/OtpSignInState.Done.copy|copy(stapel.auth.model.SignInOutcome.Session){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.Done.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInState.Done.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInState.Done.toString|toString(){}[0]
+    }
+
+    final class Idle : stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState.Idle|null[0]
+        constructor <init>(stapel.auth.model/OtpChannel = ..., kotlin/String = ...) // stapel.auth.presentation/OtpSignInState.Idle.<init>|<init>(stapel.auth.model.OtpChannel;kotlin.String){}[0]
+
+        final val channel // stapel.auth.presentation/OtpSignInState.Idle.channel|{}channel[0]
+            final fun <get-channel>(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.Idle.channel.<get-channel>|<get-channel>(){}[0]
+        final val identifier // stapel.auth.presentation/OtpSignInState.Idle.identifier|{}identifier[0]
+            final fun <get-identifier>(): kotlin/String // stapel.auth.presentation/OtpSignInState.Idle.identifier.<get-identifier>|<get-identifier>(){}[0]
+
+        final fun component1(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.Idle.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.presentation/OtpSignInState.Idle.component2|component2(){}[0]
+        final fun copy(stapel.auth.model/OtpChannel = ..., kotlin/String = ...): stapel.auth.presentation/OtpSignInState.Idle // stapel.auth.presentation/OtpSignInState.Idle.copy|copy(stapel.auth.model.OtpChannel;kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.Idle.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInState.Idle.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInState.Idle.toString|toString(){}[0]
+    }
+
+    final class Locked : stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState.Locked|null[0]
+        constructor <init>(stapel.auth.model/OtpChannel, kotlin/String, kotlin.time/Instant?, stapel.auth.error/AuthError) // stapel.auth.presentation/OtpSignInState.Locked.<init>|<init>(stapel.auth.model.OtpChannel;kotlin.String;kotlin.time.Instant?;stapel.auth.error.AuthError){}[0]
+
+        final val channel // stapel.auth.presentation/OtpSignInState.Locked.channel|{}channel[0]
+            final fun <get-channel>(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.Locked.channel.<get-channel>|<get-channel>(){}[0]
+        final val error // stapel.auth.presentation/OtpSignInState.Locked.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError // stapel.auth.presentation/OtpSignInState.Locked.error.<get-error>|<get-error>(){}[0]
+        final val identifier // stapel.auth.presentation/OtpSignInState.Locked.identifier|{}identifier[0]
+            final fun <get-identifier>(): kotlin/String // stapel.auth.presentation/OtpSignInState.Locked.identifier.<get-identifier>|<get-identifier>(){}[0]
+        final val until // stapel.auth.presentation/OtpSignInState.Locked.until|{}until[0]
+            final fun <get-until>(): kotlin.time/Instant? // stapel.auth.presentation/OtpSignInState.Locked.until.<get-until>|<get-until>(){}[0]
+
+        final fun component1(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.Locked.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.presentation/OtpSignInState.Locked.component2|component2(){}[0]
+        final fun component3(): kotlin.time/Instant? // stapel.auth.presentation/OtpSignInState.Locked.component3|component3(){}[0]
+        final fun component4(): stapel.auth.error/AuthError // stapel.auth.presentation/OtpSignInState.Locked.component4|component4(){}[0]
+        final fun copy(stapel.auth.model/OtpChannel = ..., kotlin/String = ..., kotlin.time/Instant? = ..., stapel.auth.error/AuthError = ...): stapel.auth.presentation/OtpSignInState.Locked // stapel.auth.presentation/OtpSignInState.Locked.copy|copy(stapel.auth.model.OtpChannel;kotlin.String;kotlin.time.Instant?;stapel.auth.error.AuthError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.Locked.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInState.Locked.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInState.Locked.toString|toString(){}[0]
+    }
+
+    final class RequestFailed : stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState.RequestFailed|null[0]
+        constructor <init>(stapel.auth.model/OtpChannel, kotlin/String, stapel.auth.error/AuthError) // stapel.auth.presentation/OtpSignInState.RequestFailed.<init>|<init>(stapel.auth.model.OtpChannel;kotlin.String;stapel.auth.error.AuthError){}[0]
+
+        final val channel // stapel.auth.presentation/OtpSignInState.RequestFailed.channel|{}channel[0]
+            final fun <get-channel>(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.RequestFailed.channel.<get-channel>|<get-channel>(){}[0]
+        final val error // stapel.auth.presentation/OtpSignInState.RequestFailed.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError // stapel.auth.presentation/OtpSignInState.RequestFailed.error.<get-error>|<get-error>(){}[0]
+        final val identifier // stapel.auth.presentation/OtpSignInState.RequestFailed.identifier|{}identifier[0]
+            final fun <get-identifier>(): kotlin/String // stapel.auth.presentation/OtpSignInState.RequestFailed.identifier.<get-identifier>|<get-identifier>(){}[0]
+
+        final fun component1(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.RequestFailed.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.presentation/OtpSignInState.RequestFailed.component2|component2(){}[0]
+        final fun component3(): stapel.auth.error/AuthError // stapel.auth.presentation/OtpSignInState.RequestFailed.component3|component3(){}[0]
+        final fun copy(stapel.auth.model/OtpChannel = ..., kotlin/String = ..., stapel.auth.error/AuthError = ...): stapel.auth.presentation/OtpSignInState.RequestFailed // stapel.auth.presentation/OtpSignInState.RequestFailed.copy|copy(stapel.auth.model.OtpChannel;kotlin.String;stapel.auth.error.AuthError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.RequestFailed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInState.RequestFailed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInState.RequestFailed.toString|toString(){}[0]
+    }
+
+    final class Requesting : stapel.auth.presentation/OtpSignInState { // stapel.auth.presentation/OtpSignInState.Requesting|null[0]
+        constructor <init>(stapel.auth.model/OtpChannel, kotlin/String) // stapel.auth.presentation/OtpSignInState.Requesting.<init>|<init>(stapel.auth.model.OtpChannel;kotlin.String){}[0]
+
+        final val channel // stapel.auth.presentation/OtpSignInState.Requesting.channel|{}channel[0]
+            final fun <get-channel>(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.Requesting.channel.<get-channel>|<get-channel>(){}[0]
+        final val identifier // stapel.auth.presentation/OtpSignInState.Requesting.identifier|{}identifier[0]
+            final fun <get-identifier>(): kotlin/String // stapel.auth.presentation/OtpSignInState.Requesting.identifier.<get-identifier>|<get-identifier>(){}[0]
+
+        final fun component1(): stapel.auth.model/OtpChannel // stapel.auth.presentation/OtpSignInState.Requesting.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.presentation/OtpSignInState.Requesting.component2|component2(){}[0]
+        final fun copy(stapel.auth.model/OtpChannel = ..., kotlin/String = ...): stapel.auth.presentation/OtpSignInState.Requesting // stapel.auth.presentation/OtpSignInState.Requesting.copy|copy(stapel.auth.model.OtpChannel;kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/OtpSignInState.Requesting.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/OtpSignInState.Requesting.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/OtpSignInState.Requesting.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/PasswordRegisterIntent { // stapel.auth.presentation/PasswordRegisterIntent|null[0]
+    final class Register : stapel.auth.presentation/PasswordRegisterIntent { // stapel.auth.presentation/PasswordRegisterIntent.Register|null[0]
+        constructor <init>(stapel.auth.presentation/PasswordRegistration) // stapel.auth.presentation/PasswordRegisterIntent.Register.<init>|<init>(stapel.auth.presentation.PasswordRegistration){}[0]
+
+        final val registration // stapel.auth.presentation/PasswordRegisterIntent.Register.registration|{}registration[0]
+            final fun <get-registration>(): stapel.auth.presentation/PasswordRegistration // stapel.auth.presentation/PasswordRegisterIntent.Register.registration.<get-registration>|<get-registration>(){}[0]
+
+        final fun component1(): stapel.auth.presentation/PasswordRegistration // stapel.auth.presentation/PasswordRegisterIntent.Register.component1|component1(){}[0]
+        final fun copy(stapel.auth.presentation/PasswordRegistration = ...): stapel.auth.presentation/PasswordRegisterIntent.Register // stapel.auth.presentation/PasswordRegisterIntent.Register.copy|copy(stapel.auth.presentation.PasswordRegistration){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegisterIntent.Register.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegisterIntent.Register.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegisterIntent.Register.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/PasswordRegisterState { // stapel.auth.presentation/PasswordRegisterState|null[0]
+    final class Done : stapel.auth.presentation/PasswordRegisterState { // stapel.auth.presentation/PasswordRegisterState.Done|null[0]
+        constructor <init>(stapel.auth.model/SignInOutcome.Session) // stapel.auth.presentation/PasswordRegisterState.Done.<init>|<init>(stapel.auth.model.SignInOutcome.Session){}[0]
+
+        final val outcome // stapel.auth.presentation/PasswordRegisterState.Done.outcome|{}outcome[0]
+            final fun <get-outcome>(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/PasswordRegisterState.Done.outcome.<get-outcome>|<get-outcome>(){}[0]
+
+        final fun component1(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/PasswordRegisterState.Done.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/SignInOutcome.Session = ...): stapel.auth.presentation/PasswordRegisterState.Done // stapel.auth.presentation/PasswordRegisterState.Done.copy|copy(stapel.auth.model.SignInOutcome.Session){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegisterState.Done.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegisterState.Done.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegisterState.Done.toString|toString(){}[0]
+    }
+
+    final class Failed : stapel.auth.presentation/PasswordRegisterState { // stapel.auth.presentation/PasswordRegisterState.Failed|null[0]
+        constructor <init>(stapel.auth.error/AuthError) // stapel.auth.presentation/PasswordRegisterState.Failed.<init>|<init>(stapel.auth.error.AuthError){}[0]
+
+        final val error // stapel.auth.presentation/PasswordRegisterState.Failed.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError // stapel.auth.presentation/PasswordRegisterState.Failed.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): stapel.auth.error/AuthError // stapel.auth.presentation/PasswordRegisterState.Failed.component1|component1(){}[0]
+        final fun copy(stapel.auth.error/AuthError = ...): stapel.auth.presentation/PasswordRegisterState.Failed // stapel.auth.presentation/PasswordRegisterState.Failed.copy|copy(stapel.auth.error.AuthError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegisterState.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegisterState.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegisterState.Failed.toString|toString(){}[0]
+    }
+
+    final object Checking : stapel.auth.presentation/PasswordRegisterState { // stapel.auth.presentation/PasswordRegisterState.Checking|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegisterState.Checking.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegisterState.Checking.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegisterState.Checking.toString|toString(){}[0]
+    }
+
+    final object Idle : stapel.auth.presentation/PasswordRegisterState { // stapel.auth.presentation/PasswordRegisterState.Idle|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegisterState.Idle.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegisterState.Idle.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegisterState.Idle.toString|toString(){}[0]
+    }
+
+    final object Registering : stapel.auth.presentation/PasswordRegisterState { // stapel.auth.presentation/PasswordRegisterState.Registering|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegisterState.Registering.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegisterState.Registering.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegisterState.Registering.toString|toString(){}[0]
+    }
+
+    final object Unavailable : stapel.auth.presentation/PasswordRegisterState { // stapel.auth.presentation/PasswordRegisterState.Unavailable|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegisterState.Unavailable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegisterState.Unavailable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegisterState.Unavailable.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/PasswordSignInIntent { // stapel.auth.presentation/PasswordSignInIntent|null[0]
+    final class SignIn : stapel.auth.presentation/PasswordSignInIntent { // stapel.auth.presentation/PasswordSignInIntent.SignIn|null[0]
+        constructor <init>(kotlin/String, kotlin/String) // stapel.auth.presentation/PasswordSignInIntent.SignIn.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+        final val login // stapel.auth.presentation/PasswordSignInIntent.SignIn.login|{}login[0]
+            final fun <get-login>(): kotlin/String // stapel.auth.presentation/PasswordSignInIntent.SignIn.login.<get-login>|<get-login>(){}[0]
+        final val password // stapel.auth.presentation/PasswordSignInIntent.SignIn.password|{}password[0]
+            final fun <get-password>(): kotlin/String // stapel.auth.presentation/PasswordSignInIntent.SignIn.password.<get-password>|<get-password>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.presentation/PasswordSignInIntent.SignIn.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.presentation/PasswordSignInIntent.SignIn.component2|component2(){}[0]
+        final fun copy(kotlin/String = ..., kotlin/String = ...): stapel.auth.presentation/PasswordSignInIntent.SignIn // stapel.auth.presentation/PasswordSignInIntent.SignIn.copy|copy(kotlin.String;kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordSignInIntent.SignIn.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordSignInIntent.SignIn.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordSignInIntent.SignIn.toString|toString(){}[0]
+    }
+
+    final object Reset : stapel.auth.presentation/PasswordSignInIntent { // stapel.auth.presentation/PasswordSignInIntent.Reset|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordSignInIntent.Reset.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordSignInIntent.Reset.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordSignInIntent.Reset.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/PasswordSignInState { // stapel.auth.presentation/PasswordSignInState|null[0]
+    final class Authenticating : stapel.auth.presentation/PasswordSignInState { // stapel.auth.presentation/PasswordSignInState.Authenticating|null[0]
+        constructor <init>(kotlin/String) // stapel.auth.presentation/PasswordSignInState.Authenticating.<init>|<init>(kotlin.String){}[0]
+
+        final val login // stapel.auth.presentation/PasswordSignInState.Authenticating.login|{}login[0]
+            final fun <get-login>(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Authenticating.login.<get-login>|<get-login>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Authenticating.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.auth.presentation/PasswordSignInState.Authenticating // stapel.auth.presentation/PasswordSignInState.Authenticating.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordSignInState.Authenticating.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordSignInState.Authenticating.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Authenticating.toString|toString(){}[0]
+    }
+
+    final class Challenge : stapel.auth.presentation/PasswordSignInState { // stapel.auth.presentation/PasswordSignInState.Challenge|null[0]
+        constructor <init>(stapel.auth.presentation/ChallengeStep) // stapel.auth.presentation/PasswordSignInState.Challenge.<init>|<init>(stapel.auth.presentation.ChallengeStep){}[0]
+
+        final val step // stapel.auth.presentation/PasswordSignInState.Challenge.step|{}step[0]
+            final fun <get-step>(): stapel.auth.presentation/ChallengeStep // stapel.auth.presentation/PasswordSignInState.Challenge.step.<get-step>|<get-step>(){}[0]
+
+        final fun component1(): stapel.auth.presentation/ChallengeStep // stapel.auth.presentation/PasswordSignInState.Challenge.component1|component1(){}[0]
+        final fun copy(stapel.auth.presentation/ChallengeStep = ...): stapel.auth.presentation/PasswordSignInState.Challenge // stapel.auth.presentation/PasswordSignInState.Challenge.copy|copy(stapel.auth.presentation.ChallengeStep){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordSignInState.Challenge.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordSignInState.Challenge.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Challenge.toString|toString(){}[0]
+    }
+
+    final class Done : stapel.auth.presentation/PasswordSignInState { // stapel.auth.presentation/PasswordSignInState.Done|null[0]
+        constructor <init>(stapel.auth.model/SignInOutcome.Session) // stapel.auth.presentation/PasswordSignInState.Done.<init>|<init>(stapel.auth.model.SignInOutcome.Session){}[0]
+
+        final val outcome // stapel.auth.presentation/PasswordSignInState.Done.outcome|{}outcome[0]
+            final fun <get-outcome>(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/PasswordSignInState.Done.outcome.<get-outcome>|<get-outcome>(){}[0]
+
+        final fun component1(): stapel.auth.model/SignInOutcome.Session // stapel.auth.presentation/PasswordSignInState.Done.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/SignInOutcome.Session = ...): stapel.auth.presentation/PasswordSignInState.Done // stapel.auth.presentation/PasswordSignInState.Done.copy|copy(stapel.auth.model.SignInOutcome.Session){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordSignInState.Done.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordSignInState.Done.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Done.toString|toString(){}[0]
+    }
+
+    final class Failed : stapel.auth.presentation/PasswordSignInState { // stapel.auth.presentation/PasswordSignInState.Failed|null[0]
+        constructor <init>(kotlin/String, stapel.auth.error/AuthError) // stapel.auth.presentation/PasswordSignInState.Failed.<init>|<init>(kotlin.String;stapel.auth.error.AuthError){}[0]
+
+        final val error // stapel.auth.presentation/PasswordSignInState.Failed.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError // stapel.auth.presentation/PasswordSignInState.Failed.error.<get-error>|<get-error>(){}[0]
+        final val login // stapel.auth.presentation/PasswordSignInState.Failed.login|{}login[0]
+            final fun <get-login>(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Failed.login.<get-login>|<get-login>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Failed.component1|component1(){}[0]
+        final fun component2(): stapel.auth.error/AuthError // stapel.auth.presentation/PasswordSignInState.Failed.component2|component2(){}[0]
+        final fun copy(kotlin/String = ..., stapel.auth.error/AuthError = ...): stapel.auth.presentation/PasswordSignInState.Failed // stapel.auth.presentation/PasswordSignInState.Failed.copy|copy(kotlin.String;stapel.auth.error.AuthError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordSignInState.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordSignInState.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Failed.toString|toString(){}[0]
+    }
+
+    final object Idle : stapel.auth.presentation/PasswordSignInState { // stapel.auth.presentation/PasswordSignInState.Idle|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordSignInState.Idle.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordSignInState.Idle.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/PasswordSignInState.Idle.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/SessionsIntent { // stapel.auth.presentation/SessionsIntent|null[0]
+    final class Revoke : stapel.auth.presentation/SessionsIntent { // stapel.auth.presentation/SessionsIntent.Revoke|null[0]
+        constructor <init>(kotlin/String) // stapel.auth.presentation/SessionsIntent.Revoke.<init>|<init>(kotlin.String){}[0]
+
+        final val sessionId // stapel.auth.presentation/SessionsIntent.Revoke.sessionId|{}sessionId[0]
+            final fun <get-sessionId>(): kotlin/String // stapel.auth.presentation/SessionsIntent.Revoke.sessionId.<get-sessionId>|<get-sessionId>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.presentation/SessionsIntent.Revoke.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.auth.presentation/SessionsIntent.Revoke // stapel.auth.presentation/SessionsIntent.Revoke.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SessionsIntent.Revoke.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SessionsIntent.Revoke.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SessionsIntent.Revoke.toString|toString(){}[0]
+    }
+
+    final object Refresh : stapel.auth.presentation/SessionsIntent { // stapel.auth.presentation/SessionsIntent.Refresh|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SessionsIntent.Refresh.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SessionsIntent.Refresh.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SessionsIntent.Refresh.toString|toString(){}[0]
+    }
+
+    final object RevokeOthers : stapel.auth.presentation/SessionsIntent { // stapel.auth.presentation/SessionsIntent.RevokeOthers|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SessionsIntent.RevokeOthers.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SessionsIntent.RevokeOthers.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SessionsIntent.RevokeOthers.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/SignOutIntent { // stapel.auth.presentation/SignOutIntent|null[0]
+    final object SignOut : stapel.auth.presentation/SignOutIntent { // stapel.auth.presentation/SignOutIntent.SignOut|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SignOutIntent.SignOut.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SignOutIntent.SignOut.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SignOutIntent.SignOut.toString|toString(){}[0]
+    }
+
+    final object SignOutEverywhere : stapel.auth.presentation/SignOutIntent { // stapel.auth.presentation/SignOutIntent.SignOutEverywhere|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SignOutIntent.SignOutEverywhere.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SignOutIntent.SignOutEverywhere.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SignOutIntent.SignOutEverywhere.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.presentation/SignOutState { // stapel.auth.presentation/SignOutState|null[0]
+    final class Done : stapel.auth.presentation/SignOutState { // stapel.auth.presentation/SignOutState.Done|null[0]
+        constructor <init>(stapel.auth.session/SignOutEverywhereResult) // stapel.auth.presentation/SignOutState.Done.<init>|<init>(stapel.auth.session.SignOutEverywhereResult){}[0]
+
+        final val result // stapel.auth.presentation/SignOutState.Done.result|{}result[0]
+            final fun <get-result>(): stapel.auth.session/SignOutEverywhereResult // stapel.auth.presentation/SignOutState.Done.result.<get-result>|<get-result>(){}[0]
+
+        final fun component1(): stapel.auth.session/SignOutEverywhereResult // stapel.auth.presentation/SignOutState.Done.component1|component1(){}[0]
+        final fun copy(stapel.auth.session/SignOutEverywhereResult = ...): stapel.auth.presentation/SignOutState.Done // stapel.auth.presentation/SignOutState.Done.copy|copy(stapel.auth.session.SignOutEverywhereResult){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SignOutState.Done.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SignOutState.Done.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SignOutState.Done.toString|toString(){}[0]
+    }
+
+    final class SigningOut : stapel.auth.presentation/SignOutState { // stapel.auth.presentation/SignOutState.SigningOut|null[0]
+        constructor <init>(kotlin/Boolean) // stapel.auth.presentation/SignOutState.SigningOut.<init>|<init>(kotlin.Boolean){}[0]
+
+        final val everywhere // stapel.auth.presentation/SignOutState.SigningOut.everywhere|{}everywhere[0]
+            final fun <get-everywhere>(): kotlin/Boolean // stapel.auth.presentation/SignOutState.SigningOut.everywhere.<get-everywhere>|<get-everywhere>(){}[0]
+
+        final fun component1(): kotlin/Boolean // stapel.auth.presentation/SignOutState.SigningOut.component1|component1(){}[0]
+        final fun copy(kotlin/Boolean = ...): stapel.auth.presentation/SignOutState.SigningOut // stapel.auth.presentation/SignOutState.SigningOut.copy|copy(kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SignOutState.SigningOut.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SignOutState.SigningOut.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SignOutState.SigningOut.toString|toString(){}[0]
+    }
+
+    final object Idle : stapel.auth.presentation/SignOutState { // stapel.auth.presentation/SignOutState.Idle|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SignOutState.Idle.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SignOutState.Idle.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SignOutState.Idle.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.session/AuthState { // stapel.auth.session/AuthState|null[0]
+    final class Guest : stapel.auth.session/AuthState { // stapel.auth.session/AuthState.Guest|null[0]
+        constructor <init>(stapel.auth.model/AuthUser?) // stapel.auth.session/AuthState.Guest.<init>|<init>(stapel.auth.model.AuthUser?){}[0]
+
+        final val user // stapel.auth.session/AuthState.Guest.user|{}user[0]
+            final fun <get-user>(): stapel.auth.model/AuthUser? // stapel.auth.session/AuthState.Guest.user.<get-user>|<get-user>(){}[0]
+
+        final fun component1(): stapel.auth.model/AuthUser? // stapel.auth.session/AuthState.Guest.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/AuthUser? = ...): stapel.auth.session/AuthState.Guest // stapel.auth.session/AuthState.Guest.copy|copy(stapel.auth.model.AuthUser?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/AuthState.Guest.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/AuthState.Guest.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/AuthState.Guest.toString|toString(){}[0]
+    }
+
+    final class SignedIn : stapel.auth.session/AuthState { // stapel.auth.session/AuthState.SignedIn|null[0]
+        constructor <init>(stapel.auth.model/AuthUser?) // stapel.auth.session/AuthState.SignedIn.<init>|<init>(stapel.auth.model.AuthUser?){}[0]
+
+        final val user // stapel.auth.session/AuthState.SignedIn.user|{}user[0]
+            final fun <get-user>(): stapel.auth.model/AuthUser? // stapel.auth.session/AuthState.SignedIn.user.<get-user>|<get-user>(){}[0]
+
+        final fun component1(): stapel.auth.model/AuthUser? // stapel.auth.session/AuthState.SignedIn.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/AuthUser? = ...): stapel.auth.session/AuthState.SignedIn // stapel.auth.session/AuthState.SignedIn.copy|copy(stapel.auth.model.AuthUser?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/AuthState.SignedIn.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/AuthState.SignedIn.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/AuthState.SignedIn.toString|toString(){}[0]
+    }
+
+    final class SignedOut : stapel.auth.session/AuthState { // stapel.auth.session/AuthState.SignedOut|null[0]
+        constructor <init>(stapel.auth.session/SignOutReason?) // stapel.auth.session/AuthState.SignedOut.<init>|<init>(stapel.auth.session.SignOutReason?){}[0]
+
+        final val reason // stapel.auth.session/AuthState.SignedOut.reason|{}reason[0]
+            final fun <get-reason>(): stapel.auth.session/SignOutReason? // stapel.auth.session/AuthState.SignedOut.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): stapel.auth.session/SignOutReason? // stapel.auth.session/AuthState.SignedOut.component1|component1(){}[0]
+        final fun copy(stapel.auth.session/SignOutReason? = ...): stapel.auth.session/AuthState.SignedOut // stapel.auth.session/AuthState.SignedOut.copy|copy(stapel.auth.session.SignOutReason?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/AuthState.SignedOut.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/AuthState.SignedOut.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/AuthState.SignedOut.toString|toString(){}[0]
+    }
+
+    final object Restoring : stapel.auth.session/AuthState { // stapel.auth.session/AuthState.Restoring|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/AuthState.Restoring.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/AuthState.Restoring.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/AuthState.Restoring.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.session/SessionChange { // stapel.auth.session/SessionChange|null[0]
+    final class Merged : stapel.auth.session/SessionChange { // stapel.auth.session/SessionChange.Merged|null[0]
+        constructor <init>(kotlin/String, stapel.auth.model/AuthUser) // stapel.auth.session/SessionChange.Merged.<init>|<init>(kotlin.String;stapel.auth.model.AuthUser){}[0]
+
+        final val fromGuestId // stapel.auth.session/SessionChange.Merged.fromGuestId|{}fromGuestId[0]
+            final fun <get-fromGuestId>(): kotlin/String // stapel.auth.session/SessionChange.Merged.fromGuestId.<get-fromGuestId>|<get-fromGuestId>(){}[0]
+        final val into // stapel.auth.session/SessionChange.Merged.into|{}into[0]
+            final fun <get-into>(): stapel.auth.model/AuthUser // stapel.auth.session/SessionChange.Merged.into.<get-into>|<get-into>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.session/SessionChange.Merged.component1|component1(){}[0]
+        final fun component2(): stapel.auth.model/AuthUser // stapel.auth.session/SessionChange.Merged.component2|component2(){}[0]
+        final fun copy(kotlin/String = ..., stapel.auth.model/AuthUser = ...): stapel.auth.session/SessionChange.Merged // stapel.auth.session/SessionChange.Merged.copy|copy(kotlin.String;stapel.auth.model.AuthUser){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/SessionChange.Merged.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/SessionChange.Merged.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/SessionChange.Merged.toString|toString(){}[0]
+    }
+
+    final class Promoted : stapel.auth.session/SessionChange { // stapel.auth.session/SessionChange.Promoted|null[0]
+        constructor <init>(stapel.auth.model/AuthUser) // stapel.auth.session/SessionChange.Promoted.<init>|<init>(stapel.auth.model.AuthUser){}[0]
+
+        final val user // stapel.auth.session/SessionChange.Promoted.user|{}user[0]
+            final fun <get-user>(): stapel.auth.model/AuthUser // stapel.auth.session/SessionChange.Promoted.user.<get-user>|<get-user>(){}[0]
+
+        final fun component1(): stapel.auth.model/AuthUser // stapel.auth.session/SessionChange.Promoted.component1|component1(){}[0]
+        final fun copy(stapel.auth.model/AuthUser = ...): stapel.auth.session/SessionChange.Promoted // stapel.auth.session/SessionChange.Promoted.copy|copy(stapel.auth.model.AuthUser){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/SessionChange.Promoted.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/SessionChange.Promoted.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/SessionChange.Promoted.toString|toString(){}[0]
+    }
+
+    final class SignedIn : stapel.auth.session/SessionChange { // stapel.auth.session/SessionChange.SignedIn|null[0]
+        constructor <init>(stapel.auth.model/AuthUser, stapel.auth.model/SignInKind) // stapel.auth.session/SessionChange.SignedIn.<init>|<init>(stapel.auth.model.AuthUser;stapel.auth.model.SignInKind){}[0]
+
+        final val kind // stapel.auth.session/SessionChange.SignedIn.kind|{}kind[0]
+            final fun <get-kind>(): stapel.auth.model/SignInKind // stapel.auth.session/SessionChange.SignedIn.kind.<get-kind>|<get-kind>(){}[0]
+        final val user // stapel.auth.session/SessionChange.SignedIn.user|{}user[0]
+            final fun <get-user>(): stapel.auth.model/AuthUser // stapel.auth.session/SessionChange.SignedIn.user.<get-user>|<get-user>(){}[0]
+
+        final fun component1(): stapel.auth.model/AuthUser // stapel.auth.session/SessionChange.SignedIn.component1|component1(){}[0]
+        final fun component2(): stapel.auth.model/SignInKind // stapel.auth.session/SessionChange.SignedIn.component2|component2(){}[0]
+        final fun copy(stapel.auth.model/AuthUser = ..., stapel.auth.model/SignInKind = ...): stapel.auth.session/SessionChange.SignedIn // stapel.auth.session/SessionChange.SignedIn.copy|copy(stapel.auth.model.AuthUser;stapel.auth.model.SignInKind){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/SessionChange.SignedIn.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/SessionChange.SignedIn.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/SessionChange.SignedIn.toString|toString(){}[0]
+    }
+
+    final class SignedOut : stapel.auth.session/SessionChange { // stapel.auth.session/SessionChange.SignedOut|null[0]
+        constructor <init>(kotlin/String?, stapel.auth.session/SignOutReason) // stapel.auth.session/SessionChange.SignedOut.<init>|<init>(kotlin.String?;stapel.auth.session.SignOutReason){}[0]
+
+        final val reason // stapel.auth.session/SessionChange.SignedOut.reason|{}reason[0]
+            final fun <get-reason>(): stapel.auth.session/SignOutReason // stapel.auth.session/SessionChange.SignedOut.reason.<get-reason>|<get-reason>(){}[0]
+        final val userId // stapel.auth.session/SessionChange.SignedOut.userId|{}userId[0]
+            final fun <get-userId>(): kotlin/String? // stapel.auth.session/SessionChange.SignedOut.userId.<get-userId>|<get-userId>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.auth.session/SessionChange.SignedOut.component1|component1(){}[0]
+        final fun component2(): stapel.auth.session/SignOutReason // stapel.auth.session/SessionChange.SignedOut.component2|component2(){}[0]
+        final fun copy(kotlin/String? = ..., stapel.auth.session/SignOutReason = ...): stapel.auth.session/SessionChange.SignedOut // stapel.auth.session/SessionChange.SignedOut.copy|copy(kotlin.String?;stapel.auth.session.SignOutReason){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/SessionChange.SignedOut.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/SessionChange.SignedOut.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/SessionChange.SignedOut.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.auth.session/StepUpState { // stapel.auth.session/StepUpState|null[0]
+    final class AwaitingCode : stapel.auth.session/StepUpState { // stapel.auth.session/StepUpState.AwaitingCode|null[0]
+        constructor <init>(stapel.result/VerificationChallenge, kotlin/String, kotlin/Boolean, stapel.auth.error/AuthError?) // stapel.auth.session/StepUpState.AwaitingCode.<init>|<init>(stapel.result.VerificationChallenge;kotlin.String;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+
+        final val challenge // stapel.auth.session/StepUpState.AwaitingCode.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.result/VerificationChallenge // stapel.auth.session/StepUpState.AwaitingCode.challenge.<get-challenge>|<get-challenge>(){}[0]
+        final val error // stapel.auth.session/StepUpState.AwaitingCode.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError? // stapel.auth.session/StepUpState.AwaitingCode.error.<get-error>|<get-error>(){}[0]
+        final val factor // stapel.auth.session/StepUpState.AwaitingCode.factor|{}factor[0]
+            final fun <get-factor>(): kotlin/String // stapel.auth.session/StepUpState.AwaitingCode.factor.<get-factor>|<get-factor>(){}[0]
+        final val submitting // stapel.auth.session/StepUpState.AwaitingCode.submitting|{}submitting[0]
+            final fun <get-submitting>(): kotlin/Boolean // stapel.auth.session/StepUpState.AwaitingCode.submitting.<get-submitting>|<get-submitting>(){}[0]
+
+        final fun component1(): stapel.result/VerificationChallenge // stapel.auth.session/StepUpState.AwaitingCode.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.session/StepUpState.AwaitingCode.component2|component2(){}[0]
+        final fun component3(): kotlin/Boolean // stapel.auth.session/StepUpState.AwaitingCode.component3|component3(){}[0]
+        final fun component4(): stapel.auth.error/AuthError? // stapel.auth.session/StepUpState.AwaitingCode.component4|component4(){}[0]
+        final fun copy(stapel.result/VerificationChallenge = ..., kotlin/String = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...): stapel.auth.session/StepUpState.AwaitingCode // stapel.auth.session/StepUpState.AwaitingCode.copy|copy(stapel.result.VerificationChallenge;kotlin.String;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/StepUpState.AwaitingCode.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/StepUpState.AwaitingCode.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/StepUpState.AwaitingCode.toString|toString(){}[0]
+    }
+
+    final class Picking : stapel.auth.session/StepUpState { // stapel.auth.session/StepUpState.Picking|null[0]
+        constructor <init>(stapel.result/VerificationChallenge, kotlin/String, stapel.auth.error/AuthError?) // stapel.auth.session/StepUpState.Picking.<init>|<init>(stapel.result.VerificationChallenge;kotlin.String;stapel.auth.error.AuthError?){}[0]
+
+        final val challenge // stapel.auth.session/StepUpState.Picking.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.result/VerificationChallenge // stapel.auth.session/StepUpState.Picking.challenge.<get-challenge>|<get-challenge>(){}[0]
+        final val error // stapel.auth.session/StepUpState.Picking.error|{}error[0]
+            final fun <get-error>(): stapel.auth.error/AuthError? // stapel.auth.session/StepUpState.Picking.error.<get-error>|<get-error>(){}[0]
+        final val operationId // stapel.auth.session/StepUpState.Picking.operationId|{}operationId[0]
+            final fun <get-operationId>(): kotlin/String // stapel.auth.session/StepUpState.Picking.operationId.<get-operationId>|<get-operationId>(){}[0]
+
+        final fun component1(): stapel.result/VerificationChallenge // stapel.auth.session/StepUpState.Picking.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.auth.session/StepUpState.Picking.component2|component2(){}[0]
+        final fun component3(): stapel.auth.error/AuthError? // stapel.auth.session/StepUpState.Picking.component3|component3(){}[0]
+        final fun copy(stapel.result/VerificationChallenge = ..., kotlin/String = ..., stapel.auth.error/AuthError? = ...): stapel.auth.session/StepUpState.Picking // stapel.auth.session/StepUpState.Picking.copy|copy(stapel.result.VerificationChallenge;kotlin.String;stapel.auth.error.AuthError?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/StepUpState.Picking.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/StepUpState.Picking.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/StepUpState.Picking.toString|toString(){}[0]
+    }
+
+    final object Idle : stapel.auth.session/StepUpState { // stapel.auth.session/StepUpState.Idle|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/StepUpState.Idle.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.session/StepUpState.Idle.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.session/StepUpState.Idle.toString|toString(){}[0]
+    }
+}
+
+abstract class <#A: kotlin/Any, #B: kotlin/Any> stapel.auth.presentation/SignInPresenter : stapel.mvi/Presenter<#A, #B, stapel.auth.presentation/AuthEffect> // stapel.auth.presentation/SignInPresenter|null[0]
 
 final class stapel.auth.api.model/AdminUserCreateRequest { // stapel.auth.api.model/AdminUserCreateRequest|null[0]
     constructor <init>(kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Boolean? = ..., kotlin/Boolean? = ...) // stapel.auth.api.model/AdminUserCreateRequest.<init>|<init>(kotlin.String?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean?;kotlin.Boolean?){}[0]
@@ -9405,6 +10496,459 @@ final class stapel.auth.api/AuthUrls { // stapel.auth.api/AuthUrls|null[0]
     final fun ssoSamlAcsUrl(kotlin/String, kotlinx.serialization.json/JsonObject? = ...): kotlin/String // stapel.auth.api/AuthUrls.ssoSamlAcsUrl|ssoSamlAcsUrl(kotlin.String;kotlinx.serialization.json.JsonObject?){}[0]
 }
 
+final class stapel.auth.error/AuthError : stapel.result/StapelError { // stapel.auth.error/AuthError|null[0]
+    constructor <init>(stapel.auth.error/AuthErrorReason, stapel.result/StapelError?) // stapel.auth.error/AuthError.<init>|<init>(stapel.auth.error.AuthErrorReason;stapel.result.StapelError?){}[0]
+
+    final val attemptsRemaining // stapel.auth.error/AuthError.attemptsRemaining|{}attemptsRemaining[0]
+        final fun <get-attemptsRemaining>(): kotlin/Int? // stapel.auth.error/AuthError.attemptsRemaining.<get-attemptsRemaining>|<get-attemptsRemaining>(){}[0]
+    final val cause // stapel.auth.error/AuthError.cause|{}cause[0]
+        final fun <get-cause>(): stapel.result/StapelError? // stapel.auth.error/AuthError.cause.<get-cause>|<get-cause>(){}[0]
+    final val code // stapel.auth.error/AuthError.code|{}code[0]
+        final fun <get-code>(): stapel.result/ErrorCode // stapel.auth.error/AuthError.code.<get-code>|<get-code>(){}[0]
+    final val envelope // stapel.auth.error/AuthError.envelope|{}envelope[0]
+        final fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.auth.error/AuthError.envelope.<get-envelope>|<get-envelope>(){}[0]
+    final val field // stapel.auth.error/AuthError.field|{}field[0]
+        final fun <get-field>(): kotlin/String? // stapel.auth.error/AuthError.field.<get-field>|<get-field>(){}[0]
+    final val isTransient // stapel.auth.error/AuthError.isTransient|{}isTransient[0]
+        final fun <get-isTransient>(): kotlin/Boolean // stapel.auth.error/AuthError.isTransient.<get-isTransient>|<get-isTransient>(){}[0]
+    final val params // stapel.auth.error/AuthError.params|{}params[0]
+        final fun <get-params>(): stapel.result/ErrorParams // stapel.auth.error/AuthError.params.<get-params>|<get-params>(){}[0]
+    final val reason // stapel.auth.error/AuthError.reason|{}reason[0]
+        final fun <get-reason>(): stapel.auth.error/AuthErrorReason // stapel.auth.error/AuthError.reason.<get-reason>|<get-reason>(){}[0]
+    final val remediation // stapel.auth.error/AuthError.remediation|{}remediation[0]
+        final fun <get-remediation>(): stapel.result/Remediation // stapel.auth.error/AuthError.remediation.<get-remediation>|<get-remediation>(){}[0]
+    final val retryAfter // stapel.auth.error/AuthError.retryAfter|{}retryAfter[0]
+        final fun <get-retryAfter>(): kotlin.time/Duration? // stapel.auth.error/AuthError.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+    final val status // stapel.auth.error/AuthError.status|{}status[0]
+        final fun <get-status>(): kotlin/Int? // stapel.auth.error/AuthError.status.<get-status>|<get-status>(){}[0]
+
+    final fun component1(): stapel.auth.error/AuthErrorReason // stapel.auth.error/AuthError.component1|component1(){}[0]
+    final fun component2(): stapel.result/StapelError? // stapel.auth.error/AuthError.component2|component2(){}[0]
+    final fun copy(stapel.auth.error/AuthErrorReason = ..., stapel.result/StapelError? = ...): stapel.auth.error/AuthError // stapel.auth.error/AuthError.copy|copy(stapel.auth.error.AuthErrorReason;stapel.result.StapelError?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.error/AuthError.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.error/AuthError.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.error/AuthError.toString|toString(){}[0]
+
+    final object Companion { // stapel.auth.error/AuthError.Companion|null[0]
+        final fun of(stapel.result/StapelError): stapel.auth.error/AuthError // stapel.auth.error/AuthError.Companion.of|of(stapel.result.StapelError){}[0]
+    }
+}
+
+final class stapel.auth.model/AuthCapabilities { // stapel.auth.model/AuthCapabilities|null[0]
+    constructor <init>(kotlin.collections/List<stapel.auth.model/AuthMethod>, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, stapel.auth.model/OtpParameters, stapel.auth.model/PostureStage) // stapel.auth.model/AuthCapabilities.<init>|<init>(kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;stapel.auth.model.OtpParameters;stapel.auth.model.PostureStage){}[0]
+
+    final val emailMock // stapel.auth.model/AuthCapabilities.emailMock|{}emailMock[0]
+        final fun <get-emailMock>(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.emailMock.<get-emailMock>|<get-emailMock>(){}[0]
+    final val guestSessions // stapel.auth.model/AuthCapabilities.guestSessions|{}guestSessions[0]
+        final fun <get-guestSessions>(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.guestSessions.<get-guestSessions>|<get-guestSessions>(){}[0]
+    final val methods // stapel.auth.model/AuthCapabilities.methods|{}methods[0]
+        final fun <get-methods>(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.model/AuthCapabilities.methods.<get-methods>|<get-methods>(){}[0]
+    final val otp // stapel.auth.model/AuthCapabilities.otp|{}otp[0]
+        final fun <get-otp>(): stapel.auth.model/OtpParameters // stapel.auth.model/AuthCapabilities.otp.<get-otp>|<get-otp>(){}[0]
+    final val passwordRegistration // stapel.auth.model/AuthCapabilities.passwordRegistration|{}passwordRegistration[0]
+        final fun <get-passwordRegistration>(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.passwordRegistration.<get-passwordRegistration>|<get-passwordRegistration>(){}[0]
+    final val phoneMock // stapel.auth.model/AuthCapabilities.phoneMock|{}phoneMock[0]
+        final fun <get-phoneMock>(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.phoneMock.<get-phoneMock>|<get-phoneMock>(){}[0]
+    final val stage // stapel.auth.model/AuthCapabilities.stage|{}stage[0]
+        final fun <get-stage>(): stapel.auth.model/PostureStage // stapel.auth.model/AuthCapabilities.stage.<get-stage>|<get-stage>(){}[0]
+
+    final fun component1(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.model/AuthCapabilities.component1|component1(){}[0]
+    final fun component2(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.component4|component4(){}[0]
+    final fun component5(): kotlin/Boolean // stapel.auth.model/AuthCapabilities.component5|component5(){}[0]
+    final fun component6(): stapel.auth.model/OtpParameters // stapel.auth.model/AuthCapabilities.component6|component6(){}[0]
+    final fun component7(): stapel.auth.model/PostureStage // stapel.auth.model/AuthCapabilities.component7|component7(){}[0]
+    final fun copy(kotlin.collections/List<stapel.auth.model/AuthMethod> = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., stapel.auth.model/OtpParameters = ..., stapel.auth.model/PostureStage = ...): stapel.auth.model/AuthCapabilities // stapel.auth.model/AuthCapabilities.copy|copy(kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;stapel.auth.model.OtpParameters;stapel.auth.model.PostureStage){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/AuthCapabilities.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.model/AuthCapabilities.hashCode|hashCode(){}[0]
+    final fun isMock(stapel.auth.model/OtpChannel): kotlin/Boolean // stapel.auth.model/AuthCapabilities.isMock|isMock(stapel.auth.model.OtpChannel){}[0]
+    final fun toString(): kotlin/String // stapel.auth.model/AuthCapabilities.toString|toString(){}[0]
+}
+
+final class stapel.auth.model/AuthMethod { // stapel.auth.model/AuthMethod|null[0]
+    constructor <init>(stapel.auth.model/AuthMethodId, kotlin/String, kotlin/Boolean, stapel.auth.model/MethodPlacement, kotlin/Int, stapel.auth.model/MethodInteraction, kotlin/String?, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean) // stapel.auth.model/AuthMethod.<init>|<init>(stapel.auth.model.AuthMethodId;kotlin.String;kotlin.Boolean;stapel.auth.model.MethodPlacement;kotlin.Int;stapel.auth.model.MethodInteraction;kotlin.String?;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val canLogin // stapel.auth.model/AuthMethod.canLogin|{}canLogin[0]
+        final fun <get-canLogin>(): kotlin/Boolean // stapel.auth.model/AuthMethod.canLogin.<get-canLogin>|<get-canLogin>(){}[0]
+    final val canRegister // stapel.auth.model/AuthMethod.canRegister|{}canRegister[0]
+        final fun <get-canRegister>(): kotlin/Boolean // stapel.auth.model/AuthMethod.canRegister.<get-canRegister>|<get-canRegister>(){}[0]
+    final val enabled // stapel.auth.model/AuthMethod.enabled|{}enabled[0]
+        final fun <get-enabled>(): kotlin/Boolean // stapel.auth.model/AuthMethod.enabled.<get-enabled>|<get-enabled>(){}[0]
+    final val iconSvg // stapel.auth.model/AuthMethod.iconSvg|{}iconSvg[0]
+        final fun <get-iconSvg>(): kotlin/String? // stapel.auth.model/AuthMethod.iconSvg.<get-iconSvg>|<get-iconSvg>(){}[0]
+    final val id // stapel.auth.model/AuthMethod.id|{}id[0]
+        final fun <get-id>(): stapel.auth.model/AuthMethodId // stapel.auth.model/AuthMethod.id.<get-id>|<get-id>(){}[0]
+    final val interaction // stapel.auth.model/AuthMethod.interaction|{}interaction[0]
+        final fun <get-interaction>(): stapel.auth.model/MethodInteraction // stapel.auth.model/AuthMethod.interaction.<get-interaction>|<get-interaction>(){}[0]
+    final val mock // stapel.auth.model/AuthMethod.mock|{}mock[0]
+        final fun <get-mock>(): kotlin/Boolean // stapel.auth.model/AuthMethod.mock.<get-mock>|<get-mock>(){}[0]
+    final val order // stapel.auth.model/AuthMethod.order|{}order[0]
+        final fun <get-order>(): kotlin/Int // stapel.auth.model/AuthMethod.order.<get-order>|<get-order>(){}[0]
+    final val placement // stapel.auth.model/AuthMethod.placement|{}placement[0]
+        final fun <get-placement>(): stapel.auth.model/MethodPlacement // stapel.auth.model/AuthMethod.placement.<get-placement>|<get-placement>(){}[0]
+    final val wireId // stapel.auth.model/AuthMethod.wireId|{}wireId[0]
+        final fun <get-wireId>(): kotlin/String // stapel.auth.model/AuthMethod.wireId.<get-wireId>|<get-wireId>(){}[0]
+
+    final fun component1(): stapel.auth.model/AuthMethodId // stapel.auth.model/AuthMethod.component1|component1(){}[0]
+    final fun component10(): kotlin/Boolean // stapel.auth.model/AuthMethod.component10|component10(){}[0]
+    final fun component2(): kotlin/String // stapel.auth.model/AuthMethod.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // stapel.auth.model/AuthMethod.component3|component3(){}[0]
+    final fun component4(): stapel.auth.model/MethodPlacement // stapel.auth.model/AuthMethod.component4|component4(){}[0]
+    final fun component5(): kotlin/Int // stapel.auth.model/AuthMethod.component5|component5(){}[0]
+    final fun component6(): stapel.auth.model/MethodInteraction // stapel.auth.model/AuthMethod.component6|component6(){}[0]
+    final fun component7(): kotlin/String? // stapel.auth.model/AuthMethod.component7|component7(){}[0]
+    final fun component8(): kotlin/Boolean // stapel.auth.model/AuthMethod.component8|component8(){}[0]
+    final fun component9(): kotlin/Boolean // stapel.auth.model/AuthMethod.component9|component9(){}[0]
+    final fun copy(stapel.auth.model/AuthMethodId = ..., kotlin/String = ..., kotlin/Boolean = ..., stapel.auth.model/MethodPlacement = ..., kotlin/Int = ..., stapel.auth.model/MethodInteraction = ..., kotlin/String? = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ...): stapel.auth.model/AuthMethod // stapel.auth.model/AuthMethod.copy|copy(stapel.auth.model.AuthMethodId;kotlin.String;kotlin.Boolean;stapel.auth.model.MethodPlacement;kotlin.Int;stapel.auth.model.MethodInteraction;kotlin.String?;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/AuthMethod.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.model/AuthMethod.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.model/AuthMethod.toString|toString(){}[0]
+}
+
+final class stapel.auth.model/AuthUser { // stapel.auth.model/AuthUser|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String?, kotlin/String?, stapel.auth.model/AuthType, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, kotlin/String?, kotlin/String?, kotlin.time/Instant, kotlin.time/Instant?) // stapel.auth.model/AuthUser.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?;kotlin.String?;stapel.auth.model.AuthType;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.String?;kotlin.String?;kotlin.time.Instant;kotlin.time.Instant?){}[0]
+
+    final val authType // stapel.auth.model/AuthUser.authType|{}authType[0]
+        final fun <get-authType>(): stapel.auth.model/AuthType // stapel.auth.model/AuthUser.authType.<get-authType>|<get-authType>(){}[0]
+    final val avatarUrl // stapel.auth.model/AuthUser.avatarUrl|{}avatarUrl[0]
+        final fun <get-avatarUrl>(): kotlin/String? // stapel.auth.model/AuthUser.avatarUrl.<get-avatarUrl>|<get-avatarUrl>(){}[0]
+    final val createdAt // stapel.auth.model/AuthUser.createdAt|{}createdAt[0]
+        final fun <get-createdAt>(): kotlin.time/Instant // stapel.auth.model/AuthUser.createdAt.<get-createdAt>|<get-createdAt>(){}[0]
+    final val email // stapel.auth.model/AuthUser.email|{}email[0]
+        final fun <get-email>(): kotlin/String? // stapel.auth.model/AuthUser.email.<get-email>|<get-email>(){}[0]
+    final val id // stapel.auth.model/AuthUser.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.auth.model/AuthUser.id.<get-id>|<get-id>(){}[0]
+    final val isEmailVerified // stapel.auth.model/AuthUser.isEmailVerified|{}isEmailVerified[0]
+        final fun <get-isEmailVerified>(): kotlin/Boolean // stapel.auth.model/AuthUser.isEmailVerified.<get-isEmailVerified>|<get-isEmailVerified>(){}[0]
+    final val isGuest // stapel.auth.model/AuthUser.isGuest|{}isGuest[0]
+        final fun <get-isGuest>(): kotlin/Boolean // stapel.auth.model/AuthUser.isGuest.<get-isGuest>|<get-isGuest>(){}[0]
+    final val isPhoneVerified // stapel.auth.model/AuthUser.isPhoneVerified|{}isPhoneVerified[0]
+        final fun <get-isPhoneVerified>(): kotlin/Boolean // stapel.auth.model/AuthUser.isPhoneVerified.<get-isPhoneVerified>|<get-isPhoneVerified>(){}[0]
+    final val isStaff // stapel.auth.model/AuthUser.isStaff|{}isStaff[0]
+        final fun <get-isStaff>(): kotlin/Boolean // stapel.auth.model/AuthUser.isStaff.<get-isStaff>|<get-isStaff>(){}[0]
+    final val lastLogin // stapel.auth.model/AuthUser.lastLogin|{}lastLogin[0]
+        final fun <get-lastLogin>(): kotlin.time/Instant? // stapel.auth.model/AuthUser.lastLogin.<get-lastLogin>|<get-lastLogin>(){}[0]
+    final val oauthProvider // stapel.auth.model/AuthUser.oauthProvider|{}oauthProvider[0]
+        final fun <get-oauthProvider>(): kotlin/String? // stapel.auth.model/AuthUser.oauthProvider.<get-oauthProvider>|<get-oauthProvider>(){}[0]
+    final val phone // stapel.auth.model/AuthUser.phone|{}phone[0]
+        final fun <get-phone>(): kotlin/String? // stapel.auth.model/AuthUser.phone.<get-phone>|<get-phone>(){}[0]
+    final val username // stapel.auth.model/AuthUser.username|{}username[0]
+        final fun <get-username>(): kotlin/String // stapel.auth.model/AuthUser.username.<get-username>|<get-username>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.auth.model/AuthUser.component1|component1(){}[0]
+    final fun component10(): kotlin/String? // stapel.auth.model/AuthUser.component10|component10(){}[0]
+    final fun component11(): kotlin/String? // stapel.auth.model/AuthUser.component11|component11(){}[0]
+    final fun component12(): kotlin.time/Instant // stapel.auth.model/AuthUser.component12|component12(){}[0]
+    final fun component13(): kotlin.time/Instant? // stapel.auth.model/AuthUser.component13|component13(){}[0]
+    final fun component2(): kotlin/String // stapel.auth.model/AuthUser.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.auth.model/AuthUser.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // stapel.auth.model/AuthUser.component4|component4(){}[0]
+    final fun component5(): stapel.auth.model/AuthType // stapel.auth.model/AuthUser.component5|component5(){}[0]
+    final fun component6(): kotlin/Boolean // stapel.auth.model/AuthUser.component6|component6(){}[0]
+    final fun component7(): kotlin/Boolean // stapel.auth.model/AuthUser.component7|component7(){}[0]
+    final fun component8(): kotlin/Boolean // stapel.auth.model/AuthUser.component8|component8(){}[0]
+    final fun component9(): kotlin/Boolean // stapel.auth.model/AuthUser.component9|component9(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/String? = ..., stapel.auth.model/AuthType = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin.time/Instant = ..., kotlin.time/Instant? = ...): stapel.auth.model/AuthUser // stapel.auth.model/AuthUser.copy|copy(kotlin.String;kotlin.String;kotlin.String?;kotlin.String?;stapel.auth.model.AuthType;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.String?;kotlin.String?;kotlin.time.Instant;kotlin.time.Instant?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/AuthUser.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.model/AuthUser.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.model/AuthUser.toString|toString(){}[0]
+}
+
+final class stapel.auth.model/LoginChallenge { // stapel.auth.model/LoginChallenge|null[0]
+    constructor <init>(kotlin/String, kotlin.time/Instant) // stapel.auth.model/LoginChallenge.<init>|<init>(kotlin.String;kotlin.time.Instant){}[0]
+
+    final val expiresAt // stapel.auth.model/LoginChallenge.expiresAt|{}expiresAt[0]
+        final fun <get-expiresAt>(): kotlin.time/Instant // stapel.auth.model/LoginChallenge.expiresAt.<get-expiresAt>|<get-expiresAt>(){}[0]
+    final val token // stapel.auth.model/LoginChallenge.token|{}token[0]
+        final fun <get-token>(): kotlin/String // stapel.auth.model/LoginChallenge.token.<get-token>|<get-token>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.auth.model/LoginChallenge.component1|component1(){}[0]
+    final fun component2(): kotlin.time/Instant // stapel.auth.model/LoginChallenge.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin.time/Instant = ...): stapel.auth.model/LoginChallenge // stapel.auth.model/LoginChallenge.copy|copy(kotlin.String;kotlin.time.Instant){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/LoginChallenge.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.model/LoginChallenge.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.model/LoginChallenge.toString|toString(){}[0]
+}
+
+final class stapel.auth.model/OtpParameters { // stapel.auth.model/OtpParameters|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int, kotlin/Int, kotlin.time/Duration, kotlin.time/Duration) // stapel.auth.model/OtpParameters.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+    final val emailCodeLength // stapel.auth.model/OtpParameters.emailCodeLength|{}emailCodeLength[0]
+        final fun <get-emailCodeLength>(): kotlin/Int // stapel.auth.model/OtpParameters.emailCodeLength.<get-emailCodeLength>|<get-emailCodeLength>(){}[0]
+    final val phoneCodeLength // stapel.auth.model/OtpParameters.phoneCodeLength|{}phoneCodeLength[0]
+        final fun <get-phoneCodeLength>(): kotlin/Int // stapel.auth.model/OtpParameters.phoneCodeLength.<get-phoneCodeLength>|<get-phoneCodeLength>(){}[0]
+    final val resendCooldown // stapel.auth.model/OtpParameters.resendCooldown|{}resendCooldown[0]
+        final fun <get-resendCooldown>(): kotlin.time/Duration // stapel.auth.model/OtpParameters.resendCooldown.<get-resendCooldown>|<get-resendCooldown>(){}[0]
+    final val totpCodeLength // stapel.auth.model/OtpParameters.totpCodeLength|{}totpCodeLength[0]
+        final fun <get-totpCodeLength>(): kotlin/Int // stapel.auth.model/OtpParameters.totpCodeLength.<get-totpCodeLength>|<get-totpCodeLength>(){}[0]
+    final val ttl // stapel.auth.model/OtpParameters.ttl|{}ttl[0]
+        final fun <get-ttl>(): kotlin.time/Duration // stapel.auth.model/OtpParameters.ttl.<get-ttl>|<get-ttl>(){}[0]
+
+    final fun codeLength(stapel.auth.model/OtpChannel): kotlin/Int // stapel.auth.model/OtpParameters.codeLength|codeLength(stapel.auth.model.OtpChannel){}[0]
+    final fun component1(): kotlin/Int // stapel.auth.model/OtpParameters.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // stapel.auth.model/OtpParameters.component2|component2(){}[0]
+    final fun component3(): kotlin/Int // stapel.auth.model/OtpParameters.component3|component3(){}[0]
+    final fun component4(): kotlin.time/Duration // stapel.auth.model/OtpParameters.component4|component4(){}[0]
+    final fun component5(): kotlin.time/Duration // stapel.auth.model/OtpParameters.component5|component5(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.auth.model/OtpParameters // stapel.auth.model/OtpParameters.copy|copy(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.time.Duration;kotlin.time.Duration){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/OtpParameters.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.model/OtpParameters.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.model/OtpParameters.toString|toString(){}[0]
+}
+
+final class stapel.auth.model/SessionDevice { // stapel.auth.model/SessionDevice|null[0]
+    constructor <init>(kotlin/String, stapel.auth.model/DeviceType, kotlin/String, kotlin/String, kotlin/String?, kotlin.time/Instant?, kotlin.time/Instant?, kotlin/Boolean, kotlin/Boolean) // stapel.auth.model/SessionDevice.<init>|<init>(kotlin.String;stapel.auth.model.DeviceType;kotlin.String;kotlin.String;kotlin.String?;kotlin.time.Instant?;kotlin.time.Instant?;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val createdAt // stapel.auth.model/SessionDevice.createdAt|{}createdAt[0]
+        final fun <get-createdAt>(): kotlin.time/Instant? // stapel.auth.model/SessionDevice.createdAt.<get-createdAt>|<get-createdAt>(){}[0]
+    final val details // stapel.auth.model/SessionDevice.details|{}details[0]
+        final fun <get-details>(): kotlin/String // stapel.auth.model/SessionDevice.details.<get-details>|<get-details>(){}[0]
+    final val id // stapel.auth.model/SessionDevice.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.auth.model/SessionDevice.id.<get-id>|<get-id>(){}[0]
+    final val ipAddress // stapel.auth.model/SessionDevice.ipAddress|{}ipAddress[0]
+        final fun <get-ipAddress>(): kotlin/String? // stapel.auth.model/SessionDevice.ipAddress.<get-ipAddress>|<get-ipAddress>(){}[0]
+    final val isCurrent // stapel.auth.model/SessionDevice.isCurrent|{}isCurrent[0]
+        final fun <get-isCurrent>(): kotlin/Boolean // stapel.auth.model/SessionDevice.isCurrent.<get-isCurrent>|<get-isCurrent>(){}[0]
+    final val isSuspicious // stapel.auth.model/SessionDevice.isSuspicious|{}isSuspicious[0]
+        final fun <get-isSuspicious>(): kotlin/Boolean // stapel.auth.model/SessionDevice.isSuspicious.<get-isSuspicious>|<get-isSuspicious>(){}[0]
+    final val lastUsedAt // stapel.auth.model/SessionDevice.lastUsedAt|{}lastUsedAt[0]
+        final fun <get-lastUsedAt>(): kotlin.time/Instant? // stapel.auth.model/SessionDevice.lastUsedAt.<get-lastUsedAt>|<get-lastUsedAt>(){}[0]
+    final val name // stapel.auth.model/SessionDevice.name|{}name[0]
+        final fun <get-name>(): kotlin/String // stapel.auth.model/SessionDevice.name.<get-name>|<get-name>(){}[0]
+    final val type // stapel.auth.model/SessionDevice.type|{}type[0]
+        final fun <get-type>(): stapel.auth.model/DeviceType // stapel.auth.model/SessionDevice.type.<get-type>|<get-type>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.auth.model/SessionDevice.component1|component1(){}[0]
+    final fun component2(): stapel.auth.model/DeviceType // stapel.auth.model/SessionDevice.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.auth.model/SessionDevice.component3|component3(){}[0]
+    final fun component4(): kotlin/String // stapel.auth.model/SessionDevice.component4|component4(){}[0]
+    final fun component5(): kotlin/String? // stapel.auth.model/SessionDevice.component5|component5(){}[0]
+    final fun component6(): kotlin.time/Instant? // stapel.auth.model/SessionDevice.component6|component6(){}[0]
+    final fun component7(): kotlin.time/Instant? // stapel.auth.model/SessionDevice.component7|component7(){}[0]
+    final fun component8(): kotlin/Boolean // stapel.auth.model/SessionDevice.component8|component8(){}[0]
+    final fun component9(): kotlin/Boolean // stapel.auth.model/SessionDevice.component9|component9(){}[0]
+    final fun copy(kotlin/String = ..., stapel.auth.model/DeviceType = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., kotlin.time/Instant? = ..., kotlin.time/Instant? = ..., kotlin/Boolean = ..., kotlin/Boolean = ...): stapel.auth.model/SessionDevice // stapel.auth.model/SessionDevice.copy|copy(kotlin.String;stapel.auth.model.DeviceType;kotlin.String;kotlin.String;kotlin.String?;kotlin.time.Instant?;kotlin.time.Instant?;kotlin.Boolean;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.model/SessionDevice.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.model/SessionDevice.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.model/SessionDevice.toString|toString(){}[0]
+}
+
+final class stapel.auth.platform/AuthPlatform { // stapel.auth.platform/AuthPlatform|null[0]
+    constructor <init>(stapel.auth.platform/ExternalUserAgent? = ..., stapel.auth.platform/PasskeyAuthenticator? = ..., kotlin.collections/Map<kotlin/String, stapel.auth.platform/NativeIdentityProvider> = ...) // stapel.auth.platform/AuthPlatform.<init>|<init>(stapel.auth.platform.ExternalUserAgent?;stapel.auth.platform.PasskeyAuthenticator?;kotlin.collections.Map<kotlin.String,stapel.auth.platform.NativeIdentityProvider>){}[0]
+
+    final val browser // stapel.auth.platform/AuthPlatform.browser|{}browser[0]
+        final fun <get-browser>(): stapel.auth.platform/ExternalUserAgent? // stapel.auth.platform/AuthPlatform.browser.<get-browser>|<get-browser>(){}[0]
+    final val identityProviders // stapel.auth.platform/AuthPlatform.identityProviders|{}identityProviders[0]
+        final fun <get-identityProviders>(): kotlin.collections/Map<kotlin/String, stapel.auth.platform/NativeIdentityProvider> // stapel.auth.platform/AuthPlatform.identityProviders.<get-identityProviders>|<get-identityProviders>(){}[0]
+    final val passkeys // stapel.auth.platform/AuthPlatform.passkeys|{}passkeys[0]
+        final fun <get-passkeys>(): stapel.auth.platform/PasskeyAuthenticator? // stapel.auth.platform/AuthPlatform.passkeys.<get-passkeys>|<get-passkeys>(){}[0]
+
+    final fun completable(stapel.auth.model/AuthMethodId): kotlin/Boolean // stapel.auth.platform/AuthPlatform.completable|completable(stapel.auth.model.AuthMethodId){}[0]
+}
+
+final class stapel.auth.presentation/GuestPresenter : stapel.mvi/Presenter<stapel.auth.presentation/GuestState, stapel.auth.presentation/GuestIntent, kotlin/Nothing> { // stapel.auth.presentation/GuestPresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext) // stapel.auth.presentation/GuestPresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext){}[0]
+}
+
+final class stapel.auth.presentation/LoginChallengePresenter : stapel.auth.presentation/SignInPresenter<stapel.auth.presentation/LoginChallengeState, stapel.auth.presentation/LoginChallengeIntent> { // stapel.auth.presentation/LoginChallengePresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext, stapel.auth.model/SignInOutcome) // stapel.auth.presentation/LoginChallengePresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext;stapel.auth.model.SignInOutcome){}[0]
+
+    final object Companion { // stapel.auth.presentation/LoginChallengePresenter.Companion|null[0]
+        final fun totp(stapel.auth.model/LoginChallenge): stapel.auth.model/SignInOutcome // stapel.auth.presentation/LoginChallengePresenter.Companion.totp|totp(stapel.auth.model.LoginChallenge){}[0]
+    }
+}
+
+final class stapel.auth.presentation/MethodChooserPresenter : stapel.mvi/Presenter<stapel.auth.presentation/MethodChooserState, stapel.auth.presentation/MethodChooserIntent, kotlin/Nothing> { // stapel.auth.presentation/MethodChooserPresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext) // stapel.auth.presentation/MethodChooserPresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext){}[0]
+}
+
+final class stapel.auth.presentation/MethodZones { // stapel.auth.presentation/MethodZones|null[0]
+    constructor <init>(kotlin.collections/List<stapel.auth.model/AuthMethod>, kotlin.collections/List<stapel.auth.model/AuthMethod>, kotlin.collections/List<stapel.auth.model/AuthMethod>, kotlin/Boolean, kotlin/Boolean) // stapel.auth.presentation/MethodZones.<init>|<init>(kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val all // stapel.auth.presentation/MethodZones.all|{}all[0]
+        final fun <get-all>(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.presentation/MethodZones.all.<get-all>|<get-all>(){}[0]
+    final val bottom // stapel.auth.presentation/MethodZones.bottom|{}bottom[0]
+        final fun <get-bottom>(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.presentation/MethodZones.bottom.<get-bottom>|<get-bottom>(){}[0]
+    final val guestAvailable // stapel.auth.presentation/MethodZones.guestAvailable|{}guestAvailable[0]
+        final fun <get-guestAvailable>(): kotlin/Boolean // stapel.auth.presentation/MethodZones.guestAvailable.<get-guestAvailable>|<get-guestAvailable>(){}[0]
+    final val main // stapel.auth.presentation/MethodZones.main|{}main[0]
+        final fun <get-main>(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.presentation/MethodZones.main.<get-main>|<get-main>(){}[0]
+    final val overflow // stapel.auth.presentation/MethodZones.overflow|{}overflow[0]
+        final fun <get-overflow>(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.presentation/MethodZones.overflow.<get-overflow>|<get-overflow>(){}[0]
+    final val passwordRegistration // stapel.auth.presentation/MethodZones.passwordRegistration|{}passwordRegistration[0]
+        final fun <get-passwordRegistration>(): kotlin/Boolean // stapel.auth.presentation/MethodZones.passwordRegistration.<get-passwordRegistration>|<get-passwordRegistration>(){}[0]
+
+    final fun component1(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.presentation/MethodZones.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.presentation/MethodZones.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/List<stapel.auth.model/AuthMethod> // stapel.auth.presentation/MethodZones.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // stapel.auth.presentation/MethodZones.component4|component4(){}[0]
+    final fun component5(): kotlin/Boolean // stapel.auth.presentation/MethodZones.component5|component5(){}[0]
+    final fun copy(kotlin.collections/List<stapel.auth.model/AuthMethod> = ..., kotlin.collections/List<stapel.auth.model/AuthMethod> = ..., kotlin.collections/List<stapel.auth.model/AuthMethod> = ..., kotlin/Boolean = ..., kotlin/Boolean = ...): stapel.auth.presentation/MethodZones // stapel.auth.presentation/MethodZones.copy|copy(kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.collections.List<stapel.auth.model.AuthMethod>;kotlin.Boolean;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/MethodZones.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.presentation/MethodZones.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.presentation/MethodZones.toString|toString(){}[0]
+}
+
+final class stapel.auth.presentation/OtpSignInPresenter : stapel.auth.presentation/SignInPresenter<stapel.auth.presentation/OtpSignInState, stapel.auth.presentation/OtpSignInIntent> { // stapel.auth.presentation/OtpSignInPresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext) // stapel.auth.presentation/OtpSignInPresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext){}[0]
+}
+
+final class stapel.auth.presentation/PasswordRegisterPresenter : stapel.mvi/Presenter<stapel.auth.presentation/PasswordRegisterState, stapel.auth.presentation/PasswordRegisterIntent, stapel.auth.presentation/AuthEffect> { // stapel.auth.presentation/PasswordRegisterPresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext) // stapel.auth.presentation/PasswordRegisterPresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext){}[0]
+}
+
+final class stapel.auth.presentation/PasswordRegistration { // stapel.auth.presentation/PasswordRegistration|null[0]
+    constructor <init>(kotlin/String, kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...) // stapel.auth.presentation/PasswordRegistration.<init>|<init>(kotlin.String;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+
+    final val email // stapel.auth.presentation/PasswordRegistration.email|{}email[0]
+        final fun <get-email>(): kotlin/String? // stapel.auth.presentation/PasswordRegistration.email.<get-email>|<get-email>(){}[0]
+    final val password // stapel.auth.presentation/PasswordRegistration.password|{}password[0]
+        final fun <get-password>(): kotlin/String // stapel.auth.presentation/PasswordRegistration.password.<get-password>|<get-password>(){}[0]
+    final val phone // stapel.auth.presentation/PasswordRegistration.phone|{}phone[0]
+        final fun <get-phone>(): kotlin/String? // stapel.auth.presentation/PasswordRegistration.phone.<get-phone>|<get-phone>(){}[0]
+    final val username // stapel.auth.presentation/PasswordRegistration.username|{}username[0]
+        final fun <get-username>(): kotlin/String? // stapel.auth.presentation/PasswordRegistration.username.<get-username>|<get-username>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.auth.presentation/PasswordRegistration.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // stapel.auth.presentation/PasswordRegistration.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.auth.presentation/PasswordRegistration.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // stapel.auth.presentation/PasswordRegistration.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.auth.presentation/PasswordRegistration // stapel.auth.presentation/PasswordRegistration.copy|copy(kotlin.String;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/PasswordRegistration.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.presentation/PasswordRegistration.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.presentation/PasswordRegistration.toString|toString(){}[0]
+}
+
+final class stapel.auth.presentation/PasswordSignInPresenter : stapel.auth.presentation/SignInPresenter<stapel.auth.presentation/PasswordSignInState, stapel.auth.presentation/PasswordSignInIntent> { // stapel.auth.presentation/PasswordSignInPresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext) // stapel.auth.presentation/PasswordSignInPresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext){}[0]
+}
+
+final class stapel.auth.presentation/SessionsPresenter : stapel.mvi/Presenter<stapel.auth.presentation/SessionsState, stapel.auth.presentation/SessionsIntent, kotlin/Nothing> { // stapel.auth.presentation/SessionsPresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext) // stapel.auth.presentation/SessionsPresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext){}[0]
+}
+
+final class stapel.auth.presentation/SessionsState { // stapel.auth.presentation/SessionsState|null[0]
+    constructor <init>(stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...) // stapel.auth.presentation/SessionsState.<init>|<init>(stapel.result.state.Resource<kotlin.collections.List<stapel.auth.model.SessionDevice>>;kotlin.collections.Set<kotlin.String>;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+
+    final val error // stapel.auth.presentation/SessionsState.error|{}error[0]
+        final fun <get-error>(): stapel.auth.error/AuthError? // stapel.auth.presentation/SessionsState.error.<get-error>|<get-error>(){}[0]
+    final val revoking // stapel.auth.presentation/SessionsState.revoking|{}revoking[0]
+        final fun <get-revoking>(): kotlin.collections/Set<kotlin/String> // stapel.auth.presentation/SessionsState.revoking.<get-revoking>|<get-revoking>(){}[0]
+    final val revokingOthers // stapel.auth.presentation/SessionsState.revokingOthers|{}revokingOthers[0]
+        final fun <get-revokingOthers>(): kotlin/Boolean // stapel.auth.presentation/SessionsState.revokingOthers.<get-revokingOthers>|<get-revokingOthers>(){}[0]
+    final val sessions // stapel.auth.presentation/SessionsState.sessions|{}sessions[0]
+        final fun <get-sessions>(): stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> // stapel.auth.presentation/SessionsState.sessions.<get-sessions>|<get-sessions>(){}[0]
+
+    final fun component1(): stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> // stapel.auth.presentation/SessionsState.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/Set<kotlin/String> // stapel.auth.presentation/SessionsState.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // stapel.auth.presentation/SessionsState.component3|component3(){}[0]
+    final fun component4(): stapel.auth.error/AuthError? // stapel.auth.presentation/SessionsState.component4|component4(){}[0]
+    final fun copy(stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...): stapel.auth.presentation/SessionsState // stapel.auth.presentation/SessionsState.copy|copy(stapel.result.state.Resource<kotlin.collections.List<stapel.auth.model.SessionDevice>>;kotlin.collections.Set<kotlin.String>;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SessionsState.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.presentation/SessionsState.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.presentation/SessionsState.toString|toString(){}[0]
+}
+
+final class stapel.auth.presentation/SignOutPresenter : stapel.mvi/Presenter<stapel.auth.presentation/SignOutState, stapel.auth.presentation/SignOutIntent, kotlin/Nothing> { // stapel.auth.presentation/SignOutPresenter|null[0]
+    constructor <init>(stapel.auth/StapelAuth, stapel.mvi/PresenterContext) // stapel.auth.presentation/SignOutPresenter.<init>|<init>(stapel.auth.StapelAuth;stapel.mvi.PresenterContext){}[0]
+
+    final val revokedOnServer // stapel.auth.presentation/SignOutPresenter.revokedOnServer|{}revokedOnServer[0]
+        final fun <get-revokedOnServer>(): kotlin/Boolean // stapel.auth.presentation/SignOutPresenter.revokedOnServer.<get-revokedOnServer>|<get-revokedOnServer>(){}[0]
+}
+
+final class stapel.auth.repo/AccountRepository { // stapel.auth.repo/AccountRepository|null[0]
+    constructor <init>(stapel.auth.api/AuthApi, stapel.cache/StapelCache) // stapel.auth.repo/AccountRepository.<init>|<init>(stapel.auth.api.AuthApi;stapel.cache.StapelCache){}[0]
+
+    final fun me(): kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<stapel.auth.model/AuthUser>> // stapel.auth.repo/AccountRepository.me|me(){}[0]
+    final suspend fun get(): stapel.result/StapelResult<stapel.auth.model/AuthUser, stapel.auth.error/AuthError> // stapel.auth.repo/AccountRepository.get|get(){}[0]
+}
+
+final class stapel.auth.repo/CapabilitiesRepository { // stapel.auth.repo/CapabilitiesRepository|null[0]
+    constructor <init>(stapel.auth.api/AuthApi, stapel.cache/StapelCache) // stapel.auth.repo/CapabilitiesRepository.<init>|<init>(stapel.auth.api.AuthApi;stapel.cache.StapelCache){}[0]
+
+    final fun capabilities(): kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<stapel.auth.model/AuthCapabilities>> // stapel.auth.repo/CapabilitiesRepository.capabilities|capabilities(){}[0]
+    final suspend fun get(): stapel.result/StapelResult<stapel.auth.model/AuthCapabilities, stapel.auth.error/AuthError> // stapel.auth.repo/CapabilitiesRepository.get|get(){}[0]
+    final suspend fun refresh(): stapel.result/StapelResult<stapel.auth.model/AuthCapabilities, stapel.auth.error/AuthError> // stapel.auth.repo/CapabilitiesRepository.refresh|refresh(){}[0]
+}
+
+final class stapel.auth.repo/SessionsRepository { // stapel.auth.repo/SessionsRepository|null[0]
+    constructor <init>(stapel.auth.api/AuthApi, stapel.cache/StapelCache) // stapel.auth.repo/SessionsRepository.<init>|<init>(stapel.auth.api.AuthApi;stapel.cache.StapelCache){}[0]
+
+    final fun sessions(): kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>>> // stapel.auth.repo/SessionsRepository.sessions|sessions(){}[0]
+    final suspend fun load(): stapel.result/StapelResult<kotlin.collections/List<stapel.auth.model/SessionDevice>, stapel.auth.error/AuthError> // stapel.auth.repo/SessionsRepository.load|load(){}[0]
+    final suspend fun revoke(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.auth.error/AuthError> // stapel.auth.repo/SessionsRepository.revoke|revoke(kotlin.String){}[0]
+    final suspend fun revokeOthers(): stapel.result/StapelResult<kotlin/Unit, stapel.auth.error/AuthError> // stapel.auth.repo/SessionsRepository.revokeOthers|revokeOthers(){}[0]
+}
+
+final class stapel.auth.session/AuthTokenRefresher : stapel.session/TokenRefresher { // stapel.auth.session/AuthTokenRefresher|null[0]
+    constructor <init>(stapel.auth.api/AuthApi) // stapel.auth.session/AuthTokenRefresher.<init>|<init>(stapel.auth.api.AuthApi){}[0]
+
+    final suspend fun refresh(stapel.session/TokenPair): stapel.session/RefreshOutcome // stapel.auth.session/AuthTokenRefresher.refresh|refresh(stapel.session.TokenPair){}[0]
+}
+
+final class stapel.auth.session/SignOutEverywhereResult { // stapel.auth.session/SignOutEverywhereResult|null[0]
+    constructor <init>(kotlin/Boolean, stapel.auth.session/LogoutResult) // stapel.auth.session/SignOutEverywhereResult.<init>|<init>(kotlin.Boolean;stapel.auth.session.LogoutResult){}[0]
+
+    final val othersRevoked // stapel.auth.session/SignOutEverywhereResult.othersRevoked|{}othersRevoked[0]
+        final fun <get-othersRevoked>(): kotlin/Boolean // stapel.auth.session/SignOutEverywhereResult.othersRevoked.<get-othersRevoked>|<get-othersRevoked>(){}[0]
+    final val self // stapel.auth.session/SignOutEverywhereResult.self|{}self[0]
+        final fun <get-self>(): stapel.auth.session/LogoutResult // stapel.auth.session/SignOutEverywhereResult.self.<get-self>|<get-self>(){}[0]
+
+    final fun component1(): kotlin/Boolean // stapel.auth.session/SignOutEverywhereResult.component1|component1(){}[0]
+    final fun component2(): stapel.auth.session/LogoutResult // stapel.auth.session/SignOutEverywhereResult.component2|component2(){}[0]
+    final fun copy(kotlin/Boolean = ..., stapel.auth.session/LogoutResult = ...): stapel.auth.session/SignOutEverywhereResult // stapel.auth.session/SignOutEverywhereResult.copy|copy(kotlin.Boolean;stapel.auth.session.LogoutResult){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.session/SignOutEverywhereResult.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.auth.session/SignOutEverywhereResult.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.auth.session/SignOutEverywhereResult.toString|toString(){}[0]
+}
+
+final class stapel.auth.session/StepUpController : stapel.network/VerificationHandler { // stapel.auth.session/StepUpController|null[0]
+    constructor <init>(kotlin/Function0<stapel.auth.api/AuthApi>) // stapel.auth.session/StepUpController.<init>|<init>(kotlin.Function0<stapel.auth.api.AuthApi>){}[0]
+
+    final val state // stapel.auth.session/StepUpController.state|{}state[0]
+        final fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.auth.session/StepUpState> // stapel.auth.session/StepUpController.state.<get-state>|<get-state>(){}[0]
+
+    final fun cancel() // stapel.auth.session/StepUpController.cancel|cancel(){}[0]
+    final suspend fun chooseFactor(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.auth.error/AuthError> // stapel.auth.session/StepUpController.chooseFactor|chooseFactor(kotlin.String){}[0]
+    final suspend fun resolve(stapel.result/VerificationChallenge, kotlin/String): stapel.network/VerificationOutcome // stapel.auth.session/StepUpController.resolve|resolve(stapel.result.VerificationChallenge;kotlin.String){}[0]
+    final suspend fun submit(stapel.auth.model/TotpProof): stapel.result/StapelResult<kotlin/Unit, stapel.auth.error/AuthError> // stapel.auth.session/StepUpController.submit|submit(stapel.auth.model.TotpProof){}[0]
+}
+
+final class stapel.auth/AuthConfig { // stapel.auth/AuthConfig|null[0]
+    constructor <init>(stapel.auth/GuestPolicy = ..., kotlin.collections/Set<stapel.auth.model/AuthMethodId>? = ..., kotlin/Function0<stapel.auth.api.model/SignupAttribution?> = ..., kotlin.time/Clock = ...) // stapel.auth/AuthConfig.<init>|<init>(stapel.auth.GuestPolicy;kotlin.collections.Set<stapel.auth.model.AuthMethodId>?;kotlin.Function0<stapel.auth.api.model.SignupAttribution?>;kotlin.time.Clock){}[0]
+
+    final val attribution // stapel.auth/AuthConfig.attribution|{}attribution[0]
+        final fun <get-attribution>(): kotlin/Function0<stapel.auth.api.model/SignupAttribution?> // stapel.auth/AuthConfig.attribution.<get-attribution>|<get-attribution>(){}[0]
+    final val clock // stapel.auth/AuthConfig.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // stapel.auth/AuthConfig.clock.<get-clock>|<get-clock>(){}[0]
+    final val guest // stapel.auth/AuthConfig.guest|{}guest[0]
+        final fun <get-guest>(): stapel.auth/GuestPolicy // stapel.auth/AuthConfig.guest.<get-guest>|<get-guest>(){}[0]
+    final val methods // stapel.auth/AuthConfig.methods|{}methods[0]
+        final fun <get-methods>(): kotlin.collections/Set<stapel.auth.model/AuthMethodId>? // stapel.auth/AuthConfig.methods.<get-methods>|<get-methods>(){}[0]
+}
+
+final class stapel.auth/StapelAuth { // stapel.auth/StapelAuth|null[0]
+    constructor <init>(stapel.auth.api/AuthApi, stapel.session/SessionManager, stapel.cache/StapelCache, kotlinx.coroutines/CoroutineScope, stapel.auth/AuthConfig = ..., stapel.auth.platform/AuthPlatform = ..., kotlin.coroutines/SuspendFunction0<kotlin/String?> = ..., stapel.auth.session/StepUpController? = ...) // stapel.auth/StapelAuth.<init>|<init>(stapel.auth.api.AuthApi;stapel.session.SessionManager;stapel.cache.StapelCache;kotlinx.coroutines.CoroutineScope;stapel.auth.AuthConfig;stapel.auth.platform.AuthPlatform;kotlin.coroutines.SuspendFunction0<kotlin.String?>;stapel.auth.session.StepUpController?){}[0]
+
+    final val account // stapel.auth/StapelAuth.account|{}account[0]
+        final fun <get-account>(): stapel.auth.repo/AccountRepository // stapel.auth/StapelAuth.account.<get-account>|<get-account>(){}[0]
+    final val api // stapel.auth/StapelAuth.api|{}api[0]
+        final fun <get-api>(): stapel.auth.api/AuthApi // stapel.auth/StapelAuth.api.<get-api>|<get-api>(){}[0]
+    final val capabilities // stapel.auth/StapelAuth.capabilities|{}capabilities[0]
+        final fun <get-capabilities>(): stapel.auth.repo/CapabilitiesRepository // stapel.auth/StapelAuth.capabilities.<get-capabilities>|<get-capabilities>(){}[0]
+    final val config // stapel.auth/StapelAuth.config|{}config[0]
+        final fun <get-config>(): stapel.auth/AuthConfig // stapel.auth/StapelAuth.config.<get-config>|<get-config>(){}[0]
+    final val devices // stapel.auth/StapelAuth.devices|{}devices[0]
+        final fun <get-devices>(): stapel.auth.repo/SessionsRepository // stapel.auth/StapelAuth.devices.<get-devices>|<get-devices>(){}[0]
+    final val platform // stapel.auth/StapelAuth.platform|{}platform[0]
+        final fun <get-platform>(): stapel.auth.platform/AuthPlatform // stapel.auth/StapelAuth.platform.<get-platform>|<get-platform>(){}[0]
+    final val session // stapel.auth/StapelAuth.session|{}session[0]
+        final fun <get-session>(): stapel.auth.session/AuthSession // stapel.auth/StapelAuth.session.<get-session>|<get-session>(){}[0]
+    final val stepUp // stapel.auth/StapelAuth.stepUp|{}stepUp[0]
+        final fun <get-stepUp>(): stapel.auth.session/StepUpController? // stapel.auth/StapelAuth.stepUp.<get-stepUp>|<get-stepUp>(){}[0]
+}
+
 final object stapel.auth.api.error/AuthErrorCatalog : stapel.result.text/ErrorCatalog { // stapel.auth.api.error/AuthErrorCatalog|null[0]
     final val owner // stapel.auth.api.error/AuthErrorCatalog.owner|{}owner[0]
         final fun <get-owner>(): kotlin/String // stapel.auth.api.error/AuthErrorCatalog.owner.<get-owner>|<get-owner>(){}[0]
@@ -9478,3 +11022,4 @@ final object stapel.auth.api/AuthKeys { // stapel.auth.api/AuthKeys|null[0]
 
 final fun (stapel.auth.api/AuthApi).stapel.auth.api/getAdminAuditPager(kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.wire/Pager<stapel.auth.api.model/AuditLogEntry, stapel.auth.api.error/GetAdminAuditError> // stapel.auth.api/getAdminAuditPager|getAdminAuditPager@stapel.auth.api.AuthApi(kotlin.String?;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
 final fun (stapel.auth.api/AuthApi).stapel.auth.api/getSecurityAuditPager(kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.wire/Pager<stapel.auth.api.model/AuditLogEntry, stapel.auth.api.error/GetSecurityAuditError> // stapel.auth.api/getSecurityAuditPager|getSecurityAuditPager@stapel.auth.api.AuthApi(kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+final fun stapel.auth.di/authModule(stapel.auth/AuthConfig = ..., stapel.auth.platform/AuthPlatform = ..., kotlin/Boolean = ...): org.koin.core.module/Module // stapel.auth.di/authModule|authModule(stapel.auth.AuthConfig;stapel.auth.platform.AuthPlatform;kotlin.Boolean){}[0]

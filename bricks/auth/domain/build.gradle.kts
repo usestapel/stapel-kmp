@@ -1,6 +1,6 @@
 // stapel-auth: the auth domain library. `src/commonMain/generated/` is produced by stapel-codegen from
 // the pinned contract in contracts/auth/ and is never edited by hand (`stapelGenerateCheck` gates it);
-// hand-written code (repositories, presenters, mapping) lives in src/commonMain/kotlin.
+// hand-written code (session binding, repositories, presenters, mapping) lives in src/commonMain/kotlin.
 plugins {
     id("stapel.brick-domain")
 }
@@ -15,6 +15,19 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.stapelWire)
+            api(projects.stapelResult)
+            api(projects.stapelNetwork)
+            api(projects.stapelSession)
+            api(projects.stapelCache)
+            api(projects.stapelMvi)
+            implementation(projects.stapelCacheSession)
+            implementation(projects.stapelRuntime)
+            implementation(projects.stapelDi)
+            implementation(libs.kotlinx.coroutines.core)
+        }
+        commonTest.dependencies {
+            implementation(projects.stapelTesting)
+            implementation(projects.stapelConfig)
         }
     }
 }

@@ -1,3 +1,34 @@
+public final class stapel/auth/AuthConfig {
+	public fun <init> ()V
+	public fun <init> (Lstapel/auth/GuestPolicy;Ljava/util/Set;Lkotlin/jvm/functions/Function0;Lkotlin/time/Clock;)V
+	public synthetic fun <init> (Lstapel/auth/GuestPolicy;Ljava/util/Set;Lkotlin/jvm/functions/Function0;Lkotlin/time/Clock;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAttribution ()Lkotlin/jvm/functions/Function0;
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getGuest ()Lstapel/auth/GuestPolicy;
+	public final fun getMethods ()Ljava/util/Set;
+}
+
+public final class stapel/auth/GuestPolicy : java/lang/Enum {
+	public static final field Off Lstapel/auth/GuestPolicy;
+	public static final field OnDemand Lstapel/auth/GuestPolicy;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/GuestPolicy;
+	public static fun values ()[Lstapel/auth/GuestPolicy;
+}
+
+public final class stapel/auth/StapelAuth {
+	public fun <init> (Lstapel/auth/api/AuthApi;Lstapel/session/SessionManager;Lstapel/cache/StapelCache;Lkotlinx/coroutines/CoroutineScope;Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;Lkotlin/jvm/functions/Function1;Lstapel/auth/session/StepUpController;)V
+	public synthetic fun <init> (Lstapel/auth/api/AuthApi;Lstapel/session/SessionManager;Lstapel/cache/StapelCache;Lkotlinx/coroutines/CoroutineScope;Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;Lkotlin/jvm/functions/Function1;Lstapel/auth/session/StepUpController;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAccount ()Lstapel/auth/repo/AccountRepository;
+	public final fun getApi ()Lstapel/auth/api/AuthApi;
+	public final fun getCapabilities ()Lstapel/auth/repo/CapabilitiesRepository;
+	public final fun getConfig ()Lstapel/auth/AuthConfig;
+	public final fun getDevices ()Lstapel/auth/repo/SessionsRepository;
+	public final fun getPlatform ()Lstapel/auth/platform/AuthPlatform;
+	public final fun getSession ()Lstapel/auth/session/AuthSession;
+	public final fun getStepUp ()Lstapel/auth/session/StepUpController;
+}
+
 public abstract interface class stapel/auth/api/AuthApi {
 	public abstract fun adminUsers (Lstapel/auth/api/model/AdminUserCreateRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun adminUsers$default (Lstapel/auth/api/AuthApi;Lstapel/auth/api/model/AdminUserCreateRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
@@ -9099,5 +9130,1314 @@ public final synthetic class stapel/auth/api/model/VerificationPreferencesRespon
 
 public final class stapel/auth/api/model/VerificationPreferencesResponse$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/auth/di/AuthModuleKt {
+	public static final fun authModule (Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;Z)Lorg/koin/core/module/Module;
+	public static synthetic fun authModule$default (Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;ZILjava/lang/Object;)Lorg/koin/core/module/Module;
+}
+
+public final class stapel/auth/error/AuthError : stapel/result/StapelError {
+	public static final field Companion Lstapel/auth/error/AuthError$Companion;
+	public fun <init> (Lstapel/auth/error/AuthErrorReason;Lstapel/result/StapelError;)V
+	public final fun component1 ()Lstapel/auth/error/AuthErrorReason;
+	public final fun component2 ()Lstapel/result/StapelError;
+	public final fun copy (Lstapel/auth/error/AuthErrorReason;Lstapel/result/StapelError;)Lstapel/auth/error/AuthError;
+	public static synthetic fun copy$default (Lstapel/auth/error/AuthError;Lstapel/auth/error/AuthErrorReason;Lstapel/result/StapelError;ILjava/lang/Object;)Lstapel/auth/error/AuthError;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttemptsRemaining ()Ljava/lang/Integer;
+	public final fun getCause ()Lstapel/result/StapelError;
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public final fun getReason ()Lstapel/auth/error/AuthErrorReason;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter-FghU774 ()Lkotlin/time/Duration;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public final fun isTransient ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/error/AuthError$Companion {
+	public final fun of (Lstapel/result/StapelError;)Lstapel/auth/error/AuthError;
+}
+
+public final class stapel/auth/error/AuthErrorReason : java/lang/Enum {
+	public static final field AccountDisabled Lstapel/auth/error/AuthErrorReason;
+	public static final field AccountLocked Lstapel/auth/error/AuthErrorReason;
+	public static final field AlreadyTaken Lstapel/auth/error/AuthErrorReason;
+	public static final field Blocked Lstapel/auth/error/AuthErrorReason;
+	public static final field Cancelled Lstapel/auth/error/AuthErrorReason;
+	public static final field CaptchaInvalid Lstapel/auth/error/AuthErrorReason;
+	public static final field CaptchaRequired Lstapel/auth/error/AuthErrorReason;
+	public static final field ChallengeExpired Lstapel/auth/error/AuthErrorReason;
+	public static final field CodeExpired Lstapel/auth/error/AuthErrorReason;
+	public static final field InvalidCode Lstapel/auth/error/AuthErrorReason;
+	public static final field InvalidCredentials Lstapel/auth/error/AuthErrorReason;
+	public static final field InvalidInput Lstapel/auth/error/AuthErrorReason;
+	public static final field MockOtpAdmin Lstapel/auth/error/AuthErrorReason;
+	public static final field Network Lstapel/auth/error/AuthErrorReason;
+	public static final field Other Lstapel/auth/error/AuthErrorReason;
+	public static final field PasswordChangeRequired Lstapel/auth/error/AuthErrorReason;
+	public static final field RateLimited Lstapel/auth/error/AuthErrorReason;
+	public static final field RegistrationClosed Lstapel/auth/error/AuthErrorReason;
+	public static final field SsoRequired Lstapel/auth/error/AuthErrorReason;
+	public static final field Unauthenticated Lstapel/auth/error/AuthErrorReason;
+	public static final field Unavailable Lstapel/auth/error/AuthErrorReason;
+	public static final field Unsupported Lstapel/auth/error/AuthErrorReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/error/AuthErrorReason;
+	public static fun values ()[Lstapel/auth/error/AuthErrorReason;
+}
+
+public final class stapel/auth/model/AuthCapabilities {
+	public fun <init> (Ljava/util/List;ZZZZLstapel/auth/model/OtpParameters;Lstapel/auth/model/PostureStage;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Z
+	public final fun component3 ()Z
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun component6 ()Lstapel/auth/model/OtpParameters;
+	public final fun component7 ()Lstapel/auth/model/PostureStage;
+	public final fun copy (Ljava/util/List;ZZZZLstapel/auth/model/OtpParameters;Lstapel/auth/model/PostureStage;)Lstapel/auth/model/AuthCapabilities;
+	public static synthetic fun copy$default (Lstapel/auth/model/AuthCapabilities;Ljava/util/List;ZZZZLstapel/auth/model/OtpParameters;Lstapel/auth/model/PostureStage;ILjava/lang/Object;)Lstapel/auth/model/AuthCapabilities;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEmailMock ()Z
+	public final fun getGuestSessions ()Z
+	public final fun getMethods ()Ljava/util/List;
+	public final fun getOtp ()Lstapel/auth/model/OtpParameters;
+	public final fun getPasswordRegistration ()Z
+	public final fun getPhoneMock ()Z
+	public final fun getStage ()Lstapel/auth/model/PostureStage;
+	public fun hashCode ()I
+	public final fun isMock (Lstapel/auth/model/OtpChannel;)Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/AuthMethod {
+	public fun <init> (Lstapel/auth/model/AuthMethodId;Ljava/lang/String;ZLstapel/auth/model/MethodPlacement;ILstapel/auth/model/MethodInteraction;Ljava/lang/String;ZZZ)V
+	public final fun component1 ()Lstapel/auth/model/AuthMethodId;
+	public final fun component10 ()Z
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Z
+	public final fun component4 ()Lstapel/auth/model/MethodPlacement;
+	public final fun component5 ()I
+	public final fun component6 ()Lstapel/auth/model/MethodInteraction;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Z
+	public final fun component9 ()Z
+	public final fun copy (Lstapel/auth/model/AuthMethodId;Ljava/lang/String;ZLstapel/auth/model/MethodPlacement;ILstapel/auth/model/MethodInteraction;Ljava/lang/String;ZZZ)Lstapel/auth/model/AuthMethod;
+	public static synthetic fun copy$default (Lstapel/auth/model/AuthMethod;Lstapel/auth/model/AuthMethodId;Ljava/lang/String;ZLstapel/auth/model/MethodPlacement;ILstapel/auth/model/MethodInteraction;Ljava/lang/String;ZZZILjava/lang/Object;)Lstapel/auth/model/AuthMethod;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCanLogin ()Z
+	public final fun getCanRegister ()Z
+	public final fun getEnabled ()Z
+	public final fun getIconSvg ()Ljava/lang/String;
+	public final fun getId ()Lstapel/auth/model/AuthMethodId;
+	public final fun getInteraction ()Lstapel/auth/model/MethodInteraction;
+	public final fun getMock ()Z
+	public final fun getOrder ()I
+	public final fun getPlacement ()Lstapel/auth/model/MethodPlacement;
+	public final fun getWireId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/AuthMethodId : java/lang/Enum {
+	public static final field Email Lstapel/auth/model/AuthMethodId;
+	public static final field MagicLink Lstapel/auth/model/AuthMethodId;
+	public static final field OAuth Lstapel/auth/model/AuthMethodId;
+	public static final field Passkey Lstapel/auth/model/AuthMethodId;
+	public static final field Password Lstapel/auth/model/AuthMethodId;
+	public static final field Phone Lstapel/auth/model/AuthMethodId;
+	public static final field Qr Lstapel/auth/model/AuthMethodId;
+	public static final field Sso Lstapel/auth/model/AuthMethodId;
+	public static final field Unknown Lstapel/auth/model/AuthMethodId;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/AuthMethodId;
+	public static fun values ()[Lstapel/auth/model/AuthMethodId;
+}
+
+public final class stapel/auth/model/AuthType : java/lang/Enum {
+	public static final field Anonymous Lstapel/auth/model/AuthType;
+	public static final field Email Lstapel/auth/model/AuthType;
+	public static final field Login Lstapel/auth/model/AuthType;
+	public static final field OAuth Lstapel/auth/model/AuthType;
+	public static final field Phone Lstapel/auth/model/AuthType;
+	public static final field Sso Lstapel/auth/model/AuthType;
+	public static final field Unknown Lstapel/auth/model/AuthType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/AuthType;
+	public static fun values ()[Lstapel/auth/model/AuthType;
+}
+
+public final class stapel/auth/model/AuthUser {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/auth/model/AuthType;ZZZZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Lkotlin/time/Instant;
+	public final fun component13 ()Lkotlin/time/Instant;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lstapel/auth/model/AuthType;
+	public final fun component6 ()Z
+	public final fun component7 ()Z
+	public final fun component8 ()Z
+	public final fun component9 ()Z
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/auth/model/AuthType;ZZZZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lstapel/auth/model/AuthUser;
+	public static synthetic fun copy$default (Lstapel/auth/model/AuthUser;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/auth/model/AuthType;ZZZZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lstapel/auth/model/AuthUser;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAuthType ()Lstapel/auth/model/AuthType;
+	public final fun getAvatarUrl ()Ljava/lang/String;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getEmail ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getLastLogin ()Lkotlin/time/Instant;
+	public final fun getOauthProvider ()Ljava/lang/String;
+	public final fun getPhone ()Ljava/lang/String;
+	public final fun getUsername ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isEmailVerified ()Z
+	public final fun isGuest ()Z
+	public final fun isPhoneVerified ()Z
+	public final fun isStaff ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/DeviceType : java/lang/Enum {
+	public static final field Api Lstapel/auth/model/DeviceType;
+	public static final field Desktop Lstapel/auth/model/DeviceType;
+	public static final field Phone Lstapel/auth/model/DeviceType;
+	public static final field Tablet Lstapel/auth/model/DeviceType;
+	public static final field Unknown Lstapel/auth/model/DeviceType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/DeviceType;
+	public static fun values ()[Lstapel/auth/model/DeviceType;
+}
+
+public final class stapel/auth/model/FirstLoginStep : java/lang/Enum {
+	public static final field MfaEnroll Lstapel/auth/model/FirstLoginStep;
+	public static final field PasswordChange Lstapel/auth/model/FirstLoginStep;
+	public static final field Unknown Lstapel/auth/model/FirstLoginStep;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/FirstLoginStep;
+	public static fun values ()[Lstapel/auth/model/FirstLoginStep;
+}
+
+public final class stapel/auth/model/LoginChallenge {
+	public fun <init> (Ljava/lang/String;Lkotlin/time/Instant;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lkotlin/time/Instant;
+	public final fun copy (Ljava/lang/String;Lkotlin/time/Instant;)Lstapel/auth/model/LoginChallenge;
+	public static synthetic fun copy$default (Lstapel/auth/model/LoginChallenge;Ljava/lang/String;Lkotlin/time/Instant;ILjava/lang/Object;)Lstapel/auth/model/LoginChallenge;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpiresAt ()Lkotlin/time/Instant;
+	public final fun getToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/MethodInteraction : java/lang/Enum {
+	public static final field Inline Lstapel/auth/model/MethodInteraction;
+	public static final field Modal Lstapel/auth/model/MethodInteraction;
+	public static final field Redirect Lstapel/auth/model/MethodInteraction;
+	public static final field Unknown Lstapel/auth/model/MethodInteraction;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/MethodInteraction;
+	public static fun values ()[Lstapel/auth/model/MethodInteraction;
+}
+
+public final class stapel/auth/model/MethodPlacement : java/lang/Enum {
+	public static final field Bottom Lstapel/auth/model/MethodPlacement;
+	public static final field Main Lstapel/auth/model/MethodPlacement;
+	public static final field Overflow Lstapel/auth/model/MethodPlacement;
+	public static final field Unknown Lstapel/auth/model/MethodPlacement;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/MethodPlacement;
+	public static fun values ()[Lstapel/auth/model/MethodPlacement;
+}
+
+public final class stapel/auth/model/OtpChannel : java/lang/Enum {
+	public static final field Email Lstapel/auth/model/OtpChannel;
+	public static final field Phone Lstapel/auth/model/OtpChannel;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/OtpChannel;
+	public static fun values ()[Lstapel/auth/model/OtpChannel;
+}
+
+public final class stapel/auth/model/OtpParameters {
+	public synthetic fun <init> (IIIJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun codeLength (Lstapel/auth/model/OtpChannel;)I
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4-UwyO8pc ()J
+	public final fun component5-UwyO8pc ()J
+	public final fun copy-J7AnP2E (IIIJJ)Lstapel/auth/model/OtpParameters;
+	public static synthetic fun copy-J7AnP2E$default (Lstapel/auth/model/OtpParameters;IIIJJILjava/lang/Object;)Lstapel/auth/model/OtpParameters;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEmailCodeLength ()I
+	public final fun getPhoneCodeLength ()I
+	public final fun getResendCooldown-UwyO8pc ()J
+	public final fun getTotpCodeLength ()I
+	public final fun getTtl-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/PostureStage : java/lang/Enum {
+	public static final field Live Lstapel/auth/model/PostureStage;
+	public static final field Prototype Lstapel/auth/model/PostureStage;
+	public static final field Unknown Lstapel/auth/model/PostureStage;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/PostureStage;
+	public static fun values ()[Lstapel/auth/model/PostureStage;
+}
+
+public final class stapel/auth/model/SessionDevice {
+	public fun <init> (Ljava/lang/String;Lstapel/auth/model/DeviceType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ZZ)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/auth/model/DeviceType;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Lkotlin/time/Instant;
+	public final fun component7 ()Lkotlin/time/Instant;
+	public final fun component8 ()Z
+	public final fun component9 ()Z
+	public final fun copy (Ljava/lang/String;Lstapel/auth/model/DeviceType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ZZ)Lstapel/auth/model/SessionDevice;
+	public static synthetic fun copy$default (Lstapel/auth/model/SessionDevice;Ljava/lang/String;Lstapel/auth/model/DeviceType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ZZILjava/lang/Object;)Lstapel/auth/model/SessionDevice;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getDetails ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getIpAddress ()Ljava/lang/String;
+	public final fun getLastUsedAt ()Lkotlin/time/Instant;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getType ()Lstapel/auth/model/DeviceType;
+	public fun hashCode ()I
+	public final fun isCurrent ()Z
+	public final fun isSuspicious ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/SignInKind : java/lang/Enum {
+	public static final field LoggedIn Lstapel/auth/model/SignInKind;
+	public static final field Merged Lstapel/auth/model/SignInKind;
+	public static final field Modified Lstapel/auth/model/SignInKind;
+	public static final field Other Lstapel/auth/model/SignInKind;
+	public static final field Registered Lstapel/auth/model/SignInKind;
+	public static final field Rejected Lstapel/auth/model/SignInKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/model/SignInKind;
+	public static fun values ()[Lstapel/auth/model/SignInKind;
+}
+
+public abstract interface class stapel/auth/model/SignInOutcome {
+}
+
+public final class stapel/auth/model/SignInOutcome$FirstLoginRequired : stapel/auth/model/SignInOutcome {
+	public fun <init> (Lstapel/auth/model/FirstLoginStep;Lstapel/auth/model/LoginChallenge;)V
+	public final fun component1 ()Lstapel/auth/model/FirstLoginStep;
+	public final fun component2 ()Lstapel/auth/model/LoginChallenge;
+	public final fun copy (Lstapel/auth/model/FirstLoginStep;Lstapel/auth/model/LoginChallenge;)Lstapel/auth/model/SignInOutcome$FirstLoginRequired;
+	public static synthetic fun copy$default (Lstapel/auth/model/SignInOutcome$FirstLoginRequired;Lstapel/auth/model/FirstLoginStep;Lstapel/auth/model/LoginChallenge;ILjava/lang/Object;)Lstapel/auth/model/SignInOutcome$FirstLoginRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChallenge ()Lstapel/auth/model/LoginChallenge;
+	public final fun getRequires ()Lstapel/auth/model/FirstLoginStep;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/SignInOutcome$Session : stapel/auth/model/SignInOutcome {
+	public fun <init> (Lstapel/auth/model/AuthUser;Lstapel/auth/model/SignInKind;)V
+	public final fun component1 ()Lstapel/auth/model/AuthUser;
+	public final fun component2 ()Lstapel/auth/model/SignInKind;
+	public final fun copy (Lstapel/auth/model/AuthUser;Lstapel/auth/model/SignInKind;)Lstapel/auth/model/SignInOutcome$Session;
+	public static synthetic fun copy$default (Lstapel/auth/model/SignInOutcome$Session;Lstapel/auth/model/AuthUser;Lstapel/auth/model/SignInKind;ILjava/lang/Object;)Lstapel/auth/model/SignInOutcome$Session;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKind ()Lstapel/auth/model/SignInKind;
+	public final fun getUser ()Lstapel/auth/model/AuthUser;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/SignInOutcome$TotpRequired : stapel/auth/model/SignInOutcome {
+	public fun <init> (Lstapel/auth/model/LoginChallenge;)V
+	public final fun component1 ()Lstapel/auth/model/LoginChallenge;
+	public final fun copy (Lstapel/auth/model/LoginChallenge;)Lstapel/auth/model/SignInOutcome$TotpRequired;
+	public static synthetic fun copy$default (Lstapel/auth/model/SignInOutcome$TotpRequired;Lstapel/auth/model/LoginChallenge;ILjava/lang/Object;)Lstapel/auth/model/SignInOutcome$TotpRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChallenge ()Lstapel/auth/model/LoginChallenge;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/model/TotpProof {
+}
+
+public final class stapel/auth/model/TotpProof$BackupCode : stapel/auth/model/TotpProof {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/auth/model/TotpProof$BackupCode;
+	public static synthetic fun copy$default (Lstapel/auth/model/TotpProof$BackupCode;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/model/TotpProof$BackupCode;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/model/TotpProof$Code : stapel/auth/model/TotpProof {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/auth/model/TotpProof$Code;
+	public static synthetic fun copy$default (Lstapel/auth/model/TotpProof$Code;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/model/TotpProof$Code;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/platform/AuthPlatform {
+	public fun <init> ()V
+	public fun <init> (Lstapel/auth/platform/ExternalUserAgent;Lstapel/auth/platform/PasskeyAuthenticator;Ljava/util/Map;)V
+	public synthetic fun <init> (Lstapel/auth/platform/ExternalUserAgent;Lstapel/auth/platform/PasskeyAuthenticator;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun completable (Lstapel/auth/model/AuthMethodId;)Z
+	public final fun getBrowser ()Lstapel/auth/platform/ExternalUserAgent;
+	public final fun getIdentityProviders ()Ljava/util/Map;
+	public final fun getPasskeys ()Lstapel/auth/platform/PasskeyAuthenticator;
+}
+
+public abstract interface class stapel/auth/platform/ExternalUserAgent {
+	public abstract fun authenticate (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/auth/platform/NativeIdentityProvider {
+	public abstract fun acquireToken (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getProviderId ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/platform/PasskeyAuthenticator {
+	public abstract fun create (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun get (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun isAvailable ()Z
+}
+
+public abstract interface class stapel/auth/presentation/AuthEffect {
+}
+
+public final class stapel/auth/presentation/AuthEffect$SignedIn : stapel/auth/presentation/AuthEffect {
+	public fun <init> (Lstapel/auth/model/SignInOutcome$Session;)V
+	public final fun component1 ()Lstapel/auth/model/SignInOutcome$Session;
+	public final fun copy (Lstapel/auth/model/SignInOutcome$Session;)Lstapel/auth/presentation/AuthEffect$SignedIn;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/AuthEffect$SignedIn;Lstapel/auth/model/SignInOutcome$Session;ILjava/lang/Object;)Lstapel/auth/presentation/AuthEffect$SignedIn;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOutcome ()Lstapel/auth/model/SignInOutcome$Session;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/ChallengeIntent : stapel/auth/presentation/LoginChallengeIntent, stapel/auth/presentation/OtpSignInIntent, stapel/auth/presentation/PasswordSignInIntent {
+}
+
+public final class stapel/auth/presentation/ChallengeIntent$SubmitNewPassword : stapel/auth/presentation/ChallengeIntent {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/auth/presentation/ChallengeIntent$SubmitNewPassword;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/ChallengeIntent$SubmitNewPassword;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/ChallengeIntent$SubmitNewPassword;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getNewPassword ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/ChallengeIntent$SubmitTotp : stapel/auth/presentation/ChallengeIntent {
+	public fun <init> (Lstapel/auth/model/TotpProof;)V
+	public final fun component1 ()Lstapel/auth/model/TotpProof;
+	public final fun copy (Lstapel/auth/model/TotpProof;)Lstapel/auth/presentation/ChallengeIntent$SubmitTotp;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/ChallengeIntent$SubmitTotp;Lstapel/auth/model/TotpProof;ILjava/lang/Object;)Lstapel/auth/presentation/ChallengeIntent$SubmitTotp;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getProof ()Lstapel/auth/model/TotpProof;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/ChallengeStep {
+	public abstract fun getChallenge ()Lstapel/auth/model/LoginChallenge;
+}
+
+public final class stapel/auth/presentation/ChallengeStep$ForcedPasswordChange : stapel/auth/presentation/ChallengeStep {
+	public fun <init> (Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;)V
+	public synthetic fun <init> (Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/auth/model/LoginChallenge;
+	public final fun component2 ()Z
+	public final fun component3 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;)Lstapel/auth/presentation/ChallengeStep$ForcedPasswordChange;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/ChallengeStep$ForcedPasswordChange;Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/ChallengeStep$ForcedPasswordChange;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getChallenge ()Lstapel/auth/model/LoginChallenge;
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getSubmitting ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/ChallengeStep$MfaEnrollRequired : stapel/auth/presentation/ChallengeStep {
+	public fun <init> (Lstapel/auth/model/LoginChallenge;)V
+	public final fun component1 ()Lstapel/auth/model/LoginChallenge;
+	public final fun copy (Lstapel/auth/model/LoginChallenge;)Lstapel/auth/presentation/ChallengeStep$MfaEnrollRequired;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/ChallengeStep$MfaEnrollRequired;Lstapel/auth/model/LoginChallenge;ILjava/lang/Object;)Lstapel/auth/presentation/ChallengeStep$MfaEnrollRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getChallenge ()Lstapel/auth/model/LoginChallenge;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/ChallengeStep$Totp : stapel/auth/presentation/ChallengeStep {
+	public fun <init> (Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;)V
+	public synthetic fun <init> (Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/auth/model/LoginChallenge;
+	public final fun component2 ()Z
+	public final fun component3 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;)Lstapel/auth/presentation/ChallengeStep$Totp;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/ChallengeStep$Totp;Lstapel/auth/model/LoginChallenge;ZLstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/ChallengeStep$Totp;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getChallenge ()Lstapel/auth/model/LoginChallenge;
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getSubmitting ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/GuestIntent {
+}
+
+public final class stapel/auth/presentation/GuestIntent$ContinueAsGuest : stapel/auth/presentation/GuestIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/GuestIntent$ContinueAsGuest;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/GuestPresenter : stapel/mvi/Presenter {
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;)V
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/auth/presentation/GuestState {
+}
+
+public final class stapel/auth/presentation/GuestState$Creating : stapel/auth/presentation/GuestState {
+	public static final field INSTANCE Lstapel/auth/presentation/GuestState$Creating;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/GuestState$Done : stapel/auth/presentation/GuestState {
+	public fun <init> (Lstapel/auth/model/AuthUser;)V
+	public final fun component1 ()Lstapel/auth/model/AuthUser;
+	public final fun copy (Lstapel/auth/model/AuthUser;)Lstapel/auth/presentation/GuestState$Done;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/GuestState$Done;Lstapel/auth/model/AuthUser;ILjava/lang/Object;)Lstapel/auth/presentation/GuestState$Done;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUser ()Lstapel/auth/model/AuthUser;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/GuestState$Failed : stapel/auth/presentation/GuestState {
+	public fun <init> (Lstapel/auth/error/AuthError;)V
+	public final fun component1 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/auth/error/AuthError;)Lstapel/auth/presentation/GuestState$Failed;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/GuestState$Failed;Lstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/GuestState$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/GuestState$Idle : stapel/auth/presentation/GuestState {
+	public static final field INSTANCE Lstapel/auth/presentation/GuestState$Idle;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/LoginChallengeIntent {
+}
+
+public final class stapel/auth/presentation/LoginChallengePresenter : stapel/auth/presentation/SignInPresenter {
+	public static final field Companion Lstapel/auth/presentation/LoginChallengePresenter$Companion;
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;Lstapel/auth/model/SignInOutcome;)V
+	public synthetic fun challengeState$io_github_usestapel_stapel_auth (Lstapel/auth/presentation/ChallengeStep;)Ljava/lang/Object;
+	public synthetic fun doneState$io_github_usestapel_stapel_auth (Lstapel/auth/model/SignInOutcome$Session;)Ljava/lang/Object;
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public synthetic fun stepOf$io_github_usestapel_stapel_auth (Ljava/lang/Object;)Lstapel/auth/presentation/ChallengeStep;
+}
+
+public final class stapel/auth/presentation/LoginChallengePresenter$Companion {
+	public final fun totp (Lstapel/auth/model/LoginChallenge;)Lstapel/auth/model/SignInOutcome;
+}
+
+public abstract interface class stapel/auth/presentation/LoginChallengeState {
+}
+
+public final class stapel/auth/presentation/LoginChallengeState$Challenge : stapel/auth/presentation/LoginChallengeState {
+	public fun <init> (Lstapel/auth/presentation/ChallengeStep;)V
+	public final fun component1 ()Lstapel/auth/presentation/ChallengeStep;
+	public final fun copy (Lstapel/auth/presentation/ChallengeStep;)Lstapel/auth/presentation/LoginChallengeState$Challenge;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/LoginChallengeState$Challenge;Lstapel/auth/presentation/ChallengeStep;ILjava/lang/Object;)Lstapel/auth/presentation/LoginChallengeState$Challenge;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getStep ()Lstapel/auth/presentation/ChallengeStep;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/LoginChallengeState$Done : stapel/auth/presentation/LoginChallengeState {
+	public fun <init> (Lstapel/auth/model/SignInOutcome$Session;)V
+	public final fun component1 ()Lstapel/auth/model/SignInOutcome$Session;
+	public final fun copy (Lstapel/auth/model/SignInOutcome$Session;)Lstapel/auth/presentation/LoginChallengeState$Done;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/LoginChallengeState$Done;Lstapel/auth/model/SignInOutcome$Session;ILjava/lang/Object;)Lstapel/auth/presentation/LoginChallengeState$Done;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOutcome ()Lstapel/auth/model/SignInOutcome$Session;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/MethodChooserIntent {
+}
+
+public final class stapel/auth/presentation/MethodChooserIntent$Refresh : stapel/auth/presentation/MethodChooserIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/MethodChooserIntent$Refresh;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/MethodChooserPresenter : stapel/mvi/Presenter {
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;)V
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/auth/presentation/MethodChooserState {
+}
+
+public final class stapel/auth/presentation/MethodChooserState$Failed : stapel/auth/presentation/MethodChooserState {
+	public fun <init> (Lstapel/auth/error/AuthError;)V
+	public final fun component1 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/auth/error/AuthError;)Lstapel/auth/presentation/MethodChooserState$Failed;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/MethodChooserState$Failed;Lstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/MethodChooserState$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/MethodChooserState$Loading : stapel/auth/presentation/MethodChooserState {
+	public static final field INSTANCE Lstapel/auth/presentation/MethodChooserState$Loading;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/MethodChooserState$Ready : stapel/auth/presentation/MethodChooserState {
+	public fun <init> (Lstapel/auth/presentation/MethodZones;)V
+	public final fun component1 ()Lstapel/auth/presentation/MethodZones;
+	public final fun copy (Lstapel/auth/presentation/MethodZones;)Lstapel/auth/presentation/MethodChooserState$Ready;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/MethodChooserState$Ready;Lstapel/auth/presentation/MethodZones;ILjava/lang/Object;)Lstapel/auth/presentation/MethodChooserState$Ready;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getZones ()Lstapel/auth/presentation/MethodZones;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/MethodZones {
+	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;ZZ)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun copy (Ljava/util/List;Ljava/util/List;Ljava/util/List;ZZ)Lstapel/auth/presentation/MethodZones;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/MethodZones;Ljava/util/List;Ljava/util/List;Ljava/util/List;ZZILjava/lang/Object;)Lstapel/auth/presentation/MethodZones;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAll ()Ljava/util/List;
+	public final fun getBottom ()Ljava/util/List;
+	public final fun getGuestAvailable ()Z
+	public final fun getMain ()Ljava/util/List;
+	public final fun getOverflow ()Ljava/util/List;
+	public final fun getPasswordRegistration ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/OtpSignInIntent {
+}
+
+public final class stapel/auth/presentation/OtpSignInIntent$EditIdentifier : stapel/auth/presentation/OtpSignInIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/OtpSignInIntent$EditIdentifier;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInIntent$RequestCode : stapel/auth/presentation/OtpSignInIntent {
+	public fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;)V
+	public final fun component1 ()Lstapel/auth/model/OtpChannel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/auth/model/OtpChannel;Ljava/lang/String;)Lstapel/auth/presentation/OtpSignInIntent$RequestCode;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInIntent$RequestCode;Lstapel/auth/model/OtpChannel;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInIntent$RequestCode;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChannel ()Lstapel/auth/model/OtpChannel;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInIntent$Resend : stapel/auth/presentation/OtpSignInIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/OtpSignInIntent$Resend;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInIntent$SubmitCode : stapel/auth/presentation/OtpSignInIntent {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/auth/presentation/OtpSignInIntent$SubmitCode;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInIntent$SubmitCode;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInIntent$SubmitCode;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInPresenter : stapel/auth/presentation/SignInPresenter {
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;)V
+	public synthetic fun challengeState$io_github_usestapel_stapel_auth (Lstapel/auth/presentation/ChallengeStep;)Ljava/lang/Object;
+	public synthetic fun doneState$io_github_usestapel_stapel_auth (Lstapel/auth/model/SignInOutcome$Session;)Ljava/lang/Object;
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public synthetic fun stepOf$io_github_usestapel_stapel_auth (Ljava/lang/Object;)Lstapel/auth/presentation/ChallengeStep;
+}
+
+public abstract interface class stapel/auth/presentation/OtpSignInState {
+}
+
+public final class stapel/auth/presentation/OtpSignInState$Challenge : stapel/auth/presentation/OtpSignInState {
+	public fun <init> (Lstapel/auth/presentation/ChallengeStep;)V
+	public final fun component1 ()Lstapel/auth/presentation/ChallengeStep;
+	public final fun copy (Lstapel/auth/presentation/ChallengeStep;)Lstapel/auth/presentation/OtpSignInState$Challenge;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInState$Challenge;Lstapel/auth/presentation/ChallengeStep;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInState$Challenge;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getStep ()Lstapel/auth/presentation/ChallengeStep;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInState$CodeSent : stapel/auth/presentation/OtpSignInState {
+	public synthetic fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;Ljava/lang/String;ILkotlin/time/Instant;JZZLstapel/auth/error/AuthError;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;Ljava/lang/String;ILkotlin/time/Instant;JZZLstapel/auth/error/AuthError;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/auth/model/OtpChannel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()I
+	public final fun component5 ()Lkotlin/time/Instant;
+	public final fun component6-UwyO8pc ()J
+	public final fun component7 ()Z
+	public final fun component8 ()Z
+	public final fun component9 ()Lstapel/auth/error/AuthError;
+	public final fun copy-Tu6dINM (Lstapel/auth/model/OtpChannel;Ljava/lang/String;Ljava/lang/String;ILkotlin/time/Instant;JZZLstapel/auth/error/AuthError;)Lstapel/auth/presentation/OtpSignInState$CodeSent;
+	public static synthetic fun copy-Tu6dINM$default (Lstapel/auth/presentation/OtpSignInState$CodeSent;Lstapel/auth/model/OtpChannel;Ljava/lang/String;Ljava/lang/String;ILkotlin/time/Instant;JZZLstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInState$CodeSent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCanResend ()Z
+	public final fun getChannel ()Lstapel/auth/model/OtpChannel;
+	public final fun getCodeLength ()I
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getExpiresAt ()Lkotlin/time/Instant;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun getMaskedTarget ()Ljava/lang/String;
+	public final fun getResendIn-UwyO8pc ()J
+	public final fun getVerifying ()Z
+	public fun hashCode ()I
+	public final fun isMock ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInState$Done : stapel/auth/presentation/OtpSignInState {
+	public fun <init> (Lstapel/auth/model/SignInOutcome$Session;)V
+	public final fun component1 ()Lstapel/auth/model/SignInOutcome$Session;
+	public final fun copy (Lstapel/auth/model/SignInOutcome$Session;)Lstapel/auth/presentation/OtpSignInState$Done;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInState$Done;Lstapel/auth/model/SignInOutcome$Session;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInState$Done;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOutcome ()Lstapel/auth/model/SignInOutcome$Session;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInState$Idle : stapel/auth/presentation/OtpSignInState {
+	public fun <init> ()V
+	public fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/auth/model/OtpChannel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/auth/model/OtpChannel;Ljava/lang/String;)Lstapel/auth/presentation/OtpSignInState$Idle;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInState$Idle;Lstapel/auth/model/OtpChannel;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInState$Idle;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChannel ()Lstapel/auth/model/OtpChannel;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInState$Locked : stapel/auth/presentation/OtpSignInState {
+	public fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;Lkotlin/time/Instant;Lstapel/auth/error/AuthError;)V
+	public final fun component1 ()Lstapel/auth/model/OtpChannel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lkotlin/time/Instant;
+	public final fun component4 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/auth/model/OtpChannel;Ljava/lang/String;Lkotlin/time/Instant;Lstapel/auth/error/AuthError;)Lstapel/auth/presentation/OtpSignInState$Locked;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInState$Locked;Lstapel/auth/model/OtpChannel;Ljava/lang/String;Lkotlin/time/Instant;Lstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInState$Locked;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChannel ()Lstapel/auth/model/OtpChannel;
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun getUntil ()Lkotlin/time/Instant;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInState$RequestFailed : stapel/auth/presentation/OtpSignInState {
+	public fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;Lstapel/auth/error/AuthError;)V
+	public final fun component1 ()Lstapel/auth/model/OtpChannel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/auth/model/OtpChannel;Ljava/lang/String;Lstapel/auth/error/AuthError;)Lstapel/auth/presentation/OtpSignInState$RequestFailed;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInState$RequestFailed;Lstapel/auth/model/OtpChannel;Ljava/lang/String;Lstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInState$RequestFailed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChannel ()Lstapel/auth/model/OtpChannel;
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/OtpSignInState$Requesting : stapel/auth/presentation/OtpSignInState {
+	public fun <init> (Lstapel/auth/model/OtpChannel;Ljava/lang/String;)V
+	public final fun component1 ()Lstapel/auth/model/OtpChannel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/auth/model/OtpChannel;Ljava/lang/String;)Lstapel/auth/presentation/OtpSignInState$Requesting;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/OtpSignInState$Requesting;Lstapel/auth/model/OtpChannel;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/OtpSignInState$Requesting;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChannel ()Lstapel/auth/model/OtpChannel;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/PasswordRegisterIntent {
+}
+
+public final class stapel/auth/presentation/PasswordRegisterIntent$Register : stapel/auth/presentation/PasswordRegisterIntent {
+	public fun <init> (Lstapel/auth/presentation/PasswordRegistration;)V
+	public final fun component1 ()Lstapel/auth/presentation/PasswordRegistration;
+	public final fun copy (Lstapel/auth/presentation/PasswordRegistration;)Lstapel/auth/presentation/PasswordRegisterIntent$Register;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordRegisterIntent$Register;Lstapel/auth/presentation/PasswordRegistration;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordRegisterIntent$Register;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRegistration ()Lstapel/auth/presentation/PasswordRegistration;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordRegisterPresenter : stapel/mvi/Presenter {
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;)V
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/auth/presentation/PasswordRegisterState {
+}
+
+public final class stapel/auth/presentation/PasswordRegisterState$Checking : stapel/auth/presentation/PasswordRegisterState {
+	public static final field INSTANCE Lstapel/auth/presentation/PasswordRegisterState$Checking;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordRegisterState$Done : stapel/auth/presentation/PasswordRegisterState {
+	public fun <init> (Lstapel/auth/model/SignInOutcome$Session;)V
+	public final fun component1 ()Lstapel/auth/model/SignInOutcome$Session;
+	public final fun copy (Lstapel/auth/model/SignInOutcome$Session;)Lstapel/auth/presentation/PasswordRegisterState$Done;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordRegisterState$Done;Lstapel/auth/model/SignInOutcome$Session;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordRegisterState$Done;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOutcome ()Lstapel/auth/model/SignInOutcome$Session;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordRegisterState$Failed : stapel/auth/presentation/PasswordRegisterState {
+	public fun <init> (Lstapel/auth/error/AuthError;)V
+	public final fun component1 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/auth/error/AuthError;)Lstapel/auth/presentation/PasswordRegisterState$Failed;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordRegisterState$Failed;Lstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordRegisterState$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordRegisterState$Idle : stapel/auth/presentation/PasswordRegisterState {
+	public static final field INSTANCE Lstapel/auth/presentation/PasswordRegisterState$Idle;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordRegisterState$Registering : stapel/auth/presentation/PasswordRegisterState {
+	public static final field INSTANCE Lstapel/auth/presentation/PasswordRegisterState$Registering;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordRegisterState$Unavailable : stapel/auth/presentation/PasswordRegisterState {
+	public static final field INSTANCE Lstapel/auth/presentation/PasswordRegisterState$Unavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordRegistration {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/auth/presentation/PasswordRegistration;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordRegistration;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordRegistration;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEmail ()Ljava/lang/String;
+	public final fun getPassword ()Ljava/lang/String;
+	public final fun getPhone ()Ljava/lang/String;
+	public final fun getUsername ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/PasswordSignInIntent {
+}
+
+public final class stapel/auth/presentation/PasswordSignInIntent$Reset : stapel/auth/presentation/PasswordSignInIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/PasswordSignInIntent$Reset;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordSignInIntent$SignIn : stapel/auth/presentation/PasswordSignInIntent {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lstapel/auth/presentation/PasswordSignInIntent$SignIn;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordSignInIntent$SignIn;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordSignInIntent$SignIn;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLogin ()Ljava/lang/String;
+	public final fun getPassword ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordSignInPresenter : stapel/auth/presentation/SignInPresenter {
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;)V
+	public synthetic fun challengeState$io_github_usestapel_stapel_auth (Lstapel/auth/presentation/ChallengeStep;)Ljava/lang/Object;
+	public synthetic fun doneState$io_github_usestapel_stapel_auth (Lstapel/auth/model/SignInOutcome$Session;)Ljava/lang/Object;
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public synthetic fun stepOf$io_github_usestapel_stapel_auth (Ljava/lang/Object;)Lstapel/auth/presentation/ChallengeStep;
+}
+
+public abstract interface class stapel/auth/presentation/PasswordSignInState {
+}
+
+public final class stapel/auth/presentation/PasswordSignInState$Authenticating : stapel/auth/presentation/PasswordSignInState {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/auth/presentation/PasswordSignInState$Authenticating;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordSignInState$Authenticating;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordSignInState$Authenticating;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLogin ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordSignInState$Challenge : stapel/auth/presentation/PasswordSignInState {
+	public fun <init> (Lstapel/auth/presentation/ChallengeStep;)V
+	public final fun component1 ()Lstapel/auth/presentation/ChallengeStep;
+	public final fun copy (Lstapel/auth/presentation/ChallengeStep;)Lstapel/auth/presentation/PasswordSignInState$Challenge;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordSignInState$Challenge;Lstapel/auth/presentation/ChallengeStep;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordSignInState$Challenge;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getStep ()Lstapel/auth/presentation/ChallengeStep;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordSignInState$Done : stapel/auth/presentation/PasswordSignInState {
+	public fun <init> (Lstapel/auth/model/SignInOutcome$Session;)V
+	public final fun component1 ()Lstapel/auth/model/SignInOutcome$Session;
+	public final fun copy (Lstapel/auth/model/SignInOutcome$Session;)Lstapel/auth/presentation/PasswordSignInState$Done;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordSignInState$Done;Lstapel/auth/model/SignInOutcome$Session;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordSignInState$Done;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOutcome ()Lstapel/auth/model/SignInOutcome$Session;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordSignInState$Failed : stapel/auth/presentation/PasswordSignInState {
+	public fun <init> (Ljava/lang/String;Lstapel/auth/error/AuthError;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Ljava/lang/String;Lstapel/auth/error/AuthError;)Lstapel/auth/presentation/PasswordSignInState$Failed;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/PasswordSignInState$Failed;Ljava/lang/String;Lstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/PasswordSignInState$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getLogin ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/PasswordSignInState$Idle : stapel/auth/presentation/PasswordSignInState {
+	public static final field INSTANCE Lstapel/auth/presentation/PasswordSignInState$Idle;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/auth/presentation/SessionsIntent {
+}
+
+public final class stapel/auth/presentation/SessionsIntent$Refresh : stapel/auth/presentation/SessionsIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/SessionsIntent$Refresh;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/SessionsIntent$Revoke : stapel/auth/presentation/SessionsIntent {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/auth/presentation/SessionsIntent$Revoke;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/SessionsIntent$Revoke;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/SessionsIntent$Revoke;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getSessionId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/SessionsIntent$RevokeOthers : stapel/auth/presentation/SessionsIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/SessionsIntent$RevokeOthers;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/SessionsPresenter : stapel/mvi/Presenter {
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;)V
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/auth/presentation/SessionsState {
+	public fun <init> ()V
+	public fun <init> (Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;)V
+	public synthetic fun <init> (Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/result/state/Resource;
+	public final fun component2 ()Ljava/util/Set;
+	public final fun component3 ()Z
+	public final fun component4 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;)Lstapel/auth/presentation/SessionsState;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/SessionsState;Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/SessionsState;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getRevoking ()Ljava/util/Set;
+	public final fun getRevokingOthers ()Z
+	public final fun getSessions ()Lstapel/result/state/Resource;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class stapel/auth/presentation/SignInPresenter : stapel/mvi/Presenter {
+}
+
+public abstract interface class stapel/auth/presentation/SignOutIntent {
+}
+
+public final class stapel/auth/presentation/SignOutIntent$SignOut : stapel/auth/presentation/SignOutIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/SignOutIntent$SignOut;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/SignOutIntent$SignOutEverywhere : stapel/auth/presentation/SignOutIntent {
+	public static final field INSTANCE Lstapel/auth/presentation/SignOutIntent$SignOutEverywhere;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/SignOutPresenter : stapel/mvi/Presenter {
+	public fun <init> (Lstapel/auth/StapelAuth;Lstapel/mvi/PresenterContext;)V
+	public final fun getRevokedOnServer ()Z
+	public synthetic fun handle (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/auth/presentation/SignOutState {
+}
+
+public final class stapel/auth/presentation/SignOutState$Done : stapel/auth/presentation/SignOutState {
+	public fun <init> (Lstapel/auth/session/SignOutEverywhereResult;)V
+	public final fun component1 ()Lstapel/auth/session/SignOutEverywhereResult;
+	public final fun copy (Lstapel/auth/session/SignOutEverywhereResult;)Lstapel/auth/presentation/SignOutState$Done;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/SignOutState$Done;Lstapel/auth/session/SignOutEverywhereResult;ILjava/lang/Object;)Lstapel/auth/presentation/SignOutState$Done;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getResult ()Lstapel/auth/session/SignOutEverywhereResult;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/SignOutState$Idle : stapel/auth/presentation/SignOutState {
+	public static final field INSTANCE Lstapel/auth/presentation/SignOutState$Idle;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/presentation/SignOutState$SigningOut : stapel/auth/presentation/SignOutState {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lstapel/auth/presentation/SignOutState$SigningOut;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/SignOutState$SigningOut;ZILjava/lang/Object;)Lstapel/auth/presentation/SignOutState$SigningOut;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEverywhere ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/repo/AccountRepository {
+	public fun <init> (Lstapel/auth/api/AuthApi;Lstapel/cache/StapelCache;)V
+	public final fun get (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun me ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class stapel/auth/repo/CapabilitiesRepository {
+	public fun <init> (Lstapel/auth/api/AuthApi;Lstapel/cache/StapelCache;)V
+	public final fun capabilities ()Lkotlinx/coroutines/flow/Flow;
+	public final fun get (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun refresh (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/auth/repo/SessionsRepository {
+	public fun <init> (Lstapel/auth/api/AuthApi;Lstapel/cache/StapelCache;)V
+	public final fun load (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun revoke (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun revokeOthers (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun sessions ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract interface class stapel/auth/session/AuthSession {
+	public abstract fun ensureGuest (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getChanges ()Lkotlinx/coroutines/flow/SharedFlow;
+	public abstract fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun logout (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun logoutEverywhere (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun refreshUser (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun restore (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/auth/session/AuthState {
+}
+
+public final class stapel/auth/session/AuthState$Guest : stapel/auth/session/AuthState {
+	public fun <init> (Lstapel/auth/model/AuthUser;)V
+	public final fun component1 ()Lstapel/auth/model/AuthUser;
+	public final fun copy (Lstapel/auth/model/AuthUser;)Lstapel/auth/session/AuthState$Guest;
+	public static synthetic fun copy$default (Lstapel/auth/session/AuthState$Guest;Lstapel/auth/model/AuthUser;ILjava/lang/Object;)Lstapel/auth/session/AuthState$Guest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUser ()Lstapel/auth/model/AuthUser;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/AuthState$Restoring : stapel/auth/session/AuthState {
+	public static final field INSTANCE Lstapel/auth/session/AuthState$Restoring;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/AuthState$SignedIn : stapel/auth/session/AuthState {
+	public fun <init> (Lstapel/auth/model/AuthUser;)V
+	public final fun component1 ()Lstapel/auth/model/AuthUser;
+	public final fun copy (Lstapel/auth/model/AuthUser;)Lstapel/auth/session/AuthState$SignedIn;
+	public static synthetic fun copy$default (Lstapel/auth/session/AuthState$SignedIn;Lstapel/auth/model/AuthUser;ILjava/lang/Object;)Lstapel/auth/session/AuthState$SignedIn;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUser ()Lstapel/auth/model/AuthUser;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/AuthState$SignedOut : stapel/auth/session/AuthState {
+	public fun <init> (Lstapel/auth/session/SignOutReason;)V
+	public final fun component1 ()Lstapel/auth/session/SignOutReason;
+	public final fun copy (Lstapel/auth/session/SignOutReason;)Lstapel/auth/session/AuthState$SignedOut;
+	public static synthetic fun copy$default (Lstapel/auth/session/AuthState$SignedOut;Lstapel/auth/session/SignOutReason;ILjava/lang/Object;)Lstapel/auth/session/AuthState$SignedOut;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Lstapel/auth/session/SignOutReason;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/AuthTokenRefresher : stapel/session/TokenRefresher {
+	public fun <init> (Lstapel/auth/api/AuthApi;)V
+	public fun refresh (Lstapel/session/TokenPair;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/auth/session/LogoutResult : java/lang/Enum {
+	public static final field LocalOnly Lstapel/auth/session/LogoutResult;
+	public static final field RevokedOnServer Lstapel/auth/session/LogoutResult;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/session/LogoutResult;
+	public static fun values ()[Lstapel/auth/session/LogoutResult;
+}
+
+public abstract interface class stapel/auth/session/SessionChange {
+}
+
+public final class stapel/auth/session/SessionChange$Merged : stapel/auth/session/SessionChange {
+	public fun <init> (Ljava/lang/String;Lstapel/auth/model/AuthUser;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/auth/model/AuthUser;
+	public final fun copy (Ljava/lang/String;Lstapel/auth/model/AuthUser;)Lstapel/auth/session/SessionChange$Merged;
+	public static synthetic fun copy$default (Lstapel/auth/session/SessionChange$Merged;Ljava/lang/String;Lstapel/auth/model/AuthUser;ILjava/lang/Object;)Lstapel/auth/session/SessionChange$Merged;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFromGuestId ()Ljava/lang/String;
+	public final fun getInto ()Lstapel/auth/model/AuthUser;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/SessionChange$Promoted : stapel/auth/session/SessionChange {
+	public fun <init> (Lstapel/auth/model/AuthUser;)V
+	public final fun component1 ()Lstapel/auth/model/AuthUser;
+	public final fun copy (Lstapel/auth/model/AuthUser;)Lstapel/auth/session/SessionChange$Promoted;
+	public static synthetic fun copy$default (Lstapel/auth/session/SessionChange$Promoted;Lstapel/auth/model/AuthUser;ILjava/lang/Object;)Lstapel/auth/session/SessionChange$Promoted;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUser ()Lstapel/auth/model/AuthUser;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/SessionChange$SignedIn : stapel/auth/session/SessionChange {
+	public fun <init> (Lstapel/auth/model/AuthUser;Lstapel/auth/model/SignInKind;)V
+	public final fun component1 ()Lstapel/auth/model/AuthUser;
+	public final fun component2 ()Lstapel/auth/model/SignInKind;
+	public final fun copy (Lstapel/auth/model/AuthUser;Lstapel/auth/model/SignInKind;)Lstapel/auth/session/SessionChange$SignedIn;
+	public static synthetic fun copy$default (Lstapel/auth/session/SessionChange$SignedIn;Lstapel/auth/model/AuthUser;Lstapel/auth/model/SignInKind;ILjava/lang/Object;)Lstapel/auth/session/SessionChange$SignedIn;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKind ()Lstapel/auth/model/SignInKind;
+	public final fun getUser ()Lstapel/auth/model/AuthUser;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/SessionChange$SignedOut : stapel/auth/session/SessionChange {
+	public fun <init> (Ljava/lang/String;Lstapel/auth/session/SignOutReason;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/auth/session/SignOutReason;
+	public final fun copy (Ljava/lang/String;Lstapel/auth/session/SignOutReason;)Lstapel/auth/session/SessionChange$SignedOut;
+	public static synthetic fun copy$default (Lstapel/auth/session/SessionChange$SignedOut;Ljava/lang/String;Lstapel/auth/session/SignOutReason;ILjava/lang/Object;)Lstapel/auth/session/SessionChange$SignedOut;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Lstapel/auth/session/SignOutReason;
+	public final fun getUserId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/SignOutEverywhereResult {
+	public fun <init> (ZLstapel/auth/session/LogoutResult;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Lstapel/auth/session/LogoutResult;
+	public final fun copy (ZLstapel/auth/session/LogoutResult;)Lstapel/auth/session/SignOutEverywhereResult;
+	public static synthetic fun copy$default (Lstapel/auth/session/SignOutEverywhereResult;ZLstapel/auth/session/LogoutResult;ILjava/lang/Object;)Lstapel/auth/session/SignOutEverywhereResult;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOthersRevoked ()Z
+	public final fun getSelf ()Lstapel/auth/session/LogoutResult;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/SignOutReason : java/lang/Enum {
+	public static final field AccountDisabled Lstapel/auth/session/SignOutReason;
+	public static final field Expired Lstapel/auth/session/SignOutReason;
+	public static final field Other Lstapel/auth/session/SignOutReason;
+	public static final field Revoked Lstapel/auth/session/SignOutReason;
+	public static final field StorageLost Lstapel/auth/session/SignOutReason;
+	public static final field UserRequested Lstapel/auth/session/SignOutReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/auth/session/SignOutReason;
+	public static fun values ()[Lstapel/auth/session/SignOutReason;
+}
+
+public final class stapel/auth/session/StepUpController : stapel/network/VerificationHandler {
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public final fun cancel ()V
+	public final fun chooseFactor (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public fun resolve (Lstapel/result/VerificationChallenge;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun submit (Lstapel/auth/model/TotpProof;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/auth/session/StepUpState {
+}
+
+public final class stapel/auth/session/StepUpState$AwaitingCode : stapel/auth/session/StepUpState {
+	public fun <init> (Lstapel/result/VerificationChallenge;Ljava/lang/String;ZLstapel/auth/error/AuthError;)V
+	public final fun component1 ()Lstapel/result/VerificationChallenge;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Z
+	public final fun component4 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/result/VerificationChallenge;Ljava/lang/String;ZLstapel/auth/error/AuthError;)Lstapel/auth/session/StepUpState$AwaitingCode;
+	public static synthetic fun copy$default (Lstapel/auth/session/StepUpState$AwaitingCode;Lstapel/result/VerificationChallenge;Ljava/lang/String;ZLstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/session/StepUpState$AwaitingCode;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChallenge ()Lstapel/result/VerificationChallenge;
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getFactor ()Ljava/lang/String;
+	public final fun getSubmitting ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/StepUpState$Idle : stapel/auth/session/StepUpState {
+	public static final field INSTANCE Lstapel/auth/session/StepUpState$Idle;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/session/StepUpState$Picking : stapel/auth/session/StepUpState {
+	public fun <init> (Lstapel/result/VerificationChallenge;Ljava/lang/String;Lstapel/auth/error/AuthError;)V
+	public final fun component1 ()Lstapel/result/VerificationChallenge;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/result/VerificationChallenge;Ljava/lang/String;Lstapel/auth/error/AuthError;)Lstapel/auth/session/StepUpState$Picking;
+	public static synthetic fun copy$default (Lstapel/auth/session/StepUpState$Picking;Lstapel/result/VerificationChallenge;Ljava/lang/String;Lstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/session/StepUpState$Picking;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChallenge ()Lstapel/result/VerificationChallenge;
+	public final fun getError ()Lstapel/auth/error/AuthError;
+	public final fun getOperationId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
