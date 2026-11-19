@@ -1,0 +1,285 @@
+public abstract interface class stapel/session/InstallationIdentity {
+	public abstract fun deviceId (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/session/InstallationIdentity_androidKt {
+	public static final fun platformInstallationIdentity (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Lstapel/runtime/IdGenerator;Ljava/lang/String;)Lstapel/session/InstallationIdentity;
+	public static synthetic fun platformInstallationIdentity$default (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Lstapel/runtime/IdGenerator;Ljava/lang/String;ILjava/lang/Object;)Lstapel/session/InstallationIdentity;
+}
+
+public final class stapel/session/JwtKt {
+	public static final fun jwtExpiry (Ljava/lang/String;)Lkotlin/time/Instant;
+}
+
+public abstract interface class stapel/session/LogoutHook {
+	public abstract fun onSessionEnd (Lstapel/session/SessionEnd;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/session/RefreshOutcome {
+}
+
+public final class stapel/session/RefreshOutcome$Rejected : stapel/session/RefreshOutcome {
+	public fun <init> (Lstapel/session/SessionEnd;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/session/SessionEnd;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/session/SessionEnd;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/session/SessionEnd;Ljava/lang/String;)Lstapel/session/RefreshOutcome$Rejected;
+	public static synthetic fun copy$default (Lstapel/session/RefreshOutcome$Rejected;Lstapel/session/SessionEnd;Ljava/lang/String;ILjava/lang/Object;)Lstapel/session/RefreshOutcome$Rejected;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Lstapel/session/SessionEnd;
+	public final fun getCode ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/RefreshOutcome$Rotated : stapel/session/RefreshOutcome {
+	public fun <init> (Lstapel/session/TokenPair;)V
+	public final fun component1 ()Lstapel/session/TokenPair;
+	public final fun copy (Lstapel/session/TokenPair;)Lstapel/session/RefreshOutcome$Rotated;
+	public static synthetic fun copy$default (Lstapel/session/RefreshOutcome$Rotated;Lstapel/session/TokenPair;ILjava/lang/Object;)Lstapel/session/RefreshOutcome$Rotated;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTokens ()Lstapel/session/TokenPair;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/RefreshOutcome$Transient : stapel/session/RefreshOutcome {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/session/RefreshOutcome$Transient;
+	public static synthetic fun copy$default (Lstapel/session/RefreshOutcome$Transient;Ljava/lang/String;ILjava/lang/Object;)Lstapel/session/RefreshOutcome$Transient;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDetail ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionConfig {
+	public fun <init> ()V
+	public synthetic fun <init> (JJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-UwyO8pc ()J
+	public final fun component2-UwyO8pc ()J
+	public final fun copy-QTBD994 (JJ)Lstapel/session/SessionConfig;
+	public static synthetic fun copy-QTBD994$default (Lstapel/session/SessionConfig;JJILjava/lang/Object;)Lstapel/session/SessionConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getProactiveRefreshWindow-UwyO8pc ()J
+	public final fun getRotationHandoffWindow-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionDependencies {
+	public fun <init> (Lstapel/session/vault/TokenVault;Lkotlinx/coroutines/CoroutineScope;Lkotlin/time/Clock;Lstapel/runtime/Connectivity;Lstapel/runtime/StapelLogger;Lstapel/runtime/StapelTelemetry;)V
+	public synthetic fun <init> (Lstapel/session/vault/TokenVault;Lkotlinx/coroutines/CoroutineScope;Lkotlin/time/Clock;Lstapel/runtime/Connectivity;Lstapel/runtime/StapelLogger;Lstapel/runtime/StapelTelemetry;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getConnectivity ()Lstapel/runtime/Connectivity;
+	public final fun getLogger ()Lstapel/runtime/StapelLogger;
+	public final fun getScope ()Lkotlinx/coroutines/CoroutineScope;
+	public final fun getTelemetry ()Lstapel/runtime/StapelTelemetry;
+	public final fun getVault ()Lstapel/session/vault/TokenVault;
+}
+
+public final class stapel/session/SessionEnd : java/lang/Enum {
+	public static final field AccountDisabled Lstapel/session/SessionEnd;
+	public static final field Expired Lstapel/session/SessionEnd;
+	public static final field Logout Lstapel/session/SessionEnd;
+	public static final field Revoked Lstapel/session/SessionEnd;
+	public static final field StorageLost Lstapel/session/SessionEnd;
+	public static final field Unknown Lstapel/session/SessionEnd;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/session/SessionEnd;
+	public static fun values ()[Lstapel/session/SessionEnd;
+}
+
+public abstract interface class stapel/session/SessionEvent {
+}
+
+public final class stapel/session/SessionEvent$Ended : stapel/session/SessionEvent {
+	public fun <init> (Lstapel/session/SessionEnd;)V
+	public final fun component1 ()Lstapel/session/SessionEnd;
+	public final fun copy (Lstapel/session/SessionEnd;)Lstapel/session/SessionEvent$Ended;
+	public static synthetic fun copy$default (Lstapel/session/SessionEvent$Ended;Lstapel/session/SessionEnd;ILjava/lang/Object;)Lstapel/session/SessionEvent$Ended;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Lstapel/session/SessionEnd;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionEvent$RefreshUnavailable : stapel/session/SessionEvent {
+	public static final field INSTANCE Lstapel/session/SessionEvent$RefreshUnavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionEvent$Refreshed : stapel/session/SessionEvent {
+	public static final field INSTANCE Lstapel/session/SessionEvent$Refreshed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionKind : java/lang/Enum {
+	public static final field Anonymous Lstapel/session/SessionKind;
+	public static final field Authenticated Lstapel/session/SessionKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/session/SessionKind;
+	public static fun values ()[Lstapel/session/SessionKind;
+}
+
+public abstract interface class stapel/session/SessionManager {
+	public abstract fun accessToken (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun adopt (Lstapel/session/TokenPair;Lstapel/session/SessionKind;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun awaitReady (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun currentTokens (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getAuthenticator ()Lstapel/network/RequestAuthenticator;
+	public abstract fun getEvents ()Lkotlinx/coroutines/flow/SharedFlow;
+	public abstract fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun logout (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun refresh (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun refresh$default (Lstapel/session/SessionManager;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun registerLogoutHook (Lstapel/session/LogoutHook;)Ljava/lang/AutoCloseable;
+	public abstract fun restore (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun sessionLost (Lstapel/session/SessionEnd;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/session/SessionManager$DefaultImpls {
+	public static synthetic fun refresh$default (Lstapel/session/SessionManager;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class stapel/session/SessionManagerKt {
+	public static final fun SessionManager (Lstapel/session/SessionDependencies;Lstapel/session/TokenRefresher;Lstapel/session/SessionConfig;)Lstapel/session/SessionManager;
+	public static synthetic fun SessionManager$default (Lstapel/session/SessionDependencies;Lstapel/session/TokenRefresher;Lstapel/session/SessionConfig;ILjava/lang/Object;)Lstapel/session/SessionManager;
+}
+
+public abstract interface class stapel/session/SessionState {
+}
+
+public final class stapel/session/SessionState$Anonymous : stapel/session/SessionState {
+	public fun <init> (J)V
+	public final fun component1 ()J
+	public final fun copy (J)Lstapel/session/SessionState$Anonymous;
+	public static synthetic fun copy$default (Lstapel/session/SessionState$Anonymous;JILjava/lang/Object;)Lstapel/session/SessionState$Anonymous;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGeneration ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionState$Authenticated : stapel/session/SessionState {
+	public fun <init> (J)V
+	public final fun component1 ()J
+	public final fun copy (J)Lstapel/session/SessionState$Authenticated;
+	public static synthetic fun copy$default (Lstapel/session/SessionState$Authenticated;JILjava/lang/Object;)Lstapel/session/SessionState$Authenticated;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getGeneration ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionState$Initializing : stapel/session/SessionState {
+	public static final field INSTANCE Lstapel/session/SessionState$Initializing;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/SessionState$Unauthenticated : stapel/session/SessionState {
+	public fun <init> (Lstapel/session/SessionEnd;)V
+	public final fun component1 ()Lstapel/session/SessionEnd;
+	public final fun copy (Lstapel/session/SessionEnd;)Lstapel/session/SessionState$Unauthenticated;
+	public static synthetic fun copy$default (Lstapel/session/SessionState$Unauthenticated;Lstapel/session/SessionEnd;ILjava/lang/Object;)Lstapel/session/SessionState$Unauthenticated;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Lstapel/session/SessionEnd;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/TokenPair {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccessExpiresAt ()Lkotlin/time/Instant;
+	public final fun getAccessExpiry ()Lkotlin/time/Instant;
+	public final fun getAccessToken ()Ljava/lang/String;
+	public final fun getRefreshToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/session/TokenRefresher {
+	public abstract fun refresh (Lstapel/session/TokenPair;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/session/di/SessionModuleKt {
+	public static final fun sessionModule (Lstapel/session/SessionConfig;Lstapel/session/vault/TokenVaultConfig;)Lorg/koin/core/module/Module;
+	public static synthetic fun sessionModule$default (Lstapel/session/SessionConfig;Lstapel/session/vault/TokenVaultConfig;ILjava/lang/Object;)Lorg/koin/core/module/Module;
+}
+
+public final class stapel/session/vault/InMemoryTokenVault : stapel/session/vault/TokenVault {
+	public fun <init> ()V
+	public fun <init> (Lstapel/session/vault/StoredSession;)V
+	public synthetic fun <init> (Lstapel/session/vault/StoredSession;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun read (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun write (Lstapel/session/vault/StoredSession;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/session/vault/KeystoreTokenVaultKt {
+	public static final fun platformTokenVault (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Lstapel/session/vault/TokenVaultConfig;)Lstapel/session/vault/TokenVault;
+	public static synthetic fun platformTokenVault$default (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Lstapel/session/vault/TokenVaultConfig;ILjava/lang/Object;)Lstapel/session/vault/TokenVault;
+}
+
+public final class stapel/session/vault/StoredSession {
+	public fun <init> (Lstapel/session/TokenPair;Lstapel/session/SessionKind;Lkotlin/time/Instant;)V
+	public synthetic fun <init> (Lstapel/session/TokenPair;Lstapel/session/SessionKind;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKind ()Lstapel/session/SessionKind;
+	public final fun getRotationStartedAt ()Lkotlin/time/Instant;
+	public final fun getTokens ()Lstapel/session/TokenPair;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/session/vault/TokenVault {
+	public abstract fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun read (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun write (Lstapel/session/vault/StoredSession;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/session/vault/TokenVaultConfig {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lstapel/session/vault/TokenVaultConfig;
+	public static synthetic fun copy$default (Lstapel/session/vault/TokenVaultConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/session/vault/TokenVaultConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIosAccessGroup ()Ljava/lang/String;
+	public final fun getNamespace ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/session/vault/VaultRead {
+}
+
+public final class stapel/session/vault/VaultRead$Empty : stapel/session/vault/VaultRead {
+	public static final field INSTANCE Lstapel/session/vault/VaultRead$Empty;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/session/vault/VaultRead$Present : stapel/session/vault/VaultRead {
+	public fun <init> (Lstapel/session/vault/StoredSession;)V
+	public final fun getSession ()Lstapel/session/vault/StoredSession;
+}
+
+public final class stapel/session/vault/VaultRead$Unreadable : stapel/session/vault/VaultRead {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getReason ()Ljava/lang/String;
+}
+

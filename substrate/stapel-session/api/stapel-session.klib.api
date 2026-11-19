@@ -1,0 +1,303 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-session>
+final enum class stapel.session/SessionEnd : kotlin/Enum<stapel.session/SessionEnd> { // stapel.session/SessionEnd|null[0]
+    enum entry AccountDisabled // stapel.session/SessionEnd.AccountDisabled|null[0]
+    enum entry Expired // stapel.session/SessionEnd.Expired|null[0]
+    enum entry Logout // stapel.session/SessionEnd.Logout|null[0]
+    enum entry Revoked // stapel.session/SessionEnd.Revoked|null[0]
+    enum entry StorageLost // stapel.session/SessionEnd.StorageLost|null[0]
+    enum entry Unknown // stapel.session/SessionEnd.Unknown|null[0]
+
+    final val entries // stapel.session/SessionEnd.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.session/SessionEnd> // stapel.session/SessionEnd.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.session/SessionEnd // stapel.session/SessionEnd.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.session/SessionEnd> // stapel.session/SessionEnd.values|values#static(){}[0]
+}
+
+final enum class stapel.session/SessionKind : kotlin/Enum<stapel.session/SessionKind> { // stapel.session/SessionKind|null[0]
+    enum entry Anonymous // stapel.session/SessionKind.Anonymous|null[0]
+    enum entry Authenticated // stapel.session/SessionKind.Authenticated|null[0]
+
+    final val entries // stapel.session/SessionKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.session/SessionKind> // stapel.session/SessionKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.session/SessionKind // stapel.session/SessionKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.session/SessionKind> // stapel.session/SessionKind.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.session/LogoutHook { // stapel.session/LogoutHook|null[0]
+    abstract suspend fun onSessionEnd(stapel.session/SessionEnd) // stapel.session/LogoutHook.onSessionEnd|onSessionEnd(stapel.session.SessionEnd){}[0]
+}
+
+abstract fun interface stapel.session/TokenRefresher { // stapel.session/TokenRefresher|null[0]
+    abstract suspend fun refresh(stapel.session/TokenPair): stapel.session/RefreshOutcome // stapel.session/TokenRefresher.refresh|refresh(stapel.session.TokenPair){}[0]
+}
+
+abstract interface stapel.session.vault/TokenVault { // stapel.session.vault/TokenVault|null[0]
+    abstract suspend fun clear() // stapel.session.vault/TokenVault.clear|clear(){}[0]
+    abstract suspend fun read(): stapel.session.vault/VaultRead // stapel.session.vault/TokenVault.read|read(){}[0]
+    abstract suspend fun write(stapel.session.vault/StoredSession) // stapel.session.vault/TokenVault.write|write(stapel.session.vault.StoredSession){}[0]
+}
+
+abstract interface stapel.session/InstallationIdentity { // stapel.session/InstallationIdentity|null[0]
+    abstract suspend fun deviceId(): kotlin/String // stapel.session/InstallationIdentity.deviceId|deviceId(){}[0]
+}
+
+abstract interface stapel.session/SessionManager { // stapel.session/SessionManager|null[0]
+    abstract val authenticator // stapel.session/SessionManager.authenticator|{}authenticator[0]
+        abstract fun <get-authenticator>(): stapel.network/RequestAuthenticator // stapel.session/SessionManager.authenticator.<get-authenticator>|<get-authenticator>(){}[0]
+    abstract val events // stapel.session/SessionManager.events|{}events[0]
+        abstract fun <get-events>(): kotlinx.coroutines.flow/SharedFlow<stapel.session/SessionEvent> // stapel.session/SessionManager.events.<get-events>|<get-events>(){}[0]
+    abstract val state // stapel.session/SessionManager.state|{}state[0]
+        abstract fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.session/SessionState> // stapel.session/SessionManager.state.<get-state>|<get-state>(){}[0]
+
+    abstract fun registerLogoutHook(stapel.session/LogoutHook): kotlin/AutoCloseable // stapel.session/SessionManager.registerLogoutHook|registerLogoutHook(stapel.session.LogoutHook){}[0]
+    abstract suspend fun accessToken(): kotlin/String? // stapel.session/SessionManager.accessToken|accessToken(){}[0]
+    abstract suspend fun adopt(stapel.session/TokenPair, stapel.session/SessionKind) // stapel.session/SessionManager.adopt|adopt(stapel.session.TokenPair;stapel.session.SessionKind){}[0]
+    abstract suspend fun awaitReady(): stapel.session/SessionState // stapel.session/SessionManager.awaitReady|awaitReady(){}[0]
+    abstract suspend fun currentTokens(): stapel.session/TokenPair? // stapel.session/SessionManager.currentTokens|currentTokens(){}[0]
+    abstract suspend fun logout() // stapel.session/SessionManager.logout|logout(){}[0]
+    abstract suspend fun refresh(kotlin/String? = ...): stapel.network/RefreshVerdict // stapel.session/SessionManager.refresh|refresh(kotlin.String?){}[0]
+    abstract suspend fun restore() // stapel.session/SessionManager.restore|restore(){}[0]
+    abstract suspend fun sessionLost(stapel.session/SessionEnd): kotlin/Boolean // stapel.session/SessionManager.sessionLost|sessionLost(stapel.session.SessionEnd){}[0]
+}
+
+sealed interface stapel.session.vault/VaultRead { // stapel.session.vault/VaultRead|null[0]
+    final class Present : stapel.session.vault/VaultRead { // stapel.session.vault/VaultRead.Present|null[0]
+        constructor <init>(stapel.session.vault/StoredSession) // stapel.session.vault/VaultRead.Present.<init>|<init>(stapel.session.vault.StoredSession){}[0]
+
+        final val session // stapel.session.vault/VaultRead.Present.session|{}session[0]
+            final fun <get-session>(): stapel.session.vault/StoredSession // stapel.session.vault/VaultRead.Present.session.<get-session>|<get-session>(){}[0]
+    }
+
+    final class Unreadable : stapel.session.vault/VaultRead { // stapel.session.vault/VaultRead.Unreadable|null[0]
+        constructor <init>(kotlin/String) // stapel.session.vault/VaultRead.Unreadable.<init>|<init>(kotlin.String){}[0]
+
+        final val reason // stapel.session.vault/VaultRead.Unreadable.reason|{}reason[0]
+            final fun <get-reason>(): kotlin/String // stapel.session.vault/VaultRead.Unreadable.reason.<get-reason>|<get-reason>(){}[0]
+    }
+
+    final object Empty : stapel.session.vault/VaultRead { // stapel.session.vault/VaultRead.Empty|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session.vault/VaultRead.Empty.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session.vault/VaultRead.Empty.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session.vault/VaultRead.Empty.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.session/RefreshOutcome { // stapel.session/RefreshOutcome|null[0]
+    final class Rejected : stapel.session/RefreshOutcome { // stapel.session/RefreshOutcome.Rejected|null[0]
+        constructor <init>(stapel.session/SessionEnd, kotlin/String? = ...) // stapel.session/RefreshOutcome.Rejected.<init>|<init>(stapel.session.SessionEnd;kotlin.String?){}[0]
+
+        final val cause // stapel.session/RefreshOutcome.Rejected.cause|{}cause[0]
+            final fun <get-cause>(): stapel.session/SessionEnd // stapel.session/RefreshOutcome.Rejected.cause.<get-cause>|<get-cause>(){}[0]
+        final val code // stapel.session/RefreshOutcome.Rejected.code|{}code[0]
+            final fun <get-code>(): kotlin/String? // stapel.session/RefreshOutcome.Rejected.code.<get-code>|<get-code>(){}[0]
+
+        final fun component1(): stapel.session/SessionEnd // stapel.session/RefreshOutcome.Rejected.component1|component1(){}[0]
+        final fun component2(): kotlin/String? // stapel.session/RefreshOutcome.Rejected.component2|component2(){}[0]
+        final fun copy(stapel.session/SessionEnd = ..., kotlin/String? = ...): stapel.session/RefreshOutcome.Rejected // stapel.session/RefreshOutcome.Rejected.copy|copy(stapel.session.SessionEnd;kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/RefreshOutcome.Rejected.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/RefreshOutcome.Rejected.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/RefreshOutcome.Rejected.toString|toString(){}[0]
+    }
+
+    final class Rotated : stapel.session/RefreshOutcome { // stapel.session/RefreshOutcome.Rotated|null[0]
+        constructor <init>(stapel.session/TokenPair) // stapel.session/RefreshOutcome.Rotated.<init>|<init>(stapel.session.TokenPair){}[0]
+
+        final val tokens // stapel.session/RefreshOutcome.Rotated.tokens|{}tokens[0]
+            final fun <get-tokens>(): stapel.session/TokenPair // stapel.session/RefreshOutcome.Rotated.tokens.<get-tokens>|<get-tokens>(){}[0]
+
+        final fun component1(): stapel.session/TokenPair // stapel.session/RefreshOutcome.Rotated.component1|component1(){}[0]
+        final fun copy(stapel.session/TokenPair = ...): stapel.session/RefreshOutcome.Rotated // stapel.session/RefreshOutcome.Rotated.copy|copy(stapel.session.TokenPair){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/RefreshOutcome.Rotated.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/RefreshOutcome.Rotated.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/RefreshOutcome.Rotated.toString|toString(){}[0]
+    }
+
+    final class Transient : stapel.session/RefreshOutcome { // stapel.session/RefreshOutcome.Transient|null[0]
+        constructor <init>(kotlin/String? = ...) // stapel.session/RefreshOutcome.Transient.<init>|<init>(kotlin.String?){}[0]
+
+        final val detail // stapel.session/RefreshOutcome.Transient.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String? // stapel.session/RefreshOutcome.Transient.detail.<get-detail>|<get-detail>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.session/RefreshOutcome.Transient.component1|component1(){}[0]
+        final fun copy(kotlin/String? = ...): stapel.session/RefreshOutcome.Transient // stapel.session/RefreshOutcome.Transient.copy|copy(kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/RefreshOutcome.Transient.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/RefreshOutcome.Transient.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/RefreshOutcome.Transient.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.session/SessionEvent { // stapel.session/SessionEvent|null[0]
+    final class Ended : stapel.session/SessionEvent { // stapel.session/SessionEvent.Ended|null[0]
+        constructor <init>(stapel.session/SessionEnd) // stapel.session/SessionEvent.Ended.<init>|<init>(stapel.session.SessionEnd){}[0]
+
+        final val cause // stapel.session/SessionEvent.Ended.cause|{}cause[0]
+            final fun <get-cause>(): stapel.session/SessionEnd // stapel.session/SessionEvent.Ended.cause.<get-cause>|<get-cause>(){}[0]
+
+        final fun component1(): stapel.session/SessionEnd // stapel.session/SessionEvent.Ended.component1|component1(){}[0]
+        final fun copy(stapel.session/SessionEnd = ...): stapel.session/SessionEvent.Ended // stapel.session/SessionEvent.Ended.copy|copy(stapel.session.SessionEnd){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionEvent.Ended.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/SessionEvent.Ended.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/SessionEvent.Ended.toString|toString(){}[0]
+    }
+
+    final object RefreshUnavailable : stapel.session/SessionEvent { // stapel.session/SessionEvent.RefreshUnavailable|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionEvent.RefreshUnavailable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/SessionEvent.RefreshUnavailable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/SessionEvent.RefreshUnavailable.toString|toString(){}[0]
+    }
+
+    final object Refreshed : stapel.session/SessionEvent { // stapel.session/SessionEvent.Refreshed|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionEvent.Refreshed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/SessionEvent.Refreshed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/SessionEvent.Refreshed.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.session/SessionState { // stapel.session/SessionState|null[0]
+    final class Anonymous : stapel.session/SessionState { // stapel.session/SessionState.Anonymous|null[0]
+        constructor <init>(kotlin/Long) // stapel.session/SessionState.Anonymous.<init>|<init>(kotlin.Long){}[0]
+
+        final val generation // stapel.session/SessionState.Anonymous.generation|{}generation[0]
+            final fun <get-generation>(): kotlin/Long // stapel.session/SessionState.Anonymous.generation.<get-generation>|<get-generation>(){}[0]
+
+        final fun component1(): kotlin/Long // stapel.session/SessionState.Anonymous.component1|component1(){}[0]
+        final fun copy(kotlin/Long = ...): stapel.session/SessionState.Anonymous // stapel.session/SessionState.Anonymous.copy|copy(kotlin.Long){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionState.Anonymous.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/SessionState.Anonymous.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/SessionState.Anonymous.toString|toString(){}[0]
+    }
+
+    final class Authenticated : stapel.session/SessionState { // stapel.session/SessionState.Authenticated|null[0]
+        constructor <init>(kotlin/Long) // stapel.session/SessionState.Authenticated.<init>|<init>(kotlin.Long){}[0]
+
+        final val generation // stapel.session/SessionState.Authenticated.generation|{}generation[0]
+            final fun <get-generation>(): kotlin/Long // stapel.session/SessionState.Authenticated.generation.<get-generation>|<get-generation>(){}[0]
+
+        final fun component1(): kotlin/Long // stapel.session/SessionState.Authenticated.component1|component1(){}[0]
+        final fun copy(kotlin/Long = ...): stapel.session/SessionState.Authenticated // stapel.session/SessionState.Authenticated.copy|copy(kotlin.Long){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionState.Authenticated.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/SessionState.Authenticated.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/SessionState.Authenticated.toString|toString(){}[0]
+    }
+
+    final class Unauthenticated : stapel.session/SessionState { // stapel.session/SessionState.Unauthenticated|null[0]
+        constructor <init>(stapel.session/SessionEnd?) // stapel.session/SessionState.Unauthenticated.<init>|<init>(stapel.session.SessionEnd?){}[0]
+
+        final val cause // stapel.session/SessionState.Unauthenticated.cause|{}cause[0]
+            final fun <get-cause>(): stapel.session/SessionEnd? // stapel.session/SessionState.Unauthenticated.cause.<get-cause>|<get-cause>(){}[0]
+
+        final fun component1(): stapel.session/SessionEnd? // stapel.session/SessionState.Unauthenticated.component1|component1(){}[0]
+        final fun copy(stapel.session/SessionEnd? = ...): stapel.session/SessionState.Unauthenticated // stapel.session/SessionState.Unauthenticated.copy|copy(stapel.session.SessionEnd?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionState.Unauthenticated.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/SessionState.Unauthenticated.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/SessionState.Unauthenticated.toString|toString(){}[0]
+    }
+
+    final object Initializing : stapel.session/SessionState { // stapel.session/SessionState.Initializing|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionState.Initializing.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.session/SessionState.Initializing.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.session/SessionState.Initializing.toString|toString(){}[0]
+    }
+}
+
+final class stapel.session.vault/InMemoryTokenVault : stapel.session.vault/TokenVault { // stapel.session.vault/InMemoryTokenVault|null[0]
+    constructor <init>(stapel.session.vault/StoredSession? = ...) // stapel.session.vault/InMemoryTokenVault.<init>|<init>(stapel.session.vault.StoredSession?){}[0]
+
+    final suspend fun clear() // stapel.session.vault/InMemoryTokenVault.clear|clear(){}[0]
+    final suspend fun read(): stapel.session.vault/VaultRead // stapel.session.vault/InMemoryTokenVault.read|read(){}[0]
+    final suspend fun write(stapel.session.vault/StoredSession) // stapel.session.vault/InMemoryTokenVault.write|write(stapel.session.vault.StoredSession){}[0]
+}
+
+final class stapel.session.vault/StoredSession { // stapel.session.vault/StoredSession|null[0]
+    constructor <init>(stapel.session/TokenPair, stapel.session/SessionKind, kotlin.time/Instant? = ...) // stapel.session.vault/StoredSession.<init>|<init>(stapel.session.TokenPair;stapel.session.SessionKind;kotlin.time.Instant?){}[0]
+
+    final val kind // stapel.session.vault/StoredSession.kind|{}kind[0]
+        final fun <get-kind>(): stapel.session/SessionKind // stapel.session.vault/StoredSession.kind.<get-kind>|<get-kind>(){}[0]
+    final val rotationStartedAt // stapel.session.vault/StoredSession.rotationStartedAt|{}rotationStartedAt[0]
+        final fun <get-rotationStartedAt>(): kotlin.time/Instant? // stapel.session.vault/StoredSession.rotationStartedAt.<get-rotationStartedAt>|<get-rotationStartedAt>(){}[0]
+    final val tokens // stapel.session.vault/StoredSession.tokens|{}tokens[0]
+        final fun <get-tokens>(): stapel.session/TokenPair // stapel.session.vault/StoredSession.tokens.<get-tokens>|<get-tokens>(){}[0]
+
+    final fun toString(): kotlin/String // stapel.session.vault/StoredSession.toString|toString(){}[0]
+}
+
+final class stapel.session.vault/TokenVaultConfig { // stapel.session.vault/TokenVaultConfig|null[0]
+    constructor <init>(kotlin/String = ..., kotlin/String? = ...) // stapel.session.vault/TokenVaultConfig.<init>|<init>(kotlin.String;kotlin.String?){}[0]
+
+    final val iosAccessGroup // stapel.session.vault/TokenVaultConfig.iosAccessGroup|{}iosAccessGroup[0]
+        final fun <get-iosAccessGroup>(): kotlin/String? // stapel.session.vault/TokenVaultConfig.iosAccessGroup.<get-iosAccessGroup>|<get-iosAccessGroup>(){}[0]
+    final val namespace // stapel.session.vault/TokenVaultConfig.namespace|{}namespace[0]
+        final fun <get-namespace>(): kotlin/String // stapel.session.vault/TokenVaultConfig.namespace.<get-namespace>|<get-namespace>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.session.vault/TokenVaultConfig.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // stapel.session.vault/TokenVaultConfig.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String? = ...): stapel.session.vault/TokenVaultConfig // stapel.session.vault/TokenVaultConfig.copy|copy(kotlin.String;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session.vault/TokenVaultConfig.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.session.vault/TokenVaultConfig.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.session.vault/TokenVaultConfig.toString|toString(){}[0]
+}
+
+final class stapel.session/SessionConfig { // stapel.session/SessionConfig|null[0]
+    constructor <init>(kotlin.time/Duration = ..., kotlin.time/Duration = ...) // stapel.session/SessionConfig.<init>|<init>(kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+    final val proactiveRefreshWindow // stapel.session/SessionConfig.proactiveRefreshWindow|{}proactiveRefreshWindow[0]
+        final fun <get-proactiveRefreshWindow>(): kotlin.time/Duration // stapel.session/SessionConfig.proactiveRefreshWindow.<get-proactiveRefreshWindow>|<get-proactiveRefreshWindow>(){}[0]
+    final val rotationHandoffWindow // stapel.session/SessionConfig.rotationHandoffWindow|{}rotationHandoffWindow[0]
+        final fun <get-rotationHandoffWindow>(): kotlin.time/Duration // stapel.session/SessionConfig.rotationHandoffWindow.<get-rotationHandoffWindow>|<get-rotationHandoffWindow>(){}[0]
+
+    final fun component1(): kotlin.time/Duration // stapel.session/SessionConfig.component1|component1(){}[0]
+    final fun component2(): kotlin.time/Duration // stapel.session/SessionConfig.component2|component2(){}[0]
+    final fun copy(kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.session/SessionConfig // stapel.session/SessionConfig.copy|copy(kotlin.time.Duration;kotlin.time.Duration){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionConfig.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.session/SessionConfig.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.session/SessionConfig.toString|toString(){}[0]
+}
+
+final class stapel.session/SessionDependencies { // stapel.session/SessionDependencies|null[0]
+    constructor <init>(stapel.session.vault/TokenVault, kotlinx.coroutines/CoroutineScope, kotlin.time/Clock, stapel.runtime/Connectivity? = ..., stapel.runtime/StapelLogger = ..., stapel.runtime/StapelTelemetry = ...) // stapel.session/SessionDependencies.<init>|<init>(stapel.session.vault.TokenVault;kotlinx.coroutines.CoroutineScope;kotlin.time.Clock;stapel.runtime.Connectivity?;stapel.runtime.StapelLogger;stapel.runtime.StapelTelemetry){}[0]
+
+    final val clock // stapel.session/SessionDependencies.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // stapel.session/SessionDependencies.clock.<get-clock>|<get-clock>(){}[0]
+    final val connectivity // stapel.session/SessionDependencies.connectivity|{}connectivity[0]
+        final fun <get-connectivity>(): stapel.runtime/Connectivity? // stapel.session/SessionDependencies.connectivity.<get-connectivity>|<get-connectivity>(){}[0]
+    final val logger // stapel.session/SessionDependencies.logger|{}logger[0]
+        final fun <get-logger>(): stapel.runtime/StapelLogger // stapel.session/SessionDependencies.logger.<get-logger>|<get-logger>(){}[0]
+    final val scope // stapel.session/SessionDependencies.scope|{}scope[0]
+        final fun <get-scope>(): kotlinx.coroutines/CoroutineScope // stapel.session/SessionDependencies.scope.<get-scope>|<get-scope>(){}[0]
+    final val telemetry // stapel.session/SessionDependencies.telemetry|{}telemetry[0]
+        final fun <get-telemetry>(): stapel.runtime/StapelTelemetry // stapel.session/SessionDependencies.telemetry.<get-telemetry>|<get-telemetry>(){}[0]
+    final val vault // stapel.session/SessionDependencies.vault|{}vault[0]
+        final fun <get-vault>(): stapel.session.vault/TokenVault // stapel.session/SessionDependencies.vault.<get-vault>|<get-vault>(){}[0]
+}
+
+final class stapel.session/TokenPair { // stapel.session/TokenPair|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.time/Instant? = ...) // stapel.session/TokenPair.<init>|<init>(kotlin.String;kotlin.String;kotlin.time.Instant?){}[0]
+
+    final val accessExpiresAt // stapel.session/TokenPair.accessExpiresAt|{}accessExpiresAt[0]
+        final fun <get-accessExpiresAt>(): kotlin.time/Instant? // stapel.session/TokenPair.accessExpiresAt.<get-accessExpiresAt>|<get-accessExpiresAt>(){}[0]
+    final val accessExpiry // stapel.session/TokenPair.accessExpiry|{}accessExpiry[0]
+        final fun <get-accessExpiry>(): kotlin.time/Instant? // stapel.session/TokenPair.accessExpiry.<get-accessExpiry>|<get-accessExpiry>(){}[0]
+    final val accessToken // stapel.session/TokenPair.accessToken|{}accessToken[0]
+        final fun <get-accessToken>(): kotlin/String // stapel.session/TokenPair.accessToken.<get-accessToken>|<get-accessToken>(){}[0]
+    final val refreshToken // stapel.session/TokenPair.refreshToken|{}refreshToken[0]
+        final fun <get-refreshToken>(): kotlin/String // stapel.session/TokenPair.refreshToken.<get-refreshToken>|<get-refreshToken>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/TokenPair.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.session/TokenPair.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.session/TokenPair.toString|toString(){}[0]
+}
+
+final fun stapel.session.di/sessionModule(stapel.session/SessionConfig = ..., stapel.session.vault/TokenVaultConfig = ...): org.koin.core.module/Module // stapel.session.di/sessionModule|sessionModule(stapel.session.SessionConfig;stapel.session.vault.TokenVaultConfig){}[0]
+final fun stapel.session.vault/platformTokenVault(stapel.runtime/PlatformContext, stapel.runtime/StapelDispatchers, stapel.session.vault/TokenVaultConfig = ...): stapel.session.vault/TokenVault // stapel.session.vault/platformTokenVault|platformTokenVault(stapel.runtime.PlatformContext;stapel.runtime.StapelDispatchers;stapel.session.vault.TokenVaultConfig){}[0]
+final fun stapel.session/SessionManager(stapel.session/SessionDependencies, stapel.session/TokenRefresher, stapel.session/SessionConfig = ...): stapel.session/SessionManager // stapel.session/SessionManager|SessionManager(stapel.session.SessionDependencies;stapel.session.TokenRefresher;stapel.session.SessionConfig){}[0]
+final fun stapel.session/jwtExpiry(kotlin/String): kotlin.time/Instant? // stapel.session/jwtExpiry|jwtExpiry(kotlin.String){}[0]
+final fun stapel.session/platformInstallationIdentity(stapel.runtime/PlatformContext, stapel.runtime/StapelDispatchers, stapel.runtime/IdGenerator, kotlin/String = ...): stapel.session/InstallationIdentity // stapel.session/platformInstallationIdentity|platformInstallationIdentity(stapel.runtime.PlatformContext;stapel.runtime.StapelDispatchers;stapel.runtime.IdGenerator;kotlin.String){}[0]
