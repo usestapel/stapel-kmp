@@ -35,6 +35,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
+import stapel.i18n.CoreUiStrings
 import stapel.ui.skin.AvatarSize
 import stapel.ui.skin.PagerIndicatorSpec
 import stapel.ui.skin.SelectSpec
@@ -127,7 +128,7 @@ public fun StapelTextField(
     maxLines: Int = 1,
     testTag: String? = null,
     loading: Boolean = false,
-    clearLabel: String? = null,
+    clearLabel: String? = if (kind == TextFieldKind.Search) stapelString(CoreUiStrings.Clear) else null,
     inputTransformation: InputTransformation? = null,
     outputTransformation: OutputTransformation? = null,
 ) {
@@ -164,7 +165,7 @@ public fun StapelCodeField(
 @Composable
 public fun StapelDialog(
     onDismiss: () -> Unit,
-    dismissLabel: String,
+    dismissLabel: String = stapelString(CoreUiStrings.Close),
     title: String? = null,
     accessibleName: String? = null,
     dismissible: Boolean = true,
@@ -294,7 +295,7 @@ public fun StapelChip(
     tone: StapelTone = StapelTone.Neutral,
     leadingIcon: StapelIcon? = null,
     onRemove: (() -> Unit)? = null,
-    removeLabel: String? = null,
+    removeLabel: String? = if (onRemove != null) stapelString(CoreUiStrings.Remove) else null,
     enabled: Boolean = true,
     size: ControlSize = ControlSize.Regular,
     testTag: String? = null,
@@ -344,7 +345,7 @@ public fun StapelBadge(
 public fun StapelPullToRefresh(
     refreshing: Boolean,
     onRefresh: () -> Unit,
-    label: String,
+    label: String = stapelString(CoreUiStrings.Refresh),
     modifier: Modifier = Modifier,
     testTag: String? = null,
     content: @Composable () -> Unit,

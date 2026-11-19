@@ -35,6 +35,24 @@ public object CoreUiStrings {
     /** "Details": a label for a skin that collapses the technical line of an error banner (the default skins show the line). */
     public val Details: StringKey = StringKey("stapel.ui.details")
 
+    /** "Clear": clears a field (the search field's clear action). */
+    public val Clear: StringKey = StringKey("stapel.ui.clear")
+
+    /** "Search": the label of a search field. */
+    public val Search: StringKey = StringKey("stapel.ui.search")
+
+    /** "Done": commits a multi-choice picker or a sheet. */
+    public val Done: StringKey = StringKey("stapel.ui.done")
+
+    /** "No matches": a search or filter found nothing. */
+    public val NoMatches: StringKey = StringKey("stapel.ui.no_matches")
+
+    /** "Refresh": the accessible name of pull-to-refresh. */
+    public val Refresh: StringKey = StringKey("stapel.ui.refresh")
+
+    /** "Remove": the remove action of an input chip. */
+    public val Remove: StringKey = StringKey("stapel.ui.remove")
+
     /** "{count} characters left" — a plural family. */
     public val CharactersLeft: PluralKey = PluralKey("stapel.ui.characters_left")
 }
@@ -56,6 +74,12 @@ public val CoreUiBundle: I18nBundle = I18nBundle(
                 "stapel.ui.show_password" to "Show password",
                 "stapel.ui.hide_password" to "Hide password",
                 "stapel.ui.details" to "Details",
+                "stapel.ui.clear" to "Clear",
+                "stapel.ui.search" to "Search",
+                "stapel.ui.done" to "Done",
+                "stapel.ui.no_matches" to "No matches",
+                "stapel.ui.refresh" to "Refresh",
+                "stapel.ui.remove" to "Remove",
                 "stapel.ui.characters_left.one" to "{count} character left",
                 "stapel.ui.characters_left.other" to "{count} characters left",
             )
@@ -73,6 +97,12 @@ public val CoreUiBundle: I18nBundle = I18nBundle(
                 "stapel.ui.show_password" to "Показать пароль",
                 "stapel.ui.hide_password" to "Скрыть пароль",
                 "stapel.ui.details" to "Подробнее",
+                "stapel.ui.clear" to "Очистить",
+                "stapel.ui.search" to "Поиск",
+                "stapel.ui.done" to "Готово",
+                "stapel.ui.no_matches" to "Ничего не найдено",
+                "stapel.ui.refresh" to "Обновить",
+                "stapel.ui.remove" to "Удалить",
                 "stapel.ui.characters_left.one" to "Остался {count} символ",
                 "stapel.ui.characters_left.few" to "Осталось {count} символа",
                 "stapel.ui.characters_left.many" to "Осталось {count} символов",
@@ -92,6 +122,12 @@ public val CoreUiBundle: I18nBundle = I18nBundle(
                 "stapel.ui.show_password" to "Mostrar contraseña",
                 "stapel.ui.hide_password" to "Ocultar contraseña",
                 "stapel.ui.details" to "Detalles",
+                "stapel.ui.clear" to "Borrar",
+                "stapel.ui.search" to "Buscar",
+                "stapel.ui.done" to "Listo",
+                "stapel.ui.no_matches" to "Sin resultados",
+                "stapel.ui.refresh" to "Actualizar",
+                "stapel.ui.remove" to "Quitar",
                 "stapel.ui.characters_left.one" to "Queda {count} carácter",
                 "stapel.ui.characters_left.many" to "Quedan {count} de caracteres",
                 "stapel.ui.characters_left.other" to "Quedan {count} caracteres",

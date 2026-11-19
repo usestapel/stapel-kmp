@@ -86,11 +86,11 @@ public fun <T> PickerSheet(
     selected: Set<T>,
     onSelect: (Set<T>) -> Unit,
     onDismiss: () -> Unit,
-    dismissLabel: String,
+    dismissLabel: String = stapelString(CoreUiStrings.Close),
     multiple: Boolean = false,
     doneLabel: String? = null,
     searchLabel: String? = null,
-    clearLabel: String? = null,
+    clearLabel: String? = stapelString(CoreUiStrings.Clear),
     noMatchesText: String? = null,
     optionSupporting: ((T) -> String?)? = null,
     key: ((T) -> Any)? = null,
@@ -104,7 +104,7 @@ public fun <T> PickerSheet(
             if (q.isBlank()) options.withIndex().toList() else options.withIndex().filter { pickerMatches(optionLabel(it.value), q) }
         }
     }
-    val done = doneLabel ?: stapelString(CoreUiStrings.Confirm)
+    val done = doneLabel ?: stapelString(CoreUiStrings.Done)
     StapelDialog(
         onDismiss = onDismiss,
         dismissLabel = dismissLabel,
@@ -124,7 +124,7 @@ public fun <T> PickerSheet(
                 )
             }
             if (filtered.isEmpty()) {
-                EmptyState(noMatchesText ?: stapelString(CoreUiStrings.EmptyTitle))
+                EmptyState(noMatchesText ?: stapelString(CoreUiStrings.NoMatches))
             } else {
                 LazyColumn(Modifier.fillMaxWidth().heightIn(max = PICKER_LIST_MAX_HEIGHT)) {
                     itemsIndexed(filtered, key = { _, item -> key?.invoke(item.value) ?: item.index }) { _, item ->
@@ -167,7 +167,7 @@ public fun <T> StapelSelect(
     selected: T?,
     onSelect: (T) -> Unit,
     optionLabel: (T) -> String,
-    dismissLabel: String,
+    dismissLabel: String = stapelString(CoreUiStrings.Close),
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     supportingText: String? = null,
@@ -175,7 +175,7 @@ public fun <T> StapelSelect(
     enabled: Boolean = true,
     leadingIcon: StapelIcon? = null,
     searchLabel: String? = null,
-    clearLabel: String? = null,
+    clearLabel: String? = stapelString(CoreUiStrings.Clear),
     noMatchesText: String? = null,
     key: ((T) -> Any)? = null,
     testTag: String? = null,
@@ -203,8 +203,8 @@ public fun <T> StapelMultiSelect(
     selected: Set<T>,
     onSelect: (Set<T>) -> Unit,
     optionLabel: (T) -> String,
-    dismissLabel: String,
-    doneLabel: String,
+    dismissLabel: String = stapelString(CoreUiStrings.Close),
+    doneLabel: String = stapelString(CoreUiStrings.Done),
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     summary: (Set<T>) -> String? = { set -> set.takeIf { it.isNotEmpty() }?.joinToString(", ") { optionLabel(it) } },
@@ -212,7 +212,7 @@ public fun <T> StapelMultiSelect(
     error: String? = null,
     enabled: Boolean = true,
     searchLabel: String? = null,
-    clearLabel: String? = null,
+    clearLabel: String? = stapelString(CoreUiStrings.Clear),
     noMatchesText: String? = null,
     key: ((T) -> Any)? = null,
     testTag: String? = null,

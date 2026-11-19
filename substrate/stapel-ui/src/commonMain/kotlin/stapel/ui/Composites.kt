@@ -117,8 +117,8 @@ public fun <T> LoadList(
 @Composable
 public fun ConfirmDialog(
     title: String,
-    confirmLabel: String,
-    cancelLabel: String,
+    confirmLabel: String = stapelString(CoreUiStrings.Confirm),
+    cancelLabel: String = stapelString(CoreUiStrings.Cancel),
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
     message: String? = null,
