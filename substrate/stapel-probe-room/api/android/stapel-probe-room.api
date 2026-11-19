@@ -1,7 +1,0 @@
-public final class stapel/probe/room/ProbeNotes {
-	public fun <init> ()V
-	public final fun add (JLjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public final fun close ()V
-	public final fun texts (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-

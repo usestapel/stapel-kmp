@@ -90,8 +90,9 @@ What the family plugin gives you, so you do not write it:
   simulator; Android host tests do not run Compose UI).
 - **Material** only in `stapel-ui-material3` (R9); brick UI never sees Coil.
 - **Room** only in `*-room` artifacts with `id("stapel.room")`; schemas are
-  committed under `schemas/`. Proven by `substrate/stapel-probe-room` on every
-  target (Room 3.0.3 + KSP 2.3.14 + bundled SQLite 2.7.1). What it showed:
+  committed under `schemas/`. Proven on every target (Room 3.0.3 + KSP 2.3.14 +
+  bundled SQLite 2.7.1) by a build probe, now replaced by
+  `substrate/stapel-cache-room` as the reference module. What it showed:
   - keep Room types (`@Database`, `@Dao`, `@Entity`) `internal`; a public
     `RoomDatabase` subclass drags Room's KDoc (unresolvable links) into the
     Dokka gate;
