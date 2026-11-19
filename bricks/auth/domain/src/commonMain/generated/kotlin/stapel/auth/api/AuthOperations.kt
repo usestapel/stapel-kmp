@@ -239,6 +239,7 @@ import stapel.auth.api.model.VerificationInitiateResponse
 import stapel.auth.api.model.VerificationPreference
 import stapel.auth.api.model.VerificationPreferenceRow
 import stapel.auth.api.model.VerificationPreferencesResponse
+import stapel.result.ErrorCode
 import stapel.result.ErrorEnvelope
 import stapel.result.TransportFailure
 import stapel.wire.AuthRequirement
@@ -2101,5 +2102,8 @@ internal object AuthOperations {
             AuthApiError.decode(envelope) as? E ?: AuthApiError.Unknown(envelope) as E
 
         override fun transport(failure: TransportFailure): E = AuthApiError.Transport(failure) as E
+
+        override fun binds(code: ErrorCode): Boolean =
+            AuthApiError.decode(ErrorEnvelope(code, 0)).let { it is E && it !is AuthApiError.Unknown }
     }
 }

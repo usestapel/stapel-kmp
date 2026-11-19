@@ -7,6 +7,7 @@ import stapel.config.ClientPlatform
 import stapel.config.Posture
 import stapel.config.StapelEnvironment
 import stapel.result.DomainError
+import stapel.result.ErrorCode
 import stapel.result.ErrorEnvelope
 import stapel.result.Remediation
 import stapel.result.StapelError
@@ -63,6 +64,18 @@ fun <B, T> spec(
 )
 
 val getMe: OperationSpec<Unit, Me, TestError> = spec(success = mapOf(200 to Me.serializer()))
+
+/** A decoder whose table binds a rate-limit and an unavailable code, as a generated one does. */
+object BindingDecoder : ErrorDecoder<TestError> by TestError.Decoder {
+    override fun binds(code: ErrorCode): Boolean = code.value == "error.429.rate_limit" || code.value == "error.503.maintenance"
+}
+
+/** [getMe] with [BindingDecoder]. */
+val getMeBound: OperationSpec<Unit, Me, TestError> = OperationSpec(
+    id = "auth_me", module = "auth", method = "GET", path = "/auth/api/v1/me/", kind = OperationKind.Query,
+    auth = AuthRequirement.Required, bodyEncoding = BodyEncoding.None, body = null, responseKind = ResponseKind.Json,
+    success = mapOf(200 to Me.serializer()), errors = BindingDecoder,
+)
 
 val requestOtp: OperationSpec<OtpRequest, Unit, TestError> = spec(
     id = "auth_phone_request", method = "POST", path = "/auth/api/v1/phone/request/", auth = AuthRequirement.Optional,

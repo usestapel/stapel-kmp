@@ -126,6 +126,11 @@ class GeneratedContractTest {
         // A real code of the brick that the contract does not bind to this operation is not trusted as typed.
         val unbound: EmailVerifyError = decoder.domain(envelope("error.404.sso_org_not_found", 404))
         assertIs<AuthApiError.Unknown>(unbound)
+        // What the transport asks before mapping a status to the shared family: bound codes stay domain.
+        assertTrue(decoder.binds(ErrorCode("error.409.email_taken")))
+        assertTrue(!decoder.binds(ErrorCode("error.404.sso_org_not_found")), "a brick code not bound to this operation")
+        assertTrue(!decoder.binds(ErrorCode("error.418.teapot")), "an unknown code")
+        assertTrue(AuthOperations.emailRequest.errors.binds(ErrorCode("error.429.rate_limit")), "OTP request binds the rate limit")
         val transport: EmailVerifyError = decoder.transport(TransportFailure.Offline())
         assertIs<AuthApiError.Transport>(transport)
         assertEquals(Remediation.Retry, transport.remediation)

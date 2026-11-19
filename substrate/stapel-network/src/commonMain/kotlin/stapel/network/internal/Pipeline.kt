@@ -45,6 +45,7 @@ import stapel.wire.ApiTransport
 import stapel.wire.AuthRequirement
 import stapel.wire.BinaryBody
 import stapel.wire.BodyEncoding
+import stapel.wire.ErrorDecoder
 import stapel.wire.FormPart
 import stapel.wire.OperationCall
 import stapel.wire.OperationKind
@@ -160,7 +161,7 @@ internal class Pipeline(
             transportAttempts++
             val attemptStarted = env.clock.now()
             val outcome = transport.send(context.wireRequest(sentToken, config, env.defaultHeaders()))
-            val failed = classify(outcome, callId)
+            val failed = classify(outcome, callId, spec.errors)
             reportReachability(outcome)
             observe(
                 CallEvent.Attempt(
@@ -254,14 +255,14 @@ internal class Pipeline(
         return final
     }
 
-    private fun classify(outcome: WireOutcome, callId: String): AttemptFailure? = when (outcome) {
+    private fun classify(outcome: WireOutcome, callId: String, errors: ErrorDecoder<*>): AttemptFailure? = when (outcome) {
         is WireOutcome.Failure -> AttemptFailure(outcome.error, null, outcome.requestSent)
         is WireOutcome.Response -> if (outcome.status in 200..299) {
             null
         } else {
             val requestId = outcome.header(REQUEST_ID_HEADER) ?: callId
             val decoded = decodeError(outcome.status, outcome.body, requestId)
-            val failure = classifyFailure(decoded.envelope, decoded.challenge, parseRetryAfter(outcome.header("Retry-After")))
+            val failure = classifyFailure(decoded.envelope, decoded.challenge, parseRetryAfter(outcome.header("Retry-After")), errors::binds)
             AttemptFailure(failure, decoded.envelope, requestSent = true)
         }
     }

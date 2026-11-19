@@ -103,8 +103,13 @@ public final class stapel/wire/Decimal$Companion {
 }
 
 public abstract interface class stapel/wire/ErrorDecoder {
+	public fun binds-6fQUc9g (Ljava/lang/String;)Z
 	public abstract fun domain (Lstapel/result/ErrorEnvelope;)Lstapel/result/StapelError;
 	public abstract fun transport (Lstapel/result/TransportFailure;)Lstapel/result/StapelError;
+}
+
+public final class stapel/wire/ErrorDecoder$DefaultImpls {
+	public static fun binds-6fQUc9g (Lstapel/wire/ErrorDecoder;Ljava/lang/String;)Z
 }
 
 public final class stapel/wire/FilePart {

@@ -332,6 +332,8 @@ internal class ApiEmitter(
                         .add("override fun domain(envelope: %T): E =\n", R.ErrorEnvelope).indent()
                         .add("%T.decode(envelope) as? E ?: %T(envelope) as E\n", brickError, brickError.nestedClass("Unknown")).unindent()
                         .add("\noverride fun transport(failure: %T): E = %T(failure) as E\n", R.TransportFailure, brickError.nestedClass("Transport"))
+                        .add("\noverride fun binds(code: %T): Boolean =\n", R.ErrorCode).indent()
+                        .add("%T.decode(%T(code, 0)).let { it is E && it !is %T }\n", brickError, R.ErrorEnvelope, brickError.nestedClass("Unknown")).unindent()
                         .unindent().add("}\n").build(),
                 ).build(),
         )

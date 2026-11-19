@@ -1,6 +1,7 @@
 package stapel.wire
 
 import kotlinx.serialization.KSerializer
+import stapel.result.ErrorCode
 import stapel.result.ErrorEnvelope
 import stapel.result.StapelError
 import stapel.result.TransportFailure
@@ -157,4 +158,11 @@ public interface ErrorDecoder<out E : StapelError> {
 
     /** The error carrying [failure]. */
     public fun transport(failure: TransportFailure): E
+
+    /**
+     * Whether the operation's error table binds [code]. A bound code is a refusal of this operation
+     * whatever its status, 429 and 5xx included, so the transport decodes it through [domain] instead
+     * of mapping it to the shared transport family. The default binds nothing.
+     */
+    public fun binds(code: ErrorCode): Boolean = false
 }

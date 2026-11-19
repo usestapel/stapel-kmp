@@ -93,6 +93,7 @@ abstract interface <#A: out kotlin/Any?> stapel.wire/Page { // stapel.wire/Page|
 abstract interface <#A: out stapel.result/StapelError> stapel.wire/ErrorDecoder { // stapel.wire/ErrorDecoder|null[0]
     abstract fun domain(stapel.result/ErrorEnvelope): #A // stapel.wire/ErrorDecoder.domain|domain(stapel.result.ErrorEnvelope){}[0]
     abstract fun transport(stapel.result/TransportFailure): #A // stapel.wire/ErrorDecoder.transport|transport(stapel.result.TransportFailure){}[0]
+    open fun binds(stapel.result/ErrorCode): kotlin/Boolean // stapel.wire/ErrorDecoder.binds|binds(stapel.result.ErrorCode){}[0]
 }
 
 abstract interface stapel.wire/ApiTransport { // stapel.wire/ApiTransport|null[0]

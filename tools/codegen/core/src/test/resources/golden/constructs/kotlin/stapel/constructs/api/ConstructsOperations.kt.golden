@@ -24,6 +24,7 @@ import stapel.constructs.api.model.ItemRequest
 import stapel.constructs.api.model.Merged
 import stapel.constructs.api.model.Outcome
 import stapel.constructs.api.model.PatchedItem
+import stapel.result.ErrorCode
 import stapel.result.ErrorEnvelope
 import stapel.result.TransportFailure
 import stapel.wire.AuthRequirement
@@ -170,5 +171,8 @@ internal object ConstructsOperations {
             ConstructsApiError.decode(envelope) as? E ?: ConstructsApiError.Unknown(envelope) as E
 
         override fun transport(failure: TransportFailure): E = ConstructsApiError.Transport(failure) as E
+
+        override fun binds(code: ErrorCode): Boolean =
+            ConstructsApiError.decode(ErrorEnvelope(code, 0)).let { it is E && it !is ConstructsApiError.Unknown }
     }
 }

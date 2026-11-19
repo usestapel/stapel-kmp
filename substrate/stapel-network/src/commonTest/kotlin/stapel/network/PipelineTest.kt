@@ -236,6 +236,26 @@ class PipelineTest {
     }
 
     @Test
+    fun aCodeTheOperationBindsIsItsDomainErrorEvenAt429And5xx() = runTest {
+        val body = """{"localizable_error":"error.429.rate_limit","error":"text","error_language":"en","params":{"retry_after":30,"retry_after_display":"0:30","retry_after_minutes":1}}"""
+        wire.enqueueJson(429, body)
+        val limited = (transport().execute(getMeBound, OperationCall()) as StapelResult.Err).error
+        assertIs<TestError.Domain>(limited)
+        assertEquals("error.429.rate_limit", limited.code.value)
+        assertEquals("0:30", limited.params["retry_after_display"])
+        assertEquals(1, wire.requests.size, "a bound 429 is not retried as a transport rate limit")
+
+        wire.enqueueJson(503, """{"localizable_error":"error.503.maintenance","error":"text","error_language":"en","params":{}}""")
+        assertIs<TestError.Domain>((transport().execute(getMeBound, OperationCall()) as StapelResult.Err).error)
+        assertEquals(2, wire.requests.size, "a bound 503 is not retried as unavailable")
+
+        // A code the table does not bind keeps the transport mapping.
+        wire.enqueueJson(429, body.replace("error.429.rate_limit", "error.429.other"))
+        val other = (transport(config = NetworkConfig(retry = RetryPolicy.None)).execute(getMeBound, OperationCall()) as StapelResult.Err).error
+        assertIs<TransportFailure.RateLimited>(other.failure())
+    }
+
+    @Test
     fun redirectIsNotFollowedAndIsAFailure() = runTest {
         wire.enqueue(302, "", listOf("Location" to "https://login.example.com/"))
         val result = transport().execute(getMe, OperationCall())
