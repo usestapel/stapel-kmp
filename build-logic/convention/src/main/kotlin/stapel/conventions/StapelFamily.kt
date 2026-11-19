@@ -32,6 +32,9 @@ enum class StapelFamily(val published: Boolean, val compose: Boolean, val role: 
     /** Optional platform adapter of a brick `stapel-<brick>-<x>` (`bricks/<brick>/adapters/<x>`). */
     BRICK_ADAPTER(published = true, compose = false),
 
+    /** Test kit of a brick for apps' tests `stapel-<brick>-testing` (`bricks/<brick>/testing`): tags, walkers. */
+    BRICK_TESTING(published = true, compose = true),
+
     /** Demos of a brick's UI (`bricks/<brick>/demo`), never published. */
     DEMO(published = false, compose = true, role = FamilyRole.CONSUMER),
 
@@ -46,6 +49,12 @@ enum class StapelFamily(val published: Boolean, val compose: Boolean, val role: 
 
     /** `stapel-bom`. */
     BOM(published = true, compose = false),
+
+    /** `stapel-catalog`: the published Gradle version catalog a generated app imports. */
+    CATALOG(published = true, compose = false),
+
+    /** A published Gradle plugin for apps (`tools/<x>/gradle-plugin`): codegen, tokens. */
+    GRADLE_PLUGIN(published = true, compose = false),
 }
 
 /** Families whose main classpath must stay free of Compose, navigation and Koin-compose (D6). */
@@ -65,4 +74,5 @@ internal val LIBRARY_FAMILIES = setOf(
     StapelFamily.BRICK_DOMAIN,
     StapelFamily.BRICK_UI,
     StapelFamily.BRICK_ADAPTER,
+    StapelFamily.BRICK_TESTING,
 )

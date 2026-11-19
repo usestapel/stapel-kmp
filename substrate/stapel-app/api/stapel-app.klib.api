@@ -1,0 +1,94 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-app>
+abstract interface stapel.app.di/BrickSession : stapel.navigation/NavAuthSource { // stapel.app.di/BrickSession|null[0]
+    abstract val signIn // stapel.app.di/BrickSession.signIn|{}signIn[0]
+        abstract fun <get-signIn>(): stapel.navigation/DestinationId // stapel.app.di/BrickSession.signIn.<get-signIn>|<get-signIn>(){}[0]
+
+    abstract suspend fun restore() // stapel.app.di/BrickSession.restore|restore(){}[0]
+    open fun attach(stapel.navigation/StapelNavigator) // stapel.app.di/BrickSession.attach|attach(stapel.navigation.StapelNavigator){}[0]
+}
+
+abstract interface stapel.app.di/StapelBrick { // stapel.app.di/StapelBrick|null[0]
+    abstract val key // stapel.app.di/StapelBrick.key|{}key[0]
+        abstract fun <get-key>(): kotlin/String // stapel.app.di/StapelBrick.key.<get-key>|<get-key>(){}[0]
+    open val errorCatalogs // stapel.app.di/StapelBrick.errorCatalogs|{}errorCatalogs[0]
+        open fun <get-errorCatalogs>(): kotlin.collections/List<stapel.result.text/ErrorCatalog> // stapel.app.di/StapelBrick.errorCatalogs.<get-errorCatalogs>|<get-errorCatalogs>(){}[0]
+    open val requires // stapel.app.di/StapelBrick.requires|{}requires[0]
+        open fun <get-requires>(): kotlin.collections/Set<stapel.navigation/CapabilityKey> // stapel.app.di/StapelBrick.requires.<get-requires>|<get-requires>(){}[0]
+    open val strings // stapel.app.di/StapelBrick.strings|{}strings[0]
+        open fun <get-strings>(): kotlin.collections/List<stapel.i18n/I18nBundle> // stapel.app.di/StapelBrick.strings.<get-strings>|<get-strings>(){}[0]
+
+    abstract fun modules(): kotlin.collections/List<org.koin.core.module/Module> // stapel.app.di/StapelBrick.modules|modules(){}[0]
+    abstract fun navigation(stapel.app.di/BrickContext): stapel.navigation.compose/NavContribution? // stapel.app.di/StapelBrick.navigation|navigation(stapel.app.di.BrickContext){}[0]
+    open fun presenters(stapel.app.di/BrickContext, stapel.mvi.compose/PresenterFactory): stapel.mvi.compose/PresenterFactory // stapel.app.di/StapelBrick.presenters|presenters(stapel.app.di.BrickContext;stapel.mvi.compose.PresenterFactory){}[0]
+    open fun session(stapel.app.di/BrickContext): stapel.app.di/BrickSession? // stapel.app.di/StapelBrick.session|session(stapel.app.di.BrickContext){}[0]
+}
+
+final class stapel.app.di/BrickContext { // stapel.app.di/BrickContext|null[0]
+    constructor <init>(org.koin.core/Koin, kotlinx.coroutines/CoroutineScope) // stapel.app.di/BrickContext.<init>|<init>(org.koin.core.Koin;kotlinx.coroutines.CoroutineScope){}[0]
+
+    final val appScope // stapel.app.di/BrickContext.appScope|{}appScope[0]
+        final fun <get-appScope>(): kotlinx.coroutines/CoroutineScope // stapel.app.di/BrickContext.appScope.<get-appScope>|<get-appScope>(){}[0]
+    final val koin // stapel.app.di/BrickContext.koin|{}koin[0]
+        final fun <get-koin>(): org.koin.core/Koin // stapel.app.di/BrickContext.koin.<get-koin>|<get-koin>(){}[0]
+}
+
+final class stapel.app.di/StapelApp : kotlin/AutoCloseable { // stapel.app.di/StapelApp|null[0]
+    final val capabilities // stapel.app.di/StapelApp.capabilities|{}capabilities[0]
+        final fun <get-capabilities>(): kotlin.collections/Set<stapel.navigation/CapabilityKey> // stapel.app.di/StapelApp.capabilities.<get-capabilities>|<get-capabilities>(){}[0]
+    final val contributions // stapel.app.di/StapelApp.contributions|{}contributions[0]
+        final fun <get-contributions>(): kotlin.collections/List<stapel.navigation.compose/NavContribution> // stapel.app.di/StapelApp.contributions.<get-contributions>|<get-contributions>(){}[0]
+    final val errorTexts // stapel.app.di/StapelApp.errorTexts|{}errorTexts[0]
+        final fun <get-errorTexts>(): stapel.result.text/ErrorTextResolver // stapel.app.di/StapelApp.errorTexts.<get-errorTexts>|<get-errorTexts>(){}[0]
+    final val koin // stapel.app.di/StapelApp.koin|{}koin[0]
+        final fun <get-koin>(): org.koin.core/Koin // stapel.app.di/StapelApp.koin.<get-koin>|<get-koin>(){}[0]
+    final val navAuth // stapel.app.di/StapelApp.navAuth|{}navAuth[0]
+        final fun <get-navAuth>(): stapel.navigation/NavAuthSource // stapel.app.di/StapelApp.navAuth.<get-navAuth>|<get-navAuth>(){}[0]
+    final val navigator // stapel.app.di/StapelApp.navigator|{}navigator[0]
+        final fun <get-navigator>(): kotlinx.coroutines.flow/StateFlow<stapel.navigation/StapelNavigator?> // stapel.app.di/StapelApp.navigator.<get-navigator>|<get-navigator>(){}[0]
+    final val policy // stapel.app.di/StapelApp.policy|{}policy[0]
+        final fun <get-policy>(): stapel.navigation/NavPolicy // stapel.app.di/StapelApp.policy.<get-policy>|<get-policy>(){}[0]
+    final val slots // stapel.app.di/StapelApp.slots|{}slots[0]
+        final fun <get-slots>(): stapel.shell/SlotPlan // stapel.app.di/StapelApp.slots.<get-slots>|<get-slots>(){}[0]
+    final val strings // stapel.app.di/StapelApp.strings|{}strings[0]
+        final fun <get-strings>(): stapel.i18n/StapelStrings // stapel.app.di/StapelApp.strings.<get-strings>|<get-strings>(){}[0]
+
+    final fun close() // stapel.app.di/StapelApp.close|close(){}[0]
+    final fun openUrl(kotlin/String): kotlin/Boolean // stapel.app.di/StapelApp.openUrl|openUrl(kotlin.String){}[0]
+}
+
+final class stapel.app.di/StapelAppBuilder { // stapel.app.di/StapelAppBuilder|null[0]
+    final fun bricks(kotlin/Array<out stapel.app.di/StapelBrick>...) // stapel.app.di/StapelAppBuilder.bricks|bricks(kotlin.Array<out|stapel.app.di.StapelBrick>...){}[0]
+    final fun capabilities(kotlin.collections/Iterable<stapel.navigation/CapabilityKey>) // stapel.app.di/StapelAppBuilder.capabilities|capabilities(kotlin.collections.Iterable<stapel.navigation.CapabilityKey>){}[0]
+    final fun environment(stapel.config/StapelEnvironment) // stapel.app.di/StapelAppBuilder.environment|environment(stapel.config.StapelEnvironment){}[0]
+    final fun global(kotlin/Boolean) // stapel.app.di/StapelAppBuilder.global|global(kotlin.Boolean){}[0]
+    final fun logger(stapel.runtime/StapelLogger) // stapel.app.di/StapelAppBuilder.logger|logger(stapel.runtime.StapelLogger){}[0]
+    final fun modules(kotlin/Array<out org.koin.core.module/Module>...) // stapel.app.di/StapelAppBuilder.modules|modules(kotlin.Array<out|org.koin.core.module.Module>...){}[0]
+    final fun navigation(stapel.navigation/DestinationId? = ..., stapel.shell/ShellTemplate = ..., stapel.shell/SlotPlan? = ..., stapel.navigation/DeepLinkConfig? = ..., stapel.navigation/NavOverrides = ..., stapel.navigation/UnauthenticatedMode = ...) // stapel.app.di/StapelAppBuilder.navigation|navigation(stapel.navigation.DestinationId?;stapel.shell.ShellTemplate;stapel.shell.SlotPlan?;stapel.navigation.DeepLinkConfig?;stapel.navigation.NavOverrides;stapel.navigation.UnauthenticatedMode){}[0]
+    final fun network(stapel.network/NetworkConfig) // stapel.app.di/StapelAppBuilder.network|network(stapel.network.NetworkConfig){}[0]
+    final fun offline(org.koin.core.module/Module) // stapel.app.di/StapelAppBuilder.offline|offline(org.koin.core.module.Module){}[0]
+    final fun overrides(kotlin/Array<out org.koin.core.module/Module>...) // stapel.app.di/StapelAppBuilder.overrides|overrides(kotlin.Array<out|org.koin.core.module.Module>...){}[0]
+    final fun screens(kotlin/Array<out kotlin/Function1<stapel.app.di/BrickContext, stapel.navigation.compose/NavContribution>>...) // stapel.app.di/StapelAppBuilder.screens|screens(kotlin.Array<out|kotlin.Function1<stapel.app.di.BrickContext,stapel.navigation.compose.NavContribution>>...){}[0]
+    final fun session(stapel.session/SessionConfig = ..., stapel.session.vault/TokenVaultConfig = ...) // stapel.app.di/StapelAppBuilder.session|session(stapel.session.SessionConfig;stapel.session.vault.TokenVaultConfig){}[0]
+    final fun strings(kotlin/Function1<stapel.i18n/StapelStringsBuilder, kotlin/Unit>) // stapel.app.di/StapelAppBuilder.strings|strings(kotlin.Function1<stapel.i18n.StapelStringsBuilder,kotlin.Unit>){}[0]
+    final fun theme(kotlin/Function3<kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>) // stapel.app.di/StapelAppBuilder.theme|theme(kotlin.Function3<kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>){}[0]
+}
+
+final const val stapel.app.di/APP_LOG_TAG // stapel.app.di/APP_LOG_TAG|{}APP_LOG_TAG[0]
+    final fun <get-APP_LOG_TAG>(): kotlin/String // stapel.app.di/APP_LOG_TAG.<get-APP_LOG_TAG>|<get-APP_LOG_TAG>(){}[0]
+
+final val stapel.app.di/stapel_app_di_BrickContext$stableprop // stapel.app.di/stapel_app_di_BrickContext$stableprop|#static{}stapel_app_di_BrickContext$stableprop[0]
+final val stapel.app.di/stapel_app_di_StapelApp$stableprop // stapel.app.di/stapel_app_di_StapelApp$stableprop|#static{}stapel_app_di_StapelApp$stableprop[0]
+final val stapel.app.di/stapel_app_di_StapelAppBuilder$stableprop // stapel.app.di/stapel_app_di_StapelAppBuilder$stableprop|#static{}stapel_app_di_StapelAppBuilder$stableprop[0]
+
+final fun stapel.app.di/StapelAppContent(stapel.app.di/StapelApp, androidx.compose.ui/Modifier?, kotlin/Function1<stapel.navigation/StapelNavigator, kotlin/Unit>?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.app.di/StapelAppContent|StapelAppContent(stapel.app.di.StapelApp;androidx.compose.ui.Modifier?;kotlin.Function1<stapel.navigation.StapelNavigator,kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.app.di/stapelApp(stapel.runtime/PlatformContext, kotlin/Function1<stapel.app.di/StapelAppBuilder, kotlin/Unit>): stapel.app.di/StapelApp // stapel.app.di/stapelApp|stapelApp(stapel.runtime.PlatformContext;kotlin.Function1<stapel.app.di.StapelAppBuilder,kotlin.Unit>){}[0]
+final fun stapel.app.di/stapel_app_di_BrickContext$stableprop_getter(): kotlin/Int // stapel.app.di/stapel_app_di_BrickContext$stableprop_getter|stapel_app_di_BrickContext$stableprop_getter(){}[0]
+final fun stapel.app.di/stapel_app_di_StapelApp$stableprop_getter(): kotlin/Int // stapel.app.di/stapel_app_di_StapelApp$stableprop_getter|stapel_app_di_StapelApp$stableprop_getter(){}[0]
+final fun stapel.app.di/stapel_app_di_StapelAppBuilder$stableprop_getter(): kotlin/Int // stapel.app.di/stapel_app_di_StapelAppBuilder$stableprop_getter|stapel_app_di_StapelAppBuilder$stableprop_getter(){}[0]

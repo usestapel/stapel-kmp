@@ -39,6 +39,10 @@ covers all modules.
 | verifyTestsRan (inside every test task) | D12 | a test task of a module with `commonTest` sources executed 0 tests | JUnit XML |
 | `dokkaGeneratePublicationHtml` | D12/R11 | a public/protected symbol has no KDoc (except packages in `ratchetedPackages`), or any Dokka warning (e.g. an unresolved KDoc link) | — |
 | `checkBomMembers` (`stapel-bom`) | feature/consumer | the BOM constrains a consumer module or an unpublished one | — |
+| `checkNavManifest` (brick UI with a descriptor) | scaffold | the committed `nav-manifest.json` differs from what the library's `StapelBrick` exports | the descriptor class |
+| `checkNavParity` (brick UI) | D11 / §4.4 | a destination or embed of `nav-manifest.json` is unknown to the registry, or a shared field (label key, icon, path, level, parent, menu visibility, auth, surface, order; slot, opens, scope, props, breakpoints) differs; or a vendored file's sha256 differs from `gradle/composition/pin.json` | `gradle/composition/` (stapel-tools wheel, pinned) |
+| `checkKmpRegistry` (root) | scaffold | `kmp-registry.json` differs from what the build exports | published modules, nav manifests, `gradle/released-artifacts.txt` |
+| `checkPublishedCatalog` (`stapel-catalog`) | R1 | the generated catalog TOML carries a pre-release version or a consumer module | — |
 | `checkReleaseCoordinates` (release path) | R1 | a generated POM / Gradle module file carries a pre-release version — the allow-list does not apply | generated publication metadata |
 | `stapelGenerateCheck` (brick domain, once CODEGEN lands) | D4 | regenerated output differs from the committed generated tree | `contracts/` |
 
@@ -120,6 +124,19 @@ checkDependencyDirection failed:
   - stapel-auth: org.jetbrains.compose.runtime:runtime:1.12.2 on jvmCompileClasspath (via project :stapel-network)
     — D6: domain and pure substrate libraries have no Compose.
 ```
+
+## The reference app (`samples/shop-mobile`)
+
+A separate Gradle build consuming everything by coordinates (staging repo or
+mavenLocal), built the way the scaffold's KMP emitter builds an app. CI job
+`sample` (after `publish-smoke`): `stapelGenerateCheck`, `checkStapelTokens`,
+`NavGateTest` on JVM and the iOS simulator, desktop jar, Android
+`assembleDebug`, the iOS framework, then `scripts/ios-smoke.sh` (xcodebuild,
+simulator launch, log markers `stapel.app.ready` / `stapel.nav <id>`, a link
+handed to the app → `stapel.link <uri> opened`, screenshots). The sign-in walk
+(`SignInWalkTest`, compiled in with `-Pstapel.walk.baseUrl=<url>`) runs against
+a local auth stand on JVM and on the simulator; it is not in CI (no stand
+there).
 
 ## ABI dumps
 

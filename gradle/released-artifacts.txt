@@ -1,0 +1,2 @@
+# Artifacts on Maven Central (one artifact id per line). `released` in kmp-registry.json reads this list.
+# Empty until the owner's first publish (D3); the release workflow's operator appends what it published.

@@ -20,6 +20,9 @@ the build owner for a one-line change.
 | Platform adapter of a brick | `bricks/<brick>/adapters/<x>/` | `stapel-<brick>-<x>` | `stapel.<brick>.<x>` | `id("stapel.brick-adapter")` |
 | Demos of a brick's UI (unpublished) | `bricks/<brick>/demo/` | `stapel-<brick>-ui-demo` | `stapel.<brick>.ui.demo` | `id("stapel.brick-demo")` |
 | End-to-end tests (unpublished) | `bricks/<brick>/e2e/` | `stapel-<brick>-e2e` | `stapel.<brick>.e2e` | `id("stapel.brick-e2e")` |
+| Test kit of a brick for apps | `bricks/<brick>/testing/` | `stapel-<brick>-testing` | `stapel.<brick>.testing` | `id("stapel.brick-testing")` |
+| Published Gradle plugin for apps | `tools/<a>/gradle-plugin/` | `stapel-<a>-gradle-plugin`, id `<group>.<a>` (`-gen` dropped) | `stapel.tools…` | `id("stapel.gradle-plugin")` |
+| The published version catalog | `catalog/` | `stapel-catalog` | — | `id("stapel.catalog")` |
 | JVM tool / generator (unpublished in v0) | `tools/<a>/<b>/` | `:tools:<a>:<b>` | `stapel.tools…` | `id("stapel.jvm-tool")` |
 | Showcase library (unpublished) | `showcase/<a>/` | `:showcase:<a>` | `stapel.showcase…` | `id("stapel.showcase")` |
 | Room storage (only `*-room` artifacts) | `substrate/stapel-<x>-room/` | `stapel-<x>-room` | `stapel.<x>.room` | `id("stapel.substrate")` + `id("stapel.room")` |
@@ -189,9 +192,20 @@ own build file; the root lifecycle picks them up by name.
    `StapelTabs`, `StapelTopBar`, …) so any skin applies; strings in an
    `I18nBundle` per locale; Compose UI tests in `src/skikoTest` under both
    skins, at 200 % text in every shipped locale.
-6. **Demo** (`bricks/<brick>/demo`): stories for the showcase and a desktop
+6. **Descriptor and manifest.** In the UI library, one `StapelBrick`
+   implementation `stapel.<brick>.ui.di.<Brick>Brick` (no-argument
+   constructor; `modules()` must not bind the cache-session binding;
+   `navigation(context)` reads the graph only inside composables). Then
+   `./gradlew :stapel-<brick>-ui:exportNavManifest` and commit
+   `nav-manifest.json`; `checkNavManifest` (drift) and `checkNavParity`
+   (shared fields equal the pinned stapel-tools registry) are part of
+   `stapelCheckFast`; `./gradlew exportKmpRegistry` and commit
+   `kmp-registry.json`. The build generates `internal object
+   <pkg>.generated.StapelBuildInfo` (group, artifact id, train version) for
+   brick UI libraries. A test kit for apps goes to `bricks/<brick>/testing`.
+7. **Demo** (`bricks/<brick>/demo`): stories for the showcase and a desktop
    entry point; never published.
-7. **End to end** (`bricks/<brick>/e2e`): JUnit 5 tests against a real
+8. **End to end** (`bricks/<brick>/e2e`): JUnit 5 tests against a real
    backend started locally (`-Pstapel.e2e.baseUrl=…`); skipped without it.
    Declare expression-bodied tests `(): Unit` (`fun x(): Unit = runBlocking
    { … }`): JUnit 5 silently skips a test method that returns a value

@@ -33,6 +33,9 @@ abstract class StapelExtension {
      */
     abstract val ratchetedPackages: ListProperty<String>
 
+    /** `stapel.gradle-plugin` only: the plugin's implementation class (fully qualified). */
+    abstract val pluginImplementationClass: Property<String>
+
     /** Adds opt-in annotations to every compilation of this module. */
     fun optIn(vararg annotationFqNames: String) {
         optIns.addAll(*annotationFqNames)

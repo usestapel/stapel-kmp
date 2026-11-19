@@ -45,12 +45,14 @@ fun deriveNames(rootDir: File, projectDir: File, projectName: String, root: Stri
                 rel.size == 3 && rel[2] == "ui" -> StapelNames("stapel-$brick-ui", "$root.$b.ui", brick)
                 rel.size == 3 && rel[2] == "demo" -> StapelNames("stapel-$brick-ui-demo", "$root.$b.ui.demo", brick)
                 rel.size == 3 && rel[2] == "e2e" -> StapelNames("stapel-$brick-e2e", "$root.$b.e2e", brick)
+                rel.size == 3 && rel[2] == "testing" -> StapelNames("stapel-$brick-testing", "$root.$b.testing", brick)
                 rel.size == 4 && rel[2] == "adapters" ->
                     StapelNames("stapel-$brick-${rel[3]}", "$root.$b.${dotted(rel[3])}", brick)
                 else -> fail()
             }
         }
         "bom" -> StapelNames("stapel-bom", "$root.bom", null)
+        "catalog" -> StapelNames("stapel-catalog", "$root.catalog", null)
         "tools" -> StapelNames(projectName, "$root.tools", null)
         "showcase" -> StapelNames(projectName, "$root.showcase", null)
         else -> fail()

@@ -1,0 +1,13 @@
+public final class stapel/auth/testing/AuthWalkException : java/lang/AssertionError {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class stapel/auth/testing/MockOtpWalkerKt {
+	public static final field PROTOTYPE_MOCK_CODE Ljava/lang/String;
+	public static final fun awaitTag (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;J)V
+	public static synthetic fun awaitTag$default (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;JILjava/lang/Object;)V
+	public static final fun signInWithMockOtp (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;Ljava/lang/String;ZJ)V
+	public static synthetic fun signInWithMockOtp$default (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;Ljava/lang/String;ZJILjava/lang/Object;)V
+}
+

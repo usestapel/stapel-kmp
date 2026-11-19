@@ -36,8 +36,10 @@ class Generator(
     private val brick: String,
     private val contractDir: Path,
     private val acceptRenames: Boolean = false,
+    /** Root package of the output; a brick's is `stapel.<brick>.api`, an app's own module names its own. */
+    apiPackage: String? = null,
 ) {
-    private val apiPkg = "stapel." + brick.replace('-', '.') + ".api"
+    private val apiPkg = apiPackage ?: ("stapel." + brick.replace('-', '.') + ".api")
 
     /** Builds the model and every output file in memory; nothing is written. */
     fun run(previousLock: JsonObject? = null): Generation {

@@ -21,7 +21,7 @@ internal val INTERNAL_API_MARKERS = listOf(
 /** `stapel.base`: the extension, derived names, coordinates, the source-shape checks. */
 internal fun Project.applyStapelBase(family: StapelFamily): StapelExtension {
     val names = stapelNames()
-    if (name != names.artifactId && family !in setOf(StapelFamily.TOOL, StapelFamily.SHOWCASE)) {
+    if (name != names.artifactId && family !in setOf(StapelFamily.TOOL, StapelFamily.SHOWCASE, StapelFamily.GRADLE_PLUGIN)) {
         throw GradleException(
             "Project '$path' in '${projectDir.relativeTo(rootDir)}' must be named '${names.artifactId}' " +
                 "(settings derives it from the directory).",

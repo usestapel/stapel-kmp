@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Orders",
+    "version": "0.1.0",
+    "description": "A project's own orders module (sample contract).",
+    "x-stapel-contract": 2
+  },
+  "paths": {
+    "/orders/api/v1/orders/": {
+      "get": {
+        "operationId": "orders_api_v1_orders_list",
+        "summary": "List orders",
+        "description": "The signed-in customer's orders, newest first.",
+        "tags": ["orders"],
+        "security": [{"BearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "The orders.",
+            "content": {"application/json": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Order"}}}}
+          }
+        }
+      }
+    },
+    "/orders/api/v1/orders/{id}/": {
+      "get": {
+        "operationId": "orders_api_v1_orders_retrieve",
+        "summary": "One order",
+        "description": "One order of the signed-in customer.",
+        "tags": ["orders"],
+        "parameters": [{"in": "path", "name": "id", "required": true, "schema": {"type": "string"}, "description": "Order id."}],
+        "security": [{"BearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "The order.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Order"}}}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {"type": "http", "scheme": "bearer", "bearerFormat": "JWT", "description": "Access token."}
+    },
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "description": "An order.",
+        "properties": {
+          "id": {"type": "string", "description": "Order id."},
+          "title": {"type": "string", "description": "What was ordered."},
+          "total": {"type": "string", "format": "decimal", "description": "Total amount."},
+          "status": {"type": "string", "enum": ["open", "paid", "shipped"], "description": "Where the order is."}
+        },
+        "required": ["id", "title", "total", "status"]
+      }
+    }
+  }
+}

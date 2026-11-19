@@ -39,20 +39,19 @@ internal fun Project.applyStapelDokka(ext: StapelExtension) {
  * when a key is present. Nothing here publishes to a remote; Central uploads happen only in the release
  * workflow (owner bootstrap first).
  */
-internal fun Project.applyStapelPublish(ext: StapelExtension) {
+internal fun Project.applyStapelPublish(ext: StapelExtension, artifactId: String = stapelNames().artifactId) {
     pluginManager.apply("com.vanniktech.maven.publish")
-    val names = stapelNames()
     val signingKeyPresent = providers.gradleProperty("signingInMemoryKey").isPresent
     extensions.configure(MavenPublishBaseExtension::class.java) {
         // version comes from project.version (set by stapel.base from VERSION_NAME)
-        coordinates(mavenGroup(this@applyStapelPublish), names.artifactId)
+        coordinates(mavenGroup(this@applyStapelPublish), artifactId)
         if (pluginManager.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
             configure(KotlinMultiplatform(JavadocJar.Empty(), SourcesJar.Sources()))
         }
         publishToMavenCentral()
         if (signingKeyPresent) signAllPublications()
         pom {
-            name.set(names.artifactId)
+            name.set(artifactId)
             description.set(ext.description)
             inceptionYear.set("2026")
             url.set(PUBLIC_REPO_URL)

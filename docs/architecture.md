@@ -97,6 +97,8 @@ and on the resolved classpaths of every target.
   **`stapel-mvi-compose`** (presenter retention and saved state),
   **`stapel-navigation-compose`** (a navigation host over a hidden
   Navigation 3 engine), **`stapel-shell`** (adaptive app chrome).
+- **`stapel-app`** — the app-facing composition: `StapelBrick`, `stapelApp { }`,
+  `StapelAppContent`.
 - **`stapel-testing`**, **`stapel-cache-testing`** — fakes of the seams and
   the storage contract suite, for tests in this repository and in apps.
 
@@ -128,6 +130,48 @@ The factories are functions, never shared `val`s: a Koin module value keeps
 its `single` instances, so two applications loading the same value would
 share them. A project that does not use Koin wires the same constructors by
 hand.
+
+### The app-facing entry: `stapelApp { }` (`stapel-app`)
+
+A generated app does not assemble the factories above itself. Each brick UI
+library exposes one `StapelBrick` descriptor (`stapel.<brick>.ui.di.<Brick>Brick`,
+a constructor whose parameters all have defaults) carrying its Koin modules,
+navigation, strings, error catalogs, required capabilities, the sign-in owner
+and presenter creation; `stapel-app` assembles the substrate around a list of
+them:
+
+```kotlin
+val app = stapelApp(PlatformContext()) {
+    environment(environment)
+    offline(cacheRoomModule())          // optional durable cache: the only line offline adds
+    bricks(AuthBrick())
+    navigation(home = DestinationId("shop.home"))
+    theme { content -> StapelMaterialTheme(tokens = AppTokens, content = content) }
+}
+// StapelAppContent(app); app.openUrl(url); app.close()
+```
+
+The builder installs runtime, network, session, cache, the optional storage
+and `cacheSessionModule()` exactly once (bricks never bind the cache to the
+session), so the duplicate binding cannot happen through it. It is sugar over
+the public factories: manual wiring stays possible. The reference app built
+this way, by coordinates only, is `samples/shop-mobile`.
+
+## What the scaffold reads from this repository
+
+- `kmp-registry.json` (root, `exportKmpRegistry` / drift gate
+  `checkKmpRegistry`): the train, the group, the BOM and catalog ids, the two
+  Gradle plugin ids, every published artifact with its family, and per brick
+  its domain / UI / testing artifacts, its descriptor class and the nav ids it
+  ships (from the committed `nav-manifest.json`).
+- `nav-manifest.json` per brick UI library (`exportNavManifest`, drift gate
+  `checkNavManifest`, parity gate `checkNavParity` against the digest-pinned
+  stapel-tools `composition-registry.json` in `gradle/composition/`).
+- `substrate/stapel-shell/shell-templates.json` for the shell templates.
+- Published for the generated build: `stapel-bom`, `stapel-catalog` (a Gradle
+  version catalog with every stapel coordinate plus the toolchain pins),
+  `io.github.usestapel.codegen` (clients for the app's own backend modules)
+  and `io.github.usestapel.tokens` (`stapel.theme.json` → tokens, no Node).
 
 ## Generated and hand-written code
 

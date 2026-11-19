@@ -1,0 +1,20 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-auth-testing>
+final class stapel.auth.testing/AuthWalkException : kotlin/AssertionError { // stapel.auth.testing/AuthWalkException|null[0]
+    constructor <init>(kotlin/String) // stapel.auth.testing/AuthWalkException.<init>|<init>(kotlin.String){}[0]
+}
+
+final const val stapel.auth.testing/PROTOTYPE_MOCK_CODE // stapel.auth.testing/PROTOTYPE_MOCK_CODE|{}PROTOTYPE_MOCK_CODE[0]
+    final fun <get-PROTOTYPE_MOCK_CODE>(): kotlin/String // stapel.auth.testing/PROTOTYPE_MOCK_CODE.<get-PROTOTYPE_MOCK_CODE>|<get-PROTOTYPE_MOCK_CODE>(){}[0]
+
+final val stapel.auth.testing/stapel_auth_testing_AuthWalkException$stableprop // stapel.auth.testing/stapel_auth_testing_AuthWalkException$stableprop|#static{}stapel_auth_testing_AuthWalkException$stableprop[0]
+
+final fun (androidx.compose.ui.test/ComposeUiTest).stapel.auth.testing/awaitTag(kotlin/String, kotlin/Long = ...) // stapel.auth.testing/awaitTag|awaitTag@androidx.compose.ui.test.ComposeUiTest(kotlin.String;kotlin.Long){}[0]
+final fun (androidx.compose.ui.test/ComposeUiTest).stapel.auth.testing/signInWithMockOtp(kotlin/String, kotlin/String = ..., kotlin/Boolean = ..., kotlin/Long = ...) // stapel.auth.testing/signInWithMockOtp|signInWithMockOtp@androidx.compose.ui.test.ComposeUiTest(kotlin.String;kotlin.String;kotlin.Boolean;kotlin.Long){}[0]
+final fun stapel.auth.testing/stapel_auth_testing_AuthWalkException$stableprop_getter(): kotlin/Int // stapel.auth.testing/stapel_auth_testing_AuthWalkException$stableprop_getter|stapel_auth_testing_AuthWalkException$stableprop_getter(){}[0]

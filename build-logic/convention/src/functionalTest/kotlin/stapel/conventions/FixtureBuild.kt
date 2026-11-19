@@ -55,12 +55,14 @@ class FixtureBuild(private val name: String) {
         return when (p[0]) {
             "substrate", "capabilities" -> p[1]
             "bom" -> "stapel-bom"
+            "catalog" -> "stapel-catalog"
             "tools", "showcase" -> ":" + p.joinToString(":")
             "bricks" -> when (p[2]) {
                 "domain" -> "stapel-${p[1]}"
                 "e2e" -> "stapel-${p[1]}-e2e"
                 "ui" -> "stapel-${p[1]}-ui"
                 "demo" -> "stapel-${p[1]}-ui-demo"
+                "testing" -> "stapel-${p[1]}-testing"
                 "adapters" -> "stapel-${p[1]}-${p[3]}"
                 else -> error(path)
             }

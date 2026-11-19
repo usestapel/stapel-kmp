@@ -10,8 +10,10 @@
 //   bricks/<brick>/ui/                  -> :stapel-<brick>-ui
 //   bricks/<brick>/demo/                -> :stapel-<brick>-ui-demo   (never published)
 //   bricks/<brick>/e2e/                 -> :stapel-<brick>-e2e       (never published)
+//   bricks/<brick>/testing/             -> :stapel-<brick>-testing   (test kit for apps)
 //   bricks/<brick>/adapters/<x>/        -> :stapel-<brick>-<x>
 //   bom/                                -> :stapel-bom
+//   catalog/                            -> :stapel-catalog           (published version catalog)
 //   tools/<a>/<b>/, showcase/<a>/<b>/   -> :tools:<a>:<b>, :showcase:<a>:<b>
 //
 // Repositories live only here; a project that declares one fails the build.
@@ -89,6 +91,7 @@ file("bricks").listFiles().orEmpty().sortedBy { it.name }.filter { it.isDirector
         "ui" to "stapel-$key-ui",
         "demo" to "stapel-$key-ui-demo",
         "e2e" to "stapel-$key-e2e",
+        "testing" to "stapel-$key-testing",
     ).forEach { (sub, name) ->
         val dir = File(brick, sub)
         if (isProjectDir(dir)) includeAt(":$name", dir)
@@ -99,6 +102,7 @@ file("bricks").listFiles().orEmpty().sortedBy { it.name }.filter { it.isDirector
 }
 
 if (isProjectDir(file("bom"))) includeAt(":stapel-bom", file("bom"))
+if (isProjectDir(file("catalog"))) includeAt(":stapel-catalog", file("catalog"))
 
 includeTree(file("tools"), "tools")
 includeTree(file("showcase"), "showcase")

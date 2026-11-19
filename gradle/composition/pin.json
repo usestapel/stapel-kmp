@@ -1,0 +1,41 @@
+{
+  "package": "stapel-tools",
+  "version": "0.82.0",
+  "tag": "v0.82.0",
+  "commit": "29f9a1b775bf130630dd35ff54a76d30f379af5e",
+  "how": "copied from the installed stapel-tools==0.82.0 wheel (PyPI); refresh with tools/composition/vendor.sh <version>",
+  "files": {
+    "composition-registry.json": {
+      "source": "stapel_tools/data/composition-registry.json",
+      "sha256": "9d9fdcd42a6247137150ee81ac76ace6931fba202cd0642d2af06fd6d0146840"
+    },
+    "route-plans/auth-notifications-workspaces.json": {
+      "source": "stapel_tools/data/route-plans/auth-notifications-workspaces.json",
+      "sha256": "25f3628053e4c38039aea3b74784d6b3d3f3b20c09840bff92996dafd80f806f"
+    },
+    "route-plans/auth-profiles.json": {
+      "source": "stapel_tools/data/route-plans/auth-profiles.json",
+      "sha256": "c71c6889bb4aacbff75fe178b726f1acdca0bfd27417560e8c977420f687e8e7"
+    },
+    "route-plans/auth-unwired.json": {
+      "source": "stapel_tools/data/route-plans/auth-unwired.json",
+      "sha256": "a6cbfc3f13f2e4ec7f62cf2220bdffc733c749a901a0ebb2b0fad2e763c10a8a"
+    },
+    "route-plans/auth.json": {
+      "source": "stapel_tools/data/route-plans/auth.json",
+      "sha256": "0d9da0488f21488804b126b90fdfd02bd2c369f62f883b2755ad3745aef5a17a"
+    },
+    "route-plans/every-pair.json": {
+      "source": "stapel_tools/data/route-plans/every-pair.json",
+      "sha256": "31bcefad1a7656dc6c392f1b3b5b9e889519878f0e289352052ceaca8f3590dd"
+    },
+    "route-plans/gdpr-video-admin.json": {
+      "source": "stapel_tools/data/route-plans/gdpr-video-admin.json",
+      "sha256": "8681b02aa846d564cb91187499f1f6fa533aef712ec7dbda6290e19f9348c9f4"
+    },
+    "route-plans/shop.json": {
+      "source": "stapel_tools/data/route-plans/shop.json",
+      "sha256": "f5a706aeb06cbcb9023221c9e2a7eb451ea64df5bc550423ebef56ecf9f6da8a"
+    }
+  }
+}

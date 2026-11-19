@@ -41,8 +41,14 @@ val LAYERS: List<LayerRule> = listOf(
     LayerRule(StapelFamily.BRICK_DOMAIN, setOf(StapelFamily.SUBSTRATE)),
     LayerRule(StapelFamily.BRICK_UI, setOf(StapelFamily.SUBSTRATE, StapelFamily.SUBSTRATE_UI, StapelFamily.BRICK_DOMAIN)),
     LayerRule(StapelFamily.BRICK_ADAPTER, setOf(StapelFamily.SUBSTRATE, StapelFamily.BRICK_DOMAIN)),
+    LayerRule(
+        StapelFamily.BRICK_TESTING,
+        setOf(StapelFamily.SUBSTRATE, StapelFamily.SUBSTRATE_UI, StapelFamily.BRICK_DOMAIN, StapelFamily.BRICK_UI),
+    ),
     LayerRule(StapelFamily.TOOL, setOf(StapelFamily.TOOL)),
+    LayerRule(StapelFamily.GRADLE_PLUGIN, setOf(StapelFamily.TOOL)),
     LayerRule(StapelFamily.BOM, FEATURE_FAMILIES),
+    LayerRule(StapelFamily.CATALOG, FEATURE_FAMILIES),
 ) + CONSUMER_FAMILIES.map { LayerRule(it, FEATURE_FAMILIES + CONSUMER_FAMILIES) }
 
 /** Coordinates forbidden on a family's main classpaths, transitively. */
@@ -79,7 +85,7 @@ internal fun forbiddenCoordinates(materialAllowed: Set<String>): List<ForbiddenC
         unless = { it.endsWith("-room") },
     ),
     ForbiddenCoordinate(
-        setOf(StapelFamily.BRICK_UI, StapelFamily.CAPABILITY_UI, StapelFamily.SUBSTRATE_UI),
+        setOf(StapelFamily.BRICK_UI, StapelFamily.CAPABILITY_UI, StapelFamily.SUBSTRATE_UI, StapelFamily.BRICK_TESTING),
         Regex("""(org\.jetbrains\.compose\.material3?|androidx\.compose\.material3?|com\.google\.android\.material)"""),
         ANY,
         "R9: Material lives only in the default skin (gradle/material-allowed.txt)",

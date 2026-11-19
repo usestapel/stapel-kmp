@@ -111,11 +111,58 @@ jobs:
           path: build/staging-repo
           retention-days: 14
 
+  sample:
+    name: sample (shop-mobile built from the staging repo, every target)
+    needs: [publish-smoke]
+    runs-on: macos-26
+    timeout-minutes: 60
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: stapel-kmp-repo-${{ github.sha }}
+          path: build/staging-repo
+      - name: The sample builds against this train
+        run: |
+          train="$(sed -n 's/^VERSION_NAME=//p' gradle.properties)"
+          sample="$(sed -n 's/^stapel.version=//p' samples/shop-mobile/gradle.properties)"
+          [ "$train" = "$sample" ] || { echo "samples/shop-mobile stapel.version=$sample, train $train"; exit 1; }
+      - name: Gates and builds (drift, nav gate, desktop, Android, iOS framework)
+        working-directory: samples/shop-mobile
+        run: >
+          ./gradlew :shared:stapelGenerateCheck :shared:checkStapelTokens :shared:jvmTest
+          :shared:iosSimulatorArm64Test :desktopApp:jar :androidApp:assembleDebug
+          :shared:linkDebugFrameworkIosSimulatorArm64
+      - name: iOS app (xcodebuild), launch and deep link on a simulator
+        run: samples/shop-mobile/scripts/ios-smoke.sh
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: shop-mobile-ios-smoke-${{ github.sha }}
+          path: |
+            samples/shop-mobile/build/ios-smoke/*.png
+            samples/shop-mobile/build/ios-smoke/*.log
+            samples/shop-mobile/build/ios-smoke/*.txt
+          retention-days: 14
+
   # The ONE required check for branch protection. A skipped or cancelled job is red here.
   ci-ok:
     name: ci-ok
     if: always()
-    needs: [build-logic, fast, ios, publish-smoke]
+    needs: [build-logic, fast, ios, publish-smoke, sample]
     runs-on: ubuntu-latest
     steps:
       - name: All jobs succeeded

@@ -1,0 +1,10 @@
+{
+    "operations": {
+        "orders_api_v1_orders_list": "listOrders",
+        "orders_api_v1_orders_retrieve": "getOrders"
+    },
+    "types": {
+        "Order": "Order",
+        "Order/properties/status": "OrderStatus"
+    }
+}

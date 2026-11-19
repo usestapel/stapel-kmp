@@ -1,0 +1,86 @@
+public final class stapel/app/di/AppContentKt {
+	public static final field APP_LOG_TAG Ljava/lang/String;
+	public static final fun StapelAppContent (Lstapel/app/di/StapelApp;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class stapel/app/di/BrickContext {
+	public static final field $stable I
+	public fun <init> (Lorg/koin/core/Koin;Lkotlinx/coroutines/CoroutineScope;)V
+	public final fun getAppScope ()Lkotlinx/coroutines/CoroutineScope;
+	public final fun getKoin ()Lorg/koin/core/Koin;
+}
+
+public abstract interface class stapel/app/di/BrickSession : stapel/navigation/NavAuthSource {
+	public fun attach (Lstapel/navigation/StapelNavigator;)V
+	public abstract fun getSignIn-x5gaQ_A ()Ljava/lang/String;
+	public abstract fun restore (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/app/di/BrickSession$DefaultImpls {
+	public static fun attach (Lstapel/app/di/BrickSession;Lstapel/navigation/StapelNavigator;)V
+}
+
+public final class stapel/app/di/ComposableSingletons$StapelAppKt {
+	public static final field INSTANCE Lstapel/app/di/ComposableSingletons$StapelAppKt;
+	public fun <init> ()V
+	public final fun getLambda$-1013369742$io_github_usestapel_stapel_app ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class stapel/app/di/StapelApp : java/lang/AutoCloseable {
+	public static final field $stable I
+	public fun close ()V
+	public final fun getCapabilities ()Ljava/util/Set;
+	public final fun getContributions ()Ljava/util/List;
+	public final fun getErrorTexts ()Lstapel/result/text/ErrorTextResolver;
+	public final fun getKoin ()Lorg/koin/core/Koin;
+	public final fun getNavAuth ()Lstapel/navigation/NavAuthSource;
+	public final fun getNavigator ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getPolicy ()Lstapel/navigation/NavPolicy;
+	public final fun getSlots ()Lstapel/shell/SlotPlan;
+	public final fun getStrings ()Lstapel/i18n/StapelStrings;
+	public final fun openUrl (Ljava/lang/String;)Z
+}
+
+public final class stapel/app/di/StapelAppBuilder {
+	public static final field $stable I
+	public final fun bricks ([Lstapel/app/di/StapelBrick;)V
+	public final fun capabilities (Ljava/lang/Iterable;)V
+	public final fun environment (Lstapel/config/StapelEnvironment;)V
+	public final fun global (Z)V
+	public final fun logger (Lstapel/runtime/StapelLogger;)V
+	public final fun modules ([Lorg/koin/core/module/Module;)V
+	public final fun navigation-4kypVls (Ljava/lang/String;Lstapel/shell/ShellTemplate;Lstapel/shell/SlotPlan;Lstapel/navigation/DeepLinkConfig;Lstapel/navigation/NavOverrides;Lstapel/navigation/UnauthenticatedMode;)V
+	public static synthetic fun navigation-4kypVls$default (Lstapel/app/di/StapelAppBuilder;Ljava/lang/String;Lstapel/shell/ShellTemplate;Lstapel/shell/SlotPlan;Lstapel/navigation/DeepLinkConfig;Lstapel/navigation/NavOverrides;Lstapel/navigation/UnauthenticatedMode;ILjava/lang/Object;)V
+	public final fun network (Lstapel/network/NetworkConfig;)V
+	public final fun offline (Lorg/koin/core/module/Module;)V
+	public final fun overrides ([Lorg/koin/core/module/Module;)V
+	public final fun screens ([Lkotlin/jvm/functions/Function1;)V
+	public final fun session (Lstapel/session/SessionConfig;Lstapel/session/vault/TokenVaultConfig;)V
+	public static synthetic fun session$default (Lstapel/app/di/StapelAppBuilder;Lstapel/session/SessionConfig;Lstapel/session/vault/TokenVaultConfig;ILjava/lang/Object;)V
+	public final fun strings (Lkotlin/jvm/functions/Function1;)V
+	public final fun theme (Lkotlin/jvm/functions/Function3;)V
+}
+
+public final class stapel/app/di/StapelAppKt {
+	public static final fun stapelApp (Lstapel/runtime/PlatformContext;Lkotlin/jvm/functions/Function1;)Lstapel/app/di/StapelApp;
+}
+
+public abstract interface class stapel/app/di/StapelBrick {
+	public fun getErrorCatalogs ()Ljava/util/List;
+	public abstract fun getKey ()Ljava/lang/String;
+	public fun getRequires ()Ljava/util/Set;
+	public fun getStrings ()Ljava/util/List;
+	public abstract fun modules ()Ljava/util/List;
+	public abstract fun navigation (Lstapel/app/di/BrickContext;)Lstapel/navigation/compose/NavContribution;
+	public fun presenters (Lstapel/app/di/BrickContext;Lstapel/mvi/compose/PresenterFactory;)Lstapel/mvi/compose/PresenterFactory;
+	public fun session (Lstapel/app/di/BrickContext;)Lstapel/app/di/BrickSession;
+}
+
+public final class stapel/app/di/StapelBrick$DefaultImpls {
+	public static fun getErrorCatalogs (Lstapel/app/di/StapelBrick;)Ljava/util/List;
+	public static fun getRequires (Lstapel/app/di/StapelBrick;)Ljava/util/Set;
+	public static fun getStrings (Lstapel/app/di/StapelBrick;)Ljava/util/List;
+	public static fun presenters (Lstapel/app/di/StapelBrick;Lstapel/app/di/BrickContext;Lstapel/mvi/compose/PresenterFactory;)Lstapel/mvi/compose/PresenterFactory;
+	public static fun session (Lstapel/app/di/StapelBrick;Lstapel/app/di/BrickContext;)Lstapel/app/di/BrickSession;
+}
+

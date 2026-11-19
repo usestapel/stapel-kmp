@@ -1,0 +1,17 @@
+{
+  "default": "dev",
+  "environments": {
+    "dev": {
+      "posture": "prototype",
+      "baseUrl": {
+        "android": "http://10.0.2.2:18741/",
+        "ios": "http://127.0.0.1:18741/",
+        "desktop": "http://127.0.0.1:18741/"
+      }
+    },
+    "prod": {
+      "posture": "live",
+      "baseUrl": "https://shop.example.com/"
+    }
+  }
+}

@@ -104,6 +104,7 @@ class RootPlugin : Plugin<Project> {
         }
         tasks.named("check").configure { dependsOn(catalogCheck) }
         tasks.named("stapelCheckFast").configure { dependsOn(catalogCheck) }
+        registerKmpRegistryTasks()
         tasks.register("stapelVersion") {
             group = "stapel release"
             description = "Prints the train version (VERSION_NAME)."

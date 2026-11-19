@@ -98,11 +98,12 @@ internal fun Project.registerCodegenHooks(ext: StapelExtension) {
 class BrickUiPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         val ext = applyLibrary(StapelFamily.BRICK_UI)
-        val domain = rootProject.findProject(":stapel-${ext.brick.get()}")
-        if (domain != null) {
-            extensions.getByType(KotlinMultiplatformExtension::class.java)
-                .sourceSets.getByName("commonMain").dependencies { api(project(domain.path)) }
+        val kmp = extensions.getByType(KotlinMultiplatformExtension::class.java)
+        listOfNotNull(rootProject.findProject(":stapel-${ext.brick.get()}"), rootProject.findProject(":stapel-app")).forEach { p ->
+            kmp.sourceSets.getByName("commonMain").dependencies { api(project(p.path)) }
         }
+        registerBuildInfo()
+        registerNavManifestTasks(ext)
     }
 }
 

@@ -102,6 +102,73 @@ class GatesFunctionalTest {
     }
 
     @Test
+    fun `a brick test kit gets its own ui and may not reach another brick`() {
+        val ok = FixtureBuild("brick-testing")
+            .module("bricks/auth/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("bricks/auth/ui", substrate(plugin = "stapel.brick-ui"))
+            .module("bricks/auth/testing", substrate(plugin = "stapel.brick-testing"))
+        ok.file("bricks/auth/ui/src/commonMain/kotlin/stapel/auth/ui/T.kt", "package stapel.auth.ui\n/** T. */\npublic const val TAG: String = \"t\"")
+        ok.file("bricks/auth/testing/src/commonMain/kotlin/stapel/auth/testing/K.kt", "package stapel.auth.testing\n/** K. */\npublic val k: String = stapel.auth.ui.TAG")
+        ok.succeeds(":stapel-auth-testing:compileKotlinJvm", ":stapel-auth-testing:checkDependencyDirection")
+        val r = FixtureBuild("brick-testing-other")
+            .module("bricks/chat/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("bricks/chat/ui", substrate(plugin = "stapel.brick-ui"))
+            .module("bricks/auth/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("bricks/auth/testing", substrate("api(projects.stapelChatUi)", plugin = "stapel.brick-testing"))
+            .fails(":stapel-auth-testing:checkDependencyDirection")
+        assertContains(r.output, "a brick never depends on another brick")
+    }
+
+    @Test
+    fun `the published catalog and the registry list feature modules only`() {
+        val fx = FixtureBuild("catalog-registry")
+            .module("substrate/stapel-result", substrate())
+            .module("bricks/auth/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("bricks/auth/ui", substrate(plugin = "stapel.brick-ui"))
+            .module("bricks/auth/demo", "plugins { id(\"stapel.brick-demo\") }")
+            .module("showcase/gallery", "plugins { id(\"stapel.showcase\") }")
+            .module("catalog", "plugins { id(\"stapel.catalog\") }")
+        fx.succeeds(":stapel-catalog:generateCatalogAsToml", ":stapel-catalog:checkPublishedCatalog", "exportKmpRegistry")
+        val toml = fx.dir.resolve("catalog/build/version-catalog/libs.versions.toml").readText()
+        assertContains(toml, "stapel-auth-ui = {group = \"io.github.usestapel\", name = \"stapel-auth-ui\"")
+        kotlin.test.assertFalse("demo" in toml || "gallery" in toml, toml)
+        val registry = fx.dir.resolve("kmp-registry.json").readText()
+        assertContains(registry, "\"stapel-auth-ui\"")
+        kotlin.test.assertFalse("demo" in registry || "gallery" in registry, registry)
+        fx.succeeds("checkKmpRegistry")
+        // Inversion: a stale registry fails its drift gate.
+        fx.dir.resolve("kmp-registry.json").writeText(registry.replace("\"stapel-result\"", "\"stapel-gone\""))
+        val r = fx.fails("checkKmpRegistry")
+        assertContains(r.output, "kmp-registry.json is stale")
+    }
+
+    @Test
+    fun `a gradle plugin module bundles its tool and gets a group-derived id`() {
+        val fx = FixtureBuild("gradle-plugin")
+            .module("tools/demo-gen/core", "plugins { id(\"stapel.jvm-tool\") }")
+            .module(
+                "tools/demo-gen/gradle-plugin",
+                """
+                plugins { id("stapel.gradle-plugin") }
+                stapel { description = "fixture"; pluginImplementationClass.set("stapel.tools.demo.P") }
+                dependencies { stapelBundled(projects.tools.demoGen.core) }
+                """,
+            )
+        fx.file("tools/demo-gen/core/src/main/kotlin/stapel/tools/demo/Core.kt", "package stapel.tools.demo\nobject Core { fun v() = 1 }")
+        fx.file(
+            "tools/demo-gen/gradle-plugin/src/main/kotlin/stapel/tools/demo/P.kt",
+            "package stapel.tools.demo\nclass P : org.gradle.api.Plugin<org.gradle.api.Project> { override fun apply(p: org.gradle.api.Project) { Core.v() } }",
+        )
+        fx.succeeds(":tools:demo-gen:gradle-plugin:jar", ":tools:demo-gen:gradle-plugin:generatePomFileForPluginMavenPublication")
+        val jar = java.util.zip.ZipFile(fx.dir.resolve("tools/demo-gen/gradle-plugin/build/libs").listFiles()!!.single { it.name.endsWith(".jar") && "sources" !in it.name && "javadoc" !in it.name })
+        kotlin.test.assertNotNull(jar.getEntry("stapel/tools/demo/Core.class"), "the bundled tool class is in the plugin jar")
+        kotlin.test.assertNotNull(jar.getEntry("META-INF/gradle-plugins/io.github.usestapel.demo.properties"))
+        val pom = fx.dir.resolve("tools/demo-gen/gradle-plugin/build/publications/pluginMaven/pom-default.xml").readText()
+        assertContains(pom, "<artifactId>stapel-demo-gradle-plugin</artifactId>")
+        kotlin.test.assertFalse("<artifactId>core</artifactId>" in pom, "the unpublished tool is not a POM dependency")
+    }
+
+    @Test
     fun `brick ui may not depend on another brick's domain`() {
         val r = FixtureBuild("ui-to-other-brick")
             .module("bricks/chat/domain", substrate(plugin = "stapel.brick-domain"))

@@ -1,0 +1,13 @@
+{
+  "platform": "kmp",
+  "shell": {"template": "AdaptiveTabs", "slots": {"topbar.end": ["auth.account_menu"]}, "overrides": {}, "dropped": []},
+  "auth": {"model": "public", "gated": true},
+  "theme": "ocean",
+  "modules": ["auth", "orders"],
+  "installed": ["auth"],
+  "custom": ["orders"],
+  "pending": [],
+  "offline": false,
+  "signIn": "auth.login",
+  "routes": {"auth.login": "/login", "shop.home": "/app/home", "shop.order": "/app/orders/:orderId"}
+}
