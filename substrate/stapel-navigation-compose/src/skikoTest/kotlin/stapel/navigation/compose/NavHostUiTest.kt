@@ -36,6 +36,7 @@ import stapel.navigation.ExternalUris
 import stapel.navigation.NavAuthSource
 import stapel.navigation.NavAuthState
 import stapel.navigation.StapelNavigator
+import stapel.navigation.WidthClass
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -66,6 +67,7 @@ private class Harness(private val test: ComposeUiTest, private val auth: NavAuth
     private var registry by mutableStateOf(SaveableStateRegistry(null) { true })
     private var alive by mutableStateOf(true)
     var capabilities: Set<CapabilityKey> = emptySet()
+    var width by mutableStateOf(WidthClass.Phone)
     lateinit var navigator: StapelNavigator
     private var back: DirectNavigationEventInput? = null
 
@@ -95,6 +97,8 @@ private class Harness(private val test: ComposeUiTest, private val auth: NavAuth
             capabilities = capabilities,
             unavailable = { d, missing -> BasicText("unavailable ${d.id} ${missing.joinToString()}", Modifier.testTag("unavailable")) },
             waiting = { BasicText("waiting", Modifier.testTag("waiting")) },
+            width = width,
+            detailPlaceholder = { BasicText("pick a message", Modifier.testTag("detail-placeholder")) },
         )
     }
 
@@ -284,6 +288,113 @@ class NavHostUiTest {
         assertEquals(HOME, h.navigator.state.value.selectedTab)
         h.systemBack()
         h.shows("screen-home")
+    }
+}
+
+@OptIn(ExperimentalTestApi::class)
+class FlowAndPaneUiTest {
+    @Test
+    fun finishingAFlowClearsItsSharedPresenterOnceReleasesItsStateAndDeliversTheResult() = runComposeUiTest {
+        presenterClears.clear()
+        val h = Harness(this)
+        h.start()
+        runOnIdle { h.navigator.navigate(DetailRoute("3")) }
+        waitForIdle()
+        runOnIdle { h.navigator.navigate(OrderCartRoute) }
+        waitForIdle()
+        onNodeWithTag("cart-count").performClick()
+        onNodeWithTag("cart-count").assertTextEquals("cart:1")
+        runOnIdle { h.navigator.navigate(OrderPayRoute) }
+        waitForIdle()
+        val order = h.factory.created.filter { it.id == "order" }
+        assertEquals(1, order.size, "both steps of the flow share one presenter")
+        onNodeWithTag("order-pay").performClick()
+        waitForIdle()
+        h.shows("screen-detail")
+        onNodeWithTag("picked").assertTextEquals("picked order 42")
+        waitUntil { presenterClears["order"] == 1 }
+        assertFalse(order.single().context.scope.isActive)
+        assertEquals(1, presenterClears["order"], "cleared exactly once")
+        assertEquals(null, presenterClears["3"], "the screen that started the flow keeps its presenter")
+        runOnIdle { h.navigator.navigate(OrderCartRoute) }
+        waitForIdle()
+        onNodeWithTag("cart-count").assertTextEquals("cart:0") // entry state released with the flow
+        assertEquals(2, h.factory.created.count { it.id == "order" }, "re-entering builds a fresh presenter")
+        assertEquals(1, presenterClears["order"])
+    }
+
+    @Test
+    fun aPhoneShowsListAndDetailOneAtATime() = runComposeUiTest {
+        val h = Harness(this)
+        h.start()
+        runOnIdle { h.navigator.navigate(MailRoute) }
+        waitForIdle()
+        onNodeWithTag("open-m1").performClick()
+        waitForIdle()
+        h.shows("mail-item")
+        onNodeWithTag("mail-list").assertDoesNotExist()
+        h.systemBack()
+        h.shows("mail-list")
+        onNodeWithTag("detail-placeholder").assertDoesNotExist()
+    }
+
+    @Test
+    fun aWideWindowShowsListBesideDetailWithTheSameBackBehaviour() = runComposeUiTest {
+        val h = Harness(this)
+        h.width = WidthClass.Tablet
+        h.start()
+        runOnIdle { h.navigator.navigate(MailRoute) }
+        waitForIdle()
+        h.shows("mail-list")
+        h.shows("detail-placeholder")
+        onNodeWithTag("open-m1").performClick()
+        waitForIdle()
+        h.shows("mail-list")
+        h.shows("mail-item")
+        onNodeWithTag("detail-placeholder").assertDoesNotExist()
+        h.systemBack()
+        h.shows("mail-list")
+        h.shows("detail-placeholder")
+        assertEquals(listOf<stapel.navigation.Route>(HomeRoute, MailRoute), h.navigator.state.value.visible.map { it.route })
+        h.systemBack()
+        h.shows("screen-home")
+    }
+
+    @Test
+    fun entryStateSurvivesAWindowSizeChangeBothWays() = runComposeUiTest {
+        val h = Harness(this)
+        h.start()
+        runOnIdle { h.navigator.navigate(MailRoute) }
+        waitForIdle()
+        onNodeWithTag("list-count").performClick()
+        onNodeWithTag("open-m1").performClick()
+        waitForIdle()
+        onNodeWithTag("item-count").performClick()
+        onNodeWithTag("item-count").performClick()
+        val navigator = h.navigator
+        h.width = WidthClass.Desktop
+        waitForIdle()
+        assertSame(navigator, h.navigator, "a recomposition of the caller keeps the navigator")
+        onNodeWithTag("list-count").assertTextEquals("list:1")
+        onNodeWithTag("item-count").assertTextEquals("item:2")
+        h.width = WidthClass.Phone
+        waitForIdle()
+        onNodeWithTag("item-count").assertTextEquals("item:2")
+        h.systemBack()
+        onNodeWithTag("list-count").assertTextEquals("list:1")
+    }
+
+    @Test
+    fun aDeepLinkFillsBothPanesOnAWideWindow() = runComposeUiTest {
+        val h = Harness(this)
+        h.width = WidthClass.Tablet
+        h.start(DeepLinkConfig(schemes = setOf("demo"), hosts = setOf("demo.example")))
+        ExternalUris.offer("demo://app/mail/m/m7")
+        waitUntil { h.navigator.state.value.top?.route == MailItemRoute("m7") }
+        h.shows("mail-list")
+        onNodeWithTag("mail-item").assertTextEquals("mail m7")
+        h.systemBack()
+        h.shows("detail-placeholder")
     }
 }
 

@@ -1,11 +1,17 @@
 package stapel.navigation.compose.engine
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.SaveableStateHolder
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
@@ -26,6 +32,7 @@ import stapel.navigation.CapabilityKey
 import stapel.navigation.EmbedSpec
 import stapel.navigation.NavState
 import stapel.navigation.Navigator
+import stapel.navigation.PaneRole
 import stapel.navigation.Presentation
 import stapel.navigation.ResolvedDestination
 import stapel.navigation.ResolvedNav
@@ -44,6 +51,7 @@ import stapel.navigation.compose.ScreenScope
 import stapel.navigation.compose.visibleTo
 
 private const val SHEET = "stapel.presentation.sheet"
+private const val PANE = "stapel.pane"
 
 /** Owner key of an entry: its flow when it has one, else its uid. */
 internal fun ownerKey(nav: ResolvedNav, entry: StackEntry): String =
@@ -62,6 +70,8 @@ internal fun NavEngine(
     unavailable: @Composable (ResolvedDestination, Set<CapabilityKey>) -> Unit,
     waiting: @Composable () -> Unit,
     section: @Composable (ResolvedDestination) -> Unit,
+    twoPane: Boolean,
+    detailPlaceholder: @Composable () -> Unit,
 ) {
     val state by navigator.state.collectAsState()
     val nav = navigator.nav
@@ -78,7 +88,11 @@ internal fun NavEngine(
             return@CompositionLocalProvider
         }
         val decorator = remember(saveable, stores) { entryDecorator(nav, saveable, stores) }
-        val strategies = remember(overlay) { listOf(DialogSceneStrategy<StackEntry>(), SheetSceneStrategy(overlay), SinglePaneSceneStrategy()) }
+        val placeholder by rememberUpdatedState(detailPlaceholder)
+        val wide = rememberUpdatedState(twoPane)
+        val strategies = remember(overlay) {
+            listOf(DialogSceneStrategy<StackEntry>(), SheetSceneStrategy(overlay), ListDetailSceneStrategy(wide) { placeholder() }, SinglePaneSceneStrategy())
+        }
         NavDisplay(
             backStack = visible,
             modifier = modifier,
@@ -142,6 +156,7 @@ private fun navEntry(
             Presentation.Sheet -> put(SHEET, Presentation.Sheet)
             else -> Unit
         }
+        destination?.spec?.pane?.takeIf { it != PaneRole.Single }?.let { put(PANE, it) }
     }
     return NavEntry(key = entry, contentKey = entry.uid, metadata = metadata) {
         val scope = ScreenScopeImpl(navigator, destination!!, entry, nav, embeds)
@@ -209,3 +224,54 @@ private class SheetScene(
 
     override fun hashCode(): Int = entry.hashCode() * 31 + previousEntries.hashCode()
 }
+
+/**
+ * List-detail from `PaneRole`: a list entry and the detail entry right above it (or the list alone)
+ * form one scene at every width. Wide ([twoPane]) it draws both side by side, or the list beside
+ * [placeholder]; narrow it draws only the top one. The scene's key does not depend on the width, so
+ * crossing the breakpoint re-lays the same scene out in place — no scene transition, and every
+ * entry keeps its state. Back and deep links need nothing of their own: the stack is the same in
+ * both layouts (back pops the detail; a link's synthetic stack, list then detail, fills both panes).
+ */
+private class ListDetailSceneStrategy(private val twoPane: State<Boolean>, private val placeholder: @Composable () -> Unit) : SceneStrategy<StackEntry> {
+    override fun SceneStrategyScope<StackEntry>.calculateScene(entries: List<NavEntry<StackEntry>>): Scene<StackEntry>? {
+        val last = entries.lastOrNull() ?: return null
+        return when (last.metadata[PANE]) {
+            PaneRole.List -> ListDetailScene(last, null, entries.dropLast(1), twoPane, placeholder)
+            PaneRole.Detail -> {
+                val list = entries.getOrNull(entries.size - 2)?.takeIf { it.metadata[PANE] == PaneRole.List } ?: return null
+                ListDetailScene(list, last, entries.dropLast(1), twoPane, placeholder)
+            }
+            else -> null
+        }
+    }
+}
+
+private class ListDetailScene(
+    private val list: NavEntry<StackEntry>,
+    private val detail: NavEntry<StackEntry>?,
+    override val previousEntries: List<NavEntry<StackEntry>>,
+    private val twoPane: State<Boolean>,
+    private val placeholder: @Composable () -> Unit,
+) : Scene<StackEntry> {
+    // Keyed by both entries: the scene for "list alone" (what back returns to) differs from "list + detail".
+    override val key: Any = "list-detail:" + list.contentKey + ":" + detail?.contentKey
+    override val entries: List<NavEntry<StackEntry>> = listOfNotNull(list, detail)
+    override val content: @Composable () -> Unit = {
+        if (twoPane.value) {
+            Row(Modifier.fillMaxSize()) {
+                Box(Modifier.weight(LIST_WEIGHT).fillMaxHeight()) { list.Content() }
+                Box(Modifier.weight(1f - LIST_WEIGHT).fillMaxHeight()) { if (detail != null) detail.Content() else placeholder() }
+            }
+        } else {
+            Box(Modifier.fillMaxSize()) { (detail ?: list).Content() }
+        }
+    }
+
+    override fun equals(other: Any?): Boolean =
+        other is ListDetailScene && other.list == list && other.detail == detail && other.previousEntries == previousEntries
+
+    override fun hashCode(): Int = (list.hashCode() * 31 + detail.hashCode()) * 31 + previousEntries.hashCode()
+}
+
+private const val LIST_WEIGHT = 0.4f

@@ -31,6 +31,7 @@ import stapel.navigation.NavStateCodec
 import stapel.navigation.Presentation
 import stapel.navigation.ResolvedDestination
 import stapel.navigation.StapelNavigator
+import stapel.navigation.WidthClass
 import stapel.navigation.compose.engine.NavEngine
 import stapel.navigation.resolveNav
 
@@ -67,7 +68,9 @@ public fun rememberStapelNavigator(
     deepLinks: DeepLinkConfig? = null,
     overrides: NavOverrides = NavOverrides(),
 ): StapelNavigator {
-    val nav = remember(contributions, overrides) { resolveNav(contributions.map { it.manifest }, overrides) }
+    // Keyed by the overrides' content: a caller recomposing with an equal (new) NavOverrides, like the
+    // default argument, must not rebuild the navigation and reset the navigator.
+    val nav = remember(contributions, overrides.byId) { resolveNav(contributions.map { it.manifest }, overrides) }
     val codec = remember(nav) { NavStateCodec(nav.manifests) }
     val links = remember(nav, deepLinks) { deepLinks?.let { DeepLinkResolver(nav, it) } }
     val scope = rememberCoroutineScope()
@@ -98,6 +101,11 @@ public fun rememberStapelNavigator(
  * @param overlay draws sheets.
  * @param section draws a container root (`account.root`, `admin.root`): by default its children as
  *   plain rows; the shell supplies a skinned section screen.
+ * @param width the window's width class (the shell passes the token breakpoint's). From
+ *   [WidthClass.Tablet] up, a `PaneRole.List` destination is drawn beside the `PaneRole.Detail`
+ *   destination opened from it; on a phone each is a full screen. The stack is the same either way,
+ *   so back, deep links and entry state behave alike and survive a width change.
+ * @param detailPlaceholder fills the detail pane while a list is shown without a detail (wide only).
  */
 @Composable
 public fun StapelNavHost(
@@ -109,8 +117,10 @@ public fun StapelNavHost(
     unavailable: @Composable (destination: ResolvedDestination, missing: Set<CapabilityKey>) -> Unit,
     waiting: @Composable () -> Unit,
     section: @Composable (destination: ResolvedDestination) -> Unit = { DefaultSection(navigator, it) },
+    width: WidthClass = WidthClass.Phone,
+    detailPlaceholder: @Composable () -> Unit = {},
 ) {
-    NavEngine(navigator, contributions, modifier, capabilities, overlay, unavailable, waiting, section)
+    NavEngine(navigator, contributions, modifier, capabilities, overlay, unavailable, waiting, section, width != WidthClass.Phone, detailPlaceholder)
 }
 
 /** Unskinned section screen: one row per child, opening it. */

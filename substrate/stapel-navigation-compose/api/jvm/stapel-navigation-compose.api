@@ -2,6 +2,7 @@ public final class stapel/navigation/compose/ComposableSingletons$HostKt {
 	public static final field INSTANCE Lstapel/navigation/compose/ComposableSingletons$HostKt;
 	public fun <init> ()V
 	public final fun getLambda$-1518029007$io_github_usestapel_stapel_navigation_compose ()Lkotlin/jvm/functions/Function5;
+	public final fun getLambda$-437902951$io_github_usestapel_stapel_navigation_compose ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class stapel/navigation/compose/ContributionKt {
@@ -17,7 +18,7 @@ public abstract interface class stapel/navigation/compose/EmbedScope {
 }
 
 public final class stapel/navigation/compose/HostKt {
-	public static final fun StapelNavHost (Lstapel/navigation/StapelNavigator;Ljava/util/List;Landroidx/compose/ui/Modifier;Ljava/util/Set;Lkotlin/jvm/functions/Function5;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelNavHost (Lstapel/navigation/StapelNavigator;Ljava/util/List;Landroidx/compose/ui/Modifier;Ljava/util/Set;Lkotlin/jvm/functions/Function5;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;Lstapel/navigation/WidthClass;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 	public static final fun getDefaultOverlay ()Lkotlin/jvm/functions/Function5;
 	public static final fun rememberStapelNavigator (Ljava/util/List;Lstapel/navigation/NavPolicy;Lstapel/navigation/NavAuthSource;Lstapel/navigation/DeepLinkConfig;Lstapel/navigation/NavOverrides;Landroidx/compose/runtime/Composer;II)Lstapel/navigation/StapelNavigator;
 }
