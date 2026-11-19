@@ -37,6 +37,8 @@ import stapel.ui.skin.SurfaceSpec
 import stapel.ui.skin.SurfaceTone
 import stapel.ui.skin.TextFieldKind
 import stapel.ui.skin.TextFieldSpec
+import stapel.ui.skin.TabsSpec
+import stapel.ui.skin.TabsVariant
 import stapel.ui.skin.TopBarSpec
 
 /** A button through the skin ([ButtonSpec] lists the duties). */
@@ -195,6 +197,19 @@ public fun StapelTopBar(
     testTag: String? = null,
 ) {
     StapelTheme.skin.TopBar(TopBarSpec(title, navigation, actions, testTag), modifier)
+}
+
+/** Tabs or a segmented control through the skin. */
+@Composable
+public fun StapelTabs(
+    items: List<String>,
+    selectedIndex: Int,
+    onSelect: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    variant: TabsVariant = TabsVariant.Tabs,
+    testTag: String? = null,
+) {
+    StapelTheme.skin.Tabs(TabsSpec(items, selectedIndex, onSelect, variant, testTag), modifier)
 }
 
 /** A progress indicator through the skin. */

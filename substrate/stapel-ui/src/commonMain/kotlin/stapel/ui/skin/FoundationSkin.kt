@@ -419,7 +419,6 @@ public object FoundationSkin : StapelSkin {
     override fun Banner(spec: BannerSpec, modifier: Modifier) {
         val tone = StapelTheme.colors.status(spec.tone)
         val shape = StapelTheme.shapes.md
-        var expanded by remember { mutableStateOf(false) }
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -436,13 +435,7 @@ public object FoundationSkin : StapelSkin {
                     spec.title?.let { StapelText(it, style = StapelTheme.type.label) }
                     StapelText(spec.message, style = StapelTheme.type.bodySmall)
                     spec.detail?.let { detail ->
-                        val label = stapelString(CoreUiStrings.Details)
-                        StapelText(
-                            if (expanded) detail else label,
-                            style = StapelTheme.type.caption,
-                            color = StapelTheme.colors.textMuted,
-                            modifier = Modifier.clickable(role = Role.Button) { expanded = !expanded },
-                        )
+                        StapelText(detail, style = StapelTheme.type.caption, color = StapelTheme.colors.textMuted)
                     }
                     spec.action?.let { Button(it, Modifier.padding(top = StapelTheme.spacing.s1)) }
                 }
@@ -543,7 +536,7 @@ public object FoundationSkin : StapelSkin {
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .height(56.dp)
+                .heightIn(min = 56.dp)
                 .background(StapelTheme.colors.surface)
                 .optionalTestTag(spec.testTag)
                 .padding(horizontal = StapelTheme.spacing.s1),
@@ -553,7 +546,7 @@ public object FoundationSkin : StapelSkin {
             StapelText(
                 spec.title,
                 style = StapelTheme.type.title,
-                maxLines = 1,
+                maxLines = TOP_BAR_TITLE_MAX_LINES,
                 modifier = Modifier.weight(1f).padding(horizontal = StapelTheme.spacing.s3).semantics { heading() },
             )
             spec.actions.forEach { IconButton(it, Modifier) }
@@ -807,3 +800,10 @@ internal fun Spinner(modifier: Modifier, color: Color) {
         )
     }
 }
+
+/**
+ * Lines a top-bar title may wrap to before it ellipsizes: the bar grows with large text (200 %
+ * scale) instead of truncating a title to its first words; both skins use the same policy.
+ */
+public const val TOP_BAR_TITLE_MAX_LINES: Int = 3
+

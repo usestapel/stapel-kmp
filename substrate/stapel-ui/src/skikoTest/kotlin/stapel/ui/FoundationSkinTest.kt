@@ -24,9 +24,16 @@ import stapel.result.ServerRefusal
 import stapel.result.state.Freshness
 import stapel.result.state.Resource
 import stapel.showcase.contract.assertSkinContract
+import stapel.showcase.contract.assertTopBarSurvivesLargeText
 import stapel.tokens.StapelDefaultTokens
 import stapel.tokens.ThemeMode
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import stapel.ui.skin.BannerSpec
 import stapel.ui.skin.ButtonSpec
+import stapel.ui.skin.TabsSpec
+import stapel.ui.skin.TopBarSpec
 import stapel.ui.skin.FoundationSkin
 import stapel.ui.skin.StapelSkin
 import kotlin.test.Test
@@ -41,6 +48,34 @@ private object LeakyLoadingSkin : StapelSkin by FoundationSkin {
         FoundationSkin.Button(ButtonSpec(spec.label, spec.onClick, spec.variant, spec.size, spec.enabled, false, spec.gatedReason, testTag = spec.testTag), modifier)
     }
 }
+
+/** Breaks the large-text duty: a single-line, fixed-height bar. */
+private object SingleLineTitleSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun TopBar(spec: TopBarSpec, modifier: Modifier) {
+        Box(modifier.height(56.dp).optionalTag(spec.testTag)) {
+            StapelText(spec.title, maxLines = 1, modifier = Modifier.semantics { heading() })
+        }
+    }
+}
+
+/** Breaks the detail duty: the detail line hides behind a "Details" toggle. */
+private object CollapsedDetailSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun Banner(spec: BannerSpec, modifier: Modifier) {
+        FoundationSkin.Banner(BannerSpec(spec.tone, spec.message, spec.title, null, spec.action, spec.onDismiss, spec.dismissLabel, spec.testTag), modifier)
+    }
+}
+
+/** Marks its Tabs slot, to see that the wrapper goes through the skin. */
+private object MarkedTabsSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun Tabs(spec: TabsSpec, modifier: Modifier) {
+        Box(Modifier.testTag("marked.tabs")) { FoundationSkin.Tabs(spec, modifier) }
+    }
+}
+
+private fun Modifier.optionalTag(tag: String?): Modifier = if (tag == null) this else testTag(tag)
 
 /** A project skin replacing exactly one slot by interface delegation. */
 private object BrandButtonSkin : StapelSkin by FoundationSkin {
@@ -57,6 +92,34 @@ class FoundationSkinTest {
 
     @Test
     fun foundationSkinHonoursTheContractDark() = runComposeUiTest { assertSkinContract(FoundationSkin, mode = ThemeMode.Dark) }
+
+    @Test
+    fun theTopBarSurvivesTwiceTheTextSizeInEnglishAndRussian() = runComposeUiTest { assertTopBarSurvivesLargeText(FoundationSkin) }
+
+    @Test
+    fun aSingleLineTopBarIsCaughtTruncatingAtLargeText() = runComposeUiTest {
+        val e = assertFails { assertTopBarSurvivesLargeText(SingleLineTitleSkin) }
+        assertTrue(e.message.orEmpty().startsWith("skin contract duty TopBar.largeText"), e.message)
+    }
+
+    @Test
+    fun aCollapsedErrorDetailIsCaught() = runComposeUiTest {
+        val e = assertFails { assertSkinContract(CollapsedDetailSkin) }
+        assertTrue(e.message.orEmpty().startsWith("skin contract duty Banner.detail"), e.message)
+    }
+
+    @Test
+    fun stapelTabsDrawsThroughTheSkinSlot() = runComposeUiTest {
+        var picked = -1
+        setContent {
+            StapelTheme(skin = MarkedTabsSkin, mode = ThemeMode.Light) {
+                StapelTabs(listOf("Phone", "E-mail"), 0, { picked = it }, testTag = "tabs")
+            }
+        }
+        onNodeWithTag("marked.tabs").assertExists()
+        onNodeWithText("E-mail").performClick()
+        assertEquals(1, picked)
+    }
 
     @Test
     fun contractCatchesABrokenSkin() = runComposeUiTest {

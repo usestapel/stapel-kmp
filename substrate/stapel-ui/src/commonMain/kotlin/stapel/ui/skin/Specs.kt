@@ -197,7 +197,7 @@ public class BannerSpec(
     public val message: String,
     /** Optional title. */
     public val title: String? = null,
-    /** Technical detail, collapsed by default. */
+    /** Technical detail (`HTTP 503 · <request id>`), shown as a secondary line under the message. */
     public val detail: String? = null,
     /** Optional action. */
     public val action: ButtonSpec? = null,

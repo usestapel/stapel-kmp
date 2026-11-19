@@ -126,7 +126,7 @@ private fun ContractScreen(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMo
             s.CodeField(CodeFieldSpec(fields.code, 4, "Code", onComplete = { hits.values["code"] = it }, testTag = "c.codefield"), Modifier)
             s.Banner(
                 BannerSpec(
-                    StapelTone.Warning, "Banner message", title = "Banner title",
+                    StapelTone.Warning, "Banner message", title = "Banner title", detail = "HTTP 503 · req-42",
                     action = ButtonSpec("Fix it", { hits.hit("banner.action") }), onDismiss = { hits.hit("banner.dismiss") },
                     dismissLabel = "Dismiss banner", testTag = "c.banner",
                 ),
@@ -245,6 +245,10 @@ public fun ComposeUiTest.assertSkinContract(
     // Banner
     onNodeWithTag("c.banner").assert(SemanticsMatcher.expectValue(SemanticsProperties.LiveRegion, LiveRegionMode.Polite))
     onNodeWithText("Banner message", useUnmergedTree = true).assertExistsOrFail("banner message")
+    duty("Banner.detail") {
+        // The ladder's detail line (status and request id) is visible text, not behind a toggle.
+        onNodeWithText("HTTP 503 · req-42", useUnmergedTree = true).assertExists()
+    }
     onNodeWithContentDescription("Dismiss banner").tap()
     onNodeWithText("Fix it").tap()
     settle()
@@ -351,3 +355,59 @@ private fun androidx.compose.ui.test.SemanticsNodeInteraction.assertExistsOrFail
         throw AssertionError("skin contract: missing $what", e)
     }
 }
+
+/** Screen titles of a real flow, long enough to wrap at twice the text size on a phone (en, ru). */
+public val LARGE_TEXT_TITLES: List<String> = listOf(
+    "Confirm your phone number",
+    "Подтвердите номер телефона",
+)
+
+/**
+ * The top bar survives large text: at [fontScale] (200 % by default) on a 360 dp phone, each of
+ * [LARGE_TEXT_TITLES] is laid out in full — no ellipsis, no visual overflow — and the title is not
+ * clipped by the bar. One `setContent` per test: call it from its own test.
+ */
+@OptIn(ExperimentalTestApi::class)
+public fun ComposeUiTest.assertTopBarSurvivesLargeText(
+    skin: StapelSkin,
+    tokens: StapelTokens = StapelDefaultTokens,
+    theme: SkinContractTheme = PlainContractTheme,
+    fontScale: Float = 2f,
+) {
+    var title by mutableStateOf(LARGE_TEXT_TITLES.first())
+    setContent {
+        val base = androidx.compose.ui.platform.LocalDensity.current
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.ui.platform.LocalDensity provides androidx.compose.ui.unit.Density(base.density, fontScale),
+        ) {
+            val layout = stapelLayout(tokens, 360.dp, input = StapelInput.Touch)
+            theme.Wrap(skin, tokens, ThemeMode.Light, layout) {
+                Column(Modifier.size(width = 360.dp, height = 800.dp)) {
+                    StapelTheme.skin.TopBar(
+                        TopBarSpec(title, navigation = IconButtonSpec(StapelIconIds.ArrowBack, "Go back", {}), testTag = "c.topbar"),
+                        Modifier,
+                    )
+                }
+            }
+        }
+    }
+    for (t in LARGE_TEXT_TITLES) {
+        title = t
+        waitForIdle()
+        duty("TopBar.largeText") {
+            val node = onNode(hasText(t) and SemanticsMatcher.keyIsDefined(SemanticsProperties.Heading), useUnmergedTree = true).fetchSemanticsNode()
+            val layouts = mutableListOf<androidx.compose.ui.text.TextLayoutResult>()
+            node.config[SemanticsActions.GetTextLayoutResult].action?.invoke(layouts)
+            val layout = layouts.single()
+            if (layout.lineCount < 2) throw AssertionError("'$t' was expected to wrap at ${fontScale}x on 360 dp (lines = ${layout.lineCount})")
+            if (layout.hasVisualOverflow || layout.isLineEllipsized(layout.lineCount - 1)) {
+                throw AssertionError("TopBar title '$t' is truncated at ${fontScale}x (lines = ${layout.lineCount})")
+            }
+            val bar = onNodeWithTag("c.topbar", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
+            if (node.boundsInRoot.bottom > bar.bottom + 0.5f || node.boundsInRoot.top < bar.top - 0.5f) {
+                throw AssertionError("TopBar title '$t' is clipped by the bar (${node.boundsInRoot} outside $bar)")
+            }
+        }
+    }
+}
+

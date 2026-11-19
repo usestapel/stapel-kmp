@@ -10,6 +10,7 @@ public final class stapel/ui/ComponentsKt {
 	public static final fun StapelPage (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lstapel/ui/PaneMeasure;ZZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun StapelProgress (Lstapel/ui/skin/ProgressKind;Landroidx/compose/ui/Modifier;Ljava/lang/String;Ljava/lang/Float;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun StapelSurface (Landroidx/compose/ui/Modifier;Lstapel/ui/skin/SurfaceTone;Lstapel/ui/skin/ElevationStep;ZLkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelTabs (Ljava/util/List;ILkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lstapel/ui/skin/TabsVariant;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun StapelTextField-7MyUqlY (Landroidx/compose/foundation/text/input/TextFieldState;Ljava/lang/String;Landroidx/compose/ui/Modifier;Lstapel/ui/skin/TextFieldKind;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZLstapel/ui/StapelIcon;Ljava/lang/String;Lstapel/ui/skin/IconButtonSpec;ILkotlin/jvm/functions/Function0;Landroidx/compose/ui/autofill/ContentType;IILjava/lang/String;Landroidx/compose/runtime/Composer;III)V
 	public static final fun StapelTopBar (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lstapel/ui/skin/IconButtonSpec;Ljava/util/List;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 }
@@ -498,6 +499,7 @@ public final class stapel/ui/skin/FoundationSkin : stapel/ui/skin/StapelSkin {
 
 public final class stapel/ui/skin/FoundationSkinKt {
 	public static final field GATED_REASON_TAG_SUFFIX Ljava/lang/String;
+	public static final field TOP_BAR_TITLE_MAX_LINES I
 	public static final fun optionalTestTag (Landroidx/compose/ui/Modifier;Ljava/lang/String;)Landroidx/compose/ui/Modifier;
 	public static final fun stapelShadow (Landroidx/compose/ui/Modifier;Lstapel/tokens/Shadow;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/Modifier;
 	public static final fun stapelTouchTarget (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/Modifier;

@@ -29,14 +29,13 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -84,6 +83,7 @@ import stapel.ui.skin.optionalTestTag
 import stapel.ui.skin.stapelShadow
 import stapel.ui.skin.stapelTouchTarget
 import stapel.ui.skin.toneIcon
+import stapel.ui.skin.TOP_BAR_TITLE_MAX_LINES
 import stapel.ui.stapelString
 import androidx.compose.material3.Button as M3Button
 import androidx.compose.material3.IconButton as M3IconButton
@@ -316,7 +316,6 @@ public object Material3Skin : StapelSkin {
     override fun Banner(spec: BannerSpec, modifier: Modifier) {
         val c = StapelTheme.colors
         val tone = c.status(spec.tone)
-        var expanded by remember { mutableStateOf(false) }
         M3Surface(
             modifier = modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite }.optionalTestTag(spec.testTag),
             shape = StapelTheme.shapes.md,
@@ -330,13 +329,7 @@ public object Material3Skin : StapelSkin {
                     spec.title?.let { Text(it, style = MaterialTheme.typography.titleSmall) }
                     Text(spec.message, style = MaterialTheme.typography.bodyMedium)
                     spec.detail?.let { detail ->
-                        val label = stapelString(CoreUiStrings.Details)
-                        Text(
-                            if (expanded) detail else label,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = c.textMuted,
-                            modifier = Modifier.clickable { expanded = !expanded },
-                        )
+                        Text(detail, style = MaterialTheme.typography.bodySmall, color = c.textMuted)
                     }
                     spec.action?.let { Button(it, Modifier) }
                 }
@@ -420,13 +413,24 @@ public object Material3Skin : StapelSkin {
     @Composable
     override fun TopBar(spec: TopBarSpec, modifier: Modifier) {
         val c = StapelTheme.colors
-        TopAppBar(
-            title = { Text(spec.title, maxLines = 1, modifier = Modifier.semantics { heading() }) },
-            modifier = modifier.optionalTestTag(spec.testTag),
-            navigationIcon = { spec.navigation?.let { IconButton(it, Modifier) } },
-            actions = { spec.actions.forEach { IconButton(it, Modifier) } },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = c.surface, titleContentColor = c.text),
-        )
+        // Material's TopAppBar has a fixed height and a single-line title, which truncates at large
+        // text scales; this keeps its look (64 dp, title-large type) and lets the bar grow instead.
+        M3Surface(modifier = modifier.fillMaxWidth().optionalTestTag(spec.testTag), color = c.surface, contentColor = c.text) {
+            Row(
+                Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(horizontal = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                spec.navigation?.let { IconButton(it, Modifier) }
+                Text(
+                    spec.title,
+                    style = MaterialTheme.typography.titleLarge,
+                    maxLines = TOP_BAR_TITLE_MAX_LINES,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f).padding(horizontal = 12.dp, vertical = 8.dp).semantics { heading() },
+                )
+                spec.actions.forEach { IconButton(it, Modifier) }
+            }
+        }
     }
 
     /** Material `HorizontalDivider` in `border-subtle`. */

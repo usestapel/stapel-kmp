@@ -32,7 +32,7 @@ public object CoreUiStrings {
     /** "Hide password". */
     public val HidePassword: StringKey = StringKey("stapel.ui.hide_password")
 
-    /** "Details" (the collapsed technical line of an error banner). */
+    /** "Details": a label for a skin that collapses the technical line of an error banner (the default skins show the line). */
     public val Details: StringKey = StringKey("stapel.ui.details")
 
     /** "{count} characters left" — a plural family. */
