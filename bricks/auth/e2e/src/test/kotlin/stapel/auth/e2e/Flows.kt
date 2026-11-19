@@ -14,9 +14,10 @@ suspend fun signIn(device: Device, channel: OtpChannel, identifier: String): Sig
     val p = OtpSignInPresenter(device.auth, device.context())
     p.dispatch(OtpSignInIntent.RequestCode(channel, identifier))
     var sent = p.state.await { it is OtpSignInState.CodeSent || it is OtpSignInState.RequestFailed || it is OtpSignInState.Locked }
-    val limited = (sent as? OtpSignInState.Locked)?.error
-    if (limited?.reason == AuthErrorReason.RateLimited) {
-        // The same identifier on a second device inside the stand's (short) resend cooldown: wait it out once.
+    // The same identifier on a second device inside the stand's (short) resend cooldown: wait it out
+    // (a few times at most: the server's window is counted from the other device's request).
+    repeat(3) {
+        val limited = (sent as? OtpSignInState.Locked)?.error?.takeIf { it.reason == AuthErrorReason.RateLimited } ?: return@repeat
         kotlinx.coroutines.delay((limited.retryAfter ?: 2.seconds).coerceAtMost(5.seconds) + 500.milliseconds)
         p.dispatch(OtpSignInIntent.RequestCode(channel, identifier))
         sent = p.state.await { it is OtpSignInState.CodeSent || it is OtpSignInState.RequestFailed || (it is OtpSignInState.Locked && it.error !== limited) }
