@@ -403,10 +403,12 @@ final class stapel.cache/ReadOptions { // stapel.cache/ReadOptions|null[0]
 }
 
 final class stapel.cache/StapelCacheConfig { // stapel.cache/StapelCacheConfig|null[0]
-    constructor <init>(kotlinx.serialization.json/Json, kotlinx.coroutines/CoroutineScope, kotlin.time/Clock, stapel.cache/CacheStoreFactory = ..., stapel.cache/CacheObserver = ..., kotlin/Long = ...) // stapel.cache/StapelCacheConfig.<init>|<init>(kotlinx.serialization.json.Json;kotlinx.coroutines.CoroutineScope;kotlin.time.Clock;stapel.cache.CacheStoreFactory;stapel.cache.CacheObserver;kotlin.Long){}[0]
+    constructor <init>(kotlinx.serialization.json/Json, kotlinx.coroutines/CoroutineScope, kotlin.time/Clock, stapel.cache/CacheStoreFactory = ..., stapel.cache/CacheObserver = ..., kotlin/Long = ..., stapel.runtime/Connectivity? = ...) // stapel.cache/StapelCacheConfig.<init>|<init>(kotlinx.serialization.json.Json;kotlinx.coroutines.CoroutineScope;kotlin.time.Clock;stapel.cache.CacheStoreFactory;stapel.cache.CacheObserver;kotlin.Long;stapel.runtime.Connectivity?){}[0]
 
     final val clock // stapel.cache/StapelCacheConfig.clock|{}clock[0]
         final fun <get-clock>(): kotlin.time/Clock // stapel.cache/StapelCacheConfig.clock.<get-clock>|<get-clock>(){}[0]
+    final val connectivity // stapel.cache/StapelCacheConfig.connectivity|{}connectivity[0]
+        final fun <get-connectivity>(): stapel.runtime/Connectivity? // stapel.cache/StapelCacheConfig.connectivity.<get-connectivity>|<get-connectivity>(){}[0]
     final val json // stapel.cache/StapelCacheConfig.json|{}json[0]
         final fun <get-json>(): kotlinx.serialization.json/Json // stapel.cache/StapelCacheConfig.json.<get-json>|<get-json>(){}[0]
     final val maxEntryBytes // stapel.cache/StapelCacheConfig.maxEntryBytes|{}maxEntryBytes[0]
@@ -450,5 +452,6 @@ final class stapel.cache/WipeReport { // stapel.cache/WipeReport|null[0]
     final fun toString(): kotlin/String // stapel.cache/WipeReport.toString|toString(){}[0]
 }
 
+final fun stapel.cache.di/cacheModule(kotlinx.serialization.json/Json = ..., kotlin/Long = ...): org.koin.core.module/Module // stapel.cache.di/cacheModule|cacheModule(kotlinx.serialization.json.Json;kotlin.Long){}[0]
 final fun stapel.cache/StapelCache(stapel.cache/StapelCacheConfig): stapel.cache/ManagedStapelCache // stapel.cache/StapelCache|StapelCache(stapel.cache.StapelCacheConfig){}[0]
 final suspend fun <#A: kotlin/Any?> (kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<#A>>).stapel.cache/firstSettled(): stapel.result/StapelResult<#A, stapel.result/StapelError> // stapel.cache/firstSettled|firstSettled@kotlinx.coroutines.flow.Flow<stapel.result.state.Resource<0:0>>(){0§<kotlin.Any?>}[0]

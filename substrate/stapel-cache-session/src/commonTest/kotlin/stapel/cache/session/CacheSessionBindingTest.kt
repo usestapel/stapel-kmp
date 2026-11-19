@@ -211,13 +211,16 @@ class CacheSessionBindingTest {
     }
 
     @Test
-    fun accountIdComesFromTheTokenClaims() {
-        assertEquals("7", jwtClaimOf(tokens(7).accessToken, listOf("user_id", "sub")))
-        assertEquals("abc", jwtClaimOf(jwt("{\"sub\":\"abc\"}"), listOf("user_id", "sub")))
-        assertEquals("abc", jwtClaimOf(jwt("{\"user_id\":null,\"sub\":\"abc\"}"), listOf("user_id", "sub")))
-        assertNull(jwtClaimOf(jwt("{\"exp\":1}"), listOf("user_id", "sub")))
-        assertNull(jwtClaimOf("not-a-jwt", listOf("sub")))
-        assertNull(jwtClaimOf("a.!!!.c", listOf("sub")))
+    fun theAccountIsWhatTheSessionPublishesNotAGuessFromOtherClaims() = runTest {
+        val factory = MemoryCacheStoreFactory()
+        val cache = cache(backgroundScope, factory)
+        // Inversion: a token naming the user only under `sub` opens no account partition.
+        val session = session(stored = TokenPair(jwt("{\"sub\":\"abc\",\"exp\":4102444800}"), "r"))
+        CacheSessionBinding(cache, session, backgroundScope)
+        session.restore()
+        runCurrent()
+        assertEquals(SessionState.Authenticated(1, null), session.state.value)
+        assertEquals(emptyList(), factory.listPartitions())
     }
 }
 

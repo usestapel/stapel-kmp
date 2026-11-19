@@ -8,5 +8,5 @@ import android.content.Context
  */
 public fun RoomCacheStoreFactory(
     context: Context,
-    options: RoomCacheOptions = RoomCacheOptions(),
+    options: RoomCacheOptions,
 ): RoomCacheStoreFactory = RoomCacheStoreFactory(context.noBackupFilesDir.absolutePath, options)

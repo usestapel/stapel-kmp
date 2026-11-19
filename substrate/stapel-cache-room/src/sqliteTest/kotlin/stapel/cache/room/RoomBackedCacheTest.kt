@@ -2,6 +2,7 @@
 
 package stapel.cache.room
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.toList
@@ -67,7 +68,7 @@ class RoomBackedCacheTest {
             json = Json,
             scope = backgroundScope,
             clock = clock,
-            storeFactory = RoomCacheStoreFactory(dir.toString()),
+            storeFactory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default)),
         ),
     )
 

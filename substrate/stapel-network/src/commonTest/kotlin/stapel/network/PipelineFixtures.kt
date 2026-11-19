@@ -12,7 +12,6 @@ import stapel.result.Remediation
 import stapel.result.StapelError
 import stapel.result.TransportCarrier
 import stapel.result.TransportFailure
-import stapel.runtime.IdGenerator
 import stapel.wire.AuthRequirement
 import stapel.wire.BodyEncoding
 import stapel.wire.CaptchaRequirement
@@ -20,8 +19,9 @@ import stapel.wire.ErrorDecoder
 import stapel.wire.OperationKind
 import stapel.wire.OperationSpec
 import stapel.wire.ResponseKind
+import stapel.testing.SequentialIdGenerator
+import stapel.testing.TestClock
 import kotlin.random.Random
-import kotlin.time.Clock
 import kotlin.time.Instant
 
 /** A brick-shaped error type, as CODEGEN generates one. */
@@ -76,45 +76,11 @@ val testClient = ClientInfo("com.example.app", "1.2.3", "45", ClientPlatform.And
 fun testEnvironment(base: String = "https://api.example.com/") =
     StapelEnvironment.single("test", base, Posture.Prototype, testClient)
 
-class SequentialIds : IdGenerator {
-    private var n = 0
-
-    override fun uuid(): String = "call-${++n}"
-}
-
-class FixedClock : Clock {
-    override fun now(): Instant = Instant.fromEpochSeconds(1_800_000_000)
-}
-
-/** Answers from a script; records every request. */
-class FakeTransport : HttpTransport {
-    val requests = mutableListOf<WireRequest>()
-    private val script = ArrayDeque<(WireRequest) -> WireOutcome>()
-    var fallback: ((WireRequest) -> WireOutcome)? = null
-
-    fun enqueue(answer: (WireRequest) -> WireOutcome) {
-        script.addLast(answer)
-    }
-
-    fun enqueue(status: Int, body: String = "", headers: List<Pair<String, String>> = emptyList()) =
-        enqueue { WireOutcome.Response(status, headers, body.encodeToByteArray()) }
-
-    fun enqueueEnvelope(status: Int, code: String, params: String = "{}", extra: String = "") =
-        enqueue(status, "{\"localizable_error\":\"$code\",\"error\":\"text\",\"error_language\":\"en\",\"params\":$params$extra}")
-
-    fun enqueueFailure(error: TransportFailure.NoResponse, requestSent: Boolean) = enqueue { WireOutcome.Failure(error, requestSent) }
-
-    override suspend fun send(request: WireRequest): WireOutcome {
-        requests += request
-        val answer = script.removeFirstOrNull() ?: fallback ?: error("no scripted answer for request #${requests.size}: $request")
-        return answer(request)
-    }
-
-    override fun close() {}
-}
+/** The first id [SequentialIdGenerator] hands out: the `X-Request-ID` of the first logical call. */
+const val FIRST_ID = "00000000-0000-4000-8000-000000000001"
 
 fun deps(env: StapelEnvironment = testEnvironment(), connectivity: stapel.runtime.Connectivity? = null) = NetworkDependencies(
-    environment = env, clock = FixedClock(), ids = SequentialIds(), connectivity = connectivity, random = Random(7),
+    environment = env, clock = TestClock(Instant.fromEpochSeconds(1_800_000_000)), ids = SequentialIdGenerator(), connectivity = connectivity, random = Random(7),
 )
 
 /** An authenticator over a mutable token with a scripted refresh. */

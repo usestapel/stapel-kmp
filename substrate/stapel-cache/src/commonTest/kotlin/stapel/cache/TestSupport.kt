@@ -113,6 +113,7 @@ fun newCache(
     factory: CacheStoreFactory = MemoryCacheStoreFactory(),
     observer: CacheObserver = CacheObserver.None,
     maxEntryBytes: Long = 1024 * 1024,
+    connectivity: stapel.runtime.Connectivity? = null,
 ): ManagedStapelCache = StapelCache(
     StapelCacheConfig(
         json = testJson,
@@ -121,6 +122,7 @@ fun newCache(
         storeFactory = factory,
         observer = observer,
         maxEntryBytes = maxEntryBytes,
+        connectivity = connectivity,
     ),
 )
 

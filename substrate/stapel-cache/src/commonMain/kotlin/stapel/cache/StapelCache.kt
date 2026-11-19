@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.json.Json
+import stapel.runtime.Connectivity
 import stapel.result.StapelError
 import stapel.result.StapelResult
 import stapel.result.state.Resource
@@ -148,6 +149,9 @@ public fun interface WipeHook {
  *   factory (e.g. `RoomCacheStoreFactory`) when the app opts in. Never discovered from the classpath.
  * @property observer receives [CacheEvent]s (bridge it to logs or analytics).
  * @property maxEntryBytes an encoded value above this size is kept in memory only.
+ * @property connectivity when present, coming back online after `Offline` refetches every observed
+ *   key that is stale, missing or whose last refresh failed (the same as [ManagedStapelCache.onForeground]
+ *   plus the failed ones).
  */
 public class StapelCacheConfig(
     public val json: Json,
@@ -156,6 +160,7 @@ public class StapelCacheConfig(
     public val storeFactory: CacheStoreFactory = MemoryCacheStoreFactory(),
     public val observer: CacheObserver = CacheObserver.None,
     public val maxEntryBytes: Long = 1L * 1024 * 1024,
+    public val connectivity: Connectivity? = null,
 )
 
 /** Builds the app's cache from [config]. Emits [CacheEvent.Degraded] once when storage is not durable. */

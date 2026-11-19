@@ -7,9 +7,10 @@ Coordinates: `io.github.usestapel:stapel-cache-room` (group provisional until th
 
 ```kotlin
 // Composition root — the only place that knows storage exists.
-val storeFactory = RoomCacheStoreFactory(context)          // Android: noBackupFilesDir
-// val storeFactory = RoomCacheStoreFactory()              // iOS: Application Support, no backup
-// val storeFactory = RoomCacheStoreFactory("/path/data")  // JVM desktop: the app's data directory
+val options = RoomCacheOptions(ioContext = dispatchers.io)          // StapelDispatchers from stapel-runtime
+val storeFactory = RoomCacheStoreFactory(context, options)          // Android: noBackupFilesDir
+// val storeFactory = RoomCacheStoreFactory(options)                // iOS: Application Support, no backup
+// val storeFactory = RoomCacheStoreFactory("/path/data", options)  // JVM desktop: the app's data directory
 val cache = StapelCache(StapelCacheConfig(storeFactory = storeFactory, /* … */))
 ```
 

@@ -6,16 +6,10 @@
 // - Show declarations: true
 
 // Library unique name: <io.github.usestapel:stapel-cache-session>
-abstract fun interface stapel.cache.session/AccountIdResolver { // stapel.cache.session/AccountIdResolver|null[0]
-    abstract suspend fun accountId(stapel.session/TokenPair): kotlin/String? // stapel.cache.session/AccountIdResolver.accountId|accountId(stapel.session.TokenPair){}[0]
-
-    final object Companion { // stapel.cache.session/AccountIdResolver.Companion|null[0]
-        final fun jwtClaim(kotlin/Array<out kotlin/String>... = ...): stapel.cache.session/AccountIdResolver // stapel.cache.session/AccountIdResolver.Companion.jwtClaim|jwtClaim(kotlin.Array<out|kotlin.String>...){}[0]
-    }
-}
-
 final class stapel.cache.session/CacheSessionBinding : kotlin/AutoCloseable { // stapel.cache.session/CacheSessionBinding|null[0]
-    constructor <init>(stapel.cache/ManagedStapelCache, stapel.session/SessionManager, kotlinx.coroutines/CoroutineScope, stapel.cache.session/AccountIdResolver = ...) // stapel.cache.session/CacheSessionBinding.<init>|<init>(stapel.cache.ManagedStapelCache;stapel.session.SessionManager;kotlinx.coroutines.CoroutineScope;stapel.cache.session.AccountIdResolver){}[0]
+    constructor <init>(stapel.cache/ManagedStapelCache, stapel.session/SessionManager, kotlinx.coroutines/CoroutineScope) // stapel.cache.session/CacheSessionBinding.<init>|<init>(stapel.cache.ManagedStapelCache;stapel.session.SessionManager;kotlinx.coroutines.CoroutineScope){}[0]
 
     final fun close() // stapel.cache.session/CacheSessionBinding.close|close(){}[0]
 }
+
+final fun stapel.cache.session.di/cacheSessionModule(): org.koin.core.module/Module // stapel.cache.session.di/cacheSessionModule|cacheSessionModule(){}[0]

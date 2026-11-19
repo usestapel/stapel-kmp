@@ -27,6 +27,7 @@ import stapel.result.TransportFailure
 import stapel.result.state.Freshness
 import stapel.result.state.Origin
 import stapel.result.state.Resource
+import stapel.runtime.NetworkStatus
 import stapel.wire.CacheKey
 import stapel.wire.CacheScope
 import stapel.wire.KeyPattern
@@ -76,7 +77,7 @@ internal class Runtime(val partition: PartitionId?, val stores: PartitionStores?
     val cacheScope: CacheScope get() = if (partition == PartitionId.App) CacheScope.App else CacheScope.User
 
     suspend fun slot(key: CacheKey): Slot {
-        val storageKey = storageKeyOf(key)
+        val storageKey = key.storageKey
         return lock.withLock { slots.getOrPut(storageKey) { Slot(key, storageKey) } }
     }
 }
@@ -106,6 +107,23 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
             config.observer.onEvent(
                 CacheEvent.Degraded("storage is not durable: entries live for the process only, no offline queue"),
             )
+        }
+    }
+
+    /** Refetches observed keys when the network returns after `Offline`. */
+    private val reconnect: Job? = config.connectivity?.let { connectivity ->
+        config.scope.launch {
+            var offline = false
+            connectivity.status.collect { status ->
+                when (status) {
+                    NetworkStatus.Offline -> offline = true
+                    is NetworkStatus.Online -> if (offline) {
+                        offline = false
+                        refetchObserved(includeFailed = true)
+                    }
+                    NetworkStatus.Unknown -> Unit
+                }
+            }
         }
     }
 
@@ -190,19 +208,25 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
     }
 
     override fun onForeground() {
-        config.scope.launch {
-            for (runtime in liveRuntimes()) {
-                val active = runtime.lock.withLock { runtime.slots.values.filter { it.observers > 0 } }
-                for (slot in active) {
-                    val spec = slot.spec ?: continue
-                    val held = slot.state.value.held
-                    if (held == null || isStale(held, policyOf(spec))) startFetch(runtime, slot)
-                }
+        config.scope.launch { refetchObserved(includeFailed = false) }
+    }
+
+    private suspend fun refetchObserved(includeFailed: Boolean) {
+        for (runtime in liveRuntimes()) {
+            val active = runtime.lock.withLock { runtime.slots.values.filter { it.observers > 0 } }
+            for (slot in active) {
+                val spec = slot.spec ?: continue
+                val state = slot.state.value
+                val held = state.held
+                val due = held == null || isStale(held, policyOf(spec)) ||
+                    (includeFailed && (state.refreshError != null || state.failure != null))
+                if (due) startFetch(runtime, slot)
             }
         }
     }
 
     override suspend fun close(): Unit = adminLock.withLock {
+        reconnect?.cancel()
         liveRuntimes().forEach { shutDown(it) }
         user.value = Target.Waiting
         app.value = Target.Waiting
@@ -487,7 +511,7 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
         for (runtime in liveRuntimes()) {
             val slots = runtime.lock.withLock { runtime.slots.values.filter { pattern.matches(it.key) } }
             matched += runtime.stores?.entries?.let { store ->
-                runCatchingStore { storeInvalidate(store, pattern, runtime.cacheScope) }
+                runCatchingStore { storeInvalidate(store, pattern) }
             } ?: 0
             for (slot in slots) {
                 var memoryOnly = false
@@ -509,7 +533,7 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
         for (runtime in liveRuntimes()) {
             val slots = runtime.lock.withLock { runtime.slots.values.filter { pattern.matches(it.key) } }
             removed += runtime.stores?.entries?.let { store ->
-                runCatchingStore { storeDelete(store, pattern, runtime.cacheScope) }
+                runCatchingStore { storeDelete(store, pattern) }
             } ?: 0
             for (slot in slots) {
                 var memoryOnly = false
@@ -524,23 +548,17 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
         return removed
     }
 
-    private suspend fun storeInvalidate(store: CacheStore, pattern: KeyPattern, scope: CacheScope): Int {
-        if (!isExact(pattern)) return store.markInvalidated(storagePrefixOf(pattern))
-        return exactKeys(store, pattern, scope).count { key ->
-            val entry = store.get(key) ?: return@count false
-            store.put(entry.withInvalidated(true))
-            true
-        }
+    private suspend fun storeInvalidate(store: CacheStore, pattern: KeyPattern): Int {
+        val exact = pattern.exactKey ?: return store.markInvalidated(pattern.storagePrefix)
+        val entry = store.get(exact.storageKey) ?: return 0
+        store.put(entry.withInvalidated(true))
+        return 1
     }
 
-    private suspend fun storeDelete(store: CacheStore, pattern: KeyPattern, scope: CacheScope): Int {
-        if (!isExact(pattern)) return store.deletePrefix(storagePrefixOf(pattern))
-        return exactKeys(store, pattern, scope).onEach { store.delete(it) }.size
+    private suspend fun storeDelete(store: CacheStore, pattern: KeyPattern): Int {
+        val exact = pattern.exactKey ?: return store.deletePrefix(pattern.storagePrefix)
+        if (store.get(exact.storageKey) == null) return 0
+        store.delete(exact.storageKey)
+        return 1
     }
-
-    /** Stored keys an exact pattern matches (at most one; the listing is bounded by its path prefix). */
-    private suspend fun exactKeys(store: CacheStore, pattern: KeyPattern, scope: CacheScope): List<String> =
-        store.keys(storagePrefixOf(pattern)).filter { stored ->
-            cacheKeyOf(stored, scope)?.let(pattern::matches) == true
-        }
 }

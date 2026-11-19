@@ -13,7 +13,7 @@ import platform.Foundation.NSUserDomainMask
  * directory excluded from backup. Not the Caches directory: the system may purge it.
  */
 @OptIn(ExperimentalForeignApi::class)
-public fun RoomCacheStoreFactory(options: RoomCacheOptions = RoomCacheOptions()): RoomCacheStoreFactory {
+public fun RoomCacheStoreFactory(options: RoomCacheOptions): RoomCacheStoreFactory {
     val manager = NSFileManager.defaultManager
     val support = manager.URLForDirectory(
         directory = NSApplicationSupportDirectory,

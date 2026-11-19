@@ -1,12 +1,10 @@
 public final class stapel/cache/room/AndroidRoomCacheStoreFactoryKt {
 	public static final fun RoomCacheStoreFactory (Landroid/content/Context;Lstapel/cache/room/RoomCacheOptions;)Lstapel/cache/room/RoomCacheStoreFactory;
-	public static synthetic fun RoomCacheStoreFactory$default (Landroid/content/Context;Lstapel/cache/room/RoomCacheOptions;ILjava/lang/Object;)Lstapel/cache/room/RoomCacheStoreFactory;
 }
 
 public final class stapel/cache/room/RoomCacheOptions {
-	public fun <init> ()V
-	public fun <init> (Lkotlin/jvm/functions/Function0;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;)V
-	public synthetic fun <init> (Lkotlin/jvm/functions/Function0;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getDriver ()Lkotlin/jvm/functions/Function0;
 	public final fun getIoContext ()Lkotlin/coroutines/CoroutineContext;
 	public final fun getOnDiscarded ()Lkotlin/jvm/functions/Function2;
@@ -14,10 +12,14 @@ public final class stapel/cache/room/RoomCacheOptions {
 
 public final class stapel/cache/room/RoomCacheStoreFactory : stapel/cache/CacheStoreFactory {
 	public fun <init> (Ljava/lang/String;Lstapel/cache/room/RoomCacheOptions;)V
-	public synthetic fun <init> (Ljava/lang/String;Lstapel/cache/room/RoomCacheOptions;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun destroy (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getDurable ()Z
 	public fun listPartitions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun open (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/room/di/CacheRoomModuleKt {
+	public static final fun cacheRoomModule (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Lorg/koin/core/module/Module;
+	public static synthetic fun cacheRoomModule$default (Ljava/lang/String;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lorg/koin/core/module/Module;
 }
 

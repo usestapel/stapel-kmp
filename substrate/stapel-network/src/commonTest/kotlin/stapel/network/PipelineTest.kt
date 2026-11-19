@@ -7,6 +7,7 @@ import stapel.result.TimeoutPhase
 import stapel.result.TransportFailure
 import stapel.runtime.Connectivity
 import stapel.runtime.NetworkStatus
+import stapel.testing.FakeTransport
 import stapel.wire.AuthRequirement
 import stapel.wire.OperationCall
 import kotlin.test.Test
@@ -43,7 +44,7 @@ class PipelineTest {
         assertEquals("https://api.example.com/auth/api/v1/me/", sent.url)
         assertEquals("Bearer A", sent.header("Authorization"))
         assertEquals("application/json", sent.header("Accept"))
-        assertEquals("call-1", sent.header("X-Request-ID"))
+        assertEquals(FIRST_ID, sent.header("X-Request-ID"))
         assertEquals(testClient.userAgent, sent.header("User-Agent"))
         assertEquals("\"Android\"", sent.header("Sec-CH-UA-Platform"))
         assertNull(sent.header("Cookie"))
@@ -77,21 +78,21 @@ class PipelineTest {
     @Test
     fun unauthorizedRefreshesOnceAndRetriesOnceWithTheNewToken() = runTest {
         val auth = FakeAuthenticator()
-        wire.enqueueEnvelope(401, "error.401.unauthorized")
+        wire.enqueueEnvelope(401, "error.401.unauthorized", error = "text", language = "en")
         wire.enqueue(200, """{"id":"u1"}""")
         val result = transport(auth).execute(getMe, OperationCall())
         assertIs<StapelResult.Ok<Me>>(result)
         assertEquals(1, auth.refreshes)
         assertEquals(listOf<String?>("A"), auth.failedTokens)
         assertEquals(listOf("Bearer A", "Bearer B"), wire.requests.map { it.header("Authorization") })
-        assertEquals(listOf("call-1", "call-1"), wire.requests.map { it.header("X-Request-ID") }, "one logical call, one request id")
+        assertEquals(listOf(FIRST_ID, FIRST_ID), wire.requests.map { it.header("X-Request-ID") }, "one logical call, one request id")
     }
 
     @Test
     fun aSecond401IsReturnedNotLooped() = runTest {
         val auth = FakeAuthenticator()
-        wire.enqueueEnvelope(401, "error.401.unauthorized")
-        wire.enqueueEnvelope(401, "error.401.unauthorized")
+        wire.enqueueEnvelope(401, "error.401.unauthorized", error = "text", language = "en")
+        wire.enqueueEnvelope(401, "error.401.unauthorized", error = "text", language = "en")
         val error = (transport(auth).execute(getMe, OperationCall()) as StapelResult.Err).error.failure()
         assertIs<TransportFailure.Unauthenticated>(error)
         assertEquals(ErrorCode("error.401.unauthorized"), error.code)
@@ -102,7 +103,7 @@ class PipelineTest {
     @Test
     fun refreshWithoutVerdictIsTransientNotSignedOut() = runTest {
         val auth = FakeAuthenticator().apply { verdict = { RefreshVerdict.Unavailable } }
-        wire.enqueueEnvelope(401, "error.401.unauthorized")
+        wire.enqueueEnvelope(401, "error.401.unauthorized", error = "text", language = "en")
         val error = (transport(auth).execute(getMe, OperationCall()) as StapelResult.Err).error.failure()
         assertIs<TransportFailure.ConnectionFailed>(error)
         assertEquals(1, wire.requests.size)
@@ -111,7 +112,7 @@ class PipelineTest {
     @Test
     fun endedSessionIsUnauthenticated() = runTest {
         val auth = FakeAuthenticator().apply { verdict = { RefreshVerdict.SessionEnded } }
-        wire.enqueueEnvelope(401, "error.401.unauthorized")
+        wire.enqueueEnvelope(401, "error.401.unauthorized", error = "text", language = "en")
         val error = (transport(auth).execute(getMe, OperationCall()) as StapelResult.Err).error.failure()
         assertIs<TransportFailure.Unauthenticated>(error)
     }
@@ -119,7 +120,7 @@ class PipelineTest {
     @Test
     fun a401WithoutATokenDoesNotRefresh() = runTest {
         val auth = FakeAuthenticator(token = null)
-        wire.enqueueEnvelope(401, "error.401.unauthorized")
+        wire.enqueueEnvelope(401, "error.401.unauthorized", error = "text", language = "en")
         transport(auth).execute(requestOtp, OperationCall(body = OtpRequest("+1")))
         assertEquals(0, auth.refreshes)
     }
@@ -178,8 +179,8 @@ class PipelineTest {
                 return Recovery.Retry { it.setHeader("X-Test", "retry") }
             }
         }
-        wire.enqueueEnvelope(400, "error.400.something")
-        wire.enqueueEnvelope(400, "error.400.something")
+        wire.enqueueEnvelope(400, "error.400.something", error = "text", language = "en")
+        wire.enqueueEnvelope(400, "error.400.something", error = "text", language = "en")
         val error = (transport(plugins = listOf(plugin)).execute(getMe, OperationCall()) as StapelResult.Err).error
         assertIs<TestError.Domain>(error)
         assertEquals(1, asked)
@@ -194,7 +195,7 @@ class PipelineTest {
             override suspend fun recover(context: RequestContext, error: stapel.result.StapelError) =
                 Recovery.Retry { assertTrue(it.setBodyField("captcha_token", "tok")) }
         }
-        wire.enqueueEnvelope(400, "error.400.captcha_required")
+        wire.enqueueEnvelope(400, "error.400.captcha_required", error = "text", language = "en")
         wire.enqueue(204)
         transport(plugins = listOf(plugin)).execute(requestOtp, OperationCall(body = OtpRequest("+1")))
         assertEquals("""{"phone":"+1"}""", (wire.requests[0].body as WireBody.Bytes).text())
@@ -222,12 +223,12 @@ class PipelineTest {
         val error = (transport().execute(getMe, OperationCall()) as StapelResult.Err).error.failure()
         assertIs<TransportFailure.HttpStatus>(error)
         assertEquals("stapel.http.404", error.code.value)
-        assertEquals("call-1", error.envelope.requestId, "the sent request id stands in when the server echoes none")
+        assertEquals(FIRST_ID, error.envelope.requestId, "the sent request id stands in when the server echoes none")
     }
 
     @Test
     fun rateLimitTakesParamsBeforeTheHeader() = runTest {
-        wire.enqueueEnvelope(429, "error.429.rate_limit", """{"retry_after":120,"retry_after_minutes":2}""")
+        wire.enqueueJson(429, """{"localizable_error":"error.429.rate_limit","error":"text","error_language":"en","params":{"retry_after":120,"retry_after_minutes":2}}""")
         val error = (transport(config = NetworkConfig(retry = RetryPolicy.None)).execute(getMe, OperationCall()) as StapelResult.Err)
             .error.failure()
         assertIs<TransportFailure.RateLimited>(error)
@@ -251,7 +252,7 @@ class PipelineTest {
         wire.enqueue(200, """{"id":"u1"}""")
         assertIs<StapelResult.Ok<Me>>(transport().execute(getMe, OperationCall()))
         assertEquals(3, wire.requests.size)
-        assertEquals(setOf("call-1"), wire.requests.map { it.header("X-Request-ID") }.toSet())
+        assertEquals(setOf(FIRST_ID), wire.requests.map { it.header("X-Request-ID") }.toSet())
     }
 
     @Test
@@ -295,17 +296,17 @@ class PipelineTest {
 
     @Test
     fun shortRateLimitIsWaitedOutForQueriesOnly() = runTest {
-        wire.enqueueEnvelope(429, "error.429.rate_limit", """{"retry_after":2}""")
+        wire.enqueueJson(429, """{"localizable_error":"error.429.rate_limit","error":"text","error_language":"en","params":{"retry_after":2}}""")
         wire.enqueue(200, """{"id":"u1"}""")
         assertIs<StapelResult.Ok<Me>>(transport().execute(getMe, OperationCall()))
-        wire.enqueueEnvelope(429, "error.429.rate_limit", """{"retry_after":60}""")
+        wire.enqueueJson(429, """{"localizable_error":"error.429.rate_limit","error":"text","error_language":"en","params":{"retry_after":60}}""")
         assertIs<StapelResult.Err<TestError>>(transport().execute(getMe, OperationCall()))
         assertEquals(3, wire.requests.size, "a long wait is not honoured automatically")
     }
 
     @Test
     fun recoveriesDoNotConsumeTransportAttempts() = runTest {
-        wire.enqueueEnvelope(401, "error.401.unauthorized")
+        wire.enqueueEnvelope(401, "error.401.unauthorized", error = "text", language = "en")
         wire.enqueue(503, "")
         wire.enqueue(503, "")
         wire.enqueue(200, """{"id":"u1"}""")

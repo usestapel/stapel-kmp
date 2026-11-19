@@ -3,8 +3,6 @@ package stapel.cache.room
 import androidx.sqlite.SQLiteDriver
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
@@ -20,16 +18,18 @@ import kotlin.coroutines.CoroutineContext
 /**
  * Options of [RoomCacheStoreFactory].
  *
+ * @property ioContext where database and file work runs: the app's IO dispatcher
+ *   (`StapelDispatchers.io`; the Koin module passes it). No default: a library never picks a
+ *   dispatcher itself (gate G-R1).
  * @property driver creates the SQLite driver of each database; replace it to plug an encrypting or
  *   a system driver. Default: the bundled SQLite build, the same on every platform.
- * @property ioContext where database and file work runs. Default: the coroutines IO dispatcher.
  * @property onDiscarded called when a partition's `cache.db` could not be used as found (unreadable
  *   file, a schema or store format from another version) and was deleted and recreated empty. The
  *   cache is disposable, so this is a metric, not an error.
  */
 public class RoomCacheOptions(
+    public val ioContext: CoroutineContext,
     public val driver: () -> SQLiteDriver = { BundledSQLiteDriver() },
-    public val ioContext: CoroutineContext = Dispatchers.IO,
     public val onDiscarded: (partition: PartitionId, cause: Throwable) -> Unit = { _, _ -> },
 )
 
@@ -45,15 +45,15 @@ public class RoomCacheOptions(
  * every file in it (`-wal`, `-shm` included). `cache.db` is disposable: a file that cannot be
  * opened, that carries another schema, or another store format is deleted and recreated empty.
  *
- * Platform entry points pick the directory: `RoomCacheStoreFactory(context)` on Android
- * (`noBackupFilesDir`), `RoomCacheStoreFactory()` on iOS (Application Support, excluded from
+ * Platform entry points pick the directory: `RoomCacheStoreFactory(context, options)` on Android
+ * (`noBackupFilesDir`), `RoomCacheStoreFactory(options)` on iOS (Application Support, excluded from
  * backup); on the JVM the app passes its data directory to this constructor.
  *
  * @param directory absolute path of the directory that will hold `stapel-cache/`.
  */
 public class RoomCacheStoreFactory(
     directory: String,
-    private val options: RoomCacheOptions = RoomCacheOptions(),
+    private val options: RoomCacheOptions,
 ) : CacheStoreFactory {
     private val root = Path(directory, ROOT_NAME)
     private val lock = Mutex()
@@ -171,8 +171,11 @@ public class RoomCacheStoreFactory(
         val DB_FILES: List<String> = listOf(DB_NAME, "$DB_NAME-wal", "$DB_NAME-shm", "$DB_NAME-journal")
         const val FORMAT_KEY: String = "format"
 
-        /** Store format number (payload encoding, key encoding); a different number recreates the file. */
-        const val STORE_FORMAT: Int = 1
+        /**
+         * Store format number (payload encoding, key encoding); a different number recreates the file.
+         * 2: keys are `stapel-wire`'s `CacheKey.storageKey`.
+         */
+        const val STORE_FORMAT: Int = 2
     }
 }
 

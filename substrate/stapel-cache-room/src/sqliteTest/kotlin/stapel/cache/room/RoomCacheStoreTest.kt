@@ -2,6 +2,7 @@ package stapel.cache.room
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import androidx.sqlite.execSQL
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import kotlinx.io.buffered
 import kotlinx.io.files.Path
@@ -40,14 +41,14 @@ class RoomCacheStoreTest {
 
     @Test
     fun roomStorePassesTheContract() = runTest {
-        val ran = CacheStoreContract.verify { RoomCacheStoreFactory(tempDir().toString()) }
+        val ran = CacheStoreContract.verify { RoomCacheStoreFactory(tempDir().toString(), RoomCacheOptions(Dispatchers.Default)) }
         assertEquals(CacheStoreContract.caseNames.size, ran)
     }
 
     @Test
     fun partitionsAreSeparateFilesNamedByHash() = runTest {
         val dir = tempDir()
-        val factory = RoomCacheStoreFactory(dir.toString())
+        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default))
         val app = factory.open(PartitionId.App)
         val user = factory.open(account)
         app.entries.put(entry(key, "app"))
@@ -67,7 +68,7 @@ class RoomCacheStoreTest {
     @Test
     fun wipeClosesAndDeletesEveryFileOfThePartition() = runTest {
         val dir = tempDir()
-        val factory = RoomCacheStoreFactory(dir.toString())
+        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default))
         val app = factory.open(PartitionId.App)
         val user = factory.open(account)
         app.entries.put(entry(key, "app"))
@@ -92,12 +93,12 @@ class RoomCacheStoreTest {
         // Process death: the first instance is never closed; a new instance over the same directory
         // (the next process) must read what was written.
         val dir = tempDir()
-        val first = RoomCacheStoreFactory(dir.toString())
+        val first = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default))
         val stores = first.open(account)
         stores.entries.put(entry(key, "last known me", fetchedAt = 42, invalidated = true))
         stores.entries.put(entry("auth\u001Fcapabilities\u001F", "caps"))
 
-        val second = RoomCacheStoreFactory(dir.toString())
+        val second = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default))
         assertEquals(listOf(account), second.listPartitions())
         val reopened = second.open(account)
         val read = assertNotNull(reopened.entries.get(key))
@@ -118,7 +119,7 @@ class RoomCacheStoreTest {
             it.writeString("this is not a database ".repeat(200))
         }
         val discarded = mutableListOf<PartitionId>()
-        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(onDiscarded = { p, _ -> discarded += p }))
+        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default, onDiscarded = { p, _ -> discarded += p }))
 
         val stores = factory.open(account)
         assertEquals(0, stores.entries.count())
@@ -140,7 +141,7 @@ class RoomCacheStoreTest {
             c.execSQL("PRAGMA user_version = $CACHE_DB_VERSION")
         }.close()
         val discarded = mutableListOf<Throwable>()
-        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(onDiscarded = { _, e -> discarded += e }))
+        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default, onDiscarded = { _, e -> discarded += e }))
 
         val stores = factory.open(account)
         stores.entries.put(entry(key, "fresh"))
@@ -158,7 +159,7 @@ class RoomCacheStoreTest {
             c.execSQL("CREATE TABLE future (x INTEGER)")
             c.execSQL("PRAGMA user_version = ${CACHE_DB_VERSION + 6}")
         }.close()
-        val factory = RoomCacheStoreFactory(dir.toString())
+        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default))
 
         val stores = factory.open(account)
         stores.entries.put(entry(key, "fresh"))
@@ -170,7 +171,7 @@ class RoomCacheStoreTest {
     fun otherStoreFormatIsDiscardedAndSameFormatIsKept() = runTest {
         // Same format: the data survives a reopen (inversion of the discard below).
         val dir = tempDir()
-        val factory = RoomCacheStoreFactory(dir.toString())
+        val factory = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default))
         factory.open(account).also { it.entries.put(entry(key, "kept")) }.close()
         factory.open(account).also {
             assertEquals("kept", it.entries.get(key)?.payload?.decodeToString())
@@ -182,7 +183,7 @@ class RoomCacheStoreTest {
             it.entries().putMeta(MetaRow("format", "${RoomCacheStoreFactory.STORE_FORMAT + 1}"))
         }.close()
         val discarded = mutableListOf<PartitionId>()
-        val next = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(onDiscarded = { p, _ -> discarded += p }))
+        val next = RoomCacheStoreFactory(dir.toString(), RoomCacheOptions(Dispatchers.Default, onDiscarded = { p, _ -> discarded += p }))
         next.open(account).also {
             assertNull(it.entries.get(key), "entry of another store format was served")
         }.close()
@@ -191,7 +192,7 @@ class RoomCacheStoreTest {
 
     @Test
     fun handlesAreCountedPerPartition() = runTest {
-        val factory = RoomCacheStoreFactory(tempDir().toString())
+        val factory = RoomCacheStoreFactory(tempDir().toString(), RoomCacheOptions(Dispatchers.Default))
         val a = factory.open(account)
         val b = factory.open(account)
         a.entries.put(entry(key, "v"))

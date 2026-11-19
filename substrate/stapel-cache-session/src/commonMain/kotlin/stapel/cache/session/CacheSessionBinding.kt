@@ -5,36 +5,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
 import stapel.cache.ManagedStapelCache
 import stapel.cache.WipeTarget
 import stapel.session.LogoutHook
 import stapel.session.SessionManager
 import stapel.session.SessionState
-import stapel.session.TokenPair
-import kotlin.io.encoding.Base64
-
-/**
- * Names the account a token pair belongs to, from local data only (the partition must open at cold
- * start, before any request). `null` = no account partition (reads go to the network, nothing kept).
- */
-public fun interface AccountIdResolver {
-    /** The account id of [tokens], or `null`. */
-    public suspend fun accountId(tokens: TokenPair): String?
-
-    /** Ready-made resolvers. */
-    public companion object {
-        /**
-         * The first present claim of the access JWT's payload among [claims] (read without verifying
-         * the signature: it only picks a local directory). Default: `user_id` (the backend's
-         * SimpleJWT claim), then `sub`.
-         */
-        public fun jwtClaim(vararg claims: String = arrayOf("user_id", "sub")): AccountIdResolver =
-            AccountIdResolver { tokens -> jwtClaimOf(tokens.accessToken, claims.toList()) }
-    }
-}
 
 /**
  * Binds the cache's partitions to the session (one binding per app, created in the composition root):
@@ -49,14 +24,16 @@ public fun interface AccountIdResolver {
  *
  * @param cache the app's cache.
  * @param session the app's session.
+ * The account is [SessionState.Authenticated.accountId] / [SessionState.Anonymous.accountId] as the
+ * session publishes it (read from the stored tokens, so the partition opens before any request); a
+ * session whose token names no account gets no account partition.
+ *
  * @param scope application scope the binding collects in.
- * @param resolver how the account id is read from the tokens.
  */
 public class CacheSessionBinding(
     private val cache: ManagedStapelCache,
     private val session: SessionManager,
     scope: CoroutineScope,
-    private val resolver: AccountIdResolver = AccountIdResolver.jwtClaim(),
 ) : AutoCloseable {
     private val lock = Mutex()
     private var current: String? = null
@@ -67,7 +44,8 @@ public class CacheSessionBinding(
     private suspend fun follow(state: SessionState) = lock.withLock {
         val account = when (state) {
             SessionState.Initializing -> return@withLock
-            is SessionState.Authenticated, is SessionState.Anonymous -> session.currentTokens()?.let { resolver.accountId(it) }
+            is SessionState.Authenticated -> state.accountId
+            is SessionState.Anonymous -> state.accountId
             is SessionState.Unauthenticated -> null
         }
         current = account
@@ -89,23 +67,5 @@ public class CacheSessionBinding(
     override fun close() {
         job.cancel()
         hook.close()
-    }
-}
-
-internal fun jwtClaimOf(token: String, claims: List<String>): String? {
-    val parts = token.split('.')
-    if (parts.size != 3) return null
-    val payload = try {
-        Base64.UrlSafe.withPadding(Base64.PaddingOption.ABSENT_OPTIONAL).decode(parts[1]).decodeToString()
-    } catch (_: IllegalArgumentException) {
-        return null
-    }
-    val json = try {
-        Json.parseToJsonElement(payload) as? JsonObject
-    } catch (_: IllegalArgumentException) {
-        null
-    } ?: return null
-    return claims.firstNotNullOfOrNull { claim ->
-        (json[claim] as? JsonPrimitive)?.takeIf { it !is kotlinx.serialization.json.JsonNull }?.content?.takeIf { it.isNotEmpty() }
     }
 }

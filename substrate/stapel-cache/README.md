@@ -10,7 +10,7 @@ Coordinates: `io.github.usestapel:stapel-cache` (group provisional until the fir
 ```kotlin
 // Composition root
 val cache = StapelCache(StapelCacheConfig(json = sharedJson, scope = appScope, clock = clock))
-// opt-in durability: storeFactory = RoomCacheStoreFactory(context)
+// opt-in durability: storeFactory = RoomCacheStoreFactory(context, RoomCacheOptions(dispatchers.io))
 
 // Repository (spec and key come from generated code)
 val me = QuerySpec(AuthKeys.me(), Me.serializer(), schemaHash = "…", policy = ReadPolicy.StaleWhileRevalidate(ZERO, INFINITE))

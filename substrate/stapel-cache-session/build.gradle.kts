@@ -11,8 +11,11 @@ kotlin {
         commonMain.dependencies {
             api(projects.stapelCache)
             api(projects.stapelSession)
+            implementation(projects.stapelDi)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.serialization.json)
+        }
+        commonTest.dependencies {
+            implementation(projects.stapelTesting)
         }
     }
 }

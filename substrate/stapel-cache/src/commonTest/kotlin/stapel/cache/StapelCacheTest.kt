@@ -138,7 +138,7 @@ class StapelCacheTest {
         assertNull(cache.peek(spec("chat", "conv")))
         assertNotNull(cache.peek(spec("chat", "conversations")))
         val stores = factory.open(PartitionId.account("acc"))
-        assertNull(stores.entries.get(storageKeyOf(spec("chat", "conv").key)))
+        assertNull(stores.entries.get(spec("chat", "conv").key.storageKey))
     }
 
     @Test
@@ -194,7 +194,7 @@ class StapelCacheTest {
     ): Triple<List<String>, Boolean, MissReason?> {
         val factory = DurableMemoryFactory()
         val spec = spec("auth", "me")
-        val storageKey = storageKeyOf(spec.key)
+        val storageKey = spec.key.storageKey
         factory.open(PartitionId.account("acc")).entries.put(
             StoredEntry(storageKey, "auth", payload.encodeToByteArray(), storedHash, clock.millis, false),
         )
@@ -475,6 +475,58 @@ class StapelCacheTest {
         cache.onForeground()
         runCurrent()
         assertEquals(1, fetch.calls)
+        job.cancel()
+    }
+
+    @Test
+    fun comingBackOnlineRefetchesStaleAndFailedObservedKeysOnly() = runTest {
+        val network = stapel.testing.FakeConnectivity(stapel.runtime.NetworkStatus.Online())
+        val cache = newCache(backgroundScope, clock, connectivity = network)
+        cache.setAccount("a")
+        val fresh = spec("auth", "fresh")
+        val stale = spec("auth", "stale")
+        val failed = spec("auth", "failed")
+        cache.write(fresh, "v")
+        cache.write(stale, "v")
+        val freshFetch = FakeFetch()
+        val staleFetch = FakeFetch()
+        val failedFetch = FakeFetch(StapelResult.Err(stapel.result.TransportFailure.Offline()))
+        val jobs = listOf(
+            backgroundScope.launch { cache.observe(fresh) { freshFetch.invoke() }.collect { } },
+            backgroundScope.launch { cache.observe(stale) { staleFetch.invoke() }.collect { } },
+            backgroundScope.launch { cache.observe(failed) { failedFetch.invoke() }.collect { } },
+        )
+        runCurrent()
+        assertEquals(1, failedFetch.calls)
+        cache.invalidate(stapel.wire.KeyPattern.exact(stale.key), Refetch.None)
+        failedFetch.next = StapelResult.Ok("v")
+
+        // Unknown -> Online at start and Online -> Online are not a reconnect.
+        network.set(stapel.runtime.NetworkStatus.Online(metered = true))
+        runCurrent()
+        assertEquals(listOf(0, 0, 1), listOf(freshFetch.calls, staleFetch.calls, failedFetch.calls))
+
+        network.set(stapel.runtime.NetworkStatus.Offline)
+        runCurrent()
+        assertEquals(listOf(0, 0, 1), listOf(freshFetch.calls, staleFetch.calls, failedFetch.calls))
+        network.set(stapel.runtime.NetworkStatus.Online())
+        runCurrent()
+        assertEquals(listOf(0, 1, 2), listOf(freshFetch.calls, staleFetch.calls, failedFetch.calls), "fresh, stale, failed")
+        jobs.forEach { it.cancel() }
+    }
+
+    @Test
+    fun withoutConnectivityNothingFollowsTheNetwork() = runTest {
+        val cache = newCache(backgroundScope, clock)
+        cache.setAccount("a")
+        val stale = spec("auth", "stale")
+        cache.write(stale, "v")
+        val fetch = FakeFetch()
+        val job = backgroundScope.launch { cache.observe(stale) { fetch.invoke() }.collect { } }
+        runCurrent()
+        cache.invalidate(stapel.wire.KeyPattern.exact(stale.key), Refetch.None)
+        runCurrent()
+        assertEquals(0, fetch.calls)
         job.cancel()
     }
 

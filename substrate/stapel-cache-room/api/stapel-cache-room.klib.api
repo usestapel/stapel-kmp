@@ -7,7 +7,7 @@
 
 // Library unique name: <io.github.usestapel:stapel-cache-room>
 final class stapel.cache.room/RoomCacheOptions { // stapel.cache.room/RoomCacheOptions|null[0]
-    constructor <init>(kotlin/Function0<androidx.sqlite/SQLiteDriver> = ..., kotlin.coroutines/CoroutineContext = ..., kotlin/Function2<stapel.cache/PartitionId, kotlin/Throwable, kotlin/Unit> = ...) // stapel.cache.room/RoomCacheOptions.<init>|<init>(kotlin.Function0<androidx.sqlite.SQLiteDriver>;kotlin.coroutines.CoroutineContext;kotlin.Function2<stapel.cache.PartitionId,kotlin.Throwable,kotlin.Unit>){}[0]
+    constructor <init>(kotlin.coroutines/CoroutineContext, kotlin/Function0<androidx.sqlite/SQLiteDriver> = ..., kotlin/Function2<stapel.cache/PartitionId, kotlin/Throwable, kotlin/Unit> = ...) // stapel.cache.room/RoomCacheOptions.<init>|<init>(kotlin.coroutines.CoroutineContext;kotlin.Function0<androidx.sqlite.SQLiteDriver>;kotlin.Function2<stapel.cache.PartitionId,kotlin.Throwable,kotlin.Unit>){}[0]
 
     final val driver // stapel.cache.room/RoomCacheOptions.driver|{}driver[0]
         final fun <get-driver>(): kotlin/Function0<androidx.sqlite/SQLiteDriver> // stapel.cache.room/RoomCacheOptions.driver.<get-driver>|<get-driver>(){}[0]
@@ -18,7 +18,7 @@ final class stapel.cache.room/RoomCacheOptions { // stapel.cache.room/RoomCacheO
 }
 
 final class stapel.cache.room/RoomCacheStoreFactory : stapel.cache/CacheStoreFactory { // stapel.cache.room/RoomCacheStoreFactory|null[0]
-    constructor <init>(kotlin/String, stapel.cache.room/RoomCacheOptions = ...) // stapel.cache.room/RoomCacheStoreFactory.<init>|<init>(kotlin.String;stapel.cache.room.RoomCacheOptions){}[0]
+    constructor <init>(kotlin/String, stapel.cache.room/RoomCacheOptions) // stapel.cache.room/RoomCacheStoreFactory.<init>|<init>(kotlin.String;stapel.cache.room.RoomCacheOptions){}[0]
 
     final val durable // stapel.cache.room/RoomCacheStoreFactory.durable|{}durable[0]
         final fun <get-durable>(): kotlin/Boolean // stapel.cache.room/RoomCacheStoreFactory.durable.<get-durable>|<get-durable>(){}[0]
@@ -28,4 +28,5 @@ final class stapel.cache.room/RoomCacheStoreFactory : stapel.cache/CacheStoreFac
     final suspend fun open(stapel.cache/PartitionId): stapel.cache/PartitionStores // stapel.cache.room/RoomCacheStoreFactory.open|open(stapel.cache.PartitionId){}[0]
 }
 
-final fun stapel.cache.room/RoomCacheStoreFactory(stapel.cache.room/RoomCacheOptions = ...): stapel.cache.room/RoomCacheStoreFactory // stapel.cache.room/RoomCacheStoreFactory|RoomCacheStoreFactory(stapel.cache.room.RoomCacheOptions){}[0]
+final fun stapel.cache.room.di/cacheRoomModule(kotlin/String? = ..., kotlin/Function0<androidx.sqlite/SQLiteDriver> = ...): org.koin.core.module/Module // stapel.cache.room.di/cacheRoomModule|cacheRoomModule(kotlin.String?;kotlin.Function0<androidx.sqlite.SQLiteDriver>){}[0]
+final fun stapel.cache.room/RoomCacheStoreFactory(stapel.cache.room/RoomCacheOptions): stapel.cache.room/RoomCacheStoreFactory // stapel.cache.room/RoomCacheStoreFactory|RoomCacheStoreFactory(stapel.cache.room.RoomCacheOptions){}[0]

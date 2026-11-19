@@ -1,7 +1,8 @@
 # stapel-cache-room — module map
 
 - **Provides:** `RoomCacheStoreFactory` (a `stapel.cache.CacheStoreFactory`), `RoomCacheOptions`;
-  platform entry points `RoomCacheStoreFactory(context)` (Android) and `RoomCacheStoreFactory()` (iOS).
+  platform entry points `RoomCacheStoreFactory(context, options)` (Android) and `RoomCacheStoreFactory(options)` (iOS);
+  `RoomCacheOptions.ioContext` is required (the app's IO dispatcher; no ambient default, gate G-R1).
 - **Seams:** `RoomCacheOptions.driver` (plug an encrypting/system `SQLiteDriver`; default bundled),
   `ioContext`, `onDiscarded` (metric hook for destructive recreation).
 - **Invariants:**

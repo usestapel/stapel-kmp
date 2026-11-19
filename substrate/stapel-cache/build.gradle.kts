@@ -11,8 +11,13 @@ kotlin {
         commonMain.dependencies {
             api(projects.stapelResult)
             api(projects.stapelWire)
+            api(projects.stapelRuntime)
+            implementation(projects.stapelDi)
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.serialization.json)
+        }
+        commonTest.dependencies {
+            implementation(projects.stapelTesting)
         }
     }
 }
