@@ -302,7 +302,7 @@ public final class stapel/ui/StapelIconIds {
 }
 
 public abstract interface class stapel/ui/StapelIconSet {
-	public abstract fun resolve (Ljava/lang/String;)Landroidx/compose/ui/graphics/vector/ImageVector;
+	public abstract fun resolve (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/vector/ImageVector;
 }
 
 public abstract interface class stapel/ui/StapelImages {

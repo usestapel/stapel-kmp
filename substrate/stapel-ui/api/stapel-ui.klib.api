@@ -289,7 +289,7 @@ final enum class stapel.ui/ThemePreference : kotlin/Enum<stapel.ui/ThemePreferen
 }
 
 abstract fun interface stapel.ui/StapelIconSet { // stapel.ui/StapelIconSet|null[0]
-    abstract fun resolve(kotlin/String): androidx.compose.ui.graphics.vector/ImageVector? // stapel.ui/StapelIconSet.resolve|resolve(kotlin.String){}[0]
+    abstract fun resolve(kotlin/String, androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui.graphics.vector/ImageVector? // stapel.ui/StapelIconSet.resolve|resolve(kotlin.String;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 }
 
 abstract fun interface stapel.ui/StapelImages { // stapel.ui/StapelImages|null[0]

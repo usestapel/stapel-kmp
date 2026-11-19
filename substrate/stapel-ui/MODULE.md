@@ -38,8 +38,12 @@
 - **Colours** only from `StapelTheme.colors`; no colour literal in a brick.
 - **Strings:** `stapelString` / `stapelPlural` recompose on a locale switch; error text goes through
   `LocalStapelErrorText` (stapel-result's `ErrorTextResolver`).
-- **Icons** are neutral ids (`StapelIconIds`); the default glyphs are hand-drawn path data in
-  `Icons.kt` (the SVG → vector generator is not built yet). An unknown id draws a square.
+- **Icons** are neutral ids (`StapelIconIds`); the default glyphs are vector drawables bundled as
+  Compose Multiplatform resources (`src/commonMain/composeResources/drawable/stapel_icon_<id>.xml`,
+  internal `Res`), the standard carrier for drawables and fonts; strings stay on our own engine
+  (`stapel-i18n`). `StapelIconSet.resolve` is composable so a set can load from resources. Proven by a
+  consumer build against the staged artifact (jvm and iOS simulator draw the glyph; the Android AAR
+  carries `assets/composeResources/…`). An unknown id draws a square.
 - **Select is a sheet, never a dropdown:** the `Select` slot draws the field; `PickerSheet` (single /
   multiple, search folding case and accents, a lazy list) is the picker; `StapelSelect` /
   `StapelMultiSelect` pair them.
