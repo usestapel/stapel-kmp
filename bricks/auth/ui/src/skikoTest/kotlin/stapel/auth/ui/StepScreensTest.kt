@@ -140,7 +140,13 @@ class StepScreensTest {
     @Test
     fun lockoutNamesTheWaitInTheLocaleAndGoesBack() = runComposeUiTest {
         val events = Events<SignInEvent>()
-        val state = LockedState(refusal("error.423.account_locked", 423, "retry_after_minutes" to "5"), retryIn = 5.minutes)
+        val state = LockedState(refusal(
+            "error.423.account_locked",
+            423,
+            "retry_after" to "300",
+            "retry_after_display" to "5:00",
+            "retry_after_minutes" to "5",
+        ), retryIn = 5.minutes)
         val h = harness { LockedScreen(state, events.sink) }
         eachSkin(h) {
             events.clear()
@@ -152,7 +158,7 @@ class StepScreensTest {
         h.locale = "ru"
         waitForIdle()
         onNodeWithText("Попробуйте через 5 минут.", substring = true, useUnmergedTree = true).assertExists()
-        onNodeWithText("Повторите попытку через 5 мин.", substring = true, useUnmergedTree = true).assertExists()
+        onNodeWithText("Повторите попытку через 5:00 (300 с, около 5 мин).", substring = true, useUnmergedTree = true).assertExists()
     }
 
     @Test

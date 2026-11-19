@@ -372,6 +372,10 @@ sealed interface stapel.auth.api.error/AuthApiError : stapel.result/StapelError 
             final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.auth.api.error/AuthApiError.AccountLocked.envelope.<get-envelope>|<get-envelope>(){}[0]
         final val remediation // stapel.auth.api.error/AuthApiError.AccountLocked.remediation|{}remediation[0]
             final fun <get-remediation>(): stapel.result/Remediation // stapel.auth.api.error/AuthApiError.AccountLocked.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val retryAfter // stapel.auth.api.error/AuthApiError.AccountLocked.retryAfter|{}retryAfter[0]
+            final fun <get-retryAfter>(): kotlin/String? // stapel.auth.api.error/AuthApiError.AccountLocked.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+        final val retryAfterDisplay // stapel.auth.api.error/AuthApiError.AccountLocked.retryAfterDisplay|{}retryAfterDisplay[0]
+            final fun <get-retryAfterDisplay>(): kotlin/String? // stapel.auth.api.error/AuthApiError.AccountLocked.retryAfterDisplay.<get-retryAfterDisplay>|<get-retryAfterDisplay>(){}[0]
         final val retryAfterMinutes // stapel.auth.api.error/AuthApiError.AccountLocked.retryAfterMinutes|{}retryAfterMinutes[0]
             final fun <get-retryAfterMinutes>(): kotlin/String? // stapel.auth.api.error/AuthApiError.AccountLocked.retryAfterMinutes.<get-retryAfterMinutes>|<get-retryAfterMinutes>(){}[0]
 
@@ -436,6 +440,10 @@ sealed interface stapel.auth.api.error/AuthApiError : stapel.result/StapelError 
             final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.auth.api.error/AuthApiError.Blocked.envelope.<get-envelope>|<get-envelope>(){}[0]
         final val remediation // stapel.auth.api.error/AuthApiError.Blocked.remediation|{}remediation[0]
             final fun <get-remediation>(): stapel.result/Remediation // stapel.auth.api.error/AuthApiError.Blocked.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val retryAfter // stapel.auth.api.error/AuthApiError.Blocked.retryAfter|{}retryAfter[0]
+            final fun <get-retryAfter>(): kotlin/String? // stapel.auth.api.error/AuthApiError.Blocked.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+        final val retryAfterDisplay // stapel.auth.api.error/AuthApiError.Blocked.retryAfterDisplay|{}retryAfterDisplay[0]
+            final fun <get-retryAfterDisplay>(): kotlin/String? // stapel.auth.api.error/AuthApiError.Blocked.retryAfterDisplay.<get-retryAfterDisplay>|<get-retryAfterDisplay>(){}[0]
         final val retryAfterMinutes // stapel.auth.api.error/AuthApiError.Blocked.retryAfterMinutes|{}retryAfterMinutes[0]
             final fun <get-retryAfterMinutes>(): kotlin/String? // stapel.auth.api.error/AuthApiError.Blocked.retryAfterMinutes.<get-retryAfterMinutes>|<get-retryAfterMinutes>(){}[0]
 
@@ -881,7 +889,7 @@ sealed interface stapel.auth.api.error/AuthApiError : stapel.result/StapelError 
         final fun toString(): kotlin/String // stapel.auth.api.error/AuthApiError.FirstLoginChallengeInvalid.toString|toString(){}[0]
     }
 
-    final class Forbidden : stapel.auth.api.error/AdminUsersError, stapel.auth.api.error/AnonymousError, stapel.auth.api.error/AuthApiError, stapel.auth.api.error/CreateStaffRolesError, stapel.auth.api.error/DeleteStaffRolesError, stapel.auth.api.error/EmailRequestError, stapel.auth.api.error/GetOauthAuthorizeError, stapel.auth.api.error/GrantExchangeError, stapel.auth.api.error/ListDsarError, stapel.auth.api.error/ListStaffRolesError, stapel.auth.api.error/OauthLoginError, stapel.auth.api.error/PasswordLoginError, stapel.auth.api.error/PasswordRegisterError, stapel.auth.api.error/PhoneRequestError, stapel.auth.api.error/TokenError, stapel.result/DomainError { // stapel.auth.api.error/AuthApiError.Forbidden|null[0]
+    final class Forbidden : stapel.auth.api.error/AdminUsersError, stapel.auth.api.error/AnonymousError, stapel.auth.api.error/AuthApiError, stapel.auth.api.error/CreateStaffRolesError, stapel.auth.api.error/DeleteStaffRolesError, stapel.auth.api.error/EmailRequestError, stapel.auth.api.error/GetOauthAuthorizeError, stapel.auth.api.error/GetSsoLoginError, stapel.auth.api.error/GrantExchangeError, stapel.auth.api.error/ListDsarError, stapel.auth.api.error/ListStaffRolesError, stapel.auth.api.error/OauthLoginError, stapel.auth.api.error/PasswordLoginError, stapel.auth.api.error/PasswordRegisterError, stapel.auth.api.error/PhoneRequestError, stapel.auth.api.error/TokenError, stapel.result/DomainError { // stapel.auth.api.error/AuthApiError.Forbidden|null[0]
         constructor <init>(stapel.result/ErrorEnvelope) // stapel.auth.api.error/AuthApiError.Forbidden.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
 
         final val envelope // stapel.auth.api.error/AuthApiError.Forbidden.envelope|{}envelope[0]
@@ -2000,6 +2008,10 @@ sealed interface stapel.auth.api.error/AuthApiError : stapel.result/StapelError 
             final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.auth.api.error/AuthApiError.RateLimit.envelope.<get-envelope>|<get-envelope>(){}[0]
         final val remediation // stapel.auth.api.error/AuthApiError.RateLimit.remediation|{}remediation[0]
             final fun <get-remediation>(): stapel.result/Remediation // stapel.auth.api.error/AuthApiError.RateLimit.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val retryAfter // stapel.auth.api.error/AuthApiError.RateLimit.retryAfter|{}retryAfter[0]
+            final fun <get-retryAfter>(): kotlin/String? // stapel.auth.api.error/AuthApiError.RateLimit.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+        final val retryAfterDisplay // stapel.auth.api.error/AuthApiError.RateLimit.retryAfterDisplay|{}retryAfterDisplay[0]
+            final fun <get-retryAfterDisplay>(): kotlin/String? // stapel.auth.api.error/AuthApiError.RateLimit.retryAfterDisplay.<get-retryAfterDisplay>|<get-retryAfterDisplay>(){}[0]
         final val retryAfterMinutes // stapel.auth.api.error/AuthApiError.RateLimit.retryAfterMinutes|{}retryAfterMinutes[0]
             final fun <get-retryAfterMinutes>(): kotlin/String? // stapel.auth.api.error/AuthApiError.RateLimit.retryAfterMinutes.<get-retryAfterMinutes>|<get-retryAfterMinutes>(){}[0]
 

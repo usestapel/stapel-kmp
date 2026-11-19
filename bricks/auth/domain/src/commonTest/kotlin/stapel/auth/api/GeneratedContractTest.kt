@@ -158,24 +158,13 @@ class GeneratedContractTest {
     }
 
     private companion object {
-        /** Contract examples that do not match their own schema (source defects, fixed in stapel-auth). */
+        /**
+         * Contract examples that do not match their own schema. The one left is not stapel-auth's own:
+         * stapel-gdpr's data-owner health example, whose falsy `alive` field the backend's docstring reader
+         * drops (fix at the source, then re-pin).
+         */
         val KNOWN_EXAMPLE_DEFECTS: Set<String> = setOf(
-            "auth_api_v1_anonymous_create response 201 AuthResponse",
-            "auth_api_v1_email_change_instant_verify_new_create response 200 AuthResponse",
-            "auth_api_v1_email_verify_create response 200 Success-NewUserRegistered",
-            "auth_api_v1_email_verify_create response 200 Success-ExistingUserLoggedIn",
-            "auth_api_v1_grant_exchange_create response 200 AuthResponse",
             "auth_api_v1_owners_health_list response 200 DataOwnerHealthDTO",
-            "auth_api_v1_passkey_authenticate_complete_create response 200 AuthResponse",
-            "auth_api_v1_password_methods_retrieve response 200 PasswordMethodsResponse",
-            "auth_api_v1_password_register_create response 200 AuthResponse",
-            "auth_api_v1_password_reset_email_verify_create response 200 AuthResponse",
-            "auth_api_v1_password_reset_phone_verify_create response 200 AuthResponse",
-            "auth_api_v1_phone_change_instant_verify_new_create response 200 AuthResponse",
-            "auth_api_v1_sessions_list response 200 SessionResponse",
-            "auth_api_v1_verification_complete_create response 200 VerificationCompleteResponse",
-            "auth_api_v1_verification_preferences_update response 200 VerificationPreferenceRow",
-            "auth_api_v1_verify_create response 200 TokenVerifyResponse",
         )
     }
 }

@@ -421,6 +421,8 @@ public final class stapel/auth/api/error/AuthApiError$AccountLocked : stapel/aut
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter ()Ljava/lang/String;
+	public final fun getRetryAfterDisplay ()Ljava/lang/String;
 	public final fun getRetryAfterMinutes ()Ljava/lang/String;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
@@ -483,6 +485,8 @@ public final class stapel/auth/api/error/AuthApiError$Blocked : stapel/auth/api/
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter ()Ljava/lang/String;
+	public final fun getRetryAfterDisplay ()Ljava/lang/String;
 	public final fun getRetryAfterMinutes ()Ljava/lang/String;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
@@ -913,7 +917,7 @@ public final class stapel/auth/api/error/AuthApiError$FirstLoginChallengeInvalid
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class stapel/auth/api/error/AuthApiError$Forbidden : stapel/auth/api/error/AdminUsersError, stapel/auth/api/error/AnonymousError, stapel/auth/api/error/AuthApiError, stapel/auth/api/error/CreateStaffRolesError, stapel/auth/api/error/DeleteStaffRolesError, stapel/auth/api/error/EmailRequestError, stapel/auth/api/error/GetOauthAuthorizeError, stapel/auth/api/error/GrantExchangeError, stapel/auth/api/error/ListDsarError, stapel/auth/api/error/ListStaffRolesError, stapel/auth/api/error/OauthLoginError, stapel/auth/api/error/PasswordLoginError, stapel/auth/api/error/PasswordRegisterError, stapel/auth/api/error/PhoneRequestError, stapel/auth/api/error/TokenError, stapel/result/DomainError {
+public final class stapel/auth/api/error/AuthApiError$Forbidden : stapel/auth/api/error/AdminUsersError, stapel/auth/api/error/AnonymousError, stapel/auth/api/error/AuthApiError, stapel/auth/api/error/CreateStaffRolesError, stapel/auth/api/error/DeleteStaffRolesError, stapel/auth/api/error/EmailRequestError, stapel/auth/api/error/GetOauthAuthorizeError, stapel/auth/api/error/GetSsoLoginError, stapel/auth/api/error/GrantExchangeError, stapel/auth/api/error/ListDsarError, stapel/auth/api/error/ListStaffRolesError, stapel/auth/api/error/OauthLoginError, stapel/auth/api/error/PasswordLoginError, stapel/auth/api/error/PasswordRegisterError, stapel/auth/api/error/PhoneRequestError, stapel/auth/api/error/TokenError, stapel/result/DomainError {
 	public fun <init> (Lstapel/result/ErrorEnvelope;)V
 	public final fun component1 ()Lstapel/result/ErrorEnvelope;
 	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/auth/api/error/AuthApiError$Forbidden;
@@ -2034,6 +2038,8 @@ public final class stapel/auth/api/error/AuthApiError$RateLimit : stapel/auth/ap
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter ()Ljava/lang/String;
+	public final fun getRetryAfterDisplay ()Ljava/lang/String;
 	public final fun getRetryAfterMinutes ()Ljava/lang/String;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
