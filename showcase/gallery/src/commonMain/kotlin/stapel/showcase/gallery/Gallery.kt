@@ -36,7 +36,26 @@ import stapel.ui.StapelTheme
 import stapel.ui.StapelTone
 import stapel.ui.material3.StapelMaterialTheme
 import stapel.ui.material3.Material3Skin
+import stapel.ui.skin.AvatarSize
 import stapel.ui.skin.AvatarSpec
+import stapel.ui.skin.BadgeEmphasis
+import stapel.ui.skin.BadgePlacement
+import stapel.ui.skin.BadgeSize
+import stapel.ui.skin.ControlSize
+import stapel.ui.skin.PagerIndicatorSpec
+import stapel.ui.skin.SelectSpec
+import stapel.ui.skin.SkeletonShape
+import stapel.ui.AdaptiveGrid
+import stapel.ui.EmptyState
+import stapel.ui.SectionHeader
+import stapel.ui.SectionHeaderAction
+import stapel.ui.SectionHeaderSize
+import stapel.ui.StapelMultiSelect
+import stapel.ui.StapelSelect
+import stapel.ui.StatusPage
+import stapel.ui.skin.ListItemAccessory
+import stapel.ui.skin.ListItemMedia
+import stapel.ui.skin.ListItemValue
 import stapel.ui.skin.BadgeSpec
 import stapel.ui.skin.BannerSpec
 import stapel.ui.skin.ButtonSpec
@@ -73,7 +92,7 @@ enum class GallerySkin(val skin: StapelSkin) { Material3(Material3Skin), Foundat
 /** One slot's demo: the slot name and its content drawn through the current skin. */
 class SlotStory(val slot: String, val content: @Composable () -> Unit)
 
-/** Every one of the twenty slots, in table order. */
+/** Every slot in table order, then the composites built on them. */
 fun slotStories(): List<SlotStory> = listOf(
     SlotStory("Button") {
         val s = StapelTheme.skin
@@ -97,6 +116,7 @@ fun slotStories(): List<SlotStory> = listOf(
         s.TextField(TextFieldSpec(remember { TextFieldState("ada@example.com") }, "E-mail", TextFieldKind.Email, supportingText = "We never share it"), Modifier)
         s.TextField(TextFieldSpec(remember { TextFieldState("secret") }, "Password", TextFieldKind.Password), Modifier)
         s.TextField(TextFieldSpec(remember { TextFieldState("12") }, "Phone", TextFieldKind.Phone, error = "Enter the full number"), Modifier)
+        s.TextField(TextFieldSpec(remember { TextFieldState("running shoes") }, "Search", TextFieldKind.Search, loading = true, clearLabel = "Clear search"), Modifier)
     },
     SlotStory("CodeField") { StapelTheme.skin.CodeField(CodeFieldSpec(remember { TextFieldState("12") }, 6, "Code"), Modifier) },
     SlotStory("Dialog") {
@@ -119,7 +139,11 @@ fun slotStories(): List<SlotStory> = listOf(
         val s = StapelTheme.skin
         s.Progress(ProgressSpec(ProgressKind.Spinner, "Loading"), Modifier)
         s.Progress(ProgressSpec(ProgressKind.Linear, "Upload", 0.6f), Modifier)
-        s.Progress(ProgressSpec(ProgressKind.Skeleton, "Loading"), Modifier)
+        s.Progress(ProgressSpec(ProgressKind.Skeleton, "Loading", skeleton = SkeletonShape.Text, lines = 3), Modifier)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            s.Progress(ProgressSpec(ProgressKind.Skeleton, "Loading", skeleton = SkeletonShape.Circle), Modifier)
+            s.Progress(ProgressSpec(ProgressKind.Skeleton, "Loading", skeleton = SkeletonShape.Block), Modifier.height(64.dp))
+        }
     },
     SlotStory("Surface") {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -132,11 +156,24 @@ fun slotStories(): List<SlotStory> = listOf(
     },
     SlotStory("ListItem") {
         val s = StapelTheme.skin
-        s.ListItem(ListItemSpec("This device", supporting = "Active now", onClick = {}, selected = true), Modifier)
-        s.ListItem(ListItemSpec("Laptop", supporting = "2 days ago", overline = "Session", onClick = {}), Modifier)
+        var push by remember { mutableStateOf(true) }
+        s.ListItem(ListItemSpec("This device", supporting = "Active now", onClick = {}, selected = true, media = ListItemMedia.Icon(StapelIconIds.Device)), Modifier)
+        s.ListItem(ListItemSpec("Laptop", supporting = "2 days ago", overline = "Session", onClick = {}, accessory = ListItemAccessory.Chevron), Modifier)
+        s.ListItem(
+            ListItemSpec(
+                "Grace Hopper", supporting = "Sent the invoice", onClick = {},
+                media = ListItemMedia.Avatar(AvatarSpec("GH", "Grace Hopper")), value = ListItemValue("-42.00", "Yesterday", StapelTone.Error),
+            ),
+            Modifier,
+        )
+        s.ListItem(ListItemSpec("Language", onClick = {}, value = ListItemValue("English"), accessory = ListItemAccessory.Chevron), Modifier)
+        s.ListItem(ListItemSpec("Push alerts", supporting = "On this device", accessory = ListItemAccessory.Toggle(ToggleKind.Switch, push, { push = it })), Modifier)
+        s.ListItem(ListItemSpec("Inbox", onClick = {}, accessory = ListItemAccessory.Badge(BadgeSpec(12, "12 unread"))), Modifier)
     },
     SlotStory("TopBar") {
         StapelTheme.skin.TopBar(TopBarSpec("Security", IconButtonSpec(StapelIconIds.ArrowBack, "Back", {}), listOf(IconButtonSpec(StapelIconIds.More, "More", {}))), Modifier)
+        StapelTheme.skin.TopBar(TopBarSpec("Inbox", IconButtonSpec(StapelIconIds.ArrowBack, "Back", {}), subtitle = "12 unread"), Modifier)
+        StapelTheme.skin.TopBar(TopBarSpec("Orders", subtitle = "3 in progress", collapsedFraction = 0f), Modifier)
     },
     SlotStory("Divider") { StapelTheme.skin.Divider(Modifier) },
     SlotStory("Snackbar") { StapelTheme.skin.Snackbar(SnackbarSpec("Password changed", actionLabel = "Undo", onAction = {}), Modifier) },
@@ -146,25 +183,98 @@ fun slotStories(): List<SlotStory> = listOf(
         s.Toggle(ToggleSpec(ToggleKind.Switch, on, { on = it }, "Two-factor sign-in"), Modifier)
         s.Toggle(ToggleSpec(ToggleKind.Checkbox, on, { on = it }, "Remember me"), Modifier)
         s.Toggle(ToggleSpec(ToggleKind.Radio, !on, { on = !it }, "Text message"), Modifier)
+        s.Toggle(ToggleSpec(ToggleKind.Checkbox, false, { on = it }, "Select all", indeterminate = true), Modifier)
+        s.Toggle(
+            ToggleSpec(ToggleKind.Switch, on, { on = it }, "Marketing e-mails", supporting = "Once a month at most", controlAtEnd = true),
+            Modifier.fillMaxWidth(),
+        )
+        s.Toggle(ToggleSpec(ToggleKind.Checkbox, false, {}, "Accept the terms", error = "Required to continue"), Modifier)
+        s.Toggle(ToggleSpec(ToggleKind.Switch, true, {}, "Locked", enabled = false), Modifier)
     },
     SlotStory("Tabs") {
         var tab by remember { mutableIntStateOf(0) }
         StapelTheme.skin.Tabs(TabsSpec(listOf("E-mail", "Phone"), tab, { tab = it }), Modifier)
         StapelTheme.skin.Tabs(TabsSpec(listOf("Day", "Week", "Month"), tab, { tab = it }, TabsVariant.Segmented), Modifier)
+        StapelTheme.skin.Tabs(
+            TabsSpec(listOf("Home", "Alerts", "Search"), tab, { tab = it }, TabsVariant.Segmented, icons = listOf(StapelIconIds.Home, StapelIconIds.Bell, StapelIconIds.Search), iconOnly = true),
+            Modifier,
+        )
+        StapelTheme.skin.Tabs(TabsSpec((1..8).map { "Section $it" }, tab, { tab = it }, scrollable = true), Modifier)
     },
     SlotStory("Chip") {
+        var filter by remember { mutableStateOf(true) }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             StapelTheme.skin.Chip(ChipSpec("Selected", selected = true, onClick = {}), Modifier)
-            StapelTheme.skin.Chip(ChipSpec("Filter", ChipKind.Filter, onClick = {}), Modifier)
+            StapelTheme.skin.Chip(ChipSpec("Filter", ChipKind.Filter, selected = filter, onClick = { filter = !filter }), Modifier)
             StapelTheme.skin.Chip(ChipSpec("Verified", ChipKind.Status, tone = StapelTone.Success), Modifier)
         }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            StapelTheme.skin.Chip(ChipSpec("Ada", ChipKind.Input, onClick = {}, onRemove = {}, removeLabel = "Remove Ada", leadingIcon = StapelIconIds.User), Modifier)
+            StapelTheme.skin.Chip(ChipSpec("Small", size = ControlSize.Small, onClick = {}), Modifier)
+            StapelTheme.skin.Chip(ChipSpec("Disabled", onClick = {}, enabled = false), Modifier)
+        }
     },
-    SlotStory("Avatar") { StapelTheme.skin.Avatar(AvatarSpec("AL", "Ada Lovelace"), Modifier) },
-    SlotStory("Badge") { StapelTheme.skin.Badge(BadgeSpec(3, "3 unread"), Modifier) { StapelText("Inbox   ") } },
+    SlotStory("Avatar") {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            AvatarSize.entries.forEach { size -> StapelTheme.skin.Avatar(AvatarSpec("AL", "Ada Lovelace", size = size), Modifier) }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            StapelTheme.skin.Avatar(AvatarSpec(null, "Unknown person"), Modifier)
+            StapelTheme.skin.Avatar(AvatarSpec(null, "Team", icon = StapelIconIds.Settings), Modifier)
+            StapelTheme.skin.Avatar(AvatarSpec("GH", "Grace Hopper", badge = BadgeSpec(null, "Online", tone = StapelTone.Success)), Modifier)
+            StapelTheme.skin.Avatar(AvatarSpec("KJ", "Katherine Johnson", size = AvatarSize.Large, badge = BadgeSpec(4, "4 new"), badgePlacement = BadgePlacement.TopEnd), Modifier)
+        }
+    },
+    SlotStory("Badge") {
+        Row(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
+            StapelTheme.skin.Badge(BadgeSpec(3, "3 unread"), Modifier) { StapelText("Inbox   ") }
+            StapelTheme.skin.Badge(BadgeSpec(150, "150 unread"), Modifier) { StapelText("Mail      ") }
+            StapelTheme.skin.Badge(BadgeSpec(null, "New"), Modifier) { StapelText("News  ") }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            StapelTone.entries.forEach { tone ->
+                BadgeEmphasis.entries.forEach { e -> StapelTheme.skin.Badge(BadgeSpec(7, tone.name, tone = tone, emphasis = e), Modifier) {} }
+            }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            BadgeSize.entries.forEach { size -> StapelTheme.skin.Badge(BadgeSpec(5, size.name, size = size), Modifier) {} }
+            BadgeSize.entries.forEach { size -> StapelTheme.skin.Badge(BadgeSpec(null, size.name, size = size), Modifier) {} }
+        }
+    },
     SlotStory("NavigationBar") { StapelTheme.skin.NavigationBar(navigation(), Modifier) },
     SlotStory("NavigationRail") { StapelTheme.skin.NavigationRail(navigation(), Modifier.height(200.dp)) },
+    SlotStory("Select") {
+        var lang by remember { mutableStateOf<String?>("English") }
+        StapelSelect("Language", listOf("English", "Español", "Русский", "Čeština"), lang, { lang = it }, { it }, "Close", searchLabel = "Search languages", clearLabel = "Clear")
+        var picked by remember { mutableStateOf(setOf("Books")) }
+        StapelMultiSelect("Categories", (1..300).map { "Category $it" } + "Books", picked, { picked = it }, { it }, "Close", "Apply", searchLabel = "Search", clearLabel = "Clear")
+        StapelTheme.skin.Select(SelectSpec("Currency", null, {}, placeholder = "Choose a currency", error = "Required"), Modifier)
+    },
+    SlotStory("PagerIndicator") {
+        var page by remember { mutableIntStateOf(0) }
+        StapelTheme.skin.PagerIndicator(PagerIndicatorSpec(4, page % 4, "Page ${page % 4 + 1} of 4"), Modifier)
+        StapelTheme.skin.PagerIndicator(PagerIndicatorSpec(20, page, "Page ${page + 1} of 20", onSelect = { page = it }, dotLabel = { "Go to page ${it + 1}" }), Modifier)
+    },
+    SlotStory("Composites") {
+        SectionHeader("Recent orders", caption = "This week", description = "Paid and pending", action = SectionHeaderAction.Link("See all") {})
+        SectionHeader("Settings", size = SectionHeaderSize.XSmall)
+        StatusPage(
+            "Order placed", description = "We sent the receipt to your e-mail.", icon = StapelIconIds.CheckCircle, tone = StapelTone.Success,
+            primaryAction = ButtonSpec("Track order", {}), secondaryAction = ButtonSpec("Keep shopping", {}, ButtonVariant.Text), footer = "Order 1024",
+        )
+        EmptyState("No orders yet", description = "Your orders show up here.", icon = StapelIconIds.Info, action = ButtonSpec("Browse", {}))
+        AdaptiveGrid((1..5).toList(), 120.dp) { n ->
+            StapelTheme.skin.Surface(SurfaceSpec(bordered = true), Modifier.height(56.dp)) { Box(Modifier.padding(8.dp)) { StapelText("Card $n") } }
+        }
+    },
     SlotStory("PullToRefresh") {
-        StapelTheme.skin.PullToRefresh(PullToRefreshSpec(false, {}, "Refresh"), Modifier) { StapelText("Sessions list") }
+        var refreshing by remember { mutableStateOf(false) }
+        StapelTheme.skin.PullToRefresh(PullToRefreshSpec(refreshing, { refreshing = true }, "Refresh"), Modifier) {
+            Column(Modifier.fillMaxWidth().height(120.dp).verticalScroll(rememberScrollState())) {
+                StapelText("Sessions list (pull, or use the button)")
+                if (refreshing) StapelTheme.skin.Button(ButtonSpec("Finish refresh", { refreshing = false }, ButtonVariant.Text), Modifier)
+            }
+        }
     },
 )
 
@@ -182,7 +292,7 @@ private fun navigation(): NavigationSpec {
     )
 }
 
-/** All twenty slots and the 33 roles, in one theme column. */
+/** All slots, the composites and the 33 roles, in one theme column. */
 @Composable
 fun GalleryColumn(skin: GallerySkin, tokens: StapelTokens, mode: ThemeMode, width: Dp, ruler: Boolean, stories: List<SlotStory> = slotStories()) {
     val layout = stapelLayout(tokens, width, input = StapelInput.Pointer)

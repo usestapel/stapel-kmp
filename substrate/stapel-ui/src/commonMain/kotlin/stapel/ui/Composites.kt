@@ -55,7 +55,10 @@ public fun ErrorState(
     )
 }
 
-/** "Nothing here": reachable only from a load that succeeded (see [LoadList]). */
+/**
+ * "Nothing here": reachable only from a load that succeeded (see [LoadList]). A [StatusPage] at
+ * [size] (compact by default) with up to two actions.
+ */
 @Composable
 public fun EmptyState(
     title: String,
@@ -64,17 +67,10 @@ public fun EmptyState(
     icon: StapelIcon? = null,
     action: ButtonSpec? = null,
     testTag: String? = null,
+    secondaryAction: ButtonSpec? = null,
+    size: StatusSize = StatusSize.Compact,
 ) {
-    Column(
-        modifier = modifier.fillMaxWidth().padding(vertical = StapelTheme.spacing.s6).then(testTag?.let { Modifier.testTag(it) } ?: Modifier),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s2),
-    ) {
-        icon?.let { StapelIconView(it, null, size = 40.dp, tint = StapelTheme.colors.textSubtle) }
-        StapelText(title, style = StapelTheme.type.title, textAlign = TextAlign.Center)
-        description?.let { StapelText(it, color = StapelTheme.colors.textMuted, textAlign = TextAlign.Center) }
-        action?.let { StapelTheme.skin.Button(it, Modifier.padding(top = StapelTheme.spacing.s2)) }
-    }
+    StatusPage(title, modifier, description, icon, StapelTone.Neutral, action, secondaryAction, null, size, testTag)
 }
 
 /** Loading → [loading]; Failed → [ErrorState] (with retry); Ready → [content]. */

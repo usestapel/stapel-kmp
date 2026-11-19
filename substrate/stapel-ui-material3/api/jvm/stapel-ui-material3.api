@@ -1,3 +1,11 @@
+public final class stapel/ui/material3/ComposableSingletons$Material3SkinKt {
+	public static final field INSTANCE Lstapel/ui/material3/ComposableSingletons$Material3SkinKt;
+	public fun <init> ()V
+	public final fun getLambda$-547887066$io_github_usestapel_stapel_ui_material3 ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1039618035$io_github_usestapel_stapel_ui_material3 ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$568157820$io_github_usestapel_stapel_ui_material3 ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class stapel/ui/material3/MappingKt {
 	public static final fun toColorScheme (Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;)Landroidx/compose/material3/ColorScheme;
 	public static final fun toShapes (Lstapel/tokens/StapelTokens;)Landroidx/compose/material3/Shapes;
@@ -19,8 +27,10 @@ public final class stapel/ui/material3/Material3Skin : stapel/ui/skin/StapelSkin
 	public fun ListItem (Lstapel/ui/skin/ListItemSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationBar (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationRail (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun PagerIndicator (Lstapel/ui/skin/PagerIndicatorSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Progress (Lstapel/ui/skin/ProgressSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun PullToRefresh (Lstapel/ui/skin/PullToRefreshSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Select (Lstapel/ui/skin/SelectSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Snackbar (Lstapel/ui/skin/SnackbarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Surface (Lstapel/ui/skin/SurfaceSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public fun Tabs (Lstapel/ui/skin/TabsSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V

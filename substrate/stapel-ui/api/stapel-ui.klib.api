@@ -6,6 +6,55 @@
 // - Show declarations: true
 
 // Library unique name: <io.github.usestapel:stapel-ui>
+final enum class stapel.ui.skin/AvatarSize : kotlin/Enum<stapel.ui.skin/AvatarSize> { // stapel.ui.skin/AvatarSize|null[0]
+    enum entry Large // stapel.ui.skin/AvatarSize.Large|null[0]
+    enum entry Medium // stapel.ui.skin/AvatarSize.Medium|null[0]
+    enum entry Small // stapel.ui.skin/AvatarSize.Small|null[0]
+    enum entry XLarge // stapel.ui.skin/AvatarSize.XLarge|null[0]
+
+    final val dp // stapel.ui.skin/AvatarSize.dp|{}dp[0]
+        final fun <get-dp>(): kotlin/Int // stapel.ui.skin/AvatarSize.dp.<get-dp>|<get-dp>(){}[0]
+    final val entries // stapel.ui.skin/AvatarSize.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.ui.skin/AvatarSize> // stapel.ui.skin/AvatarSize.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.ui.skin/AvatarSize // stapel.ui.skin/AvatarSize.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.ui.skin/AvatarSize> // stapel.ui.skin/AvatarSize.values|values#static(){}[0]
+}
+
+final enum class stapel.ui.skin/BadgeEmphasis : kotlin/Enum<stapel.ui.skin/BadgeEmphasis> { // stapel.ui.skin/BadgeEmphasis|null[0]
+    enum entry Solid // stapel.ui.skin/BadgeEmphasis.Solid|null[0]
+    enum entry Subtle // stapel.ui.skin/BadgeEmphasis.Subtle|null[0]
+
+    final val entries // stapel.ui.skin/BadgeEmphasis.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.ui.skin/BadgeEmphasis> // stapel.ui.skin/BadgeEmphasis.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.ui.skin/BadgeEmphasis // stapel.ui.skin/BadgeEmphasis.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.ui.skin/BadgeEmphasis> // stapel.ui.skin/BadgeEmphasis.values|values#static(){}[0]
+}
+
+final enum class stapel.ui.skin/BadgePlacement : kotlin/Enum<stapel.ui.skin/BadgePlacement> { // stapel.ui.skin/BadgePlacement|null[0]
+    enum entry BottomEnd // stapel.ui.skin/BadgePlacement.BottomEnd|null[0]
+    enum entry TopEnd // stapel.ui.skin/BadgePlacement.TopEnd|null[0]
+
+    final val entries // stapel.ui.skin/BadgePlacement.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.ui.skin/BadgePlacement> // stapel.ui.skin/BadgePlacement.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.ui.skin/BadgePlacement // stapel.ui.skin/BadgePlacement.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.ui.skin/BadgePlacement> // stapel.ui.skin/BadgePlacement.values|values#static(){}[0]
+}
+
+final enum class stapel.ui.skin/BadgeSize : kotlin/Enum<stapel.ui.skin/BadgeSize> { // stapel.ui.skin/BadgeSize|null[0]
+    enum entry Large // stapel.ui.skin/BadgeSize.Large|null[0]
+    enum entry Medium // stapel.ui.skin/BadgeSize.Medium|null[0]
+    enum entry Small // stapel.ui.skin/BadgeSize.Small|null[0]
+
+    final val entries // stapel.ui.skin/BadgeSize.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.ui.skin/BadgeSize> // stapel.ui.skin/BadgeSize.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.ui.skin/BadgeSize // stapel.ui.skin/BadgeSize.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.ui.skin/BadgeSize> // stapel.ui.skin/BadgeSize.values|values#static(){}[0]
+}
+
 final enum class stapel.ui.skin/ButtonVariant : kotlin/Enum<stapel.ui.skin/ButtonVariant> { // stapel.ui.skin/ButtonVariant|null[0]
     enum entry Danger // stapel.ui.skin/ButtonVariant.Danger|null[0]
     enum entry Primary // stapel.ui.skin/ButtonVariant.Primary|null[0]
@@ -22,6 +71,7 @@ final enum class stapel.ui.skin/ButtonVariant : kotlin/Enum<stapel.ui.skin/Butto
 final enum class stapel.ui.skin/ChipKind : kotlin/Enum<stapel.ui.skin/ChipKind> { // stapel.ui.skin/ChipKind|null[0]
     enum entry Choice // stapel.ui.skin/ChipKind.Choice|null[0]
     enum entry Filter // stapel.ui.skin/ChipKind.Filter|null[0]
+    enum entry Input // stapel.ui.skin/ChipKind.Input|null[0]
     enum entry Status // stapel.ui.skin/ChipKind.Status|null[0]
 
     final val entries // stapel.ui.skin/ChipKind.entries|#static{}entries[0]
@@ -67,6 +117,18 @@ final enum class stapel.ui.skin/ProgressKind : kotlin/Enum<stapel.ui.skin/Progre
     final fun values(): kotlin/Array<stapel.ui.skin/ProgressKind> // stapel.ui.skin/ProgressKind.values|values#static(){}[0]
 }
 
+final enum class stapel.ui.skin/SkeletonShape : kotlin/Enum<stapel.ui.skin/SkeletonShape> { // stapel.ui.skin/SkeletonShape|null[0]
+    enum entry Block // stapel.ui.skin/SkeletonShape.Block|null[0]
+    enum entry Circle // stapel.ui.skin/SkeletonShape.Circle|null[0]
+    enum entry Text // stapel.ui.skin/SkeletonShape.Text|null[0]
+
+    final val entries // stapel.ui.skin/SkeletonShape.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.ui.skin/SkeletonShape> // stapel.ui.skin/SkeletonShape.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.ui.skin/SkeletonShape // stapel.ui.skin/SkeletonShape.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.ui.skin/SkeletonShape> // stapel.ui.skin/SkeletonShape.values|values#static(){}[0]
+}
+
 final enum class stapel.ui.skin/SurfaceTone : kotlin/Enum<stapel.ui.skin/SurfaceTone> { // stapel.ui.skin/SurfaceTone|null[0]
     enum entry Overlay // stapel.ui.skin/SurfaceTone.Overlay|null[0]
     enum entry Plain // stapel.ui.skin/SurfaceTone.Plain|null[0]
@@ -97,6 +159,7 @@ final enum class stapel.ui.skin/TextFieldKind : kotlin/Enum<stapel.ui.skin/TextF
     enum entry Number // stapel.ui.skin/TextFieldKind.Number|null[0]
     enum entry Password // stapel.ui.skin/TextFieldKind.Password|null[0]
     enum entry Phone // stapel.ui.skin/TextFieldKind.Phone|null[0]
+    enum entry Search // stapel.ui.skin/TextFieldKind.Search|null[0]
     enum entry Text // stapel.ui.skin/TextFieldKind.Text|null[0]
 
     final val entries // stapel.ui.skin/TextFieldKind.entries|#static{}entries[0]
@@ -144,6 +207,20 @@ final enum class stapel.ui/PaneMeasure : kotlin/Enum<stapel.ui/PaneMeasure> { //
     final fun values(): kotlin/Array<stapel.ui/PaneMeasure> // stapel.ui/PaneMeasure.values|values#static(){}[0]
 }
 
+final enum class stapel.ui/SectionHeaderSize : kotlin/Enum<stapel.ui/SectionHeaderSize> { // stapel.ui/SectionHeaderSize|null[0]
+    enum entry Large // stapel.ui/SectionHeaderSize.Large|null[0]
+    enum entry Medium // stapel.ui/SectionHeaderSize.Medium|null[0]
+    enum entry Small // stapel.ui/SectionHeaderSize.Small|null[0]
+    enum entry XLarge // stapel.ui/SectionHeaderSize.XLarge|null[0]
+    enum entry XSmall // stapel.ui/SectionHeaderSize.XSmall|null[0]
+
+    final val entries // stapel.ui/SectionHeaderSize.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.ui/SectionHeaderSize> // stapel.ui/SectionHeaderSize.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.ui/SectionHeaderSize // stapel.ui/SectionHeaderSize.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.ui/SectionHeaderSize> // stapel.ui/SectionHeaderSize.values|values#static(){}[0]
+}
+
 final enum class stapel.ui/StapelInput : kotlin/Enum<stapel.ui/StapelInput> { // stapel.ui/StapelInput|null[0]
     enum entry Pointer // stapel.ui/StapelInput.Pointer|null[0]
     enum entry Touch // stapel.ui/StapelInput.Touch|null[0]
@@ -185,6 +262,20 @@ final enum class stapel.ui/StapelTone : kotlin/Enum<stapel.ui/StapelTone> { // s
     final fun values(): kotlin/Array<stapel.ui/StapelTone> // stapel.ui/StapelTone.values|values#static(){}[0]
 }
 
+final enum class stapel.ui/StatusSize : kotlin/Enum<stapel.ui/StatusSize> { // stapel.ui/StatusSize|null[0]
+    enum entry Compact // stapel.ui/StatusSize.Compact|null[0]
+    enum entry Full // stapel.ui/StatusSize.Full|null[0]
+    enum entry Regular // stapel.ui/StatusSize.Regular|null[0]
+
+    final val entries // stapel.ui/StatusSize.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.ui/StatusSize> // stapel.ui/StatusSize.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val illustrationDp // stapel.ui/StatusSize.illustrationDp|{}illustrationDp[0]
+        final fun <get-illustrationDp>(): kotlin/Int // stapel.ui/StatusSize.illustrationDp.<get-illustrationDp>|<get-illustrationDp>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.ui/StatusSize // stapel.ui/StatusSize.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.ui/StatusSize> // stapel.ui/StatusSize.values|values#static(){}[0]
+}
+
 final enum class stapel.ui/ThemePreference : kotlin/Enum<stapel.ui/ThemePreference> { // stapel.ui/ThemePreference|null[0]
     enum entry Dark // stapel.ui/ThemePreference.Dark|null[0]
     enum entry Light // stapel.ui/ThemePreference.Light|null[0]
@@ -199,6 +290,10 @@ final enum class stapel.ui/ThemePreference : kotlin/Enum<stapel.ui/ThemePreferen
 
 abstract fun interface stapel.ui/StapelIconSet { // stapel.ui/StapelIconSet|null[0]
     abstract fun resolve(kotlin/String): androidx.compose.ui.graphics.vector/ImageVector? // stapel.ui/StapelIconSet.resolve|resolve(kotlin.String){}[0]
+}
+
+abstract fun interface stapel.ui/StapelImages { // stapel.ui/StapelImages|null[0]
+    abstract fun painter(kotlin/String, androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui.graphics.painter/Painter? // stapel.ui/StapelImages.painter|painter(kotlin.String;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 }
 
 abstract interface stapel.ui.skin/StapelSkin { // stapel.ui.skin/StapelSkin|null[0]
@@ -220,7 +315,9 @@ abstract interface stapel.ui.skin/StapelSkin { // stapel.ui.skin/StapelSkin|null
     open fun Chip(stapel.ui.skin/ChipSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.Chip|Chip(stapel.ui.skin.ChipSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     open fun NavigationBar(stapel.ui.skin/NavigationSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.NavigationBar|NavigationBar(stapel.ui.skin.NavigationSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     open fun NavigationRail(stapel.ui.skin/NavigationSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.NavigationRail|NavigationRail(stapel.ui.skin.NavigationSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    open fun PagerIndicator(stapel.ui.skin/PagerIndicatorSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.PagerIndicator|PagerIndicator(stapel.ui.skin.PagerIndicatorSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     open fun PullToRefresh(stapel.ui.skin/PullToRefreshSpec, androidx.compose.ui/Modifier, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.PullToRefresh|PullToRefresh(stapel.ui.skin.PullToRefreshSpec;androidx.compose.ui.Modifier;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    open fun Select(stapel.ui.skin/SelectSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.Select|Select(stapel.ui.skin.SelectSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     open fun Tabs(stapel.ui.skin/TabsSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.Tabs|Tabs(stapel.ui.skin.TabsSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     open fun Toggle(stapel.ui.skin/ToggleSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/StapelSkin.Toggle|Toggle(stapel.ui.skin.ToggleSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 }
@@ -236,6 +333,89 @@ abstract interface stapel.ui/ThemePreferenceStore { // stapel.ui/ThemePreference
     abstract suspend fun set(stapel.ui/ThemePreference) // stapel.ui/ThemePreferenceStore.set|set(stapel.ui.ThemePreference){}[0]
 }
 
+sealed interface stapel.ui.skin/ListItemAccessory { // stapel.ui.skin/ListItemAccessory|null[0]
+    final class Badge : stapel.ui.skin/ListItemAccessory { // stapel.ui.skin/ListItemAccessory.Badge|null[0]
+        constructor <init>(stapel.ui.skin/BadgeSpec) // stapel.ui.skin/ListItemAccessory.Badge.<init>|<init>(stapel.ui.skin.BadgeSpec){}[0]
+
+        final val spec // stapel.ui.skin/ListItemAccessory.Badge.spec|{}spec[0]
+            final fun <get-spec>(): stapel.ui.skin/BadgeSpec // stapel.ui.skin/ListItemAccessory.Badge.spec.<get-spec>|<get-spec>(){}[0]
+    }
+
+    final class Toggle : stapel.ui.skin/ListItemAccessory { // stapel.ui.skin/ListItemAccessory.Toggle|null[0]
+        constructor <init>(stapel.ui.skin/ToggleKind, kotlin/Boolean, kotlin/Function1<kotlin/Boolean, kotlin/Unit>) // stapel.ui.skin/ListItemAccessory.Toggle.<init>|<init>(stapel.ui.skin.ToggleKind;kotlin.Boolean;kotlin.Function1<kotlin.Boolean,kotlin.Unit>){}[0]
+
+        final val checked // stapel.ui.skin/ListItemAccessory.Toggle.checked|{}checked[0]
+            final fun <get-checked>(): kotlin/Boolean // stapel.ui.skin/ListItemAccessory.Toggle.checked.<get-checked>|<get-checked>(){}[0]
+        final val kind // stapel.ui.skin/ListItemAccessory.Toggle.kind|{}kind[0]
+            final fun <get-kind>(): stapel.ui.skin/ToggleKind // stapel.ui.skin/ListItemAccessory.Toggle.kind.<get-kind>|<get-kind>(){}[0]
+        final val onCheckedChange // stapel.ui.skin/ListItemAccessory.Toggle.onCheckedChange|{}onCheckedChange[0]
+            final fun <get-onCheckedChange>(): kotlin/Function1<kotlin/Boolean, kotlin/Unit> // stapel.ui.skin/ListItemAccessory.Toggle.onCheckedChange.<get-onCheckedChange>|<get-onCheckedChange>(){}[0]
+    }
+
+    final object Chevron : stapel.ui.skin/ListItemAccessory { // stapel.ui.skin/ListItemAccessory.Chevron|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.ui.skin/ListItemAccessory.Chevron.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.ui.skin/ListItemAccessory.Chevron.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.ui.skin/ListItemAccessory.Chevron.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.ui.skin/ListItemMedia { // stapel.ui.skin/ListItemMedia|null[0]
+    final class Avatar : stapel.ui.skin/ListItemMedia { // stapel.ui.skin/ListItemMedia.Avatar|null[0]
+        constructor <init>(stapel.ui.skin/AvatarSpec) // stapel.ui.skin/ListItemMedia.Avatar.<init>|<init>(stapel.ui.skin.AvatarSpec){}[0]
+
+        final val spec // stapel.ui.skin/ListItemMedia.Avatar.spec|{}spec[0]
+            final fun <get-spec>(): stapel.ui.skin/AvatarSpec // stapel.ui.skin/ListItemMedia.Avatar.spec.<get-spec>|<get-spec>(){}[0]
+    }
+
+    final class Icon : stapel.ui.skin/ListItemMedia { // stapel.ui.skin/ListItemMedia.Icon|null[0]
+        constructor <init>(stapel.ui/StapelIcon, stapel.ui/StapelTone = ...) // stapel.ui.skin/ListItemMedia.Icon.<init>|<init>(stapel.ui.StapelIcon;stapel.ui.StapelTone){}[0]
+
+        final val icon // stapel.ui.skin/ListItemMedia.Icon.icon|{}icon[0]
+            final fun <get-icon>(): stapel.ui/StapelIcon // stapel.ui.skin/ListItemMedia.Icon.icon.<get-icon>|<get-icon>(){}[0]
+        final val tone // stapel.ui.skin/ListItemMedia.Icon.tone|{}tone[0]
+            final fun <get-tone>(): stapel.ui/StapelTone // stapel.ui.skin/ListItemMedia.Icon.tone.<get-tone>|<get-tone>(){}[0]
+    }
+}
+
+sealed interface stapel.ui/SectionHeaderAction { // stapel.ui/SectionHeaderAction|null[0]
+    final class Avatar : stapel.ui/SectionHeaderAction { // stapel.ui/SectionHeaderAction.Avatar|null[0]
+        constructor <init>(stapel.ui.skin/AvatarSpec) // stapel.ui/SectionHeaderAction.Avatar.<init>|<init>(stapel.ui.skin.AvatarSpec){}[0]
+
+        final val spec // stapel.ui/SectionHeaderAction.Avatar.spec|{}spec[0]
+            final fun <get-spec>(): stapel.ui.skin/AvatarSpec // stapel.ui/SectionHeaderAction.Avatar.spec.<get-spec>|<get-spec>(){}[0]
+    }
+
+    final class Badge : stapel.ui/SectionHeaderAction { // stapel.ui/SectionHeaderAction.Badge|null[0]
+        constructor <init>(stapel.ui.skin/BadgeSpec) // stapel.ui/SectionHeaderAction.Badge.<init>|<init>(stapel.ui.skin.BadgeSpec){}[0]
+
+        final val spec // stapel.ui/SectionHeaderAction.Badge.spec|{}spec[0]
+            final fun <get-spec>(): stapel.ui.skin/BadgeSpec // stapel.ui/SectionHeaderAction.Badge.spec.<get-spec>|<get-spec>(){}[0]
+    }
+
+    final class Chip : stapel.ui/SectionHeaderAction { // stapel.ui/SectionHeaderAction.Chip|null[0]
+        constructor <init>(stapel.ui.skin/ChipSpec) // stapel.ui/SectionHeaderAction.Chip.<init>|<init>(stapel.ui.skin.ChipSpec){}[0]
+
+        final val spec // stapel.ui/SectionHeaderAction.Chip.spec|{}spec[0]
+            final fun <get-spec>(): stapel.ui.skin/ChipSpec // stapel.ui/SectionHeaderAction.Chip.spec.<get-spec>|<get-spec>(){}[0]
+    }
+
+    final class Icon : stapel.ui/SectionHeaderAction { // stapel.ui/SectionHeaderAction.Icon|null[0]
+        constructor <init>(stapel.ui.skin/IconButtonSpec) // stapel.ui/SectionHeaderAction.Icon.<init>|<init>(stapel.ui.skin.IconButtonSpec){}[0]
+
+        final val spec // stapel.ui/SectionHeaderAction.Icon.spec|{}spec[0]
+            final fun <get-spec>(): stapel.ui.skin/IconButtonSpec // stapel.ui/SectionHeaderAction.Icon.spec.<get-spec>|<get-spec>(){}[0]
+    }
+
+    final class Link : stapel.ui/SectionHeaderAction { // stapel.ui/SectionHeaderAction.Link|null[0]
+        constructor <init>(kotlin/String, kotlin/Function0<kotlin/Unit>) // stapel.ui/SectionHeaderAction.Link.<init>|<init>(kotlin.String;kotlin.Function0<kotlin.Unit>){}[0]
+
+        final val label // stapel.ui/SectionHeaderAction.Link.label|{}label[0]
+            final fun <get-label>(): kotlin/String // stapel.ui/SectionHeaderAction.Link.label.<get-label>|<get-label>(){}[0]
+        final val onClick // stapel.ui/SectionHeaderAction.Link.onClick|{}onClick[0]
+            final fun <get-onClick>(): kotlin/Function0<kotlin/Unit> // stapel.ui/SectionHeaderAction.Link.onClick.<get-onClick>|<get-onClick>(){}[0]
+    }
+}
+
 final class <#A: kotlin/Any> stapel.ui.skin/SkinExtensionKey { // stapel.ui.skin/SkinExtensionKey|null[0]
     constructor <init>(kotlin/String, #A) // stapel.ui.skin/SkinExtensionKey.<init>|<init>(kotlin.String;1:0){}[0]
 
@@ -246,27 +426,47 @@ final class <#A: kotlin/Any> stapel.ui.skin/SkinExtensionKey { // stapel.ui.skin
 }
 
 final class stapel.ui.skin/AvatarSpec { // stapel.ui.skin/AvatarSpec|null[0]
-    constructor <init>(kotlin/String, kotlin/String, kotlin/Int = ..., kotlin/String? = ...) // stapel.ui.skin/AvatarSpec.<init>|<init>(kotlin.String;kotlin.String;kotlin.Int;kotlin.String?){}[0]
+    constructor <init>(kotlin/String?, kotlin/String, stapel.ui.skin/AvatarSize = ..., stapel.ui/StapelIcon? = ..., kotlin/String? = ..., stapel.ui.skin/BadgeSpec? = ..., stapel.ui.skin/BadgePlacement = ..., kotlin/Function0<kotlin/Unit>? = ..., kotlin/String? = ...) // stapel.ui.skin/AvatarSpec.<init>|<init>(kotlin.String?;kotlin.String;stapel.ui.skin.AvatarSize;stapel.ui.StapelIcon?;kotlin.String?;stapel.ui.skin.BadgeSpec?;stapel.ui.skin.BadgePlacement;kotlin.Function0<kotlin.Unit>?;kotlin.String?){}[0]
 
+    final val badge // stapel.ui.skin/AvatarSpec.badge|{}badge[0]
+        final fun <get-badge>(): stapel.ui.skin/BadgeSpec? // stapel.ui.skin/AvatarSpec.badge.<get-badge>|<get-badge>(){}[0]
+    final val badgePlacement // stapel.ui.skin/AvatarSpec.badgePlacement|{}badgePlacement[0]
+        final fun <get-badgePlacement>(): stapel.ui.skin/BadgePlacement // stapel.ui.skin/AvatarSpec.badgePlacement.<get-badgePlacement>|<get-badgePlacement>(){}[0]
     final val contentDescription // stapel.ui.skin/AvatarSpec.contentDescription|{}contentDescription[0]
         final fun <get-contentDescription>(): kotlin/String // stapel.ui.skin/AvatarSpec.contentDescription.<get-contentDescription>|<get-contentDescription>(){}[0]
+    final val icon // stapel.ui.skin/AvatarSpec.icon|{}icon[0]
+        final fun <get-icon>(): stapel.ui/StapelIcon? // stapel.ui.skin/AvatarSpec.icon.<get-icon>|<get-icon>(){}[0]
+    final val image // stapel.ui.skin/AvatarSpec.image|{}image[0]
+        final fun <get-image>(): kotlin/String? // stapel.ui.skin/AvatarSpec.image.<get-image>|<get-image>(){}[0]
     final val initials // stapel.ui.skin/AvatarSpec.initials|{}initials[0]
-        final fun <get-initials>(): kotlin/String // stapel.ui.skin/AvatarSpec.initials.<get-initials>|<get-initials>(){}[0]
-    final val sizeDp // stapel.ui.skin/AvatarSpec.sizeDp|{}sizeDp[0]
-        final fun <get-sizeDp>(): kotlin/Int // stapel.ui.skin/AvatarSpec.sizeDp.<get-sizeDp>|<get-sizeDp>(){}[0]
+        final fun <get-initials>(): kotlin/String? // stapel.ui.skin/AvatarSpec.initials.<get-initials>|<get-initials>(){}[0]
+    final val onClick // stapel.ui.skin/AvatarSpec.onClick|{}onClick[0]
+        final fun <get-onClick>(): kotlin/Function0<kotlin/Unit>? // stapel.ui.skin/AvatarSpec.onClick.<get-onClick>|<get-onClick>(){}[0]
+    final val size // stapel.ui.skin/AvatarSpec.size|{}size[0]
+        final fun <get-size>(): stapel.ui.skin/AvatarSize // stapel.ui.skin/AvatarSpec.size.<get-size>|<get-size>(){}[0]
     final val testTag // stapel.ui.skin/AvatarSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/AvatarSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
 }
 
 final class stapel.ui.skin/BadgeSpec { // stapel.ui.skin/BadgeSpec|null[0]
-    constructor <init>(kotlin/Int? = ..., kotlin/String? = ..., kotlin/String? = ...) // stapel.ui.skin/BadgeSpec.<init>|<init>(kotlin.Int?;kotlin.String?;kotlin.String?){}[0]
+    constructor <init>(kotlin/Int? = ..., kotlin/String? = ..., kotlin/String? = ..., stapel.ui/StapelTone = ..., stapel.ui.skin/BadgeSize = ..., stapel.ui.skin/BadgeEmphasis = ..., kotlin/Int = ..., stapel.ui/StapelIcon? = ...) // stapel.ui.skin/BadgeSpec.<init>|<init>(kotlin.Int?;kotlin.String?;kotlin.String?;stapel.ui.StapelTone;stapel.ui.skin.BadgeSize;stapel.ui.skin.BadgeEmphasis;kotlin.Int;stapel.ui.StapelIcon?){}[0]
 
     final val contentDescription // stapel.ui.skin/BadgeSpec.contentDescription|{}contentDescription[0]
         final fun <get-contentDescription>(): kotlin/String? // stapel.ui.skin/BadgeSpec.contentDescription.<get-contentDescription>|<get-contentDescription>(){}[0]
     final val count // stapel.ui.skin/BadgeSpec.count|{}count[0]
         final fun <get-count>(): kotlin/Int? // stapel.ui.skin/BadgeSpec.count.<get-count>|<get-count>(){}[0]
+    final val emphasis // stapel.ui.skin/BadgeSpec.emphasis|{}emphasis[0]
+        final fun <get-emphasis>(): stapel.ui.skin/BadgeEmphasis // stapel.ui.skin/BadgeSpec.emphasis.<get-emphasis>|<get-emphasis>(){}[0]
+    final val icon // stapel.ui.skin/BadgeSpec.icon|{}icon[0]
+        final fun <get-icon>(): stapel.ui/StapelIcon? // stapel.ui.skin/BadgeSpec.icon.<get-icon>|<get-icon>(){}[0]
+    final val max // stapel.ui.skin/BadgeSpec.max|{}max[0]
+        final fun <get-max>(): kotlin/Int // stapel.ui.skin/BadgeSpec.max.<get-max>|<get-max>(){}[0]
+    final val size // stapel.ui.skin/BadgeSpec.size|{}size[0]
+        final fun <get-size>(): stapel.ui.skin/BadgeSize // stapel.ui.skin/BadgeSpec.size.<get-size>|<get-size>(){}[0]
     final val testTag // stapel.ui.skin/BadgeSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/BadgeSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
+    final val tone // stapel.ui.skin/BadgeSpec.tone|{}tone[0]
+        final fun <get-tone>(): stapel.ui/StapelTone // stapel.ui.skin/BadgeSpec.tone.<get-tone>|<get-tone>(){}[0]
 }
 
 final class stapel.ui.skin/BannerSpec { // stapel.ui.skin/BannerSpec|null[0]
@@ -316,16 +516,26 @@ final class stapel.ui.skin/ButtonSpec { // stapel.ui.skin/ButtonSpec|null[0]
 }
 
 final class stapel.ui.skin/ChipSpec { // stapel.ui.skin/ChipSpec|null[0]
-    constructor <init>(kotlin/String, stapel.ui.skin/ChipKind = ..., kotlin/Boolean = ..., kotlin/Function0<kotlin/Unit>? = ..., stapel.ui/StapelTone = ..., kotlin/String? = ...) // stapel.ui.skin/ChipSpec.<init>|<init>(kotlin.String;stapel.ui.skin.ChipKind;kotlin.Boolean;kotlin.Function0<kotlin.Unit>?;stapel.ui.StapelTone;kotlin.String?){}[0]
+    constructor <init>(kotlin/String, stapel.ui.skin/ChipKind = ..., kotlin/Boolean = ..., kotlin/Function0<kotlin/Unit>? = ..., stapel.ui/StapelTone = ..., kotlin/String? = ..., stapel.ui/StapelIcon? = ..., kotlin/Function0<kotlin/Unit>? = ..., kotlin/String? = ..., kotlin/Boolean = ..., stapel.ui.skin/ControlSize = ...) // stapel.ui.skin/ChipSpec.<init>|<init>(kotlin.String;stapel.ui.skin.ChipKind;kotlin.Boolean;kotlin.Function0<kotlin.Unit>?;stapel.ui.StapelTone;kotlin.String?;stapel.ui.StapelIcon?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;kotlin.Boolean;stapel.ui.skin.ControlSize){}[0]
 
+    final val enabled // stapel.ui.skin/ChipSpec.enabled|{}enabled[0]
+        final fun <get-enabled>(): kotlin/Boolean // stapel.ui.skin/ChipSpec.enabled.<get-enabled>|<get-enabled>(){}[0]
     final val kind // stapel.ui.skin/ChipSpec.kind|{}kind[0]
         final fun <get-kind>(): stapel.ui.skin/ChipKind // stapel.ui.skin/ChipSpec.kind.<get-kind>|<get-kind>(){}[0]
     final val label // stapel.ui.skin/ChipSpec.label|{}label[0]
         final fun <get-label>(): kotlin/String // stapel.ui.skin/ChipSpec.label.<get-label>|<get-label>(){}[0]
+    final val leadingIcon // stapel.ui.skin/ChipSpec.leadingIcon|{}leadingIcon[0]
+        final fun <get-leadingIcon>(): stapel.ui/StapelIcon? // stapel.ui.skin/ChipSpec.leadingIcon.<get-leadingIcon>|<get-leadingIcon>(){}[0]
     final val onClick // stapel.ui.skin/ChipSpec.onClick|{}onClick[0]
         final fun <get-onClick>(): kotlin/Function0<kotlin/Unit>? // stapel.ui.skin/ChipSpec.onClick.<get-onClick>|<get-onClick>(){}[0]
+    final val onRemove // stapel.ui.skin/ChipSpec.onRemove|{}onRemove[0]
+        final fun <get-onRemove>(): kotlin/Function0<kotlin/Unit>? // stapel.ui.skin/ChipSpec.onRemove.<get-onRemove>|<get-onRemove>(){}[0]
+    final val removeLabel // stapel.ui.skin/ChipSpec.removeLabel|{}removeLabel[0]
+        final fun <get-removeLabel>(): kotlin/String? // stapel.ui.skin/ChipSpec.removeLabel.<get-removeLabel>|<get-removeLabel>(){}[0]
     final val selected // stapel.ui.skin/ChipSpec.selected|{}selected[0]
         final fun <get-selected>(): kotlin/Boolean // stapel.ui.skin/ChipSpec.selected.<get-selected>|<get-selected>(){}[0]
+    final val size // stapel.ui.skin/ChipSpec.size|{}size[0]
+        final fun <get-size>(): stapel.ui.skin/ControlSize // stapel.ui.skin/ChipSpec.size.<get-size>|<get-size>(){}[0]
     final val testTag // stapel.ui.skin/ChipSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/ChipSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
     final val tone // stapel.ui.skin/ChipSpec.tone|{}tone[0]
@@ -333,12 +543,14 @@ final class stapel.ui.skin/ChipSpec { // stapel.ui.skin/ChipSpec|null[0]
 }
 
 final class stapel.ui.skin/CodeFieldSpec { // stapel.ui.skin/CodeFieldSpec|null[0]
-    constructor <init>(androidx.compose.foundation.text.input/TextFieldState, kotlin/Int, kotlin/String, kotlin/String? = ..., kotlin/Boolean = ..., kotlin/Function1<kotlin/String, kotlin/Unit>? = ..., kotlin/String? = ...) // stapel.ui.skin/CodeFieldSpec.<init>|<init>(androidx.compose.foundation.text.input.TextFieldState;kotlin.Int;kotlin.String;kotlin.String?;kotlin.Boolean;kotlin.Function1<kotlin.String,kotlin.Unit>?;kotlin.String?){}[0]
+    constructor <init>(androidx.compose.foundation.text.input/TextFieldState, kotlin/Int, kotlin/String, kotlin/String? = ..., kotlin/Boolean = ..., kotlin/Function1<kotlin/String, kotlin/Unit>? = ..., kotlin/String? = ..., androidx.compose.foundation.text.input/InputTransformation? = ...) // stapel.ui.skin/CodeFieldSpec.<init>|<init>(androidx.compose.foundation.text.input.TextFieldState;kotlin.Int;kotlin.String;kotlin.String?;kotlin.Boolean;kotlin.Function1<kotlin.String,kotlin.Unit>?;kotlin.String?;androidx.compose.foundation.text.input.InputTransformation?){}[0]
 
     final val enabled // stapel.ui.skin/CodeFieldSpec.enabled|{}enabled[0]
         final fun <get-enabled>(): kotlin/Boolean // stapel.ui.skin/CodeFieldSpec.enabled.<get-enabled>|<get-enabled>(){}[0]
     final val error // stapel.ui.skin/CodeFieldSpec.error|{}error[0]
         final fun <get-error>(): kotlin/String? // stapel.ui.skin/CodeFieldSpec.error.<get-error>|<get-error>(){}[0]
+    final val inputTransformation // stapel.ui.skin/CodeFieldSpec.inputTransformation|{}inputTransformation[0]
+        final fun <get-inputTransformation>(): androidx.compose.foundation.text.input/InputTransformation? // stapel.ui.skin/CodeFieldSpec.inputTransformation.<get-inputTransformation>|<get-inputTransformation>(){}[0]
     final val label // stapel.ui.skin/CodeFieldSpec.label|{}label[0]
         final fun <get-label>(): kotlin/String // stapel.ui.skin/CodeFieldSpec.label.<get-label>|<get-label>(){}[0]
     final val length // stapel.ui.skin/CodeFieldSpec.length|{}length[0]
@@ -390,14 +602,20 @@ final class stapel.ui.skin/IconButtonSpec { // stapel.ui.skin/IconButtonSpec|nul
 }
 
 final class stapel.ui.skin/ListItemSpec { // stapel.ui.skin/ListItemSpec|null[0]
-    constructor <init>(kotlin/String, kotlin/String? = ..., kotlin/String? = ..., kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>? = ..., kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>? = ..., kotlin/Function0<kotlin/Unit>? = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/String? = ...) // stapel.ui.skin/ListItemSpec.<init>|<init>(kotlin.String;kotlin.String?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function0<kotlin.Unit>?;kotlin.Boolean;kotlin.Boolean;kotlin.String?){}[0]
+    constructor <init>(kotlin/String, kotlin/String? = ..., kotlin/String? = ..., kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>? = ..., kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>? = ..., kotlin/Function0<kotlin/Unit>? = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/String? = ..., stapel.ui.skin/ListItemMedia? = ..., stapel.ui.skin/ListItemValue? = ..., stapel.ui.skin/ListItemAccessory? = ..., kotlin/Int = ..., kotlin/Int = ...) // stapel.ui.skin/ListItemSpec.<init>|<init>(kotlin.String;kotlin.String?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function0<kotlin.Unit>?;kotlin.Boolean;kotlin.Boolean;kotlin.String?;stapel.ui.skin.ListItemMedia?;stapel.ui.skin.ListItemValue?;stapel.ui.skin.ListItemAccessory?;kotlin.Int;kotlin.Int){}[0]
 
+    final val accessory // stapel.ui.skin/ListItemSpec.accessory|{}accessory[0]
+        final fun <get-accessory>(): stapel.ui.skin/ListItemAccessory? // stapel.ui.skin/ListItemSpec.accessory.<get-accessory>|<get-accessory>(){}[0]
     final val enabled // stapel.ui.skin/ListItemSpec.enabled|{}enabled[0]
         final fun <get-enabled>(): kotlin/Boolean // stapel.ui.skin/ListItemSpec.enabled.<get-enabled>|<get-enabled>(){}[0]
     final val headline // stapel.ui.skin/ListItemSpec.headline|{}headline[0]
         final fun <get-headline>(): kotlin/String // stapel.ui.skin/ListItemSpec.headline.<get-headline>|<get-headline>(){}[0]
+    final val headlineMaxLines // stapel.ui.skin/ListItemSpec.headlineMaxLines|{}headlineMaxLines[0]
+        final fun <get-headlineMaxLines>(): kotlin/Int // stapel.ui.skin/ListItemSpec.headlineMaxLines.<get-headlineMaxLines>|<get-headlineMaxLines>(){}[0]
     final val leading // stapel.ui.skin/ListItemSpec.leading|{}leading[0]
         final fun <get-leading>(): kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>? // stapel.ui.skin/ListItemSpec.leading.<get-leading>|<get-leading>(){}[0]
+    final val media // stapel.ui.skin/ListItemSpec.media|{}media[0]
+        final fun <get-media>(): stapel.ui.skin/ListItemMedia? // stapel.ui.skin/ListItemSpec.media.<get-media>|<get-media>(){}[0]
     final val onClick // stapel.ui.skin/ListItemSpec.onClick|{}onClick[0]
         final fun <get-onClick>(): kotlin/Function0<kotlin/Unit>? // stapel.ui.skin/ListItemSpec.onClick.<get-onClick>|<get-onClick>(){}[0]
     final val overline // stapel.ui.skin/ListItemSpec.overline|{}overline[0]
@@ -406,10 +624,25 @@ final class stapel.ui.skin/ListItemSpec { // stapel.ui.skin/ListItemSpec|null[0]
         final fun <get-selected>(): kotlin/Boolean // stapel.ui.skin/ListItemSpec.selected.<get-selected>|<get-selected>(){}[0]
     final val supporting // stapel.ui.skin/ListItemSpec.supporting|{}supporting[0]
         final fun <get-supporting>(): kotlin/String? // stapel.ui.skin/ListItemSpec.supporting.<get-supporting>|<get-supporting>(){}[0]
+    final val supportingMaxLines // stapel.ui.skin/ListItemSpec.supportingMaxLines|{}supportingMaxLines[0]
+        final fun <get-supportingMaxLines>(): kotlin/Int // stapel.ui.skin/ListItemSpec.supportingMaxLines.<get-supportingMaxLines>|<get-supportingMaxLines>(){}[0]
     final val testTag // stapel.ui.skin/ListItemSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/ListItemSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
     final val trailing // stapel.ui.skin/ListItemSpec.trailing|{}trailing[0]
         final fun <get-trailing>(): kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>? // stapel.ui.skin/ListItemSpec.trailing.<get-trailing>|<get-trailing>(){}[0]
+    final val value // stapel.ui.skin/ListItemSpec.value|{}value[0]
+        final fun <get-value>(): stapel.ui.skin/ListItemValue? // stapel.ui.skin/ListItemSpec.value.<get-value>|<get-value>(){}[0]
+}
+
+final class stapel.ui.skin/ListItemValue { // stapel.ui.skin/ListItemValue|null[0]
+    constructor <init>(kotlin/String, kotlin/String? = ..., stapel.ui/StapelTone = ...) // stapel.ui.skin/ListItemValue.<init>|<init>(kotlin.String;kotlin.String?;stapel.ui.StapelTone){}[0]
+
+    final val supporting // stapel.ui.skin/ListItemValue.supporting|{}supporting[0]
+        final fun <get-supporting>(): kotlin/String? // stapel.ui.skin/ListItemValue.supporting.<get-supporting>|<get-supporting>(){}[0]
+    final val text // stapel.ui.skin/ListItemValue.text|{}text[0]
+        final fun <get-text>(): kotlin/String // stapel.ui.skin/ListItemValue.text.<get-text>|<get-text>(){}[0]
+    final val tone // stapel.ui.skin/ListItemValue.tone|{}tone[0]
+        final fun <get-tone>(): stapel.ui/StapelTone // stapel.ui.skin/ListItemValue.tone.<get-tone>|<get-tone>(){}[0]
 }
 
 final class stapel.ui.skin/NavigationItemSpec { // stapel.ui.skin/NavigationItemSpec|null[0]
@@ -438,8 +671,40 @@ final class stapel.ui.skin/NavigationSpec { // stapel.ui.skin/NavigationSpec|nul
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/NavigationSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
 }
 
+final class stapel.ui.skin/PagerDot { // stapel.ui.skin/PagerDot|null[0]
+    constructor <init>(kotlin/Int, kotlin/Boolean) // stapel.ui.skin/PagerDot.<init>|<init>(kotlin.Int;kotlin.Boolean){}[0]
+
+    final val page // stapel.ui.skin/PagerDot.page|{}page[0]
+        final fun <get-page>(): kotlin/Int // stapel.ui.skin/PagerDot.page.<get-page>|<get-page>(){}[0]
+    final val small // stapel.ui.skin/PagerDot.small|{}small[0]
+        final fun <get-small>(): kotlin/Boolean // stapel.ui.skin/PagerDot.small.<get-small>|<get-small>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.ui.skin/PagerDot.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.ui.skin/PagerDot.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.ui.skin/PagerDot.toString|toString(){}[0]
+}
+
+final class stapel.ui.skin/PagerIndicatorSpec { // stapel.ui.skin/PagerIndicatorSpec|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int, kotlin/String, kotlin/Function1<kotlin/Int, kotlin/Unit>? = ..., kotlin/Function1<kotlin/Int, kotlin/String>? = ..., kotlin/Int = ..., kotlin/String? = ...) // stapel.ui.skin/PagerIndicatorSpec.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.String;kotlin.Function1<kotlin.Int,kotlin.Unit>?;kotlin.Function1<kotlin.Int,kotlin.String>?;kotlin.Int;kotlin.String?){}[0]
+
+    final val count // stapel.ui.skin/PagerIndicatorSpec.count|{}count[0]
+        final fun <get-count>(): kotlin/Int // stapel.ui.skin/PagerIndicatorSpec.count.<get-count>|<get-count>(){}[0]
+    final val current // stapel.ui.skin/PagerIndicatorSpec.current|{}current[0]
+        final fun <get-current>(): kotlin/Int // stapel.ui.skin/PagerIndicatorSpec.current.<get-current>|<get-current>(){}[0]
+    final val description // stapel.ui.skin/PagerIndicatorSpec.description|{}description[0]
+        final fun <get-description>(): kotlin/String // stapel.ui.skin/PagerIndicatorSpec.description.<get-description>|<get-description>(){}[0]
+    final val dotLabel // stapel.ui.skin/PagerIndicatorSpec.dotLabel|{}dotLabel[0]
+        final fun <get-dotLabel>(): kotlin/Function1<kotlin/Int, kotlin/String>? // stapel.ui.skin/PagerIndicatorSpec.dotLabel.<get-dotLabel>|<get-dotLabel>(){}[0]
+    final val maxDots // stapel.ui.skin/PagerIndicatorSpec.maxDots|{}maxDots[0]
+        final fun <get-maxDots>(): kotlin/Int // stapel.ui.skin/PagerIndicatorSpec.maxDots.<get-maxDots>|<get-maxDots>(){}[0]
+    final val onSelect // stapel.ui.skin/PagerIndicatorSpec.onSelect|{}onSelect[0]
+        final fun <get-onSelect>(): kotlin/Function1<kotlin/Int, kotlin/Unit>? // stapel.ui.skin/PagerIndicatorSpec.onSelect.<get-onSelect>|<get-onSelect>(){}[0]
+    final val testTag // stapel.ui.skin/PagerIndicatorSpec.testTag|{}testTag[0]
+        final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/PagerIndicatorSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
+}
+
 final class stapel.ui.skin/ProgressSpec { // stapel.ui.skin/ProgressSpec|null[0]
-    constructor <init>(stapel.ui.skin/ProgressKind, kotlin/String? = ..., kotlin/Float? = ..., kotlin/String? = ...) // stapel.ui.skin/ProgressSpec.<init>|<init>(stapel.ui.skin.ProgressKind;kotlin.String?;kotlin.Float?;kotlin.String?){}[0]
+    constructor <init>(stapel.ui.skin/ProgressKind, kotlin/String? = ..., kotlin/Float? = ..., kotlin/String? = ..., stapel.ui.skin/SkeletonShape = ..., kotlin/Int = ...) // stapel.ui.skin/ProgressSpec.<init>|<init>(stapel.ui.skin.ProgressKind;kotlin.String?;kotlin.Float?;kotlin.String?;stapel.ui.skin.SkeletonShape;kotlin.Int){}[0]
 
     final val fraction // stapel.ui.skin/ProgressSpec.fraction|{}fraction[0]
         final fun <get-fraction>(): kotlin/Float? // stapel.ui.skin/ProgressSpec.fraction.<get-fraction>|<get-fraction>(){}[0]
@@ -447,6 +712,10 @@ final class stapel.ui.skin/ProgressSpec { // stapel.ui.skin/ProgressSpec|null[0]
         final fun <get-kind>(): stapel.ui.skin/ProgressKind // stapel.ui.skin/ProgressSpec.kind.<get-kind>|<get-kind>(){}[0]
     final val label // stapel.ui.skin/ProgressSpec.label|{}label[0]
         final fun <get-label>(): kotlin/String? // stapel.ui.skin/ProgressSpec.label.<get-label>|<get-label>(){}[0]
+    final val lines // stapel.ui.skin/ProgressSpec.lines|{}lines[0]
+        final fun <get-lines>(): kotlin/Int // stapel.ui.skin/ProgressSpec.lines.<get-lines>|<get-lines>(){}[0]
+    final val skeleton // stapel.ui.skin/ProgressSpec.skeleton|{}skeleton[0]
+        final fun <get-skeleton>(): stapel.ui.skin/SkeletonShape // stapel.ui.skin/ProgressSpec.skeleton.<get-skeleton>|<get-skeleton>(){}[0]
     final val testTag // stapel.ui.skin/ProgressSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/ProgressSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
 }
@@ -462,6 +731,29 @@ final class stapel.ui.skin/PullToRefreshSpec { // stapel.ui.skin/PullToRefreshSp
         final fun <get-refreshing>(): kotlin/Boolean // stapel.ui.skin/PullToRefreshSpec.refreshing.<get-refreshing>|<get-refreshing>(){}[0]
     final val testTag // stapel.ui.skin/PullToRefreshSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/PullToRefreshSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
+}
+
+final class stapel.ui.skin/SelectSpec { // stapel.ui.skin/SelectSpec|null[0]
+    constructor <init>(kotlin/String, kotlin/String?, kotlin/Function0<kotlin/Unit>, kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Boolean = ..., stapel.ui/StapelIcon? = ..., kotlin/String? = ...) // stapel.ui.skin/SelectSpec.<init>|<init>(kotlin.String;kotlin.String?;kotlin.Function0<kotlin.Unit>;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?){}[0]
+
+    final val enabled // stapel.ui.skin/SelectSpec.enabled|{}enabled[0]
+        final fun <get-enabled>(): kotlin/Boolean // stapel.ui.skin/SelectSpec.enabled.<get-enabled>|<get-enabled>(){}[0]
+    final val error // stapel.ui.skin/SelectSpec.error|{}error[0]
+        final fun <get-error>(): kotlin/String? // stapel.ui.skin/SelectSpec.error.<get-error>|<get-error>(){}[0]
+    final val label // stapel.ui.skin/SelectSpec.label|{}label[0]
+        final fun <get-label>(): kotlin/String // stapel.ui.skin/SelectSpec.label.<get-label>|<get-label>(){}[0]
+    final val leadingIcon // stapel.ui.skin/SelectSpec.leadingIcon|{}leadingIcon[0]
+        final fun <get-leadingIcon>(): stapel.ui/StapelIcon? // stapel.ui.skin/SelectSpec.leadingIcon.<get-leadingIcon>|<get-leadingIcon>(){}[0]
+    final val onClick // stapel.ui.skin/SelectSpec.onClick|{}onClick[0]
+        final fun <get-onClick>(): kotlin/Function0<kotlin/Unit> // stapel.ui.skin/SelectSpec.onClick.<get-onClick>|<get-onClick>(){}[0]
+    final val placeholder // stapel.ui.skin/SelectSpec.placeholder|{}placeholder[0]
+        final fun <get-placeholder>(): kotlin/String? // stapel.ui.skin/SelectSpec.placeholder.<get-placeholder>|<get-placeholder>(){}[0]
+    final val supportingText // stapel.ui.skin/SelectSpec.supportingText|{}supportingText[0]
+        final fun <get-supportingText>(): kotlin/String? // stapel.ui.skin/SelectSpec.supportingText.<get-supportingText>|<get-supportingText>(){}[0]
+    final val testTag // stapel.ui.skin/SelectSpec.testTag|{}testTag[0]
+        final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/SelectSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
+    final val value // stapel.ui.skin/SelectSpec.value|{}value[0]
+        final fun <get-value>(): kotlin/String? // stapel.ui.skin/SelectSpec.value.<get-value>|<get-value>(){}[0]
 }
 
 final class stapel.ui.skin/SnackbarSpec { // stapel.ui.skin/SnackbarSpec|null[0]
@@ -497,12 +789,18 @@ final class stapel.ui.skin/SurfaceSpec { // stapel.ui.skin/SurfaceSpec|null[0]
 }
 
 final class stapel.ui.skin/TabsSpec { // stapel.ui.skin/TabsSpec|null[0]
-    constructor <init>(kotlin.collections/List<kotlin/String>, kotlin/Int, kotlin/Function1<kotlin/Int, kotlin/Unit>, stapel.ui.skin/TabsVariant = ..., kotlin/String? = ...) // stapel.ui.skin/TabsSpec.<init>|<init>(kotlin.collections.List<kotlin.String>;kotlin.Int;kotlin.Function1<kotlin.Int,kotlin.Unit>;stapel.ui.skin.TabsVariant;kotlin.String?){}[0]
+    constructor <init>(kotlin.collections/List<kotlin/String>, kotlin/Int, kotlin/Function1<kotlin/Int, kotlin/Unit>, stapel.ui.skin/TabsVariant = ..., kotlin/String? = ..., kotlin.collections/List<stapel.ui/StapelIcon>? = ..., kotlin/Boolean = ..., kotlin/Boolean = ...) // stapel.ui.skin/TabsSpec.<init>|<init>(kotlin.collections.List<kotlin.String>;kotlin.Int;kotlin.Function1<kotlin.Int,kotlin.Unit>;stapel.ui.skin.TabsVariant;kotlin.String?;kotlin.collections.List<stapel.ui.StapelIcon>?;kotlin.Boolean;kotlin.Boolean){}[0]
 
+    final val iconOnly // stapel.ui.skin/TabsSpec.iconOnly|{}iconOnly[0]
+        final fun <get-iconOnly>(): kotlin/Boolean // stapel.ui.skin/TabsSpec.iconOnly.<get-iconOnly>|<get-iconOnly>(){}[0]
+    final val icons // stapel.ui.skin/TabsSpec.icons|{}icons[0]
+        final fun <get-icons>(): kotlin.collections/List<stapel.ui/StapelIcon>? // stapel.ui.skin/TabsSpec.icons.<get-icons>|<get-icons>(){}[0]
     final val items // stapel.ui.skin/TabsSpec.items|{}items[0]
         final fun <get-items>(): kotlin.collections/List<kotlin/String> // stapel.ui.skin/TabsSpec.items.<get-items>|<get-items>(){}[0]
     final val onSelect // stapel.ui.skin/TabsSpec.onSelect|{}onSelect[0]
         final fun <get-onSelect>(): kotlin/Function1<kotlin/Int, kotlin/Unit> // stapel.ui.skin/TabsSpec.onSelect.<get-onSelect>|<get-onSelect>(){}[0]
+    final val scrollable // stapel.ui.skin/TabsSpec.scrollable|{}scrollable[0]
+        final fun <get-scrollable>(): kotlin/Boolean // stapel.ui.skin/TabsSpec.scrollable.<get-scrollable>|<get-scrollable>(){}[0]
     final val selectedIndex // stapel.ui.skin/TabsSpec.selectedIndex|{}selectedIndex[0]
         final fun <get-selectedIndex>(): kotlin/Int // stapel.ui.skin/TabsSpec.selectedIndex.<get-selectedIndex>|<get-selectedIndex>(){}[0]
     final val testTag // stapel.ui.skin/TabsSpec.testTag|{}testTag[0]
@@ -512,28 +810,36 @@ final class stapel.ui.skin/TabsSpec { // stapel.ui.skin/TabsSpec|null[0]
 }
 
 final class stapel.ui.skin/TextFieldSpec { // stapel.ui.skin/TextFieldSpec|null[0]
-    constructor <init>(androidx.compose.foundation.text.input/TextFieldState, kotlin/String, stapel.ui.skin/TextFieldKind = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., stapel.ui/StapelIcon? = ..., kotlin/String? = ..., stapel.ui.skin/IconButtonSpec? = ..., androidx.compose.ui.text.input/ImeAction = ..., kotlin/Function0<kotlin/Unit>? = ..., androidx.compose.ui.autofill/ContentType? = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/String? = ...) // stapel.ui.skin/TextFieldSpec.<init>|<init>(androidx.compose.foundation.text.input.TextFieldState;kotlin.String;stapel.ui.skin.TextFieldKind;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?;stapel.ui.skin.IconButtonSpec?;androidx.compose.ui.text.input.ImeAction;kotlin.Function0<kotlin.Unit>?;androidx.compose.ui.autofill.ContentType?;kotlin.Int;kotlin.Int;kotlin.String?){}[0]
+    constructor <init>(androidx.compose.foundation.text.input/TextFieldState, kotlin/String, stapel.ui.skin/TextFieldKind = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., stapel.ui/StapelIcon? = ..., kotlin/String? = ..., stapel.ui.skin/IconButtonSpec? = ..., androidx.compose.ui.text.input/ImeAction = ..., kotlin/Function0<kotlin/Unit>? = ..., androidx.compose.ui.autofill/ContentType? = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/String? = ..., kotlin/Boolean = ..., kotlin/String? = ..., androidx.compose.foundation.text.input/InputTransformation? = ..., androidx.compose.foundation.text.input/OutputTransformation? = ...) // stapel.ui.skin/TextFieldSpec.<init>|<init>(androidx.compose.foundation.text.input.TextFieldState;kotlin.String;stapel.ui.skin.TextFieldKind;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?;stapel.ui.skin.IconButtonSpec?;androidx.compose.ui.text.input.ImeAction;kotlin.Function0<kotlin.Unit>?;androidx.compose.ui.autofill.ContentType?;kotlin.Int;kotlin.Int;kotlin.String?;kotlin.Boolean;kotlin.String?;androidx.compose.foundation.text.input.InputTransformation?;androidx.compose.foundation.text.input.OutputTransformation?){}[0]
 
     final val autofill // stapel.ui.skin/TextFieldSpec.autofill|{}autofill[0]
         final fun <get-autofill>(): androidx.compose.ui.autofill/ContentType? // stapel.ui.skin/TextFieldSpec.autofill.<get-autofill>|<get-autofill>(){}[0]
+    final val clearLabel // stapel.ui.skin/TextFieldSpec.clearLabel|{}clearLabel[0]
+        final fun <get-clearLabel>(): kotlin/String? // stapel.ui.skin/TextFieldSpec.clearLabel.<get-clearLabel>|<get-clearLabel>(){}[0]
     final val enabled // stapel.ui.skin/TextFieldSpec.enabled|{}enabled[0]
         final fun <get-enabled>(): kotlin/Boolean // stapel.ui.skin/TextFieldSpec.enabled.<get-enabled>|<get-enabled>(){}[0]
     final val error // stapel.ui.skin/TextFieldSpec.error|{}error[0]
         final fun <get-error>(): kotlin/String? // stapel.ui.skin/TextFieldSpec.error.<get-error>|<get-error>(){}[0]
     final val imeAction // stapel.ui.skin/TextFieldSpec.imeAction|{}imeAction[0]
         final fun <get-imeAction>(): androidx.compose.ui.text.input/ImeAction // stapel.ui.skin/TextFieldSpec.imeAction.<get-imeAction>|<get-imeAction>(){}[0]
+    final val inputTransformation // stapel.ui.skin/TextFieldSpec.inputTransformation|{}inputTransformation[0]
+        final fun <get-inputTransformation>(): androidx.compose.foundation.text.input/InputTransformation? // stapel.ui.skin/TextFieldSpec.inputTransformation.<get-inputTransformation>|<get-inputTransformation>(){}[0]
     final val kind // stapel.ui.skin/TextFieldSpec.kind|{}kind[0]
         final fun <get-kind>(): stapel.ui.skin/TextFieldKind // stapel.ui.skin/TextFieldSpec.kind.<get-kind>|<get-kind>(){}[0]
     final val label // stapel.ui.skin/TextFieldSpec.label|{}label[0]
         final fun <get-label>(): kotlin/String // stapel.ui.skin/TextFieldSpec.label.<get-label>|<get-label>(){}[0]
     final val leadingIcon // stapel.ui.skin/TextFieldSpec.leadingIcon|{}leadingIcon[0]
         final fun <get-leadingIcon>(): stapel.ui/StapelIcon? // stapel.ui.skin/TextFieldSpec.leadingIcon.<get-leadingIcon>|<get-leadingIcon>(){}[0]
+    final val loading // stapel.ui.skin/TextFieldSpec.loading|{}loading[0]
+        final fun <get-loading>(): kotlin/Boolean // stapel.ui.skin/TextFieldSpec.loading.<get-loading>|<get-loading>(){}[0]
     final val maxLines // stapel.ui.skin/TextFieldSpec.maxLines|{}maxLines[0]
         final fun <get-maxLines>(): kotlin/Int // stapel.ui.skin/TextFieldSpec.maxLines.<get-maxLines>|<get-maxLines>(){}[0]
     final val minLines // stapel.ui.skin/TextFieldSpec.minLines|{}minLines[0]
         final fun <get-minLines>(): kotlin/Int // stapel.ui.skin/TextFieldSpec.minLines.<get-minLines>|<get-minLines>(){}[0]
     final val onImeAction // stapel.ui.skin/TextFieldSpec.onImeAction|{}onImeAction[0]
         final fun <get-onImeAction>(): kotlin/Function0<kotlin/Unit>? // stapel.ui.skin/TextFieldSpec.onImeAction.<get-onImeAction>|<get-onImeAction>(){}[0]
+    final val outputTransformation // stapel.ui.skin/TextFieldSpec.outputTransformation|{}outputTransformation[0]
+        final fun <get-outputTransformation>(): androidx.compose.foundation.text.input/OutputTransformation? // stapel.ui.skin/TextFieldSpec.outputTransformation.<get-outputTransformation>|<get-outputTransformation>(){}[0]
     final val placeholder // stapel.ui.skin/TextFieldSpec.placeholder|{}placeholder[0]
         final fun <get-placeholder>(): kotlin/String? // stapel.ui.skin/TextFieldSpec.placeholder.<get-placeholder>|<get-placeholder>(){}[0]
     final val readOnly // stapel.ui.skin/TextFieldSpec.readOnly|{}readOnly[0]
@@ -551,33 +857,56 @@ final class stapel.ui.skin/TextFieldSpec { // stapel.ui.skin/TextFieldSpec|null[
 }
 
 final class stapel.ui.skin/ToggleSpec { // stapel.ui.skin/ToggleSpec|null[0]
-    constructor <init>(stapel.ui.skin/ToggleKind, kotlin/Boolean, kotlin/Function1<kotlin/Boolean, kotlin/Unit>, kotlin/String, kotlin/Boolean = ..., kotlin/String? = ...) // stapel.ui.skin/ToggleSpec.<init>|<init>(stapel.ui.skin.ToggleKind;kotlin.Boolean;kotlin.Function1<kotlin.Boolean,kotlin.Unit>;kotlin.String;kotlin.Boolean;kotlin.String?){}[0]
+    constructor <init>(stapel.ui.skin/ToggleKind, kotlin/Boolean, kotlin/Function1<kotlin/Boolean, kotlin/Unit>, kotlin/String, kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/Boolean = ...) // stapel.ui.skin/ToggleSpec.<init>|<init>(stapel.ui.skin.ToggleKind;kotlin.Boolean;kotlin.Function1<kotlin.Boolean,kotlin.Unit>;kotlin.String;kotlin.Boolean;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.String?;kotlin.Boolean){}[0]
 
     final val checked // stapel.ui.skin/ToggleSpec.checked|{}checked[0]
         final fun <get-checked>(): kotlin/Boolean // stapel.ui.skin/ToggleSpec.checked.<get-checked>|<get-checked>(){}[0]
+    final val controlAtEnd // stapel.ui.skin/ToggleSpec.controlAtEnd|{}controlAtEnd[0]
+        final fun <get-controlAtEnd>(): kotlin/Boolean // stapel.ui.skin/ToggleSpec.controlAtEnd.<get-controlAtEnd>|<get-controlAtEnd>(){}[0]
     final val enabled // stapel.ui.skin/ToggleSpec.enabled|{}enabled[0]
         final fun <get-enabled>(): kotlin/Boolean // stapel.ui.skin/ToggleSpec.enabled.<get-enabled>|<get-enabled>(){}[0]
+    final val error // stapel.ui.skin/ToggleSpec.error|{}error[0]
+        final fun <get-error>(): kotlin/String? // stapel.ui.skin/ToggleSpec.error.<get-error>|<get-error>(){}[0]
+    final val indeterminate // stapel.ui.skin/ToggleSpec.indeterminate|{}indeterminate[0]
+        final fun <get-indeterminate>(): kotlin/Boolean // stapel.ui.skin/ToggleSpec.indeterminate.<get-indeterminate>|<get-indeterminate>(){}[0]
     final val kind // stapel.ui.skin/ToggleSpec.kind|{}kind[0]
         final fun <get-kind>(): stapel.ui.skin/ToggleKind // stapel.ui.skin/ToggleSpec.kind.<get-kind>|<get-kind>(){}[0]
     final val label // stapel.ui.skin/ToggleSpec.label|{}label[0]
         final fun <get-label>(): kotlin/String // stapel.ui.skin/ToggleSpec.label.<get-label>|<get-label>(){}[0]
     final val onCheckedChange // stapel.ui.skin/ToggleSpec.onCheckedChange|{}onCheckedChange[0]
         final fun <get-onCheckedChange>(): kotlin/Function1<kotlin/Boolean, kotlin/Unit> // stapel.ui.skin/ToggleSpec.onCheckedChange.<get-onCheckedChange>|<get-onCheckedChange>(){}[0]
+    final val supporting // stapel.ui.skin/ToggleSpec.supporting|{}supporting[0]
+        final fun <get-supporting>(): kotlin/String? // stapel.ui.skin/ToggleSpec.supporting.<get-supporting>|<get-supporting>(){}[0]
     final val testTag // stapel.ui.skin/ToggleSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/ToggleSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
 }
 
 final class stapel.ui.skin/TopBarSpec { // stapel.ui.skin/TopBarSpec|null[0]
-    constructor <init>(kotlin/String, stapel.ui.skin/IconButtonSpec? = ..., kotlin.collections/List<stapel.ui.skin/IconButtonSpec> = ..., kotlin/String? = ...) // stapel.ui.skin/TopBarSpec.<init>|<init>(kotlin.String;stapel.ui.skin.IconButtonSpec?;kotlin.collections.List<stapel.ui.skin.IconButtonSpec>;kotlin.String?){}[0]
+    constructor <init>(kotlin/String, stapel.ui.skin/IconButtonSpec? = ..., kotlin.collections/List<stapel.ui.skin/IconButtonSpec> = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Float? = ...) // stapel.ui.skin/TopBarSpec.<init>|<init>(kotlin.String;stapel.ui.skin.IconButtonSpec?;kotlin.collections.List<stapel.ui.skin.IconButtonSpec>;kotlin.String?;kotlin.String?;kotlin.Float?){}[0]
 
     final val actions // stapel.ui.skin/TopBarSpec.actions|{}actions[0]
         final fun <get-actions>(): kotlin.collections/List<stapel.ui.skin/IconButtonSpec> // stapel.ui.skin/TopBarSpec.actions.<get-actions>|<get-actions>(){}[0]
+    final val collapsedFraction // stapel.ui.skin/TopBarSpec.collapsedFraction|{}collapsedFraction[0]
+        final fun <get-collapsedFraction>(): kotlin/Float? // stapel.ui.skin/TopBarSpec.collapsedFraction.<get-collapsedFraction>|<get-collapsedFraction>(){}[0]
     final val navigation // stapel.ui.skin/TopBarSpec.navigation|{}navigation[0]
         final fun <get-navigation>(): stapel.ui.skin/IconButtonSpec? // stapel.ui.skin/TopBarSpec.navigation.<get-navigation>|<get-navigation>(){}[0]
+    final val subtitle // stapel.ui.skin/TopBarSpec.subtitle|{}subtitle[0]
+        final fun <get-subtitle>(): kotlin/String? // stapel.ui.skin/TopBarSpec.subtitle.<get-subtitle>|<get-subtitle>(){}[0]
     final val testTag // stapel.ui.skin/TopBarSpec.testTag|{}testTag[0]
         final fun <get-testTag>(): kotlin/String? // stapel.ui.skin/TopBarSpec.testTag.<get-testTag>|<get-testTag>(){}[0]
     final val title // stapel.ui.skin/TopBarSpec.title|{}title[0]
         final fun <get-title>(): kotlin/String // stapel.ui.skin/TopBarSpec.title.<get-title>|<get-title>(){}[0]
+}
+
+final class stapel.ui/ContainerColors { // stapel.ui/ContainerColors|null[0]
+    constructor <init>(androidx.compose.ui.graphics/Color, androidx.compose.ui.graphics/Color, androidx.compose.ui.graphics/Color = ...) // stapel.ui/ContainerColors.<init>|<init>(androidx.compose.ui.graphics.Color;androidx.compose.ui.graphics.Color;androidx.compose.ui.graphics.Color){}[0]
+
+    final val container // stapel.ui/ContainerColors.container|{}container[0]
+        final fun <get-container>(): androidx.compose.ui.graphics/Color // stapel.ui/ContainerColors.container.<get-container>|<get-container>(){}[0]
+    final val content // stapel.ui/ContainerColors.content|{}content[0]
+        final fun <get-content>(): androidx.compose.ui.graphics/Color // stapel.ui/ContainerColors.content.<get-content>|<get-content>(){}[0]
+    final val outline // stapel.ui/ContainerColors.outline|{}outline[0]
+        final fun <get-outline>(): androidx.compose.ui.graphics/Color // stapel.ui/ContainerColors.outline.<get-outline>|<get-outline>(){}[0]
 }
 
 final class stapel.ui/InMemoryThemePreferenceStore : stapel.ui/ThemePreferenceStore { // stapel.ui/InMemoryThemePreferenceStore|null[0]
@@ -833,14 +1162,22 @@ final object stapel.ui.skin/FoundationSkin : stapel.ui.skin/StapelSkin { // stap
     final fun ListItem(stapel.ui.skin/ListItemSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.ListItem|ListItem(stapel.ui.skin.ListItemSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun NavigationBar(stapel.ui.skin/NavigationSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.NavigationBar|NavigationBar(stapel.ui.skin.NavigationSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun NavigationRail(stapel.ui.skin/NavigationSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.NavigationRail|NavigationRail(stapel.ui.skin.NavigationSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun PagerIndicator(stapel.ui.skin/PagerIndicatorSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.PagerIndicator|PagerIndicator(stapel.ui.skin.PagerIndicatorSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun Progress(stapel.ui.skin/ProgressSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.Progress|Progress(stapel.ui.skin.ProgressSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun PullToRefresh(stapel.ui.skin/PullToRefreshSpec, androidx.compose.ui/Modifier, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.PullToRefresh|PullToRefresh(stapel.ui.skin.PullToRefreshSpec;androidx.compose.ui.Modifier;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun Select(stapel.ui.skin/SelectSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.Select|Select(stapel.ui.skin.SelectSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun Snackbar(stapel.ui.skin/SnackbarSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.Snackbar|Snackbar(stapel.ui.skin.SnackbarSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun Surface(stapel.ui.skin/SurfaceSpec, androidx.compose.ui/Modifier, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.Surface|Surface(stapel.ui.skin.SurfaceSpec;androidx.compose.ui.Modifier;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun Tabs(stapel.ui.skin/TabsSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.Tabs|Tabs(stapel.ui.skin.TabsSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun TextField(stapel.ui.skin/TextFieldSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.TextField|TextField(stapel.ui.skin.TextFieldSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun Toggle(stapel.ui.skin/ToggleSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.Toggle|Toggle(stapel.ui.skin.ToggleSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
     final fun TopBar(stapel.ui.skin/TopBarSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.skin/FoundationSkin.TopBar|TopBar(stapel.ui.skin.TopBarSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+final object stapel.ui/ComponentColors { // stapel.ui/ComponentColors|null[0]
+    final fun avatar(stapel.ui/StapelColors): stapel.ui/ContainerColors // stapel.ui/ComponentColors.avatar|avatar(stapel.ui.StapelColors){}[0]
+    final fun badge(stapel.ui/StapelColors, stapel.ui/StapelTone, kotlin/Boolean): stapel.ui/ContainerColors // stapel.ui/ComponentColors.badge|badge(stapel.ui.StapelColors;stapel.ui.StapelTone;kotlin.Boolean){}[0]
+    final fun chip(stapel.ui/StapelColors, kotlin/Boolean, stapel.ui/StapelTone?, kotlin/Boolean): stapel.ui/ContainerColors // stapel.ui/ComponentColors.chip|chip(stapel.ui.StapelColors;kotlin.Boolean;stapel.ui.StapelTone?;kotlin.Boolean){}[0]
 }
 
 final object stapel.ui/StapelIconIds { // stapel.ui/StapelIconIds|null[0]
@@ -931,13 +1268,31 @@ final object stapel.ui/SystemFonts : stapel.ui/StapelFontResolver { // stapel.ui
 
 final const val stapel.ui.skin/GATED_REASON_TAG_SUFFIX // stapel.ui.skin/GATED_REASON_TAG_SUFFIX|{}GATED_REASON_TAG_SUFFIX[0]
     final fun <get-GATED_REASON_TAG_SUFFIX>(): kotlin/String // stapel.ui.skin/GATED_REASON_TAG_SUFFIX.<get-GATED_REASON_TAG_SUFFIX>|<get-GATED_REASON_TAG_SUFFIX>(){}[0]
+final const val stapel.ui.skin/LARGE_TITLE_TAG_SUFFIX // stapel.ui.skin/LARGE_TITLE_TAG_SUFFIX|{}LARGE_TITLE_TAG_SUFFIX[0]
+    final fun <get-LARGE_TITLE_TAG_SUFFIX>(): kotlin/String // stapel.ui.skin/LARGE_TITLE_TAG_SUFFIX.<get-LARGE_TITLE_TAG_SUFFIX>|<get-LARGE_TITLE_TAG_SUFFIX>(){}[0]
+final const val stapel.ui.skin/LIST_VALUE_MAX_FRACTION // stapel.ui.skin/LIST_VALUE_MAX_FRACTION|{}LIST_VALUE_MAX_FRACTION[0]
+    final fun <get-LIST_VALUE_MAX_FRACTION>(): kotlin/Float // stapel.ui.skin/LIST_VALUE_MAX_FRACTION.<get-LIST_VALUE_MAX_FRACTION>|<get-LIST_VALUE_MAX_FRACTION>(){}[0]
+final const val stapel.ui.skin/SHIMMER_PERIOD_MS // stapel.ui.skin/SHIMMER_PERIOD_MS|{}SHIMMER_PERIOD_MS[0]
+    final fun <get-SHIMMER_PERIOD_MS>(): kotlin/Int // stapel.ui.skin/SHIMMER_PERIOD_MS.<get-SHIMMER_PERIOD_MS>|<get-SHIMMER_PERIOD_MS>(){}[0]
 final const val stapel.ui.skin/TOP_BAR_TITLE_MAX_LINES // stapel.ui.skin/TOP_BAR_TITLE_MAX_LINES|{}TOP_BAR_TITLE_MAX_LINES[0]
     final fun <get-TOP_BAR_TITLE_MAX_LINES>(): kotlin/Int // stapel.ui.skin/TOP_BAR_TITLE_MAX_LINES.<get-TOP_BAR_TITLE_MAX_LINES>|<get-TOP_BAR_TITLE_MAX_LINES>(){}[0]
+final const val stapel.ui/PICKER_OPTION_TAG // stapel.ui/PICKER_OPTION_TAG|{}PICKER_OPTION_TAG[0]
+    final fun <get-PICKER_OPTION_TAG>(): kotlin/String // stapel.ui/PICKER_OPTION_TAG.<get-PICKER_OPTION_TAG>|<get-PICKER_OPTION_TAG>(){}[0]
+final const val stapel.ui/PICKER_SEARCH_TAG // stapel.ui/PICKER_SEARCH_TAG|{}PICKER_SEARCH_TAG[0]
+    final fun <get-PICKER_SEARCH_TAG>(): kotlin/String // stapel.ui/PICKER_SEARCH_TAG.<get-PICKER_SEARCH_TAG>|<get-PICKER_SEARCH_TAG>(){}[0]
 final const val stapel.ui/STAPEL_PAGE_CONTENT_TAG // stapel.ui/STAPEL_PAGE_CONTENT_TAG|{}STAPEL_PAGE_CONTENT_TAG[0]
     final fun <get-STAPEL_PAGE_CONTENT_TAG>(): kotlin/String // stapel.ui/STAPEL_PAGE_CONTENT_TAG.<get-STAPEL_PAGE_CONTENT_TAG>|<get-STAPEL_PAGE_CONTENT_TAG>(){}[0]
+final const val stapel.ui/STAPEL_PAGE_TOP_BAR_TAG // stapel.ui/STAPEL_PAGE_TOP_BAR_TAG|{}STAPEL_PAGE_TOP_BAR_TAG[0]
+    final fun <get-STAPEL_PAGE_TOP_BAR_TAG>(): kotlin/String // stapel.ui/STAPEL_PAGE_TOP_BAR_TAG.<get-STAPEL_PAGE_TOP_BAR_TAG>|<get-STAPEL_PAGE_TOP_BAR_TAG>(){}[0]
 
+final val stapel.ui.skin/PULL_REFRESH_THRESHOLD // stapel.ui.skin/PULL_REFRESH_THRESHOLD|{}PULL_REFRESH_THRESHOLD[0]
+    final fun <get-PULL_REFRESH_THRESHOLD>(): androidx.compose.ui.unit/Dp // stapel.ui.skin/PULL_REFRESH_THRESHOLD.<get-PULL_REFRESH_THRESHOLD>|<get-PULL_REFRESH_THRESHOLD>(){}[0]
 final val stapel.ui.skin/StapelSkinSlots // stapel.ui.skin/StapelSkinSlots|{}StapelSkinSlots[0]
     final fun <get-StapelSkinSlots>(): kotlin.collections/List<kotlin/String> // stapel.ui.skin/StapelSkinSlots.<get-StapelSkinSlots>|<get-StapelSkinSlots>(){}[0]
+final val stapel.ui.skin/accessibleName // stapel.ui.skin/accessibleName|@stapel.ui.skin.AvatarSpec{}accessibleName[0]
+    final fun (stapel.ui.skin/AvatarSpec).<get-accessibleName>(): kotlin/String // stapel.ui.skin/accessibleName.<get-accessibleName>|<get-accessibleName>@stapel.ui.skin.AvatarSpec(){}[0]
+final val stapel.ui.skin/initialsText // stapel.ui.skin/initialsText|@stapel.ui.skin.AvatarSpec{}initialsText[0]
+    final fun (stapel.ui.skin/AvatarSpec).<get-initialsText>(): kotlin/String? // stapel.ui.skin/initialsText.<get-initialsText>|<get-initialsText>@stapel.ui.skin.AvatarSpec(){}[0]
 final val stapel.ui.skin/stapel_ui_skin_AvatarSpec$stableprop // stapel.ui.skin/stapel_ui_skin_AvatarSpec$stableprop|#static{}stapel_ui_skin_AvatarSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_BadgeSpec$stableprop // stapel.ui.skin/stapel_ui_skin_BadgeSpec$stableprop|#static{}stapel_ui_skin_BadgeSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_BannerSpec$stableprop // stapel.ui.skin/stapel_ui_skin_BannerSpec$stableprop|#static{}stapel_ui_skin_BannerSpec$stableprop[0]
@@ -947,11 +1302,20 @@ final val stapel.ui.skin/stapel_ui_skin_CodeFieldSpec$stableprop // stapel.ui.sk
 final val stapel.ui.skin/stapel_ui_skin_DialogSpec$stableprop // stapel.ui.skin/stapel_ui_skin_DialogSpec$stableprop|#static{}stapel_ui_skin_DialogSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_FoundationSkin$stableprop // stapel.ui.skin/stapel_ui_skin_FoundationSkin$stableprop|#static{}stapel_ui_skin_FoundationSkin$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_IconButtonSpec$stableprop // stapel.ui.skin/stapel_ui_skin_IconButtonSpec$stableprop|#static{}stapel_ui_skin_IconButtonSpec$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Badge$stableprop // stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Badge$stableprop|#static{}stapel_ui_skin_ListItemAccessory_Badge$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Chevron$stableprop // stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Chevron$stableprop|#static{}stapel_ui_skin_ListItemAccessory_Chevron$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Toggle$stableprop // stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Toggle$stableprop|#static{}stapel_ui_skin_ListItemAccessory_Toggle$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_ListItemMedia_Avatar$stableprop // stapel.ui.skin/stapel_ui_skin_ListItemMedia_Avatar$stableprop|#static{}stapel_ui_skin_ListItemMedia_Avatar$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_ListItemMedia_Icon$stableprop // stapel.ui.skin/stapel_ui_skin_ListItemMedia_Icon$stableprop|#static{}stapel_ui_skin_ListItemMedia_Icon$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_ListItemSpec$stableprop // stapel.ui.skin/stapel_ui_skin_ListItemSpec$stableprop|#static{}stapel_ui_skin_ListItemSpec$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_ListItemValue$stableprop // stapel.ui.skin/stapel_ui_skin_ListItemValue$stableprop|#static{}stapel_ui_skin_ListItemValue$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_NavigationItemSpec$stableprop // stapel.ui.skin/stapel_ui_skin_NavigationItemSpec$stableprop|#static{}stapel_ui_skin_NavigationItemSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_NavigationSpec$stableprop // stapel.ui.skin/stapel_ui_skin_NavigationSpec$stableprop|#static{}stapel_ui_skin_NavigationSpec$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_PagerDot$stableprop // stapel.ui.skin/stapel_ui_skin_PagerDot$stableprop|#static{}stapel_ui_skin_PagerDot$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_PagerIndicatorSpec$stableprop // stapel.ui.skin/stapel_ui_skin_PagerIndicatorSpec$stableprop|#static{}stapel_ui_skin_PagerIndicatorSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_ProgressSpec$stableprop // stapel.ui.skin/stapel_ui_skin_ProgressSpec$stableprop|#static{}stapel_ui_skin_ProgressSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_PullToRefreshSpec$stableprop // stapel.ui.skin/stapel_ui_skin_PullToRefreshSpec$stableprop|#static{}stapel_ui_skin_PullToRefreshSpec$stableprop[0]
+final val stapel.ui.skin/stapel_ui_skin_SelectSpec$stableprop // stapel.ui.skin/stapel_ui_skin_SelectSpec$stableprop|#static{}stapel_ui_skin_SelectSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_SkinExtensionKey$stableprop // stapel.ui.skin/stapel_ui_skin_SkinExtensionKey$stableprop|#static{}stapel_ui_skin_SkinExtensionKey$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_SnackbarSpec$stableprop // stapel.ui.skin/stapel_ui_skin_SnackbarSpec$stableprop|#static{}stapel_ui_skin_SnackbarSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_SurfaceSpec$stableprop // stapel.ui.skin/stapel_ui_skin_SurfaceSpec$stableprop|#static{}stapel_ui_skin_SurfaceSpec$stableprop[0]
@@ -959,17 +1323,36 @@ final val stapel.ui.skin/stapel_ui_skin_TabsSpec$stableprop // stapel.ui.skin/st
 final val stapel.ui.skin/stapel_ui_skin_TextFieldSpec$stableprop // stapel.ui.skin/stapel_ui_skin_TextFieldSpec$stableprop|#static{}stapel_ui_skin_TextFieldSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_ToggleSpec$stableprop // stapel.ui.skin/stapel_ui_skin_ToggleSpec$stableprop|#static{}stapel_ui_skin_ToggleSpec$stableprop[0]
 final val stapel.ui.skin/stapel_ui_skin_TopBarSpec$stableprop // stapel.ui.skin/stapel_ui_skin_TopBarSpec$stableprop|#static{}stapel_ui_skin_TopBarSpec$stableprop[0]
+final val stapel.ui.skin/text // stapel.ui.skin/text|@stapel.ui.skin.BadgeSpec{}text[0]
+    final fun (stapel.ui.skin/BadgeSpec).<get-text>(): kotlin/String? // stapel.ui.skin/text.<get-text>|<get-text>@stapel.ui.skin.BadgeSpec(){}[0]
+final val stapel.ui.skin/visible // stapel.ui.skin/visible|@stapel.ui.skin.BadgeSpec{}visible[0]
+    final fun (stapel.ui.skin/BadgeSpec).<get-visible>(): kotlin/Boolean // stapel.ui.skin/visible.<get-visible>|<get-visible>@stapel.ui.skin.BadgeSpec(){}[0]
+final val stapel.ui/LARGE_TITLE_COLLAPSE_DISTANCE // stapel.ui/LARGE_TITLE_COLLAPSE_DISTANCE|{}LARGE_TITLE_COLLAPSE_DISTANCE[0]
+    final fun <get-LARGE_TITLE_COLLAPSE_DISTANCE>(): androidx.compose.ui.unit/Dp // stapel.ui/LARGE_TITLE_COLLAPSE_DISTANCE.<get-LARGE_TITLE_COLLAPSE_DISTANCE>|<get-LARGE_TITLE_COLLAPSE_DISTANCE>(){}[0]
 final val stapel.ui/LocalStapelContentColor // stapel.ui/LocalStapelContentColor|{}LocalStapelContentColor[0]
     final fun <get-LocalStapelContentColor>(): androidx.compose.runtime/ProvidableCompositionLocal<androidx.compose.ui.graphics/Color> // stapel.ui/LocalStapelContentColor.<get-LocalStapelContentColor>|<get-LocalStapelContentColor>(){}[0]
 final val stapel.ui/LocalStapelErrorText // stapel.ui/LocalStapelErrorText|{}LocalStapelErrorText[0]
     final fun <get-LocalStapelErrorText>(): androidx.compose.runtime/ProvidableCompositionLocal<stapel.result.text/ErrorTextResolver> // stapel.ui/LocalStapelErrorText.<get-LocalStapelErrorText>|<get-LocalStapelErrorText>(){}[0]
+final val stapel.ui/LocalStapelImages // stapel.ui/LocalStapelImages|{}LocalStapelImages[0]
+    final fun <get-LocalStapelImages>(): androidx.compose.runtime/ProvidableCompositionLocal<stapel.ui/StapelImages> // stapel.ui/LocalStapelImages.<get-LocalStapelImages>|<get-LocalStapelImages>(){}[0]
+final val stapel.ui/LocalStapelReduceMotion // stapel.ui/LocalStapelReduceMotion|{}LocalStapelReduceMotion[0]
+    final fun <get-LocalStapelReduceMotion>(): androidx.compose.runtime/ProvidableCompositionLocal<kotlin/Boolean> // stapel.ui/LocalStapelReduceMotion.<get-LocalStapelReduceMotion>|<get-LocalStapelReduceMotion>(){}[0]
 final val stapel.ui/LocalStapelStrings // stapel.ui/LocalStapelStrings|{}LocalStapelStrings[0]
     final fun <get-LocalStapelStrings>(): androidx.compose.runtime/ProvidableCompositionLocal<stapel.i18n/StapelStrings> // stapel.ui/LocalStapelStrings.<get-LocalStapelStrings>|<get-LocalStapelStrings>(){}[0]
+final val stapel.ui/PICKER_LIST_MAX_HEIGHT // stapel.ui/PICKER_LIST_MAX_HEIGHT|{}PICKER_LIST_MAX_HEIGHT[0]
+    final fun <get-PICKER_LIST_MAX_HEIGHT>(): androidx.compose.ui.unit/Dp // stapel.ui/PICKER_LIST_MAX_HEIGHT.<get-PICKER_LIST_MAX_HEIGHT>|<get-PICKER_LIST_MAX_HEIGHT>(){}[0]
 final val stapel.ui/StapelIconIdsDrawn // stapel.ui/StapelIconIdsDrawn|{}StapelIconIdsDrawn[0]
     final fun <get-StapelIconIdsDrawn>(): kotlin.collections/Set<kotlin/String> // stapel.ui/StapelIconIdsDrawn.<get-StapelIconIdsDrawn>|<get-StapelIconIdsDrawn>(){}[0]
 final val stapel.ui/StapelIcons // stapel.ui/StapelIcons|{}StapelIcons[0]
     final fun <get-StapelIcons>(): stapel.ui/StapelIconSet // stapel.ui/StapelIcons.<get-StapelIcons>|<get-StapelIcons>(){}[0]
+final val stapel.ui/stapel_ui_ComponentColors$stableprop // stapel.ui/stapel_ui_ComponentColors$stableprop|#static{}stapel_ui_ComponentColors$stableprop[0]
+final val stapel.ui/stapel_ui_ContainerColors$stableprop // stapel.ui/stapel_ui_ContainerColors$stableprop|#static{}stapel_ui_ContainerColors$stableprop[0]
 final val stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop // stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop|#static{}stapel_ui_InMemoryThemePreferenceStore$stableprop[0]
+final val stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop|#static{}stapel_ui_SectionHeaderAction_Avatar$stableprop[0]
+final val stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop|#static{}stapel_ui_SectionHeaderAction_Badge$stableprop[0]
+final val stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop|#static{}stapel_ui_SectionHeaderAction_Chip$stableprop[0]
+final val stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop|#static{}stapel_ui_SectionHeaderAction_Icon$stableprop[0]
+final val stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop|#static{}stapel_ui_SectionHeaderAction_Link$stableprop[0]
 final val stapel.ui/stapel_ui_StapelColors$stableprop // stapel.ui/stapel_ui_StapelColors$stableprop|#static{}stapel_ui_StapelColors$stableprop[0]
 final val stapel.ui/stapel_ui_StapelElevations$stableprop // stapel.ui/stapel_ui_StapelElevations$stableprop|#static{}stapel_ui_StapelElevations$stableprop[0]
 final val stapel.ui/stapel_ui_StapelFonts$stableprop // stapel.ui/stapel_ui_StapelFonts$stableprop|#static{}stapel_ui_StapelFonts$stableprop[0]
@@ -984,14 +1367,24 @@ final val stapel.ui/stapel_ui_StapelTheme$stableprop // stapel.ui/stapel_ui_Stap
 final val stapel.ui/stapel_ui_StapelTypography$stableprop // stapel.ui/stapel_ui_StapelTypography$stableprop|#static{}stapel_ui_StapelTypography$stableprop[0]
 final val stapel.ui/stapel_ui_SystemFonts$stableprop // stapel.ui/stapel_ui_SystemFonts$stableprop|#static{}stapel_ui_SystemFonts$stableprop[0]
 
+final fun (androidx.compose.ui/Modifier).stapel.ui.skin/maxWidthFraction(kotlin/Float): androidx.compose.ui/Modifier // stapel.ui.skin/maxWidthFraction|maxWidthFraction@androidx.compose.ui.Modifier(kotlin.Float){}[0]
 final fun (androidx.compose.ui/Modifier).stapel.ui.skin/optionalTestTag(kotlin/String?): androidx.compose.ui/Modifier // stapel.ui.skin/optionalTestTag|optionalTestTag@androidx.compose.ui.Modifier(kotlin.String?){}[0]
+final fun (androidx.compose.ui/Modifier).stapel.ui.skin/refreshAction(stapel.ui.skin/PullToRefreshSpec): androidx.compose.ui/Modifier // stapel.ui.skin/refreshAction|refreshAction@androidx.compose.ui.Modifier(stapel.ui.skin.PullToRefreshSpec){}[0]
 final fun (androidx.compose.ui/Modifier).stapel.ui.skin/stapelShadow(stapel.tokens/Shadow?, androidx.compose.ui.graphics/Shape, androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui/Modifier // stapel.ui.skin/stapelShadow|stapelShadow@androidx.compose.ui.Modifier(stapel.tokens.Shadow?;androidx.compose.ui.graphics.Shape;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+final fun (androidx.compose.ui/Modifier).stapel.ui.skin/stapelToggle(stapel.ui.skin/ToggleKind, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, androidx.compose.foundation.interaction/MutableInteractionSource?, kotlin/Function1<kotlin/Boolean, kotlin/Unit>): androidx.compose.ui/Modifier // stapel.ui.skin/stapelToggle|stapelToggle@androidx.compose.ui.Modifier(stapel.ui.skin.ToggleKind;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;androidx.compose.foundation.interaction.MutableInteractionSource?;kotlin.Function1<kotlin.Boolean,kotlin.Unit>){}[0]
 final fun (androidx.compose.ui/Modifier).stapel.ui.skin/stapelTouchTarget(androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui/Modifier // stapel.ui.skin/stapelTouchTarget|stapelTouchTarget@androidx.compose.ui.Modifier(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 final fun (androidx.compose.ui/Modifier).stapel.ui/stapelFocusRing(androidx.compose.foundation.interaction/MutableInteractionSource, androidx.compose.ui.graphics/Shape?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int): androidx.compose.ui/Modifier // stapel.ui/stapelFocusRing|stapelFocusRing@androidx.compose.ui.Modifier(androidx.compose.foundation.interaction.MutableInteractionSource;androidx.compose.ui.graphics.Shape?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun (stapel.tokens/Argb).stapel.ui/toColor(): androidx.compose.ui.graphics/Color // stapel.ui/toColor|toColor@stapel.tokens.Argb(){}[0]
+final fun (stapel.ui.skin/TextFieldSpec).stapel.ui.skin/keyboardOptions(): androidx.compose.foundation.text/KeyboardOptions // stapel.ui.skin/keyboardOptions|keyboardOptions@stapel.ui.skin.TextFieldSpec(){}[0]
 final fun (stapel.ui/StapelIconSet).stapel.ui/orElse(stapel.ui/StapelIconSet): stapel.ui/StapelIconSet // stapel.ui/orElse|orElse@stapel.ui.StapelIconSet(stapel.ui.StapelIconSet){}[0]
+final fun <#A: kotlin/Any?> stapel.ui/AdaptiveGrid(kotlin.collections/List<#A>, androidx.compose.ui.unit/Dp, androidx.compose.ui/Modifier?, androidx.compose.ui.unit/Dp, kotlin/Function3<#A, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/AdaptiveGrid|AdaptiveGrid(kotlin.collections.List<0:0>;androidx.compose.ui.unit.Dp;androidx.compose.ui.Modifier?;androidx.compose.ui.unit.Dp;kotlin.Function3<0:0,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
 final fun <#A: kotlin/Any?> stapel.ui/LoadBoundary(stapel.result.state/Resource<#A>, androidx.compose.ui/Modifier?, kotlin/Function0<kotlin/Unit>?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function3<#A, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/LoadBoundary|LoadBoundary(stapel.result.state.Resource<0:0>;androidx.compose.ui.Modifier?;kotlin.Function0<kotlin.Unit>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function3<0:0,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
 final fun <#A: kotlin/Any?> stapel.ui/LoadList(stapel.result.state/Resource<kotlin.collections/List<#A>>, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.ui/Modifier?, kotlin/Function0<kotlin/Unit>?, kotlin/Function3<#A, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/LoadList|LoadList(stapel.result.state.Resource<kotlin.collections.List<0:0>>;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.ui.Modifier?;kotlin.Function0<kotlin.Unit>?;kotlin.Function3<0:0,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> stapel.ui/PickerSheet(kotlin/String, kotlin.collections/List<#A>, kotlin/Function1<#A, kotlin/String>, kotlin.collections/Set<#A>, kotlin/Function1<kotlin.collections/Set<#A>, kotlin/Unit>, kotlin/Function0<kotlin/Unit>, kotlin/String, kotlin/Boolean, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Function1<#A, kotlin/String?>?, kotlin/Function1<#A, kotlin/Any>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/PickerSheet|PickerSheet(kotlin.String;kotlin.collections.List<0:0>;kotlin.Function1<0:0,kotlin.String>;kotlin.collections.Set<0:0>;kotlin.Function1<kotlin.collections.Set<0:0>,kotlin.Unit>;kotlin.Function0<kotlin.Unit>;kotlin.String;kotlin.Boolean;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Function1<0:0,kotlin.String?>?;kotlin.Function1<0:0,kotlin.Any>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> stapel.ui/StapelMultiSelect(kotlin/String, kotlin.collections/List<#A>, kotlin.collections/Set<#A>, kotlin/Function1<kotlin.collections/Set<#A>, kotlin/Unit>, kotlin/Function1<#A, kotlin/String>, kotlin/String, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Function1<kotlin.collections/Set<#A>, kotlin/String?>?, kotlin/String?, kotlin/String?, kotlin/Boolean, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Function1<#A, kotlin/Any>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelMultiSelect|StapelMultiSelect(kotlin.String;kotlin.collections.List<0:0>;kotlin.collections.Set<0:0>;kotlin.Function1<kotlin.collections.Set<0:0>,kotlin.Unit>;kotlin.Function1<0:0,kotlin.String>;kotlin.String;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Function1<kotlin.collections.Set<0:0>,kotlin.String?>?;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Function1<0:0,kotlin.Any>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> stapel.ui/StapelSelect(kotlin/String, kotlin.collections/List<#A>, #A?, kotlin/Function1<#A, kotlin/Unit>, kotlin/Function1<#A, kotlin/String>, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Boolean, stapel.ui/StapelIcon?, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Function1<#A, kotlin/Any>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelSelect|StapelSelect(kotlin.String;kotlin.collections.List<0:0>;0:0?;kotlin.Function1<0:0,kotlin.Unit>;kotlin.Function1<0:0,kotlin.String>;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Function1<0:0,kotlin.Any>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
+final fun stapel.ui.skin/pagerDotWindow(kotlin/Int, kotlin/Int, kotlin/Int): kotlin.collections/List<stapel.ui.skin/PagerDot> // stapel.ui.skin/pagerDotWindow|pagerDotWindow(kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui.skin/shimmerBrush(androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui.graphics/Brush // stapel.ui.skin/shimmerBrush|shimmerBrush(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_AvatarSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_AvatarSpec$stableprop_getter|stapel_ui_skin_AvatarSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_BadgeSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_BadgeSpec$stableprop_getter|stapel_ui_skin_BadgeSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_BannerSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_BannerSpec$stableprop_getter|stapel_ui_skin_BannerSpec$stableprop_getter(){}[0]
@@ -1001,11 +1394,20 @@ final fun stapel.ui.skin/stapel_ui_skin_CodeFieldSpec$stableprop_getter(): kotli
 final fun stapel.ui.skin/stapel_ui_skin_DialogSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_DialogSpec$stableprop_getter|stapel_ui_skin_DialogSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_FoundationSkin$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_FoundationSkin$stableprop_getter|stapel_ui_skin_FoundationSkin$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_IconButtonSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_IconButtonSpec$stableprop_getter|stapel_ui_skin_IconButtonSpec$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Badge$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Badge$stableprop_getter|stapel_ui_skin_ListItemAccessory_Badge$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Chevron$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Chevron$stableprop_getter|stapel_ui_skin_ListItemAccessory_Chevron$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Toggle$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ListItemAccessory_Toggle$stableprop_getter|stapel_ui_skin_ListItemAccessory_Toggle$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_ListItemMedia_Avatar$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ListItemMedia_Avatar$stableprop_getter|stapel_ui_skin_ListItemMedia_Avatar$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_ListItemMedia_Icon$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ListItemMedia_Icon$stableprop_getter|stapel_ui_skin_ListItemMedia_Icon$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_ListItemSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ListItemSpec$stableprop_getter|stapel_ui_skin_ListItemSpec$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_ListItemValue$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ListItemValue$stableprop_getter|stapel_ui_skin_ListItemValue$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_NavigationItemSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_NavigationItemSpec$stableprop_getter|stapel_ui_skin_NavigationItemSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_NavigationSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_NavigationSpec$stableprop_getter|stapel_ui_skin_NavigationSpec$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_PagerDot$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_PagerDot$stableprop_getter|stapel_ui_skin_PagerDot$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_PagerIndicatorSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_PagerIndicatorSpec$stableprop_getter|stapel_ui_skin_PagerIndicatorSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_ProgressSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ProgressSpec$stableprop_getter|stapel_ui_skin_ProgressSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_PullToRefreshSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_PullToRefreshSpec$stableprop_getter|stapel_ui_skin_PullToRefreshSpec$stableprop_getter(){}[0]
+final fun stapel.ui.skin/stapel_ui_skin_SelectSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_SelectSpec$stableprop_getter|stapel_ui_skin_SelectSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_SkinExtensionKey$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_SkinExtensionKey$stableprop_getter|stapel_ui_skin_SkinExtensionKey$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_SnackbarSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_SnackbarSpec$stableprop_getter|stapel_ui_skin_SnackbarSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_SurfaceSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_SurfaceSpec$stableprop_getter|stapel_ui_skin_SurfaceSpec$stableprop_getter(){}[0]
@@ -1013,36 +1415,58 @@ final fun stapel.ui.skin/stapel_ui_skin_TabsSpec$stableprop_getter(): kotlin/Int
 final fun stapel.ui.skin/stapel_ui_skin_TextFieldSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_TextFieldSpec$stableprop_getter|stapel_ui_skin_TextFieldSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_ToggleSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_ToggleSpec$stableprop_getter|stapel_ui_skin_ToggleSpec$stableprop_getter(){}[0]
 final fun stapel.ui.skin/stapel_ui_skin_TopBarSpec$stableprop_getter(): kotlin/Int // stapel.ui.skin/stapel_ui_skin_TopBarSpec$stableprop_getter|stapel_ui_skin_TopBarSpec$stableprop_getter(){}[0]
+final fun stapel.ui.skin/toggleState(kotlin/Boolean, kotlin/Boolean): androidx.compose.ui.state/ToggleableState // stapel.ui.skin/toggleState|toggleState(kotlin.Boolean;kotlin.Boolean){}[0]
 final fun stapel.ui.skin/toneIcon(stapel.ui/StapelTone): stapel.ui/StapelIcon // stapel.ui.skin/toneIcon|toneIcon(stapel.ui.StapelTone){}[0]
 final fun stapel.ui/ConfirmDialog(kotlin/String, kotlin/String, kotlin/String, kotlin/Function0<kotlin/Unit>, kotlin/Function0<kotlin/Unit>, kotlin/String?, kotlin/Boolean, kotlin/Boolean, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/ConfirmDialog|ConfirmDialog(kotlin.String;kotlin.String;kotlin.String;kotlin.Function0<kotlin.Unit>;kotlin.Function0<kotlin.Unit>;kotlin.String?;kotlin.Boolean;kotlin.Boolean;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/EmptyState(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, stapel.ui/StapelIcon?, stapel.ui.skin/ButtonSpec?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/EmptyState|EmptyState(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;stapel.ui.StapelIcon?;stapel.ui.skin.ButtonSpec?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/EmptyState(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, stapel.ui/StapelIcon?, stapel.ui.skin/ButtonSpec?, kotlin/String?, stapel.ui.skin/ButtonSpec?, stapel.ui/StatusSize?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/EmptyState|EmptyState(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;stapel.ui.StapelIcon?;stapel.ui.skin.ButtonSpec?;kotlin.String?;stapel.ui.skin.ButtonSpec?;stapel.ui.StatusSize?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/ErrorState(stapel.result/StapelError, androidx.compose.ui/Modifier?, kotlin/Function0<kotlin/Unit>?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/ErrorState|ErrorState(stapel.result.StapelError;androidx.compose.ui.Modifier?;kotlin.Function0<kotlin.Unit>?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/SectionHeader(kotlin/String, androidx.compose.ui/Modifier?, stapel.ui/SectionHeaderSize?, kotlin/String?, kotlin/String?, stapel.ui/SectionHeaderAction?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/SectionHeader|SectionHeader(kotlin.String;androidx.compose.ui.Modifier?;stapel.ui.SectionHeaderSize?;kotlin.String?;kotlin.String?;stapel.ui.SectionHeaderAction?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelAvatar(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, stapel.ui.skin/AvatarSize?, stapel.ui/StapelIcon?, kotlin/String?, stapel.ui.skin/BadgeSpec?, stapel.ui.skin/BadgePlacement?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelAvatar|StapelAvatar(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;stapel.ui.skin.AvatarSize?;stapel.ui.StapelIcon?;kotlin.String?;stapel.ui.skin.BadgeSpec?;stapel.ui.skin.BadgePlacement?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelBadge(androidx.compose.ui/Modifier?, kotlin/Int?, kotlin/String?, stapel.ui/StapelTone?, stapel.ui.skin/BadgeSize?, stapel.ui.skin/BadgeEmphasis?, kotlin/Int, stapel.ui/StapelIcon?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelBadge|StapelBadge(androidx.compose.ui.Modifier?;kotlin.Int?;kotlin.String?;stapel.ui.StapelTone?;stapel.ui.skin.BadgeSize?;stapel.ui.skin.BadgeEmphasis?;kotlin.Int;stapel.ui.StapelIcon?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelBanner(stapel.ui/StapelTone, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/String?, stapel.ui.skin/ButtonSpec?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelBanner|StapelBanner(stapel.ui.StapelTone;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.String?;stapel.ui.skin.ButtonSpec?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelButton(kotlin/String, kotlin/Function0<kotlin/Unit>, androidx.compose.ui/Modifier?, stapel.ui.skin/ButtonVariant?, stapel.ui.skin/ControlSize?, kotlin/Boolean, kotlin/Boolean, kotlin/String?, stapel.ui/StapelIcon?, kotlin/Boolean, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelButton|StapelButton(kotlin.String;kotlin.Function0<kotlin.Unit>;androidx.compose.ui.Modifier?;stapel.ui.skin.ButtonVariant?;stapel.ui.skin.ControlSize?;kotlin.Boolean;kotlin.Boolean;kotlin.String?;stapel.ui.StapelIcon?;kotlin.Boolean;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelCodeField(androidx.compose.foundation.text.input/TextFieldState, kotlin/Int, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Boolean, kotlin/Function1<kotlin/String, kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelCodeField|StapelCodeField(androidx.compose.foundation.text.input.TextFieldState;kotlin.Int;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Boolean;kotlin.Function1<kotlin.String,kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelChip(kotlin/String, androidx.compose.ui/Modifier?, stapel.ui.skin/ChipKind?, kotlin/Boolean, kotlin/Function0<kotlin/Unit>?, stapel.ui/StapelTone?, stapel.ui/StapelIcon?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, kotlin/Boolean, stapel.ui.skin/ControlSize?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelChip|StapelChip(kotlin.String;androidx.compose.ui.Modifier?;stapel.ui.skin.ChipKind?;kotlin.Boolean;kotlin.Function0<kotlin.Unit>?;stapel.ui.StapelTone?;stapel.ui.StapelIcon?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;kotlin.Boolean;stapel.ui.skin.ControlSize?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelCodeField(androidx.compose.foundation.text.input/TextFieldState, kotlin/Int, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Boolean, kotlin/Function1<kotlin/String, kotlin/Unit>?, kotlin/String?, androidx.compose.foundation.text.input/InputTransformation?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelCodeField|StapelCodeField(androidx.compose.foundation.text.input.TextFieldState;kotlin.Int;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Boolean;kotlin.Function1<kotlin.String,kotlin.Unit>?;kotlin.String?;androidx.compose.foundation.text.input.InputTransformation?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelDialog(kotlin/Function0<kotlin/Unit>, kotlin/String, kotlin/String?, kotlin/String?, kotlin/Boolean, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelDialog|StapelDialog(kotlin.Function0<kotlin.Unit>;kotlin.String;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelDivider(androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelDivider|StapelDivider(androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelIconButton(stapel.ui/StapelIcon, kotlin/String, kotlin/Function0<kotlin/Unit>, androidx.compose.ui/Modifier?, kotlin/Boolean, stapel.ui/StapelTone?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelIconButton|StapelIconButton(stapel.ui.StapelIcon;kotlin.String;kotlin.Function0<kotlin.Unit>;androidx.compose.ui.Modifier?;kotlin.Boolean;stapel.ui.StapelTone?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelIconView(stapel.ui/StapelIcon, kotlin/String?, androidx.compose.ui/Modifier?, androidx.compose.ui.unit/Dp, androidx.compose.ui.graphics/Color, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelIconView|StapelIconView(stapel.ui.StapelIcon;kotlin.String?;androidx.compose.ui.Modifier?;androidx.compose.ui.unit.Dp;androidx.compose.ui.graphics.Color;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelLink(kotlin/String, kotlin/Function0<kotlin/Unit>, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelLink|StapelLink(kotlin.String;kotlin.Function0<kotlin.Unit>;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelListItem(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function0<kotlin/Unit>?, kotlin/Boolean, kotlin/Boolean, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelListItem|StapelListItem(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function0<kotlin.Unit>?;kotlin.Boolean;kotlin.Boolean;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelPage(androidx.compose.ui/Modifier?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, stapel.ui/PaneMeasure?, kotlin/Boolean, kotlin/Boolean, kotlin/Function3<androidx.compose.foundation.layout/ColumnScope, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelPage|StapelPage(androidx.compose.ui.Modifier?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;stapel.ui.PaneMeasure?;kotlin.Boolean;kotlin.Boolean;kotlin.Function3<androidx.compose.foundation.layout.ColumnScope,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelProgress(stapel.ui.skin/ProgressKind?, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Float?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelProgress|StapelProgress(stapel.ui.skin.ProgressKind?;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Float?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelListItem(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function0<kotlin/Unit>?, kotlin/Boolean, kotlin/Boolean, kotlin/String?, stapel.ui.skin/ListItemMedia?, stapel.ui.skin/ListItemValue?, stapel.ui.skin/ListItemAccessory?, kotlin/Int, kotlin/Int, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelListItem|StapelListItem(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function0<kotlin.Unit>?;kotlin.Boolean;kotlin.Boolean;kotlin.String?;stapel.ui.skin.ListItemMedia?;stapel.ui.skin.ListItemValue?;stapel.ui.skin.ListItemAccessory?;kotlin.Int;kotlin.Int;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelNavigationBar(kotlin.collections/List<stapel.ui.skin/NavigationItemSpec>, kotlin/String?, kotlin/Function1<kotlin/String, kotlin/Unit>, androidx.compose.ui/Modifier?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelNavigationBar|StapelNavigationBar(kotlin.collections.List<stapel.ui.skin.NavigationItemSpec>;kotlin.String?;kotlin.Function1<kotlin.String,kotlin.Unit>;androidx.compose.ui.Modifier?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelNavigationRail(kotlin.collections/List<stapel.ui.skin/NavigationItemSpec>, kotlin/String?, kotlin/Function1<kotlin/String, kotlin/Unit>, androidx.compose.ui/Modifier?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelNavigationRail|StapelNavigationRail(kotlin.collections.List<stapel.ui.skin.NavigationItemSpec>;kotlin.String?;kotlin.Function1<kotlin.String,kotlin.Unit>;androidx.compose.ui.Modifier?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelPage(androidx.compose.ui/Modifier?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, stapel.ui/PaneMeasure?, kotlin/Boolean, kotlin/Boolean, kotlin/String?, kotlin/String?, stapel.ui.skin/IconButtonSpec?, kotlin.collections/List<stapel.ui.skin/IconButtonSpec>?, kotlin/Boolean, stapel.ui.skin/PullToRefreshSpec?, stapel.ui/StapelSnackbarHostState?, androidx.compose.foundation.layout/WindowInsets?, kotlin/Function3<androidx.compose.foundation.layout/ColumnScope, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelPage|StapelPage(androidx.compose.ui.Modifier?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;stapel.ui.PaneMeasure?;kotlin.Boolean;kotlin.Boolean;kotlin.String?;kotlin.String?;stapel.ui.skin.IconButtonSpec?;kotlin.collections.List<stapel.ui.skin.IconButtonSpec>?;kotlin.Boolean;stapel.ui.skin.PullToRefreshSpec?;stapel.ui.StapelSnackbarHostState?;androidx.compose.foundation.layout.WindowInsets?;kotlin.Function3<androidx.compose.foundation.layout.ColumnScope,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelPagerIndicator(kotlin/Int, kotlin/Int, kotlin/String, androidx.compose.ui/Modifier?, kotlin/Function1<kotlin/Int, kotlin/Unit>?, kotlin/Function1<kotlin/Int, kotlin/String>?, kotlin/Int, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelPagerIndicator|StapelPagerIndicator(kotlin.Int;kotlin.Int;kotlin.String;androidx.compose.ui.Modifier?;kotlin.Function1<kotlin.Int,kotlin.Unit>?;kotlin.Function1<kotlin.Int,kotlin.String>?;kotlin.Int;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelProgress(stapel.ui.skin/ProgressKind?, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Float?, kotlin/String?, stapel.ui.skin/SkeletonShape?, kotlin/Int, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelProgress|StapelProgress(stapel.ui.skin.ProgressKind?;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Float?;kotlin.String?;stapel.ui.skin.SkeletonShape?;kotlin.Int;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelPullToRefresh(kotlin/Boolean, kotlin/Function0<kotlin/Unit>, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelPullToRefresh|StapelPullToRefresh(kotlin.Boolean;kotlin.Function0<kotlin.Unit>;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelSelectField(kotlin/String, kotlin/String?, kotlin/Function0<kotlin/Unit>, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Boolean, stapel.ui/StapelIcon?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelSelectField|StapelSelectField(kotlin.String;kotlin.String?;kotlin.Function0<kotlin.Unit>;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelSnackbarHost(stapel.ui/StapelSnackbarHostState, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelSnackbarHost|StapelSnackbarHost(stapel.ui.StapelSnackbarHostState;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelSurface(androidx.compose.ui/Modifier?, stapel.ui.skin/SurfaceTone?, stapel.ui.skin/ElevationStep?, kotlin/Boolean, kotlin/Function0<kotlin/Unit>?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelSurface|StapelSurface(androidx.compose.ui.Modifier?;stapel.ui.skin.SurfaceTone?;stapel.ui.skin.ElevationStep?;kotlin.Boolean;kotlin.Function0<kotlin.Unit>?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelTabs(kotlin.collections/List<kotlin/String>, kotlin/Int, kotlin/Function1<kotlin/Int, kotlin/Unit>, androidx.compose.ui/Modifier?, stapel.ui.skin/TabsVariant?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelTabs|StapelTabs(kotlin.collections.List<kotlin.String>;kotlin.Int;kotlin.Function1<kotlin.Int,kotlin.Unit>;androidx.compose.ui.Modifier?;stapel.ui.skin.TabsVariant?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelTabs(kotlin.collections/List<kotlin/String>, kotlin/Int, kotlin/Function1<kotlin/Int, kotlin/Unit>, androidx.compose.ui/Modifier?, stapel.ui.skin/TabsVariant?, kotlin/String?, kotlin.collections/List<stapel.ui/StapelIcon>?, kotlin/Boolean, kotlin/Boolean, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelTabs|StapelTabs(kotlin.collections.List<kotlin.String>;kotlin.Int;kotlin.Function1<kotlin.Int,kotlin.Unit>;androidx.compose.ui.Modifier?;stapel.ui.skin.TabsVariant?;kotlin.String?;kotlin.collections.List<stapel.ui.StapelIcon>?;kotlin.Boolean;kotlin.Boolean;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelText(kotlin/String, androidx.compose.ui/Modifier?, androidx.compose.ui.text/TextStyle?, androidx.compose.ui.graphics/Color, kotlin/Int, androidx.compose.ui.text.style/TextOverflow, androidx.compose.ui.text.style/TextAlign?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelText|StapelText(kotlin.String;androidx.compose.ui.Modifier?;androidx.compose.ui.text.TextStyle?;androidx.compose.ui.graphics.Color;kotlin.Int;androidx.compose.ui.text.style.TextOverflow;androidx.compose.ui.text.style.TextAlign?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelText(kotlin/String, androidx.compose.ui/Modifier?, androidx.compose.ui.text/TextStyle?, androidx.compose.ui.graphics/Color, kotlin/Int, androidx.compose.ui.text.style/TextOverflow?, androidx.compose.ui.text.style/TextAlign?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelText|StapelText(kotlin.String;androidx.compose.ui.Modifier?;androidx.compose.ui.text.TextStyle?;androidx.compose.ui.graphics.Color;kotlin.Int;androidx.compose.ui.text.style.TextOverflow?;androidx.compose.ui.text.style.TextAlign?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelTextField(androidx.compose.foundation.text.input/TextFieldState, kotlin/String, androidx.compose.ui/Modifier?, stapel.ui.skin/TextFieldKind?, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Boolean, kotlin/Boolean, stapel.ui/StapelIcon?, kotlin/String?, stapel.ui.skin/IconButtonSpec?, androidx.compose.ui.text.input/ImeAction?, kotlin/Function0<kotlin/Unit>?, androidx.compose.ui.autofill/ContentType?, kotlin/Int, kotlin/Int, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelTextField|StapelTextField(androidx.compose.foundation.text.input.TextFieldState;kotlin.String;androidx.compose.ui.Modifier?;stapel.ui.skin.TextFieldKind?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?;stapel.ui.skin.IconButtonSpec?;androidx.compose.ui.text.input.ImeAction?;kotlin.Function0<kotlin.Unit>?;androidx.compose.ui.autofill.ContentType?;kotlin.Int;kotlin.Int;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelTheme(stapel.ui.skin/StapelSkin, stapel.tokens/StapelTokens?, stapel.tokens/ThemeMode?, stapel.ui/StapelFontResolver?, stapel.ui/StapelIconSet?, stapel.i18n/StapelStrings?, stapel.ui/StapelLayout?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelTheme|StapelTheme(stapel.ui.skin.StapelSkin;stapel.tokens.StapelTokens?;stapel.tokens.ThemeMode?;stapel.ui.StapelFontResolver?;stapel.ui.StapelIconSet?;stapel.i18n.StapelStrings?;stapel.ui.StapelLayout?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
-final fun stapel.ui/StapelTopBar(kotlin/String, androidx.compose.ui/Modifier?, stapel.ui.skin/IconButtonSpec?, kotlin.collections/List<stapel.ui.skin/IconButtonSpec>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelTopBar|StapelTopBar(kotlin.String;androidx.compose.ui.Modifier?;stapel.ui.skin.IconButtonSpec?;kotlin.collections.List<stapel.ui.skin.IconButtonSpec>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelTextField(androidx.compose.foundation.text.input/TextFieldState, kotlin/String, androidx.compose.ui/Modifier?, stapel.ui.skin/TextFieldKind?, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Boolean, kotlin/Boolean, stapel.ui/StapelIcon?, kotlin/String?, stapel.ui.skin/IconButtonSpec?, androidx.compose.ui.text.input/ImeAction?, kotlin/Function0<kotlin/Unit>?, androidx.compose.ui.autofill/ContentType?, kotlin/Int, kotlin/Int, kotlin/String?, kotlin/Boolean, kotlin/String?, androidx.compose.foundation.text.input/InputTransformation?, androidx.compose.foundation.text.input/OutputTransformation?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelTextField|StapelTextField(androidx.compose.foundation.text.input.TextFieldState;kotlin.String;androidx.compose.ui.Modifier?;stapel.ui.skin.TextFieldKind?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?;stapel.ui.skin.IconButtonSpec?;androidx.compose.ui.text.input.ImeAction?;kotlin.Function0<kotlin.Unit>?;androidx.compose.ui.autofill.ContentType?;kotlin.Int;kotlin.Int;kotlin.String?;kotlin.Boolean;kotlin.String?;androidx.compose.foundation.text.input.InputTransformation?;androidx.compose.foundation.text.input.OutputTransformation?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelTheme(stapel.ui.skin/StapelSkin, stapel.tokens/StapelTokens?, stapel.tokens/ThemeMode?, stapel.ui/StapelFontResolver?, stapel.ui/StapelIconSet?, stapel.i18n/StapelStrings?, stapel.ui/StapelLayout?, kotlin/Boolean, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelTheme|StapelTheme(stapel.ui.skin.StapelSkin;stapel.tokens.StapelTokens?;stapel.tokens.ThemeMode?;stapel.ui.StapelFontResolver?;stapel.ui.StapelIconSet?;stapel.i18n.StapelStrings?;stapel.ui.StapelLayout?;kotlin.Boolean;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelToggle(stapel.ui.skin/ToggleKind, kotlin/Boolean, kotlin/Function1<kotlin/Boolean, kotlin/Unit>, kotlin/String, androidx.compose.ui/Modifier?, kotlin/Boolean, kotlin/String?, kotlin/Boolean, kotlin/String?, kotlin/Boolean, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelToggle|StapelToggle(stapel.ui.skin.ToggleKind;kotlin.Boolean;kotlin.Function1<kotlin.Boolean,kotlin.Unit>;kotlin.String;androidx.compose.ui.Modifier?;kotlin.Boolean;kotlin.String?;kotlin.Boolean;kotlin.String?;kotlin.Boolean;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelTopBar(kotlin/String, androidx.compose.ui/Modifier?, stapel.ui.skin/IconButtonSpec?, kotlin.collections/List<stapel.ui.skin/IconButtonSpec>?, kotlin/String?, kotlin/String?, kotlin/Float?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelTopBar|StapelTopBar(kotlin.String;androidx.compose.ui.Modifier?;stapel.ui.skin.IconButtonSpec?;kotlin.collections.List<stapel.ui.skin.IconButtonSpec>?;kotlin.String?;kotlin.String?;kotlin.Float?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StatusPage(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, stapel.ui/StapelIcon?, stapel.ui/StapelTone?, stapel.ui.skin/ButtonSpec?, stapel.ui.skin/ButtonSpec?, kotlin/String?, stapel.ui/StatusSize?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StatusPage|StatusPage(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;stapel.ui.StapelIcon?;stapel.ui.StapelTone?;stapel.ui.skin.ButtonSpec?;stapel.ui.skin.ButtonSpec?;kotlin.String?;stapel.ui.StatusSize?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/adaptiveColumns(androidx.compose.ui.unit/Dp, androidx.compose.ui.unit/Dp, androidx.compose.ui.unit/Dp): kotlin/Int // stapel.ui/adaptiveColumns|adaptiveColumns(androidx.compose.ui.unit.Dp;androidx.compose.ui.unit.Dp;androidx.compose.ui.unit.Dp){}[0]
+final fun stapel.ui/avatarInitials(kotlin/String): kotlin/String // stapel.ui/avatarInitials|avatarInitials(kotlin.String){}[0]
 final fun stapel.ui/currentWindowWidth(androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui.unit/Dp // stapel.ui/currentWindowWidth|currentWindowWidth(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+final fun stapel.ui/pickerMatches(kotlin/String, kotlin/String): kotlin/Boolean // stapel.ui/pickerMatches|pickerMatches(kotlin.String;kotlin.String){}[0]
 final fun stapel.ui/rememberStapelLayout(stapel.tokens/StapelTokens, androidx.compose.ui.unit/Dp, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int): stapel.ui/StapelLayout // stapel.ui/rememberStapelLayout|rememberStapelLayout(stapel.tokens.StapelTokens;androidx.compose.ui.unit.Dp;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/rememberThemeMode(stapel.ui/ThemePreferenceStore, androidx.compose.runtime/Composer?, kotlin/Int): stapel.tokens/ThemeMode // stapel.ui/rememberThemeMode|rememberThemeMode(stapel.ui.ThemePreferenceStore;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 final fun stapel.ui/stapelLayout(stapel.tokens/StapelTokens, androidx.compose.ui.unit/Dp, stapel.ui/StapelInput = ..., androidx.compose.ui.unit/Dp = ...): stapel.ui/StapelLayout // stapel.ui/stapelLayout|stapelLayout(stapel.tokens.StapelTokens;androidx.compose.ui.unit.Dp;stapel.ui.StapelInput;androidx.compose.ui.unit.Dp){}[0]
 final fun stapel.ui/stapelPlural(stapel.i18n/PluralKey, kotlin/Long, kotlin/Array<out kotlin/Pair<kotlin/String, kotlin/Any?>>..., androidx.compose.runtime/Composer?, kotlin/Int): kotlin/String // stapel.ui/stapelPlural|stapelPlural(stapel.i18n.PluralKey;kotlin.Long;kotlin.Array<out|kotlin.Pair<kotlin.String,kotlin.Any?>>...;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 final fun stapel.ui/stapelString(stapel.i18n/StringKey, kotlin/Array<out kotlin/Pair<kotlin/String, kotlin/Any?>>..., androidx.compose.runtime/Composer?, kotlin/Int): kotlin/String // stapel.ui/stapelString|stapelString(stapel.i18n.StringKey;kotlin.Array<out|kotlin.Pair<kotlin.String,kotlin.Any?>>...;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+final fun stapel.ui/stapel_ui_ComponentColors$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_ComponentColors$stableprop_getter|stapel_ui_ComponentColors$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_ContainerColors$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_ContainerColors$stableprop_getter|stapel_ui_ContainerColors$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop_getter|stapel_ui_InMemoryThemePreferenceStore$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop_getter|stapel_ui_SectionHeaderAction_Avatar$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop_getter|stapel_ui_SectionHeaderAction_Badge$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop_getter|stapel_ui_SectionHeaderAction_Chip$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop_getter|stapel_ui_SectionHeaderAction_Icon$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop_getter|stapel_ui_SectionHeaderAction_Link$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelColors$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelColors$stableprop_getter|stapel_ui_StapelColors$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelElevations$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelElevations$stableprop_getter|stapel_ui_StapelElevations$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelFonts$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelFonts$stableprop_getter|stapel_ui_StapelFonts$stableprop_getter(){}[0]

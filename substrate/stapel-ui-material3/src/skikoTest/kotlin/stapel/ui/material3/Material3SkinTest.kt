@@ -13,6 +13,8 @@ import androidx.compose.ui.test.v2.runComposeUiTest
 import stapel.showcase.contract.SkinContractTheme
 import stapel.showcase.contract.assertSkinContract
 import stapel.showcase.contract.assertTopBarSurvivesLargeText
+import stapel.showcase.contract.assertSlotsSurviveLargeText
+import stapel.showcase.contract.assertSkeletonRespectsReduceMotion
 import stapel.tokens.StapelPresetTokens
 import stapel.tokens.StapelTokens
 import stapel.tokens.ThemeMode
@@ -51,6 +53,12 @@ class Material3SkinTest {
     fun theTopBarSurvivesTwiceTheTextSizeInEnglishAndRussian() = runComposeUiTest {
         assertTopBarSurvivesLargeText(Material3Skin, theme = MaterialContractTheme)
     }
+
+    @Test
+    fun theLaterSlotsSurviveTwiceTheTextSize() = runComposeUiTest { assertSlotsSurviveLargeText(Material3Skin, theme = MaterialContractTheme) }
+
+    @Test
+    fun theSkeletonRespectsReduceMotion() = runComposeUiTest { assertSkeletonRespectsReduceMotion(Material3Skin, theme = MaterialContractTheme) }
 
     @Test
     fun material3SkinHonoursTheContractDarkWithAPreset() = runComposeUiTest {

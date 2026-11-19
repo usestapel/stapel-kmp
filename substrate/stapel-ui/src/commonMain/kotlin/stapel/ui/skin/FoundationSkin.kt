@@ -1,6 +1,38 @@
 package stapel.ui.skin
 
 import androidx.compose.foundation.background
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.text.input.clearText
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.layout.layout
+import stapel.ui.LocalStapelReduceMotion
+import kotlin.math.roundToInt
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.Velocity
+import stapel.ui.ComponentColors
+import stapel.ui.LocalStapelImages
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -19,7 +51,6 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicSecureTextField
 import androidx.compose.foundation.text.BasicTextField
@@ -60,6 +91,7 @@ import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
@@ -197,16 +229,7 @@ public object FoundationSkin : StapelSkin {
         val shape = StapelTheme.shapes.md
         val interaction = remember { MutableInteractionSource() }
         var revealed by remember { mutableStateOf(false) }
-        val keyboard = KeyboardOptions(
-            keyboardType = when (spec.kind) {
-                TextFieldKind.Email -> KeyboardType.Email
-                TextFieldKind.Phone -> KeyboardType.Phone
-                TextFieldKind.Password -> KeyboardType.Password
-                TextFieldKind.Number -> KeyboardType.Number
-                TextFieldKind.Text, TextFieldKind.Multiline -> KeyboardType.Text
-            },
-            imeAction = spec.imeAction,
-        )
+        val keyboard = spec.keyboardOptions()
         val outline = when {
             spec.error != null -> colors.errorBorder
             else -> colors.border
@@ -230,7 +253,7 @@ public object FoundationSkin : StapelSkin {
                     .padding(horizontal = StapelTheme.spacing.s3, vertical = StapelTheme.spacing.s2),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                spec.leadingIcon?.let {
+                (spec.leadingIcon ?: StapelIconIds.Search.takeIf { spec.kind == TextFieldKind.Search })?.let {
                     StapelIconView(it, null, size = 20.dp, tint = colors.textMuted)
                     Spacer(Modifier.width(StapelTheme.spacing.s2))
                 }
@@ -248,6 +271,11 @@ public object FoundationSkin : StapelSkin {
                         Modifier,
                     )
                 }
+                if (spec.loading) Progress(ProgressSpec(ProgressKind.Spinner, label = stapelString(CoreUiStrings.Loading)), Modifier.padding(horizontal = StapelTheme.spacing.s1))
+                val clear = spec.clearLabel
+                if (spec.kind == TextFieldKind.Search && clear != null && spec.state.text.isNotEmpty()) {
+                    IconButton(IconButtonSpec(StapelIconIds.Close, clear, { spec.state.clearText() }, enabled = spec.enabled), Modifier)
+                }
                 spec.trailingAction?.let { IconButton(it, Modifier) }
             }
         }
@@ -259,6 +287,7 @@ public object FoundationSkin : StapelSkin {
                     state = spec.state,
                     modifier = fieldModifier,
                     enabled = spec.enabled,
+                    inputTransformation = spec.inputTransformation,
                     textStyle = textStyle,
                     keyboardOptions = keyboard,
                     onKeyboardAction = spec.onImeAction?.let { action -> { action() } },
@@ -273,6 +302,8 @@ public object FoundationSkin : StapelSkin {
                     modifier = fieldModifier,
                     enabled = spec.enabled,
                     readOnly = spec.readOnly,
+                    inputTransformation = spec.inputTransformation,
+                    outputTransformation = spec.outputTransformation,
                     textStyle = textStyle,
                     keyboardOptions = keyboard,
                     onKeyboardAction = spec.onImeAction?.let { action -> { action() } },
@@ -304,11 +335,12 @@ public object FoundationSkin : StapelSkin {
         val colors = StapelTheme.colors
         val shape = StapelTheme.shapes.md
         val interaction = remember { MutableInteractionSource() }
-        val digitsOnly = remember(spec.length) {
+        val digitsOnly = remember(spec.length, spec.inputTransformation) {
+            val first = spec.inputTransformation
             InputTransformation {
-                val digits = toString().filter { it.isDigit() }
+                val digits = toString().filter { it in '0'..'9' }
                 if (digits != toString()) replace(0, length, digits)
-            }.then(InputTransformation.maxLength(spec.length))
+            }.then(InputTransformation.maxLength(spec.length)).let { filter -> first?.then(filter) ?: filter }
         }
         val onComplete = spec.onComplete
         LaunchedEffect(spec.state, spec.length, onComplete) {
@@ -460,7 +492,27 @@ public object FoundationSkin : StapelSkin {
             ) {
                 Box(Modifier.fillMaxWidth(spec.fraction ?: 0.3f).height(4.dp).background(colors.brand, StapelTheme.shapes.full))
             }
-            ProgressKind.Skeleton -> Box(modifier.fillMaxWidth().height(16.dp).background(colors.surfaceSunken, StapelTheme.shapes.sm).then(semantics))
+            ProgressKind.Skeleton -> Skeleton(spec, modifier.then(semantics))
+        }
+    }
+
+    /** The skeleton shapes, filled with [shimmerBrush]. */
+    @Composable
+    private fun Skeleton(spec: ProgressSpec, modifier: Modifier) {
+        val brush = shimmerBrush()
+        val lineHeight = with(LocalDensity.current) { StapelTheme.type.body.lineHeight.toDp() }
+        when (spec.skeleton) {
+            SkeletonShape.Text -> Column(modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s2)) {
+                val lines = spec.lines.coerceAtLeast(1)
+                repeat(lines) { i ->
+                    Box(
+                        Modifier.fillMaxWidth(if (i == lines - 1 && lines > 1) 0.6f else 1f).height(lineHeight * 0.7f)
+                            .clip(StapelTheme.shapes.sm).background(brush),
+                    )
+                }
+            }
+            SkeletonShape.Block -> Box(modifier.fillMaxWidth().defaultMinSize(minHeight = 96.dp).clip(StapelTheme.shapes.md).background(brush))
+            SkeletonShape.Circle -> Box(modifier.defaultMinSize(40.dp, 40.dp).clip(CircleShape).background(brush))
         }
     }
 
@@ -503,17 +555,23 @@ public object FoundationSkin : StapelSkin {
     override fun ListItem(spec: ListItemSpec, modifier: Modifier) {
         val colors = StapelTheme.colors
         val interaction = remember { MutableInteractionSource() }
+        val toggle = spec.accessory as? ListItemAccessory.Toggle
+        val onClick = spec.onClick
+        val action = when {
+            toggle != null -> Modifier.stapelToggle(toggle.kind, toggle.checked, false, spec.enabled, interaction, toggle.onCheckedChange)
+                .stapelFocusRing(interaction)
+            onClick != null ->
+                Modifier.selectable(selected = spec.selected, enabled = spec.enabled, role = Role.Button, interactionSource = interaction, indication = null, onClick = onClick)
+                    .stapelFocusRing(interaction)
+            else -> Modifier
+        }
         Row(
             modifier = modifier
                 .fillMaxWidth()
                 .heightIn(min = maxOf(StapelTheme.layout.controlHeight, StapelTheme.layout.minTouchTarget, 48.dp))
                 .background(if (spec.selected) colors.brandSubtle else Color.Transparent)
-                .then(
-                    spec.onClick?.let {
-                        Modifier.selectable(selected = spec.selected, enabled = spec.enabled, role = Role.Button, interactionSource = interaction, indication = null, onClick = it)
-                            .stapelFocusRing(interaction)
-                    } ?: Modifier,
-                )
+                .then(action)
+                .then(if (toggle == null && onClick == null && spec.selected) Modifier.semantics { selected = true } else Modifier)
                 .optionalTestTag(spec.testTag)
                 .padding(horizontal = StapelTheme.spacing.s4, vertical = StapelTheme.spacing.s2),
             verticalAlignment = Alignment.CenterVertically,
@@ -521,10 +579,36 @@ public object FoundationSkin : StapelSkin {
         ) {
             CompositionLocalProvider(LocalStapelContentColor provides if (spec.enabled) colors.text else colors.textSubtle) {
                 spec.leading?.invoke()
+                when (val media = spec.media) {
+                    is ListItemMedia.Icon -> StapelIconView(
+                        media.icon, null,
+                        tint = if (media.tone == StapelTone.Neutral) colors.textMuted else colors.status(media.tone).base,
+                    )
+                    is ListItemMedia.Avatar -> Avatar(media.spec, Modifier)
+                    null -> Unit
+                }
                 Column(Modifier.weight(1f)) {
-                    spec.overline?.let { StapelText(it, style = StapelTheme.type.caption, color = colors.textMuted) }
-                    StapelText(spec.headline, style = StapelTheme.type.body)
-                    spec.supporting?.let { StapelText(it, style = StapelTheme.type.bodySmall, color = colors.textMuted) }
+                    spec.overline?.let { StapelText(it, style = StapelTheme.type.caption, color = colors.textMuted, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                    StapelText(spec.headline, style = StapelTheme.type.body, maxLines = spec.headlineMaxLines, overflow = TextOverflow.Ellipsis)
+                    spec.supporting?.let {
+                        StapelText(it, style = StapelTheme.type.bodySmall, color = colors.textMuted, maxLines = spec.supportingMaxLines, overflow = TextOverflow.Ellipsis)
+                    }
+                }
+                spec.value?.let { value ->
+                    Column(Modifier.maxWidthFraction(LIST_VALUE_MAX_FRACTION), horizontalAlignment = Alignment.End) {
+                        StapelText(
+                            value.text,
+                            style = StapelTheme.type.body,
+                            color = if (value.tone == StapelTone.Neutral) LocalStapelContentColor.current else colors.status(value.tone).base,
+                        )
+                        value.supporting?.let { StapelText(it, style = StapelTheme.type.caption, color = colors.textMuted) }
+                    }
+                }
+                when (val accessory = spec.accessory) {
+                    ListItemAccessory.Chevron -> StapelIconView(StapelIconIds.ChevronRight, null, size = 20.dp, tint = colors.textMuted)
+                    is ListItemAccessory.Badge -> Badge(accessory.spec, Modifier) {}
+                    is ListItemAccessory.Toggle -> ToggleGlyph(accessory.kind, accessory.checked, false, spec.enabled)
+                    null -> Unit
                 }
                 spec.trailing?.invoke()
             }
@@ -533,23 +617,102 @@ public object FoundationSkin : StapelSkin {
 
     @Composable
     override fun TopBar(spec: TopBarSpec, modifier: Modifier) {
+        val fraction = spec.collapsedFraction?.coerceIn(0f, 1f)
+        Column(modifier.fillMaxWidth().background(StapelTheme.colors.surface).optionalTestTag(spec.testTag)) {
+            Row(
+                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(horizontal = StapelTheme.spacing.s1),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                spec.navigation?.let { IconButton(it, Modifier) }
+                Column(
+                    Modifier.weight(1f).padding(horizontal = StapelTheme.spacing.s3)
+                        .then(if (fraction != null) Modifier.alpha(fraction) else Modifier),
+                ) {
+                    StapelText(spec.title, style = StapelTheme.type.title, maxLines = TOP_BAR_TITLE_MAX_LINES, modifier = Modifier.semantics { heading() })
+                    if (fraction == null || fraction >= 1f) spec.subtitle?.let { StapelText(it, style = StapelTheme.type.caption, color = StapelTheme.colors.textMuted) }
+                }
+                spec.actions.forEach { IconButton(it, Modifier) }
+            }
+            if (fraction != null && fraction < 1f) {
+                Column(
+                    Modifier.fillMaxWidth().collapse(1f - fraction).padding(horizontal = StapelTheme.spacing.s4).padding(bottom = StapelTheme.spacing.s3)
+                        .semantics { hideFromAccessibility() }
+                        .optionalTestTag(spec.testTag?.plus(LARGE_TITLE_TAG_SUFFIX)),
+                ) {
+                    StapelText(spec.title, style = StapelTheme.type.display)
+                    spec.subtitle?.let { StapelText(it, style = StapelTheme.type.bodySmall, color = StapelTheme.colors.textMuted) }
+                }
+            }
+        }
+    }
+
+    @Composable
+    override fun Select(spec: SelectSpec, modifier: Modifier) {
+        val colors = StapelTheme.colors
+        val shape = StapelTheme.shapes.md
+        val interaction = remember { MutableInteractionSource() }
+        val error = spec.error
+        Column(modifier) {
+            StapelText(spec.label, style = StapelTheme.type.label, color = colors.textMuted, modifier = Modifier.semantics { hideFromAccessibility() })
+            Spacer(Modifier.height(StapelTheme.spacing.s1))
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .stapelTouchTarget()
+                    .heightIn(min = StapelTheme.layout.controlHeight)
+                    .clip(shape)
+                    .background(if (spec.enabled) colors.surface else colors.surfaceSunken, shape)
+                    .border(1.dp, if (error != null) colors.errorBorder else colors.border, shape)
+                    .clickable(interactionSource = interaction, indication = null, enabled = spec.enabled, role = Role.DropdownList, onClick = spec.onClick)
+                    .stapelFocusRing(interaction, shape)
+                    .semantics {
+                        contentDescription = spec.label
+                        if (error != null) error(error)
+                    }
+                    .optionalTestTag(spec.testTag)
+                    .padding(horizontal = StapelTheme.spacing.s3, vertical = StapelTheme.spacing.s2),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s2),
+            ) {
+                spec.leadingIcon?.let { StapelIconView(it, null, size = 20.dp, tint = colors.textMuted) }
+                StapelText(
+                    spec.value ?: spec.placeholder.orEmpty(),
+                    modifier = Modifier.weight(1f),
+                    color = if (spec.value == null || !spec.enabled) colors.textSubtle else colors.text,
+                )
+                StapelIconView(StapelIconIds.ChevronDown, null, size = 20.dp, tint = colors.textMuted)
+            }
+            (error ?: spec.supportingText)?.let {
+                Spacer(Modifier.height(StapelTheme.spacing.s1))
+                StapelText(it, style = StapelTheme.type.caption, color = if (error != null) colors.error else colors.textMuted, modifier = Modifier.semantics { hideFromAccessibility() })
+            }
+        }
+    }
+
+    @Composable
+    override fun PagerIndicator(spec: PagerIndicatorSpec, modifier: Modifier) {
+        val colors = StapelTheme.colors
+        val onSelect = spec.onSelect
         Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .heightIn(min = 56.dp)
-                .background(StapelTheme.colors.surface)
-                .optionalTestTag(spec.testTag)
-                .padding(horizontal = StapelTheme.spacing.s1),
+            modifier.semantics(mergeDescendants = onSelect == null) { stateDescription = spec.description }.optionalTestTag(spec.testTag),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(if (onSelect == null) 6.dp else 0.dp),
         ) {
-            spec.navigation?.let { IconButton(it, Modifier) }
-            StapelText(
-                spec.title,
-                style = StapelTheme.type.title,
-                maxLines = TOP_BAR_TITLE_MAX_LINES,
-                modifier = Modifier.weight(1f).padding(horizontal = StapelTheme.spacing.s3).semantics { heading() },
-            )
-            spec.actions.forEach { IconButton(it, Modifier) }
+            pagerDotWindow(spec.count, spec.current, spec.maxDots).forEach { dot ->
+                val size = if (dot.small) 5.dp else 8.dp
+                val fill = if (dot.page == spec.current) colors.brand else colors.border
+                val glyph = @Composable { Box(Modifier.size(size).background(fill, CircleShape)) }
+                if (onSelect == null) {
+                    glyph()
+                } else {
+                    Box(
+                        Modifier.stapelTouchTarget().sizeIn(minWidth = 24.dp, minHeight = 24.dp)
+                            .clickable(role = Role.Button) { onSelect(dot.page) }
+                            .semantics { spec.dotLabel?.let { contentDescription = it(dot.page) }; if (dot.page == spec.current) selected = true },
+                        contentAlignment = Alignment.Center,
+                    ) { glyph() }
+                }
+            }
         }
     }
 
@@ -587,43 +750,52 @@ public object FoundationSkin : StapelSkin {
     override fun Toggle(spec: ToggleSpec, modifier: Modifier) {
         val colors = StapelTheme.colors
         val interaction = remember { MutableInteractionSource() }
-        val on = if (spec.enabled) colors.brand else colors.textSubtle
+        val error = spec.error
         Row(
             modifier = modifier
                 .stapelTouchTarget()
-                .toggleable(
-                    value = spec.checked,
-                    enabled = spec.enabled,
-                    role = when (spec.kind) {
-                        ToggleKind.Switch -> Role.Switch
-                        ToggleKind.Checkbox -> Role.Checkbox
-                        ToggleKind.Radio -> Role.RadioButton
-                    },
-                    interactionSource = interaction,
-                    indication = null,
-                    onValueChange = spec.onCheckedChange,
-                )
+                .stapelToggle(spec.kind, spec.checked, spec.indeterminate, spec.enabled, interaction, spec.onCheckedChange)
                 .stapelFocusRing(interaction)
+                .semantics { if (error != null) error(error) }
                 .optionalTestTag(spec.testTag),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s3),
         ) {
-            when (spec.kind) {
-                ToggleKind.Switch -> Box(
-                    Modifier.size(44.dp, 24.dp).background(if (spec.checked) on else colors.border, StapelTheme.shapes.full).padding(3.dp),
-                    contentAlignment = if (spec.checked) Alignment.CenterEnd else Alignment.CenterStart,
-                ) { Box(Modifier.size(18.dp).background(colors.surface, CircleShape)) }
-                ToggleKind.Checkbox -> Box(
-                    Modifier.size(20.dp).background(if (spec.checked) on else colors.surface, StapelTheme.shapes.sm)
-                        .border(1.5.dp, if (spec.checked) on else colors.border, StapelTheme.shapes.sm),
-                    contentAlignment = Alignment.Center,
-                ) { if (spec.checked) StapelIconView(StapelIconIds.Check, null, size = 16.dp, tint = colors.textOnAccent) }
-                ToggleKind.Radio -> Box(
-                    Modifier.size(20.dp).border(1.5.dp, if (spec.checked) on else colors.border, CircleShape),
-                    contentAlignment = Alignment.Center,
-                ) { if (spec.checked) Box(Modifier.size(10.dp).background(on, CircleShape)) }
+            if (!spec.controlAtEnd) ToggleGlyph(spec.kind, spec.checked, spec.indeterminate, spec.enabled)
+            Column(Modifier.weight(1f, fill = spec.controlAtEnd)) {
+                StapelText(spec.label, color = if (spec.enabled) colors.text else colors.textSubtle)
+                spec.supporting?.let { StapelText(it, style = StapelTheme.type.bodySmall, color = colors.textMuted) }
+                error?.let { StapelText(it, style = StapelTheme.type.caption, color = colors.error, modifier = Modifier.semantics { hideFromAccessibility() }) }
             }
-            StapelText(spec.label, color = if (spec.enabled) colors.text else colors.textSubtle)
+            if (spec.controlAtEnd) ToggleGlyph(spec.kind, spec.checked, spec.indeterminate, spec.enabled)
+        }
+    }
+
+    /** The visual of a switch / checkbox / radio (no interaction: the caller's node owns it). */
+    @Composable
+    private fun ToggleGlyph(kind: ToggleKind, checked: Boolean, indeterminate: Boolean, enabled: Boolean) {
+        val colors = StapelTheme.colors
+        val on = if (enabled) colors.brand else colors.textSubtle
+        val filled = checked || indeterminate
+        when (kind) {
+            ToggleKind.Switch -> Box(
+                Modifier.size(44.dp, 24.dp).background(if (checked) on else colors.border, StapelTheme.shapes.full).padding(3.dp),
+                contentAlignment = if (checked) Alignment.CenterEnd else Alignment.CenterStart,
+            ) { Box(Modifier.size(18.dp).background(colors.surface, CircleShape)) }
+            ToggleKind.Checkbox -> Box(
+                Modifier.size(20.dp).background(if (filled) on else colors.surface, StapelTheme.shapes.sm)
+                    .border(1.5.dp, if (filled) on else colors.border, StapelTheme.shapes.sm),
+                contentAlignment = Alignment.Center,
+            ) {
+                when {
+                    indeterminate -> Box(Modifier.size(width = 10.dp, height = 2.dp).background(colors.textOnAccent))
+                    checked -> StapelIconView(StapelIconIds.Check, null, size = 16.dp, tint = colors.textOnAccent)
+                }
+            }
+            ToggleKind.Radio -> Box(
+                Modifier.size(20.dp).border(1.5.dp, if (checked) on else colors.border, CircleShape),
+                contentAlignment = Alignment.Center,
+            ) { if (checked) Box(Modifier.size(10.dp).background(on, CircleShape)) }
         }
     }
 
@@ -633,21 +805,30 @@ public object FoundationSkin : StapelSkin {
         val segmented = spec.variant == TabsVariant.Segmented
         Row(
             modifier = modifier
+                .then(if (spec.scrollable) Modifier.horizontalScroll(rememberScrollState()) else Modifier)
                 .then(if (segmented) Modifier.background(colors.surfaceSunken, StapelTheme.shapes.md).padding(2.dp) else Modifier)
+                .selectableGroup()
                 .optionalTestTag(spec.testTag),
         ) {
             spec.items.forEachIndexed { i, label ->
                 val selected = i == spec.selectedIndex
+                val icon = spec.icons?.getOrNull(i)
                 Box(
                     Modifier
-                        .weight(1f)
+                        .then(if (spec.scrollable) Modifier else Modifier.weight(1f))
                         .stapelTouchTarget()
                         .heightIn(min = 40.dp)
                         .then(if (segmented && selected) Modifier.background(colors.surface, StapelTheme.shapes.md) else Modifier)
-                        .selectable(selected = selected, role = Role.Tab) { spec.onSelect(i) },
+                        .selectable(selected = selected, role = Role.Tab) { spec.onSelect(i) }
+                        .then(if (spec.iconOnly && icon != null) Modifier.semantics { contentDescription = label } else Modifier)
+                        .padding(horizontal = StapelTheme.spacing.s3, vertical = StapelTheme.spacing.s1),
                     contentAlignment = Alignment.Center,
                 ) {
-                    StapelText(label, style = StapelTheme.type.label, color = if (selected) colors.text else colors.textMuted)
+                    val tint = if (selected) colors.text else colors.textMuted
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s2)) {
+                        icon?.let { StapelIconView(it, null, size = 20.dp, tint = tint) }
+                        if (!spec.iconOnly || icon == null) StapelText(label, style = StapelTheme.type.label, color = tint, textAlign = TextAlign.Center)
+                    }
                     if (!segmented && selected) {
                         Box(Modifier.align(Alignment.BottomCenter).fillMaxWidth().height(2.dp).background(colors.brand))
                     }
@@ -659,68 +840,145 @@ public object FoundationSkin : StapelSkin {
     @Composable
     override fun Chip(spec: ChipSpec, modifier: Modifier) {
         val colors = StapelTheme.colors
-        val tone = colors.status(spec.tone)
-        val fill = when {
-            spec.kind == ChipKind.Status -> tone.bg
-            spec.selected -> colors.brandSubtle
-            else -> colors.surface
-        }
-        val outline = when {
-            spec.kind == ChipKind.Status -> tone.border
-            spec.selected -> colors.brand
-            else -> colors.border
-        }
-        Box(
+        val status = spec.kind == ChipKind.Status
+        val c = ComponentColors.chip(colors, spec.selected, if (status) spec.tone else null, spec.enabled)
+        val shape = StapelTheme.shapes.full
+        val interaction = remember { MutableInteractionSource() }
+        val onClick = spec.onClick
+        val minHeight = if (spec.size == ControlSize.Small) 28.dp else 32.dp
+        Row(
             modifier = modifier
-                .heightIn(min = 32.dp)
-                .background(fill, StapelTheme.shapes.full)
-                .border(1.dp, outline, StapelTheme.shapes.full)
-                .then(spec.onClick?.let { Modifier.selectable(selected = spec.selected, role = Role.Button, onClick = it) } ?: Modifier)
+                .heightIn(min = maxOf(minHeight, StapelTheme.layout.minTouchTarget))
+                .clip(shape)
+                .background(c.container, shape)
+                .border(1.dp, c.outline, shape)
+                .then(
+                    if (!status && onClick != null) {
+                        Modifier.selectable(selected = spec.selected, enabled = spec.enabled, role = Role.Button, interactionSource = interaction, indication = null, onClick = onClick)
+                            .stapelFocusRing(interaction, shape)
+                    } else {
+                        Modifier
+                    },
+                )
                 .optionalTestTag(spec.testTag)
-                .padding(horizontal = StapelTheme.spacing.s3, vertical = StapelTheme.spacing.s1),
-            contentAlignment = Alignment.Center,
+                .padding(start = StapelTheme.spacing.s3, end = if (spec.onRemove != null) 0.dp else StapelTheme.spacing.s3),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s1),
         ) {
-            StapelText(spec.label, style = StapelTheme.type.label, color = colors.text)
+            CompositionLocalProvider(LocalStapelContentColor provides c.content) {
+                when {
+                    spec.selected && !status && spec.leadingIcon == null && spec.kind == ChipKind.Filter ->
+                        StapelIconView(StapelIconIds.Check, null, size = 16.dp)
+                    else -> spec.leadingIcon?.let { StapelIconView(it, null, size = 16.dp) }
+                }
+                StapelText(spec.label, style = StapelTheme.type.label, modifier = Modifier.padding(vertical = StapelTheme.spacing.s1))
+                spec.onRemove?.let { remove ->
+                    IconButton(IconButtonSpec(StapelIconIds.Close, spec.removeLabel ?: stapelString(CoreUiStrings.Dismiss), remove, enabled = spec.enabled), Modifier)
+                }
+            }
         }
     }
 
     @Composable
     override fun Avatar(spec: AvatarSpec, modifier: Modifier) {
         val colors = StapelTheme.colors
+        val c = ComponentColors.avatar(colors)
+        val interaction = remember { MutableInteractionSource() }
+        val painter = spec.image?.let { LocalStapelImages.current.painter(it) }
+        val onClick = spec.onClick
+        val name = spec.accessibleName
         Box(
             modifier = modifier
-                .size(spec.sizeDp.dp)
-                .background(colors.brandSubtle, CircleShape)
-                .optionalTestTag(spec.testTag)
-                .clearAndSetSemantics { contentDescription = spec.contentDescription },
+                .then(
+                    if (onClick != null) {
+                        Modifier.stapelTouchTarget().clickable(interactionSource = interaction, indication = null, role = Role.Button, onClick = onClick)
+                            .stapelFocusRing(interaction, CircleShape)
+                    } else {
+                        Modifier
+                    },
+                )
+                .semantics(mergeDescendants = true) { contentDescription = name }
+                .optionalTestTag(spec.testTag),
             contentAlignment = Alignment.Center,
-        ) { StapelText(spec.initials.take(2).uppercase(), style = StapelTheme.type.label, color = colors.text) }
+        ) {
+            Box(Modifier.size(spec.size.dp.dp).clip(CircleShape).background(c.container, CircleShape), contentAlignment = Alignment.Center) {
+                val initials = spec.initialsText
+                when {
+                    painter != null -> Image(painter, null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+                    initials != null -> StapelText(
+                        initials,
+                        style = avatarTextStyle(spec.size),
+                        color = c.content,
+                        maxLines = 1,
+                        modifier = Modifier.semantics { hideFromAccessibility() },
+                    )
+                    else -> StapelIconView(spec.icon ?: StapelIconIds.User, null, size = (spec.size.dp * 0.55f).dp, tint = c.content)
+                }
+            }
+            spec.badge?.takeIf { it.visible }?.let { badge ->
+                BadgeMark(
+                    BadgeSpec(badge.count, null, badge.testTag, badge.tone, badge.size, badge.emphasis, badge.max, badge.icon),
+                    Modifier.align(if (spec.badgePlacement == BadgePlacement.TopEnd) Alignment.TopEnd else Alignment.BottomEnd),
+                    ring = true,
+                )
+            }
+        }
+    }
+
+    @Composable
+    private fun avatarTextStyle(size: AvatarSize) = when (size) {
+        AvatarSize.Small -> StapelTheme.type.caption
+        AvatarSize.Medium -> StapelTheme.type.label
+        AvatarSize.Large -> StapelTheme.type.title
+        AvatarSize.XLarge -> StapelTheme.type.heading
     }
 
     @Composable
     override fun Badge(spec: BadgeSpec, modifier: Modifier, content: @Composable () -> Unit) {
-        val colors = StapelTheme.colors
         Box(modifier) {
             content()
-            Box(
-                Modifier
-                    .align(Alignment.TopEnd)
-                    .then(if (spec.count == null) Modifier.size(8.dp) else Modifier.heightIn(min = 16.dp).widthIn(min = 16.dp))
-                    .background(colors.error, StapelTheme.shapes.full)
-                    .semantics { spec.contentDescription?.let { contentDescription = it } }
-                    .optionalTestTag(spec.testTag)
-                    .padding(horizontal = if (spec.count == null) 0.dp else 4.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                spec.count?.let { StapelText(if (it > 99) "99+" else it.toString(), style = StapelTheme.type.caption, color = colors.errorOn) }
-            }
+            if (spec.visible) BadgeMark(spec, Modifier.align(Alignment.TopEnd), ring = false)
+        }
+    }
+
+    /** The badge itself: a dot or a pill with the count; [ring] draws a surface-coloured outline (on avatars). */
+    @Composable
+    private fun BadgeMark(spec: BadgeSpec, modifier: Modifier, ring: Boolean) {
+        val colors = StapelTheme.colors
+        val c = ComponentColors.badge(colors, spec.tone, spec.emphasis == BadgeEmphasis.Solid)
+        val label = spec.text
+        val shape = StapelTheme.shapes.full
+        val description = spec.contentDescription
+        val dot = when (spec.size) {
+            BadgeSize.Small -> 6.dp
+            BadgeSize.Medium -> 8.dp
+            BadgeSize.Large -> 10.dp
+        }
+        val pill = when (spec.size) {
+            BadgeSize.Small -> 14.dp
+            BadgeSize.Medium -> 16.dp
+            BadgeSize.Large -> 20.dp
+        }
+        Row(
+            modifier
+                .then(if (ring) Modifier.border(2.dp, colors.surface, shape) else Modifier)
+                .then(if (label == null && spec.icon == null) Modifier.size(dot) else Modifier.heightIn(min = pill).widthIn(min = pill))
+                .background(c.container, shape)
+                .semantics { if (description != null) contentDescription = description }
+                .optionalTestTag(spec.testTag)
+                .padding(horizontal = if (label == null && spec.icon == null) 0.dp else 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterHorizontally),
+        ) {
+            spec.icon?.let { StapelIconView(it, null, size = pill - 4.dp, tint = c.content) }
+            label?.let { StapelText(it, style = StapelTheme.type.caption, color = c.content, modifier = Modifier.semantics { hideFromAccessibility() }) }
         }
     }
 
     @Composable
     override fun NavigationBar(spec: NavigationSpec, modifier: Modifier) {
         Row(
-            modifier = modifier.fillMaxWidth().background(StapelTheme.colors.surfaceRaised).optionalTestTag(spec.testTag),
+            modifier = modifier.fillMaxWidth().background(StapelTheme.colors.surfaceRaised).selectableGroup().optionalTestTag(spec.testTag),
         ) {
             spec.items.forEach { item -> NavItem(item, item.id == spec.selectedId, { spec.onSelect(item.id) }, Modifier.weight(1f)) }
         }
@@ -729,7 +987,8 @@ public object FoundationSkin : StapelSkin {
     @Composable
     override fun NavigationRail(spec: NavigationSpec, modifier: Modifier) {
         Column(
-            modifier = modifier.width(88.dp).background(StapelTheme.colors.surfaceRaised).optionalTestTag(spec.testTag).padding(vertical = StapelTheme.spacing.s2),
+            modifier = modifier.width(88.dp).background(StapelTheme.colors.surfaceRaised).selectableGroup().optionalTestTag(spec.testTag)
+                .padding(vertical = StapelTheme.spacing.s2),
             verticalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s1),
         ) {
             spec.items.forEach { item -> NavItem(item, item.id == spec.selectedId, { spec.onSelect(item.id) }, Modifier.fillMaxWidth()) }
@@ -752,24 +1011,98 @@ public object FoundationSkin : StapelSkin {
                 val icon: @Composable () -> Unit = { StapelIconView(item.icon, null, tint = if (selected) colors.text else colors.textMuted) }
                 if (item.badge != null) Badge(item.badge, Modifier, icon) else icon()
             }
-            StapelText(item.label, style = StapelTheme.type.caption, color = if (selected) colors.text else colors.textMuted)
+            StapelText(item.label, style = StapelTheme.type.caption, color = if (selected) colors.text else colors.textMuted, textAlign = TextAlign.Center)
         }
     }
 
     @Composable
     override fun PullToRefresh(spec: PullToRefreshSpec, modifier: Modifier, content: @Composable () -> Unit) {
-        // Foundation body: no drag gesture; a pointer user gets an explicit refresh row, touch users the
-        // skin's gesture (Material3Skin) — basic implementation.
-        Column(modifier.optionalTestTag(spec.testTag)) {
-            if (spec.refreshing) {
-                Progress(ProgressSpec(ProgressKind.Linear, label = spec.label), Modifier)
-            } else if (StapelTheme.layout.input == StapelInput.Pointer) {
-                Button(ButtonSpec(spec.label, spec.onRefresh, variant = ButtonVariant.Text, size = ControlSize.Small, leadingIcon = StapelIconIds.Refresh), Modifier)
+        val density = LocalDensity.current
+        val threshold = with(density) { PULL_REFRESH_THRESHOLD.toPx() }
+        val current by rememberUpdatedState(spec)
+        var pull by remember { mutableFloatStateOf(0f) }
+        val connection = remember {
+            object : NestedScrollConnection {
+                override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                    if (pull > 0f && available.y < 0f) {
+                        val used = maxOf(available.y, -pull)
+                        pull += used
+                        return Offset(0f, used)
+                    }
+                    return Offset.Zero
+                }
+
+                override fun onPostScroll(consumed: Offset, available: Offset, source: NestedScrollSource): Offset {
+                    if (source == NestedScrollSource.UserInput && available.y > 0f && !current.refreshing) {
+                        pull += available.y * PULL_RESISTANCE
+                        return Offset(0f, available.y)
+                    }
+                    return Offset.Zero
+                }
+
+                override suspend fun onPreFling(available: Velocity): Velocity {
+                    val fire = pull >= threshold && !current.refreshing
+                    pull = 0f
+                    if (fire) current.onRefresh()
+                    return Velocity.Zero
+                }
+            }
+        }
+        Column(modifier.refreshAction(spec).nestedScroll(connection).optionalTestTag(spec.testTag)) {
+            when {
+                spec.refreshing -> Progress(ProgressSpec(ProgressKind.Linear, label = spec.label), Modifier)
+                pull > 0f -> Progress(ProgressSpec(ProgressKind.Linear, fraction = (pull / threshold).coerceIn(0f, 1f)), Modifier.semantics { hideFromAccessibility() })
+                StapelTheme.layout.input == StapelInput.Pointer ->
+                    Button(ButtonSpec(spec.label, spec.onRefresh, variant = ButtonVariant.Text, size = ControlSize.Small, leadingIcon = StapelIconIds.Refresh), Modifier)
             }
             content()
         }
     }
 }
+
+/** Test tag suffix of the large title block of a collapsing top bar. */
+public const val LARGE_TITLE_TAG_SUFFIX: String = ".large"
+
+/** Lays the element out at [fraction] of its height (clipped), for collapsing blocks. */
+private fun Modifier.collapse(fraction: Float): Modifier = clipToBounds().layout { measurable, constraints ->
+    val placeable = measurable.measure(constraints)
+    val height = (placeable.height * fraction.coerceIn(0f, 1f)).roundToInt()
+    layout(placeable.width, height) { placeable.place(0, height - placeable.height) }
+}
+
+/**
+ * A moving highlight across the `surface-sunken` placeholder colour; a still fill when
+ * [LocalStapelReduceMotion] is on.
+ */
+@Composable
+public fun shimmerBrush(): Brush {
+    val colors = StapelTheme.colors
+    val base = colors.surfaceSunken
+    if (LocalStapelReduceMotion.current) return SolidColor(base)
+    val highlight = colors.surface
+    val transition = rememberInfiniteTransition()
+    val x by transition.animateFloat(
+        initialValue = -1f,
+        targetValue = 2f,
+        animationSpec = infiniteRepeatable(tween(durationMillis = SHIMMER_PERIOD_MS, easing = LinearEasing), RepeatMode.Restart),
+    )
+    return Brush.linearGradient(
+        colors = listOf(base, highlight, base),
+        start = Offset(x * SHIMMER_SPAN, 0f),
+        end = Offset((x + 0.5f) * SHIMMER_SPAN, 0f),
+    )
+}
+
+/** One sweep of the shimmer. */
+public const val SHIMMER_PERIOD_MS: Int = 1200
+
+private const val SHIMMER_SPAN: Float = 600f
+
+/** How far content must be pulled (after resistance) to start a refresh. */
+public val PULL_REFRESH_THRESHOLD: Dp = 64.dp
+
+/** Share of the finger's travel that moves the pull indicator. */
+private const val PULL_RESISTANCE: Float = 0.5f
 
 /** The status glyph of [tone]. */
 public fun toneIcon(tone: StapelTone): StapelIcon = when (tone) {

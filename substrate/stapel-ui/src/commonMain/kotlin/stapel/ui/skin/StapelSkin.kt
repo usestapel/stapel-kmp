@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
  * }
  * ```
  *
- * The first twelve slots (Button … Snackbar) are abstract. The later slots (Toggle … PullToRefresh)
+ * The first twelve slots (Button … Snackbar) are abstract. The later slots (Toggle … PagerIndicator)
  * have a [FoundationSkin] body, so adding one never breaks an existing skin. Methods take no default
  * arguments on purpose; the wrappers carry the defaults.
  */
@@ -117,12 +117,25 @@ public interface StapelSkin {
         FoundationSkin.PullToRefresh(spec, modifier, content)
     }
 
+    /** A select field that opens a picker ([SelectSpec] lists the duties). */
+    @Composable
+    public fun Select(spec: SelectSpec, modifier: Modifier) {
+        FoundationSkin.Select(spec, modifier)
+    }
+
+    /** Page dots under a pager or carousel ([PagerIndicatorSpec] lists the duties). */
+    @Composable
+    public fun PagerIndicator(spec: PagerIndicatorSpec, modifier: Modifier) {
+        FoundationSkin.PagerIndicator(spec, modifier)
+    }
+
     /** A brick-local widget: the skin's own value for [key], or the brick's default. */
     public fun <T : Any> extension(key: SkinExtensionKey<T>): T = key.default
 }
 
-/** The names of the twenty slots, in table order (tests and the gallery iterate them). */
+/** The names of the slots, in table order (tests and the gallery iterate them). */
 public val StapelSkinSlots: List<String> = listOf(
     "Button", "IconButton", "TextField", "CodeField", "Dialog", "Banner", "Progress", "Surface", "ListItem", "TopBar",
     "Divider", "Snackbar", "Toggle", "Tabs", "Chip", "Avatar", "Badge", "NavigationBar", "NavigationRail", "PullToRefresh",
+    "Select", "PagerIndicator",
 )

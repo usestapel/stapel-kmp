@@ -75,6 +75,10 @@ public class StapelLayout(
 internal expect val platformInput: StapelInput
 internal expect val platformMinTouchTarget: Dp
 
+/** The platform's reduce-motion accessibility setting (Android: animations removed; iOS: Reduce Motion; desktop: false). */
+@Composable
+internal expect fun platformReduceMotion(): Boolean
+
 /**
  * The layout for a window [windowWidth] wide (pure: no composition needed).
  *

@@ -223,6 +223,13 @@ public val LocalStapelStrings: androidx.compose.runtime.ProvidableCompositionLoc
 
 private val DefaultStrings: StapelStrings by lazy { StapelStrings { register(CoreUiBundle) } }
 
+/**
+ * True when the user asked for less motion: skins draw still placeholders instead of shimmer, and
+ * skip decorative animation. `StapelTheme(reduceMotion = …)` sets it (the platform setting by default).
+ */
+public val LocalStapelReduceMotion: androidx.compose.runtime.ProvidableCompositionLocal<Boolean> =
+    staticCompositionLocalOf { false }
+
 /** The error-text resolver of the subtree (the app registers its bricks' catalogs here). */
 public val LocalStapelErrorText: androidx.compose.runtime.ProvidableCompositionLocal<ErrorTextResolver> =
     staticCompositionLocalOf { ErrorTextResolver(emptyList()) }
@@ -309,6 +316,7 @@ internal fun buildThemeValues(
  * @param icons the icon set.
  * @param strings the UI strings.
  * @param layout size class, input kind, gutter; derived from the window width by default.
+ * @param reduceMotion the user asked for less motion (the platform setting by default); read through [LocalStapelReduceMotion].
  * @param content the UI.
  */
 @Composable
@@ -320,6 +328,7 @@ public fun StapelTheme(
     icons: StapelIconSet = StapelIcons,
     strings: StapelStrings = LocalStapelStrings.current,
     layout: StapelLayout = rememberStapelLayout(tokens),
+    reduceMotion: Boolean = platformReduceMotion(),
     content: @Composable () -> Unit,
 ) {
     val resolvedFonts = fonts.resolve(tokens.fontFamily)
@@ -330,6 +339,7 @@ public fun StapelTheme(
         LocalStapelTheme provides values,
         LocalStapelStrings provides strings,
         LocalStapelContentColor provides values.colors.text,
+        LocalStapelReduceMotion provides reduceMotion,
         content = content,
     )
 }

@@ -1,5 +1,7 @@
 package stapel.ui.skin
 
+import androidx.compose.foundation.text.input.InputTransformation
+import androidx.compose.foundation.text.input.OutputTransformation
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -99,12 +101,20 @@ public enum class TextFieldKind {
 
     /** Several lines of text. */
     Multiline,
+
+    /** A search query: search keyboard action, a clear action, a loading state. */
+    Search,
 }
 
 /**
  * A text field. Duties: exactly one editable node bound to [state] (the skin never clamps or rewrites
  * the value; Password only obfuscates visually), [label] as its accessible name, [error] exposed as
- * the semantic error, [testTag] on the editable node.
+ * the semantic error, [testTag] on the editable node. A [TextFieldKind.Search] field with text and a
+ * [clearLabel] shows a clear button of that name which empties [state]; while [loading] it shows a
+ * progress node and stays editable (typing is never blocked or debounced by the skin). The skin
+ * forwards [inputTransformation] / [outputTransformation] to its state-based field and never formats
+ * on its own; its keyboard comes from `TextFieldSpec.keyboardOptions()` (the transformation's keyboard
+ * type, when it names one, wins over the one derived from [kind]).
  */
 @Immutable
 public class TextFieldSpec(
@@ -142,9 +152,24 @@ public class TextFieldSpec(
     public val maxLines: Int = 1,
     /** Test tag of the editable node. */
     public val testTag: String? = null,
+    /** Work behind the value is running (a search request): a progress node inside the field. */
+    public val loading: Boolean = false,
+    /** Accessible name of the clear action ([TextFieldKind.Search]); null draws none. */
+    public val clearLabel: String? = null,
+    /** Caller-supplied value transformation (e.g. an input mask); the skin forwards it and never formats on its own. */
+    public val inputTransformation: InputTransformation? = null,
+    /**
+     * Caller-supplied display transformation (e.g. grouping separators); the skin forwards it and never
+     * formats on its own. Not applied to [TextFieldKind.Password] (a secure field has none).
+     */
+    public val outputTransformation: OutputTransformation? = null,
 )
 
-/** A fixed-length numeric code (OTP). Accepts digits only, up to [length]; calls [onComplete] once full. */
+/**
+ * A fixed-length numeric code (OTP). Accepts digits only, up to [length]; calls [onComplete] once full.
+ * A caller's [inputTransformation] runs before the skin's digit filter (it may fold non-ASCII digits or
+ * pull the code out of a pasted message before the filter drops what is not an ASCII digit).
+ */
 @Immutable
 public class CodeFieldSpec(
     /** The value. */
@@ -161,6 +186,8 @@ public class CodeFieldSpec(
     public val onComplete: ((String) -> Unit)? = null,
     /** Test tag of the editable node. */
     public val testTag: String? = null,
+    /** Caller-supplied value transformation, applied before the skin's digit filter; the skin never formats on its own. */
+    public val inputTransformation: InputTransformation? = null,
 )
 
 /**
@@ -217,11 +244,27 @@ public enum class ProgressKind {
     /** Bar (determinate with a fraction). */
     Linear,
 
-    /** Placeholder block while content loads. */
+    /** Placeholder shape while content loads ([ProgressSpec.skeleton] picks the shape). */
     Skeleton,
 }
 
-/** A progress indicator. */
+/** The shape of a skeleton placeholder. */
+public enum class SkeletonShape {
+    /** Text lines ([ProgressSpec.lines] of them, the last one shorter), at the body line height. */
+    Text,
+
+    /** A block filling the width; its height comes from the modifier (a card, an image), 96 dp by default. */
+    Block,
+
+    /** A circle (an avatar), 40 dp unless the modifier sizes it. */
+    Circle,
+}
+
+/**
+ * A progress indicator. Duties: a node with progress semantics (indeterminate, or [fraction]) named
+ * [label]; a skeleton shimmers unless reduce motion is on (`LocalStapelReduceMotion`), when it is a
+ * still placeholder.
+ */
 @Immutable
 public class ProgressSpec(
     /** Presentation. */
@@ -232,6 +275,10 @@ public class ProgressSpec(
     public val fraction: Float? = null,
     /** Test tag. */
     public val testTag: String? = null,
+    /** Skeleton shape ([ProgressKind.Skeleton]). */
+    public val skeleton: SkeletonShape = SkeletonShape.Text,
+    /** Number of text lines ([SkeletonShape.Text]). */
+    public val lines: Int = 1,
 )
 
 /** Surface fill. */
@@ -279,7 +326,71 @@ public class SurfaceSpec(
     public val testTag: String? = null,
 )
 
-/** A list row. */
+/** What a list row shows at its start, as data (a skin draws it in its own style). */
+public sealed interface ListItemMedia {
+    /** A glyph, tinted by [tone] (neutral = muted text). */
+    public class Icon(
+        /** The glyph. */
+        public val icon: StapelIcon,
+        /** Tint tone. */
+        public val tone: StapelTone = StapelTone.Neutral,
+    ) : ListItemMedia
+
+    /** An avatar ([AvatarSpec] keeps its own accessible name). */
+    public class Avatar(
+        /** The avatar. */
+        public val spec: AvatarSpec,
+    ) : ListItemMedia
+}
+
+/**
+ * The value block at a row's end: a [text] line and an optional [supporting] line under it (an
+ * amount and its date, a status and its time). It is laid out in full — never ellipsized — and the
+ * headline column wraps instead of running under it.
+ */
+@Immutable
+public class ListItemValue(
+    /** The value line. */
+    public val text: String,
+    /** A second, quieter line under the value. */
+    public val supporting: String? = null,
+    /** Tone of the value line (neutral = normal text). */
+    public val tone: StapelTone = StapelTone.Neutral,
+)
+
+/** What a list row shows at its very end, as data. */
+public sealed interface ListItemAccessory {
+    /** A disclosure chevron: the row opens something. */
+    public data object Chevron : ListItemAccessory
+
+    /** A badge (a count or a dot). */
+    public class Badge(
+        /** The badge. */
+        public val spec: BadgeSpec,
+    ) : ListItemAccessory
+
+    /**
+     * A two-state control: the whole row becomes that control (one toggleable node with the
+     * headline as its label); the row's `onClick` is not used.
+     */
+    public class Toggle(
+        /** Switch, checkbox or radio. */
+        public val kind: ToggleKind,
+        /** State. */
+        public val checked: Boolean,
+        /** Called with the new state (a radio is only ever turned on). */
+        public val onCheckedChange: (Boolean) -> Unit,
+    ) : ListItemAccessory
+}
+
+/**
+ * A list row. Duties: the headline and supporting lines are text of the row's node; a clickable row
+ * is one node with `Role.Button` (and `Selected` when [selected]); a [ListItemAccessory.Toggle] row is
+ * one toggleable node with the toggle's role, flipped by tapping anywhere on it; a disabled row
+ * refuses clicks; the row is at least the touch-target tall; the [value] block is laid out in full and
+ * never overlaps the headline; the headline and supporting lines wrap (a caller may cap them with
+ * [headlineMaxLines] / [supportingMaxLines], then they ellipsize) — at 200 % text nothing is clipped.
+ */
 @Immutable
 public class ListItemSpec(
     /** Main line. */
@@ -288,9 +399,9 @@ public class ListItemSpec(
     public val supporting: String? = null,
     /** Line above the headline. */
     public val overline: String? = null,
-    /** Leading content (icon, avatar). */
+    /** Custom leading content; prefer [media] (data a skin can restyle). */
     public val leading: (@Composable () -> Unit)? = null,
-    /** Trailing content (switch, chevron, value). */
+    /** Custom trailing content; prefer [value] and [accessory]. */
     public val trailing: (@Composable () -> Unit)? = null,
     /** Non-null: the row is clickable. */
     public val onClick: (() -> Unit)? = null,
@@ -300,19 +411,38 @@ public class ListItemSpec(
     public val enabled: Boolean = true,
     /** Test tag. */
     public val testTag: String? = null,
+    /** Leading icon or avatar. */
+    public val media: ListItemMedia? = null,
+    /** The two-line value block at the end. */
+    public val value: ListItemValue? = null,
+    /** Chevron, badge or toggle after the value. */
+    public val accessory: ListItemAccessory? = null,
+    /** Lines the headline may wrap to before it ellipsizes (unlimited by default: large text wraps, never clips). */
+    public val headlineMaxLines: Int = Int.MAX_VALUE,
+    /** Lines the supporting text may wrap to before it ellipsizes (unlimited by default). */
+    public val supportingMaxLines: Int = Int.MAX_VALUE,
 )
 
-/** A screen's top bar. */
+/**
+ * A screen's top bar. Duties: the title is the one heading of the bar and is never truncated at large
+ * text (it wraps); [subtitle] is visible text under it; with [collapsedFraction] the bar is the large
+ * variant — at 0 a large title block under the bar, shrinking with the fraction, at 1 only the bar —
+ * and the title stays the one heading throughout.
+ */
 @Immutable
 public class TopBarSpec(
     /** Title (a heading). */
     public val title: String,
     /** Navigation button (back / close). */
     public val navigation: IconButtonSpec? = null,
-    /** Action buttons. */
+    /** Action buttons (three at most fit a phone bar). */
     public val actions: List<IconButtonSpec> = emptyList(),
     /** Test tag. */
     public val testTag: String? = null,
+    /** A line under the title (a count, a status). */
+    public val subtitle: String? = null,
+    /** Null: a regular bar. 0..1: the large variant, collapsed by this fraction (`StapelPage` drives it from the scroll). */
+    public val collapsedFraction: Float? = null,
 )
 
 /** One transient message. */
@@ -337,14 +467,20 @@ public enum class ToggleKind {
     /** On/off switch. */
     Switch,
 
-    /** Checkbox. */
+    /** Checkbox (may be indeterminate). */
     Checkbox,
 
-    /** Radio button (one of a group). */
+    /** Radio button (one of a group): tapping a checked radio keeps it checked. */
     Radio,
 }
 
-/** A two-state control with its label. */
+/**
+ * A two-state control with its label. Duties: one node carrying the label text, the role of [kind]
+ * (`Switch`, `Checkbox`, `RadioButton`); a switch or checkbox exposes its toggle state (`On`, `Off`,
+ * `Indeterminate` when [indeterminate]) and flips through [onCheckedChange]; a radio exposes
+ * `Selected` and only ever reports `true`; [supporting] is visible text; [error] is the semantic error;
+ * disabled refuses taps; the node is at least the touch target.
+ */
 @Immutable
 public class ToggleSpec(
     /** Presentation. */
@@ -359,6 +495,14 @@ public class ToggleSpec(
     public val enabled: Boolean = true,
     /** Test tag. */
     public val testTag: String? = null,
+    /** A quieter line under the label. */
+    public val supporting: String? = null,
+    /** Checkbox only: neither on nor off (a partly selected group); a tap reports `true`. */
+    public val indeterminate: Boolean = false,
+    /** Non-null: invalid, with this message (announced). */
+    public val error: String? = null,
+    /** True: label first and the control at the row's end (settings rows); false: control first. */
+    public val controlAtEnd: Boolean = false,
 )
 
 /** Tabs presentation. */
@@ -370,10 +514,14 @@ public enum class TabsVariant {
     Segmented,
 }
 
-/** A set of tabs. */
+/**
+ * A set of tabs. Duties: every item is a node with `Role.Tab` and `Selected` state, at least the touch
+ * target, carrying its label as text (or as its accessible name when [iconOnly]); a tap calls
+ * [onSelect] with its index; with [scrollable] every item stays reachable however many there are.
+ */
 @Immutable
 public class TabsSpec(
-    /** Labels. */
+    /** Labels (always required: they are the accessible names of icon-only items). */
     public val items: List<String>,
     /** Selected index. */
     public val selectedIndex: Int,
@@ -383,6 +531,12 @@ public class TabsSpec(
     public val variant: TabsVariant = TabsVariant.Tabs,
     /** Test tag. */
     public val testTag: String? = null,
+    /** One glyph per item (same size as [items]), or null for text-only items. */
+    public val icons: List<StapelIcon>? = null,
+    /** Draw only the glyphs; the labels become accessible names. Needs [icons]. */
+    public val iconOnly: Boolean = false,
+    /** Scroll horizontally instead of sharing the width (many or long labels). */
+    public val scrollable: Boolean = false,
 )
 
 /** Chip kind. */
@@ -395,9 +549,17 @@ public enum class ChipKind {
 
     /** A read-only status tag. */
     Status,
+
+    /** An entered value (a recipient, a tag) that can be removed. */
+    Input,
 }
 
-/** A chip. */
+/**
+ * A chip. Duties: a [ChipKind.Choice] / [ChipKind.Filter] chip with [onClick] is one node with
+ * `Selected` state, at least the touch target; a [ChipKind.Status] chip is plain text with no click
+ * action; with [onRemove] a separate remove button named [removeLabel] calls [onRemove] (never
+ * [onClick]); disabled refuses both; the label is never clipped (the chip grows with large text).
+ */
 @Immutable
 public class ChipSpec(
     /** Label. */
@@ -412,28 +574,168 @@ public class ChipSpec(
     public val tone: StapelTone = StapelTone.Neutral,
     /** Test tag. */
     public val testTag: String? = null,
+    /** Optional leading glyph. */
+    public val leadingIcon: StapelIcon? = null,
+    /** Non-null: removable; called by the remove button. */
+    public val onRemove: (() -> Unit)? = null,
+    /** Accessible name of the remove button (i18n copy from the caller); the dismiss string by default. */
+    public val removeLabel: String? = null,
+    /** False: disabled. */
+    public val enabled: Boolean = true,
+    /** Size. */
+    public val size: ControlSize = ControlSize.Regular,
 )
 
-/** An avatar: initials (an image source arrives with `stapel-image-compose`). */
+/** Avatar size. */
+public enum class AvatarSize(
+    /** Diameter in dp. */
+    public val dp: Int,
+) {
+    /** Dense rows, chips: 32. */
+    Small(32),
+
+    /** List rows: 40. */
+    Medium(40),
+
+    /** Headers: 56. */
+    Large(56),
+
+    /** Profile pages: 80. */
+    XLarge(80),
+}
+
+/** Where a badge sits on an avatar. */
+public enum class BadgePlacement {
+    /** Top end corner (counts). */
+    TopEnd,
+
+    /** Bottom end corner (presence, status). */
+    BottomEnd,
+}
+
+/**
+ * An avatar. Content ladder: the [image] when the theme's image resolver draws it, else the
+ * [initials], else the [icon], else a generic person glyph — so a missing or failing image never
+ * leaves a blank circle. Duties: one node whose accessible name is [contentDescription] (plus the
+ * badge's description), exactly [size] in diameter; with [onClick] a button of at least the touch
+ * target.
+ */
 @Immutable
 public class AvatarSpec(
-    /** One or two letters. */
-    public val initials: String,
-    /** Accessible name. */
+    /** One or two letters (see `avatarInitials`); null or blank: skip to [icon]. */
+    public val initials: String?,
+    /** Accessible name (the person's or entity's name). */
     public val contentDescription: String,
-    /** Diameter in dp. */
-    public val sizeDp: Int = 40,
+    /** Diameter. */
+    public val size: AvatarSize = AvatarSize.Medium,
+    /** Glyph when there are no initials. */
+    public val icon: StapelIcon? = null,
+    /** An image source handed to `LocalStapelImages` (a URL, a content id). */
+    public val image: String? = null,
+    /** A count or a status dot on the avatar. */
+    public val badge: BadgeSpec? = null,
+    /** Where [badge] sits. */
+    public val badgePlacement: BadgePlacement = BadgePlacement.BottomEnd,
+    /** Non-null: the avatar is a button. */
+    public val onClick: (() -> Unit)? = null,
     /** Test tag. */
     public val testTag: String? = null,
 )
 
-/** A badge: a count, or a dot when [count] is null. */
+/** Badge size. */
+public enum class BadgeSize {
+    /** A 6 dp dot / caption count. */
+    Small,
+
+    /** The default: 8 dp dot / 16 dp count. */
+    Medium,
+
+    /** A 10 dp dot / 20 dp count. */
+    Large,
+}
+
+/** Badge fill. */
+public enum class BadgeEmphasis {
+    /** Solid tone fill with the tone's on-colour. */
+    Solid,
+
+    /** Tinted tone background with the tone's text colour (calmer; for dense lists). */
+    Subtle,
+}
+
+/**
+ * A badge: a count, or a dot when [count] is null. Duties: a count above [max] reads `max+`; a count
+ * of zero or less draws nothing (the content stays); a dot has no text; [contentDescription] is the
+ * badge node's accessible description.
+ */
 @Immutable
 public class BadgeSpec(
     /** The count; null draws a dot. */
     public val count: Int? = null,
     /** Accessible description ("3 unread"). */
     public val contentDescription: String? = null,
+    /** Test tag. */
+    public val testTag: String? = null,
+    /** Tone ([StapelTone.Error] = attention, the default). */
+    public val tone: StapelTone = StapelTone.Error,
+    /** Size. */
+    public val size: BadgeSize = BadgeSize.Medium,
+    /** Fill. */
+    public val emphasis: BadgeEmphasis = BadgeEmphasis.Solid,
+    /** The largest count shown as a number. */
+    public val max: Int = 99,
+    /** Optional glyph before the count. */
+    public val icon: StapelIcon? = null,
+)
+
+/**
+ * A select field: shows the chosen value and opens a picker (`PickerSheet`) — it never edits text.
+ * Duties: one clickable node with `Role.DropdownList`, named by [label], whose text carries [value]
+ * (or [placeholder] when nothing is chosen); [error] is the semantic error; disabled refuses taps; at
+ * least the touch target; the value wraps instead of being clipped at large text.
+ */
+@Immutable
+public class SelectSpec(
+    /** Visible label and accessible name. */
+    public val label: String,
+    /** The chosen value's text; null when nothing is chosen. */
+    public val value: String?,
+    /** Opens the picker. */
+    public val onClick: () -> Unit,
+    /** Shown while nothing is chosen. */
+    public val placeholder: String? = null,
+    /** Helper text below the field. */
+    public val supportingText: String? = null,
+    /** Non-null: invalid, with this message (announced). */
+    public val error: String? = null,
+    /** False: disabled. */
+    public val enabled: Boolean = true,
+    /** Optional leading glyph. */
+    public val leadingIcon: StapelIcon? = null,
+    /** Test tag of the clickable node. */
+    public val testTag: String? = null,
+)
+
+/**
+ * Dots under a pager or carousel. Duties: one node whose state description is [description] ("Page 2
+ * of 5", i18n copy from the caller) and whose text is never drawn; at most [maxDots] dots, a window
+ * that keeps [current] visible (edge dots smaller when the window is cut, see `pagerDotWindow`); with
+ * [onSelect] every visible dot is a button of at least the touch target named by [dotLabel].
+ */
+@Immutable
+public class PagerIndicatorSpec(
+    /** Number of pages. */
+    public val count: Int,
+    /** Current page, 0-based. */
+    public val current: Int,
+    /** Accessible state ("Page 2 of 5"). */
+    public val description: String,
+    /** Non-null: tapping a dot jumps to its page. */
+    public val onSelect: ((Int) -> Unit)? = null,
+    /** Accessible name of the dot for a page (0-based), when [onSelect] is set ("Go to page 3"). */
+    public val dotLabel: ((Int) -> String)? = null,
+    /** Most dots drawn at once. */
+    public val maxDots: Int = 7,
     /** Test tag. */
     public val testTag: String? = null,
 )
@@ -451,7 +753,10 @@ public class NavigationItemSpec(
     public val badge: BadgeSpec? = null,
 )
 
-/** The primary navigation (bar on a phone, rail on wider windows). */
+/**
+ * The primary navigation (bar on a phone, rail on wider windows). Duties: every item is a node with
+ * `Role.Tab`, `Selected` for [selectedId], its label as text; a tap calls [onSelect] with its id.
+ */
 @Immutable
 public class NavigationSpec(
     /** Destinations. */
@@ -464,7 +769,12 @@ public class NavigationSpec(
     public val testTag: String? = null,
 )
 
-/** Pull-to-refresh around scrollable content. */
+/**
+ * Pull-to-refresh around scrollable content. Duties: the content is drawn; while [refreshing] a progress
+ * node (indeterminate, named [label]) is shown; when not refreshing, the refresh is reachable without
+ * a gesture — an accessibility action named [label] on the container, and for pointer input a visible
+ * control — and a pull past the threshold on touch calls [onRefresh] once.
+ */
 @Immutable
 public class PullToRefreshSpec(
     /** A refresh is running. */

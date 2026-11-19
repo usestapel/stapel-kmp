@@ -7,10 +7,13 @@
 - **Contrast:** every on-X / X pair the mapping creates, plus brand/error text on every surface,
   brand on brand-subtle, subtle text on sunken and status text on surface/overlay, is computed for the
   default theme and every preset in both modes (`MappingTest`, 81 pairs per mode).
-- **Slots:** the twelve auth slots are Material (CodeField is the token-styled foundation field:
-  Material 3 has no one-time-code component). Toggle, Tabs, Chip, Avatar, Badge, NavigationBar,
-  NavigationRail and PullToRefresh are the `FoundationSkin` bodies (basic) until a consumer needs the
-  Material version.
+- **Slots:** every slot is a Material 3 component (`Switch` / `TriStateCheckbox` / `RadioButton` in a
+  row that owns the interaction, `PrimaryTabRow` / `PrimaryScrollableTabRow` / segmented buttons,
+  `FilterChip` / `InputChip`, `Badge`, `NavigationBarItem` / `NavigationRail`, `PullToRefreshBox`) except
+  where Material 3 has none: CodeField and Avatar are the token-styled foundation bodies.
+- **Large text:** Material's `NavigationBar` and `TopAppBar` containers have fixed heights; the skin uses
+  their items inside a container that grows instead (`assertSlotsSurviveLargeText`,
+  `assertTopBarSurvivesLargeText`).
 - **Dynamic colour** is never used; an app that insists passes its own `ColorScheme` inside
   `StapelMaterialTheme` and owns the consequences.
 - Conformance: `assertSkinContract(Material3Skin)` (from `showcase/skin-contract`) runs in the tests.
