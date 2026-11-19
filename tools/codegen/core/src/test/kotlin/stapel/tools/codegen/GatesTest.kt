@@ -35,6 +35,20 @@ class GatesTest {
     }
 
     @Test
+    fun aNotMarkedVariantIsTheFallbackOfAnInferredUnion() {
+        val video = """{"type":"object","properties":{"type":{"type":"string","enum":["video"]},"data":{}},"required":["type"]}"""
+        val custom = """{"type":"object","properties":{"type":{"type":"string","not":{"enum":["video"]}},"data":{}},"required":["type"]}"""
+        val plain = """{"type":"object","properties":{"type":{"type":"string"},"data":{}},"required":["type"]}"""
+        fun dir(fallback: String) = Fixtures.contract(
+            components = """{"V":$video,"C":$fallback,"U":{"oneOf":[{"${'$'}ref":"#/components/schemas/V"},{"${'$'}ref":"#/components/schemas/C"}]}}""",
+            paths = "{" + Fixtures.get("demo_api_v1_u_retrieve", "u", """{"${'$'}ref":"#/components/schemas/U"}""") + "}",
+        )
+        val files = Fixtures.generate("demo", dir(custom)).files
+        assertTrue(files.values.any { "\"video\" -> V.serializer()" in it && "else -> C.serializer()" in it })
+        failsWith("E-UNION-AMBIGUOUS", dir(plain))
+    }
+
+    @Test
     fun moneyAsDoubleIsAnError() {
         val dir = Fixtures.contract(
             components = """{"P":{"type":"object","description":"P.","properties":{"price":{"type":"number","description":"Price."}},"required":["price"]}}""",

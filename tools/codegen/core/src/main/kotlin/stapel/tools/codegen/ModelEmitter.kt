@@ -183,7 +183,7 @@ internal class ModelEmitter(
     }
 
     private fun numberConst(text: String): Pair<TypeName, String>? {
-        text.toLongOrNull()?.let { return LONG to "${it}L" }
+        text.toLongOrNull()?.let { return LONG to if (it == Long.MIN_VALUE) "Long.MIN_VALUE" else "${it}L" }
         text.toDoubleOrNull()?.let { if (it.isFinite()) return DOUBLE to it.toString() }
         return null
     }

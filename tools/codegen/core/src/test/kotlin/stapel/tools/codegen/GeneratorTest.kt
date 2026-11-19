@@ -140,6 +140,16 @@ class GeneratorTest {
     }
 
     @Test
+    fun integerLimitsAtTheEdgeOfLongStayConstants() {
+        val dir = Fixtures.contract(
+            components = """{"B":{"type":"object","description":"B.","properties":{"n":{"type":"integer","format":"int64","minimum":-9223372036854775808,"maximum":9223372036854775807,"description":"N."}},"required":["n"]}}""",
+            paths = "{" + Fixtures.post("demo_api_v1_b_create", "b", """{"${'$'}ref":"#/components/schemas/B"}""", "{\"type\":\"object\"}") + "}",
+        )
+        val text = Generator("demo", dir).run().files.values.joinToString("")
+        assertTrue("N_MINIMUM: Long = Long.MIN_VALUE" in text && "N_MAXIMUM: Long = 9223372036854775807L" in text, text)
+    }
+
+    @Test
     fun namesFollowSection4() {
         assertEquals("PatchedOrg", Names.typeName("Patched_Org"))
         assertEquals("Org", Names.typeName("_Org"))

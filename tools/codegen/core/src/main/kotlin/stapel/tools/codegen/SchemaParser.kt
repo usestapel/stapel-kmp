@@ -276,7 +276,7 @@ internal class SchemaParser(
     private fun selectorFor(schema: JsonObject, variants: List<String>, objects: List<JsonObject>, pointer: String): UnionSelector {
         val discriminator = schema.obj("discriminator")?.str("propertyName")
         if (discriminator != null) {
-            byProperty(discriminator, variants, objects, pointer)?.let { selector ->
+            byProperty(discriminator, variants, objects)?.let { selector ->
                 val mapping = schema.obj("discriminator")?.obj("mapping")
                 if (mapping != null) {
                     val wireValues = selector.values.toMap()
@@ -300,7 +300,10 @@ internal class SchemaParser(
         // (1) inferred property: present in every variant, pairwise-disjoint enum values.
         val common = objects.map { it.obj("properties")?.keys.orEmpty() }.reduce { a, b -> a intersect b }
         for (candidate in common.sorted()) {
-            val selector = byProperty(candidate, variants, objects, pointer, allowFallback = false) ?: continue
+            val selector = byProperty(candidate, variants, objects) ?: continue
+            // A fallback is accepted only when its property says "anything but the others" (`not`).
+            val fallbackIndex = selector.fallback?.let { variants.indexOf(it) }
+            if (fallbackIndex != null && objects[fallbackIndex].obj("properties")?.obj(candidate)?.containsKey("not") != true) continue
             return selector
         }
         // (2) key probes: a key required in one variant and declared in no other.
@@ -322,7 +325,6 @@ internal class SchemaParser(
         property: String,
         variants: List<String>,
         objects: List<JsonObject>,
-        pointer: String,
         allowFallback: Boolean = true,
     ): UnionSelector.ByProperty? {
         val values = mutableListOf<Pair<String, String>>()
@@ -334,9 +336,7 @@ internal class SchemaParser(
         if (values.map { it.first }.toSet().size != values.size) return null
         if (fallbacks.size > (if (allowFallback) 1 else 0)) return null
         if (values.isEmpty()) return null
-        return UnionSelector.ByProperty(property, values, fallbacks.singleOrNull()).also {
-            if (it.fallback != null && !allowFallback) diagnostics.warn("W-UNION-FALLBACK", pointer, "fallback ${it.fallback}")
-        }
+        return UnionSelector.ByProperty(property, values, fallbacks.singleOrNull())
     }
 
     private fun declareEnum(name: String, wireName: String, schema: JsonObject, pointer: String) {
