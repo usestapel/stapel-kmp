@@ -155,12 +155,17 @@ mavenLocal), built the way the scaffold's KMP emitter builds an app. CI job
 `NavGateTest` on JVM and the iOS simulator, desktop jar, Android
 `assembleDebug`, the iOS framework, then `scripts/ios-smoke.sh` (xcodebuild,
 simulator launch, log markers `stapel.app.ready` / `stapel.nav <id>`, a link
-handed to the app → `stapel.link <uri> opened`, screenshots). The job brings up
+handed to the app → `stapel.link <uri> opened`, screenshots). The smoke reads the
+markers from the app's own marker file in its data container (launch argument
+`-stapelLogFile`) as well as from the unified log, whose filtering differs between
+simulator runtimes; an app that exits or crashes while a marker is awaited fails
+at once, with `diagnose.log` (marker file, crash report, `log show`) and
+`failure.png` uploaded. The job brings up
 the auth stand (`bricks/auth/e2e/stand/stand.sh up`, Python 3.12, 127.0.0.1:18731)
 first, so the sign-in walk (`SignInWalkTest`, compiled in with
 `-Pstapel.walk.baseUrl=<url>`) runs on JVM and on the simulator, and
 `ios-smoke.sh --uitest` runs the XCUITest suite against it; the stand goes down
-in an `always()` step. Uploads: screenshots, `uitest.log`, `uitest.xcresult`,
+in an `always()` step. Uploads: screenshots, `markers.log`, `diagnose.log`, `uitest.log`, `uitest.xcresult`,
 the stand's logs.
 
 ## CI capacity and the `ci-ok` verdict

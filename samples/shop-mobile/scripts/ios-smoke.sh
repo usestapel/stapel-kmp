@@ -7,7 +7,10 @@
 # Builds iosApp with xcodebuild for the simulator (the Xcode build phase runs
 # :shared:embedAndSignAppleFrameworkForXcode), boots the simulator, installs and launches the app,
 # waits for the app's log markers (stapel.app.ready, stapel.nav <id>), opens a deep link and waits
-# for stapel.link <uri> opened, and saves a screenshot. Artifacts in samples/shop-mobile/build/ios-smoke.
+# for stapel.link <uri> opened, and saves a screenshot. The markers are read from the app's own marker
+# file in its data container (launch argument -stapelLogFile) and from the unified log; an app that
+# exits or crashes while a marker is awaited fails at once, with diagnose.log (marker file, crash
+# report, `log show`) and failure.png. Artifacts in samples/shop-mobile/build/ios-smoke.
 # The app is signed ad hoc ("Sign to Run Locally", no team) so it has a Keychain on the simulator.
 #
 # --uitest then uninstalls the app (a fresh install: no Keychain item, no install marker) and runs the
@@ -54,21 +57,61 @@ xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
 xcrun simctl install "$UDID" "$APP"
 
 LOG="$OUT/app.log"
+MARKERS_NAME="stapel-smoke.log"
+DATA="$(xcrun simctl get_app_container "$UDID" "$BUNDLE_ID" data)"
+MARKERS="$DATA/Documents/$MARKERS_NAME"
+rm -f "$MARKERS" "$OUT"/*.png "$OUT/markers.log" "$OUT/diagnose.log"
 : >"$LOG"
+# Two channels for the app's markers: the app's own marker file in its data container (-stapelLogFile;
+# deterministic) and the unified log (informative; its filtering differs between simulator runtimes).
+# Every wait reads both; the summary says which channel delivered.
 xcrun simctl spawn "$UDID" log stream --level info --style compact \
     --predicate 'process == "ShopMobile" AND eventMessage CONTAINS "stapel."' >"$LOG" 2>&1 &
 STREAM=$!
 trap 'kill $STREAM 2>/dev/null || true' EXIT
 sleep 2
 
-wait_for() { # pattern seconds
-    for _ in $(seq 1 "$2"); do grep -q "$1" "$LOG" && return 0; sleep 1; done
-    echo "[ios-smoke] '$1' did not appear within $2 s"; tail -20 "$LOG"; return 1
+app_pid() { sed -n 's/^.*: \([0-9][0-9]*\)$/\1/p' "$OUT/launch.txt" | tail -1; }
+alive() { # the launched process still runs
+    local pid; pid="$(app_pid)"
+    [[ -n "$pid" ]] && xcrun simctl spawn "$UDID" launchctl list 2>/dev/null | grep -q "^$pid[[:space:]].*$BUNDLE_ID"
+}
+diagnose() { # what the app did, when a marker did not come (never fails itself)
+    set +e +o pipefail
+    local reports=~/Library/Logs/DiagnosticReports latest
+    latest="$(ls -t "$reports" 2>/dev/null | grep -i shopmobile | head -1)"
+    {
+        echo "== launch: $(tr '\n' ' ' <"$OUT/launch.txt")"
+        echo "== process alive: $(alive && echo yes || echo NO)"
+        echo "== marker file $MARKERS:"; cat "$MARKERS" 2>/dev/null || echo "(absent)"
+        echo "== latest crash report: ${latest:-(none)}"
+        [[ -n "$latest" ]] && head -c 6000 "$reports/$latest" && echo
+        echo "== log show (process ShopMobile, last 4 min, info+debug):"
+        xcrun simctl spawn "$UDID" log show --last 4m --info --debug --style compact \
+            --predicate 'process == "ShopMobile"' 2>&1 | tail -200
+    } >"$OUT/diagnose.log" 2>&1
+    xcrun simctl io "$UDID" screenshot "$OUT/failure.png" >/dev/null 2>&1
+    sed -n '1,/^== log show/p' "$OUT/diagnose.log" | head -60 | cut -c1-300 | sed 's/^/[ios-smoke] diag: /'
+    grep -E 'stapel|Exception|Terminating|fault|error' "$OUT/diagnose.log" | grep -v '^== ' | tail -40 | cut -c1-300 | sed 's/^/[ios-smoke] diag log: /'
+    set -e -o pipefail
+}
+seen() { grep -qF "$1" "$MARKERS" 2>/dev/null || grep -qF "$1" "$LOG"; }
+wait_for() { # literal seconds
+    for _ in $(seq 1 "$2"); do
+        if seen "$1"; then
+            echo "[ios-smoke] '$1' (marker file: $(grep -qF "$1" "$MARKERS" 2>/dev/null && echo yes || echo no), unified log: $(grep -qF "$1" "$LOG" && echo yes || echo no))"
+            return 0
+        fi
+        # A crash at start fails at once, not after the timeout.
+        if ! alive; then sleep 1; seen "$1" && continue; echo "[ios-smoke] the app is not running (crashed or exited) while waiting for '$1'"; diagnose; return 1; fi
+        sleep 1
+    done
+    echo "[ios-smoke] '$1' did not appear within $2 s"; diagnose; return 1
 }
 
 echo "[ios-smoke] launch"
-xcrun simctl launch "$UDID" "$BUNDLE_ID" >"$OUT/launch.txt"
-wait_for 'stapel.app.ready' 60
+xcrun simctl launch "$UDID" "$BUNDLE_ID" -stapelLogFile "$MARKERS_NAME" >"$OUT/launch.txt"
+wait_for 'stapel.app.ready' 120
 wait_for 'stapel.nav ' 30
 xcrun simctl io "$UDID" screenshot "$OUT/launched.png" >/dev/null
 
@@ -76,17 +119,17 @@ echo "[ios-smoke] system link $LINK (expect the system's open-in-app prompt)"
 xcrun simctl openurl "$UDID" "$LINK"
 sleep 3
 xcrun simctl io "$UDID" screenshot "$OUT/os-link-prompt.png" >/dev/null
-if grep -q "stapel.link $LINK" "$LOG"; then echo "[ios-smoke] the system delivered the link without a prompt"; fi
+if seen "stapel.link $LINK"; then echo "[ios-smoke] the system delivered the link without a prompt"; fi
 
 echo "[ios-smoke] relaunch with the link as a launch argument (the app's URL entry point)"
 xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
-: >"$LOG.prev"; cp "$LOG" "$LOG.prev"
-xcrun simctl launch "$UDID" "$BUNDLE_ID" -stapelOpenUrl "$LINK" >>"$OUT/launch.txt"
+xcrun simctl launch "$UDID" "$BUNDLE_ID" -stapelLogFile "$MARKERS_NAME" -stapelOpenUrl "$LINK" >>"$OUT/launch.txt"
 wait_for "stapel.link $LINK opened" 60
 sleep 2
 xcrun simctl io "$UDID" screenshot "$OUT/deep-link.png" >/dev/null
-grep -E 'stapel\.(app|nav|link)' "$LOG" | sed 's/^/[ios-smoke] log: /'
-if grep -q 'stapel.session: vault' "$LOG"; then grep 'stapel.session: vault' "$LOG" | sed 's/^/[ios-smoke] /'; echo "[ios-smoke] the token vault failed"; exit 1; fi
+cp "$MARKERS" "$OUT/markers.log"
+grep -E 'stapel\.(app|nav|link)' "$OUT/markers.log" | sed 's/^/[ios-smoke] marker: /'
+if grep -h 'stapel.session: vault' "$OUT/markers.log" "$LOG"; then echo "[ios-smoke] the token vault failed"; exit 1; fi
 echo "[ios-smoke] OK — artifacts in $OUT"
 
 if [[ $UITEST == 1 ]]; then
