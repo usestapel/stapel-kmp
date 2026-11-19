@@ -40,6 +40,7 @@ exposing the probe. Without `-Pstapel.e2e.baseUrl` the test task is skipped.
 | cookies | after each class: the server saw requests and none carried a `Cookie` header |
 | captcha | captcha instance: no solver → `CaptchaRequired`, one request; fake solver → solved once, `400` then `200`; wrong token → `CaptchaInvalid` |
 | koin | `authModule()` + substrate modules: a presenter from Koin signs in, refresh works through the bare transport |
+| app | `stapelApp { bricks(AuthBrick()) }` alone: sign-in owner is `auth.login`, the mock code signs in, navigation sees a member |
 | current | each device sees exactly its own row `isCurrent`, and keeps it after a refresh rotation |
 | others | revoke-others (presenter) spares this device: own refresh works, the other device's is dead, one row left |
 | logout-bare | logout with the access token only (no refresh token in the body) kills the session's refresh token |

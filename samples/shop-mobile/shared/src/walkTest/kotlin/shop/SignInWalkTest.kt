@@ -6,6 +6,7 @@ import org.koin.dsl.module
 import stapel.app.di.StapelAppContent
 import stapel.auth.StapelAuth
 import stapel.auth.session.AuthState
+import stapel.auth.testing.AuthTags
 import stapel.auth.testing.awaitTag
 import stapel.auth.testing.signInWithMockOtp
 import stapel.session.vault.InMemoryTokenVault
@@ -32,6 +33,8 @@ class SignInWalkTest {
             setContent { StapelAppContent(app) }
             signInWithMockOtp("walk+${Random.nextLong(1_000_000_000L)}@example.com")
             awaitTag("shop.home")
+            // The account control (sign-out) is in the top bar once signed in.
+            awaitTag(AuthTags.ACCOUNT_MENU)
             assertTrue(app.koin.get<StapelAuth>().session.state.value is AuthState.SignedIn)
         } finally {
             app.close()

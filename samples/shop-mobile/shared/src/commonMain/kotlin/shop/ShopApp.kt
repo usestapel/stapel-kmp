@@ -22,11 +22,14 @@ import stapel.app.di.StapelApp
 import stapel.app.di.StapelAppBuilder
 import stapel.app.di.StapelAppContent
 import stapel.app.di.stapelApp
+import stapel.auth.ui.di.AuthBrick
 import stapel.config.StapelEnvironment
 import stapel.config.platformClientInfo
+import stapel.i18n.I18nBundle
 import stapel.navigation.DeepLinkConfig
 import stapel.navigation.DestinationId
 import stapel.navigation.NavIcons
+import stapel.navigation.Placement
 import stapel.navigation.PathCodec
 import stapel.navigation.Route
 import stapel.navigation.RouteAddress
@@ -47,6 +50,19 @@ data object ShopHomeRoute : Route
 /** One order, `/app/orders/<id>`. */
 @Serializable
 data class OrderRoute(val orderId: String) : Route
+
+/** The customer's orders, in the account section (which the account control in the top bar opens). */
+@Serializable
+data object MyOrdersRoute : Route
+
+/** The shop's own UI strings. */
+private val ShopStrings = I18nBundle(
+    "shop",
+    mapOf(
+        "en" to { mapOf("shop.nav.home" to "Home", "shop.nav.order" to "Order", "shop.nav.my_orders" to "My orders") },
+        "ru" to { mapOf("shop.nav.home" to "Главная", "shop.nav.order" to "Заказ", "shop.nav.my_orders" to "Мои заказы") },
+    ),
+)
 
 /**
  * The whole app, assembled once per process: the substrate, the auth brick, the app's own screens and
@@ -69,7 +85,7 @@ fun createShopApp(
             client = platformClientInfo(appId = "io.github.usestapel.sample.shop", appVersion = "0.1.0", build = "1"),
         ),
     )
-    bricks(ShopAuthBrick())
+    bricks(AuthBrick())
     screens(::shopScreens)
     modules(module { single<OrdersApi> { OrdersApiClient(get<ApiTransport>()) } })
     navigation(
@@ -77,6 +93,7 @@ fun createShopApp(
         deepLinks = DeepLinkConfig(schemes = setOf("shopmobile"), hosts = setOf("shop.example.com")),
     )
     theme { content -> StapelMaterialTheme(tokens = AppTokens, content = content) }
+    strings { register(ShopStrings) }
     configure()
 }
 
@@ -97,6 +114,13 @@ fun shopScreens(context: BrickContext): NavContribution = navContribution("app:s
         codec = PathCodec(parse = { params, _ -> OrderRoute(params.getValue("orderId")) }, format = { r -> RouteAddress(path = mapOf("orderId" to r.orderId)) }),
         requiresAuth = true, menuVisibleDefault = false, order = 1,
     ) { route -> StapelPage(Modifier.testTag("shop.order")) { StapelText("Order ${route.orderId}") } }
+    // A child of the container's account section: with it the section exists, and so does the top bar's
+    // account control (it opens the section, and an embed whose target is not installed is dropped).
+    destination<MyOrdersRoute>(
+        id = "shop.my_orders", path = "orders", labelKey = "shop.nav.my_orders", icon = NavIcons.Cart,
+        codec = PathCodec.constant(MyOrdersRoute), placement = Placement.Submenu(DestinationId("account.root")),
+        requiresAuth = true, order = 2,
+    ) { StapelPage(Modifier.testTag("shop.my_orders")) { StapelText("My orders") } }
 }
 
 @Composable

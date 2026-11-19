@@ -9,6 +9,10 @@ plugins {
 
 dependencies {
     testImplementation(projects.stapelAuth)
+    // AppCompositionTest: the descriptor through stapelApp.
+    testImplementation(projects.stapelAuthUi)
+    testImplementation(projects.stapelApp)
+    testImplementation(projects.stapelNavigation)
     testImplementation(projects.stapelNetwork)
     testImplementation(projects.stapelSession)
     testImplementation(projects.stapelCache)
