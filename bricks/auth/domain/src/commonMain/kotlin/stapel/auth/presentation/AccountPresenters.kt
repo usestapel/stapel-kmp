@@ -246,6 +246,8 @@ public data class SessionsState(
     val sessions: Resource<List<SessionDevice>> = Resource.Loading,
     /** Session ids being revoked. */
     val revoking: Set<String> = emptySet(),
+    /** Session ids being confirmed ("this was me"). */
+    val confirming: Set<String> = emptySet(),
     /** True while "revoke all others" runs. */
     val revokingOthers: Boolean = false,
     /** The last mutation error. */
@@ -265,9 +267,15 @@ public sealed interface SessionsIntent {
 
     /** Revokes every session except this one. */
     public data object RevokeOthers : SessionsIntent
+
+    /** Marks a suspicious session as the user's own ("this was me"); its flag is cleared on success. */
+    public data class ConfirmMine(
+        /** Session id. */
+        val sessionId: String,
+    ) : SessionsIntent
 }
 
-/** The signed-in user's sessions and devices with revoke and revoke-others. */
+/** The signed-in user's sessions and devices with revoke, revoke-others and "this was me". */
 public class SessionsPresenter(private val auth: StapelAuth, context: PresenterContext) :
     Presenter<SessionsState, SessionsIntent, Nothing>(SessionsState(), context) {
 
@@ -293,6 +301,23 @@ public class SessionsPresenter(private val auth: StapelAuth, context: PresenterC
                             if (r is StapelResult.Ok) Resource.Ready(ready.data.filterNot { it.id == intent.sessionId }, ready.freshness) else ready
                         } ?: sessions
                         copy(sessions = list, revoking = revoking - intent.sessionId, error = (r as? StapelResult.Err)?.error)
+                    }
+                }
+            }
+            is SessionsIntent.ConfirmMine -> {
+                if (intent.sessionId in state.value.confirming) return
+                reduce { copy(confirming = confirming + intent.sessionId, error = null) }
+                launch("confirm-${intent.sessionId}") {
+                    val r = auth.devices.confirm(intent.sessionId)
+                    reduce {
+                        val list = (sessions as? Resource.Ready)?.let { ready ->
+                            if (r is StapelResult.Ok) {
+                                Resource.Ready(ready.data.map { if (it.id == intent.sessionId) it.copy(isSuspicious = false) else it }, ready.freshness)
+                            } else {
+                                ready
+                            }
+                        } ?: sessions
+                        copy(sessions = list, confirming = confirming - intent.sessionId, error = (r as? StapelResult.Err)?.error)
                     }
                 }
             }

@@ -5,12 +5,15 @@ import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import stapel.auth.api.error.AuthApiError
 import stapel.auth.api.model.AuthResponseStatus
+import stapel.auth.api.model.SessionResponse
+import stapel.auth.api.model.SimpleStatusResponse
 import stapel.auth.api.model.FirstLoginChallengeResponse
 import stapel.auth.api.model.FirstLoginChallengeResponseStatus
 import stapel.auth.api.model.Requires
 import stapel.auth.api.model.TOTPChallengeResponse
 import stapel.auth.api.model.TOTPChallengeResponseStatus
 import stapel.auth.api.model.TOTPChallengeVerify
+import stapel.auth.error.AuthError
 import stapel.auth.error.AuthErrorReason
 import stapel.auth.model.AuthMethodId
 import stapel.auth.model.OtpChannel
@@ -33,6 +36,9 @@ import stapel.auth.presentation.PasswordRegisterState
 import stapel.auth.presentation.PasswordSignInIntent
 import stapel.auth.presentation.PasswordSignInPresenter
 import stapel.auth.presentation.PasswordSignInState
+import stapel.auth.presentation.SessionsIntent
+import stapel.auth.presentation.SessionsPresenter
+import stapel.result.state.Resource
 import stapel.auth.session.AuthState
 import stapel.mvi.record
 import stapel.testing.FakeAnswer
@@ -171,6 +177,62 @@ class PresenterTest {
         p.dispatch(OtpSignInIntent.EditIdentifier)
         runCurrent()
         assertEquals(OtpSignInState.Idle(OtpChannel.Email, "a@example.com"), p.state.value)
+    }
+
+    @Test
+    fun aChallengeAfterTheCodeHasAWayBackToTheForm() = runTest {
+        val f = Fixture(this).start()
+        f.transport.on(Ops.PHONE_REQUEST) { FakeAnswer.Value(sent) }
+        f.transport.on(Ops.PHONE_VERIFY) {
+            FakeAnswer.Value(TOTPChallengeResponse(TOTPChallengeResponseStatus.TotpRequired, challengeToken = "ch-1", expiresIn = 300))
+        }
+        f.transport.on(Ops.TOTP_VERIFY) { FakeAnswer.Value(session("u1", AuthResponseStatus.LoggedIn)) }
+        val p = OtpSignInPresenter(f.auth, f.context)
+        p.dispatch(OtpSignInIntent.RequestCode(OtpChannel.Phone, "+12025550100"))
+        runCurrent()
+        p.dispatch(OtpSignInIntent.SubmitCode("0000"))
+        runCurrent()
+        assertIs<ChallengeStep.Totp>(assertIs<OtpSignInState.Challenge>(p.state.value).step)
+
+        p.dispatch(OtpSignInIntent.EditIdentifier)
+        runCurrent()
+        assertEquals(OtpSignInState.Idle(OtpChannel.Phone, "+12025550100"), p.state.value)
+        p.dispatch(ChallengeIntent.SubmitTotp(TotpProof.Code("123456")))
+        runCurrent()
+        assertEquals(0, f.calls(Ops.TOTP_VERIFY), "the abandoned challenge accepts nothing")
+        assertNull(f.sessions.currentTokens())
+    }
+
+    @Test
+    fun thisWasMeClearsTheSuspiciousFlagAndAFailureKeepsIt() = runTest {
+        val f = Fixture(this).start()
+        f.auth.sessionImpl.adopt(session("u1", AuthResponseStatus.LoggedIn))
+        val row = { suspicious: Boolean ->
+            SessionResponse("s-2", "phone", "Phone", "Android", null, "2026-11-19T10:00:00Z", "2026-11-19T10:00:00Z", isCurrent = false, isSuspicious = suspicious)
+        }
+        var listed = listOf(row(true))
+        f.transport.on(Ops.SESSIONS) { FakeAnswer.Value(listed) }
+        f.transport.on(Ops.SESSION_CONFIRM) { refusal("error.404.not_found", 404) }
+        val p = SessionsPresenter(f.auth, f.context)
+        runCurrent() // the fixture has no cache partition binding: the observed list stays Loading
+        p.dispatch(SessionsIntent.Refresh)
+        runCurrent()
+        assertTrue((p.state.value.sessions as Resource.Ready).data.single().isSuspicious)
+
+        p.dispatch(SessionsIntent.ConfirmMine("s-2"))
+        runCurrent()
+        assertTrue((p.state.value.sessions as Resource.Ready).data.single().isSuspicious, "a refused confirm keeps the flag")
+        assertIs<AuthError>(p.state.value.error)
+
+        f.transport.on(Ops.SESSION_CONFIRM) { FakeAnswer.Value(SimpleStatusResponse("ok")) }
+        listed = listOf(row(false))
+        p.dispatch(SessionsIntent.ConfirmMine("s-2"))
+        runCurrent()
+        val after = p.state.value
+        assertEquals(false, (after.sessions as Resource.Ready).data.single().isSuspicious)
+        assertTrue(after.confirming.isEmpty())
+        assertNull(after.error)
+        assertEquals(2, f.calls(Ops.SESSION_CONFIRM))
     }
 
     @Test

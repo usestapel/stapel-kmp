@@ -75,6 +75,7 @@ public class PasswordSignInPresenter(auth: StapelAuth, context: PresenterContext
             }
             PasswordSignInIntent.Reset -> {
                 launch(KEY_WORK) {}
+                launch(KEY_CHALLENGE) {}
                 reduce { PasswordSignInState.Idle }
             }
             is ChallengeIntent -> handleChallenge(intent)

@@ -10125,6 +10125,17 @@ public final class stapel/auth/presentation/PasswordSignInState$Idle : stapel/au
 public abstract interface class stapel/auth/presentation/SessionsIntent {
 }
 
+public final class stapel/auth/presentation/SessionsIntent$ConfirmMine : stapel/auth/presentation/SessionsIntent {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/auth/presentation/SessionsIntent$ConfirmMine;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/SessionsIntent$ConfirmMine;Ljava/lang/String;ILjava/lang/Object;)Lstapel/auth/presentation/SessionsIntent$ConfirmMine;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getSessionId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class stapel/auth/presentation/SessionsIntent$Refresh : stapel/auth/presentation/SessionsIntent {
 	public static final field INSTANCE Lstapel/auth/presentation/SessionsIntent$Refresh;
 	public fun equals (Ljava/lang/Object;)Z
@@ -10157,15 +10168,17 @@ public final class stapel/auth/presentation/SessionsPresenter : stapel/mvi/Prese
 
 public final class stapel/auth/presentation/SessionsState {
 	public fun <init> ()V
-	public fun <init> (Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;)V
-	public synthetic fun <init> (Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lstapel/result/state/Resource;Ljava/util/Set;Ljava/util/Set;ZLstapel/auth/error/AuthError;)V
+	public synthetic fun <init> (Lstapel/result/state/Resource;Ljava/util/Set;Ljava/util/Set;ZLstapel/auth/error/AuthError;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lstapel/result/state/Resource;
 	public final fun component2 ()Ljava/util/Set;
-	public final fun component3 ()Z
-	public final fun component4 ()Lstapel/auth/error/AuthError;
-	public final fun copy (Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;)Lstapel/auth/presentation/SessionsState;
-	public static synthetic fun copy$default (Lstapel/auth/presentation/SessionsState;Lstapel/result/state/Resource;Ljava/util/Set;ZLstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/SessionsState;
+	public final fun component3 ()Ljava/util/Set;
+	public final fun component4 ()Z
+	public final fun component5 ()Lstapel/auth/error/AuthError;
+	public final fun copy (Lstapel/result/state/Resource;Ljava/util/Set;Ljava/util/Set;ZLstapel/auth/error/AuthError;)Lstapel/auth/presentation/SessionsState;
+	public static synthetic fun copy$default (Lstapel/auth/presentation/SessionsState;Lstapel/result/state/Resource;Ljava/util/Set;Ljava/util/Set;ZLstapel/auth/error/AuthError;ILjava/lang/Object;)Lstapel/auth/presentation/SessionsState;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getConfirming ()Ljava/util/Set;
 	public final fun getError ()Lstapel/auth/error/AuthError;
 	public final fun getRevoking ()Ljava/util/Set;
 	public final fun getRevokingOthers ()Z
@@ -10247,6 +10260,7 @@ public final class stapel/auth/repo/CapabilitiesRepository {
 
 public final class stapel/auth/repo/SessionsRepository {
 	public fun <init> (Lstapel/auth/api/AuthApi;Lstapel/cache/StapelCache;)V
+	public final fun confirm (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun load (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun revoke (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun revokeOthers (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

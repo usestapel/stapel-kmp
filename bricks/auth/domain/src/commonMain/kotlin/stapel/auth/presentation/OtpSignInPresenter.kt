@@ -118,7 +118,10 @@ public sealed interface OtpSignInIntent {
         val code: String,
     ) : OtpSignInIntent
 
-    /** Back to [OtpSignInState.Idle] keeping the typed identifier. */
+    /**
+     * Back to [OtpSignInState.Idle] keeping the typed identifier: from the code step, a refusal, a
+     * lock, or a challenge (which is abandoned; the server lets its token expire).
+     */
     public data object EditIdentifier : OtpSignInIntent
 }
 
@@ -128,7 +131,8 @@ public sealed interface OtpSignInIntent {
  * existing account, and the session publishes `SessionChange.Promoted` / `Merged`.
  *
  * Transitions: `Idle → Requesting → CodeSent | RequestFailed | Locked`;
- * `CodeSent(verifying) → Done | Challenge | CodeSent(error) | Locked`.
+ * `CodeSent(verifying) → Done | Challenge | CodeSent(error) | Locked`;
+ * [OtpSignInIntent.EditIdentifier]: `CodeSent | RequestFailed | Locked | Challenge → Idle`.
  */
 public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
     SignInPresenter<OtpSignInState, OtpSignInIntent>(OtpSignInState.Idle(), context, auth) {
@@ -146,10 +150,12 @@ public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
                     is OtpSignInState.RequestFailed -> s.channel to s.identifier
                     is OtpSignInState.Locked -> s.channel to s.identifier
                     is OtpSignInState.Requesting -> s.channel to s.identifier
+                    is OtpSignInState.Challenge -> lastRequest ?: (OtpChannel.Email to "")
                     else -> return
                 }
-                // A keyed launch cancels the previous one: in-flight work and the timer stop here.
+                // A keyed launch cancels the previous one: in-flight work, a challenge step and the timer stop here.
                 launch(KEY_WORK) {}
+                launch(KEY_CHALLENGE) {}
                 launch(KEY_TIMER) {}
                 reduce { OtpSignInState.Idle(channel, identifier) }
             }
@@ -157,7 +163,11 @@ public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
         }
     }
 
+    /** The channel and identifier of the last code request, for the way back from a challenge. */
+    private var lastRequest: Pair<OtpChannel, String>? = null
+
     private fun request(channel: OtpChannel, identifier: String) {
+        lastRequest = channel to identifier
         reduce { OtpSignInState.Requesting(channel, identifier) }
         launch(KEY_WORK) {
             val otp = auth.capabilities.get().let { (it as? StapelResult.Ok)?.value }

@@ -5414,6 +5414,19 @@ sealed interface stapel.auth.presentation/PasswordSignInState { // stapel.auth.p
 }
 
 sealed interface stapel.auth.presentation/SessionsIntent { // stapel.auth.presentation/SessionsIntent|null[0]
+    final class ConfirmMine : stapel.auth.presentation/SessionsIntent { // stapel.auth.presentation/SessionsIntent.ConfirmMine|null[0]
+        constructor <init>(kotlin/String) // stapel.auth.presentation/SessionsIntent.ConfirmMine.<init>|<init>(kotlin.String){}[0]
+
+        final val sessionId // stapel.auth.presentation/SessionsIntent.ConfirmMine.sessionId|{}sessionId[0]
+            final fun <get-sessionId>(): kotlin/String // stapel.auth.presentation/SessionsIntent.ConfirmMine.sessionId.<get-sessionId>|<get-sessionId>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.auth.presentation/SessionsIntent.ConfirmMine.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.auth.presentation/SessionsIntent.ConfirmMine // stapel.auth.presentation/SessionsIntent.ConfirmMine.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SessionsIntent.ConfirmMine.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.presentation/SessionsIntent.ConfirmMine.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.presentation/SessionsIntent.ConfirmMine.toString|toString(){}[0]
+    }
+
     final class Revoke : stapel.auth.presentation/SessionsIntent { // stapel.auth.presentation/SessionsIntent.Revoke|null[0]
         constructor <init>(kotlin/String) // stapel.auth.presentation/SessionsIntent.Revoke.<init>|<init>(kotlin.String){}[0]
 
@@ -10843,8 +10856,10 @@ final class stapel.auth.presentation/SessionsPresenter : stapel.mvi/Presenter<st
 }
 
 final class stapel.auth.presentation/SessionsState { // stapel.auth.presentation/SessionsState|null[0]
-    constructor <init>(stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...) // stapel.auth.presentation/SessionsState.<init>|<init>(stapel.result.state.Resource<kotlin.collections.List<stapel.auth.model.SessionDevice>>;kotlin.collections.Set<kotlin.String>;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+    constructor <init>(stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...) // stapel.auth.presentation/SessionsState.<init>|<init>(stapel.result.state.Resource<kotlin.collections.List<stapel.auth.model.SessionDevice>>;kotlin.collections.Set<kotlin.String>;kotlin.collections.Set<kotlin.String>;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
 
+    final val confirming // stapel.auth.presentation/SessionsState.confirming|{}confirming[0]
+        final fun <get-confirming>(): kotlin.collections/Set<kotlin/String> // stapel.auth.presentation/SessionsState.confirming.<get-confirming>|<get-confirming>(){}[0]
     final val error // stapel.auth.presentation/SessionsState.error|{}error[0]
         final fun <get-error>(): stapel.auth.error/AuthError? // stapel.auth.presentation/SessionsState.error.<get-error>|<get-error>(){}[0]
     final val revoking // stapel.auth.presentation/SessionsState.revoking|{}revoking[0]
@@ -10856,9 +10871,10 @@ final class stapel.auth.presentation/SessionsState { // stapel.auth.presentation
 
     final fun component1(): stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> // stapel.auth.presentation/SessionsState.component1|component1(){}[0]
     final fun component2(): kotlin.collections/Set<kotlin/String> // stapel.auth.presentation/SessionsState.component2|component2(){}[0]
-    final fun component3(): kotlin/Boolean // stapel.auth.presentation/SessionsState.component3|component3(){}[0]
-    final fun component4(): stapel.auth.error/AuthError? // stapel.auth.presentation/SessionsState.component4|component4(){}[0]
-    final fun copy(stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...): stapel.auth.presentation/SessionsState // stapel.auth.presentation/SessionsState.copy|copy(stapel.result.state.Resource<kotlin.collections.List<stapel.auth.model.SessionDevice>>;kotlin.collections.Set<kotlin.String>;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
+    final fun component3(): kotlin.collections/Set<kotlin/String> // stapel.auth.presentation/SessionsState.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // stapel.auth.presentation/SessionsState.component4|component4(){}[0]
+    final fun component5(): stapel.auth.error/AuthError? // stapel.auth.presentation/SessionsState.component5|component5(){}[0]
+    final fun copy(stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin.collections/Set<kotlin/String> = ..., kotlin/Boolean = ..., stapel.auth.error/AuthError? = ...): stapel.auth.presentation/SessionsState // stapel.auth.presentation/SessionsState.copy|copy(stapel.result.state.Resource<kotlin.collections.List<stapel.auth.model.SessionDevice>>;kotlin.collections.Set<kotlin.String>;kotlin.collections.Set<kotlin.String>;kotlin.Boolean;stapel.auth.error.AuthError?){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.presentation/SessionsState.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // stapel.auth.presentation/SessionsState.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // stapel.auth.presentation/SessionsState.toString|toString(){}[0]
@@ -10890,6 +10906,7 @@ final class stapel.auth.repo/SessionsRepository { // stapel.auth.repo/SessionsRe
     constructor <init>(stapel.auth.api/AuthApi, stapel.cache/StapelCache) // stapel.auth.repo/SessionsRepository.<init>|<init>(stapel.auth.api.AuthApi;stapel.cache.StapelCache){}[0]
 
     final fun sessions(): kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<kotlin.collections/List<stapel.auth.model/SessionDevice>>> // stapel.auth.repo/SessionsRepository.sessions|sessions(){}[0]
+    final suspend fun confirm(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.auth.error/AuthError> // stapel.auth.repo/SessionsRepository.confirm|confirm(kotlin.String){}[0]
     final suspend fun load(): stapel.result/StapelResult<kotlin.collections/List<stapel.auth.model/SessionDevice>, stapel.auth.error/AuthError> // stapel.auth.repo/SessionsRepository.load|load(){}[0]
     final suspend fun revoke(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.auth.error/AuthError> // stapel.auth.repo/SessionsRepository.revoke|revoke(kotlin.String){}[0]
     final suspend fun revokeOthers(): stapel.result/StapelResult<kotlin/Unit, stapel.auth.error/AuthError> // stapel.auth.repo/SessionsRepository.revokeOthers|revokeOthers(){}[0]

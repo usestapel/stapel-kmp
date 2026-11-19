@@ -115,6 +115,16 @@ public class SessionsRepository(private val api: AuthApi, private val cache: Sta
             is StapelResult.Err -> StapelResult.Err(AuthError.of(r.error))
         }
 
+    /** Clears the suspicious flag of a session the user recognizes ("this was me", `POST /sessions/{id}/confirm/`). */
+    public suspend fun confirm(sessionId: String): StapelResult<Unit, AuthError> =
+        when (val r = api.sessionsConfirm(sessionId)) {
+            is StapelResult.Ok -> {
+                AuthInvalidation.after(AuthOperations.sessionsConfirm.id).forEach { cache.invalidate(it) }
+                StapelResult.Ok(Unit)
+            }
+            is StapelResult.Err -> StapelResult.Err(AuthError.of(r.error))
+        }
+
     /** Revokes every session except this one (`DELETE /sessions/`). */
     public suspend fun revokeOthers(): StapelResult<Unit, AuthError> =
         when (val r = api.deleteSessions()) {

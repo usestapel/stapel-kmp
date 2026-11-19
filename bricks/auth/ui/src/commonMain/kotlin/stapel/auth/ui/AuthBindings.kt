@@ -157,10 +157,8 @@ public fun AuthSignIn(
 
 @Composable
 private fun BoundSignIn(auth: StapelAuth, onSignedIn: () -> Unit, slots: AuthSlots, clock: Clock) {
-    // "Back to sign in" from an OTP challenge restarts the OTP presenter (it has no reset intent).
-    var otpGeneration by rememberSaveable { mutableStateOf(0) }
     val chooser = rememberPresenter<MethodChooserPresenter>()
-    val otp = rememberPresenter<OtpSignInPresenter>(key = "otp.$otpGeneration")
+    val otp = rememberPresenter<OtpSignInPresenter>()
     val password = rememberPresenter<PasswordSignInPresenter>()
     val register = rememberPresenter<PasswordRegisterPresenter>()
     val guest = rememberPresenter<GuestPresenter>()
@@ -237,11 +235,8 @@ private fun BoundSignIn(auth: StapelAuth, onSignedIn: () -> Unit, slots: AuthSlo
                 val intent = ChallengeIntent.SubmitNewPassword(event.password)
                 if (active == SignInMethod.Password) password.dispatch(intent) else otp.dispatch(intent)
             }
-            SignInEvent.BackToForm -> when {
-                active == SignInMethod.Password -> password.dispatch(PasswordSignInIntent.Reset)
-                otpState is OtpSignInState.Locked -> otp.dispatch(OtpSignInIntent.EditIdentifier)
-                else -> otpGeneration++
-            }
+            SignInEvent.BackToForm ->
+                if (active == SignInMethod.Password) password.dispatch(PasswordSignInIntent.Reset) else otp.dispatch(OtpSignInIntent.EditIdentifier)
             SignInEvent.ContinueAsGuest -> guest.dispatch(GuestIntent.ContinueAsGuest)
             SignInEvent.DismissNotice -> noticeDismissed = true
             SignInEvent.Retry -> chooser.dispatch(MethodChooserIntent.Refresh)
@@ -268,8 +263,8 @@ internal fun SessionDevice.toRow(fallbackTime: kotlin.time.Instant): SessionRowS
 )
 
 /**
- * The sessions screen bound to the sessions presenter: list, revoke one (confirmed), sign out every
- * other device (confirmed), refresh. "This was me" is not offered: the domain has no confirm action yet.
+ * The sessions screen bound to the sessions presenter: list, revoke one (confirmed), "this was me" on
+ * a suspicious session, sign out every other device (confirmed), refresh.
  */
 @Composable
 public fun AuthSessions(auth: StapelAuth, clock: Clock = auth.config.clock) {
@@ -283,7 +278,7 @@ public fun AuthSessions(auth: StapelAuth, clock: Clock = auth.config.clock) {
         val state = SessionsState(
             sessions = s.sessions.map { list -> list.map { it.toRow(now) } },
             now = now,
-            busy = s.revoking,
+            busy = s.revoking + s.confirming,
             confirmRevoke = confirm,
             confirmRevokeOthers = confirmOthers,
             revokingOthers = s.revokingOthers,
@@ -302,7 +297,7 @@ public fun AuthSessions(auth: StapelAuth, clock: Clock = auth.config.clock) {
                     confirm = null
                     confirmOthers = false
                 }
-                is SessionsEvent.ConfirmMine -> Unit
+                is SessionsEvent.ConfirmMine -> presenter.dispatch(SessionsIntent.ConfirmMine(event.id))
                 SessionsEvent.Refresh -> presenter.dispatch(SessionsIntent.Refresh)
                 SessionsEvent.DismissError -> errorDismissed = true
             }
