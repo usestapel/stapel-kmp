@@ -25,6 +25,7 @@ the build owner for a one-line change.
 | The published version catalog | `catalog/` | `stapel-catalog` | — | `id("stapel.catalog")` |
 | JVM tool / generator (unpublished in v0) | `tools/<a>/<b>/` | `:tools:<a>:<b>` | `stapel.tools…` | `id("stapel.jvm-tool")` |
 | Showcase library (unpublished) | `showcase/<a>/` | `:showcase:<a>` | `stapel.showcase…` | `id("stapel.showcase")` |
+| Stories of a substrate module (unpublished) | `showcase/stories/<x>/` | `:showcase:stories:<x>` | `stapel.showcase.stories.<x>` | `id("stapel.showcase")`, exports `val storyCatalog` |
 | Room storage (only `*-room` artifacts) | `substrate/stapel-<x>-room/` | `stapel-<x>-room` | `stapel.<x>.room` | `id("stapel.substrate")` + `id("stapel.room")` |
 
 Add-on plugin for any Kotlin module: `id("stapel.serialization")`
@@ -203,8 +204,44 @@ own build file; the root lifecycle picks them up by name.
    `kmp-registry.json`. The build generates `internal object
    <pkg>.generated.StapelBuildInfo` (group, artifact id, train version) for
    brick UI libraries. A test kit for apps goes to `bricks/<brick>/testing`.
-7. **Demo** (`bricks/<brick>/demo`): stories for the showcase and a desktop
-   entry point; never published.
+7. **Demo** (`bricks/<brick>/demo`, `id("stapel.brick-demo")`, package
+   `stapel.<brick>.ui.demo`): the brick's stories. The plugin already gives the
+   module the brick's UI and `stapel-showcase`. Declare exactly one catalogue at
+   the top of the package:
+
+   ```kotlin
+   val storyCatalog: StoryCatalog = StoryCatalog(
+       id = "<brick>", title = "<Brick>",
+       stories = listOf(
+           Story("inbox.empty", "Inbox, empty", "Inbox", StoryKind.Screen,
+               covers = setOf(StoryTarget.Screen("Inbox"))) { InboxScreen(InboxState(), { event(it.toString()) }) },
+       ),
+       environment = StoryEnvironment(bundles = listOf(<Brick>UiBundle), locales = listOf("en", "ru")),
+   )
+   ```
+
+   That is all the registration there is: the gallery's build
+   (`stapel.showcase-gallery` on `showcase/gallery`) finds every
+   `bricks/*/demo` and `showcase/stories/*` directory and generates its
+   registry, so the new stories appear in `./gradlew :showcase:desktop:run`
+   with no edit to the showcase. Then:
+   - one story per screen state (ids stable, lower case: they name routes,
+     snapshots and docs images); `covers` names the members of the brick's
+     screen table (`interface <Brick>Screens`) the story draws —
+     `./gradlew :showcase:gallery:checkDemoCoverage` (part of
+     `stapelCheckFast`) fails while a brick UI has no demo catalogue or a
+     screen-table member has no story;
+   - knobs (`Knob.Flag`, `Knob.enumOf`, `Knob.Text`, `Knob.Number`,
+     `Knob.Color`) for what a reviewer should be able to vary, and named
+     `StoryState`s for the fixed combinations worth a snapshot;
+   - baselines (optional per catalogue, macOS only): `./gradlew
+     :showcase:gallery:recordScreenshots -Pstapel.showcase.catalogs=<brick>`
+     writes `bricks/<brick>/demo/snapshots/*.png`; once that directory exists,
+     `verifyScreenshots` (in `stapelCheck` and the macOS CI job) holds every
+     story × state × {Material3, Foundation} × {light, dark} to it;
+   - the docs export picks the catalogue up too (`exportCatalog`).
+   A demo module may keep a desktop entry point for a live app against a
+   backend (`bricks/auth/demo` does); its stories still live in the gallery.
 8. **End to end** (`bricks/<brick>/e2e`): JUnit 5 tests against a real
    backend started locally (`-Pstapel.e2e.baseUrl=…`); skipped without it.
    Declare expression-bodied tests `(): Unit` (`fun x(): Unit = runBlocking

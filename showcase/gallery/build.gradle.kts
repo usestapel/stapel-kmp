@@ -1,28 +1,22 @@
-// The gallery (unpublished): every StapelSkin slot, the token roles and the gutter ruler, side by side
-// in light and dark, under Material3Skin or FoundationSkin and any theme preset. Hosted by
-// showcase/desktop; the jvm tests here also measure screenshot capture (no baselines yet).
+// The gallery (unpublished): every story catalogue of the repository — showcase/stories/* and every
+// bricks/<brick>/demo — discovered at build time by stapel.showcase-gallery (no hand-edited list).
+// Built on stapel-navigation: a page per catalogue and per story, each with a route and a deep link.
+// Hosted by showcase/desktop. The same catalogues feed the screenshot baselines
+// (recordScreenshots / verifyScreenshots, macOS) and the docs export (exportCatalog); see README.md.
 plugins {
     id("stapel.showcase")
+    id("stapel.showcase-gallery")
+    id("stapel.serialization")
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.stapelUiMaterial3)
+            implementation(projects.stapelNavigationCompose)
         }
-        jvmTest.dependencies {
-            implementation(libs.roborazzi.compose.desktop)
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
         }
     }
-}
-
-tasks.withType<Test>().configureEach {
-    // Measurement of ARCH-UI §testing: capture with no display at all.
-    systemProperty("java.awt.headless", "true")
-    // Pinned so captures from different machines can be compared.
-    systemProperty("user.language", "en")
-    systemProperty("user.country", "US")
-    systemProperty("user.timezone", "UTC")
-    systemProperty("roborazzi.test.record", "true")
-    systemProperty("stapel.showcase.captureDir", layout.buildDirectory.dir("captures").get().asFile.absolutePath)
 }

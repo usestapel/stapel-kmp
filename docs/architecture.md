@@ -211,9 +211,11 @@ fills the slots:
 A project changes the look at three levels, none of which forks a screen:
 tokens (a theme preset or its own token source), a skin delegation that
 replaces individual slots and keeps the rest, or a whole skin. Every skin is
-held to the same contract tests (`showcase/skin-contract`), and the gallery
-(`showcase/gallery`, hosted by `showcase/desktop`) shows every slot in light
-and dark.
+held to the same contract tests (`showcase/skin-contract`). Every slot,
+composite and brick screen is a story (`stapel-showcase`): the gallery
+(`showcase/gallery`, hosted by `showcase/desktop`) shows them under any skin,
+preset, mode, locale, size class and text scale, the screenshot baselines are
+rendered from the same stories, and so is the docs export.
 
 ## Platform code
 

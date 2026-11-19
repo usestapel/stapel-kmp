@@ -23,8 +23,12 @@
 - **Wrappers carry defaults**, skin methods take none. Every slot has a wrapper (`StapelToggle`,
   `StapelChip`, `StapelAvatar`, `StapelBadge`, `StapelPullToRefresh`, `StapelNavigationBar`,
   `StapelNavigationRail`, …). Bricks call `StapelButton(…)`, never `StapelTheme.skin.Button(…)`.
-- **Copy comes from the caller** for anything not in the `stapel.ui.*` floor bundle (`removeLabel`,
-  refresh labels); the floor's `Dismiss` is the fallback only where a slot must name a control.
+- **Copy comes from the caller** for anything not in the `stapel.ui.*` floor bundle. The wrappers
+  default the generic labels to the floor (`stapel.ui.close`, `cancel`, `confirm`, `clear`, `done`,
+  `no_matches`, `refresh`, `remove`; `search` is there for callers): `StapelDialog`, `PickerSheet`,
+  `StapelSelect` / `StapelMultiSelect`, `ConfirmDialog`, `StapelPullToRefresh`, a search field's clear
+  action and an input chip's remove action. The floor's `Dismiss` is the fallback only where a slot
+  must name a control.
 - **Screen titles, once:** a screen names itself with `StapelScreenTitle(text)`, never a heading of its
   own. When a chrome with a title hosts it (`LocalStapelChromeTitle`: the app shell's top bar, a
   `StapelPage` drawing its bar from `title`) the chrome shows the text and the screen draws nothing;

@@ -44,7 +44,29 @@ covers all modules.
 | `checkKmpRegistry` (root) | scaffold | `kmp-registry.json` differs from what the build exports | published modules, nav manifests, `gradle/released-artifacts.txt` |
 | `checkPublishedCatalog` (`stapel-catalog`) | R1 | the generated catalog TOML carries a pre-release version or a consumer module | — |
 | `checkReleaseCoordinates` (release path) | R1 | a generated POM / Gradle module file carries a pre-release version — the allow-list does not apply | generated publication metadata |
+| `checkDemoCoverage` (`:showcase:gallery`) | showcase | a brick UI module has no `bricks/<brick>/demo` catalogue; a member of a brick's screen table (`interface <Brick>Screens` in its jvm ABI dump) is covered by no story of that brick's catalogue; a `StapelSkin` slot (stapel-ui's dump) is covered by no story; two catalogues share an id | `build/showcase/catalog-index.json` (written by `exportCatalogIndex` from the discovered catalogues), the committed ABI dumps |
+| `verifyScreenshots` (`:showcase:gallery`, in `stapelCheck`, macOS only) | D12 | a story × state × {Material3, Foundation} × {light, dark} render of a catalogue that has a `snapshots/` directory differs from its baseline by any pixel, a baseline is missing, or an orphan baseline has no story; actual / expected / diff PNGs go to `showcase/gallery/build/showcase/screenshot-report` | `<catalogue module>/snapshots/*.png` |
 | `stapelGenerateCheck` (brick domain, once CODEGEN lands) | D4 | regenerated output differs from the committed generated tree | `contracts/` |
+
+### Stories, baselines, docs export
+
+One source, three uses: the story catalogues (`stapel-showcase`; one
+`val storyCatalog` per `bricks/<brick>/demo` and `showcase/stories/<x>`) feed
+the gallery, the screenshot baselines and the docs export.
+
+- `./gradlew :showcase:gallery:recordScreenshots [-Pstapel.showcase.catalogs=ui]`
+  (macOS) renders every story × state × skin × mode at the pinned policy
+  (phone frame 390 dp, density 1, `en`, UTC, reduced motion, default preset,
+  fixed frame time, the platform's system font) into `<module>/snapshots/`;
+  unchanged pixels keep their file, stale files are removed.
+- `verifyScreenshots` compares pixel for pixel. Baselines are recorded and
+  verified on macOS only: measured, a macOS CI runner and a local Mac render
+  identical pixels, Linux differs in ~4.6 % of pixels (text rasterisation).
+  The task is skipped on other systems with that reason.
+- `./gradlew :showcase:gallery:exportCatalog` writes
+  `showcase/gallery/build/showcase/catalog/` — `catalog.json` (catalogues,
+  stories, states with image paths, knobs, coverage, anatomy, snippets) and
+  a PNG per story / state / mode (Material 3, density 2) for a docs site.
 
 ### Layer table (sensor 1)
 
