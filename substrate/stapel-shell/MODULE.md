@@ -19,6 +19,10 @@
   drawer's surface runs to the edge, its items keep clear; the rail is padded whole), the top bar
   beside it then only top and end. A side no chrome touches (the bottom beside a rail or in the
   `Stack` template) stays with the screen. UI tests inject distinct insets per side.
+- **Title:** the top bar names the screen on top: the text the screen published with
+  `StapelScreenTitle` (stapel-ui; the shell provides `LocalStapelChromeTitle` to the content while the
+  bar shows a title), else the destination's label (`ShellTags.Title`). With a `topbar.center` embed the
+  bar shows no title and screens draw their own heading.
 - **Panes:** the shell passes its width class to `StapelNavHost`; list-detail is two-pane from
   `Tablet` up with `ShellTags.DetailPlaceholder` (label key `shell.detail.empty`) in an empty
   detail pane.

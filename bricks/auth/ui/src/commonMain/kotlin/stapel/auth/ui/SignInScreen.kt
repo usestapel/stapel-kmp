@@ -52,7 +52,7 @@ public fun SignInScreen(
             slots.brand?.invoke()
             AuthHeading(
                 stapelString(if (state.variant == SignInVariant.Register) AuthUiStrings.RegisterTitle else AuthUiStrings.LoginTitle),
-                Modifier.testTag(AuthTestTags.TITLE),
+                testTag = AuthTestTags.TITLE,
             )
             state.notice?.let { notice ->
                 StapelBanner(

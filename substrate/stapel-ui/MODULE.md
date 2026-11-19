@@ -25,6 +25,10 @@
   `StapelNavigationRail`, …). Bricks call `StapelButton(…)`, never `StapelTheme.skin.Button(…)`.
 - **Copy comes from the caller** for anything not in the `stapel.ui.*` floor bundle (`removeLabel`,
   refresh labels); the floor's `Dismiss` is the fallback only where a slot must name a control.
+- **Screen titles, once:** a screen names itself with `StapelScreenTitle(text)`, never a heading of its
+  own. When a chrome with a title hosts it (`LocalStapelChromeTitle`: the app shell's top bar, a
+  `StapelPage` drawing its bar from `title`) the chrome shows the text and the screen draws nothing;
+  hosted bare, the screen draws it as its heading. Dialogs and sheets title themselves through `title`.
 - **Gutter:** `StapelPage` applies `StapelTheme.layout.pageGutter` (4 / 8 / 24 dp) once. A screen
   never adds its own horizontal root padding.
 - **Size classes** come from the token breakpoints and the window width (`LocalWindowInfo`), not

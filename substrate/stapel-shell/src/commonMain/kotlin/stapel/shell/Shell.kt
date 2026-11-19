@@ -58,6 +58,9 @@ import stapel.ui.StapelPage
 import stapel.ui.StapelProgress
 import stapel.ui.StapelBanner
 import stapel.ui.StapelSurface
+import stapel.ui.LocalStapelChromeTitle
+import stapel.ui.StapelChromeTitle
+import stapel.ui.StapelScreenTitle
 import stapel.ui.StapelText
 import stapel.ui.StapelTheme
 import stapel.ui.StapelTone
@@ -79,6 +82,9 @@ public object ShellTags {
 
     /** The top bar. */
     public const val TopBar: String = "stapel.shell.topbar"
+
+    /** The top bar's title text. */
+    public const val Title: String = "stapel.shell.topbar.title"
 
     /** The phone "More" sheet. */
     public const val MoreSheet: String = "stapel.shell.more"
@@ -147,6 +153,7 @@ public fun StapelShell(
         }
         var moreOpen by rememberSaveable { mutableStateOf(false) }
         val badges = badgeCounts(config)
+        val chromeTitle = remember { StapelChromeTitle() }
 
         val side = windowInsets.only(WindowInsetsSides.Start + WindowInsetsSides.Vertical)
         val hasSide = chrome == Chrome.Rail || chrome == Chrome.Drawer
@@ -173,22 +180,27 @@ public fun StapelShell(
                 // The rail / drawer took the start side (and the vertical sides on its own column).
                 val main = if (hasSide) Modifier.consumeWindowInsets(windowInsets.only(WindowInsetsSides.Start)) else Modifier
                 Column(main.weight(1f).fillMaxHeight()) {
+                    // The bar names the hosted screen (its StapelScreenTitle, else the destination's label) unless
+                    // a top-bar-center embed takes the title's place; then the screen draws its own heading.
+                    val titled = topBarShown && navigator.nav.embeds.none { it.slot == Slots.TopbarCenter && embedFilter(it) }
                     if (topBarShown) {
-                        TopBar(navigator, config, embedFilter, Modifier.windowInsetsPadding(windowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)))
+                        TopBar(navigator, config, embedFilter, Modifier.windowInsetsPadding(windowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)), chromeTitle)
                     }
                     Refusal(navigator)
                     Box(Modifier.weight(1f).fillMaxWidth().consumeWindowInsets(contentConsumes).testTag(ShellTags.Content)) {
-                        StapelNavHost(
-                            navigator = navigator,
-                            contributions = config.contributions,
-                            capabilities = config.capabilities,
-                            overlay = ShellOverlay,
-                            unavailable = { d, missing -> UnavailableScreen(d, missing) },
-                            waiting = { WaitScreen() },
-                            section = { SectionScreen(it.id) },
-                            width = width,
-                            detailPlaceholder = { DetailPlaceholder() },
-                        )
+                        CompositionLocalProvider(LocalStapelChromeTitle provides chromeTitle.takeIf { titled }) {
+                            StapelNavHost(
+                                navigator = navigator,
+                                contributions = config.contributions,
+                                capabilities = config.capabilities,
+                                overlay = ShellOverlay,
+                                unavailable = { d, missing -> UnavailableScreen(d, missing) },
+                                waiting = { WaitScreen() },
+                                section = { SectionScreen(it.id) },
+                                width = width,
+                                detailPlaceholder = { DetailPlaceholder() },
+                            )
+                        }
                     }
                     if (chrome == Chrome.BottomBar) {
                         EmbedSlot(Slots.Bottombar, navigator, config.contributions, filter = embedFilter)
@@ -258,7 +270,7 @@ private fun topBarShown(navigator: StapelNavigator, state: NavState): Boolean {
 }
 
 @Composable
-private fun TopBar(navigator: StapelNavigator, config: ShellConfig, filter: (EmbedSpec) -> Boolean, modifier: Modifier) {
+private fun TopBar(navigator: StapelNavigator, config: ShellConfig, filter: (EmbedSpec) -> Boolean, modifier: Modifier, title: StapelChromeTitle) {
     val state by navigator.state.collectAsState()
     val top = state.top ?: return
     val destination = navigator.nav.destinationOf(top.route) ?: return
@@ -275,7 +287,7 @@ private fun TopBar(navigator: StapelNavigator, config: ShellConfig, filter: (Emb
             if (hasCenter) {
                 EmbedSlot(Slots.TopbarCenter, navigator, config.contributions, filter = filter)
             } else {
-                StapelText(label(destination.labelKey), style = StapelTheme.type.title)
+                StapelText(title.current ?: label(destination.labelKey), Modifier.testTag(ShellTags.Title), style = StapelTheme.type.title)
             }
         }
         EmbedSlot(Slots.TopbarEnd, navigator, config.contributions, filter = filter)
@@ -394,7 +406,7 @@ public fun SectionScreen(root: DestinationId, modifier: Modifier = Modifier) {
     val section = navigator.nav.byId[root] ?: return
     val label = LocalShellLabel.current
     StapelPage(modifier.testTag("stapel.shell.section.${root.value}")) {
-        StapelText(label(section.labelKey), style = StapelTheme.type.title)
+        StapelScreenTitle(label(section.labelKey))
         for (child in section.children.filter { it.menuVisible }) {
             val route = navigator.nav.defaultRoute(child.id) ?: continue
             StapelListItem(
@@ -413,7 +425,7 @@ public fun SectionScreen(root: DestinationId, modifier: Modifier = Modifier) {
 public fun UnavailableScreen(destination: ResolvedDestination, missing: Set<CapabilityKey>) {
     val label = LocalShellLabel.current
     StapelPage(Modifier.testTag(ShellTags.Unavailable)) {
-        StapelText(label(destination.labelKey), style = StapelTheme.type.title)
+        StapelScreenTitle(label(destination.labelKey))
         StapelText(
             if (missing.isEmpty()) {
                 "${label("shell.unavailable.no_screen")}: ${destination.id}"

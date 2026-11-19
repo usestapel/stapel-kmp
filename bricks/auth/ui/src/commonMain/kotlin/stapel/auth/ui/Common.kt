@@ -9,8 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.heading
-import androidx.compose.ui.semantics.semantics
 import stapel.i18n.StringKey
 import stapel.result.StapelError
 import stapel.result.text.ErrorCatalog
@@ -19,6 +17,7 @@ import stapel.ui.LocalStapelErrorText
 import stapel.ui.LocalStapelStrings
 import stapel.ui.StapelSizeClass
 import stapel.ui.StapelSurface
+import stapel.ui.StapelScreenTitle
 import stapel.ui.StapelText
 import stapel.ui.StapelTheme
 import stapel.ui.skin.ElevationStep
@@ -194,10 +193,13 @@ internal fun AuthCard(modifier: Modifier = Modifier, content: @Composable Column
     }
 }
 
-/** A heading in the title style. */
+/**
+ * A screen's (or a sign-in step's) title: the hosting chrome shows it when there is one (shell top bar,
+ * a titled page), the screen draws it as its heading only when hosted bare ([StapelScreenTitle]).
+ */
 @Composable
-internal fun AuthHeading(text: String, modifier: Modifier = Modifier) {
-    StapelText(text, modifier.semantics { heading() }, style = StapelTheme.type.heading)
+internal fun AuthHeading(text: String, testTag: String? = null) {
+    StapelScreenTitle(text, testTag = testTag)
 }
 
 /** Muted secondary text. */

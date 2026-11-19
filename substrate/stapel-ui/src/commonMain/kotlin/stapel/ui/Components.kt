@@ -18,6 +18,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
@@ -461,7 +462,9 @@ public val LARGE_TITLE_COLLAPSE_DISTANCE: Dp = 96.dp
  *   is never under the IME) and THE page gutter (`StapelTheme.layout.pageGutter`) — a brick screen never
  *   writes a horizontal padding of its own;
  * - the top bar: a custom [topBar], or one drawn from [title] / [subtitle] / [navigation] / [actions];
- *   with [largeTitle] it collapses from a large title into the bar as the content scrolls;
+ *   with [largeTitle] it collapses from a large title into the bar as the content scrolls. A bar drawn
+ *   from [title] is the content's chrome title ([StapelChromeTitle]): a [StapelScreenTitle] inside
+ *   replaces [title] in the bar instead of drawing a second heading;
  * - pull-to-refresh around the content when [refresh] is given;
  * - the snackbar host over the content when [snackbars] is given (above the bottom bar and the keyboard).
  *
@@ -507,13 +510,15 @@ public fun StapelPage(
             }
         }
     }
+    // A page that draws its bar from `title` names the screens inside it: their StapelScreenTitle goes to the bar.
+    val ownTitle = if (topBar == null && title != null) remember { StapelChromeTitle() } else null
     Box(modifier.fillMaxSize().background(StapelTheme.colors.surface).windowInsetsPadding(insets)) {
         Column(Modifier.fillMaxSize()) {
             when {
                 topBar != null -> topBar()
                 title != null -> StapelTheme.skin.TopBar(
                     TopBarSpec(
-                        title, navigation, actions, STAPEL_PAGE_TOP_BAR_TAG, subtitle,
+                        ownTitle?.current ?: title, navigation, actions, STAPEL_PAGE_TOP_BAR_TAG, subtitle,
                         if (collapsing) (collapsed / distance).coerceIn(0f, 1f) else null,
                     ),
                     Modifier,
@@ -529,8 +534,13 @@ public fun StapelPage(
                             .testTag(STAPEL_PAGE_CONTENT_TAG)
                             .padding(horizontal = gutter),
                         verticalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s4),
-                        content = content,
-                    )
+                    ) {
+                        if (ownTitle != null) {
+                            CompositionLocalProvider(LocalStapelChromeTitle provides ownTitle) { content() }
+                        } else {
+                            content()
+                        }
+                    }
                 }
             }
             Box(Modifier.weight(1f).fillMaxWidth().nestedScroll(connection)) {

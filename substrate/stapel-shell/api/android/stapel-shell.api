@@ -45,6 +45,7 @@ public final class stapel/shell/ShellTags {
 	public static final field MoreSheet Ljava/lang/String;
 	public static final field Rail Ljava/lang/String;
 	public static final field Refusal Ljava/lang/String;
+	public static final field Title Ljava/lang/String;
 	public static final field TopBar Ljava/lang/String;
 	public static final field Unavailable Ljava/lang/String;
 	public static final field Waiting Ljava/lang/String;

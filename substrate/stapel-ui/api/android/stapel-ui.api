@@ -123,6 +123,11 @@ public final class stapel/ui/PickersKt {
 	public static final fun pickerMatches (Ljava/lang/String;Ljava/lang/String;)Z
 }
 
+public final class stapel/ui/ScreenTitleKt {
+	public static final fun StapelScreenTitle (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun getLocalStapelChromeTitle ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+}
+
 public abstract interface class stapel/ui/SectionHeaderAction {
 }
 
@@ -171,6 +176,12 @@ public final class stapel/ui/SectionHeaderSize : java/lang/Enum {
 public final class stapel/ui/SectionsKt {
 	public static final fun SectionHeader (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lstapel/ui/SectionHeaderSize;Ljava/lang/String;Ljava/lang/String;Lstapel/ui/SectionHeaderAction;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun StatusPage (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lstapel/ui/StapelIcon;Lstapel/ui/StapelTone;Lstapel/ui/skin/ButtonSpec;Lstapel/ui/skin/ButtonSpec;Ljava/lang/String;Lstapel/ui/StatusSize;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class stapel/ui/StapelChromeTitle {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun getCurrent ()Ljava/lang/String;
 }
 
 public final class stapel/ui/StapelColors {

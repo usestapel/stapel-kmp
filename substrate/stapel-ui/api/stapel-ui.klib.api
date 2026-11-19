@@ -918,6 +918,13 @@ final class stapel.ui/InMemoryThemePreferenceStore : stapel.ui/ThemePreferenceSt
     final suspend fun set(stapel.ui/ThemePreference) // stapel.ui/InMemoryThemePreferenceStore.set|set(stapel.ui.ThemePreference){}[0]
 }
 
+final class stapel.ui/StapelChromeTitle { // stapel.ui/StapelChromeTitle|null[0]
+    constructor <init>() // stapel.ui/StapelChromeTitle.<init>|<init>(){}[0]
+
+    final val current // stapel.ui/StapelChromeTitle.current|{}current[0]
+        final fun <get-current>(): kotlin/String? // stapel.ui/StapelChromeTitle.current.<get-current>|<get-current>(){}[0]
+}
+
 final class stapel.ui/StapelColors { // stapel.ui/StapelColors|null[0]
     constructor <init>(stapel.tokens/ColorTokens) // stapel.ui/StapelColors.<init>|<init>(stapel.tokens.ColorTokens){}[0]
 
@@ -1329,6 +1336,8 @@ final val stapel.ui.skin/visible // stapel.ui.skin/visible|@stapel.ui.skin.Badge
     final fun (stapel.ui.skin/BadgeSpec).<get-visible>(): kotlin/Boolean // stapel.ui.skin/visible.<get-visible>|<get-visible>@stapel.ui.skin.BadgeSpec(){}[0]
 final val stapel.ui/LARGE_TITLE_COLLAPSE_DISTANCE // stapel.ui/LARGE_TITLE_COLLAPSE_DISTANCE|{}LARGE_TITLE_COLLAPSE_DISTANCE[0]
     final fun <get-LARGE_TITLE_COLLAPSE_DISTANCE>(): androidx.compose.ui.unit/Dp // stapel.ui/LARGE_TITLE_COLLAPSE_DISTANCE.<get-LARGE_TITLE_COLLAPSE_DISTANCE>|<get-LARGE_TITLE_COLLAPSE_DISTANCE>(){}[0]
+final val stapel.ui/LocalStapelChromeTitle // stapel.ui/LocalStapelChromeTitle|{}LocalStapelChromeTitle[0]
+    final fun <get-LocalStapelChromeTitle>(): androidx.compose.runtime/ProvidableCompositionLocal<stapel.ui/StapelChromeTitle?> // stapel.ui/LocalStapelChromeTitle.<get-LocalStapelChromeTitle>|<get-LocalStapelChromeTitle>(){}[0]
 final val stapel.ui/LocalStapelContentColor // stapel.ui/LocalStapelContentColor|{}LocalStapelContentColor[0]
     final fun <get-LocalStapelContentColor>(): androidx.compose.runtime/ProvidableCompositionLocal<androidx.compose.ui.graphics/Color> // stapel.ui/LocalStapelContentColor.<get-LocalStapelContentColor>|<get-LocalStapelContentColor>(){}[0]
 final val stapel.ui/LocalStapelErrorText // stapel.ui/LocalStapelErrorText|{}LocalStapelErrorText[0]
@@ -1355,6 +1364,7 @@ final val stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop // stapel.ui/
 final val stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop|#static{}stapel_ui_SectionHeaderAction_Chip$stableprop[0]
 final val stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop|#static{}stapel_ui_SectionHeaderAction_Icon$stableprop[0]
 final val stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop|#static{}stapel_ui_SectionHeaderAction_Link$stableprop[0]
+final val stapel.ui/stapel_ui_StapelChromeTitle$stableprop // stapel.ui/stapel_ui_StapelChromeTitle$stableprop|#static{}stapel_ui_StapelChromeTitle$stableprop[0]
 final val stapel.ui/stapel_ui_StapelColors$stableprop // stapel.ui/stapel_ui_StapelColors$stableprop|#static{}stapel_ui_StapelColors$stableprop[0]
 final val stapel.ui/stapel_ui_StapelElevations$stableprop // stapel.ui/stapel_ui_StapelElevations$stableprop|#static{}stapel_ui_StapelElevations$stableprop[0]
 final val stapel.ui/stapel_ui_StapelFonts$stableprop // stapel.ui/stapel_ui_StapelFonts$stableprop|#static{}stapel_ui_StapelFonts$stableprop[0]
@@ -1441,6 +1451,7 @@ final fun stapel.ui/StapelPage(androidx.compose.ui/Modifier?, kotlin/Function2<a
 final fun stapel.ui/StapelPagerIndicator(kotlin/Int, kotlin/Int, kotlin/String, androidx.compose.ui/Modifier?, kotlin/Function1<kotlin/Int, kotlin/Unit>?, kotlin/Function1<kotlin/Int, kotlin/String>?, kotlin/Int, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelPagerIndicator|StapelPagerIndicator(kotlin.Int;kotlin.Int;kotlin.String;androidx.compose.ui.Modifier?;kotlin.Function1<kotlin.Int,kotlin.Unit>?;kotlin.Function1<kotlin.Int,kotlin.String>?;kotlin.Int;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelProgress(stapel.ui.skin/ProgressKind?, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Float?, kotlin/String?, stapel.ui.skin/SkeletonShape?, kotlin/Int, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelProgress|StapelProgress(stapel.ui.skin.ProgressKind?;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Float?;kotlin.String?;stapel.ui.skin.SkeletonShape?;kotlin.Int;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelPullToRefresh(kotlin/Boolean, kotlin/Function0<kotlin/Unit>, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelPullToRefresh|StapelPullToRefresh(kotlin.Boolean;kotlin.Function0<kotlin.Unit>;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelScreenTitle(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelScreenTitle|StapelScreenTitle(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelSelectField(kotlin/String, kotlin/String?, kotlin/Function0<kotlin/Unit>, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/String?, kotlin/String?, kotlin/Boolean, stapel.ui/StapelIcon?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelSelectField|StapelSelectField(kotlin.String;kotlin.String?;kotlin.Function0<kotlin.Unit>;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.Boolean;stapel.ui.StapelIcon?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelSnackbarHost(stapel.ui/StapelSnackbarHostState, androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelSnackbarHost|StapelSnackbarHost(stapel.ui.StapelSnackbarHostState;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelSurface(androidx.compose.ui/Modifier?, stapel.ui.skin/SurfaceTone?, stapel.ui.skin/ElevationStep?, kotlin/Boolean, kotlin/Function0<kotlin/Unit>?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelSurface|StapelSurface(androidx.compose.ui.Modifier?;stapel.ui.skin.SurfaceTone?;stapel.ui.skin.ElevationStep?;kotlin.Boolean;kotlin.Function0<kotlin.Unit>?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
@@ -1470,6 +1481,7 @@ final fun stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop_getter(): kot
 final fun stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop_getter|stapel_ui_SectionHeaderAction_Chip$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Icon$stableprop_getter|stapel_ui_SectionHeaderAction_Icon$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Link$stableprop_getter|stapel_ui_SectionHeaderAction_Link$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_StapelChromeTitle$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelChromeTitle$stableprop_getter|stapel_ui_StapelChromeTitle$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelColors$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelColors$stableprop_getter|stapel_ui_StapelColors$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelElevations$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelElevations$stableprop_getter|stapel_ui_StapelElevations$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelFonts$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelFonts$stableprop_getter|stapel_ui_StapelFonts$stableprop_getter(){}[0]

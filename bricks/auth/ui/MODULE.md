@@ -27,7 +27,13 @@
   ids, paths, placement, order and surfaces (fixture `src/jvmTest/resources/web`).
 - **Layout:** `StapelPage` applies the gutter; screens never add root horizontal padding. Wider than a
   phone, the sign-in column is a bordered card (`PaneMeasure.Narrow`). Screens with their own top bar
-  are avoided: the chrome names the destination (a single-line bar title truncates at 200 % text).
+  are avoided. Every screen and sign-in step names itself through `StapelScreenTitle`: inside a shell
+  (or a titled page) the chrome's bar shows it and the screen draws no heading; hosted bare, the screen
+  draws it (tag `AuthTestTags.TITLE` on the sign-in screen).
+- **Descriptor:** `stapel.auth.ui.di.AuthBrick(config, platform)` is the brick's `StapelBrick`:
+  `authModule(bindCacheToSession = false)`, the navigation, strings, error catalogs, the session bridge and
+  the presenter factory. `nav-manifest.json` is exported from it (`exportNavManifest`, drift gate
+  `checkNavManifest`, parity `checkNavParity`).
 - **Tested:** each screen's states and events with both skins, the override table, skin delegation,
   named actionable nodes, one editable node for the code field, touch targets ≥ 44 dp on a phone, no
   clipped text at 200 % in en and ru.

@@ -2,6 +2,7 @@ package stapel.auth.ui
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.v2.runComposeUiTest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +22,7 @@ import stapel.navigation.NavAuthState
 import stapel.navigation.compose.NavContribution
 import stapel.runtime.PlatformContext
 import stapel.session.vault.InMemoryTokenVault
+import stapel.shell.ShellTags
 import stapel.session.vault.TokenVault
 import stapel.result.TransportFailure
 import stapel.testing.FakeAnswer
@@ -80,6 +82,12 @@ class AuthBrickTest {
             waitUntil(timeoutMillis = 10_000) { onAllNodes(hasTestTag(AuthTestTags.SIGN_IN)).fetchSemanticsNodes().isNotEmpty() }
             assertEquals(AuthState.SignedOut(null), app.koin.get<StapelAuth>().session.state.value)
             assertEquals(NavAuthState.Anonymous, app.navAuth.authState().value)
+            // Hosted in the shell, the chrome owns the title: the top bar shows the screen's title, the
+            // screen draws no second heading.
+            val title = app.strings.t(AuthUiStrings.LoginTitle.key)
+            waitUntil(timeoutMillis = 5_000) { onAllNodes(hasTestTag(ShellTags.Title) and hasText(title)).fetchSemanticsNodes().isNotEmpty() }
+            assertEquals(0, onAllNodes(hasTestTag(AuthTestTags.TITLE)).fetchSemanticsNodes().size)
+            assertEquals(1, onAllNodes(hasText(title)).fetchSemanticsNodes().size, "the sign-in title is drawn once")
         } finally {
             app.close()
         }
