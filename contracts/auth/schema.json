@@ -2,7 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "",
-    "version": "0.0.0"
+    "version": "0.0.0",
+    "x-stapel-contract": 2
   },
   "paths": {
     "/auth/api/v1/admin-users/": {
@@ -34,6 +35,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -58,10 +62,20 @@
             "description": ""
           },
           "400": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.400.email_or_phone_required",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.phone_too_long"
+            ]
           },
           "403": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -115,6 +129,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -127,9 +144,29 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         },
-        "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
+        "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`",
+        "x-stapel-pagination": {
+          "style": "page",
+          "items": "results",
+          "params": [
+            "page"
+          ]
+        }
       }
     },
     "/auth/api/v1/anonymous/": {
@@ -161,7 +198,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "201": {
@@ -189,7 +230,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.device_id_weak"
+            ]
           },
           "429": {
             "content": {
@@ -199,7 +243,38 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
         }
       }
@@ -239,6 +314,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           },
           {}
         ],
@@ -284,7 +362,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.forbidden"
+            ]
           }
         }
       },
@@ -318,6 +399,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           },
           {}
         ],
@@ -358,7 +442,13 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.captcha_invalid",
+              "error.400.captcha_required",
+              "error.400.gdpr.unknown_dsar_kind"
+            ]
           },
           "429": {
             "content": {
@@ -368,7 +458,30 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.network_blocked"
+            ]
+          }
+        },
+        "x-stapel-captcha": {
+          "action": "gdpr_dsar",
+          "token": {
+            "header": "X-Captcha-Token",
+            "field": "captcha_token"
           }
         }
       }
@@ -394,6 +507,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -433,7 +549,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.gdpr.dsar_not_found"
+            ]
           }
         }
       },
@@ -476,6 +595,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -515,7 +637,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.gdpr.dsar_not_found"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request"
+            ]
           }
         }
       }
@@ -550,6 +688,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -579,7 +720,93 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.no_current_value",
+              "error.400.not_available"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -613,6 +840,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -646,6 +876,107 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.email_or_phone_required",
+              "error.400.email_required",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_current_value",
+              "error.400.not_available",
+              "error.400.phone_too_long"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -660,6 +991,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -685,6 +1019,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -719,6 +1066,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -748,6 +1098,107 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.email_or_phone_required",
+              "error.400.email_required",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_current_value",
+              "error.400.not_available",
+              "error.400.phone_too_long"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -781,6 +1232,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -801,6 +1255,102 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.no_current_value",
+              "error.400.not_available"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -835,6 +1385,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -857,6 +1410,121 @@
           },
           "409": {
             "description": "No response body"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.email_or_phone_required",
+              "error.400.email_required",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_current_value",
+              "error.400.not_available",
+              "error.400.phone_too_long"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -891,6 +1559,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -912,6 +1583,102 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.no_current_value",
+              "error.400.not_available"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -955,7 +1722,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "200": {
@@ -985,7 +1756,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.captcha_invalid",
+              "error.400.captcha_required"
+            ]
           },
           "403": {
             "content": {
@@ -995,7 +1770,13 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.change_requires_current",
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required",
+              "error.403.registration_closed"
+            ]
           },
           "409": {
             "content": {
@@ -1005,7 +1786,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.409.email_reserved",
+              "error.409.email_taken"
+            ]
           },
           "422": {
             "content": {
@@ -1015,7 +1800,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
           },
           "429": {
             "content": {
@@ -1039,7 +1827,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
           },
           "500": {
             "content": {
@@ -1049,9 +1840,21 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
           }
-        }
+        },
+        "x-stapel-captcha": {
+          "action": null,
+          "token": {
+            "field": "captcha_token"
+          }
+        },
+        "x-stapel-flows": [
+          "auth.passwordless_login"
+        ]
       }
     },
     "/auth/api/v1/email/verify/": {
@@ -1093,7 +1896,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "200": {
@@ -1156,7 +1963,12 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts"
+            ]
           },
           "403": {
             "content": {
@@ -1166,7 +1978,13 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.change_requires_current",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required",
+              "error.403.registration_closed"
+            ]
           },
           "409": {
             "content": {
@@ -1176,7 +1994,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.409.email_taken"
+            ]
           },
           "422": {
             "content": {
@@ -1186,7 +2007,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
           },
           "423": {
             "content": {
@@ -1196,7 +2020,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.423.account_locked"
+            ]
           },
           "503": {
             "content": {
@@ -1206,9 +2033,28 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.passwordless_login"
+        ]
       }
     },
     "/auth/api/v1/erasures": {
@@ -1242,6 +2088,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -1263,7 +2112,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.gdpr.unknown_subject_type"
+            ]
           },
           "403": {
             "content": {
@@ -1273,7 +2126,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.gdpr.erasure_forbidden"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
           }
         }
       }
@@ -1299,6 +2168,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -1344,7 +2216,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.gdpr.erasure_not_found"
+            ]
           }
         }
       }
@@ -1481,6 +2356,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -1548,6 +2426,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -1576,7 +2457,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.grant_invalid"
+            ]
           },
           "403": {
             "content": {
@@ -1586,7 +2470,26 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.grant_existing_account",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
           }
         }
       }
@@ -1632,6 +2535,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -1646,7 +2552,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.bad_request"
+            ]
           },
           "403": {
             "content": {
@@ -1656,7 +2565,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.forbidden"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
           }
         }
       }
@@ -1712,7 +2637,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "200": {
@@ -1741,6 +2670,32 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
           }
         }
       }
@@ -1777,6 +2732,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -1789,6 +2747,40 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.captcha_invalid",
+              "error.400.captcha_required",
+              "error.400.invalid_redirect_url"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.magic_link_rate"
+            ]
+          }
+        },
+        "x-stapel-captcha": {
+          "action": null,
+          "token": {
+            "field": "captcha_token"
           }
         }
       }
@@ -1815,11 +2807,41 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
           "302": {
             "description": "No response body"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
         }
       }
@@ -1834,6 +2856,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -1855,7 +2880,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.unauthorized"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -1871,6 +2912,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -1947,6 +2991,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -1977,9 +3024,15 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.first_login_challenge_invalid"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.first_login"
+        ]
       }
     },
     "/auth/api/v1/oauth/{provider}/authorize/": {
@@ -2002,11 +3055,44 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "302": {
             "description": "No response body"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.attribution_invalid",
+              "error.400.oauth_failed",
+              "error.400.signup_context_invalid"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -2031,7 +3117,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "302": {
@@ -2045,7 +3135,39 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.attribution_invalid",
+              "error.400.oauth_failed"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required",
+              "error.403.registration_closed"
+            ]
           }
         }
       }
@@ -2070,7 +3192,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "302": {
@@ -2084,7 +3210,39 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.attribution_invalid",
+              "error.400.oauth_failed"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required",
+              "error.403.registration_closed"
+            ]
           }
         }
       }
@@ -2100,6 +3258,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2112,6 +3273,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -2145,6 +3319,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2163,6 +3340,19 @@
           },
           "409": {
             "description": "No response body"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -2188,6 +3378,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2199,6 +3392,19 @@
           },
           "404": {
             "description": "No response body"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -2242,7 +3448,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "200": {
@@ -2263,7 +3473,42 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.attribution_invalid",
+              "error.400.oauth_failed",
+              "error.400.oauth_fields_required",
+              "error.400.signup_context_invalid"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required",
+              "error.403.registration_closed"
+            ]
           }
         }
       }
@@ -2296,6 +3541,9 @@
           },
           "required": true
         },
+        "security": [
+          {}
+        ],
         "responses": {
           "200": {
             "content": {
@@ -2315,7 +3563,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.token_invalid"
+            ]
           }
         }
       }
@@ -2331,6 +3582,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2376,6 +3630,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2388,6 +3645,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -2432,6 +3702,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2453,7 +3726,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.passkey_not_found"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -2477,11 +3766,53 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
           "204": {
             "description": "No response body"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.last_auth_method"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.passkey_not_found"
+            ]
           }
         }
       }
@@ -2517,6 +3848,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -2529,6 +3863,19 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.passkey_invalid"
+            ]
           }
         }
       }
@@ -2565,6 +3912,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -2584,6 +3934,47 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.passkey_challenge_expired",
+              "error.400.passkey_invalid"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
         }
       }
@@ -2599,6 +3990,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2620,7 +4014,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.passkey_invalid"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -2656,6 +4066,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2668,6 +4081,47 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.passkey_challenge_expired",
+              "error.400.passkey_invalid"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
         }
       }
@@ -2702,6 +4156,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2723,7 +4180,24 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.no_password",
+              "error.400.wrong_password"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -2758,6 +4232,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2787,7 +4264,14 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts",
+              "error.400.invalid_method",
+              "error.400.no_verified_contact"
+            ]
           },
           "422": {
             "content": {
@@ -2797,7 +4281,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
           },
           "429": {
             "content": {
@@ -2807,7 +4294,63 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.mock_otp_admin"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.user_for_reset"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -2842,6 +4385,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -2863,7 +4409,92 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts",
+              "error.400.invalid_method",
+              "error.400.no_verified_contact"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.user_for_reset"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -2899,6 +4530,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -2920,9 +4554,42 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.first_login_challenge_invalid"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.first_login"
+        ]
       }
     },
     "/auth/api/v1/password/login/": {
@@ -2956,6 +4623,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -2977,9 +4647,58 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.account_disabled",
+              "error.401.invalid_credentials"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "423": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Locked",
+            "x-stapel-errors": [
+              "error.423.account_locked"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.first_login",
+          "auth.password_login"
+        ]
       }
     },
     "/auth/api/v1/password/methods/": {
@@ -2992,6 +4711,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3011,6 +4733,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -3046,6 +4781,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -3074,7 +4812,16 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.captcha_invalid",
+              "error.400.captcha_required",
+              "error.400.email_or_phone_required",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.phone_too_long"
+            ]
           },
           "403": {
             "content": {
@@ -3084,7 +4831,46 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Conflict",
+            "x-stapel-errors": [
+              "error.409.email_taken",
+              "error.409.phone_taken",
+              "error.409.username_taken"
+            ]
+          }
+        },
+        "x-stapel-captcha": {
+          "action": null,
+          "token": {
+            "field": "captcha_token"
           }
         }
       }
@@ -3120,6 +4906,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -3149,7 +4938,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.mock_otp_admin"
+            ]
           },
           "404": {
             "content": {
@@ -3159,7 +4951,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.user_for_reset"
+            ]
           },
           "429": {
             "content": {
@@ -3169,7 +4964,74 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.captcha_invalid",
+              "error.400.captcha_required",
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts",
+              "error.400.invalid_method",
+              "error.400.no_verified_contact"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
+          }
+        },
+        "x-stapel-captcha": {
+          "action": null,
+          "token": {
+            "field": "captcha_token"
           }
         }
       }
@@ -3205,6 +5067,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -3233,7 +5098,14 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts",
+              "error.400.invalid_method",
+              "error.400.no_verified_contact"
+            ]
           },
           "404": {
             "content": {
@@ -3243,7 +5115,89 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.user_for_reset"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3279,6 +5233,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -3308,7 +5265,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.mock_otp_admin"
+            ]
           },
           "404": {
             "content": {
@@ -3318,7 +5278,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.user_for_reset"
+            ]
           },
           "429": {
             "content": {
@@ -3328,7 +5291,77 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.captcha_invalid",
+              "error.400.captcha_required",
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts",
+              "error.400.invalid_method",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_verified_contact",
+              "error.400.phone_too_long"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
+          }
+        },
+        "x-stapel-captcha": {
+          "action": null,
+          "token": {
+            "field": "captcha_token"
           }
         }
       }
@@ -3364,6 +5397,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -3392,7 +5428,17 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts",
+              "error.400.invalid_method",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_verified_contact",
+              "error.400.phone_too_long"
+            ]
           },
           "404": {
             "content": {
@@ -3402,7 +5448,89 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.user_for_reset"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3437,6 +5565,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3466,7 +5597,93 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.no_current_value",
+              "error.400.not_available"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3500,6 +5717,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3533,6 +5753,107 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.email_or_phone_required",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_current_value",
+              "error.400.not_available",
+              "error.400.phone_required",
+              "error.400.phone_too_long"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3547,6 +5868,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3572,6 +5896,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -3606,6 +5943,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3635,6 +5975,107 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.email_or_phone_required",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_current_value",
+              "error.400.not_available",
+              "error.400.phone_required",
+              "error.400.phone_too_long"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3668,6 +6109,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3688,6 +6132,102 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.no_current_value",
+              "error.400.not_available"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3722,6 +6262,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3744,6 +6287,121 @@
           },
           "409": {
             "description": "No response body"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.email_or_phone_required",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.no_current_value",
+              "error.400.not_available",
+              "error.400.phone_required",
+              "error.400.phone_too_long"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3778,6 +6436,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -3799,6 +6460,102 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.bad_request",
+              "error.400.code_expired",
+              "error.400.invalid_change_token",
+              "error.400.invalid_code",
+              "error.400.no_current_value",
+              "error.400.not_available"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unprocessable Entity",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Too Many Requests",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -3842,7 +6599,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "200": {
@@ -3872,7 +6633,14 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.captcha_invalid",
+              "error.400.captcha_required",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.phone_too_long"
+            ]
           },
           "403": {
             "content": {
@@ -3882,7 +6650,13 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.change_requires_current",
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required",
+              "error.403.registration_closed"
+            ]
           },
           "409": {
             "content": {
@@ -3892,7 +6666,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.409.phone_reserved",
+              "error.409.phone_taken"
+            ]
           },
           "422": {
             "content": {
@@ -3902,7 +6680,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
           },
           "429": {
             "content": {
@@ -3912,7 +6693,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
           },
           "500": {
             "content": {
@@ -3922,7 +6706,16 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.500.send_failed"
+            ]
+          }
+        },
+        "x-stapel-captcha": {
+          "action": null,
+          "token": {
+            "field": "captcha_token"
           }
         }
       }
@@ -3966,7 +6759,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "200": {
@@ -3987,7 +6784,15 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_expired",
+              "error.400.invalid_code",
+              "error.400.invalid_code_attempts",
+              "error.400.invalid_phone",
+              "error.400.invalid_phone_format",
+              "error.400.phone_too_long"
+            ]
           },
           "403": {
             "content": {
@@ -3997,7 +6802,13 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.change_requires_current",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required",
+              "error.403.registration_closed"
+            ]
           },
           "409": {
             "content": {
@@ -4007,7 +6818,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.409.phone_taken"
+            ]
           },
           "422": {
             "content": {
@@ -4017,7 +6831,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.422.blocked"
+            ]
           },
           "423": {
             "content": {
@@ -4027,7 +6844,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.423.account_locked"
+            ]
           },
           "503": {
             "content": {
@@ -4037,7 +6857,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
           }
         }
       }
@@ -4062,6 +6898,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4090,7 +6929,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.qr_fulfilled",
+              "error.400.qr_type_required"
+            ]
           },
           "401": {
             "content": {
@@ -4110,7 +6953,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.qr_not_found"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -4136,6 +6995,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -4164,7 +7026,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.qr_not_found"
+            ]
           }
         }
       }
@@ -4190,6 +7055,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -4204,7 +7072,51 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.qr_not_found"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.qr_fulfilled"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required",
+              "error.403.qr_unauth_scan"
+            ]
           }
         }
       }
@@ -4230,6 +7142,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -4251,6 +7166,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.qr_device_mismatch"
+            ]
           }
         }
       }
@@ -4286,6 +7214,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -4318,7 +7249,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.invalid_redirect_url"
+            ]
           },
           "401": {
             "content": {
@@ -4328,7 +7262,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.qr_auth_required"
+            ]
           }
         }
       }
@@ -4375,6 +7312,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4387,9 +7327,29 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         },
-        "description": "**Permissions:** `IsAuthenticated, DenyEnrollOnly`"
+        "description": "**Permissions:** `IsAuthenticated, DenyEnrollOnly`",
+        "x-stapel-pagination": {
+          "style": "page",
+          "items": "results",
+          "params": [
+            "page"
+          ]
+        }
       }
     },
     "/auth/api/v1/security/revoke-suspicious/": {
@@ -4413,11 +7373,27 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
           "302": {
             "description": "No response body"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.not_found"
+            ]
           }
         },
         "description": "**Permissions:** `AllowAny`"
@@ -4433,6 +7409,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4445,6 +7424,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -4459,6 +7451,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4474,6 +7469,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -4506,6 +7514,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4518,6 +7529,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -4543,6 +7567,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4555,6 +7582,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -4598,6 +7638,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4610,6 +7653,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -4652,6 +7708,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4664,6 +7723,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -4687,11 +7759,27 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
           "204": {
             "description": "No response body"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -4706,6 +7794,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4737,6 +7828,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -4749,6 +7853,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4768,6 +7875,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -4792,6 +7912,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4820,7 +7943,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.not_found"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -4845,6 +7984,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -4873,7 +8015,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.not_found"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -4924,11 +8082,53 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
           "302": {
             "description": "No response body"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.sso_not_configured"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.sso_org_not_found"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
           }
         }
       }
@@ -4954,11 +8154,41 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
           "302": {
             "description": "No response body"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
         },
         "description": "**Permissions:** `AllowAny`"
@@ -5008,11 +8238,41 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
           "302": {
             "description": "No response body"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
         }
       }
@@ -5038,6 +8298,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -5050,6 +8313,19 @@
               }
             },
             "description": ""
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.sso_org_not_found"
+            ]
           }
         },
         "description": "**Permissions:** `AllowAny`"
@@ -5076,6 +8352,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           },
           {}
         ],
@@ -5113,6 +8392,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5128,6 +8410,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         },
         "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
@@ -5161,6 +8456,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5173,6 +8471,32 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Conflict",
+            "x-stapel-errors": [
+              "error.409.sso_org_slug_taken"
+            ]
           }
         },
         "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
@@ -5198,6 +8522,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5210,6 +8537,32 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.sso_org_not_found"
+            ]
           }
         },
         "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
@@ -5252,6 +8605,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5264,6 +8620,32 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.sso_org_not_found"
+            ]
           }
         },
         "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
@@ -5287,11 +8669,40 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
           "204": {
             "description": "No response body"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.sso_org_not_found"
+            ]
           }
         },
         "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
@@ -5337,6 +8748,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5349,6 +8763,32 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.sso_org_not_found"
+            ]
           }
         },
         "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
@@ -5391,6 +8831,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5403,6 +8846,32 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.sso_org_not_found"
+            ]
           }
         },
         "description": "**Permissions:** `IsAdminUser, DenyEnrollOnly`"
@@ -5418,6 +8887,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5435,7 +8907,11 @@
             "description": ""
           },
           "403": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       },
@@ -5468,6 +8944,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5482,13 +8961,24 @@
             "description": ""
           },
           "400": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.400.staff_role_target_not_staff",
+              "error.400.unknown_staff_role"
+            ]
           },
           "403": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required"
+            ]
           },
           "404": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.404.not_found"
+            ]
           }
         }
       }
@@ -5514,6 +9004,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5521,10 +9014,17 @@
             "description": "No response body"
           },
           "403": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required"
+            ]
           },
           "404": {
-            "description": "No response body"
+            "description": "No response body",
+            "x-stapel-errors": [
+              "error.404.not_found"
+            ]
           }
         }
       }
@@ -5560,6 +9060,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -5581,7 +9084,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.account_disabled",
+              "error.401.invalid_credentials"
+            ]
           },
           "403": {
             "content": {
@@ -5591,7 +9098,12 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.forbidden",
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           },
           "423": {
             "content": {
@@ -5601,7 +9113,36 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.423.account_locked"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.credentials_required"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
         }
       }
@@ -5616,6 +9157,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           },
           {}
         ],
@@ -5646,7 +9190,12 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.refresh_invalid",
+              "error.401.refresh_not_provided",
+              "error.401.refresh_revoked"
+            ]
           }
         }
       },
@@ -5679,6 +9228,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -5708,7 +9260,12 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.refresh_invalid",
+              "error.401.refresh_not_provided",
+              "error.401.refresh_revoked"
+            ]
           }
         }
       }
@@ -5744,6 +9301,9 @@
           {
             "JWTCookieAuth": []
           },
+          {
+            "JWTBearerAuth": []
+          },
           {}
         ],
         "responses": {
@@ -5765,9 +9325,69 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_required",
+              "error.400.invalid_code"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
+          },
+          "423": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Locked",
+            "x-stapel-errors": [
+              "error.423.account_locked"
+            ]
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Service Unavailable",
+            "x-stapel-errors": [
+              "error.503.verification_unavailable"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.password_login"
+        ]
       }
     },
     "/auth/api/v1/totp/change/delayed/cancel/": {
@@ -5800,6 +9420,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5829,7 +9452,38 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.code_required",
+              "error.400.no_verified_contact",
+              "error.400.totp_not_enabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -5863,6 +9517,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5895,7 +9552,38 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_required",
+              "error.400.no_verified_contact",
+              "error.400.totp_not_enabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.change_not_found"
+            ]
           }
         }
       }
@@ -5910,6 +9598,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5935,6 +9626,19 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -5968,6 +9672,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -5996,7 +9703,25 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.code_required",
+              "error.400.invalid_code",
+              "error.400.no_verified_contact"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -6011,6 +9736,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6040,7 +9768,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.no_verified_contact"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -6074,6 +9818,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6104,7 +9851,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.totp_proof_required"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -6139,6 +9902,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6161,8 +9927,53 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.code_required",
+              "error.400.invalid_code",
+              "error.400.totp_not_pending"
+            ]
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Unauthorized",
+            "x-stapel-errors": [
+              "error.401.account_disabled"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.password_change_required"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.first_login"
+        ]
       }
     },
     "/auth/api/v1/user/account/cancel-close": {
@@ -6187,7 +9998,9 @@
           {
             "JWTCookieAuth": []
           },
-          {}
+          {
+            "JWTBearerAuth": []
+          }
         ],
         "responses": {
           "200": {
@@ -6218,7 +10031,12 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.gdpr.closure_token_expired",
+              "error.401.gdpr.closure_token_invalid",
+              "error.401.unauthorized"
+            ]
           },
           "403": {
             "content": {
@@ -6228,7 +10046,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.gdpr.account_closed",
+              "error.403.gdpr.closure_token_scope"
+            ]
           },
           "404": {
             "content": {
@@ -6238,7 +10060,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.gdpr.no_active_closure"
+            ]
           }
         }
       }
@@ -6254,6 +10079,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6275,7 +10103,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.409.gdpr.closure_already_pending",
+              "error.409.gdpr.legal_hold"
+            ]
           },
           "429": {
             "content": {
@@ -6285,7 +10117,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
           },
           "503": {
             "content": {
@@ -6295,7 +10130,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.503.gdpr.closure_unavailable"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
           }
         }
       }
@@ -6322,7 +10173,9 @@
           {
             "JWTCookieAuth": []
           },
-          {}
+          {
+            "JWTBearerAuth": []
+          }
         ],
         "responses": {
           "200": {
@@ -6353,7 +10206,12 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.gdpr.closure_token_expired",
+              "error.401.gdpr.closure_token_invalid",
+              "error.401.unauthorized"
+            ]
           },
           "403": {
             "content": {
@@ -6363,7 +10221,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.gdpr.account_closed",
+              "error.403.gdpr.closure_token_scope"
+            ]
           },
           "404": {
             "content": {
@@ -6373,7 +10235,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.gdpr.no_active_closure"
+            ]
           }
         }
       }
@@ -6409,6 +10274,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6431,7 +10299,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.gdpr.export_not_found"
+            ]
           },
           "410": {
             "content": {
@@ -6441,7 +10312,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.410.gdpr.download_consumed",
+              "error.410.gdpr.download_expired"
+            ]
           },
           "425": {
             "content": {
@@ -6451,7 +10326,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.425.gdpr.export_not_ready"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
           }
         }
       }
@@ -6467,6 +10358,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6488,7 +10382,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.409.gdpr.export_cooldown"
+            ]
           },
           "429": {
             "content": {
@@ -6498,7 +10395,23 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.429.rate_limit"
+            ]
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Internal Server Error",
+            "x-stapel-errors": [
+              "error.500.internal"
+            ]
           }
         }
       }
@@ -6514,6 +10427,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6541,6 +10457,19 @@
               }
             },
             "description": ""
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Not Found",
+            "x-stapel-errors": [
+              "error.404.gdpr.export_not_found"
+            ]
           }
         }
       }
@@ -6565,6 +10494,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6599,9 +10531,28 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.verification_challenge_not_found"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.step_up_verification"
+        ]
       }
     },
     "/auth/api/v1/verification/{challenge_id}/complete/": {
@@ -6644,6 +10595,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6673,7 +10627,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.verification_failed",
+              "error.400.verification_invalid_factor"
+            ]
           },
           "404": {
             "content": {
@@ -6683,7 +10641,10 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.verification_challenge_not_found"
+            ]
           },
           "423": {
             "content": {
@@ -6693,9 +10654,28 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.423.verification_locked"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.step_up_verification"
+        ]
       }
     },
     "/auth/api/v1/verification/{challenge_id}/initiate/": {
@@ -6738,6 +10718,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6769,7 +10752,11 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.400.verification_failed",
+              "error.400.verification_invalid_factor"
+            ]
           },
           "404": {
             "content": {
@@ -6779,9 +10766,28 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.404.verification_challenge_not_found"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.step_up_verification"
+        ]
       }
     },
     "/auth/api/v1/verification/preferences/": {
@@ -6794,6 +10800,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6818,8 +10827,24 @@
               }
             },
             "description": ""
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
-        }
+        },
+        "x-stapel-flows": [
+          "auth.step_up_verification"
+        ]
       },
       "put": {
         "operationId": "auth_api_v1_verification_preferences_update",
@@ -6850,6 +10875,9 @@
         "security": [
           {
             "JWTCookieAuth": []
+          },
+          {
+            "JWTBearerAuth": []
           }
         ],
         "responses": {
@@ -6888,8 +10916,22 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required",
+              "error.403.verification_enrollment_required",
+              "error.403.verification_required"
+            ]
           }
+        },
+        "x-stapel-flows": [
+          "auth.step_up_verification"
+        ],
+        "x-stapel-verification": {
+          "scope": "verification.settings",
+          "factors": null,
+          "max_age": null,
+          "level": "default_on"
         }
       }
     },
@@ -6923,7 +10965,11 @@
         "security": [
           {
             "JWTCookieAuth": []
-          }
+          },
+          {
+            "JWTBearerAuth": []
+          },
+          {}
         ],
         "responses": {
           "200": {
@@ -6951,7 +10997,38 @@
                 }
               }
             },
-            "description": ""
+            "description": "",
+            "x-stapel-errors": [
+              "error.401.token_invalid",
+              "error.401.token_revoked",
+              "error.401.user_not_found"
+            ]
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Bad Request",
+            "x-stapel-errors": [
+              "error.400.token_required"
+            ]
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "description": "Forbidden",
+            "x-stapel-errors": [
+              "error.403.mfa_enrollment_required"
+            ]
           }
         }
       }
@@ -7104,7 +11181,11 @@
           "count",
           "next",
           "results"
-        ]
+        ],
+        "x-stapel-pagination": {
+          "style": "page",
+          "items": "results"
+        }
       },
       "AuthCapabilities": {
         "type": "object",
@@ -8380,9 +12461,13 @@
         "discriminator": {
           "propertyName": "status",
           "mapping": {
-            "AuthResponse": "#/components/schemas/AuthResponse",
-            "TOTPChallengeResponse": "#/components/schemas/TOTPChallengeResponse",
-            "FirstLoginChallengeResponse": "#/components/schemas/FirstLoginChallengeResponse"
+            "REJECTED": "#/components/schemas/AuthResponse",
+            "REGISTERED": "#/components/schemas/AuthResponse",
+            "LOGGED_IN": "#/components/schemas/AuthResponse",
+            "MERGED": "#/components/schemas/AuthResponse",
+            "MODIFIED": "#/components/schemas/AuthResponse",
+            "TOTP_REQUIRED": "#/components/schemas/TOTPChallengeResponse",
+            "FIRST_LOGIN_REQUIRED": "#/components/schemas/FirstLoginChallengeResponse"
           }
         }
       },
@@ -8878,8 +12963,12 @@
         "discriminator": {
           "propertyName": "status",
           "mapping": {
-            "AuthResponse": "#/components/schemas/AuthResponse",
-            "null": "#/components/schemas/PasswordChangedResponse"
+            "REJECTED": "#/components/schemas/AuthResponse",
+            "REGISTERED": "#/components/schemas/AuthResponse",
+            "LOGGED_IN": "#/components/schemas/AuthResponse",
+            "MERGED": "#/components/schemas/AuthResponse",
+            "MODIFIED": "#/components/schemas/AuthResponse",
+            "password_changed": "#/components/schemas/PasswordChangedResponse"
           }
         }
       },
@@ -10232,7 +14321,9 @@
         "discriminator": {
           "propertyName": "method",
           "mapping": {
-            "null": "#/components/schemas/_TOTPDisableByOTP"
+            "totp": "#/components/schemas/_TOTPDisableByTOTP",
+            "backup": "#/components/schemas/_TOTPDisableByBackup",
+            "otp": "#/components/schemas/_TOTPDisableByOTP"
           }
         }
       },
@@ -11032,6 +15123,12 @@
       }
     },
     "securitySchemes": {
+      "JWTBearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT access token in the `Authorization: Bearer <token>` header — the credential a native client sends. When the JWT cookie is also present, the cookie wins."
+      },
       "JWTCookieAuth": {
         "type": "apiKey",
         "in": "cookie",

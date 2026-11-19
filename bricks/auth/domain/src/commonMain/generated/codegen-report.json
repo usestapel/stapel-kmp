@@ -2,40 +2,24 @@
     "brick": "auth",
     "contract": {
         "module": "stapel-auth",
-        "profile": 1,
+        "profile": 2,
         "ref": "cb69660f291fc91103d9707b2edf85b24982fade",
-        "schema_sha256": "b0b4eca5415cb6b9f2a53f59ef0eb45b19697311d1799baaceb0be783637b610",
+        "schema_sha256": "9c4e969a407a4fd266f95f454b03d8e7353241ec1d2d5f329aefceefd650d57e",
         "version": "0.52.0"
     },
     "counts": {
         "W-BODY-UNDECLARED": 1,
-        "W-DISC-MAPPING": 3,
         "W-DOC-PARAM": 37,
         "W-DOC-PROPERTY": 171,
         "W-DOC-TYPE": 62,
         "W-ERR-STATUS-UNBOUND": 7,
-        "W-SECURITY-ABSENT": 2
+        "W-SECURITY-ABSENT": 1
     },
     "diagnostics": [
         {
             "code": "W-BODY-UNDECLARED",
             "message": "untyped object body",
             "pointer": "#/paths/~1auth~1api~1v1~1gdpr~1schema~1/get"
-        },
-        {
-            "code": "W-DISC-MAPPING",
-            "message": "mapping keys [AuthResponse, FirstLoginChallengeResponse, TOTPChallengeResponse] are not the wire values of `status`; the variants' own enums are used",
-            "pointer": "#/components/schemas/LoginResponse/discriminator/mapping"
-        },
-        {
-            "code": "W-DISC-MAPPING",
-            "message": "mapping keys [AuthResponse, null] are not the wire values of `status`; the variants' own enums are used",
-            "pointer": "#/components/schemas/PasswordOtpChangeResponse/discriminator/mapping"
-        },
-        {
-            "code": "W-DISC-MAPPING",
-            "message": "mapping keys [null] are not the wire values of `method`; the variants' own enums are used",
-            "pointer": "#/components/schemas/TOTPDisableRequest/discriminator/mapping"
         },
         {
             "code": "W-DOC-PARAM",
@@ -1426,11 +1410,6 @@
             "code": "W-SECURITY-ABSENT",
             "message": "no security declaration",
             "pointer": "#/paths/~1auth~1api~1v1~1jwt~1status~1/get"
-        },
-        {
-            "code": "W-SECURITY-ABSENT",
-            "message": "no security declaration",
-            "pointer": "#/paths/~1auth~1api~1v1~1oauth2~1introspect~1/post"
         }
     ],
     "operations": 121,

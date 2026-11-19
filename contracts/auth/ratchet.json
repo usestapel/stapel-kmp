@@ -1,12 +1,11 @@
 {
     "diagnostics": {
         "W-BODY-UNDECLARED": 1,
-        "W-DISC-MAPPING": 3,
         "W-DOC-PARAM": 37,
         "W-DOC-PROPERTY": 171,
         "W-DOC-TYPE": 62,
         "W-ERR-STATUS-UNBOUND": 7,
-        "W-SECURITY-ABSENT": 2
+        "W-SECURITY-ABSENT": 1
     },
-    "overlay_entries": 135
+    "overlay_entries": 0
 }
