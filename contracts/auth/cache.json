@@ -1,0 +1,403 @@
+{
+    "module": "auth",
+    "note": "Seeded from stapel-react packages/auth-react/manifest.json hooks (queryKey / invalidates), joined to operationIds by path; namespace \"auth\" is implicit.",
+    "operations": {
+        "auth_api_v1_admin_audit_retrieve": {
+            "key": [
+                "admin",
+                "audit"
+            ]
+        },
+        "auth_api_v1_admin_users_create": {
+            "invalidates": []
+        },
+        "auth_api_v1_capabilities_retrieve": {
+            "key": [
+                "capabilities"
+            ],
+            "scope": "app"
+        },
+        "auth_api_v1_email_change_delayed_cancel_create": {
+            "invalidates": [
+                [
+                    "change",
+                    "delayed",
+                    "email"
+                ]
+            ]
+        },
+        "auth_api_v1_email_change_delayed_initiate_create": {
+            "invalidates": [
+                [
+                    "change",
+                    "delayed",
+                    "email"
+                ]
+            ]
+        },
+        "auth_api_v1_email_change_delayed_status_retrieve": {
+            "key": [
+                "change",
+                "delayed",
+                "email"
+            ]
+        },
+        "auth_api_v1_logout_create": {
+            "invalidates": [
+                []
+            ]
+        },
+        "auth_api_v1_me_retrieve": {
+            "key": [
+                "me"
+            ]
+        },
+        "auth_api_v1_oauth_links_create": {
+            "invalidates": [
+                [
+                    "oauth",
+                    "links"
+                ],
+                [
+                    "security",
+                    "status"
+                ]
+            ]
+        },
+        "auth_api_v1_oauth_links_destroy": {
+            "invalidates": [
+                [
+                    "oauth",
+                    "links"
+                ],
+                [
+                    "security",
+                    "status"
+                ]
+            ]
+        },
+        "auth_api_v1_oauth_links_retrieve": {
+            "key": [
+                "oauth",
+                "links"
+            ]
+        },
+        "auth_api_v1_passkey_destroy": {
+            "invalidates": [
+                [
+                    "passkeys"
+                ],
+                [
+                    "security",
+                    "status"
+                ]
+            ]
+        },
+        "auth_api_v1_passkey_partial_update": {
+            "invalidates": [
+                [
+                    "passkeys"
+                ]
+            ]
+        },
+        "auth_api_v1_passkey_retrieve": {
+            "key": [
+                "passkeys"
+            ]
+        },
+        "auth_api_v1_password_methods_retrieve": {
+            "key": [
+                "password",
+                "methods"
+            ]
+        },
+        "auth_api_v1_phone_change_delayed_cancel_create": {
+            "invalidates": [
+                [
+                    "change",
+                    "delayed",
+                    "phone"
+                ]
+            ]
+        },
+        "auth_api_v1_phone_change_delayed_initiate_create": {
+            "invalidates": [
+                [
+                    "change",
+                    "delayed",
+                    "phone"
+                ]
+            ]
+        },
+        "auth_api_v1_phone_change_delayed_status_retrieve": {
+            "key": [
+                "change",
+                "delayed",
+                "phone"
+            ]
+        },
+        "auth_api_v1_qr_confirm_create": {
+            "invalidates": []
+        },
+        "auth_api_v1_qr_reject_create": {
+            "invalidates": []
+        },
+        "auth_api_v1_security_audit_retrieve": {
+            "key": [
+                "audit"
+            ]
+        },
+        "auth_api_v1_security_status_retrieve": {
+            "key": [
+                "security",
+                "status"
+            ]
+        },
+        "auth_api_v1_service_keys_create": {
+            "invalidates": [
+                [
+                    "admin",
+                    "service-keys"
+                ]
+            ]
+        },
+        "auth_api_v1_service_keys_destroy": {
+            "invalidates": [
+                [
+                    "admin",
+                    "service-keys"
+                ]
+            ]
+        },
+        "auth_api_v1_service_keys_list": {
+            "key": [
+                "admin",
+                "service-keys"
+            ]
+        },
+        "auth_api_v1_service_keys_partial_update": {
+            "invalidates": [
+                [
+                    "admin",
+                    "service-keys"
+                ]
+            ]
+        },
+        "auth_api_v1_service_keys_retrieve": {
+            "key": [
+                "admin",
+                "service-keys",
+                "{id}"
+            ]
+        },
+        "auth_api_v1_service_keys_update": {
+            "invalidates": [
+                [
+                    "admin",
+                    "service-keys"
+                ]
+            ]
+        },
+        "auth_api_v1_sessions_confirm_create": {
+            "invalidates": [
+                [
+                    "sessions"
+                ]
+            ]
+        },
+        "auth_api_v1_sessions_destroy": {
+            "invalidates": [
+                [
+                    "sessions"
+                ]
+            ]
+        },
+        "auth_api_v1_sessions_destroy_2": {
+            "invalidates": [
+                [
+                    "security",
+                    "status"
+                ],
+                [
+                    "sessions"
+                ]
+            ]
+        },
+        "auth_api_v1_sessions_list": {
+            "key": [
+                "sessions"
+            ]
+        },
+        "auth_api_v1_sso_lookup_retrieve": {
+            "key": [
+                "sso",
+                "lookup",
+                "{domain}"
+            ],
+            "scope": "app"
+        },
+        "auth_api_v1_sso_orgs_config_partial_update": {
+            "invalidates": [
+                [
+                    "admin",
+                    "sso",
+                    "orgs",
+                    "{slug}",
+                    "config"
+                ],
+                [
+                    "admin",
+                    "sso",
+                    "orgs"
+                ]
+            ]
+        },
+        "auth_api_v1_sso_orgs_config_update": {
+            "invalidates": [
+                [
+                    "admin",
+                    "sso",
+                    "orgs",
+                    "{slug}",
+                    "config"
+                ],
+                [
+                    "admin",
+                    "sso",
+                    "orgs"
+                ]
+            ]
+        },
+        "auth_api_v1_sso_orgs_create": {
+            "invalidates": [
+                [
+                    "admin",
+                    "sso",
+                    "orgs"
+                ]
+            ]
+        },
+        "auth_api_v1_sso_orgs_destroy": {
+            "invalidates": [
+                [
+                    "admin",
+                    "sso",
+                    "orgs"
+                ]
+            ]
+        },
+        "auth_api_v1_sso_orgs_list": {
+            "key": [
+                "admin",
+                "sso",
+                "orgs"
+            ]
+        },
+        "auth_api_v1_sso_orgs_partial_update": {
+            "invalidates": [
+                [
+                    "admin",
+                    "sso",
+                    "orgs",
+                    "{slug}"
+                ],
+                [
+                    "admin",
+                    "sso",
+                    "orgs"
+                ]
+            ]
+        },
+        "auth_api_v1_sso_orgs_retrieve": {
+            "key": [
+                "admin",
+                "sso",
+                "orgs",
+                "{slug}"
+            ]
+        },
+        "auth_api_v1_staff_roles_create": {
+            "invalidates": [
+                [
+                    "admin",
+                    "staff-roles"
+                ]
+            ]
+        },
+        "auth_api_v1_staff_roles_destroy": {
+            "invalidates": [
+                [
+                    "admin",
+                    "staff-roles"
+                ]
+            ]
+        },
+        "auth_api_v1_staff_roles_list": {
+            "key": [
+                "admin",
+                "staff-roles"
+            ]
+        },
+        "auth_api_v1_token_refresh_create": {
+            "invalidates": [],
+            "persistence": "never",
+            "sensitive": true
+        },
+        "auth_api_v1_token_refresh_retrieve": {
+            "key": [
+                "token",
+                "refresh"
+            ],
+            "persistence": "never",
+            "policy": "network_only",
+            "sensitive": true
+        },
+        "auth_api_v1_totp_change_delayed_cancel_create": {
+            "invalidates": [
+                [
+                    "totp",
+                    "change",
+                    "delayed"
+                ]
+            ]
+        },
+        "auth_api_v1_totp_change_delayed_initiate_create": {
+            "invalidates": [
+                [
+                    "totp",
+                    "change",
+                    "delayed"
+                ]
+            ]
+        },
+        "auth_api_v1_totp_change_delayed_status_retrieve": {
+            "key": [
+                "totp",
+                "change",
+                "delayed"
+            ]
+        },
+        "auth_api_v1_totp_disable_create": {
+            "invalidates": [
+                [
+                    "security",
+                    "status"
+                ]
+            ]
+        },
+        "auth_api_v1_verification_preferences_retrieve": {
+            "key": [
+                "verification",
+                "preferences"
+            ]
+        },
+        "auth_api_v1_verification_preferences_update": {
+            "invalidates": [
+                [
+                    "verification",
+                    "preferences"
+                ]
+            ]
+        }
+    }
+}

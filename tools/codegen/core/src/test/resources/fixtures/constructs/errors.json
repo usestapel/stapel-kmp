@@ -1,0 +1,24 @@
+[
+  {
+    "code": "error.400.bad_name",
+    "status": 400,
+    "params": [
+      "field",
+      "max_length"
+    ],
+    "param_types": {
+      "max_length": "integer"
+    },
+    "remediation": "fix_input",
+    "en": "Bad name {field}.",
+    "owner": "constructs"
+  },
+  {
+    "code": "error.409.taken",
+    "status": 409,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Taken.",
+    "owner": "constructs"
+  }
+]

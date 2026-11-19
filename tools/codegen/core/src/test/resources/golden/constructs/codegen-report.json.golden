@@ -1,0 +1,90 @@
+{
+    "brick": "constructs",
+    "contract": {
+        "module": "stapel-constructs",
+        "profile": 2,
+        "ref": "0000000000000000000000000000000000000000",
+        "schema_sha256": "20677815a090b903d41fe511ed6d7b389a9145119864a5ec5655a1bc9479262f",
+        "version": "unpinned"
+    },
+    "counts": {
+        "W-DISC-MAPPING": 1,
+        "W-DOC-PROPERTY": 6,
+        "W-DOC-TYPE": 6,
+        "W-ERR-STATUS-UNBOUND": 1
+    },
+    "diagnostics": [
+        {
+            "code": "W-DISC-MAPPING",
+            "message": "mapping keys [Done, Pending] are not the wire values of `result`; the variants' own enums are used",
+            "pointer": "#/components/schemas/Outcome/discriminator/mapping"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ItemPage.count has no description",
+            "pointer": "#/components/schemas/ItemPage/properties/count"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ItemPage.has_next has no description",
+            "pointer": "#/components/schemas/ItemPage/properties/has_next"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ItemPage.has_prev has no description",
+            "pointer": "#/components/schemas/ItemPage/properties/has_prev"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ItemPage.items has no description",
+            "pointer": "#/components/schemas/ItemPage/properties/items"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ItemPage.next_anchor has no description",
+            "pointer": "#/components/schemas/ItemPage/properties/next_anchor"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ItemPage.prev_anchor has no description",
+            "pointer": "#/components/schemas/ItemPage/properties/prev_anchor"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type ByKeys has no description",
+            "pointer": "#/components/schemas/ByKeys"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Outcome has no description",
+            "pointer": "#/components/schemas/Outcome"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PendingResult has no description",
+            "pointer": "#/components/schemas/PendingResultEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Result has no description",
+            "pointer": "#/components/schemas/ResultEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Status has no description",
+            "pointer": "#/components/schemas/StatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type ListItemsDirection has no description",
+            "pointer": "#/paths/~1constructs~1api~1v1~1items~1/get/parameters/direction"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 409 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1constructs~1api~1v1~1items~1/post/responses/409"
+        }
+    ],
+    "operations": 9,
+    "types": 14
+}

@@ -1,0 +1,1438 @@
+{
+    "brick": "auth",
+    "contract": {
+        "module": "stapel-auth",
+        "profile": 1,
+        "ref": "cb69660f291fc91103d9707b2edf85b24982fade",
+        "schema_sha256": "b0b4eca5415cb6b9f2a53f59ef0eb45b19697311d1799baaceb0be783637b610",
+        "version": "0.52.0"
+    },
+    "counts": {
+        "W-BODY-UNDECLARED": 1,
+        "W-DISC-MAPPING": 3,
+        "W-DOC-PARAM": 37,
+        "W-DOC-PROPERTY": 171,
+        "W-DOC-TYPE": 62,
+        "W-ERR-STATUS-UNBOUND": 7,
+        "W-SECURITY-ABSENT": 2
+    },
+    "diagnostics": [
+        {
+            "code": "W-BODY-UNDECLARED",
+            "message": "untyped object body",
+            "pointer": "#/paths/~1auth~1api~1v1~1gdpr~1schema~1/get"
+        },
+        {
+            "code": "W-DISC-MAPPING",
+            "message": "mapping keys [AuthResponse, FirstLoginChallengeResponse, TOTPChallengeResponse] are not the wire values of `status`; the variants' own enums are used",
+            "pointer": "#/components/schemas/LoginResponse/discriminator/mapping"
+        },
+        {
+            "code": "W-DISC-MAPPING",
+            "message": "mapping keys [AuthResponse, null] are not the wire values of `status`; the variants' own enums are used",
+            "pointer": "#/components/schemas/PasswordOtpChangeResponse/discriminator/mapping"
+        },
+        {
+            "code": "W-DISC-MAPPING",
+            "message": "mapping keys [null] are not the wire values of `method`; the variants' own enums are used",
+            "pointer": "#/components/schemas/TOTPDisableRequest/discriminator/mapping"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter event_type of auth_api_v1_admin_audit_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1admin~1audit~1/get/parameters/event_type"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter page of auth_api_v1_admin_audit_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1admin~1audit~1/get/parameters/page"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter user_id of auth_api_v1_admin_audit_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1admin~1audit~1/get/parameters/user_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter dsar_id of auth_api_v1_dsar_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1dsar~1{dsar_id}/get/parameters/dsar_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter dsar_id of auth_api_v1_dsar_partial_update has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1dsar~1{dsar_id}/patch/parameters/dsar_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter request_id of auth_api_v1_erasures_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1erasures~1{request_id}/get/parameters/request_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter format of auth_api_v1_gdpr_schema_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1gdpr~1schema~1/get/parameters/format"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter lang of auth_api_v1_gdpr_schema_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1gdpr~1schema~1/get/parameters/lang"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter token of auth_api_v1_magic_verify_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1magic~1verify~1/get/parameters/token"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter provider of auth_api_v1_oauth_links_destroy has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1oauth~1links~1{provider}~1/delete/parameters/provider"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter provider of auth_api_v1_oauth_authorize_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1oauth~1{provider}~1authorize~1/get/parameters/provider"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter provider of auth_api_v1_oauth_callback_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1oauth~1{provider}~1callback/get/parameters/provider"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter provider of auth_api_v1_oauth_callback_retrieve_2 has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1oauth~1{provider}~1callback~1/get/parameters/provider"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter id of auth_api_v1_passkey_destroy has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1passkey~1{id}~1/delete/parameters/id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter id of auth_api_v1_passkey_partial_update has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1passkey~1{id}~1/patch/parameters/id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter key of auth_api_v1_qr_confirm_create has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1qr~1{key}~1confirm~1/post/parameters/key"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter key of auth_api_v1_qr_reject_create has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1qr~1{key}~1reject~1/post/parameters/key"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter key of auth_api_v1_qr_scan_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1qr~1{key}~1scan~1/get/parameters/key"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter key of auth_api_v1_qr_status_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1qr~1{key}~1status~1/get/parameters/key"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter event_type of auth_api_v1_security_audit_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1security~1audit~1/get/parameters/event_type"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter page of auth_api_v1_security_audit_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1security~1audit~1/get/parameters/page"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter token of auth_api_v1_security_revoke_suspicious_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1security~1revoke-suspicious~1/get/parameters/token"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter session_id of auth_api_v1_sessions_destroy_2 has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sessions~1{session_id}~1/delete/parameters/session_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter session_id of auth_api_v1_sessions_confirm_create has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sessions~1{session_id}~1confirm~1/post/parameters/session_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_orgs_destroy has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1orgs~1{slug}~1/delete/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_orgs_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1orgs~1{slug}~1/get/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_orgs_partial_update has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1orgs~1{slug}~1/patch/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_orgs_config_partial_update has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1orgs~1{slug}~1config~1/patch/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_orgs_config_update has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1orgs~1{slug}~1config~1/put/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_login_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1{slug}~1login~1/get/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_oidc_callback_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1{slug}~1oidc~1callback~1/get/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_saml_acs_create has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1{slug}~1saml~1acs~1/post/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of auth_api_v1_sso_saml_metadata_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1sso~1{slug}~1saml~1metadata~1/get/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter assignment_id of auth_api_v1_staff_roles_destroy has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1staff-roles~1{assignment_id}~1/delete/parameters/assignment_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter challenge_id of auth_api_v1_verification_retrieve has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1verification~1{challenge_id}~1/get/parameters/challenge_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter challenge_id of auth_api_v1_verification_complete_create has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1verification~1{challenge_id}~1complete~1/post/parameters/challenge_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter challenge_id of auth_api_v1_verification_initiate_create has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1verification~1{challenge_id}~1initiate~1/post/parameters/challenge_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AdminUserCreateRequest.display_name has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest/properties/display_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AdminUserCreateRequest.email has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AdminUserCreateRequest.mark_verified has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest/properties/mark_verified"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AdminUserCreateRequest.password has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest/properties/password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AdminUserCreateRequest.phone has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AdminUserCreateRequest.send_welcome has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest/properties/send_welcome"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AdminUserCreateRequest.username has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest/properties/username"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogEntry.created_at has no description",
+            "pointer": "#/components/schemas/AuditLogEntry/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogEntry.event_type has no description",
+            "pointer": "#/components/schemas/AuditLogEntry/properties/event_type"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogEntry.id has no description",
+            "pointer": "#/components/schemas/AuditLogEntry/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogEntry.ip_address has no description",
+            "pointer": "#/components/schemas/AuditLogEntry/properties/ip_address"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogEntry.metadata has no description",
+            "pointer": "#/components/schemas/AuditLogEntry/properties/metadata"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogEntry.user_agent has no description",
+            "pointer": "#/components/schemas/AuditLogEntry/properties/user_agent"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogPage.count has no description",
+            "pointer": "#/components/schemas/AuditLogPage/properties/count"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogPage.next has no description",
+            "pointer": "#/components/schemas/AuditLogPage/properties/next"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AuditLogPage.results has no description",
+            "pointer": "#/components/schemas/AuditLogPage/properties/results"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DelayedChangeCancel.change_request_id has no description",
+            "pointer": "#/components/schemas/DelayedChangeCancel/properties/change_request_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DelayedChangeInitiate.device_id has no description",
+            "pointer": "#/components/schemas/DelayedChangeInitiate/properties/device_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DelayedChangeInitiate.email has no description",
+            "pointer": "#/components/schemas/DelayedChangeInitiate/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DelayedChangeInitiate.phone has no description",
+            "pointer": "#/components/schemas/DelayedChangeInitiate/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EmailAuthRequest.captcha_token has no description",
+            "pointer": "#/components/schemas/EmailAuthRequest/properties/captcha_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EmailAuthRequest.device_id has no description",
+            "pointer": "#/components/schemas/EmailAuthRequest/properties/device_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EmailAuthRequest.email has no description",
+            "pointer": "#/components/schemas/EmailAuthRequest/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EmailAuthVerify.code has no description",
+            "pointer": "#/components/schemas/EmailAuthVerify/properties/code"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EmailAuthVerify.email has no description",
+            "pointer": "#/components/schemas/EmailAuthVerify/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ForcedPasswordChange.new_password has no description",
+            "pointer": "#/components/schemas/ForcedPasswordChange/properties/new_password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeRequestNew.change_token has no description",
+            "pointer": "#/components/schemas/InstantChangeRequestNew/properties/change_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeRequestNew.email has no description",
+            "pointer": "#/components/schemas/InstantChangeRequestNew/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeRequestNew.phone has no description",
+            "pointer": "#/components/schemas/InstantChangeRequestNew/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeRequestOld.device_id has no description",
+            "pointer": "#/components/schemas/InstantChangeRequestOld/properties/device_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeVerifyNew.change_token has no description",
+            "pointer": "#/components/schemas/InstantChangeVerifyNew/properties/change_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeVerifyNew.code has no description",
+            "pointer": "#/components/schemas/InstantChangeVerifyNew/properties/code"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeVerifyNew.email has no description",
+            "pointer": "#/components/schemas/InstantChangeVerifyNew/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeVerifyNew.phone has no description",
+            "pointer": "#/components/schemas/InstantChangeVerifyNew/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property InstantChangeVerifyOld.code has no description",
+            "pointer": "#/components/schemas/InstantChangeVerifyOld/properties/code"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property JWTStatus.authenticated has no description",
+            "pointer": "#/components/schemas/JWTStatus/properties/authenticated"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property JWTStatus.profile has no description",
+            "pointer": "#/components/schemas/JWTStatus/properties/profile"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property JWTStatus.tokens has no description",
+            "pointer": "#/components/schemas/JWTStatus/properties/tokens"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property JWTStatusTokens.access_token_exp has no description",
+            "pointer": "#/components/schemas/JWTStatusTokens/properties/access_token_exp"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property JWTStatusTokens.access_token_valid has no description",
+            "pointer": "#/components/schemas/JWTStatusTokens/properties/access_token_valid"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property JWTStatusTokens.refresh_token_exp has no description",
+            "pointer": "#/components/schemas/JWTStatusTokens/properties/refresh_token_exp"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property JWTStatusTokens.refresh_token_valid has no description",
+            "pointer": "#/components/schemas/JWTStatusTokens/properties/refresh_token_valid"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property MagicLinkRequestBody.captcha_token has no description",
+            "pointer": "#/components/schemas/MagicLinkRequestBody/properties/captcha_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property MagicLinkRequestBody.email has no description",
+            "pointer": "#/components/schemas/MagicLinkRequestBody/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property MagicLinkRequestResponse.message has no description",
+            "pointer": "#/components/schemas/MagicLinkRequestResponse/properties/message"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property OAuth.access_token has no description",
+            "pointer": "#/components/schemas/OAuth/properties/access_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property OAuth.provider has no description",
+            "pointer": "#/components/schemas/OAuth/properties/provider"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property OAuthLinkRequest.access_token has no description",
+            "pointer": "#/components/schemas/OAuthLinkRequest/properties/access_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property OAuthLinkRequest.provider has no description",
+            "pointer": "#/components/schemas/OAuthLinkRequest/properties/provider"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyItem.aaguid has no description",
+            "pointer": "#/components/schemas/PasskeyItem/properties/aaguid"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyItem.created_at has no description",
+            "pointer": "#/components/schemas/PasskeyItem/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyItem.device_name has no description",
+            "pointer": "#/components/schemas/PasskeyItem/properties/device_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyItem.id has no description",
+            "pointer": "#/components/schemas/PasskeyItem/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyItem.last_used_at has no description",
+            "pointer": "#/components/schemas/PasskeyItem/properties/last_used_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyItem.transports has no description",
+            "pointer": "#/components/schemas/PasskeyItem/properties/transports"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteResponse.aaguid has no description",
+            "pointer": "#/components/schemas/PasskeyRegisterCompleteResponse/properties/aaguid"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteResponse.created_at has no description",
+            "pointer": "#/components/schemas/PasskeyRegisterCompleteResponse/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteResponse.device_name has no description",
+            "pointer": "#/components/schemas/PasskeyRegisterCompleteResponse/properties/device_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteResponse.id has no description",
+            "pointer": "#/components/schemas/PasskeyRegisterCompleteResponse/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteResponse.last_used_at has no description",
+            "pointer": "#/components/schemas/PasskeyRegisterCompleteResponse/properties/last_used_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteResponse.transports has no description",
+            "pointer": "#/components/schemas/PasskeyRegisterCompleteResponse/properties/transports"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordChangeDirect.new_password has no description",
+            "pointer": "#/components/schemas/PasswordChangeDirect/properties/new_password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordChangeDirect.old_password has no description",
+            "pointer": "#/components/schemas/PasswordChangeDirect/properties/old_password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordLogin.password has no description",
+            "pointer": "#/components/schemas/PasswordLogin/properties/password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordOtpRequest.method has no description",
+            "pointer": "#/components/schemas/PasswordOtpRequest/properties/method"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordOtpVerify.code has no description",
+            "pointer": "#/components/schemas/PasswordOtpVerify/properties/code"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordOtpVerify.method has no description",
+            "pointer": "#/components/schemas/PasswordOtpVerify/properties/method"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordOtpVerify.new_password has no description",
+            "pointer": "#/components/schemas/PasswordOtpVerify/properties/new_password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordRegister.captcha_token has no description",
+            "pointer": "#/components/schemas/PasswordRegister/properties/captcha_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordRegister.email has no description",
+            "pointer": "#/components/schemas/PasswordRegister/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordRegister.password has no description",
+            "pointer": "#/components/schemas/PasswordRegister/properties/password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordRegister.phone has no description",
+            "pointer": "#/components/schemas/PasswordRegister/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordRegister.username has no description",
+            "pointer": "#/components/schemas/PasswordRegister/properties/username"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetEmailRequest.captcha_token has no description",
+            "pointer": "#/components/schemas/PasswordResetEmailRequest/properties/captcha_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetEmailRequest.email has no description",
+            "pointer": "#/components/schemas/PasswordResetEmailRequest/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetEmailVerify.code has no description",
+            "pointer": "#/components/schemas/PasswordResetEmailVerify/properties/code"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetEmailVerify.email has no description",
+            "pointer": "#/components/schemas/PasswordResetEmailVerify/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetEmailVerify.new_password has no description",
+            "pointer": "#/components/schemas/PasswordResetEmailVerify/properties/new_password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetPhoneRequest.captcha_token has no description",
+            "pointer": "#/components/schemas/PasswordResetPhoneRequest/properties/captcha_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetPhoneRequest.phone has no description",
+            "pointer": "#/components/schemas/PasswordResetPhoneRequest/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetPhoneVerify.code has no description",
+            "pointer": "#/components/schemas/PasswordResetPhoneVerify/properties/code"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetPhoneVerify.new_password has no description",
+            "pointer": "#/components/schemas/PasswordResetPhoneVerify/properties/new_password"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasswordResetPhoneVerify.phone has no description",
+            "pointer": "#/components/schemas/PasswordResetPhoneVerify/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedGDPRDsarPatch.note has no description",
+            "pointer": "#/components/schemas/PatchedGDPRDsarPatch/properties/note"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedGDPRDsarPatch.state has no description",
+            "pointer": "#/components/schemas/PatchedGDPRDsarPatch/properties/state"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedGDPRDsarPatch.user_id has no description",
+            "pointer": "#/components/schemas/PatchedGDPRDsarPatch/properties/user_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedServiceAPIKey.allowed_endpoints has no description",
+            "pointer": "#/components/schemas/PatchedServiceAPIKey/properties/allowed_endpoints"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedServiceAPIKey.description has no description",
+            "pointer": "#/components/schemas/PatchedServiceAPIKey/properties/description"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedServiceAPIKey.is_active has no description",
+            "pointer": "#/components/schemas/PatchedServiceAPIKey/properties/is_active"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedServiceAPIKey.name has no description",
+            "pointer": "#/components/schemas/PatchedServiceAPIKey/properties/name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedOrg.name has no description",
+            "pointer": "#/components/schemas/Patched_Org/properties/name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedOrg.slug has no description",
+            "pointer": "#/components/schemas/Patched_Org/properties/slug"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.attr_email has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/attr_email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.attr_first_name has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/attr_first_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.attr_last_name has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/attr_last_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.is_active has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/is_active"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.oidc_client_id has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/oidc_client_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.oidc_client_secret has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/oidc_client_secret"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.oidc_scopes has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/oidc_scopes"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.protocol has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/protocol"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedSSOConfig.saml_name_id_format has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig/properties/saml_name_id_format"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PhoneAuthRequest.captcha_token has no description",
+            "pointer": "#/components/schemas/PhoneAuthRequest/properties/captcha_token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PhoneAuthRequest.device_id has no description",
+            "pointer": "#/components/schemas/PhoneAuthRequest/properties/device_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PhoneAuthRequest.phone has no description",
+            "pointer": "#/components/schemas/PhoneAuthRequest/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PhoneAuthVerify.code has no description",
+            "pointer": "#/components/schemas/PhoneAuthVerify/properties/code"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PhoneAuthVerify.phone has no description",
+            "pointer": "#/components/schemas/PhoneAuthVerify/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.allowed_endpoints has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/allowed_endpoints"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.created_at has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.description has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/description"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.id has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.is_active has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/is_active"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.key has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/key"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.last_used_at has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/last_used_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ServiceAPIKey.name has no description",
+            "pointer": "#/components/schemas/ServiceAPIKey/properties/name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SignupUtm.campaign has no description",
+            "pointer": "#/components/schemas/SignupUtm/properties/campaign"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SignupUtm.content has no description",
+            "pointer": "#/components/schemas/SignupUtm/properties/content"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SignupUtm.medium has no description",
+            "pointer": "#/components/schemas/SignupUtm/properties/medium"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SignupUtm.source has no description",
+            "pointer": "#/components/schemas/SignupUtm/properties/source"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SignupUtm.term has no description",
+            "pointer": "#/components/schemas/SignupUtm/properties/term"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SiteBootstrap.seo has no description",
+            "pointer": "#/components/schemas/SiteBootstrap/properties/seo"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StaffRoleAssignRequest.role has no description",
+            "pointer": "#/components/schemas/StaffRoleAssignRequest/properties/role"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StaffRoleAssignRequest.user_id has no description",
+            "pointer": "#/components/schemas/StaffRoleAssignRequest/properties/user_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StaffRoleAssignment.assigned_by has no description",
+            "pointer": "#/components/schemas/StaffRoleAssignment/properties/assigned_by"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StaffRoleAssignment.created_at has no description",
+            "pointer": "#/components/schemas/StaffRoleAssignment/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StaffRoleAssignment.id has no description",
+            "pointer": "#/components/schemas/StaffRoleAssignment/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StaffRoleAssignment.role_name has no description",
+            "pointer": "#/components/schemas/StaffRoleAssignment/properties/role_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StaffRoleAssignment.user has no description",
+            "pointer": "#/components/schemas/StaffRoleAssignment/properties/user"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TOTPDelayedInitiate.device_id has no description",
+            "pointer": "#/components/schemas/TOTPDelayedInitiate/properties/device_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TokenIntrospectResponse.email has no description",
+            "pointer": "#/components/schemas/TokenIntrospectResponse/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TokenIntrospectResponse.scope has no description",
+            "pointer": "#/components/schemas/TokenIntrospectResponse/properties/scope"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TokenIntrospectResponse.token_type has no description",
+            "pointer": "#/components/schemas/TokenIntrospectResponse/properties/token_type"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TokenIntrospectResponse.username has no description",
+            "pointer": "#/components/schemas/TokenIntrospectResponse/properties/username"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TokenVerify.token has no description",
+            "pointer": "#/components/schemas/TokenVerify/properties/token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.auth_type has no description",
+            "pointer": "#/components/schemas/User/properties/auth_type"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.avatar has no description",
+            "pointer": "#/components/schemas/User/properties/avatar"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.bio has no description",
+            "pointer": "#/components/schemas/User/properties/bio"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.created_at has no description",
+            "pointer": "#/components/schemas/User/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.id has no description",
+            "pointer": "#/components/schemas/User/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.is_anonymous has no description",
+            "pointer": "#/components/schemas/User/properties/is_anonymous"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.is_email_verified has no description",
+            "pointer": "#/components/schemas/User/properties/is_email_verified"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.is_phone_verified has no description",
+            "pointer": "#/components/schemas/User/properties/is_phone_verified"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.last_login has no description",
+            "pointer": "#/components/schemas/User/properties/last_login"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.oauth_provider has no description",
+            "pointer": "#/components/schemas/User/properties/oauth_provider"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.onboarding_completed has no description",
+            "pointer": "#/components/schemas/User/properties/onboarding_completed"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.phone has no description",
+            "pointer": "#/components/schemas/User/properties/phone"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property User.profile_completed has no description",
+            "pointer": "#/components/schemas/User/properties/profile_completed"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Org.created_at has no description",
+            "pointer": "#/components/schemas/_Org/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Org.id has no description",
+            "pointer": "#/components/schemas/_Org/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Org.name has no description",
+            "pointer": "#/components/schemas/_Org/properties/name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Org.slug has no description",
+            "pointer": "#/components/schemas/_Org/properties/slug"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyAuthBeginBody.email has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthBeginBody/properties/email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyAuthCompleteBody.credential has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthCompleteBody/properties/credential"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyAuthCompleteBody.session_key has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthCompleteBody/properties/session_key"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyAuthOptions.options has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthOptions/properties/options"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyAuthOptions.session_key has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthOptions/properties/session_key"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyListResponse.passkeys has no description",
+            "pointer": "#/components/schemas/_PasskeyListResponse/properties/passkeys"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegOptions.options has no description",
+            "pointer": "#/components/schemas/_PasskeyRegOptions/properties/options"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteBody.credential has no description",
+            "pointer": "#/components/schemas/_PasskeyRegisterCompleteBody/properties/credential"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PasskeyRegisterCompleteBody.device_name has no description",
+            "pointer": "#/components/schemas/_PasskeyRegisterCompleteBody/properties/device_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.attr_email has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/attr_email"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.attr_first_name has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/attr_first_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.attr_last_name has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/attr_last_name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.is_active has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/is_active"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.oidc_client_id has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/oidc_client_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.oidc_client_secret has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/oidc_client_secret"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.oidc_scopes has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/oidc_scopes"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.protocol has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/protocol"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property SSOConfig.saml_name_id_format has no description",
+            "pointer": "#/components/schemas/_SSOConfig/properties/saml_name_id_format"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TOTPDisableByBackup.method has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByBackup/properties/method"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TOTPDisableByOTP.method has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByOTP/properties/method"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property TOTPDisableByTOTP.method has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByTOTP/properties/method"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type AdminUserCreateRequest has no description",
+            "pointer": "#/components/schemas/AdminUserCreateRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type AuditLogEntry has no description",
+            "pointer": "#/components/schemas/AuditLogEntry"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type AuthResponseStatus has no description",
+            "pointer": "#/components/schemas/AuthResponseStatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type AuthType has no description",
+            "pointer": "#/components/schemas/AuthTypeEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type ClickIdType has no description",
+            "pointer": "#/components/schemas/ClickIdTypeEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type FirstLoginChallengeResponseStatus has no description",
+            "pointer": "#/components/schemas/FirstLoginChallengeResponseStatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type ForcedPasswordChange has no description",
+            "pointer": "#/components/schemas/ForcedPasswordChange"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type GDPRDownloadTokenRequest has no description",
+            "pointer": "#/components/schemas/GDPRDownloadTokenRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type GDPRDsarRequest has no description",
+            "pointer": "#/components/schemas/GDPRDsarRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type GDPRErasureRequest has no description",
+            "pointer": "#/components/schemas/GDPRErasureRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Kind has no description",
+            "pointer": "#/components/schemas/KindEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type LegacyTokenResponse has no description",
+            "pointer": "#/components/schemas/LegacyTokenResponse"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type LoginGrantExchangeBody has no description",
+            "pointer": "#/components/schemas/LoginGrantExchangeBody"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type LoginResponse has no description",
+            "pointer": "#/components/schemas/LoginResponse"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type LogoutRequest has no description",
+            "pointer": "#/components/schemas/LogoutRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type MagicLinkRequestResponse has no description",
+            "pointer": "#/components/schemas/MagicLinkRequestResponse"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type MfaEnrollExchange has no description",
+            "pointer": "#/components/schemas/MfaEnrollExchange"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type MfaEnrollSessionResponseStatus has no description",
+            "pointer": "#/components/schemas/MfaEnrollSessionResponseStatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasskeyItem has no description",
+            "pointer": "#/components/schemas/PasskeyItem"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordChangeDirect has no description",
+            "pointer": "#/components/schemas/PasswordChangeDirect"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordChangedResponseStatus has no description",
+            "pointer": "#/components/schemas/PasswordChangedResponseStatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordLogin has no description",
+            "pointer": "#/components/schemas/PasswordLogin"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordMethodMethod has no description",
+            "pointer": "#/components/schemas/PasswordMethodMethodEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordOtpChangeResponse has no description",
+            "pointer": "#/components/schemas/PasswordOtpChangeResponse"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordOtpMethod has no description",
+            "pointer": "#/components/schemas/PasswordOtpMethodEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordOtpRequest has no description",
+            "pointer": "#/components/schemas/PasswordOtpRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordOtpVerify has no description",
+            "pointer": "#/components/schemas/PasswordOtpVerify"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordResetEmailVerify has no description",
+            "pointer": "#/components/schemas/PasswordResetEmailVerify"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasswordResetPhoneVerify has no description",
+            "pointer": "#/components/schemas/PasswordResetPhoneVerify"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PatchedGDPRDsarPatch has no description",
+            "pointer": "#/components/schemas/PatchedGDPRDsarPatch"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PatchedOrg has no description",
+            "pointer": "#/components/schemas/Patched_Org"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PatchedSSOConfig has no description",
+            "pointer": "#/components/schemas/Patched_SSOConfig"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Protocol has no description",
+            "pointer": "#/components/schemas/ProtocolEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type QRGenerate has no description",
+            "pointer": "#/components/schemas/QRGenerate"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type QRGenerateResponseType has no description",
+            "pointer": "#/components/schemas/QRGenerateResponseTypeEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type QRGenerateType has no description",
+            "pointer": "#/components/schemas/QRGenerateTypeEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type QRStatusResponseStatus has no description",
+            "pointer": "#/components/schemas/QRStatusResponseStatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Requires has no description",
+            "pointer": "#/components/schemas/RequiresEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type State has no description",
+            "pointer": "#/components/schemas/StateEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPChallengeResponseStatus has no description",
+            "pointer": "#/components/schemas/TOTPChallengeResponseStatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPChallengeVerify has no description",
+            "pointer": "#/components/schemas/TOTPChallengeVerify"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPDisableRequest has no description",
+            "pointer": "#/components/schemas/TOTPDisableRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPSetupConfirm has no description",
+            "pointer": "#/components/schemas/TOTPSetupConfirm"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TokenObtainRequest has no description",
+            "pointer": "#/components/schemas/TokenObtainRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TokenRefreshRequest has no description",
+            "pointer": "#/components/schemas/TokenRefreshRequest"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type User has no description",
+            "pointer": "#/components/schemas/User"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Org has no description",
+            "pointer": "#/components/schemas/_Org"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasskeyAuthBeginBody has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthBeginBody"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasskeyAuthCompleteBody has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthCompleteBody"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasskeyAuthOptions has no description",
+            "pointer": "#/components/schemas/_PasskeyAuthOptions"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasskeyListResponse has no description",
+            "pointer": "#/components/schemas/_PasskeyListResponse"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasskeyRegOptions has no description",
+            "pointer": "#/components/schemas/_PasskeyRegOptions"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PasskeyRegisterCompleteBody has no description",
+            "pointer": "#/components/schemas/_PasskeyRegisterCompleteBody"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type SSOConfig has no description",
+            "pointer": "#/components/schemas/_SSOConfig"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPDisableByBackup has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByBackup"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPDisableByBackupMethod has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByBackupMethodEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPDisableByOTP has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByOTP"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPDisableByOTPMethod has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByOTPMethodEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPDisableByTOTP has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByTOTP"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type TOTPDisableByTOTPMethod has no description",
+            "pointer": "#/components/schemas/_TOTPDisableByTOTPMethodEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type GetGdprSchemaFormat has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1gdpr~1schema~1/get/parameters/format"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type GetGdprSchemaLang has no description",
+            "pointer": "#/paths/~1auth~1api~1v1~1gdpr~1schema~1/get/parameters/lang"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 409 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1auth~1api~1v1~1email~1change~1delayed~1initiate~1/post/responses/409"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 409 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1auth~1api~1v1~1email~1change~1instant~1request-new~1/post/responses/409"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 400 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1auth~1api~1v1~1logout~1/post/responses/400"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 409 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1auth~1api~1v1~1phone~1change~1delayed~1initiate~1/post/responses/409"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 409 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1auth~1api~1v1~1phone~1change~1instant~1request-new~1/post/responses/409"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1auth~1api~1v1~1qr~1{key}~1confirm~1/post/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 400 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1auth~1api~1v1~1verification~1preferences~1/put/responses/400"
+        },
+        {
+            "code": "W-SECURITY-ABSENT",
+            "message": "no security declaration",
+            "pointer": "#/paths/~1auth~1api~1v1~1jwt~1status~1/get"
+        },
+        {
+            "code": "W-SECURITY-ABSENT",
+            "message": "no security declaration",
+            "pointer": "#/paths/~1auth~1api~1v1~1oauth2~1introspect~1/post"
+        }
+    ],
+    "operations": 121,
+    "types": 158
+}

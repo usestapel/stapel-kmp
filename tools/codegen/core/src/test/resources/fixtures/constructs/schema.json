@@ -1,0 +1,688 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "",
+    "version": "0",
+    "x-stapel-contract": 2
+  },
+  "paths": {
+    "/constructs/api/v1/items/": {
+      "get": {
+        "operationId": "constructs_api_v1_items_list",
+        "summary": "List items",
+        "description": "Lists items.\n\n**Permissions:** `IsAuthenticated`",
+        "tags": [
+          "items"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "anchor",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Cursor."
+          },
+          {
+            "in": "query",
+            "name": "direction",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "next",
+                "prev",
+                "center"
+              ]
+            },
+            "description": "Direction."
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page size."
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Filter."
+          }
+        ],
+        "security": [
+          {
+            "JWTCookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemPage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "constructs_api_v1_items_create",
+        "description": "Creates an item.",
+        "security": [
+          {
+            "JWTCookieAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              },
+              "examples": {
+                "New": {
+                  "value": {
+                    "name": "abc",
+                    "price": "1.50",
+                    "note": null
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Outcome"
+                },
+                "examples": {
+                  "Done": {
+                    "value": {
+                      "result": "PENDING",
+                      "token": "t"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            },
+            "x-stapel-errors": [
+              "error.400.bad_name"
+            ]
+          },
+          "409": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StapelError"
+                }
+              }
+            }
+          }
+        },
+        "x-stapel-captcha": {
+          "action": "create_item",
+          "token": {
+            "header": "X-Captcha-Token",
+            "field": "captcha_token"
+          }
+        }
+      }
+    },
+    "/constructs/api/v1/items/{item_id}/": {
+      "patch": {
+        "operationId": "constructs_api_v1_items_partial_update",
+        "description": "Patches.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Item."
+          },
+          {
+            "in": "header",
+            "name": "X-Closure-Token",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Header."
+          }
+        ],
+        "security": [
+          {
+            "JWTCookieAuth": []
+          },
+          {}
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchedItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "constructs_api_v1_items_destroy",
+        "description": "Deletes.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Item."
+          }
+        ],
+        "security": [
+          {
+            "JWTCookieAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/constructs/api/v1/upload/": {
+      "post": {
+        "operationId": "upload_file",
+        "description": "Uploads.",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "File."
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title."
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ByKeys"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/constructs/api/v1/export/": {
+      "get": {
+        "operationId": "constructs_api_v1_export_retrieve",
+        "description": "Export.",
+        "security": [
+          {
+            "JWTCookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/constructs/api/v1/feed/": {
+      "get": {
+        "operationId": "constructs_api_v1_feed_retrieve",
+        "description": "Feed.",
+        "security": [
+          {}
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/constructs/api/v1/oauth/{provider}/": {
+      "get": {
+        "operationId": "constructs_api_v1_oauth_retrieve",
+        "description": "Redirects.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Provider."
+          }
+        ],
+        "security": [
+          {}
+        ],
+        "responses": {
+          "302": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/constructs/api/v1/merged/": {
+      "get": {
+        "operationId": "constructs_api_v1_merged_list",
+        "description": "Merged list.",
+        "security": [
+          {
+            "JWTCookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Merged"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/constructs/api/v1/internal/hook/": {
+      "post": {
+        "operationId": "constructs_api_v1_internal_hook_create",
+        "description": "Service.",
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Item": {
+        "type": "object",
+        "description": "An item.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true,
+            "description": "Id."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[a-z]+$",
+            "description": "Name.",
+            "example": "abc"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional nullable."
+          },
+          "price": {
+            "type": "string",
+            "format": "decimal",
+            "description": "Price as decimal."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Created."
+          },
+          "status": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              },
+              {
+                "$ref": "#/components/schemas/BlankEnum"
+              },
+              {
+                "$ref": "#/components/schemas/NullEnum"
+              }
+            ],
+            "description": "Status or blank."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags."
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Counters."
+          },
+          "extra": {
+            "description": "Anything."
+          },
+          "object": {
+            "type": "boolean",
+            "description": "A keyword-named field."
+          },
+          "parent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Ref"
+              }
+            ],
+            "nullable": true,
+            "description": "Wrapped ref."
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "price",
+          "created_at",
+          "note"
+        ]
+      },
+      "Ref": {
+        "type": "object",
+        "description": "A reference.",
+        "properties": {
+          "ref_id": {
+            "type": "integer",
+            "description": "Ref id."
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "StatusEnum": {
+        "type": "string",
+        "enum": [
+          "open",
+          "closed",
+          "ref_select"
+        ],
+        "description": "* `open` - Open\n* `closed` - Closed\n* `ref_select` - ref_select"
+      },
+      "BlankEnum": {
+        "enum": [
+          ""
+        ]
+      },
+      "NullEnum": {
+        "enum": [
+          null
+        ]
+      },
+      "PatchedItem": {
+        "type": "object",
+        "description": "Patch body.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name."
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "description": "Note."
+          }
+        }
+      },
+      "Done": {
+        "type": "object",
+        "description": "Done.",
+        "properties": {
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResultEnum"
+              }
+            ],
+            "description": "Result."
+          },
+          "item": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Item"
+              }
+            ],
+            "description": "Item."
+          }
+        },
+        "required": [
+          "result",
+          "item"
+        ]
+      },
+      "ResultEnum": {
+        "type": "string",
+        "enum": [
+          "DONE",
+          "MERGED"
+        ]
+      },
+      "Pending": {
+        "type": "object",
+        "description": "Pending.",
+        "properties": {
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PendingResultEnum"
+              }
+            ],
+            "description": "Result."
+          },
+          "token": {
+            "type": "string",
+            "description": "Token."
+          }
+        },
+        "required": [
+          "result",
+          "token"
+        ]
+      },
+      "PendingResultEnum": {
+        "type": "string",
+        "enum": [
+          "PENDING"
+        ]
+      },
+      "Outcome": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Done"
+          },
+          {
+            "$ref": "#/components/schemas/Pending"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "result",
+          "mapping": {
+            "Done": "#/components/schemas/Done",
+            "Pending": "#/components/schemas/Pending"
+          }
+        }
+      },
+      "ByKeys": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Ref"
+          },
+          {
+            "$ref": "#/components/schemas/Pending"
+          }
+        ]
+      },
+      "Merged": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Ref"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Label."
+              }
+            },
+            "required": [
+              "label"
+            ]
+          }
+        ],
+        "description": "Merged object."
+      },
+      "ItemPage": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "next_anchor": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "nullable": true
+          },
+          "prev_anchor": {
+            "type": "string",
+            "nullable": true
+          },
+          "has_next": {
+            "type": "boolean"
+          },
+          "has_prev": {
+            "type": "boolean"
+          },
+          "count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "next_anchor",
+          "prev_anchor",
+          "has_next",
+          "has_prev",
+          "count"
+        ]
+      },
+      "StapelError": {
+        "type": "object",
+        "description": "Error envelope.",
+        "properties": {
+          "localizable_error": {
+            "type": "string",
+            "description": "Code."
+          }
+        },
+        "required": [
+          "localizable_error"
+        ]
+      }
+    }
+  }
+}

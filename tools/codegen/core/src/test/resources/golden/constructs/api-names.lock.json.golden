@@ -1,0 +1,29 @@
+{
+    "operations": {
+        "constructs_api_v1_export_retrieve": "getExport",
+        "constructs_api_v1_feed_retrieve": "getFeed",
+        "constructs_api_v1_items_create": "createItems",
+        "constructs_api_v1_items_destroy": "deleteItems",
+        "constructs_api_v1_items_list": "listItems",
+        "constructs_api_v1_items_partial_update": "patchItems",
+        "constructs_api_v1_merged_list": "listMerged",
+        "constructs_api_v1_oauth_retrieve": "getOauth",
+        "upload_file": "uploadFile"
+    },
+    "types": {
+        "#/paths/~1constructs~1api~1v1~1items~1/get/parameters/direction": "ListItemsDirection",
+        "ByKeys": "ByKeys",
+        "Done": "Done",
+        "Item": "Item",
+        "Item (request)": "ItemRequest",
+        "ItemPage": "ItemPage",
+        "Merged": "Merged",
+        "Outcome": "Outcome",
+        "PatchedItem": "PatchedItem",
+        "Pending": "Pending",
+        "PendingResultEnum": "PendingResult",
+        "Ref": "Ref",
+        "ResultEnum": "Result",
+        "StatusEnum": "Status"
+    }
+}

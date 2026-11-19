@@ -1,0 +1,19 @@
+{
+  "module": "constructs",
+  "operations": {
+    "constructs_api_v1_items_list": {
+      "key": [
+        "items"
+      ],
+      "policy": "stale_while_revalidate"
+    },
+    "constructs_api_v1_items_create": {
+      "invalidates": [
+        [
+          "items"
+        ]
+      ],
+      "offline": "keyed"
+    }
+  }
+}
