@@ -157,6 +157,11 @@
       "family": "substrate",
       "released": false
     },
+    "stapel-showcase": {
+      "version": "0.0.1",
+      "family": "substrate",
+      "released": false
+    },
     "stapel-testing": {
       "version": "0.0.1",
       "family": "substrate",
