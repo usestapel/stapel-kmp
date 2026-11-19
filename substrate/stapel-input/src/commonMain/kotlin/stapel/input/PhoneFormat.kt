@@ -56,8 +56,9 @@ public object GenericPhoneMetadata : PhoneMetadata {
  * A phone number in E.164: raw is `""` or `"+"` followed by up to 15 ASCII digits.
  *
  * - Without [defaultCallingCode] the user types the full international number (`+` optional).
- * - With it, a number typed or pasted without `+` (or an international prefix) is national and is
- *   prefixed through [PhoneMetadata.nationalToE164]; a number with `+` is taken as it is. When
+ * - With it, a number typed or pasted without `+` (or an international prefix) over the whole value
+ *   is national and is prefixed through [PhoneMetadata.nationalToE164]; a number with `+` is taken as
+ *   it is. When
  *   [lockCallingCode] is set the calling code cannot be edited away, a paste of another country's
  *   number is refused, and a value with no national digits is empty.
  * - A paste of a full number (`+…` or an international prefix) replaces the whole value.
@@ -106,7 +107,8 @@ public class PhoneFormat(
         }
         val prefix = digits.cut(0, ds)
         val suffix = digits.cut(de, digits.length)
-        if (digits.isEmpty() && cc != null && typed.isNotEmpty()) {
+        val wholeValue = suffix.isEmpty() && (prefix.isEmpty() || (locked && prefix == cc))
+        if (wholeValue && cc != null && typed.isNotEmpty()) {
             val full = clamp(metadata.nationalToE164(cc, typed).let(::digitsOf))
             val out = canonical(full)
             return RawEdit(out, out.length)

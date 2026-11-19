@@ -59,6 +59,13 @@ class PhoneFormatTest {
     }
 
     @Test
+    fun replacingTheWholeValueWithANationalNumberKeepsTheCallingCode() {
+        val m = MaskedText.of(nanpLike, "+15550000000")
+        assertEquals("+15551234567", m.select(0, m.text.length).type("555 123 4567").raw)
+        assertEquals("+15550000001", m.select(m.text.length - 1, m.text.length).type("1").raw, "a partial edit stays partial")
+    }
+
+    @Test
     fun internationalPrefixStandsForPlus() {
         val m = MaskedText.of(PhoneFormat(SampleMetadata)).type("0044 20 7946 0000")
         assertEquals("+442079460000", m.raw)

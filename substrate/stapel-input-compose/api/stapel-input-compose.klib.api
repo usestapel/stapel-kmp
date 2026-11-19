@@ -1,0 +1,30 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-input-compose>
+final class stapel.input.compose/InputMask { // stapel.input.compose/InputMask|null[0]
+    constructor <init>(stapel.input/InputFormat) // stapel.input.compose/InputMask.<init>|<init>(stapel.input.InputFormat){}[0]
+
+    final val format // stapel.input.compose/InputMask.format|{}format[0]
+        final fun <get-format>(): stapel.input/InputFormat // stapel.input.compose/InputMask.format.<get-format>|<get-format>(){}[0]
+    final val inputTransformation // stapel.input.compose/InputMask.inputTransformation|{}inputTransformation[0]
+        final fun <get-inputTransformation>(): androidx.compose.foundation.text.input/InputTransformation // stapel.input.compose/InputMask.inputTransformation.<get-inputTransformation>|<get-inputTransformation>(){}[0]
+    final val keyboardOptions // stapel.input.compose/InputMask.keyboardOptions|{}keyboardOptions[0]
+        final fun <get-keyboardOptions>(): androidx.compose.foundation.text/KeyboardOptions // stapel.input.compose/InputMask.keyboardOptions.<get-keyboardOptions>|<get-keyboardOptions>(){}[0]
+    final val outputTransformation // stapel.input.compose/InputMask.outputTransformation|{}outputTransformation[0]
+        final fun <get-outputTransformation>(): androidx.compose.foundation.text.input/OutputTransformation // stapel.input.compose/InputMask.outputTransformation.<get-outputTransformation>|<get-outputTransformation>(){}[0]
+
+    final fun formatted(androidx.compose.foundation.text.input/TextFieldState): stapel.input/Formatted // stapel.input.compose/InputMask.formatted|formatted(androidx.compose.foundation.text.input.TextFieldState){}[0]
+    final fun setValue(androidx.compose.foundation.text.input/TextFieldState, kotlin/CharSequence) // stapel.input.compose/InputMask.setValue|setValue(androidx.compose.foundation.text.input.TextFieldState;kotlin.CharSequence){}[0]
+}
+
+final val stapel.input.compose/stapel_input_compose_InputMask$stableprop // stapel.input.compose/stapel_input_compose_InputMask$stableprop|#static{}stapel_input_compose_InputMask$stableprop[0]
+
+final fun (stapel.input/InputFormat).stapel.input.compose/asInputMask(): stapel.input.compose/InputMask // stapel.input.compose/asInputMask|asInputMask@stapel.input.InputFormat(){}[0]
+final fun (stapel.input/InputKeyboard).stapel.input.compose/toKeyboardOptions(): androidx.compose.foundation.text/KeyboardOptions // stapel.input.compose/toKeyboardOptions|toKeyboardOptions@stapel.input.InputKeyboard(){}[0]
+final fun stapel.input.compose/rememberMaskedTextFieldState(stapel.input/InputFormat, kotlin/CharSequence?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int): androidx.compose.foundation.text.input/TextFieldState // stapel.input.compose/rememberMaskedTextFieldState|rememberMaskedTextFieldState(stapel.input.InputFormat;kotlin.CharSequence?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.input.compose/stapel_input_compose_InputMask$stableprop_getter(): kotlin/Int // stapel.input.compose/stapel_input_compose_InputMask$stableprop_getter|stapel_input_compose_InputMask$stableprop_getter(){}[0]

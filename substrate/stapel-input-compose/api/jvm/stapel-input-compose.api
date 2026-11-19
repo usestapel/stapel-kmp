@@ -1,0 +1,17 @@
+public final class stapel/input/compose/InputMask {
+	public static final field $stable I
+	public fun <init> (Lstapel/input/InputFormat;)V
+	public final fun formatted (Landroidx/compose/foundation/text/input/TextFieldState;)Lstapel/input/Formatted;
+	public final fun getFormat ()Lstapel/input/InputFormat;
+	public final fun getInputTransformation ()Landroidx/compose/foundation/text/input/InputTransformation;
+	public final fun getKeyboardOptions ()Landroidx/compose/foundation/text/KeyboardOptions;
+	public final fun getOutputTransformation ()Landroidx/compose/foundation/text/input/OutputTransformation;
+	public final fun setValue (Landroidx/compose/foundation/text/input/TextFieldState;Ljava/lang/CharSequence;)V
+}
+
+public final class stapel/input/compose/InputMaskKt {
+	public static final fun asInputMask (Lstapel/input/InputFormat;)Lstapel/input/compose/InputMask;
+	public static final fun rememberMaskedTextFieldState (Lstapel/input/InputFormat;Ljava/lang/CharSequence;Landroidx/compose/runtime/Composer;II)Landroidx/compose/foundation/text/input/TextFieldState;
+	public static final fun toKeyboardOptions (Lstapel/input/InputKeyboard;)Landroidx/compose/foundation/text/KeyboardOptions;
+}
+
