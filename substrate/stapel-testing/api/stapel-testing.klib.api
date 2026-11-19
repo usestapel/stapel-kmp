@@ -6,6 +6,42 @@
 // - Show declarations: true
 
 // Library unique name: <io.github.usestapel:stapel-testing>
+sealed interface stapel.testing/FakeAnswer { // stapel.testing/FakeAnswer|null[0]
+    final class Failure : stapel.testing/FakeAnswer { // stapel.testing/FakeAnswer.Failure|null[0]
+        constructor <init>(stapel.result/TransportFailure) // stapel.testing/FakeAnswer.Failure.<init>|<init>(stapel.result.TransportFailure){}[0]
+
+        final val failure // stapel.testing/FakeAnswer.Failure.failure|{}failure[0]
+            final fun <get-failure>(): stapel.result/TransportFailure // stapel.testing/FakeAnswer.Failure.failure.<get-failure>|<get-failure>(){}[0]
+    }
+
+    final class Refusal : stapel.testing/FakeAnswer { // stapel.testing/FakeAnswer.Refusal|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.testing/FakeAnswer.Refusal.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.testing/FakeAnswer.Refusal.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.testing/FakeAnswer.Refusal.envelope.<get-envelope>|<get-envelope>(){}[0]
+    }
+
+    final class Value : stapel.testing/FakeAnswer { // stapel.testing/FakeAnswer.Value|null[0]
+        constructor <init>(kotlin/Any?) // stapel.testing/FakeAnswer.Value.<init>|<init>(kotlin.Any?){}[0]
+
+        final val value // stapel.testing/FakeAnswer.Value.value|{}value[0]
+            final fun <get-value>(): kotlin/Any? // stapel.testing/FakeAnswer.Value.value.<get-value>|<get-value>(){}[0]
+    }
+}
+
+final class stapel.testing/FakeApiTransport : stapel.wire/ApiTransport { // stapel.testing/FakeApiTransport|null[0]
+    constructor <init>() // stapel.testing/FakeApiTransport.<init>|<init>(){}[0]
+
+    final val calls // stapel.testing/FakeApiTransport.calls|{}calls[0]
+        final fun <get-calls>(): kotlin.collections/List<kotlin/Pair<kotlin/String, stapel.wire/OperationCall<*>>> // stapel.testing/FakeApiTransport.calls.<get-calls>|<get-calls>(){}[0]
+
+    final fun on(kotlin/String, kotlin/Function1<stapel.wire/OperationCall<*>, stapel.testing/FakeAnswer>) // stapel.testing/FakeApiTransport.on|on(kotlin.String;kotlin.Function1<stapel.wire.OperationCall<*>,stapel.testing.FakeAnswer>){}[0]
+    final fun onDownload(kotlin/String, kotlin/ByteArray, kotlin/String? = ...) // stapel.testing/FakeApiTransport.onDownload|onDownload(kotlin.String;kotlin.ByteArray;kotlin.String?){}[0]
+    final fun url(stapel.wire/OperationSpec<*, *, *>, stapel.wire/OperationCall<*>): kotlin/String // stapel.testing/FakeApiTransport.url|url(stapel.wire.OperationSpec<*,*,*>;stapel.wire.OperationCall<*>){}[0]
+    final suspend fun <#A1: kotlin/Any?, #B1: kotlin/Any?, #C1: stapel.result/StapelError> download(stapel.wire/OperationSpec<#A1, kotlin/Unit, #C1>, stapel.wire/OperationCall<#A1>, kotlin.coroutines/SuspendFunction1<stapel.wire/BinaryBody, #B1>): stapel.result/StapelResult<#B1, #C1> // stapel.testing/FakeApiTransport.download|download(stapel.wire.OperationSpec<0:0,kotlin.Unit,0:2>;stapel.wire.OperationCall<0:0>;kotlin.coroutines.SuspendFunction1<stapel.wire.BinaryBody,0:1>){0§<kotlin.Any?>;1§<kotlin.Any?>;2§<stapel.result.StapelError>}[0]
+    final suspend fun <#A1: kotlin/Any?, #B1: kotlin/Any?, #C1: stapel.result/StapelError> execute(stapel.wire/OperationSpec<#A1, #B1, #C1>, stapel.wire/OperationCall<#A1>): stapel.result/StapelResult<#B1, #C1> // stapel.testing/FakeApiTransport.execute|execute(stapel.wire.OperationSpec<0:0,0:1,0:2>;stapel.wire.OperationCall<0:0>){0§<kotlin.Any?>;1§<kotlin.Any?>;2§<stapel.result.StapelError>}[0]
+}
+
 final class stapel.testing/FakeAppLifecycle : stapel.runtime/AppLifecycle { // stapel.testing/FakeAppLifecycle|null[0]
     constructor <init>(stapel.runtime/AppPhase = ...) // stapel.testing/FakeAppLifecycle.<init>|<init>(stapel.runtime.AppPhase){}[0]
 
@@ -29,6 +65,27 @@ final class stapel.testing/FakeConnectivity : stapel.runtime/Connectivity { // s
     final fun reportReachable() // stapel.testing/FakeConnectivity.reportReachable|reportReachable(){}[0]
     final fun reportUnreachable() // stapel.testing/FakeConnectivity.reportUnreachable|reportUnreachable(){}[0]
     final fun set(stapel.runtime/NetworkStatus) // stapel.testing/FakeConnectivity.set|set(stapel.runtime.NetworkStatus){}[0]
+}
+
+final class stapel.testing/FakeTransport : stapel.network/HttpTransport { // stapel.testing/FakeTransport|null[0]
+    constructor <init>() // stapel.testing/FakeTransport.<init>|<init>(){}[0]
+
+    final val pending // stapel.testing/FakeTransport.pending|{}pending[0]
+        final fun <get-pending>(): kotlin/Int // stapel.testing/FakeTransport.pending.<get-pending>|<get-pending>(){}[0]
+    final val requests // stapel.testing/FakeTransport.requests|{}requests[0]
+        final fun <get-requests>(): kotlin.collections/List<stapel.network/WireRequest> // stapel.testing/FakeTransport.requests.<get-requests>|<get-requests>(){}[0]
+
+    final var fallback // stapel.testing/FakeTransport.fallback|{}fallback[0]
+        final fun <get-fallback>(): kotlin/Function1<stapel.network/WireRequest, stapel.network/WireOutcome>? // stapel.testing/FakeTransport.fallback.<get-fallback>|<get-fallback>(){}[0]
+        final fun <set-fallback>(kotlin/Function1<stapel.network/WireRequest, stapel.network/WireOutcome>?) // stapel.testing/FakeTransport.fallback.<set-fallback>|<set-fallback>(kotlin.Function1<stapel.network.WireRequest,stapel.network.WireOutcome>?){}[0]
+
+    final fun close() // stapel.testing/FakeTransport.close|close(){}[0]
+    final fun enqueue(kotlin/Function1<stapel.network/WireRequest, stapel.network/WireOutcome>) // stapel.testing/FakeTransport.enqueue|enqueue(kotlin.Function1<stapel.network.WireRequest,stapel.network.WireOutcome>){}[0]
+    final fun enqueue(kotlin/Int, kotlin/String = ..., kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> = ...) // stapel.testing/FakeTransport.enqueue|enqueue(kotlin.Int;kotlin.String;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>){}[0]
+    final fun enqueueEnvelope(kotlin/Int, kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> = ...) // stapel.testing/FakeTransport.enqueueEnvelope|enqueueEnvelope(kotlin.Int;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>){}[0]
+    final fun enqueueFailure(stapel.result/TransportFailure.NoResponse, kotlin/Boolean) // stapel.testing/FakeTransport.enqueueFailure|enqueueFailure(stapel.result.TransportFailure.NoResponse;kotlin.Boolean){}[0]
+    final fun enqueueJson(kotlin/Int, kotlin/String) // stapel.testing/FakeTransport.enqueueJson|enqueueJson(kotlin.Int;kotlin.String){}[0]
+    final suspend fun send(stapel.network/WireRequest): stapel.network/WireOutcome // stapel.testing/FakeTransport.send|send(stapel.network.WireRequest){}[0]
 }
 
 final class stapel.testing/FixedLocaleProvider : stapel.runtime/LocaleProvider { // stapel.testing/FixedLocaleProvider|null[0]
@@ -120,6 +177,6 @@ final class stapel.testing/TestDispatchers : stapel.runtime/StapelDispatchers { 
 }
 
 final fun (kotlinx.coroutines.test/TestScope).stapel.testing/virtualTimeClock(kotlin.time/Instant = ...): kotlin.time/Clock // stapel.testing/virtualTimeClock|virtualTimeClock@kotlinx.coroutines.test.TestScope(kotlin.time.Instant){}[0]
-final fun stapel.testing.di/testOverridesModule(kotlinx.coroutines/CoroutineScope, stapel.runtime/StapelDispatchers, kotlin.time/Clock = ..., stapel.runtime/IdGenerator = ..., stapel.runtime/StapelLogger = ..., stapel.runtime/Connectivity = ..., stapel.runtime/LocaleProvider = ..., stapel.runtime/TimeZoneProvider = ..., stapel.runtime/AppLifecycle = ...): org.koin.core.module/Module // stapel.testing.di/testOverridesModule|testOverridesModule(kotlinx.coroutines.CoroutineScope;stapel.runtime.StapelDispatchers;kotlin.time.Clock;stapel.runtime.IdGenerator;stapel.runtime.StapelLogger;stapel.runtime.Connectivity;stapel.runtime.LocaleProvider;stapel.runtime.TimeZoneProvider;stapel.runtime.AppLifecycle){}[0]
+final fun stapel.testing.di/testOverridesModule(kotlinx.coroutines/CoroutineScope, stapel.runtime/StapelDispatchers, kotlin.time/Clock = ..., stapel.runtime/IdGenerator = ..., stapel.runtime/StapelLogger = ..., stapel.runtime/Connectivity = ..., stapel.runtime/LocaleProvider = ..., stapel.runtime/TimeZoneProvider = ..., stapel.runtime/AppLifecycle = ..., stapel.network/HttpTransport? = ..., stapel.session.vault/TokenVault? = ...): org.koin.core.module/Module // stapel.testing.di/testOverridesModule|testOverridesModule(kotlinx.coroutines.CoroutineScope;stapel.runtime.StapelDispatchers;kotlin.time.Clock;stapel.runtime.IdGenerator;stapel.runtime.StapelLogger;stapel.runtime.Connectivity;stapel.runtime.LocaleProvider;stapel.runtime.TimeZoneProvider;stapel.runtime.AppLifecycle;stapel.network.HttpTransport?;stapel.session.vault.TokenVault?){}[0]
 final fun stapel.testing/testClientInfo(): stapel.config/ClientInfo // stapel.testing/testClientInfo|testClientInfo(){}[0]
 final fun stapel.testing/testEnvironment(kotlin/String = ..., stapel.config/Posture = ..., kotlin.collections/Map<kotlin/String, stapel.config/ServiceEndpoint> = ...): stapel.config/StapelEnvironment // stapel.testing/testEnvironment|testEnvironment(kotlin.String;stapel.config.Posture;kotlin.collections.Map<kotlin.String,stapel.config.ServiceEndpoint>){}[0]

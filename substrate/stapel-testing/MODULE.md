@@ -13,13 +13,19 @@ main code.
 | `RecordingLogger` | `StapelLogger` |
 | `FakeConnectivity`, `FixedLocaleProvider`, `FixedTimeZoneProvider`, `FakeAppLifecycle` | the runtime observers |
 | `testEnvironment()`, `testClientInfo()` | `StapelEnvironment`, `ClientInfo` |
-| `testOverridesModule(...)` | every binding of `runtimeModule`, as a Koin override module |
+| `FakeTransport` | `stapel-network`'s `HttpTransport`: scripted responses, envelopes, no-response failures, under the real pipeline |
+| `FakeApiTransport` + `FakeAnswer` | `stapel-wire`'s `ApiTransport`, by operation id, errors built through each operation's own `ErrorDecoder` (presenter / UI tests only) |
+| `testOverridesModule(...)` | every binding of `runtimeModule`, plus the `HttpTransport` of `networkModule` and the `TokenVault` of `sessionModule` when given |
 
-## Still to come (blocked on neighbours)
+`InMemoryTokenVault` is public in `stapel-session` itself and is not duplicated here.
 
-The network and session fakes of ARCH-CORE §6.4 — `FakeTransport` (with `enqueueEnvelope`),
-`FakeApiTransport` for presenter tests, `InMemoryTokenVault` re-export, `wireFixture(name)` — land
-here once `stapel-network` / `stapel-session` / `stapel-wire` are on `main`.
+## Not here
+
+- `wireFixture(name)` (real response bodies captured from a scaffolded backend): the capture is
+  CODEGEN/AUTH's; common code has no portable resource loading, so fixtures stay in the consuming
+  module's test sources until a capture format exists.
+- The network and session modules still carry private copies of a fake transport / clock in their
+  own tests; moving them onto this module is their owners' change.
 
 ## Rule
 

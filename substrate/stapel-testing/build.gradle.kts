@@ -5,7 +5,7 @@ plugins {
 }
 
 stapel {
-    description = "Test doubles for Stapel clients: clock, dispatchers, ids, locale, connectivity, logger."
+    description = "Test doubles for Stapel clients: wire transports, clock, dispatchers, ids, locale, connectivity, logger."
 }
 
 kotlin {
@@ -15,6 +15,9 @@ kotlin {
             api(projects.stapelRuntime)
             api(projects.stapelConfig)
             api(projects.stapelDi)
+            api(projects.stapelWire)
+            api(projects.stapelNetwork)
+            api(projects.stapelSession)
             api(libs.kotlinx.coroutines.test)
         }
     }

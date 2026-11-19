@@ -16,6 +16,7 @@ commonTest.dependencies { implementation("io.github.usestapel:stapel-testing") }
 }
 ```
 
+- `FakeTransport` (the wire as a script, under the real pipeline), `FakeApiTransport` (by operation id, for presenter/UI tests).
 - `TestClock`, `TestScope.virtualTimeClock()`, `TestDispatchers`, `SequentialIdGenerator`.
 - `RecordingLogger` (with `contains(secret)` to prove a secret never reached the log).
 - `FakeConnectivity`, `FixedLocaleProvider`, `FixedTimeZoneProvider`, `FakeAppLifecycle`.

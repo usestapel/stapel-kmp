@@ -1,3 +1,32 @@
+public abstract interface class stapel/testing/FakeAnswer {
+}
+
+public final class stapel/testing/FakeAnswer$Failure : stapel/testing/FakeAnswer {
+	public fun <init> (Lstapel/result/TransportFailure;)V
+	public final fun getFailure ()Lstapel/result/TransportFailure;
+}
+
+public final class stapel/testing/FakeAnswer$Refusal : stapel/testing/FakeAnswer {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+}
+
+public final class stapel/testing/FakeAnswer$Value : stapel/testing/FakeAnswer {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun getValue ()Ljava/lang/Object;
+}
+
+public final class stapel/testing/FakeApiTransport : stapel/wire/ApiTransport {
+	public fun <init> ()V
+	public fun download (Lstapel/wire/OperationSpec;Lstapel/wire/OperationCall;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun execute (Lstapel/wire/OperationSpec;Lstapel/wire/OperationCall;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getCalls ()Ljava/util/List;
+	public final fun on (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun onDownload (Ljava/lang/String;[BLjava/lang/String;)V
+	public static synthetic fun onDownload$default (Lstapel/testing/FakeApiTransport;Ljava/lang/String;[BLjava/lang/String;ILjava/lang/Object;)V
+	public fun url (Lstapel/wire/OperationSpec;Lstapel/wire/OperationCall;)Ljava/lang/String;
+}
+
 public final class stapel/testing/FakeAppLifecycle : stapel/runtime/AppLifecycle {
 	public fun <init> ()V
 	public fun <init> (Lstapel/runtime/AppPhase;)V
@@ -16,6 +45,23 @@ public final class stapel/testing/FakeConnectivity : stapel/runtime/Connectivity
 	public fun reportReachable ()V
 	public fun reportUnreachable ()V
 	public final fun set (Lstapel/runtime/NetworkStatus;)V
+}
+
+public final class stapel/testing/FakeTransport : stapel/network/HttpTransport {
+	public fun <init> ()V
+	public fun close ()V
+	public final fun enqueue (ILjava/lang/String;Ljava/util/List;)V
+	public final fun enqueue (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun enqueue$default (Lstapel/testing/FakeTransport;ILjava/lang/String;Ljava/util/List;ILjava/lang/Object;)V
+	public final fun enqueueEnvelope (ILjava/lang/String;Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)V
+	public static synthetic fun enqueueEnvelope$default (Lstapel/testing/FakeTransport;ILjava/lang/String;Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)V
+	public final fun enqueueFailure (Lstapel/result/TransportFailure$NoResponse;Z)V
+	public final fun enqueueJson (ILjava/lang/String;)V
+	public final fun getFallback ()Lkotlin/jvm/functions/Function1;
+	public final fun getPending ()I
+	public final fun getRequests ()Ljava/util/List;
+	public fun send (Lstapel/network/WireRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun setFallback (Lkotlin/jvm/functions/Function1;)V
 }
 
 public final class stapel/testing/FakesKt {
@@ -101,7 +147,7 @@ public final class stapel/testing/TestDispatchers : stapel/runtime/StapelDispatc
 }
 
 public final class stapel/testing/di/TestOverridesKt {
-	public static final fun testOverridesModule (Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelDispatchers;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lstapel/runtime/StapelLogger;Lstapel/runtime/Connectivity;Lstapel/runtime/LocaleProvider;Lstapel/runtime/TimeZoneProvider;Lstapel/runtime/AppLifecycle;)Lorg/koin/core/module/Module;
-	public static synthetic fun testOverridesModule$default (Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelDispatchers;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lstapel/runtime/StapelLogger;Lstapel/runtime/Connectivity;Lstapel/runtime/LocaleProvider;Lstapel/runtime/TimeZoneProvider;Lstapel/runtime/AppLifecycle;ILjava/lang/Object;)Lorg/koin/core/module/Module;
+	public static final fun testOverridesModule (Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelDispatchers;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lstapel/runtime/StapelLogger;Lstapel/runtime/Connectivity;Lstapel/runtime/LocaleProvider;Lstapel/runtime/TimeZoneProvider;Lstapel/runtime/AppLifecycle;Lstapel/network/HttpTransport;Lstapel/session/vault/TokenVault;)Lorg/koin/core/module/Module;
+	public static synthetic fun testOverridesModule$default (Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelDispatchers;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lstapel/runtime/StapelLogger;Lstapel/runtime/Connectivity;Lstapel/runtime/LocaleProvider;Lstapel/runtime/TimeZoneProvider;Lstapel/runtime/AppLifecycle;Lstapel/network/HttpTransport;Lstapel/session/vault/TokenVault;ILjava/lang/Object;)Lorg/koin/core/module/Module;
 }
 
