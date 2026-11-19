@@ -20,7 +20,9 @@ never a moved tag.
 
 1. Every change to a published module carries a note in `.changes/`.
 2. Version commit (alone): bump `VERSION_NAME`, prepend the CHANGELOG section,
-   delete the consumed notes. Push it to `main`; wait for a green `ci-ok`.
+   delete the consumed notes, `./gradlew exportKmpRegistry` (the registry
+   carries the train; the brick `nav-manifest.json` files carry no version and
+   do not change). Push it to `main`; wait for a green `ci-ok`.
 3. Annotated tag on that commit, pushed by name:
    `git tag -a vX.Y.Z -m vX.Y.Z && git push origin vX.Y.Z`. The pre-push hook
    refuses a tag whose tree, `VERSION_NAME` or `.changes/` does not match, or

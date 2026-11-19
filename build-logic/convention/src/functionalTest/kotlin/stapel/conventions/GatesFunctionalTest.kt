@@ -3,6 +3,7 @@ package stapel.conventions
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertContains
+import kotlin.test.assertTrue
 
 /**
  * Inversion tests: every gate is proven able to fail on a fixture that breaks its rule, with the
@@ -140,6 +141,20 @@ class GatesFunctionalTest {
         fx.dir.resolve("kmp-registry.json").writeText(registry.replace("\"stapel-result\"", "\"stapel-gone\""))
         val r = fx.fails("checkKmpRegistry")
         assertContains(r.output, "kmp-registry.json is stale")
+    }
+
+    @Test
+    fun `the registry runs after the manifests it reads when both are exported in one invocation`() {
+        val fx = FixtureBuild("registry-order")
+            .module("substrate/stapel-result", substrate())
+            .module("bricks/auth/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("bricks/auth/ui", substrate(plugin = "stapel.brick-ui"))
+        // The registry is named first on the command line; without the ordering rule Gradle runs it first.
+        val order = fx.succeeds("exportKmpRegistry", ":stapel-auth-ui:exportNavManifest", "--dry-run").output
+            .lines().filter { it.endsWith(" SKIPPED") }.map { it.removeSuffix(" SKIPPED") }
+        val manifest = order.indexOf(":stapel-auth-ui:exportNavManifest")
+        val registry = order.indexOf(":exportKmpRegistry")
+        assertTrue(manifest in 0 until registry, order.joinToString("\n"))
     }
 
     @Test

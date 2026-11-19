@@ -12,13 +12,13 @@ import java.io.File
 /**
  * Build-time entry of `exportNavManifest` / `checkNavManifest` (not an app API): instantiates the brick
  * descriptor [args]`[0]` (a class with a no-argument constructor, see [StapelBrick]), builds its
- * navigation against an empty graph and writes the manifest JSON for artifact [args]`[1]` at version
- * [args]`[2]` to the file [args]`[3]`.
+ * navigation against an empty graph and writes the manifest JSON for artifact [args]`[1]` (group:artifact,
+ * no version) to the file [args]`[2]`.
  */
 @InternalStapelApi
 public fun main(args: Array<String>) {
-    require(args.size == 4) { "usage: <descriptor class> <group:artifact> <version> <out file>" }
-    val (descriptor, artifact, version, out) = args
+    require(args.size == 3) { "usage: <descriptor class> <group:artifact> <out file>" }
+    val (descriptor, artifact, out) = args
     val type = try {
         Class.forName(descriptor)
     } catch (e: ClassNotFoundException) {
@@ -33,5 +33,5 @@ public fun main(args: Array<String>) {
     val koin = koinApplication { }.koin
     val contribution = brick.navigation(BrickContext(koin, CoroutineScope(Job())))
         ?: error("exportNavManifest: $descriptor declares no navigation; a brick UI library without screens has no manifest")
-    File(out).apply { parentFile?.mkdirs() }.writeText(navManifestJson(contribution.manifest, artifact, version))
+    File(out).apply { parentFile?.mkdirs() }.writeText(navManifestJson(contribution.manifest, artifact))
 }

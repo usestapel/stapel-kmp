@@ -48,9 +48,10 @@ class NavManifestJsonTest {
 
     @Test
     fun theCommittedShapeIsTheRegistryShapePlusMobileFields() {
-        val o = Json.parseToJsonElement(navManifestJson(manifest, "g:stapel-auth-ui", "1.2.3")).jsonObject
+        val o = Json.parseToJsonElement(navManifestJson(manifest, "g:stapel-auth-ui")).jsonObject
         assertEquals("g:stapel-auth-ui", o.getValue("artifact").jsonPrimitive.content)
-        assertEquals("1.2.3", o.getValue("version").jsonPrimitive.content)
+        // No version: the committed file must not drift when the train version is bumped.
+        assertEquals(listOf("artifact", "destinations", "embeds"), o.keys.toList())
         val d = o.getValue("destinations").jsonArray.single().jsonObject
         assertEquals(
             listOf("id", "labelKey", "icon", "path", "level", "parentId", "menuVisibleDefault", "requiresAuth", "surface", "order", "presentation", "requires"),
@@ -69,6 +70,6 @@ class NavManifestJsonTest {
 
     @Test
     fun theOutputIsDeterministic() {
-        assertEquals(navManifestJson(manifest, "a", "1"), navManifestJson(manifest, "a", "1"))
+        assertEquals(navManifestJson(manifest, "a"), navManifestJson(manifest, "a"))
     }
 }

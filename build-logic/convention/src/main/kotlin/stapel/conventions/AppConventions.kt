@@ -120,14 +120,13 @@ internal fun Project.registerNavManifestTasks(ext: StapelExtension) {
     val descriptorFile = brickDescriptorFile()
     val manifest = file(NAV_MANIFEST)
     val coordinates = "${mavenGroup(this)}:${names.artifactId}"
-    val version = versionName(this)
     val runtime = configurations.named("jvmRuntimeClasspath")
     val jar = tasks.named("jvmJar", Jar::class.java)
     fun JavaExec.common(out: File) {
         group = STAPEL_GATES
         classpath(jar, runtime)
         mainClass.set(EXPORT_MAIN)
-        args(descriptor, coordinates, version, out.absolutePath)
+        args(descriptor, coordinates, out.absolutePath)
         val present = descriptorFile.isFile
         onlyIf("needs the StapelBrick descriptor $descriptor") { present }
     }
@@ -437,13 +436,22 @@ private class Row(p: List<String>) {
     operator fun component7() = pluginId
 }
 
+/** Paths of the brick UI libraries (the projects that own a `nav-manifest.json` and `exportNavManifest`). */
+private fun Project.brickUiPaths(): List<String> = rootProject.subprojects
+    .filter { it.extensions.extraProperties.has(FAMILY_PROPERTY) }
+    .filter { StapelFamily.valueOf(it.extensions.extraProperties.get(FAMILY_PROPERTY).toString()) == StapelFamily.BRICK_UI }
+    .map { it.path }
+
 internal fun Project.registerKmpRegistryTasks() {
     fun KmpRegistryTask.common() {
         rows.set(provider { registryRows() })
         train.set(versionName(project))
         mavenGroupName.set(mavenGroup(project))
         released.from(file("gradle/released-artifacts.txt"))
-        manifests.from(provider { rootProject.subprojects.map { it.file(NAV_MANIFEST) }.filter { it.isFile } })
+        // Every brick UI library's manifest, present or not yet, and after its export when both run in one
+        // invocation: the registry reads the manifests' entries.
+        manifests.from(provider { brickUiPaths().map { rootProject.project(it).file(NAV_MANIFEST) } })
+        mustRunAfter(provider { brickUiPaths().map { "$it:exportNavManifest" } })
         target.set(layout.projectDirectory.file("kmp-registry.json"))
     }
     tasks.register("exportKmpRegistry", KmpRegistryTask::class.java) {

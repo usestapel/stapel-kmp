@@ -41,17 +41,17 @@ class NavManifestExportTest {
     @Test
     fun theExportWritesTheDescriptorsManifestWithTheBuildsCoordinates() {
         val out = File.createTempFile("nav-manifest", ".json")
-        stapel.app.di.export.main(arrayOf(ExportBrick::class.java.name, "g:stapel-export-ui", "9.9.9", out.absolutePath))
+        stapel.app.di.export.main(arrayOf(ExportBrick::class.java.name, "g:stapel-export-ui", out.absolutePath))
         val o = Json.parseToJsonElement(out.readText()).jsonObject
         assertEquals("g:stapel-export-ui", o.getValue("artifact").jsonPrimitive.content)
-        assertEquals("9.9.9", o.getValue("version").jsonPrimitive.content)
+        kotlin.test.assertFalse("version" in o, "the committed manifest carries no version: $o")
         assertEquals("export.home", o.getValue("destinations").jsonArray.single().jsonObject.getValue("id").jsonPrimitive.content)
     }
 
     @Test
     fun aMissingDescriptorIsNamed() {
         val e = assertFailsWith<IllegalStateException> {
-            stapel.app.di.export.main(arrayOf("stapel.nope.di.NopeBrick", "g:a", "1", File.createTempFile("missing", ".json").absolutePath))
+            stapel.app.di.export.main(arrayOf("stapel.nope.di.NopeBrick", "g:a", File.createTempFile("missing", ".json").absolutePath))
         }
         assertTrue("no brick descriptor 'stapel.nope.di.NopeBrick'" in e.message.orEmpty(), e.message)
     }

@@ -20,14 +20,15 @@ private val prettyJson = Json { prettyPrint = true }
  * The committed `nav-manifest.json` of a brick UI library: the neutral fields of every destination
  * and embed in the shape of stapel-tools' `composition-registry.json` (`level`/`parentId` flat, `null`
  * for an absent parent or surface), plus the mobile fields `presentation` and `requires`. [artifact]
- * and [version] are the Maven coordinates the build publishes, not what the library passes at runtime.
+ * is the `group:artifact` the build publishes, not what the library passes at runtime. No version: the
+ * file is committed, and its version is the train's (`kmp-registry.json` `train`, the published
+ * artifact's own coordinates), so a version bump never makes it drift.
  * Deterministic: destinations and embeds in declaration order, sets sorted, one trailing newline.
  */
 @InternalStapelApi
-public fun navManifestJson(manifest: NavManifest, artifact: String, version: String): String {
+public fun navManifestJson(manifest: NavManifest, artifact: String): String {
     val root = buildJsonObject {
         put("artifact", artifact)
-        put("version", version)
         putJsonArray("destinations") {
             for (d in manifest.destinations) {
                 add(
