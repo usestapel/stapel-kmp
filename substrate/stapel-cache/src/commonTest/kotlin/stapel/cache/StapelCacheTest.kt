@@ -344,6 +344,20 @@ class StapelCacheTest {
     }
 
     @Test
+    fun wipeAllAccountsExceptKeepsOnlyThatAccountAndTheApp() = runTest {
+        val factory = DurableMemoryFactory()
+        val cache = newCache(backgroundScope, clock, factory)
+        for (account in listOf("a", "b", "c")) {
+            cache.setAccount(account)
+            cache.write(spec("auth", "me"), "me-$account")
+        }
+        cache.write(spec("site", "config", scope = CacheScope.App), "cfg")
+        assertEquals(2, cache.wipe(WipeTarget.AllAccountsExcept("c")).partitions)
+        assertEquals(setOf(PartitionId.App, PartitionId.account("c")), factory.listPartitions().toSet())
+        assertEquals("me-c", cache.peek(spec("auth", "me"))?.data)
+    }
+
+    @Test
     fun aLateResponseAfterWipeIsNotWritten() = runTest {
         val factory = DurableMemoryFactory()
         val cache = newCache(backgroundScope, clock, factory)

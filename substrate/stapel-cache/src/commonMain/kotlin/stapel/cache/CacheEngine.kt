@@ -155,6 +155,8 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
             val partitions = when (target) {
                 is WipeTarget.Account -> listOf(PartitionId.account(target.accountId))
                 WipeTarget.AllAccounts -> (factory.listPartitions() + currentAccountPartition()).filter { it.isAccount }
+                is WipeTarget.AllAccountsExcept -> (factory.listPartitions() + currentAccountPartition())
+                    .filter { it.isAccount && it != PartitionId.account(target.accountId) }
                 WipeTarget.Everything -> factory.listPartitions() + currentAccountPartition() + PartitionId.App
             }.distinct()
             for (partition in partitions) {

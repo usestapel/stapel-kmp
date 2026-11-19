@@ -110,6 +110,14 @@ public sealed interface WipeTarget {
     /** Every account partition; the app partition is kept. */
     public data object AllAccounts : WipeTarget
 
+    /**
+     * Every account partition except [accountId]'s (orphans of sessions that ended without a
+     * completed wipe, e.g. a process killed during logout).
+     *
+     * @property accountId the account whose partition stays.
+     */
+    public data class AllAccountsExcept(val accountId: String) : WipeTarget
+
     /** Everything, the app partition included (erasure, "reset app"). */
     public data object Everything : WipeTarget
 }

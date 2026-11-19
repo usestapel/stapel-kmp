@@ -357,6 +357,17 @@ public final class stapel/cache/WipeTarget$AllAccounts : stapel/cache/WipeTarget
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class stapel/cache/WipeTarget$AllAccountsExcept : stapel/cache/WipeTarget {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cache/WipeTarget$AllAccountsExcept;
+	public static synthetic fun copy$default (Lstapel/cache/WipeTarget$AllAccountsExcept;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cache/WipeTarget$AllAccountsExcept;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccountId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class stapel/cache/WipeTarget$Everything : stapel/cache/WipeTarget {
 	public static final field INSTANCE Lstapel/cache/WipeTarget$Everything;
 	public fun equals (Ljava/lang/Object;)Z

@@ -1,0 +1,16 @@
+public abstract interface class stapel/cache/session/AccountIdResolver {
+	public static final field Companion Lstapel/cache/session/AccountIdResolver$Companion;
+	public abstract fun accountId (Lstapel/session/TokenPair;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/session/AccountIdResolver$Companion {
+	public final fun jwtClaim ([Ljava/lang/String;)Lstapel/cache/session/AccountIdResolver;
+	public static synthetic fun jwtClaim$default (Lstapel/cache/session/AccountIdResolver$Companion;[Ljava/lang/String;ILjava/lang/Object;)Lstapel/cache/session/AccountIdResolver;
+}
+
+public final class stapel/cache/session/CacheSessionBinding : java/lang/AutoCloseable {
+	public fun <init> (Lstapel/cache/ManagedStapelCache;Lstapel/session/SessionManager;Lkotlinx/coroutines/CoroutineScope;Lstapel/cache/session/AccountIdResolver;)V
+	public synthetic fun <init> (Lstapel/cache/ManagedStapelCache;Lstapel/session/SessionManager;Lkotlinx/coroutines/CoroutineScope;Lstapel/cache/session/AccountIdResolver;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun close ()V
+}
+

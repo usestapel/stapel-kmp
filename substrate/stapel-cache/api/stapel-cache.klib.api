@@ -295,6 +295,19 @@ sealed interface stapel.cache/WipeTarget { // stapel.cache/WipeTarget|null[0]
         final fun toString(): kotlin/String // stapel.cache/WipeTarget.Account.toString|toString(){}[0]
     }
 
+    final class AllAccountsExcept : stapel.cache/WipeTarget { // stapel.cache/WipeTarget.AllAccountsExcept|null[0]
+        constructor <init>(kotlin/String) // stapel.cache/WipeTarget.AllAccountsExcept.<init>|<init>(kotlin.String){}[0]
+
+        final val accountId // stapel.cache/WipeTarget.AllAccountsExcept.accountId|{}accountId[0]
+            final fun <get-accountId>(): kotlin/String // stapel.cache/WipeTarget.AllAccountsExcept.accountId.<get-accountId>|<get-accountId>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.cache/WipeTarget.AllAccountsExcept.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.cache/WipeTarget.AllAccountsExcept // stapel.cache/WipeTarget.AllAccountsExcept.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/WipeTarget.AllAccountsExcept.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.cache/WipeTarget.AllAccountsExcept.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.cache/WipeTarget.AllAccountsExcept.toString|toString(){}[0]
+    }
+
     final object AllAccounts : stapel.cache/WipeTarget { // stapel.cache/WipeTarget.AllAccounts|null[0]
         final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/WipeTarget.AllAccounts.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // stapel.cache/WipeTarget.AllAccounts.hashCode|hashCode(){}[0]
