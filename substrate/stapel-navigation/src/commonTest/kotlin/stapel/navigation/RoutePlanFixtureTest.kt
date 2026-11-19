@@ -62,6 +62,11 @@ class RoutePlanFixtureTest {
                 "$name: dropped = unrouted",
             )
             assertTrue(nav.dropped.all { it.reason.isNotBlank() }, "$name: every drop names its reason")
+            if (name == "synthetic-child-of-absolute-top-is-not-routed") {
+                // Parity with the web plan, which skips such children silently; here the reason is explicit.
+                assertTrue(nav.dropped.isNotEmpty(), name)
+                assertTrue(nav.dropped.all { "has an absolute path" in it.reason }, "$name: ${nav.dropped}")
+            }
         }
         assertEquals(unrepresentable.keys, seenUnrepresentable)
     }
