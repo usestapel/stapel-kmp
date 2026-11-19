@@ -396,6 +396,22 @@ sealed interface stapel.auth.ui/SignInStep { // stapel.auth.ui/SignInStep|null[0
     }
 }
 
+final class stapel.auth.ui.di/AuthBrick : stapel.app.di/StapelBrick { // stapel.auth.ui.di/AuthBrick|null[0]
+    constructor <init>(stapel.auth/AuthConfig = ..., stapel.auth.platform/AuthPlatform = ...) // stapel.auth.ui.di/AuthBrick.<init>|<init>(stapel.auth.AuthConfig;stapel.auth.platform.AuthPlatform){}[0]
+
+    final val errorCatalogs // stapel.auth.ui.di/AuthBrick.errorCatalogs|{}errorCatalogs[0]
+        final fun <get-errorCatalogs>(): kotlin.collections/List<stapel.result.text/ErrorCatalog> // stapel.auth.ui.di/AuthBrick.errorCatalogs.<get-errorCatalogs>|<get-errorCatalogs>(){}[0]
+    final val key // stapel.auth.ui.di/AuthBrick.key|{}key[0]
+        final fun <get-key>(): kotlin/String // stapel.auth.ui.di/AuthBrick.key.<get-key>|<get-key>(){}[0]
+    final val strings // stapel.auth.ui.di/AuthBrick.strings|{}strings[0]
+        final fun <get-strings>(): kotlin.collections/List<stapel.i18n/I18nBundle> // stapel.auth.ui.di/AuthBrick.strings.<get-strings>|<get-strings>(){}[0]
+
+    final fun modules(): kotlin.collections/List<org.koin.core.module/Module> // stapel.auth.ui.di/AuthBrick.modules|modules(){}[0]
+    final fun navigation(stapel.app.di/BrickContext): stapel.navigation.compose/NavContribution // stapel.auth.ui.di/AuthBrick.navigation|navigation(stapel.app.di.BrickContext){}[0]
+    final fun presenters(stapel.app.di/BrickContext, stapel.mvi.compose/PresenterFactory): stapel.mvi.compose/PresenterFactory // stapel.auth.ui.di/AuthBrick.presenters|presenters(stapel.app.di.BrickContext;stapel.mvi.compose.PresenterFactory){}[0]
+    final fun session(stapel.app.di/BrickContext): stapel.app.di/BrickSession // stapel.auth.ui.di/AuthBrick.session|session(stapel.app.di.BrickContext){}[0]
+}
+
 final class stapel.auth.ui/AuthNavBridge : stapel.navigation/NavAuthSource { // stapel.auth.ui/AuthNavBridge|null[0]
     constructor <init>(stapel.auth/StapelAuth, kotlinx.coroutines/CoroutineScope) // stapel.auth.ui/AuthNavBridge.<init>|<init>(stapel.auth.StapelAuth;kotlinx.coroutines.CoroutineScope){}[0]
 
@@ -1021,6 +1037,7 @@ final object stapel.auth.ui/SecurityRoute : kotlinx.serialization.internal/Seria
 final const val stapel.auth.ui/AUTH_UI_ARTIFACT // stapel.auth.ui/AUTH_UI_ARTIFACT|{}AUTH_UI_ARTIFACT[0]
     final fun <get-AUTH_UI_ARTIFACT>(): kotlin/String // stapel.auth.ui/AUTH_UI_ARTIFACT.<get-AUTH_UI_ARTIFACT>|<get-AUTH_UI_ARTIFACT>(){}[0]
 
+final val stapel.auth.ui.di/stapel_auth_ui_di_AuthBrick$stableprop // stapel.auth.ui.di/stapel_auth_ui_di_AuthBrick$stableprop|#static{}stapel_auth_ui_di_AuthBrick$stableprop[0]
 final val stapel.auth.ui/AuthSkinKey // stapel.auth.ui/AuthSkinKey|{}AuthSkinKey[0]
     final fun <get-AuthSkinKey>(): stapel.ui.skin/SkinExtensionKey<stapel.auth.ui/AuthSkin> // stapel.auth.ui/AuthSkinKey.<get-AuthSkinKey>|<get-AuthSkinKey>(){}[0]
 final val stapel.auth.ui/AuthUiBundle // stapel.auth.ui/AuthUiBundle|{}AuthUiBundle[0]
@@ -1086,6 +1103,7 @@ final val stapel.auth.ui/stapel_auth_ui_TotpChallengeState$stableprop // stapel.
 
 final fun (stapel.auth.session/AuthState).stapel.auth.ui/toNavAuthState(): stapel.navigation/NavAuthState // stapel.auth.ui/toNavAuthState|toNavAuthState@stapel.auth.session.AuthState(){}[0]
 final fun (stapel.auth.session/SignOutReason).stapel.auth.ui/toNotice(): stapel.auth.ui/AuthNotice // stapel.auth.ui/toNotice|toNotice@stapel.auth.session.SignOutReason(){}[0]
+final fun stapel.auth.ui.di/stapel_auth_ui_di_AuthBrick$stableprop_getter(): kotlin/Int // stapel.auth.ui.di/stapel_auth_ui_di_AuthBrick$stableprop_getter|stapel_auth_ui_di_AuthBrick$stableprop_getter(){}[0]
 final fun stapel.auth.ui/AccountMenu(kotlin/String, kotlin/Boolean, kotlin/Function0<kotlin/Unit>, androidx.compose.ui/Modifier?, kotlin/Function0<kotlin/Unit>?, kotlin/Boolean, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.auth.ui/AccountMenu|AccountMenu(kotlin.String;kotlin.Boolean;kotlin.Function0<kotlin.Unit>;androidx.compose.ui.Modifier?;kotlin.Function0<kotlin.Unit>?;kotlin.Boolean;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.auth.ui/AuthAccountMenu(stapel.auth/StapelAuth, androidx.compose.ui/Modifier?, kotlin/Function0<kotlin/Unit>?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.auth.ui/AuthAccountMenu|AuthAccountMenu(stapel.auth.StapelAuth;androidx.compose.ui.Modifier?;kotlin.Function0<kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.auth.ui/AuthGuestWall(kotlin/Function0<kotlin/Unit>, kotlin/Function0<kotlin/Unit>, kotlin/Function0<kotlin/Unit>?, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.auth.ui/AuthGuestWall|AuthGuestWall(kotlin.Function0<kotlin.Unit>;kotlin.Function0<kotlin.Unit>;kotlin.Function0<kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int){}[0]

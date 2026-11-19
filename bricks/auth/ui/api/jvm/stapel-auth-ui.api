@@ -901,3 +901,18 @@ public final class stapel/auth/ui/TotpChallengeState {
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class stapel/auth/ui/di/AuthBrick : stapel/app/di/StapelBrick {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;)V
+	public synthetic fun <init> (Lstapel/auth/AuthConfig;Lstapel/auth/platform/AuthPlatform;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getErrorCatalogs ()Ljava/util/List;
+	public fun getKey ()Ljava/lang/String;
+	public fun getRequires ()Ljava/util/Set;
+	public fun getStrings ()Ljava/util/List;
+	public fun modules ()Ljava/util/List;
+	public fun navigation (Lstapel/app/di/BrickContext;)Lstapel/navigation/compose/NavContribution;
+	public fun presenters (Lstapel/app/di/BrickContext;Lstapel/mvi/compose/PresenterFactory;)Lstapel/mvi/compose/PresenterFactory;
+	public fun session (Lstapel/app/di/BrickContext;)Lstapel/app/di/BrickSession;
+}
+

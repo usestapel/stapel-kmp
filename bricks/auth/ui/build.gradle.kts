@@ -21,6 +21,12 @@ kotlin {
         getByName("skikoTest").dependencies {
             // Tests render every screen with both shipped skins; test classpaths are not dependency edges.
             implementation(projects.stapelUiMaterial3)
+            // AuthBrickTest composes the descriptor through stapelApp over the test environment.
+            implementation(projects.stapelTesting)
+        }
+        jvmTest.dependencies {
+            // The app's content collects with repeatOnLifecycle, which needs a Main dispatcher on the desktop.
+            implementation(libs.kotlinx.coroutines.swing)
         }
     }
 }

@@ -197,12 +197,23 @@
       "descriptor": {
         "class": "stapel.auth.ui.di.AuthBrick",
         "call": "stapel.auth.ui.di.AuthBrick()",
-        "present": false
+        "present": true
       },
-      "entries": [],
-      "embeds": [],
-      "presentation": {},
-      "requires": {}
+      "entries": [
+        "auth.login",
+        "auth.security"
+      ],
+      "embeds": [
+        "auth.account_menu"
+      ],
+      "presentation": {
+        "auth.login": "screen",
+        "auth.security": "screen"
+      },
+      "requires": {
+        "auth.login": [],
+        "auth.security": []
+      }
     }
   }
 }
