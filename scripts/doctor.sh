@@ -61,7 +61,11 @@ else
     bad "git hooks not active" "scripts/setup-hooks.sh"
 fi
 if command -v stapel-exposure-lint >/dev/null 2>&1; then
-    ok "stapel-exposure-lint on PATH (pre-push exposure stage active)"
+    if stapel-exposure-lint --help 2>/dev/null | grep -q -- '--strict'; then
+        ok "stapel-exposure-lint on PATH (pre-push exposure stage active)"
+    else
+        bad "stapel-exposure-lint on PATH is older than stapel-tools 0.82.0 (no --strict): the pre-push hook refuses" "pip install 'stapel-tools>=0.82.0' into the venv on PATH"
+    fi
 else
     warn "stapel-exposure-lint not on PATH: the pre-push exposure stage is skipped on this machine"
 fi

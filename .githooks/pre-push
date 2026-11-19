@@ -7,8 +7,6 @@
 set -eo pipefail
 
 zero='0000000000000000000000000000000000000000'
-tmp="$(mktemp -d)"
-trap 'rm -rf "$tmp"' EXIT
 
 # git passes the remote name as $1 and its URL as $2.
 remote_name="${1:-origin}"
@@ -116,27 +114,23 @@ while read -r local_ref local_sha remote_ref remote_sha; do
 
     # A private client name must not leave this machine in a public tree or a
     # commit message (stapel-exposure-lint EXP001/EXP002; the list is
-    # ~/.stapel/private-names, outside every repo). Skipped where the tool is
-    # not on PATH - a checkout without stapel-tools is not the owner's.
-    #
-    # The lint decides "public project" from a pyproject.toml / package.json
-    # name and answers "not applicable" for a Gradle repository, which would
-    # make this stage verify nothing. So the hook lints a copy of the PUSHED
-    # tree with a marker naming the project, plus the pushed commit messages
-    # as a file inside that copy (EXP001 over both).
+    # ~/.stapel/private-names, outside every repo). Push mode reads the
+    # committed tree at the pushed sha and the messages of the commits this
+    # push publishes, never the working tree; --strict fails on an empty list
+    # and on a directory the lint does not recognise (this repository is
+    # recognised by settings.gradle.kts, stapel-tools >= 0.82.0). Skipped where
+    # the tool is not on PATH - a checkout without stapel-tools is not the
+    # owner's.
     if command -v stapel-exposure-lint >/dev/null 2>&1; then
-        dest="$tmp/tree-${local_sha:0:12}"
-        mkdir -p "$dest"
-        git archive "$local_sha" | tar -x -C "$dest"
-        [ -f "$dest/pyproject.toml" ] || printf '[project]\nname = "stapel-kmp"\n' > "$dest/pyproject.toml"
-        if [ -z "$remote_sha" ] || [ "$remote_sha" = "$zero" ]; then
-            git log --format='%B' "$local_sha" --not --remotes > "$dest/pushed-commit-messages.txt"
-        else
-            git log --format='%B' "$remote_sha..$local_sha" > "$dest/pushed-commit-messages.txt"
+        if ! stapel-exposure-lint --help 2>/dev/null | grep -q -- '--strict'; then
+            echo ""
+            echo "REFUSING to push: stapel-exposure-lint on PATH is older than stapel-tools 0.82.0"
+            echo "(no --strict, does not recognise a Gradle repository). Install a newer one:"
+            echo "  pip install 'stapel-tools>=0.82.0'"
+            exit 1
         fi
-        echo "Exposure lint on ${local_sha:0:12} (tree + pushed commit messages)..."
-        stapel-exposure-lint "$dest"
-        rm -rf "$dest"
+        echo "Exposure lint on ${local_sha:0:12} (pushed tree + pushed commit messages)..."
+        stapel-exposure-lint "$(git rev-parse --show-toplevel)" --strict --pushed "$local_sha" --remote "${remote_sha:-$zero}"
     fi
 
     # Release tag guard (cheap half; the expensive half - generator drift, ABI,
