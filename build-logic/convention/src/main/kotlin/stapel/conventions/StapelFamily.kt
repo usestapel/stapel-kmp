@@ -1,7 +1,16 @@
 package stapel.conventions
 
+/**
+ * Whether a family builds part of the product (FEATURE: libraries and the tools that build them) or is
+ * an end product that only consumes them (CONSUMER: showcase, demos, end-to-end suites, samples; never
+ * published as a library). A consumer may depend on any feature module of any brick; a feature module
+ * never depends on a consumer (`checkDependencyDirection`); consumers are never in the BOM, the
+ * published catalog or `kmp-registry.json`.
+ */
+enum class FamilyRole { FEATURE, CONSUMER }
+
 /** Module family; set by the family plugin, read by every gate. */
-enum class StapelFamily(val published: Boolean, val compose: Boolean) {
+enum class StapelFamily(val published: Boolean, val compose: Boolean, val role: FamilyRole = FamilyRole.FEATURE) {
     /** Pure Kotlin substrate artifact (`substrate/stapel-<x>`, `stapel.substrate`). */
     SUBSTRATE(published = true, compose = false),
 
@@ -24,16 +33,16 @@ enum class StapelFamily(val published: Boolean, val compose: Boolean) {
     BRICK_ADAPTER(published = true, compose = false),
 
     /** Demos of a brick's UI (`bricks/<brick>/demo`), never published. */
-    DEMO(published = false, compose = true),
+    DEMO(published = false, compose = true, role = FamilyRole.CONSUMER),
 
     /** End-to-end tests of a brick against a real backend (`bricks/<brick>/e2e`), never published. */
-    E2E(published = false, compose = false),
+    E2E(published = false, compose = false, role = FamilyRole.CONSUMER),
 
     /** JVM tool under `tools/` (generators); not published in v0. */
     TOOL(published = false, compose = false),
 
     /** Showcase gallery and apps under `showcase/`. */
-    SHOWCASE(published = false, compose = true),
+    SHOWCASE(published = false, compose = true, role = FamilyRole.CONSUMER),
 
     /** `stapel-bom`. */
     BOM(published = true, compose = false),

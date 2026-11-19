@@ -33,9 +33,19 @@ and JVM desktop.
 | Capability | `capabilities/stapel-<x>` | captcha | pure substrate |
 | Brick domain | `bricks/<brick>/domain` | `stapel-auth` | pure substrate |
 | Brick UI | `bricks/<brick>/ui` | `stapel-auth-ui` | substrate, its own brick's domain |
-| Demo / end-to-end | `bricks/<brick>/{demo,e2e}` | unpublished | anything of its own brick |
+| Demo / end-to-end (consumer) | `bricks/<brick>/{demo,e2e}` | unpublished | any feature module, any brick |
 | Tools | `tools/` | codegen, tokens-gen | other tools |
-| Showcase | `showcase/` | gallery, desktop host, skin contract | anything (unpublished) |
+| Showcase (consumer) | `showcase/` | gallery, desktop host, skin contract | any feature module, any brick |
+
+Every family is either a **feature** family or a **consumer** family.
+Feature families build the product: substrate, capabilities, brick domain,
+brick UI, brick adapters, and the tools that generate them. Consumer families
+are end products that only use it: the showcase, brick demos, end-to-end
+suites, samples and the consumer smoke build; they are never published as
+libraries. A consumer may depend on any feature module of any brick (the
+showcase shows every brick's screens); a feature module never depends on a
+consumer; consumers are never in the BOM, the published catalog or
+`kmp-registry.json`.
 
 The direction is strictly downward: `stapel-<brick>-ui → stapel-<brick> →
 substrate`. A brick never depends on another brick; when two bricks need to

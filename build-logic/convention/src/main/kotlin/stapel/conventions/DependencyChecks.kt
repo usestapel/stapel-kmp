@@ -25,7 +25,14 @@ import java.util.Properties
 /** One row of the layer table (docs/gates.md). */
 data class LayerRule(val from: StapelFamily, val mayDependOn: Set<StapelFamily>)
 
-/** Families each family may depend on through main (non-test) project edges; same-brick/rank refinements below. */
+private val FEATURE_FAMILIES: Set<StapelFamily> = StapelFamily.entries.filter { it.role == FamilyRole.FEATURE }.toSet()
+private val CONSUMER_FAMILIES: Set<StapelFamily> = StapelFamily.entries.filter { it.role == FamilyRole.CONSUMER }.toSet()
+
+/**
+ * Families each family may depend on through main (non-test) project edges; same-brick/rank refinements
+ * below. Feature families follow the layer table and never reach a consumer; a consumer family (an end
+ * product: showcase, demo, e2e) may depend on every feature family of any brick and on other consumers.
+ */
 val LAYERS: List<LayerRule> = listOf(
     LayerRule(StapelFamily.SUBSTRATE, setOf(StapelFamily.SUBSTRATE)),
     LayerRule(StapelFamily.SUBSTRATE_UI, setOf(StapelFamily.SUBSTRATE, StapelFamily.SUBSTRATE_UI)),
@@ -34,24 +41,9 @@ val LAYERS: List<LayerRule> = listOf(
     LayerRule(StapelFamily.BRICK_DOMAIN, setOf(StapelFamily.SUBSTRATE)),
     LayerRule(StapelFamily.BRICK_UI, setOf(StapelFamily.SUBSTRATE, StapelFamily.SUBSTRATE_UI, StapelFamily.BRICK_DOMAIN)),
     LayerRule(StapelFamily.BRICK_ADAPTER, setOf(StapelFamily.SUBSTRATE, StapelFamily.BRICK_DOMAIN)),
-    LayerRule(
-        StapelFamily.DEMO,
-        setOf(
-            StapelFamily.SUBSTRATE, StapelFamily.SUBSTRATE_UI, StapelFamily.CAPABILITY, StapelFamily.CAPABILITY_UI,
-            StapelFamily.BRICK_DOMAIN, StapelFamily.BRICK_UI, StapelFamily.BRICK_ADAPTER,
-        ),
-    ),
-    LayerRule(
-        StapelFamily.E2E,
-        setOf(
-            StapelFamily.SUBSTRATE, StapelFamily.SUBSTRATE_UI, StapelFamily.CAPABILITY, StapelFamily.CAPABILITY_UI,
-            StapelFamily.BRICK_DOMAIN, StapelFamily.BRICK_UI, StapelFamily.BRICK_ADAPTER, StapelFamily.TOOL,
-        ),
-    ),
     LayerRule(StapelFamily.TOOL, setOf(StapelFamily.TOOL)),
-    LayerRule(StapelFamily.SHOWCASE, StapelFamily.entries.toSet()),
-    LayerRule(StapelFamily.BOM, StapelFamily.entries.toSet()),
-)
+    LayerRule(StapelFamily.BOM, FEATURE_FAMILIES),
+) + CONSUMER_FAMILIES.map { LayerRule(it, FEATURE_FAMILIES + CONSUMER_FAMILIES) }
 
 /** Coordinates forbidden on a family's main classpaths, transitively. */
 data class ForbiddenCoordinate(
@@ -160,13 +152,19 @@ abstract class CheckDependencyDirection : DefaultTask() {
                 continue
             }
             val tFamily = StapelFamily.valueOf(tFamilyName)
+            if (family.role == FamilyRole.FEATURE && tFamily.role == FamilyRole.CONSUMER) {
+                errors += "$me ($family, feature) -> $target ($tFamily, consumer) via $conf: a feature module never " +
+                    "depends on a consumer module (showcase, demo, e2e, samples are end products). " +
+                    "Fix: move the shared code into a feature module both can use."
+                continue
+            }
             val rule = "$family may depend on ${allowed.joinToString()}"
             if (tFamily !in allowed) {
                 errors += "$me ($family) -> $target ($tFamily) via $conf: forbidden by the layer table ($rule). " +
                     "Fix: declare the interface in the substrate and wire the two in the app."
                 continue
             }
-            val sameBrickNeeded = tFamily in setOf(StapelFamily.BRICK_DOMAIN, StapelFamily.BRICK_UI, StapelFamily.BRICK_ADAPTER)
+            val sameBrickNeeded = family.role == FamilyRole.FEATURE && tFamily in setOf(StapelFamily.BRICK_DOMAIN, StapelFamily.BRICK_UI, StapelFamily.BRICK_ADAPTER)
             if (sameBrickNeeded && tBrick != brick) {
                 errors += "$me -> $target via $conf: a brick never depends on another brick (D6). " +
                     "Fix: put the shared interface in the substrate; the app wires both bricks."

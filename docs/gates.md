@@ -38,10 +38,21 @@ covers all modules.
 | `checkKotlinAbi` | D12 | the public ABI differs from the committed dump | `api/` dumps in the module |
 | verifyTestsRan (inside every test task) | D12 | a test task of a module with `commonTest` sources executed 0 tests | JUnit XML |
 | `dokkaGeneratePublicationHtml` | D12/R11 | a public/protected symbol has no KDoc (except packages in `ratchetedPackages`), or any Dokka warning (e.g. an unresolved KDoc link) | — |
+| `checkBomMembers` (`stapel-bom`) | feature/consumer | the BOM constrains a consumer module or an unpublished one | — |
 | `checkReleaseCoordinates` (release path) | R1 | a generated POM / Gradle module file carries a pre-release version — the allow-list does not apply | generated publication metadata |
 | `stapelGenerateCheck` (brick domain, once CODEGEN lands) | D4 | regenerated output differs from the committed generated tree | `contracts/` |
 
 ### Layer table (sensor 1)
+
+Families are **feature** families (substrate, substrate-ui, capability,
+capability-ui, brick domain, brick UI, brick adapter, tool, BOM) or
+**consumer** families (showcase, demo, e2e — end products, never published as
+libraries; samples and `consumer-smoke` are separate builds of the same kind).
+A consumer may depend on every feature family of any brick and on other
+consumers; a feature module never depends on a consumer (the gate says so by
+name); the "a brick never depends on another brick" rule applies to feature
+families only. `checkBomMembers` (on `stapel-bom`) fails when the BOM
+constrains a consumer or an unpublished module.
 
 | From \ may depend on | substrate | substrate-ui | capability | capability-ui | brick domain | brick ui | brick adapter |
 |---|---|---|---|---|---|---|---|
@@ -52,9 +63,8 @@ covers all modules.
 | brick domain | ✓ | | | | | | |
 | brick ui | ✓ | ✓ | | | same brick | | |
 | brick adapter | ✓ | | | | same brick | | |
-| demo / e2e | ✓ | ✓ | ✓ | ✓ | same brick | same brick | same brick |
+| demo / e2e / showcase (consumers) | ✓ | ✓ | ✓ | ✓ | any brick | any brick | any brick |
 | tool | tools only | | | | | | |
-| showcase | anything | | | | | | |
 
 Test configurations are not edges. There is no per-module escape hatch; the
 only exception file is `gradle/depcheck-exceptions.toml` (empty, each entry

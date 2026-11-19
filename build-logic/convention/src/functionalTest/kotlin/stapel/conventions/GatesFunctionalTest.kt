@@ -67,6 +67,41 @@ class GatesFunctionalTest {
     }
 
     @Test
+    fun `a consumer may depend on any brick's ui module`() {
+        FixtureBuild("consumer-to-brick-ui")
+            .module("bricks/auth/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("bricks/auth/ui", substrate(plugin = "stapel.brick-ui"))
+            .module("bricks/chat/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("bricks/chat/ui", substrate(plugin = "stapel.brick-ui"))
+            .module("bricks/chat/demo", "plugins { id(\"stapel.brick-demo\") }\nkotlin { sourceSets { commonMain.dependencies { implementation(projects.stapelAuthUi) } } }")
+            .module(
+                "showcase/stories",
+                "plugins { id(\"stapel.showcase\") }\nkotlin { sourceSets { commonMain.dependencies { implementation(projects.stapelAuthUi); implementation(projects.stapelChatUi) } } }",
+            )
+            .succeeds(":showcase:stories:checkDependencyDirection", ":stapel-chat-ui-demo:checkDependencyDirection")
+    }
+
+    @Test
+    fun `a feature module may not depend on a consumer module`() {
+        val r = FixtureBuild("feature-to-consumer")
+            .module("bricks/auth/domain", substrate(plugin = "stapel.brick-domain"))
+            .module("showcase/stories", "plugins { id(\"stapel.showcase\") }")
+            .module("bricks/auth/ui", substrate("implementation(projects.showcase.stories)", plugin = "stapel.brick-ui"))
+            .fails(":stapel-auth-ui:checkDependencyDirection")
+        assertContains(r.output, "a feature module never depends on a consumer module")
+    }
+
+    @Test
+    fun `a consumer listed in the BOM fails checkBomMembers`() {
+        val r = FixtureBuild("bom-consumer")
+            .module("substrate/stapel-result", substrate())
+            .module("showcase/stories", "plugins { id(\"stapel.showcase\") }")
+            .module("bom", "plugins { id(\"stapel.bom\") }\ndependencies { constraints { api(projects.showcase.stories) } }")
+            .fails(":stapel-bom:checkBomMembers")
+        assertContains(r.output, ":showcase:stories (SHOWCASE) is a consumer module")
+    }
+
+    @Test
     fun `brick ui may not depend on another brick's domain`() {
         val r = FixtureBuild("ui-to-other-brick")
             .module("bricks/chat/domain", substrate(plugin = "stapel.brick-domain"))

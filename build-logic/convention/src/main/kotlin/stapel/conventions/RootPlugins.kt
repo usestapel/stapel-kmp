@@ -133,10 +133,61 @@ class BomPlugin : Plugin<Project> {
         gradle.projectsEvaluated {
             rootProject.subprojects
                 .filter { p -> p != this@with && p.extensions.extraProperties.has(FAMILY_PROPERTY) }
-                .filter { p -> StapelFamily.valueOf(p.extensions.extraProperties.get(FAMILY_PROPERTY).toString()).published }
+                .filter { p ->
+                    val f = StapelFamily.valueOf(p.extensions.extraProperties.get(FAMILY_PROPERTY).toString())
+                    f.published && f.role == FamilyRole.FEATURE
+                }
                 .sortedBy { it.name }
                 .forEach { p -> dependencies.constraints.add("api", dependencies.project(mapOf("path" to p.path))) }
         }
+        val members = tasks.register("checkBomMembers", CheckBomMembers::class.java) {
+            group = STAPEL_GATES
+            description = "The BOM constrains published feature modules only; never a consumer (showcase, demo, e2e, sample)."
+            entries.set(
+                provider {
+                    val api = configurations.getByName("api")
+                    val projectPaths = api.dependencyConstraints.mapNotNull { c ->
+                        rootProject.subprojects.firstOrNull { it.group.toString() == c.group && it.name == c.name }?.path
+                    } + api.dependencies.withType(org.gradle.api.artifacts.ProjectDependency::class.java).map { it.path }
+                    projectPaths.distinct().sorted().map { path ->
+                        val p = rootProject.project(path)
+                        val fam = p.extensions.extraProperties.let { if (it.has(FAMILY_PROPERTY)) it.get(FAMILY_PROPERTY).toString() else "" }
+                        "$path|$fam"
+                    }
+                },
+            )
+            stamp.set(layout.buildDirectory.file("stapel-gates/checkBomMembers"))
+        }
+        tasks.named("stapelCheckFast").configure { dependsOn(members) }
+        pluginManager.withPlugin("lifecycle-base") { tasks.named("check").configure { dependsOn(members) } }
         Unit
+    }
+}
+
+/** `checkBomMembers`: every module the BOM constrains is a published feature module (never a consumer). */
+abstract class CheckBomMembers : DefaultTask() {
+    /** "path|FAMILY" of every project the BOM's `api` configuration names. */
+    @get:Input abstract val entries: org.gradle.api.provider.ListProperty<String>
+
+    /** Stamp. */
+    @get:OutputFile abstract val stamp: RegularFileProperty
+
+    @TaskAction
+    fun run() {
+        val bad = entries.get().mapNotNull { e ->
+            val (path, fam) = e.split("|")
+            val family = fam.takeIf { it.isNotEmpty() }?.let { StapelFamily.valueOf(it) }
+            when {
+                family == null -> "$path is not a stapel module"
+                family.role == FamilyRole.CONSUMER -> "$path ($family) is a consumer module (an end product, never a library)"
+                !family.published -> "$path ($family) is not published"
+                else -> null
+            }
+        }
+        if (bad.isNotEmpty()) {
+            throw GradleException("checkBomMembers failed: the BOM may constrain published feature modules only:\n" +
+                bad.joinToString("\n") { "  - $it" })
+        }
+        stamp.get().asFile.apply { parentFile.mkdirs() }.writeText("ok\n")
     }
 }
