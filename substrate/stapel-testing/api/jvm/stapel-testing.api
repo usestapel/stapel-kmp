@@ -1,0 +1,107 @@
+public final class stapel/testing/FakeAppLifecycle : stapel/runtime/AppLifecycle {
+	public fun <init> ()V
+	public fun <init> (Lstapel/runtime/AppPhase;)V
+	public synthetic fun <init> (Lstapel/runtime/AppPhase;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getPhase ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun set (Lstapel/runtime/AppPhase;)V
+}
+
+public final class stapel/testing/FakeConnectivity : stapel/runtime/Connectivity {
+	public fun <init> ()V
+	public fun <init> (Lstapel/runtime/NetworkStatus;)V
+	public synthetic fun <init> (Lstapel/runtime/NetworkStatus;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getReachableReports ()I
+	public fun getStatus ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getUnreachableReports ()I
+	public fun reportReachable ()V
+	public fun reportUnreachable ()V
+	public final fun set (Lstapel/runtime/NetworkStatus;)V
+}
+
+public final class stapel/testing/FakesKt {
+	public static final fun testClientInfo ()Lstapel/config/ClientInfo;
+	public static final fun testEnvironment (Ljava/lang/String;Lstapel/config/Posture;Ljava/util/Map;)Lstapel/config/StapelEnvironment;
+	public static synthetic fun testEnvironment$default (Ljava/lang/String;Lstapel/config/Posture;Ljava/util/Map;ILjava/lang/Object;)Lstapel/config/StapelEnvironment;
+	public static final fun virtualTimeClock (Lkotlinx/coroutines/test/TestScope;Lkotlin/time/Instant;)Lkotlin/time/Clock;
+	public static synthetic fun virtualTimeClock$default (Lkotlinx/coroutines/test/TestScope;Lkotlin/time/Instant;ILjava/lang/Object;)Lkotlin/time/Clock;
+}
+
+public final class stapel/testing/FixedLocaleProvider : stapel/runtime/LocaleProvider {
+	public fun <init> ()V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getLocale ()Lkotlinx/coroutines/flow/StateFlow;
+	public fun setAppLocale-knluWF4 (Ljava/lang/String;)V
+	public final fun setDeviceLocale-TC5i594 (Ljava/lang/String;)V
+}
+
+public final class stapel/testing/FixedTimeZoneProvider : stapel/runtime/TimeZoneProvider {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getTimeZoneId ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun set (Ljava/lang/String;)V
+}
+
+public final class stapel/testing/LogRecord {
+	public fun <init> (Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public final fun component1 ()Lstapel/runtime/LogLevel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/Throwable;
+	public final fun component5 ()Ljava/util/Map;
+	public final fun copy (Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)Lstapel/testing/LogRecord;
+	public static synthetic fun copy$default (Lstapel/testing/LogRecord;Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)Lstapel/testing/LogRecord;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Ljava/lang/Throwable;
+	public final fun getFields ()Ljava/util/Map;
+	public final fun getLevel ()Lstapel/runtime/LogLevel;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getTag ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/testing/RecordingLogger : stapel/runtime/StapelLogger {
+	public fun <init> ()V
+	public fun <init> (Lstapel/runtime/LogLevel;)V
+	public synthetic fun <init> (Lstapel/runtime/LogLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clear ()V
+	public final fun contains (Ljava/lang/String;)Z
+	public final fun getRecords ()Ljava/util/List;
+	public fun isEnabled (Lstapel/runtime/LogLevel;Ljava/lang/String;)Z
+	public fun log (Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+}
+
+public final class stapel/testing/SequentialIdGenerator : stapel/runtime/IdGenerator {
+	public fun <init> ()V
+	public fun uuid ()Ljava/lang/String;
+}
+
+public final class stapel/testing/TestClock : kotlin/time/Clock {
+	public static final field Companion Lstapel/testing/TestClock$Companion;
+	public static final field DEFAULT_EPOCH_MILLIS J
+	public fun <init> ()V
+	public fun <init> (Lkotlin/time/Instant;)V
+	public synthetic fun <init> (Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun advance-LRDsOJo (J)V
+	public fun now ()Lkotlin/time/Instant;
+	public final fun set (Lkotlin/time/Instant;)V
+}
+
+public final class stapel/testing/TestClock$Companion {
+}
+
+public final class stapel/testing/TestDispatchers : stapel/runtime/StapelDispatchers {
+	public fun <init> (Lkotlinx/coroutines/test/TestDispatcher;)V
+	public fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public final fun getDispatcher ()Lkotlinx/coroutines/test/TestDispatcher;
+	public fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
+}
+
+public final class stapel/testing/di/TestOverridesKt {
+	public static final fun testOverridesModule (Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelDispatchers;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lstapel/runtime/StapelLogger;Lstapel/runtime/Connectivity;Lstapel/runtime/LocaleProvider;Lstapel/runtime/TimeZoneProvider;Lstapel/runtime/AppLifecycle;)Lorg/koin/core/module/Module;
+	public static synthetic fun testOverridesModule$default (Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelDispatchers;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lstapel/runtime/StapelLogger;Lstapel/runtime/Connectivity;Lstapel/runtime/LocaleProvider;Lstapel/runtime/TimeZoneProvider;Lstapel/runtime/AppLifecycle;ILjava/lang/Object;)Lorg/koin/core/module/Module;
+}
+

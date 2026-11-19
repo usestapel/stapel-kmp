@@ -1,0 +1,125 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-testing>
+final class stapel.testing/FakeAppLifecycle : stapel.runtime/AppLifecycle { // stapel.testing/FakeAppLifecycle|null[0]
+    constructor <init>(stapel.runtime/AppPhase = ...) // stapel.testing/FakeAppLifecycle.<init>|<init>(stapel.runtime.AppPhase){}[0]
+
+    final val phase // stapel.testing/FakeAppLifecycle.phase|{}phase[0]
+        final fun <get-phase>(): kotlinx.coroutines.flow/StateFlow<stapel.runtime/AppPhase> // stapel.testing/FakeAppLifecycle.phase.<get-phase>|<get-phase>(){}[0]
+
+    final fun set(stapel.runtime/AppPhase) // stapel.testing/FakeAppLifecycle.set|set(stapel.runtime.AppPhase){}[0]
+}
+
+final class stapel.testing/FakeConnectivity : stapel.runtime/Connectivity { // stapel.testing/FakeConnectivity|null[0]
+    constructor <init>(stapel.runtime/NetworkStatus = ...) // stapel.testing/FakeConnectivity.<init>|<init>(stapel.runtime.NetworkStatus){}[0]
+
+    final val status // stapel.testing/FakeConnectivity.status|{}status[0]
+        final fun <get-status>(): kotlinx.coroutines.flow/StateFlow<stapel.runtime/NetworkStatus> // stapel.testing/FakeConnectivity.status.<get-status>|<get-status>(){}[0]
+
+    final var reachableReports // stapel.testing/FakeConnectivity.reachableReports|{}reachableReports[0]
+        final fun <get-reachableReports>(): kotlin/Int // stapel.testing/FakeConnectivity.reachableReports.<get-reachableReports>|<get-reachableReports>(){}[0]
+    final var unreachableReports // stapel.testing/FakeConnectivity.unreachableReports|{}unreachableReports[0]
+        final fun <get-unreachableReports>(): kotlin/Int // stapel.testing/FakeConnectivity.unreachableReports.<get-unreachableReports>|<get-unreachableReports>(){}[0]
+
+    final fun reportReachable() // stapel.testing/FakeConnectivity.reportReachable|reportReachable(){}[0]
+    final fun reportUnreachable() // stapel.testing/FakeConnectivity.reportUnreachable|reportUnreachable(){}[0]
+    final fun set(stapel.runtime/NetworkStatus) // stapel.testing/FakeConnectivity.set|set(stapel.runtime.NetworkStatus){}[0]
+}
+
+final class stapel.testing/FixedLocaleProvider : stapel.runtime/LocaleProvider { // stapel.testing/FixedLocaleProvider|null[0]
+    constructor <init>(stapel.result.text/LocaleTag = ...) // stapel.testing/FixedLocaleProvider.<init>|<init>(stapel.result.text.LocaleTag){}[0]
+
+    final val locale // stapel.testing/FixedLocaleProvider.locale|{}locale[0]
+        final fun <get-locale>(): kotlinx.coroutines.flow/StateFlow<stapel.result.text/LocaleTag> // stapel.testing/FixedLocaleProvider.locale.<get-locale>|<get-locale>(){}[0]
+
+    final fun setAppLocale(stapel.result.text/LocaleTag?) // stapel.testing/FixedLocaleProvider.setAppLocale|setAppLocale(stapel.result.text.LocaleTag?){}[0]
+    final fun setDeviceLocale(stapel.result.text/LocaleTag) // stapel.testing/FixedLocaleProvider.setDeviceLocale|setDeviceLocale(stapel.result.text.LocaleTag){}[0]
+}
+
+final class stapel.testing/FixedTimeZoneProvider : stapel.runtime/TimeZoneProvider { // stapel.testing/FixedTimeZoneProvider|null[0]
+    constructor <init>(kotlin/String = ...) // stapel.testing/FixedTimeZoneProvider.<init>|<init>(kotlin.String){}[0]
+
+    final val timeZoneId // stapel.testing/FixedTimeZoneProvider.timeZoneId|{}timeZoneId[0]
+        final fun <get-timeZoneId>(): kotlinx.coroutines.flow/StateFlow<kotlin/String> // stapel.testing/FixedTimeZoneProvider.timeZoneId.<get-timeZoneId>|<get-timeZoneId>(){}[0]
+
+    final fun set(kotlin/String) // stapel.testing/FixedTimeZoneProvider.set|set(kotlin.String){}[0]
+}
+
+final class stapel.testing/LogRecord { // stapel.testing/LogRecord|null[0]
+    constructor <init>(stapel.runtime/LogLevel, kotlin/String, kotlin/String, kotlin/Throwable?, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.testing/LogRecord.<init>|<init>(stapel.runtime.LogLevel;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val error // stapel.testing/LogRecord.error|{}error[0]
+        final fun <get-error>(): kotlin/Throwable? // stapel.testing/LogRecord.error.<get-error>|<get-error>(){}[0]
+    final val fields // stapel.testing/LogRecord.fields|{}fields[0]
+        final fun <get-fields>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.testing/LogRecord.fields.<get-fields>|<get-fields>(){}[0]
+    final val level // stapel.testing/LogRecord.level|{}level[0]
+        final fun <get-level>(): stapel.runtime/LogLevel // stapel.testing/LogRecord.level.<get-level>|<get-level>(){}[0]
+    final val message // stapel.testing/LogRecord.message|{}message[0]
+        final fun <get-message>(): kotlin/String // stapel.testing/LogRecord.message.<get-message>|<get-message>(){}[0]
+    final val tag // stapel.testing/LogRecord.tag|{}tag[0]
+        final fun <get-tag>(): kotlin/String // stapel.testing/LogRecord.tag.<get-tag>|<get-tag>(){}[0]
+
+    final fun component1(): stapel.runtime/LogLevel // stapel.testing/LogRecord.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.testing/LogRecord.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.testing/LogRecord.component3|component3(){}[0]
+    final fun component4(): kotlin/Throwable? // stapel.testing/LogRecord.component4|component4(){}[0]
+    final fun component5(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.testing/LogRecord.component5|component5(){}[0]
+    final fun copy(stapel.runtime/LogLevel = ..., kotlin/String = ..., kotlin/String = ..., kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...): stapel.testing/LogRecord // stapel.testing/LogRecord.copy|copy(stapel.runtime.LogLevel;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.testing/LogRecord.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.testing/LogRecord.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.testing/LogRecord.toString|toString(){}[0]
+}
+
+final class stapel.testing/RecordingLogger : stapel.runtime/StapelLogger { // stapel.testing/RecordingLogger|null[0]
+    constructor <init>(stapel.runtime/LogLevel = ...) // stapel.testing/RecordingLogger.<init>|<init>(stapel.runtime.LogLevel){}[0]
+
+    final val records // stapel.testing/RecordingLogger.records|{}records[0]
+        final fun <get-records>(): kotlin.collections/List<stapel.testing/LogRecord> // stapel.testing/RecordingLogger.records.<get-records>|<get-records>(){}[0]
+
+    final fun clear() // stapel.testing/RecordingLogger.clear|clear(){}[0]
+    final fun contains(kotlin/String): kotlin/Boolean // stapel.testing/RecordingLogger.contains|contains(kotlin.String){}[0]
+    final fun isEnabled(stapel.runtime/LogLevel, kotlin/String): kotlin/Boolean // stapel.testing/RecordingLogger.isEnabled|isEnabled(stapel.runtime.LogLevel;kotlin.String){}[0]
+    final fun log(stapel.runtime/LogLevel, kotlin/String, kotlin/String, kotlin/Throwable?, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.testing/RecordingLogger.log|log(stapel.runtime.LogLevel;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+}
+
+final class stapel.testing/SequentialIdGenerator : stapel.runtime/IdGenerator { // stapel.testing/SequentialIdGenerator|null[0]
+    constructor <init>() // stapel.testing/SequentialIdGenerator.<init>|<init>(){}[0]
+
+    final fun uuid(): kotlin/String // stapel.testing/SequentialIdGenerator.uuid|uuid(){}[0]
+}
+
+final class stapel.testing/TestClock : kotlin.time/Clock { // stapel.testing/TestClock|null[0]
+    constructor <init>(kotlin.time/Instant = ...) // stapel.testing/TestClock.<init>|<init>(kotlin.time.Instant){}[0]
+
+    final fun advance(kotlin.time/Duration) // stapel.testing/TestClock.advance|advance(kotlin.time.Duration){}[0]
+    final fun now(): kotlin.time/Instant // stapel.testing/TestClock.now|now(){}[0]
+    final fun set(kotlin.time/Instant) // stapel.testing/TestClock.set|set(kotlin.time.Instant){}[0]
+
+    final object Companion { // stapel.testing/TestClock.Companion|null[0]
+        final const val DEFAULT_EPOCH_MILLIS // stapel.testing/TestClock.Companion.DEFAULT_EPOCH_MILLIS|{}DEFAULT_EPOCH_MILLIS[0]
+            final fun <get-DEFAULT_EPOCH_MILLIS>(): kotlin/Long // stapel.testing/TestClock.Companion.DEFAULT_EPOCH_MILLIS.<get-DEFAULT_EPOCH_MILLIS>|<get-DEFAULT_EPOCH_MILLIS>(){}[0]
+    }
+}
+
+final class stapel.testing/TestDispatchers : stapel.runtime/StapelDispatchers { // stapel.testing/TestDispatchers|null[0]
+    constructor <init>(kotlinx.coroutines.test/TestDispatcher) // stapel.testing/TestDispatchers.<init>|<init>(kotlinx.coroutines.test.TestDispatcher){}[0]
+
+    final val default // stapel.testing/TestDispatchers.default|{}default[0]
+        final fun <get-default>(): kotlinx.coroutines/CoroutineDispatcher // stapel.testing/TestDispatchers.default.<get-default>|<get-default>(){}[0]
+    final val dispatcher // stapel.testing/TestDispatchers.dispatcher|{}dispatcher[0]
+        final fun <get-dispatcher>(): kotlinx.coroutines.test/TestDispatcher // stapel.testing/TestDispatchers.dispatcher.<get-dispatcher>|<get-dispatcher>(){}[0]
+    final val io // stapel.testing/TestDispatchers.io|{}io[0]
+        final fun <get-io>(): kotlinx.coroutines/CoroutineDispatcher // stapel.testing/TestDispatchers.io.<get-io>|<get-io>(){}[0]
+    final val main // stapel.testing/TestDispatchers.main|{}main[0]
+        final fun <get-main>(): kotlinx.coroutines/CoroutineDispatcher // stapel.testing/TestDispatchers.main.<get-main>|<get-main>(){}[0]
+}
+
+final fun (kotlinx.coroutines.test/TestScope).stapel.testing/virtualTimeClock(kotlin.time/Instant = ...): kotlin.time/Clock // stapel.testing/virtualTimeClock|virtualTimeClock@kotlinx.coroutines.test.TestScope(kotlin.time.Instant){}[0]
+final fun stapel.testing.di/testOverridesModule(kotlinx.coroutines/CoroutineScope, stapel.runtime/StapelDispatchers, kotlin.time/Clock = ..., stapel.runtime/IdGenerator = ..., stapel.runtime/StapelLogger = ..., stapel.runtime/Connectivity = ..., stapel.runtime/LocaleProvider = ..., stapel.runtime/TimeZoneProvider = ..., stapel.runtime/AppLifecycle = ...): org.koin.core.module/Module // stapel.testing.di/testOverridesModule|testOverridesModule(kotlinx.coroutines.CoroutineScope;stapel.runtime.StapelDispatchers;kotlin.time.Clock;stapel.runtime.IdGenerator;stapel.runtime.StapelLogger;stapel.runtime.Connectivity;stapel.runtime.LocaleProvider;stapel.runtime.TimeZoneProvider;stapel.runtime.AppLifecycle){}[0]
+final fun stapel.testing/testClientInfo(): stapel.config/ClientInfo // stapel.testing/testClientInfo|testClientInfo(){}[0]
+final fun stapel.testing/testEnvironment(kotlin/String = ..., stapel.config/Posture = ..., kotlin.collections/Map<kotlin/String, stapel.config/ServiceEndpoint> = ...): stapel.config/StapelEnvironment // stapel.testing/testEnvironment|testEnvironment(kotlin.String;stapel.config.Posture;kotlin.collections.Map<kotlin.String,stapel.config.ServiceEndpoint>){}[0]
