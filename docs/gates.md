@@ -155,10 +155,25 @@ mavenLocal), built the way the scaffold's KMP emitter builds an app. CI job
 `NavGateTest` on JVM and the iOS simulator, desktop jar, Android
 `assembleDebug`, the iOS framework, then `scripts/ios-smoke.sh` (xcodebuild,
 simulator launch, log markers `stapel.app.ready` / `stapel.nav <id>`, a link
-handed to the app → `stapel.link <uri> opened`, screenshots). The sign-in walk
-(`SignInWalkTest`, compiled in with `-Pstapel.walk.baseUrl=<url>`) runs against
-a local auth stand on JVM and on the simulator; it is not in CI (no stand
-there).
+handed to the app → `stapel.link <uri> opened`, screenshots). The job brings up
+the auth stand (`bricks/auth/e2e/stand/stand.sh up`, Python 3.12, 127.0.0.1:18731)
+first, so the sign-in walk (`SignInWalkTest`, compiled in with
+`-Pstapel.walk.baseUrl=<url>`) runs on JVM and on the simulator, and
+`ios-smoke.sh --uitest` runs the XCUITest suite against it; the stand goes down
+in an `always()` step. Uploads: screenshots, `uitest.log`, `uitest.xcresult`,
+the stand's logs.
+
+## CI capacity and the `ci-ok` verdict
+
+Linux jobs (`build-logic`, `fast`) run for every commit. Each macOS job (`ios`,
+`publish-smoke`, `sample`) has a job-level concurrency group shared by every
+push to `main`: a newer commit's job replaces an older one that is still
+waiting for the group (GitHub keeps one pending job per group); a job that has
+the group (running, or queued for a runner) is never cancelled. `ci-ok` runs
+`scripts/ci-verdict.sh` over the run's jobs: `GREEN`; `SUPERSEDED by <sha>`
+(no job failed, a macOS job was cancelled before it got a runner and `main`
+moved on; red, the commit is unverified, the newer one carries the verdict);
+or `FAILED`. Rules and inversions: `CiWorkflowTest`.
 
 ## ABI dumps
 
