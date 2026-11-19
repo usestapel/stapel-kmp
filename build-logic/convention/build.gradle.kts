@@ -64,6 +64,7 @@ gradlePlugin {
         plugin("stapel.gradle-plugin", "GradlePluginPlugin")
         plugin("stapel.jvm-tool", "JvmToolPlugin")
         plugin("stapel.showcase", "ShowcasePlugin")
+        plugin("stapel.showcase-gallery", "ShowcaseGalleryPlugin")
         plugin("stapel.bom", "BomPlugin")
         plugin("stapel.root", "RootPlugin")
         // Add-ons a module applies next to its family plugin.

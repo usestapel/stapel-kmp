@@ -91,7 +91,7 @@ internal fun Project.applyStapelKmp(ext: StapelExtension, explicitApi: Boolean =
     kmp.iosSimulatorArm64()
 
     kmp.extensions.configure(KotlinMultiplatformAndroidLibraryTarget::class.java) {
-        namespace = names.packageName
+        namespace = moduleNamespace(names)
         compileSdk = catalogVersion("android-compileSdk").toInt()
         minSdk = catalogVersion("android-minSdk").toInt()
         withHostTest { }
@@ -193,9 +193,23 @@ internal fun Project.applyStapelCompose() {
     (extensions.getByType(org.jetbrains.compose.ComposeExtension::class.java) as org.gradle.api.plugins.ExtensionAware)
         .extensions.configure(org.jetbrains.compose.resources.ResourcesExtension::class.java) {
         publicResClass = false
-        packageOfResClass = "${names.packageName}.generated.resources"
+        packageOfResClass = "${moduleNamespace(names)}.generated.resources"
     }
 }
+
+/**
+ * The Android namespace and Compose resources package of a module: its derived package, except under
+ * `showcase/`, where every module shares the package root `stapel.showcase` with the published
+ * `stapel-showcase` artifact; there the project path is appended (`:showcase:stories:ui` →
+ * `stapel.showcase.stories.ui`) so two showcase modules linked into one binary never declare the same
+ * `Res` / `R` class.
+ */
+internal fun Project.moduleNamespace(names: StapelNames): String =
+    if (path.startsWith(":showcase:")) {
+        names.packageName + "." + path.removePrefix(":showcase:").split(':').joinToString(".") { it.replace('-', '_') }
+    } else {
+        names.packageName
+    }
 
 /** Skiko runtime for the machine running the desktop tests (what `compose.desktop.currentOs` resolves to). */
 internal fun Project.desktopRuntimeCoordinate(): String {
