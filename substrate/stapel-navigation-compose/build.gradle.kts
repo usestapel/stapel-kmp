@@ -13,8 +13,10 @@ kotlin {
             api(projects.stapelNavigation)
             // The engine. No type of it appears in this module's public API (see the ABI dump).
             implementation(libs.jb.navigation3.ui)
-            implementation(libs.jb.lifecycle.viewmodel.compose)
-            implementation(libs.jb.lifecycle.runtime.compose)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.lifecycle.runtime.compose)
+            // Back handling (NavigationBackHandler) is used directly, so it is declared, not inherited.
+            implementation(libs.androidx.navigationevent.compose)
         }
         commonTest.dependencies {
             implementation(projects.stapelMviCompose)

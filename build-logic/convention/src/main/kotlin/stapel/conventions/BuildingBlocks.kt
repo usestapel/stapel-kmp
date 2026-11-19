@@ -40,6 +40,7 @@ internal fun Project.applyStapelBase(family: StapelFamily): StapelExtension {
 
     registerLifecycleTasks()
     registerSourceChecks(family, names, ext)
+    applyLibraryLines()
     return ext
 }
 
@@ -110,6 +111,7 @@ internal fun Project.applyStapelKmp(ext: StapelExtension, explicitApi: Boolean =
         }
     }
     wireVerifyTestsRan()
+    registerCheckLibraryLines()
 
     tasks.named("stapelCheckFast").configure {
         dependsOn(tasks.withType(Test::class.java))

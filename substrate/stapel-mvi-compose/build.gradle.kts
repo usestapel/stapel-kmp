@@ -11,8 +11,8 @@ kotlin {
         commonMain.dependencies {
             api(projects.stapelMvi)
             api(projects.stapelDi)
-            api(libs.jb.lifecycle.viewmodel.compose)
-            implementation(libs.jb.lifecycle.runtime.compose)
+            api(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.kotlinx.serialization.json)
         }
         // viewModelScope runs on Dispatchers.Main; a desktop app (and the desktop UI tests) supply it.

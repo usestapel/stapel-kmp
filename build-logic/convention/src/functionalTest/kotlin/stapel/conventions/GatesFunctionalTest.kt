@@ -236,4 +236,37 @@ class GatesFunctionalTest {
         val r = fx.fails(":stapel-result:dokkaGeneratePublicationHtml")
         assertContains(r.output, "undocumented")
     }
+
+    @Test
+    fun `a compose module resolves one lifecycle line and an iosMain compiles`() {
+        val fx = FixtureBuild("library-lines")
+            .module("substrate/stapel-ui", substrate(plugin = "stapel.substrate-ui"))
+            .file("substrate/stapel-ui/src/commonMain/kotlin/stapel/ui/A.kt", "package stapel.ui\n/** A. */\npublic expect val a: Int")
+            .file("substrate/stapel-ui/src/iosMain/kotlin/stapel/ui/A.ios.kt", "package stapel.ui\n/** A. */\npublic actual val a: Int = 1")
+            .file("substrate/stapel-ui/src/jvmMain/kotlin/stapel/ui/A.jvm.kt", "package stapel.ui\n/** A. */\npublic actual val a: Int = 2")
+            .file("substrate/stapel-ui/src/androidMain/kotlin/stapel/ui/A.android.kt", "package stapel.ui\n/** A. */\npublic actual val a: Int = 3")
+        fx.file("substrate/stapel-ui/build.gradle.kts", """
+            plugins { id("stapel.substrate-ui") }
+            stapel { description = "fixture"; platformSubject("fixture") }
+        """)
+        val tasks = mutableListOf(":stapel-ui:checkLibraryLines")
+        // Duplicate klibs show up in the shared native metadata compilation (macOS only).
+        if (System.getProperty("os.name").lowercase().contains("mac")) tasks += ":stapel-ui:compileIosMainKotlinMetadata"
+        fx.succeeds(*tasks.toTypedArray())
+    }
+
+    @Test
+    fun `a JetBrains module next to its androidx twin fails checkLibraryLines`() {
+        val r = FixtureBuild("library-twins")
+            .module(
+                "substrate/stapel-ui",
+                substrate(
+                    "implementation(libs.jb.navigation3.ui); implementation(\"androidx.navigation3:navigation3-ui:1.2.0\")",
+                    plugin = "stapel.substrate-ui",
+                ),
+            )
+            .fails(":stapel-ui:checkLibraryLines")
+        assertContains(r.output, "org.jetbrains.androidx.navigation3:navigation3-ui:1.2.0 next to androidx.navigation3:navigation3-ui:1.2.0")
+        assertContains(r.output, "REDIRECT_SHIMS")
+    }
 }
