@@ -1,0 +1,213 @@
+public abstract interface class stapel/runtime/Analytics {
+	public static final field Companion Lstapel/runtime/Analytics$Companion;
+	public abstract fun identify (Ljava/lang/String;)V
+	public abstract fun page (Ljava/lang/String;Ljava/util/Map;)V
+	public static synthetic fun page$default (Lstapel/runtime/Analytics;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public abstract fun track (Ljava/lang/String;Ljava/util/Map;)V
+	public static synthetic fun track$default (Lstapel/runtime/Analytics;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+}
+
+public final class stapel/runtime/Analytics$Companion {
+	public final fun getNoop ()Lstapel/runtime/Analytics;
+}
+
+public final class stapel/runtime/Analytics$DefaultImpls {
+	public static synthetic fun page$default (Lstapel/runtime/Analytics;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static synthetic fun track$default (Lstapel/runtime/Analytics;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+}
+
+public final class stapel/runtime/AnalyticsKt {
+	public static final fun trackFlowStep (Lstapel/runtime/Analytics;Ljava/lang/String;Ljava/lang/String;Lstapel/runtime/FlowStepPhase;Ljava/util/Map;)V
+	public static synthetic fun trackFlowStep$default (Lstapel/runtime/Analytics;Ljava/lang/String;Ljava/lang/String;Lstapel/runtime/FlowStepPhase;Ljava/util/Map;ILjava/lang/Object;)V
+}
+
+public abstract interface class stapel/runtime/AppLifecycle {
+	public abstract fun getPhase ()Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public final class stapel/runtime/AppPhase : java/lang/Enum {
+	public static final field Background Lstapel/runtime/AppPhase;
+	public static final field Foreground Lstapel/runtime/AppPhase;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/runtime/AppPhase;
+	public static fun values ()[Lstapel/runtime/AppPhase;
+}
+
+public abstract interface class stapel/runtime/Connectivity {
+	public abstract fun getStatus ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun reportReachable ()V
+	public abstract fun reportUnreachable ()V
+}
+
+public final class stapel/runtime/FlowStepPhase : java/lang/Enum {
+	public static final field Completed Lstapel/runtime/FlowStepPhase;
+	public static final field Failed Lstapel/runtime/FlowStepPhase;
+	public static final field Started Lstapel/runtime/FlowStepPhase;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getWire ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/runtime/FlowStepPhase;
+	public static fun values ()[Lstapel/runtime/FlowStepPhase;
+}
+
+public final class stapel/runtime/HttpCallEvent {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5-UwyO8pc ()J
+	public final fun component6 ()I
+	public final fun copy-myKFqkg (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;JI)Lstapel/runtime/HttpCallEvent;
+	public static synthetic fun copy-myKFqkg$default (Lstapel/runtime/HttpCallEvent;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;JIILjava/lang/Object;)Lstapel/runtime/HttpCallEvent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempts ()I
+	public final fun getDuration-UwyO8pc ()J
+	public final fun getErrorCode ()Ljava/lang/String;
+	public final fun getMethod ()Ljava/lang/String;
+	public final fun getOperationId ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/runtime/IdGenerator {
+	public abstract fun uuid ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/runtime/LocaleProvider {
+	public abstract fun getLocale ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun setAppLocale-knluWF4 (Ljava/lang/String;)V
+}
+
+public final class stapel/runtime/LogLevel : java/lang/Enum {
+	public static final field Debug Lstapel/runtime/LogLevel;
+	public static final field Error Lstapel/runtime/LogLevel;
+	public static final field Info Lstapel/runtime/LogLevel;
+	public static final field Verbose Lstapel/runtime/LogLevel;
+	public static final field Warn Lstapel/runtime/LogLevel;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/runtime/LogLevel;
+	public static fun values ()[Lstapel/runtime/LogLevel;
+}
+
+public final class stapel/runtime/LoggingKt {
+	public static final fun debug (Lstapel/runtime/StapelLogger;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)V
+	public static final fun error (Lstapel/runtime/StapelLogger;Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/functions/Function0;)V
+	public static synthetic fun error$default (Lstapel/runtime/StapelLogger;Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
+	public static final fun info (Lstapel/runtime/StapelLogger;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)V
+	public static final fun warn (Lstapel/runtime/StapelLogger;Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/functions/Function0;)V
+	public static synthetic fun warn$default (Lstapel/runtime/StapelLogger;Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
+}
+
+public abstract interface class stapel/runtime/NetworkStatus {
+}
+
+public final class stapel/runtime/NetworkStatus$Offline : stapel/runtime/NetworkStatus {
+	public static final field INSTANCE Lstapel/runtime/NetworkStatus$Offline;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/runtime/NetworkStatus$Online : stapel/runtime/NetworkStatus {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/Boolean;)Lstapel/runtime/NetworkStatus$Online;
+	public static synthetic fun copy$default (Lstapel/runtime/NetworkStatus$Online;Ljava/lang/Boolean;ILjava/lang/Object;)Lstapel/runtime/NetworkStatus$Online;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMetered ()Ljava/lang/Boolean;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/runtime/NetworkStatus$Unknown : stapel/runtime/NetworkStatus {
+	public static final field INSTANCE Lstapel/runtime/NetworkStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/runtime/NoopLogger : stapel/runtime/StapelLogger {
+	public static final field INSTANCE Lstapel/runtime/NoopLogger;
+	public fun isEnabled (Lstapel/runtime/LogLevel;Ljava/lang/String;)Z
+	public fun log (Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+}
+
+public abstract interface class stapel/runtime/PlatformContext {
+}
+
+public final class stapel/runtime/PlatformKt {
+	public static final fun defaultDispatchers ()Lstapel/runtime/StapelDispatchers;
+	public static final fun randomIdGenerator ()Lstapel/runtime/IdGenerator;
+	public static final fun systemClock ()Lkotlin/time/Clock;
+}
+
+public final class stapel/runtime/Platform_jvmKt {
+	public static final fun PlatformContext ()Lstapel/runtime/PlatformContext;
+	public static final fun platformAppLifecycle (Lstapel/runtime/PlatformContext;Lkotlinx/coroutines/CoroutineScope;)Lstapel/runtime/AppLifecycle;
+	public static final fun platformConnectivity (Lstapel/runtime/PlatformContext;Lkotlinx/coroutines/CoroutineScope;)Lstapel/runtime/Connectivity;
+	public static final fun platformLocaleProvider (Lstapel/runtime/PlatformContext;)Lstapel/runtime/LocaleProvider;
+	public static final fun platformLogger (Lstapel/runtime/LogLevel;)Lstapel/runtime/StapelLogger;
+	public static final fun platformTimeZoneProvider (Lstapel/runtime/PlatformContext;)Lstapel/runtime/TimeZoneProvider;
+}
+
+public final class stapel/runtime/SessionTelemetryEvent {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lstapel/runtime/SessionTelemetryEvent;
+	public static synthetic fun copy$default (Lstapel/runtime/SessionTelemetryEvent;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lstapel/runtime/SessionTelemetryEvent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFields ()Ljava/util/Map;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/runtime/StapelDispatchers {
+	public abstract fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public abstract fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public abstract fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
+}
+
+public abstract interface class stapel/runtime/StapelLogger {
+	public abstract fun isEnabled (Lstapel/runtime/LogLevel;Ljava/lang/String;)Z
+	public abstract fun log (Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;)V
+	public static synthetic fun log$default (Lstapel/runtime/StapelLogger;Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+}
+
+public final class stapel/runtime/StapelLogger$DefaultImpls {
+	public static synthetic fun log$default (Lstapel/runtime/StapelLogger;Lstapel/runtime/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+}
+
+public abstract interface class stapel/runtime/StapelTelemetry {
+	public static final field Companion Lstapel/runtime/StapelTelemetry$Companion;
+	public fun breadcrumb (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public static synthetic fun breadcrumb$default (Lstapel/runtime/StapelTelemetry;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public fun httpCall (Lstapel/runtime/HttpCallEvent;)V
+	public fun sessionEvent (Lstapel/runtime/SessionTelemetryEvent;)V
+}
+
+public final class stapel/runtime/StapelTelemetry$Companion {
+	public final fun getNoop ()Lstapel/runtime/StapelTelemetry;
+}
+
+public final class stapel/runtime/StapelTelemetry$DefaultImpls {
+	public static fun breadcrumb (Lstapel/runtime/StapelTelemetry;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public static synthetic fun breadcrumb$default (Lstapel/runtime/StapelTelemetry;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+	public static fun httpCall (Lstapel/runtime/StapelTelemetry;Lstapel/runtime/HttpCallEvent;)V
+	public static fun sessionEvent (Lstapel/runtime/StapelTelemetry;Lstapel/runtime/SessionTelemetryEvent;)V
+}
+
+public abstract interface class stapel/runtime/TimeZoneProvider {
+	public abstract fun getTimeZoneId ()Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public final class stapel/runtime/di/RuntimeModuleKt {
+	public static final fun runtimeModule (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelLogger;)Lorg/koin/core/module/Module;
+	public static synthetic fun runtimeModule$default (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelLogger;ILjava/lang/Object;)Lorg/koin/core/module/Module;
+}
+

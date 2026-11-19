@@ -1,0 +1,210 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-runtime>
+final enum class stapel.runtime/AppPhase : kotlin/Enum<stapel.runtime/AppPhase> { // stapel.runtime/AppPhase|null[0]
+    enum entry Background // stapel.runtime/AppPhase.Background|null[0]
+    enum entry Foreground // stapel.runtime/AppPhase.Foreground|null[0]
+
+    final val entries // stapel.runtime/AppPhase.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.runtime/AppPhase> // stapel.runtime/AppPhase.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.runtime/AppPhase // stapel.runtime/AppPhase.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.runtime/AppPhase> // stapel.runtime/AppPhase.values|values#static(){}[0]
+}
+
+final enum class stapel.runtime/FlowStepPhase : kotlin/Enum<stapel.runtime/FlowStepPhase> { // stapel.runtime/FlowStepPhase|null[0]
+    enum entry Completed // stapel.runtime/FlowStepPhase.Completed|null[0]
+    enum entry Failed // stapel.runtime/FlowStepPhase.Failed|null[0]
+    enum entry Started // stapel.runtime/FlowStepPhase.Started|null[0]
+
+    final val entries // stapel.runtime/FlowStepPhase.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.runtime/FlowStepPhase> // stapel.runtime/FlowStepPhase.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wire // stapel.runtime/FlowStepPhase.wire|{}wire[0]
+        final fun <get-wire>(): kotlin/String // stapel.runtime/FlowStepPhase.wire.<get-wire>|<get-wire>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.runtime/FlowStepPhase // stapel.runtime/FlowStepPhase.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.runtime/FlowStepPhase> // stapel.runtime/FlowStepPhase.values|values#static(){}[0]
+}
+
+final enum class stapel.runtime/LogLevel : kotlin/Enum<stapel.runtime/LogLevel> { // stapel.runtime/LogLevel|null[0]
+    enum entry Debug // stapel.runtime/LogLevel.Debug|null[0]
+    enum entry Error // stapel.runtime/LogLevel.Error|null[0]
+    enum entry Info // stapel.runtime/LogLevel.Info|null[0]
+    enum entry Verbose // stapel.runtime/LogLevel.Verbose|null[0]
+    enum entry Warn // stapel.runtime/LogLevel.Warn|null[0]
+
+    final val entries // stapel.runtime/LogLevel.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.runtime/LogLevel> // stapel.runtime/LogLevel.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.runtime/LogLevel // stapel.runtime/LogLevel.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.runtime/LogLevel> // stapel.runtime/LogLevel.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.runtime/Cancellable { // stapel.runtime/Cancellable|null[0]
+    abstract fun cancel() // stapel.runtime/Cancellable.cancel|cancel(){}[0]
+}
+
+abstract fun interface stapel.runtime/IdGenerator { // stapel.runtime/IdGenerator|null[0]
+    abstract fun uuid(): kotlin/String // stapel.runtime/IdGenerator.uuid|uuid(){}[0]
+}
+
+abstract interface stapel.runtime/Analytics { // stapel.runtime/Analytics|null[0]
+    abstract fun identify(kotlin/String?) // stapel.runtime/Analytics.identify|identify(kotlin.String?){}[0]
+    abstract fun page(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.runtime/Analytics.page|page(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    abstract fun track(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.runtime/Analytics.track|track(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final object Companion { // stapel.runtime/Analytics.Companion|null[0]
+        final val Noop // stapel.runtime/Analytics.Companion.Noop|{}Noop[0]
+            final fun <get-Noop>(): stapel.runtime/Analytics // stapel.runtime/Analytics.Companion.Noop.<get-Noop>|<get-Noop>(){}[0]
+    }
+}
+
+abstract interface stapel.runtime/AppLifecycle { // stapel.runtime/AppLifecycle|null[0]
+    abstract val phase // stapel.runtime/AppLifecycle.phase|{}phase[0]
+        abstract fun <get-phase>(): kotlinx.coroutines.flow/StateFlow<stapel.runtime/AppPhase> // stapel.runtime/AppLifecycle.phase.<get-phase>|<get-phase>(){}[0]
+}
+
+abstract interface stapel.runtime/Connectivity { // stapel.runtime/Connectivity|null[0]
+    abstract val status // stapel.runtime/Connectivity.status|{}status[0]
+        abstract fun <get-status>(): kotlinx.coroutines.flow/StateFlow<stapel.runtime/NetworkStatus> // stapel.runtime/Connectivity.status.<get-status>|<get-status>(){}[0]
+
+    abstract fun reportReachable() // stapel.runtime/Connectivity.reportReachable|reportReachable(){}[0]
+    abstract fun reportUnreachable() // stapel.runtime/Connectivity.reportUnreachable|reportUnreachable(){}[0]
+}
+
+abstract interface stapel.runtime/LocaleProvider { // stapel.runtime/LocaleProvider|null[0]
+    abstract val locale // stapel.runtime/LocaleProvider.locale|{}locale[0]
+        abstract fun <get-locale>(): kotlinx.coroutines.flow/StateFlow<stapel.result.text/LocaleTag> // stapel.runtime/LocaleProvider.locale.<get-locale>|<get-locale>(){}[0]
+
+    abstract fun setAppLocale(stapel.result.text/LocaleTag?) // stapel.runtime/LocaleProvider.setAppLocale|setAppLocale(stapel.result.text.LocaleTag?){}[0]
+}
+
+abstract interface stapel.runtime/PlatformContext // stapel.runtime/PlatformContext|null[0]
+
+abstract interface stapel.runtime/StapelDispatchers { // stapel.runtime/StapelDispatchers|null[0]
+    abstract val default // stapel.runtime/StapelDispatchers.default|{}default[0]
+        abstract fun <get-default>(): kotlinx.coroutines/CoroutineDispatcher // stapel.runtime/StapelDispatchers.default.<get-default>|<get-default>(){}[0]
+    abstract val io // stapel.runtime/StapelDispatchers.io|{}io[0]
+        abstract fun <get-io>(): kotlinx.coroutines/CoroutineDispatcher // stapel.runtime/StapelDispatchers.io.<get-io>|<get-io>(){}[0]
+    abstract val main // stapel.runtime/StapelDispatchers.main|{}main[0]
+        abstract fun <get-main>(): kotlinx.coroutines/CoroutineDispatcher // stapel.runtime/StapelDispatchers.main.<get-main>|<get-main>(){}[0]
+}
+
+abstract interface stapel.runtime/StapelLogger { // stapel.runtime/StapelLogger|null[0]
+    abstract fun isEnabled(stapel.runtime/LogLevel, kotlin/String): kotlin/Boolean // stapel.runtime/StapelLogger.isEnabled|isEnabled(stapel.runtime.LogLevel;kotlin.String){}[0]
+    abstract fun log(stapel.runtime/LogLevel, kotlin/String, kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.runtime/StapelLogger.log|log(stapel.runtime.LogLevel;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+}
+
+abstract interface stapel.runtime/StapelTelemetry { // stapel.runtime/StapelTelemetry|null[0]
+    open fun breadcrumb(kotlin/String, kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.runtime/StapelTelemetry.breadcrumb|breadcrumb(kotlin.String;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    open fun httpCall(stapel.runtime/HttpCallEvent) // stapel.runtime/StapelTelemetry.httpCall|httpCall(stapel.runtime.HttpCallEvent){}[0]
+    open fun sessionEvent(stapel.runtime/SessionTelemetryEvent) // stapel.runtime/StapelTelemetry.sessionEvent|sessionEvent(stapel.runtime.SessionTelemetryEvent){}[0]
+
+    final object Companion { // stapel.runtime/StapelTelemetry.Companion|null[0]
+        final val Noop // stapel.runtime/StapelTelemetry.Companion.Noop|{}Noop[0]
+            final fun <get-Noop>(): stapel.runtime/StapelTelemetry // stapel.runtime/StapelTelemetry.Companion.Noop.<get-Noop>|<get-Noop>(){}[0]
+    }
+}
+
+abstract interface stapel.runtime/TimeZoneProvider { // stapel.runtime/TimeZoneProvider|null[0]
+    abstract val timeZoneId // stapel.runtime/TimeZoneProvider.timeZoneId|{}timeZoneId[0]
+        abstract fun <get-timeZoneId>(): kotlinx.coroutines.flow/StateFlow<kotlin/String> // stapel.runtime/TimeZoneProvider.timeZoneId.<get-timeZoneId>|<get-timeZoneId>(){}[0]
+}
+
+sealed interface stapel.runtime/NetworkStatus { // stapel.runtime/NetworkStatus|null[0]
+    final class Online : stapel.runtime/NetworkStatus { // stapel.runtime/NetworkStatus.Online|null[0]
+        constructor <init>(kotlin/Boolean? = ...) // stapel.runtime/NetworkStatus.Online.<init>|<init>(kotlin.Boolean?){}[0]
+
+        final val metered // stapel.runtime/NetworkStatus.Online.metered|{}metered[0]
+            final fun <get-metered>(): kotlin/Boolean? // stapel.runtime/NetworkStatus.Online.metered.<get-metered>|<get-metered>(){}[0]
+
+        final fun component1(): kotlin/Boolean? // stapel.runtime/NetworkStatus.Online.component1|component1(){}[0]
+        final fun copy(kotlin/Boolean? = ...): stapel.runtime/NetworkStatus.Online // stapel.runtime/NetworkStatus.Online.copy|copy(kotlin.Boolean?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.runtime/NetworkStatus.Online.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.runtime/NetworkStatus.Online.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.runtime/NetworkStatus.Online.toString|toString(){}[0]
+    }
+
+    final object Offline : stapel.runtime/NetworkStatus { // stapel.runtime/NetworkStatus.Offline|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.runtime/NetworkStatus.Offline.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.runtime/NetworkStatus.Offline.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.runtime/NetworkStatus.Offline.toString|toString(){}[0]
+    }
+
+    final object Unknown : stapel.runtime/NetworkStatus { // stapel.runtime/NetworkStatus.Unknown|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.runtime/NetworkStatus.Unknown.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.runtime/NetworkStatus.Unknown.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.runtime/NetworkStatus.Unknown.toString|toString(){}[0]
+    }
+}
+
+final class stapel.runtime/HttpCallEvent { // stapel.runtime/HttpCallEvent|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/Int?, kotlin/String?, kotlin.time/Duration, kotlin/Int) // stapel.runtime/HttpCallEvent.<init>|<init>(kotlin.String;kotlin.String;kotlin.Int?;kotlin.String?;kotlin.time.Duration;kotlin.Int){}[0]
+
+    final val attempts // stapel.runtime/HttpCallEvent.attempts|{}attempts[0]
+        final fun <get-attempts>(): kotlin/Int // stapel.runtime/HttpCallEvent.attempts.<get-attempts>|<get-attempts>(){}[0]
+    final val duration // stapel.runtime/HttpCallEvent.duration|{}duration[0]
+        final fun <get-duration>(): kotlin.time/Duration // stapel.runtime/HttpCallEvent.duration.<get-duration>|<get-duration>(){}[0]
+    final val errorCode // stapel.runtime/HttpCallEvent.errorCode|{}errorCode[0]
+        final fun <get-errorCode>(): kotlin/String? // stapel.runtime/HttpCallEvent.errorCode.<get-errorCode>|<get-errorCode>(){}[0]
+    final val method // stapel.runtime/HttpCallEvent.method|{}method[0]
+        final fun <get-method>(): kotlin/String // stapel.runtime/HttpCallEvent.method.<get-method>|<get-method>(){}[0]
+    final val operationId // stapel.runtime/HttpCallEvent.operationId|{}operationId[0]
+        final fun <get-operationId>(): kotlin/String // stapel.runtime/HttpCallEvent.operationId.<get-operationId>|<get-operationId>(){}[0]
+    final val status // stapel.runtime/HttpCallEvent.status|{}status[0]
+        final fun <get-status>(): kotlin/Int? // stapel.runtime/HttpCallEvent.status.<get-status>|<get-status>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.runtime/HttpCallEvent.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.runtime/HttpCallEvent.component2|component2(){}[0]
+    final fun component3(): kotlin/Int? // stapel.runtime/HttpCallEvent.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // stapel.runtime/HttpCallEvent.component4|component4(){}[0]
+    final fun component5(): kotlin.time/Duration // stapel.runtime/HttpCallEvent.component5|component5(){}[0]
+    final fun component6(): kotlin/Int // stapel.runtime/HttpCallEvent.component6|component6(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/Int? = ..., kotlin/String? = ..., kotlin.time/Duration = ..., kotlin/Int = ...): stapel.runtime/HttpCallEvent // stapel.runtime/HttpCallEvent.copy|copy(kotlin.String;kotlin.String;kotlin.Int?;kotlin.String?;kotlin.time.Duration;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.runtime/HttpCallEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.runtime/HttpCallEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.runtime/HttpCallEvent.toString|toString(){}[0]
+}
+
+final class stapel.runtime/SessionTelemetryEvent { // stapel.runtime/SessionTelemetryEvent|null[0]
+    constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.runtime/SessionTelemetryEvent.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val fields // stapel.runtime/SessionTelemetryEvent.fields|{}fields[0]
+        final fun <get-fields>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.runtime/SessionTelemetryEvent.fields.<get-fields>|<get-fields>(){}[0]
+    final val name // stapel.runtime/SessionTelemetryEvent.name|{}name[0]
+        final fun <get-name>(): kotlin/String // stapel.runtime/SessionTelemetryEvent.name.<get-name>|<get-name>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.runtime/SessionTelemetryEvent.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.runtime/SessionTelemetryEvent.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...): stapel.runtime/SessionTelemetryEvent // stapel.runtime/SessionTelemetryEvent.copy|copy(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.runtime/SessionTelemetryEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.runtime/SessionTelemetryEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.runtime/SessionTelemetryEvent.toString|toString(){}[0]
+}
+
+final object stapel.runtime/NoopLogger : stapel.runtime/StapelLogger { // stapel.runtime/NoopLogger|null[0]
+    final fun isEnabled(stapel.runtime/LogLevel, kotlin/String): kotlin/Boolean // stapel.runtime/NoopLogger.isEnabled|isEnabled(stapel.runtime.LogLevel;kotlin.String){}[0]
+    final fun log(stapel.runtime/LogLevel, kotlin/String, kotlin/String, kotlin/Throwable?, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.runtime/NoopLogger.log|log(stapel.runtime.LogLevel;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+}
+
+final fun (stapel.runtime/Analytics).stapel.runtime/trackFlowStep(kotlin/String, kotlin/String, stapel.runtime/FlowStepPhase, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.runtime/trackFlowStep|trackFlowStep@stapel.runtime.Analytics(kotlin.String;kotlin.String;stapel.runtime.FlowStepPhase;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+final fun <#A: kotlin/Any> (kotlinx.coroutines.flow/Flow<#A>).stapel.runtime/watch(kotlinx.coroutines/CoroutineScope, kotlin/Function1<#A, kotlin/Unit>): stapel.runtime/Cancellable // stapel.runtime/watch|watch@kotlinx.coroutines.flow.Flow<0:0>(kotlinx.coroutines.CoroutineScope;kotlin.Function1<0:0,kotlin.Unit>){0§<kotlin.Any>}[0]
+final fun stapel.runtime.di/runtimeModule(stapel.runtime/PlatformContext, stapel.runtime/StapelLogger = ...): org.koin.core.module/Module // stapel.runtime.di/runtimeModule|runtimeModule(stapel.runtime.PlatformContext;stapel.runtime.StapelLogger){}[0]
+final fun stapel.runtime/PlatformContext(): stapel.runtime/PlatformContext // stapel.runtime/PlatformContext|PlatformContext(){}[0]
+final fun stapel.runtime/defaultDispatchers(): stapel.runtime/StapelDispatchers // stapel.runtime/defaultDispatchers|defaultDispatchers(){}[0]
+final fun stapel.runtime/platformAppLifecycle(stapel.runtime/PlatformContext, kotlinx.coroutines/CoroutineScope): stapel.runtime/AppLifecycle // stapel.runtime/platformAppLifecycle|platformAppLifecycle(stapel.runtime.PlatformContext;kotlinx.coroutines.CoroutineScope){}[0]
+final fun stapel.runtime/platformConnectivity(stapel.runtime/PlatformContext, kotlinx.coroutines/CoroutineScope): stapel.runtime/Connectivity // stapel.runtime/platformConnectivity|platformConnectivity(stapel.runtime.PlatformContext;kotlinx.coroutines.CoroutineScope){}[0]
+final fun stapel.runtime/platformLocaleProvider(stapel.runtime/PlatformContext): stapel.runtime/LocaleProvider // stapel.runtime/platformLocaleProvider|platformLocaleProvider(stapel.runtime.PlatformContext){}[0]
+final fun stapel.runtime/platformLogger(stapel.runtime/LogLevel): stapel.runtime/StapelLogger // stapel.runtime/platformLogger|platformLogger(stapel.runtime.LogLevel){}[0]
+final fun stapel.runtime/platformTimeZoneProvider(stapel.runtime/PlatformContext): stapel.runtime/TimeZoneProvider // stapel.runtime/platformTimeZoneProvider|platformTimeZoneProvider(stapel.runtime.PlatformContext){}[0]
+final fun stapel.runtime/randomIdGenerator(): stapel.runtime/IdGenerator // stapel.runtime/randomIdGenerator|randomIdGenerator(){}[0]
+final fun stapel.runtime/systemClock(): kotlin.time/Clock // stapel.runtime/systemClock|systemClock(){}[0]
+final inline fun (stapel.runtime/StapelLogger).stapel.runtime/debug(kotlin/String, kotlin/Function0<kotlin/String>) // stapel.runtime/debug|debug@stapel.runtime.StapelLogger(kotlin.String;kotlin.Function0<kotlin.String>){}[0]
+final inline fun (stapel.runtime/StapelLogger).stapel.runtime/error(kotlin/String, kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // stapel.runtime/error|error@stapel.runtime.StapelLogger(kotlin.String;kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+final inline fun (stapel.runtime/StapelLogger).stapel.runtime/info(kotlin/String, kotlin/Function0<kotlin/String>) // stapel.runtime/info|info@stapel.runtime.StapelLogger(kotlin.String;kotlin.Function0<kotlin.String>){}[0]
+final inline fun (stapel.runtime/StapelLogger).stapel.runtime/warn(kotlin/String, kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // stapel.runtime/warn|warn@stapel.runtime.StapelLogger(kotlin.String;kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
