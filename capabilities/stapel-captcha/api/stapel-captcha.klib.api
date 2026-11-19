@@ -1,0 +1,63 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-captcha>
+final enum class stapel.captcha/CaptchaReason : kotlin/Enum<stapel.captcha/CaptchaReason> { // stapel.captcha/CaptchaReason|null[0]
+    enum entry Proactive // stapel.captcha/CaptchaReason.Proactive|null[0]
+    enum entry Rejected // stapel.captcha/CaptchaReason.Rejected|null[0]
+    enum entry Required // stapel.captcha/CaptchaReason.Required|null[0]
+
+    final val entries // stapel.captcha/CaptchaReason.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.captcha/CaptchaReason> // stapel.captcha/CaptchaReason.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.captcha/CaptchaReason // stapel.captcha/CaptchaReason.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.captcha/CaptchaReason> // stapel.captcha/CaptchaReason.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.captcha/CaptchaSolver { // stapel.captcha/CaptchaSolver|null[0]
+    abstract suspend fun solve(stapel.captcha/CaptchaRequest): kotlin/String? // stapel.captcha/CaptchaSolver.solve|solve(stapel.captcha.CaptchaRequest){}[0]
+}
+
+final class stapel.captcha/CaptchaPlugin : stapel.network/NetworkPlugin { // stapel.captcha/CaptchaPlugin|null[0]
+    constructor <init>(stapel.captcha/CaptchaSolver, kotlin/Boolean = ...) // stapel.captcha/CaptchaPlugin.<init>|<init>(stapel.captcha.CaptchaSolver;kotlin.Boolean){}[0]
+
+    final val id // stapel.captcha/CaptchaPlugin.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.captcha/CaptchaPlugin.id.<get-id>|<get-id>(){}[0]
+    final val order // stapel.captcha/CaptchaPlugin.order|{}order[0]
+        final fun <get-order>(): kotlin/Int // stapel.captcha/CaptchaPlugin.order.<get-order>|<get-order>(){}[0]
+
+    final suspend fun decorate(stapel.network/RequestContext) // stapel.captcha/CaptchaPlugin.decorate|decorate(stapel.network.RequestContext){}[0]
+    final suspend fun recover(stapel.network/RequestContext, stapel.result/StapelError): stapel.network/Recovery // stapel.captcha/CaptchaPlugin.recover|recover(stapel.network.RequestContext;stapel.result.StapelError){}[0]
+}
+
+final class stapel.captcha/CaptchaRequest { // stapel.captcha/CaptchaRequest|null[0]
+    constructor <init>(kotlin/String, stapel.captcha/CaptchaReason, kotlin/String) // stapel.captcha/CaptchaRequest.<init>|<init>(kotlin.String;stapel.captcha.CaptchaReason;kotlin.String){}[0]
+
+    final val action // stapel.captcha/CaptchaRequest.action|{}action[0]
+        final fun <get-action>(): kotlin/String // stapel.captcha/CaptchaRequest.action.<get-action>|<get-action>(){}[0]
+    final val operationId // stapel.captcha/CaptchaRequest.operationId|{}operationId[0]
+        final fun <get-operationId>(): kotlin/String // stapel.captcha/CaptchaRequest.operationId.<get-operationId>|<get-operationId>(){}[0]
+    final val reason // stapel.captcha/CaptchaRequest.reason|{}reason[0]
+        final fun <get-reason>(): stapel.captcha/CaptchaReason // stapel.captcha/CaptchaRequest.reason.<get-reason>|<get-reason>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.captcha/CaptchaRequest.component1|component1(){}[0]
+    final fun component2(): stapel.captcha/CaptchaReason // stapel.captcha/CaptchaRequest.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.captcha/CaptchaRequest.component3|component3(){}[0]
+    final fun copy(kotlin/String = ..., stapel.captcha/CaptchaReason = ..., kotlin/String = ...): stapel.captcha/CaptchaRequest // stapel.captcha/CaptchaRequest.copy|copy(kotlin.String;stapel.captcha.CaptchaReason;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.captcha/CaptchaRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.captcha/CaptchaRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.captcha/CaptchaRequest.toString|toString(){}[0]
+}
+
+final object stapel.captcha/CaptchaCodes { // stapel.captcha/CaptchaCodes|null[0]
+    final const val INVALID // stapel.captcha/CaptchaCodes.INVALID|{}INVALID[0]
+        final fun <get-INVALID>(): kotlin/String // stapel.captcha/CaptchaCodes.INVALID.<get-INVALID>|<get-INVALID>(){}[0]
+    final const val REQUIRED // stapel.captcha/CaptchaCodes.REQUIRED|{}REQUIRED[0]
+        final fun <get-REQUIRED>(): kotlin/String // stapel.captcha/CaptchaCodes.REQUIRED.<get-REQUIRED>|<get-REQUIRED>(){}[0]
+}
+
+final fun stapel.captcha.di/captchaModule(stapel.captcha/CaptchaSolver, kotlin/Boolean = ...): org.koin.core.module/Module // stapel.captcha.di/captchaModule|captchaModule(stapel.captcha.CaptchaSolver;kotlin.Boolean){}[0]

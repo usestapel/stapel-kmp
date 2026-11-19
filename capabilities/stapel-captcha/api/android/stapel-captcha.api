@@ -1,0 +1,49 @@
+public final class stapel/captcha/CaptchaCodes {
+	public static final field INSTANCE Lstapel/captcha/CaptchaCodes;
+	public static final field INVALID Ljava/lang/String;
+	public static final field REQUIRED Ljava/lang/String;
+}
+
+public final class stapel/captcha/CaptchaPlugin : stapel/network/NetworkPlugin {
+	public fun <init> (Lstapel/captcha/CaptchaSolver;Z)V
+	public synthetic fun <init> (Lstapel/captcha/CaptchaSolver;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun decorate (Lstapel/network/RequestContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getId ()Ljava/lang/String;
+	public fun getOrder ()I
+	public fun observe (Lstapel/network/CallEvent;)V
+	public fun recover (Lstapel/network/RequestContext;Lstapel/result/StapelError;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/captcha/CaptchaReason : java/lang/Enum {
+	public static final field Proactive Lstapel/captcha/CaptchaReason;
+	public static final field Rejected Lstapel/captcha/CaptchaReason;
+	public static final field Required Lstapel/captcha/CaptchaReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/captcha/CaptchaReason;
+	public static fun values ()[Lstapel/captcha/CaptchaReason;
+}
+
+public final class stapel/captcha/CaptchaRequest {
+	public fun <init> (Ljava/lang/String;Lstapel/captcha/CaptchaReason;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/captcha/CaptchaReason;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lstapel/captcha/CaptchaReason;Ljava/lang/String;)Lstapel/captcha/CaptchaRequest;
+	public static synthetic fun copy$default (Lstapel/captcha/CaptchaRequest;Ljava/lang/String;Lstapel/captcha/CaptchaReason;Ljava/lang/String;ILjava/lang/Object;)Lstapel/captcha/CaptchaRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Ljava/lang/String;
+	public final fun getOperationId ()Ljava/lang/String;
+	public final fun getReason ()Lstapel/captcha/CaptchaReason;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/captcha/CaptchaSolver {
+	public abstract fun solve (Lstapel/captcha/CaptchaRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/captcha/di/CaptchaModuleKt {
+	public static final fun captchaModule (Lstapel/captcha/CaptchaSolver;Z)Lorg/koin/core/module/Module;
+	public static synthetic fun captchaModule$default (Lstapel/captcha/CaptchaSolver;ZILjava/lang/Object;)Lorg/koin/core/module/Module;
+}
+
