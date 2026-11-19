@@ -85,9 +85,6 @@ public class AccountRepository(private val api: AuthApi, private val cache: Stap
  * disk), stale-while-revalidate for 30 s. Revocations are online-only (no auth mutation is ever
  * queued offline) and invalidate the list per the cache plan.
  *
- * Backend defect (found end to end): for a bearer client the server never marks the caller's row
- * [SessionDevice.isCurrent] and [revokeOthers] revokes the caller's own session too.
- *
  * @param api the generated client.
  * @param cache the app's cache (its partitions follow the session).
  */

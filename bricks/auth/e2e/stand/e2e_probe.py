@@ -4,13 +4,6 @@ import threading
 from django.http import JsonResponse
 from stapel_core.captcha.backends import CaptchaVerifier
 
-# Backend finding: config/celery.py makes the project app current only in the importing thread; a
-# request served on another thread (threaded runserver, gthread workers) resolves @shared_task to
-# Celery's unconfigured default app (amqp://localhost) and the login notification answers 500.
-from config.celery import app as _celery_app
-
-_celery_app.set_default()
-
 _lock = threading.Lock()
 _counters = {"requests": 0, "with_cookie": 0, "cookie_paths": []}
 

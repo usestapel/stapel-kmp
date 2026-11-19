@@ -3,7 +3,8 @@
 The auth domain library against a REAL backend: no mocked server. Never published.
 
 ```sh
-bricks/auth/e2e/stand/stand.sh up        # stapel-tools 0.81.2 from PyPI, --type minimal, prototype posture
+bricks/auth/e2e/stand/stand.sh up        # stapel-tools 0.82.0 from PyPI, --type minimal, prototype posture;
+                                         # stapel-auth 0.53.0 / stapel-core 0.98.0 (the pinned contract)
 ./gradlew :stapel-auth-e2e:test \
     -Pstapel.e2e.baseUrl=http://127.0.0.1:18731/ \
     -Pstapel.e2e.captchaBaseUrl=http://127.0.0.1:18732/
@@ -39,32 +40,30 @@ exposing the probe. Without `-Pstapel.e2e.baseUrl` the test task is skipped.
 | cookies | after each class: the server saw requests and none carried a `Cookie` header |
 | captcha | captcha instance: no solver → `CaptchaRequired`, one request; fake solver → solved once, `400` then `200`; wrong token → `CaptchaInvalid` |
 | koin | `authModule()` + substrate modules: a presenter from Koin signs in, refresh works through the bare transport |
-| findings | revoke-others revokes the caller (pinned, see below) |
+| current | each device sees exactly its own row `isCurrent`, and keeps it after a refresh rotation |
+| others | revoke-others (presenter) spares this device: own refresh works, the other device's is dead, one row left |
+| logout-bare | logout with the access token only (no refresh token in the body) kills the session's refresh token |
 
 ## What the real server did that the contract does not say (lines for the backend train)
 
-1. **The scaffolded minimal project cannot sign anybody in.** `requirements.txt` has no `celery`, yet
-   `stapel_auth.tasks` imports `celery.shared_task` on every session issuance (login notification):
-   `ModuleNotFoundError` → 500 on `/email/verify/`, `/phone/verify/`. The stand installs celery.
-2. **With celery installed, a threaded server still answers 500**: `config/celery.py` makes the project
-   app current only in the importing thread; a request served on another thread (threaded
-   `runserver`, gthread workers) binds `@shared_task` to Celery's unconfigured default app
-   (`amqp://localhost`, connection refused). The stand calls `app.set_default()`.
-3. **`GET /sessions/` never marks the caller `is_current` for a bearer client**: it compares the stored
-   refresh `jti` with the access token's `refresh_jti` claim, which access tokens do not carry.
-4. **`DELETE /sessions/` ("all except current") revokes the caller too** for a bearer client (same
-   missing claim). "Sign out other devices" signs this device out as well. Pinned by a test that
-   fails once the backend is fixed.
-5. **429 params**: `error.429.rate_limit` carries `retry_after` (seconds) and `retry_after_display`, not
-   in `errors.json` (which lists only `retry_after_minutes`); `retry_after_minutes` is rounded up (30 s → 1).
-   The code is not bound to `/email/request/` in the contract, so it arrives through the transport
-   family (`RateLimited`), not as a domain error of the operation.
-6. **The per-identifier resend cooldown also gates `/password/change/otp/request/`** right after an
+Fixed and proven by this suite since `stapel-auth` 0.53.0 / `stapel-core` 0.98.0 / `stapel-tools`
+0.82.0: the minimal scaffold signs people in with no stand-side celery install and no
+`app.set_default()` call; `is_current` marks the bearer caller; `DELETE /sessions/` spares the caller;
+a body-less logout revokes the session; `retry_after` / `retry_after_display` are documented params of
+`error.429.rate_limit`, `error.422.blocked` and `error.423.account_locked`; the contract's own examples
+decode (one left, owned by stapel-gdpr, pinned in the domain's `GeneratedContractTest`).
+
+Open:
+
+1. **The scaffold's registry caps `stapel-auth` below the contract the suite proves**: `stapel-tools`
+   0.82.0 writes `stapel-auth[phone]>=0.52.0,<0.53` into `requirements.txt`. The stand rewrites the
+   `stapel-auth` and `stapel-core` lines to the exact versions above and nothing else.
+2. **The per-identifier resend cooldown also gates `/password/change/otp/request/`** right after an
    e-mail sign-in (one shared limiter), answered `429`.
-7. **Capabilities under `--auth-model public`**: `registration.sso` is `true` while `login.sso` is
+3. **Capabilities under `--auth-model public`**: `registration.sso` is `true` while `login.sso` is
    `false`; `registration.anonymous` is `true`.
-8. **Phone validation** rejects numbers in reserved fiction ranges libphonenumber marks invalid
+4. **Phone validation** rejects numbers in reserved fiction ranges libphonenumber marks invalid
    (UK `+44 7700 900xxx`), answering `error.400.invalid_phone`; NANP `555-01xx` is accepted.
-9. **The proactive refresh window must be shorter than the access-token lifetime**: with the session
+5. **The proactive refresh window must be shorter than the access-token lifetime**: with the session
    default (30 s) and a 5 s token every request refreshes first. Not a server defect; a substrate
    default to clamp (`stapel-session`).

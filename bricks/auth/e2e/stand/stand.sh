@@ -15,7 +15,10 @@
 #                                       -Pstapel.e2e.captchaBaseUrl=http://127.0.0.1:18732/
 set -euo pipefail
 
-TOOLS_VERSION="0.81.2"
+TOOLS_VERSION="0.82.0"
+# The backend the suite proves: the pinned contract's version (contracts/auth/pin.json) and its core.
+AUTH_VERSION="0.53.0"
+CORE_VERSION="0.98.0"
 PYTHON="${K7_PYTHON:-python3.12}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 STAND="$(cd "$HERE/.." && pwd)/build/stand"
@@ -41,15 +44,15 @@ scaffold() {
             --posture prototype --no-git --output-dir . >"$STAND/scaffold.log" 2>&1)
     fi
     if [[ ! -x "$PROJECT/.venv/bin/python" ]]; then
-        log "installing the project's requirements"
+        log "installing the project's requirements (stapel-auth $AUTH_VERSION, stapel-core $CORE_VERSION)"
+        # The scaffold's registry may cap a library below the pinned contract: the stand moves the two
+        # lines it proves to exact versions and changes nothing else.
+        sed -E -i '' \
+            -e "s/^stapel-auth(\[[a-z,]+\])?[<>=!~].*/stapel-auth\1==$AUTH_VERSION/" \
+            -e "s/^stapel-core(\[[a-z,]+\])?[<>=!~].*/stapel-core\1==$CORE_VERSION/" \
+            "$PROJECT/requirements.txt"
         "$PYTHON" -m venv "$PROJECT/.venv"
         "$PROJECT/.venv/bin/pip" install -q -r "$PROJECT/requirements.txt" >"$STAND/pip.log" 2>&1
-    fi
-    # Backend finding: the scaffolded minimal project does not list celery, yet stapel-auth imports
-    # `celery.shared_task` on every session issuance (login notification) and answers 500 without it.
-    if ! "$PROJECT/.venv/bin/python" -c 'import celery' 2>/dev/null; then
-        log "installing celery (missing from the scaffold's requirements; see the stand README)"
-        "$PROJECT/.venv/bin/pip" install -q celery >>"$STAND/pip.log" 2>&1
     fi
     cp "$HERE/e2e_settings.py" "$HERE/e2e_captcha_settings.py" "$HERE/e2e_probe.py" "$HERE/e2e_urls.py" "$PROJECT/"
 }

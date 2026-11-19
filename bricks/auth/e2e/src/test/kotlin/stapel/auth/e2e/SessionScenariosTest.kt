@@ -120,11 +120,8 @@ class SessionScenariosTest {
 
                 val list = (a.auth.devices.load() as StapelResult.Ok).value
                 assertEquals(2, list.size, "two sessions: $list")
-                // Backend finding: `is_current` compares the stored refresh jti with the access token's
-                // `refresh_jti` claim, which access tokens do not carry, so a bearer client never sees its
-                // own row marked. Pinned here: this assertion fails the day the backend is fixed.
-                assertEquals(0, list.count { it.isCurrent }, "is_current is never true for a bearer client (backend defect)")
                 val other = list.maxBy { it.createdAt!! } // B signed in last
+                assertEquals(list.single { it.id != other.id }, list.single { it.isCurrent }, "A's own row is the current one: $list")
                 val sessions = SessionsPresenter(a.auth, a.context())
                 sessions.dispatch(SessionsIntent.Revoke(other.id))
                 sessions.state.await { s -> other.id !in s.revoking && (s.sessions as? Resource.Ready)?.data?.none { it.id == other.id } == true }
@@ -245,18 +242,63 @@ class SessionScenariosTest {
     }
 
     @Test
-    fun `backend finding - revoke all others also revokes the caller's own session for a bearer client`(): Unit = runBlocking {
+    fun `this device is marked in the sessions list on each device and stays marked across a refresh`(): Unit = runBlocking {
+        val email = Stand.email()
+        Device("current-a").use { a ->
+            Device("current-b").use { b ->
+                signInByEmail(a, email)
+                signInByEmail(b, email)
+                val fromA = (a.auth.devices.load() as StapelResult.Ok).value
+                val fromB = (b.auth.devices.load() as StapelResult.Ok).value
+                assertEquals(fromA.map { it.id }.toSet(), fromB.map { it.id }.toSet(), "one account, the same two sessions")
+                val currentA = fromA.single { it.isCurrent }
+                val currentB = fromB.single { it.isCurrent }
+                assertNotEquals(currentA.id, currentB.id, "each device sees its own row marked")
+
+                waitPastExpiry()
+                assertIs<StapelResult.Ok<*>>(a.auth.session.refreshUser())
+                val afterRefresh = (a.auth.devices.load() as StapelResult.Ok).value
+                assertEquals(currentA.id, afterRefresh.single { it.isCurrent }.id, "a rotated refresh token keeps the session current")
+            }
+        }
+    }
+
+    @Test
+    fun `revoke all others spares this device and signs the other one out`(): Unit = runBlocking {
         val email = Stand.email()
         Device("others-a").use { a ->
             Device("others-b").use { b ->
                 signInByEmail(a, email)
                 signInByEmail(b, email)
-                assertIs<StapelResult.Ok<*>>(a.auth.devices.revokeOthers())
+                val sessions = SessionsPresenter(a.auth, a.context())
+                sessions.dispatch(SessionsIntent.Refresh)
+                sessions.state.await { (it.sessions as? Resource.Ready)?.data?.size == 2 }
+                sessions.dispatch(SessionsIntent.RevokeOthers)
+                val done = sessions.state.await { !it.revokingOthers && (it.sessions as? Resource.Ready)?.data?.size == 1 }
+                assertNull(done.error)
+                assertTrue((done.sessions as Resource.Ready).data.single().isCurrent, "the row left is this device")
+
                 val own = a.bareApi.createTokenRefresh(TokenRefreshRequest(a.storedTokens()!!.refreshToken))
-                // `DELETE /sessions/` excludes the "current" session by the same missing claim as `is_current`:
-                // the caller is revoked too. This assertion fails the day the backend is fixed.
-                assertIs<StapelResult.Err<*>>(own, "own session survived revoke-others: the backend was fixed")
+                assertIs<StapelResult.Ok<*>>(own, "own session survives revoke-others")
+                val theirs = b.bareApi.createTokenRefresh(TokenRefreshRequest(b.storedTokens()!!.refreshToken))
+                assertIs<StapelResult.Err<*>>(theirs, "the other device's refresh token is dead")
+                val list = (a.auth.devices.load() as StapelResult.Ok).value
+                assertEquals(1, list.size, "server keeps one session: $list")
             }
+        }
+    }
+
+    @Test
+    fun `logout without a refresh token still kills the session's refresh token`(): Unit = runBlocking {
+        Device("logout-bare").use { d ->
+            signInByEmail(d, Stand.email())
+            val tokens = d.storedTokens()!!
+            // The access token alone identifies the session: no body, no cookie.
+            assertIs<StapelResult.Ok<*>>(d.api.logout())
+            val reuse = d.bareApi.createTokenRefresh(TokenRefreshRequest(tokens.refreshToken))
+            assertIs<StapelResult.Err<*>>(reuse, "refresh after a body-less logout")
+            val code = (reuse.error as? TransportCarrier)?.failure?.envelope?.code?.value ?: reuse.error.code.value
+            assertEquals("error.401.refresh_revoked", code)
         }
     }
 

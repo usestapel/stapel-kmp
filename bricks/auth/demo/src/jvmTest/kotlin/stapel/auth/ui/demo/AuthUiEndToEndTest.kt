@@ -7,6 +7,8 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.ComposeUiTest
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
@@ -216,8 +218,7 @@ class AuthUiEndToEndTest {
             awaitTag(DemoTags.HOME)
             onNodeWithTag(DemoTags.SECURITY).performClick()
             awaitTag(AuthTestTags.SESSIONS)
-            // A second installation of the same user signs every session out (DELETE /sessions/ also
-            // revokes the caller on this backend version, which is fine here).
+            // A second installation of the same user signs every other session out, this one included.
             Thread.sleep(2_500)
             DemoStack(url, "u7-other").use { other ->
                 headlessSignIn(other, address)
@@ -235,6 +236,53 @@ class AuthUiEndToEndTest {
             // Back where the session ended: the security screen, not the home.
             awaitTag(AuthTestTags.SESSIONS)
             onNodeWithTag(AuthTestTags.SIGN_IN).assertDoesNotExist()
+        }
+    }
+
+    @Test
+    fun u8_sessionsMarkThisDeviceAndSignOutEveryoneElseSparesIt() = runComposeUiTest {
+        val url = stand()
+        val address = email()
+        DemoStack(url, "u8").use { stack ->
+            app(stack)
+            signInByEmailOtp(address)
+            awaitTag(DemoTags.HOME)
+            Thread.sleep(2_500) // the stand's per-identifier cooldown
+            DemoStack(url, "u8-other").use { other ->
+                headlessSignIn(other, address)
+                val mine = runBlocking { (stack.auth.devices.load() as StapelResult.Ok).value }
+                val current = mine.single { it.isCurrent }
+                val theirs = mine.single { !it.isCurrent }
+
+                onNodeWithTag(DemoTags.SECURITY).performClick()
+                awaitTag(AuthTestTags.SESSIONS)
+                onNodeWithTag(AuthTestTags.SESSIONS_REFRESH).performClick()
+                awaitTag("${AuthTestTags.SESSION_ROW}.${theirs.id}")
+                val marker = hasText("This device", substring = true)
+                val currentRow = hasTestTag("${AuthTestTags.SESSION_ROW}.${current.id}")
+                val otherRow = hasTestTag("${AuthTestTags.SESSION_ROW}.${theirs.id}")
+                onNode(currentRow and hasAnyDescendant(marker), useUnmergedTree = true).assertExists()
+                onNode(otherRow and hasAnyDescendant(marker), useUnmergedTree = true).assertDoesNotExist()
+                assertEquals(1, onAllNodes(marker, useUnmergedTree = true).fetchSemanticsNodes().size, "one row is this device")
+                // This device has no "Sign out" of its own; the other one has.
+                onNode(currentRow and hasAnyDescendant(hasText("Sign out")), useUnmergedTree = true).assertDoesNotExist()
+                onNode(otherRow and hasAnyDescendant(hasText("Sign out")), useUnmergedTree = true).assertExists()
+
+                onNodeWithTag(AuthTestTags.SIGN_OUT_OTHERS).performClick()
+                awaitTag(AuthTestTags.REVOKE_CONFIRM)
+                onNode(
+                    hasText("Sign out everyone else") and hasAnyAncestor(hasTestTag(AuthTestTags.REVOKE_CONFIRM)),
+                    useUnmergedTree = true,
+                ).performClick()
+                waitUntil(timeoutMillis = 20_000) { onAllNodes(otherRow).fetchSemanticsNodes().isEmpty() }
+                onNode(currentRow).assertExists()
+                onNodeWithTag(AuthTestTags.SIGN_OUT_OTHERS).assertDoesNotExist()
+                assertTrue(stack.auth.session.state.value is AuthState.SignedIn, "this device stays signed in")
+                runBlocking {
+                    val left = (stack.auth.devices.load() as StapelResult.Ok).value
+                    assertEquals(listOf(current.id), left.map { it.id }, "the server keeps this device only")
+                }
+            }
         }
     }
 
