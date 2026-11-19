@@ -39,6 +39,15 @@ class StapelTokensPluginTest {
     }
 
     @Test
+    fun `check alone on a fresh checkout generates first and passes`() {
+        // No build/ yet (a CI checkout): the check must not call never-generated tokens stale.
+        project("preset-ocean")
+        val r = runner("checkStapelTokens").build()
+        assertContains(r.output, ":generateStapelTokens")
+        assertTrue(File(dir, "build/generated/stapelTokens/shop/theme/AppTokens.kt").isFile)
+    }
+
+    @Test
     fun `a theme failing contrast fails the check with the problem named`() {
         project("failing-contrast")
         val r = runner("check").buildAndFail()

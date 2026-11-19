@@ -16,6 +16,7 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 import stapel.tools.tokens.ThemeException
 import stapel.tools.tokens.ThemeProblem
 import stapel.tools.tokens.ThemeValidationException
@@ -88,6 +89,7 @@ class StapelTokensPlugin : Plugin<Project> {
 }
 
 /** Shared inputs of the two tasks. */
+@DisableCachingByDefault(because = "an abstract base; each task declares its own caching")
 abstract class TokensTaskBase : DefaultTask() {
     /** The host theme, absent = library default. */
     @get:InputFile @get:Optional @get:PathSensitive(PathSensitivity.NONE) abstract val theme: RegularFileProperty
@@ -137,9 +139,13 @@ abstract class GenerateStapelTokens : TokensTaskBase() {
 }
 
 /** `checkStapelTokens`. */
+@DisableCachingByDefault(because = "a verification gate: its only output is a stamp")
 abstract class CheckStapelTokens : TokensTaskBase() {
-    /** The generated source root to compare. */
-    @get:org.gradle.api.tasks.Internal abstract val generated: DirectoryProperty
+    /**
+     * The generated source root to compare: `generateStapelTokens`' output, so the check runs after it
+     * (on a fresh checkout there is nothing to compare until it ran) and proves what compiles is current.
+     */
+    @get:org.gradle.api.tasks.InputFiles @get:PathSensitive(PathSensitivity.RELATIVE) abstract val generated: DirectoryProperty
 
     /** Stamp. */
     @get:OutputFile abstract val stamp: RegularFileProperty
