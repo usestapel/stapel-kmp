@@ -1,5 +1,0 @@
-public final class stapel/probe/compose/ProbeLabelKt {
-	public static final field PROBE_LABEL_TAG Ljava/lang/String;
-	public static final fun ProbeLabel ([Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
-}
-
