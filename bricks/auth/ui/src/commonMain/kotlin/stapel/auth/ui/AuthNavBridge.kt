@@ -28,6 +28,7 @@ public fun AuthState.toNavAuthState(): NavAuthState = when (this) {
  * involuntary sign-out: when a session ends for any reason but the user's own (expired, revoked,
  * disabled), the screens that were open are remembered before navigation resets to sign-in, and are
  * reopened (through the guard) as soon as a session exists again. A voluntary sign-out forgets them.
+ * No step of the sign-in destination's flow is ever remembered.
  *
  * Navigation's reducer resets the stack on every sign-out (it cannot tell the reasons apart); this
  * bridge is where the reason is known.
@@ -72,7 +73,13 @@ public class AuthNavBridge(private val auth: StapelAuth, private val scope: Coro
     private fun openScreens(): List<Route>? {
         val n = navigator ?: return null
         val signIn = n.policy.signIn
-        val routes = n.state.value.visible.map { it.route }.filter { n.nav.destinationOf(it)?.id != signIn }
+        val signInFlow = signIn?.let { n.nav.byId[it]?.spec?.flow }
+        // Every step of the sign-in flow is left out, not only its first screen: the navigator removes the
+        // whole flow on sign-in, and restoring a step would reopen sign-in for a signed-in user.
+        val routes = n.state.value.visible.map { it.route }.filter { route ->
+            val dest = n.nav.destinationOf(route)
+            dest?.id != signIn && (signInFlow == null || dest?.spec?.flow != signInFlow)
+        }
         return routes.takeIf { it.isNotEmpty() }
     }
 }
