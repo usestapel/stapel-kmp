@@ -1,0 +1,395 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-network>
+abstract fun interface stapel.network/VerificationHandler { // stapel.network/VerificationHandler|null[0]
+    abstract suspend fun resolve(stapel.result/VerificationChallenge, kotlin/String): stapel.network/VerificationOutcome // stapel.network/VerificationHandler.resolve|resolve(stapel.result.VerificationChallenge;kotlin.String){}[0]
+}
+
+abstract interface stapel.network/HttpTransport : kotlin/AutoCloseable { // stapel.network/HttpTransport|null[0]
+    abstract suspend fun send(stapel.network/WireRequest): stapel.network/WireOutcome // stapel.network/HttpTransport.send|send(stapel.network.WireRequest){}[0]
+}
+
+abstract interface stapel.network/NetworkPlugin { // stapel.network/NetworkPlugin|null[0]
+    abstract val id // stapel.network/NetworkPlugin.id|{}id[0]
+        abstract fun <get-id>(): kotlin/String // stapel.network/NetworkPlugin.id.<get-id>|<get-id>(){}[0]
+    open val order // stapel.network/NetworkPlugin.order|{}order[0]
+        open fun <get-order>(): kotlin/Int // stapel.network/NetworkPlugin.order.<get-order>|<get-order>(){}[0]
+
+    open fun observe(stapel.network/CallEvent) // stapel.network/NetworkPlugin.observe|observe(stapel.network.CallEvent){}[0]
+    open suspend fun decorate(stapel.network/RequestContext) // stapel.network/NetworkPlugin.decorate|decorate(stapel.network.RequestContext){}[0]
+    open suspend fun recover(stapel.network/RequestContext, stapel.result/StapelError): stapel.network/Recovery // stapel.network/NetworkPlugin.recover|recover(stapel.network.RequestContext;stapel.result.StapelError){}[0]
+}
+
+abstract interface stapel.network/RequestAuthenticator { // stapel.network/RequestAuthenticator|null[0]
+    abstract suspend fun accessToken(): kotlin/String? // stapel.network/RequestAuthenticator.accessToken|accessToken(){}[0]
+    abstract suspend fun refresh(kotlin/String?): stapel.network/RefreshVerdict // stapel.network/RequestAuthenticator.refresh|refresh(kotlin.String?){}[0]
+
+    final object Companion { // stapel.network/RequestAuthenticator.Companion|null[0]
+        final val None // stapel.network/RequestAuthenticator.Companion.None|{}None[0]
+            final fun <get-None>(): stapel.network/RequestAuthenticator // stapel.network/RequestAuthenticator.Companion.None.<get-None>|<get-None>(){}[0]
+    }
+}
+
+abstract interface stapel.network/RequestContext { // stapel.network/RequestContext|null[0]
+    abstract val attempt // stapel.network/RequestContext.attempt|{}attempt[0]
+        abstract fun <get-attempt>(): kotlin/Int // stapel.network/RequestContext.attempt.<get-attempt>|<get-attempt>(){}[0]
+    abstract val callId // stapel.network/RequestContext.callId|{}callId[0]
+        abstract fun <get-callId>(): kotlin/String // stapel.network/RequestContext.callId.<get-callId>|<get-callId>(){}[0]
+    abstract val operation // stapel.network/RequestContext.operation|{}operation[0]
+        abstract fun <get-operation>(): stapel.wire/OperationSpec<*, *, *> // stapel.network/RequestContext.operation.<get-operation>|<get-operation>(){}[0]
+    abstract val url // stapel.network/RequestContext.url|{}url[0]
+        abstract fun <get-url>(): kotlin/String // stapel.network/RequestContext.url.<get-url>|<get-url>(){}[0]
+
+    abstract fun header(kotlin/String): kotlin/String? // stapel.network/RequestContext.header|header(kotlin.String){}[0]
+    abstract fun removeHeader(kotlin/String) // stapel.network/RequestContext.removeHeader|removeHeader(kotlin.String){}[0]
+    abstract fun setBodyField(kotlin/String, kotlin/String): kotlin/Boolean // stapel.network/RequestContext.setBodyField|setBodyField(kotlin.String;kotlin.String){}[0]
+    abstract fun setHeader(kotlin/String, kotlin/String) // stapel.network/RequestContext.setHeader|setHeader(kotlin.String;kotlin.String){}[0]
+}
+
+sealed interface stapel.network/CallEvent { // stapel.network/CallEvent|null[0]
+    final class Attempt : stapel.network/CallEvent { // stapel.network/CallEvent.Attempt|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin/Int, kotlin/Int?, kotlin/String?, kotlin.time/Duration) // stapel.network/CallEvent.Attempt.<init>|<init>(kotlin.String;kotlin.String;kotlin.Int;kotlin.Int?;kotlin.String?;kotlin.time.Duration){}[0]
+
+        final val attempt // stapel.network/CallEvent.Attempt.attempt|{}attempt[0]
+            final fun <get-attempt>(): kotlin/Int // stapel.network/CallEvent.Attempt.attempt.<get-attempt>|<get-attempt>(){}[0]
+        final val callId // stapel.network/CallEvent.Attempt.callId|{}callId[0]
+            final fun <get-callId>(): kotlin/String // stapel.network/CallEvent.Attempt.callId.<get-callId>|<get-callId>(){}[0]
+        final val duration // stapel.network/CallEvent.Attempt.duration|{}duration[0]
+            final fun <get-duration>(): kotlin.time/Duration // stapel.network/CallEvent.Attempt.duration.<get-duration>|<get-duration>(){}[0]
+        final val errorCode // stapel.network/CallEvent.Attempt.errorCode|{}errorCode[0]
+            final fun <get-errorCode>(): kotlin/String? // stapel.network/CallEvent.Attempt.errorCode.<get-errorCode>|<get-errorCode>(){}[0]
+        final val operationId // stapel.network/CallEvent.Attempt.operationId|{}operationId[0]
+            final fun <get-operationId>(): kotlin/String // stapel.network/CallEvent.Attempt.operationId.<get-operationId>|<get-operationId>(){}[0]
+        final val status // stapel.network/CallEvent.Attempt.status|{}status[0]
+            final fun <get-status>(): kotlin/Int? // stapel.network/CallEvent.Attempt.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.network/CallEvent.Attempt.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.network/CallEvent.Attempt.component2|component2(){}[0]
+        final fun component3(): kotlin/Int // stapel.network/CallEvent.Attempt.component3|component3(){}[0]
+        final fun component4(): kotlin/Int? // stapel.network/CallEvent.Attempt.component4|component4(){}[0]
+        final fun component5(): kotlin/String? // stapel.network/CallEvent.Attempt.component5|component5(){}[0]
+        final fun component6(): kotlin.time/Duration // stapel.network/CallEvent.Attempt.component6|component6(){}[0]
+        final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/Int = ..., kotlin/Int? = ..., kotlin/String? = ..., kotlin.time/Duration = ...): stapel.network/CallEvent.Attempt // stapel.network/CallEvent.Attempt.copy|copy(kotlin.String;kotlin.String;kotlin.Int;kotlin.Int?;kotlin.String?;kotlin.time.Duration){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/CallEvent.Attempt.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/CallEvent.Attempt.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/CallEvent.Attempt.toString|toString(){}[0]
+    }
+
+    final class Finished : stapel.network/CallEvent { // stapel.network/CallEvent.Finished|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin/Int, kotlin/String?, kotlin.time/Duration) // stapel.network/CallEvent.Finished.<init>|<init>(kotlin.String;kotlin.String;kotlin.Int;kotlin.String?;kotlin.time.Duration){}[0]
+
+        final val attempts // stapel.network/CallEvent.Finished.attempts|{}attempts[0]
+            final fun <get-attempts>(): kotlin/Int // stapel.network/CallEvent.Finished.attempts.<get-attempts>|<get-attempts>(){}[0]
+        final val callId // stapel.network/CallEvent.Finished.callId|{}callId[0]
+            final fun <get-callId>(): kotlin/String // stapel.network/CallEvent.Finished.callId.<get-callId>|<get-callId>(){}[0]
+        final val duration // stapel.network/CallEvent.Finished.duration|{}duration[0]
+            final fun <get-duration>(): kotlin.time/Duration // stapel.network/CallEvent.Finished.duration.<get-duration>|<get-duration>(){}[0]
+        final val errorCode // stapel.network/CallEvent.Finished.errorCode|{}errorCode[0]
+            final fun <get-errorCode>(): kotlin/String? // stapel.network/CallEvent.Finished.errorCode.<get-errorCode>|<get-errorCode>(){}[0]
+        final val operationId // stapel.network/CallEvent.Finished.operationId|{}operationId[0]
+            final fun <get-operationId>(): kotlin/String // stapel.network/CallEvent.Finished.operationId.<get-operationId>|<get-operationId>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.network/CallEvent.Finished.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.network/CallEvent.Finished.component2|component2(){}[0]
+        final fun component3(): kotlin/Int // stapel.network/CallEvent.Finished.component3|component3(){}[0]
+        final fun component4(): kotlin/String? // stapel.network/CallEvent.Finished.component4|component4(){}[0]
+        final fun component5(): kotlin.time/Duration // stapel.network/CallEvent.Finished.component5|component5(){}[0]
+        final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/Int = ..., kotlin/String? = ..., kotlin.time/Duration = ...): stapel.network/CallEvent.Finished // stapel.network/CallEvent.Finished.copy|copy(kotlin.String;kotlin.String;kotlin.Int;kotlin.String?;kotlin.time.Duration){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/CallEvent.Finished.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/CallEvent.Finished.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/CallEvent.Finished.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.network/Recovery { // stapel.network/Recovery|null[0]
+    final class Fail : stapel.network/Recovery { // stapel.network/Recovery.Fail|null[0]
+        constructor <init>(stapel.result/TransportFailure) // stapel.network/Recovery.Fail.<init>|<init>(stapel.result.TransportFailure){}[0]
+
+        final val failure // stapel.network/Recovery.Fail.failure|{}failure[0]
+            final fun <get-failure>(): stapel.result/TransportFailure // stapel.network/Recovery.Fail.failure.<get-failure>|<get-failure>(){}[0]
+    }
+
+    final class Retry : stapel.network/Recovery { // stapel.network/Recovery.Retry|null[0]
+        constructor <init>(kotlin.coroutines/SuspendFunction1<stapel.network/RequestContext, kotlin/Unit> = ...) // stapel.network/Recovery.Retry.<init>|<init>(kotlin.coroutines.SuspendFunction1<stapel.network.RequestContext,kotlin.Unit>){}[0]
+
+        final val mutate // stapel.network/Recovery.Retry.mutate|{}mutate[0]
+            final fun <get-mutate>(): kotlin.coroutines/SuspendFunction1<stapel.network/RequestContext, kotlin/Unit> // stapel.network/Recovery.Retry.mutate.<get-mutate>|<get-mutate>(){}[0]
+    }
+
+    final object Pass : stapel.network/Recovery { // stapel.network/Recovery.Pass|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/Recovery.Pass.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/Recovery.Pass.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/Recovery.Pass.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.network/RefreshVerdict { // stapel.network/RefreshVerdict|null[0]
+    final class Refreshed : stapel.network/RefreshVerdict { // stapel.network/RefreshVerdict.Refreshed|null[0]
+        constructor <init>(kotlin/String) // stapel.network/RefreshVerdict.Refreshed.<init>|<init>(kotlin.String){}[0]
+
+        final val accessToken // stapel.network/RefreshVerdict.Refreshed.accessToken|{}accessToken[0]
+            final fun <get-accessToken>(): kotlin/String // stapel.network/RefreshVerdict.Refreshed.accessToken.<get-accessToken>|<get-accessToken>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.network/RefreshVerdict.Refreshed.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.network/RefreshVerdict.Refreshed // stapel.network/RefreshVerdict.Refreshed.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/RefreshVerdict.Refreshed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/RefreshVerdict.Refreshed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/RefreshVerdict.Refreshed.toString|toString(){}[0]
+    }
+
+    final object NoSession : stapel.network/RefreshVerdict { // stapel.network/RefreshVerdict.NoSession|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/RefreshVerdict.NoSession.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/RefreshVerdict.NoSession.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/RefreshVerdict.NoSession.toString|toString(){}[0]
+    }
+
+    final object SessionEnded : stapel.network/RefreshVerdict { // stapel.network/RefreshVerdict.SessionEnded|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/RefreshVerdict.SessionEnded.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/RefreshVerdict.SessionEnded.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/RefreshVerdict.SessionEnded.toString|toString(){}[0]
+    }
+
+    final object Unavailable : stapel.network/RefreshVerdict { // stapel.network/RefreshVerdict.Unavailable|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/RefreshVerdict.Unavailable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/RefreshVerdict.Unavailable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/RefreshVerdict.Unavailable.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.network/VerificationOutcome { // stapel.network/VerificationOutcome|null[0]
+    final class Verified : stapel.network/VerificationOutcome { // stapel.network/VerificationOutcome.Verified|null[0]
+        constructor <init>(kotlin/String?) // stapel.network/VerificationOutcome.Verified.<init>|<init>(kotlin.String?){}[0]
+
+        final val token // stapel.network/VerificationOutcome.Verified.token|{}token[0]
+            final fun <get-token>(): kotlin/String? // stapel.network/VerificationOutcome.Verified.token.<get-token>|<get-token>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.network/VerificationOutcome.Verified.component1|component1(){}[0]
+        final fun copy(kotlin/String? = ...): stapel.network/VerificationOutcome.Verified // stapel.network/VerificationOutcome.Verified.copy|copy(kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/VerificationOutcome.Verified.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/VerificationOutcome.Verified.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/VerificationOutcome.Verified.toString|toString(){}[0]
+    }
+
+    final object Declined : stapel.network/VerificationOutcome { // stapel.network/VerificationOutcome.Declined|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/VerificationOutcome.Declined.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/VerificationOutcome.Declined.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/VerificationOutcome.Declined.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.network/WireBody { // stapel.network/WireBody|null[0]
+    final class Bytes : stapel.network/WireBody { // stapel.network/WireBody.Bytes|null[0]
+        constructor <init>(kotlin/ByteArray, kotlin/String) // stapel.network/WireBody.Bytes.<init>|<init>(kotlin.ByteArray;kotlin.String){}[0]
+
+        final val bytes // stapel.network/WireBody.Bytes.bytes|{}bytes[0]
+            final fun <get-bytes>(): kotlin/ByteArray // stapel.network/WireBody.Bytes.bytes.<get-bytes>|<get-bytes>(){}[0]
+        final val contentType // stapel.network/WireBody.Bytes.contentType|{}contentType[0]
+            final fun <get-contentType>(): kotlin/String // stapel.network/WireBody.Bytes.contentType.<get-contentType>|<get-contentType>(){}[0]
+
+        final fun text(): kotlin/String // stapel.network/WireBody.Bytes.text|text(){}[0]
+    }
+
+    final class Multipart : stapel.network/WireBody { // stapel.network/WireBody.Multipart|null[0]
+        constructor <init>(kotlin.collections/List<stapel.network/WirePart>) // stapel.network/WireBody.Multipart.<init>|<init>(kotlin.collections.List<stapel.network.WirePart>){}[0]
+
+        final val parts // stapel.network/WireBody.Multipart.parts|{}parts[0]
+            final fun <get-parts>(): kotlin.collections/List<stapel.network/WirePart> // stapel.network/WireBody.Multipart.parts.<get-parts>|<get-parts>(){}[0]
+    }
+
+    final object Empty : stapel.network/WireBody { // stapel.network/WireBody.Empty|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/WireBody.Empty.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.network/WireBody.Empty.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.network/WireBody.Empty.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.network/WireOutcome { // stapel.network/WireOutcome|null[0]
+    final class Failure : stapel.network/WireOutcome { // stapel.network/WireOutcome.Failure|null[0]
+        constructor <init>(stapel.result/TransportFailure.NoResponse, kotlin/Boolean) // stapel.network/WireOutcome.Failure.<init>|<init>(stapel.result.TransportFailure.NoResponse;kotlin.Boolean){}[0]
+
+        final val error // stapel.network/WireOutcome.Failure.error|{}error[0]
+            final fun <get-error>(): stapel.result/TransportFailure.NoResponse // stapel.network/WireOutcome.Failure.error.<get-error>|<get-error>(){}[0]
+        final val requestSent // stapel.network/WireOutcome.Failure.requestSent|{}requestSent[0]
+            final fun <get-requestSent>(): kotlin/Boolean // stapel.network/WireOutcome.Failure.requestSent.<get-requestSent>|<get-requestSent>(){}[0]
+
+        final fun toString(): kotlin/String // stapel.network/WireOutcome.Failure.toString|toString(){}[0]
+    }
+
+    final class Response : stapel.network/WireOutcome { // stapel.network/WireOutcome.Response|null[0]
+        constructor <init>(kotlin/Int, kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>>, kotlin/ByteArray) // stapel.network/WireOutcome.Response.<init>|<init>(kotlin.Int;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>;kotlin.ByteArray){}[0]
+
+        final val body // stapel.network/WireOutcome.Response.body|{}body[0]
+            final fun <get-body>(): kotlin/ByteArray // stapel.network/WireOutcome.Response.body.<get-body>|<get-body>(){}[0]
+        final val headers // stapel.network/WireOutcome.Response.headers|{}headers[0]
+            final fun <get-headers>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> // stapel.network/WireOutcome.Response.headers.<get-headers>|<get-headers>(){}[0]
+        final val status // stapel.network/WireOutcome.Response.status|{}status[0]
+            final fun <get-status>(): kotlin/Int // stapel.network/WireOutcome.Response.status.<get-status>|<get-status>(){}[0]
+
+        final fun header(kotlin/String): kotlin/String? // stapel.network/WireOutcome.Response.header|header(kotlin.String){}[0]
+        final fun toString(): kotlin/String // stapel.network/WireOutcome.Response.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.network/WirePart { // stapel.network/WirePart|null[0]
+    abstract val name // stapel.network/WirePart.name|{}name[0]
+        abstract fun <get-name>(): kotlin/String // stapel.network/WirePart.name.<get-name>|<get-name>(){}[0]
+
+    final class Field : stapel.network/WirePart { // stapel.network/WirePart.Field|null[0]
+        constructor <init>(kotlin/String, kotlin/String) // stapel.network/WirePart.Field.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+        final val name // stapel.network/WirePart.Field.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.network/WirePart.Field.name.<get-name>|<get-name>(){}[0]
+        final val value // stapel.network/WirePart.Field.value|{}value[0]
+            final fun <get-value>(): kotlin/String // stapel.network/WirePart.Field.value.<get-value>|<get-value>(){}[0]
+    }
+
+    final class File : stapel.network/WirePart { // stapel.network/WirePart.File|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin/String?, kotlin/ByteArray) // stapel.network/WirePart.File.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?;kotlin.ByteArray){}[0]
+
+        final val bytes // stapel.network/WirePart.File.bytes|{}bytes[0]
+            final fun <get-bytes>(): kotlin/ByteArray // stapel.network/WirePart.File.bytes.<get-bytes>|<get-bytes>(){}[0]
+        final val contentType // stapel.network/WirePart.File.contentType|{}contentType[0]
+            final fun <get-contentType>(): kotlin/String? // stapel.network/WirePart.File.contentType.<get-contentType>|<get-contentType>(){}[0]
+        final val fileName // stapel.network/WirePart.File.fileName|{}fileName[0]
+            final fun <get-fileName>(): kotlin/String // stapel.network/WirePart.File.fileName.<get-fileName>|<get-fileName>(){}[0]
+        final val name // stapel.network/WirePart.File.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.network/WirePart.File.name.<get-name>|<get-name>(){}[0]
+    }
+}
+
+final class stapel.network/CertificatePins { // stapel.network/CertificatePins|null[0]
+    final val byHost // stapel.network/CertificatePins.byHost|{}byHost[0]
+        final fun <get-byHost>(): kotlin.collections/Map<kotlin/String, kotlin.collections/Set<kotlin/String>> // stapel.network/CertificatePins.byHost.<get-byHost>|<get-byHost>(){}[0]
+    final val isEmpty // stapel.network/CertificatePins.isEmpty|{}isEmpty[0]
+        final fun <get-isEmpty>(): kotlin/Boolean // stapel.network/CertificatePins.isEmpty.<get-isEmpty>|<get-isEmpty>(){}[0]
+
+    final class Builder { // stapel.network/CertificatePins.Builder|null[0]
+        constructor <init>() // stapel.network/CertificatePins.Builder.<init>|<init>(){}[0]
+
+        final fun build(): stapel.network/CertificatePins // stapel.network/CertificatePins.Builder.build|build(){}[0]
+        final fun pin(kotlin/String, kotlin/Array<out kotlin/String>...): stapel.network/CertificatePins.Builder // stapel.network/CertificatePins.Builder.pin|pin(kotlin.String;kotlin.Array<out|kotlin.String>...){}[0]
+    }
+
+    final object Companion { // stapel.network/CertificatePins.Companion|null[0]
+        final val None // stapel.network/CertificatePins.Companion.None|{}None[0]
+            final fun <get-None>(): stapel.network/CertificatePins // stapel.network/CertificatePins.Companion.None.<get-None>|<get-None>(){}[0]
+    }
+}
+
+final class stapel.network/NetworkConfig { // stapel.network/NetworkConfig|null[0]
+    constructor <init>(stapel.network/TimeoutPolicy = ..., stapel.network/RetryPolicy = ..., stapel.network/CertificatePins = ...) // stapel.network/NetworkConfig.<init>|<init>(stapel.network.TimeoutPolicy;stapel.network.RetryPolicy;stapel.network.CertificatePins){}[0]
+
+    final val pins // stapel.network/NetworkConfig.pins|{}pins[0]
+        final fun <get-pins>(): stapel.network/CertificatePins // stapel.network/NetworkConfig.pins.<get-pins>|<get-pins>(){}[0]
+    final val retry // stapel.network/NetworkConfig.retry|{}retry[0]
+        final fun <get-retry>(): stapel.network/RetryPolicy // stapel.network/NetworkConfig.retry.<get-retry>|<get-retry>(){}[0]
+    final val timeouts // stapel.network/NetworkConfig.timeouts|{}timeouts[0]
+        final fun <get-timeouts>(): stapel.network/TimeoutPolicy // stapel.network/NetworkConfig.timeouts.<get-timeouts>|<get-timeouts>(){}[0]
+
+    final fun component1(): stapel.network/TimeoutPolicy // stapel.network/NetworkConfig.component1|component1(){}[0]
+    final fun component2(): stapel.network/RetryPolicy // stapel.network/NetworkConfig.component2|component2(){}[0]
+    final fun component3(): stapel.network/CertificatePins // stapel.network/NetworkConfig.component3|component3(){}[0]
+    final fun copy(stapel.network/TimeoutPolicy = ..., stapel.network/RetryPolicy = ..., stapel.network/CertificatePins = ...): stapel.network/NetworkConfig // stapel.network/NetworkConfig.copy|copy(stapel.network.TimeoutPolicy;stapel.network.RetryPolicy;stapel.network.CertificatePins){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/NetworkConfig.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.network/NetworkConfig.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.network/NetworkConfig.toString|toString(){}[0]
+}
+
+final class stapel.network/NetworkDependencies { // stapel.network/NetworkDependencies|null[0]
+    constructor <init>(stapel.config/StapelEnvironment, kotlin.time/Clock, stapel.runtime/IdGenerator, stapel.runtime/LocaleProvider? = ..., stapel.runtime/Connectivity? = ..., stapel.runtime/StapelLogger = ..., stapel.runtime/StapelTelemetry = ..., kotlin.random/Random = ...) // stapel.network/NetworkDependencies.<init>|<init>(stapel.config.StapelEnvironment;kotlin.time.Clock;stapel.runtime.IdGenerator;stapel.runtime.LocaleProvider?;stapel.runtime.Connectivity?;stapel.runtime.StapelLogger;stapel.runtime.StapelTelemetry;kotlin.random.Random){}[0]
+
+    final val clock // stapel.network/NetworkDependencies.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // stapel.network/NetworkDependencies.clock.<get-clock>|<get-clock>(){}[0]
+    final val connectivity // stapel.network/NetworkDependencies.connectivity|{}connectivity[0]
+        final fun <get-connectivity>(): stapel.runtime/Connectivity? // stapel.network/NetworkDependencies.connectivity.<get-connectivity>|<get-connectivity>(){}[0]
+    final val environment // stapel.network/NetworkDependencies.environment|{}environment[0]
+        final fun <get-environment>(): stapel.config/StapelEnvironment // stapel.network/NetworkDependencies.environment.<get-environment>|<get-environment>(){}[0]
+    final val ids // stapel.network/NetworkDependencies.ids|{}ids[0]
+        final fun <get-ids>(): stapel.runtime/IdGenerator // stapel.network/NetworkDependencies.ids.<get-ids>|<get-ids>(){}[0]
+    final val locale // stapel.network/NetworkDependencies.locale|{}locale[0]
+        final fun <get-locale>(): stapel.runtime/LocaleProvider? // stapel.network/NetworkDependencies.locale.<get-locale>|<get-locale>(){}[0]
+    final val logger // stapel.network/NetworkDependencies.logger|{}logger[0]
+        final fun <get-logger>(): stapel.runtime/StapelLogger // stapel.network/NetworkDependencies.logger.<get-logger>|<get-logger>(){}[0]
+    final val random // stapel.network/NetworkDependencies.random|{}random[0]
+        final fun <get-random>(): kotlin.random/Random // stapel.network/NetworkDependencies.random.<get-random>|<get-random>(){}[0]
+    final val telemetry // stapel.network/NetworkDependencies.telemetry|{}telemetry[0]
+        final fun <get-telemetry>(): stapel.runtime/StapelTelemetry // stapel.network/NetworkDependencies.telemetry.<get-telemetry>|<get-telemetry>(){}[0]
+}
+
+final class stapel.network/RetryPolicy { // stapel.network/RetryPolicy|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...) // stapel.network/RetryPolicy.<init>|<init>(kotlin.Int;kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+    final val baseDelay // stapel.network/RetryPolicy.baseDelay|{}baseDelay[0]
+        final fun <get-baseDelay>(): kotlin.time/Duration // stapel.network/RetryPolicy.baseDelay.<get-baseDelay>|<get-baseDelay>(){}[0]
+    final val maxAttempts // stapel.network/RetryPolicy.maxAttempts|{}maxAttempts[0]
+        final fun <get-maxAttempts>(): kotlin/Int // stapel.network/RetryPolicy.maxAttempts.<get-maxAttempts>|<get-maxAttempts>(){}[0]
+    final val maxDelay // stapel.network/RetryPolicy.maxDelay|{}maxDelay[0]
+        final fun <get-maxDelay>(): kotlin.time/Duration // stapel.network/RetryPolicy.maxDelay.<get-maxDelay>|<get-maxDelay>(){}[0]
+    final val maxHonouredRetryAfter // stapel.network/RetryPolicy.maxHonouredRetryAfter|{}maxHonouredRetryAfter[0]
+        final fun <get-maxHonouredRetryAfter>(): kotlin.time/Duration // stapel.network/RetryPolicy.maxHonouredRetryAfter.<get-maxHonouredRetryAfter>|<get-maxHonouredRetryAfter>(){}[0]
+
+    final fun component1(): kotlin/Int // stapel.network/RetryPolicy.component1|component1(){}[0]
+    final fun component2(): kotlin.time/Duration // stapel.network/RetryPolicy.component2|component2(){}[0]
+    final fun component3(): kotlin.time/Duration // stapel.network/RetryPolicy.component3|component3(){}[0]
+    final fun component4(): kotlin.time/Duration // stapel.network/RetryPolicy.component4|component4(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.network/RetryPolicy // stapel.network/RetryPolicy.copy|copy(kotlin.Int;kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/RetryPolicy.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.network/RetryPolicy.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.network/RetryPolicy.toString|toString(){}[0]
+
+    final object Companion { // stapel.network/RetryPolicy.Companion|null[0]
+        final val None // stapel.network/RetryPolicy.Companion.None|{}None[0]
+            final fun <get-None>(): stapel.network/RetryPolicy // stapel.network/RetryPolicy.Companion.None.<get-None>|<get-None>(){}[0]
+    }
+}
+
+final class stapel.network/TimeoutPolicy { // stapel.network/TimeoutPolicy|null[0]
+    constructor <init>(kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...) // stapel.network/TimeoutPolicy.<init>|<init>(kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+    final val connect // stapel.network/TimeoutPolicy.connect|{}connect[0]
+        final fun <get-connect>(): kotlin.time/Duration // stapel.network/TimeoutPolicy.connect.<get-connect>|<get-connect>(){}[0]
+    final val request // stapel.network/TimeoutPolicy.request|{}request[0]
+        final fun <get-request>(): kotlin.time/Duration // stapel.network/TimeoutPolicy.request.<get-request>|<get-request>(){}[0]
+    final val socket // stapel.network/TimeoutPolicy.socket|{}socket[0]
+        final fun <get-socket>(): kotlin.time/Duration // stapel.network/TimeoutPolicy.socket.<get-socket>|<get-socket>(){}[0]
+
+    final fun component1(): kotlin.time/Duration // stapel.network/TimeoutPolicy.component1|component1(){}[0]
+    final fun component2(): kotlin.time/Duration // stapel.network/TimeoutPolicy.component2|component2(){}[0]
+    final fun component3(): kotlin.time/Duration // stapel.network/TimeoutPolicy.component3|component3(){}[0]
+    final fun copy(kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.network/TimeoutPolicy // stapel.network/TimeoutPolicy.copy|copy(kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.network/TimeoutPolicy.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.network/TimeoutPolicy.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.network/TimeoutPolicy.toString|toString(){}[0]
+}
+
+final class stapel.network/WireRequest { // stapel.network/WireRequest|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>>, stapel.network/WireBody = ..., stapel.network/TimeoutPolicy = ...) // stapel.network/WireRequest.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>;stapel.network.WireBody;stapel.network.TimeoutPolicy){}[0]
+
+    final val body // stapel.network/WireRequest.body|{}body[0]
+        final fun <get-body>(): stapel.network/WireBody // stapel.network/WireRequest.body.<get-body>|<get-body>(){}[0]
+    final val headers // stapel.network/WireRequest.headers|{}headers[0]
+        final fun <get-headers>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> // stapel.network/WireRequest.headers.<get-headers>|<get-headers>(){}[0]
+    final val method // stapel.network/WireRequest.method|{}method[0]
+        final fun <get-method>(): kotlin/String // stapel.network/WireRequest.method.<get-method>|<get-method>(){}[0]
+    final val timeouts // stapel.network/WireRequest.timeouts|{}timeouts[0]
+        final fun <get-timeouts>(): stapel.network/TimeoutPolicy // stapel.network/WireRequest.timeouts.<get-timeouts>|<get-timeouts>(){}[0]
+    final val url // stapel.network/WireRequest.url|{}url[0]
+        final fun <get-url>(): kotlin/String // stapel.network/WireRequest.url.<get-url>|<get-url>(){}[0]
+
+    final fun header(kotlin/String): kotlin/String? // stapel.network/WireRequest.header|header(kotlin.String){}[0]
+    final fun toString(): kotlin/String // stapel.network/WireRequest.toString|toString(){}[0]
+}
+
+final object stapel.network.di/NetworkQualifiers { // stapel.network.di/NetworkQualifiers|null[0]
+    final val Bare // stapel.network.di/NetworkQualifiers.Bare|{}Bare[0]
+        final fun <get-Bare>(): org.koin.core.qualifier/Qualifier // stapel.network.di/NetworkQualifiers.Bare.<get-Bare>|<get-Bare>(){}[0]
+}
+
+final fun stapel.network.di/networkModule(stapel.config/StapelEnvironment, stapel.network/NetworkConfig = ...): org.koin.core.module/Module // stapel.network.di/networkModule|networkModule(stapel.config.StapelEnvironment;stapel.network.NetworkConfig){}[0]
+final fun stapel.network/StapelTransport(stapel.network/NetworkDependencies, stapel.network/NetworkConfig = ..., stapel.network/RequestAuthenticator = ..., stapel.network/VerificationHandler? = ..., kotlin.collections/List<stapel.network/NetworkPlugin> = ..., stapel.network/HttpTransport = ...): stapel.wire/ApiTransport // stapel.network/StapelTransport|StapelTransport(stapel.network.NetworkDependencies;stapel.network.NetworkConfig;stapel.network.RequestAuthenticator;stapel.network.VerificationHandler?;kotlin.collections.List<stapel.network.NetworkPlugin>;stapel.network.HttpTransport){}[0]
+final fun stapel.network/platformTransport(stapel.network/CertificatePins = ...): stapel.network/HttpTransport // stapel.network/platformTransport|platformTransport(stapel.network.CertificatePins){}[0]
