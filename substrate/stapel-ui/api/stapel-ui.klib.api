@@ -1296,6 +1296,8 @@ final val stapel.ui.skin/PULL_REFRESH_THRESHOLD // stapel.ui.skin/PULL_REFRESH_T
     final fun <get-PULL_REFRESH_THRESHOLD>(): androidx.compose.ui.unit/Dp // stapel.ui.skin/PULL_REFRESH_THRESHOLD.<get-PULL_REFRESH_THRESHOLD>|<get-PULL_REFRESH_THRESHOLD>(){}[0]
 final val stapel.ui.skin/StapelSkinSlots // stapel.ui.skin/StapelSkinSlots|{}StapelSkinSlots[0]
     final fun <get-StapelSkinSlots>(): kotlin.collections/List<kotlin/String> // stapel.ui.skin/StapelSkinSlots.<get-StapelSkinSlots>|<get-StapelSkinSlots>(){}[0]
+final val stapel.ui.skin/TOP_BAR_TITLE_MIN_SIZE // stapel.ui.skin/TOP_BAR_TITLE_MIN_SIZE|{}TOP_BAR_TITLE_MIN_SIZE[0]
+    final fun <get-TOP_BAR_TITLE_MIN_SIZE>(): androidx.compose.ui.unit/TextUnit // stapel.ui.skin/TOP_BAR_TITLE_MIN_SIZE.<get-TOP_BAR_TITLE_MIN_SIZE>|<get-TOP_BAR_TITLE_MIN_SIZE>(){}[0]
 final val stapel.ui.skin/accessibleName // stapel.ui.skin/accessibleName|@stapel.ui.skin.AvatarSpec{}accessibleName[0]
     final fun (stapel.ui.skin/AvatarSpec).<get-accessibleName>(): kotlin/String // stapel.ui.skin/accessibleName.<get-accessibleName>|<get-accessibleName>@stapel.ui.skin.AvatarSpec(){}[0]
 final val stapel.ui.skin/initialsText // stapel.ui.skin/initialsText|@stapel.ui.skin.AvatarSpec{}initialsText[0]

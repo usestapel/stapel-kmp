@@ -257,6 +257,10 @@ class FoundationSkinTest {
     @Test
     fun theTopBarSurvivesTwiceTheTextSizeInEnglishAndRussian() = runComposeUiTest { assertTopBarSurvivesLargeText(FoundationSkin) }
 
+    /** More than the allowed lines at full size (any font at 3x): the title shrinks, it never truncates. */
+    @Test
+    fun theTopBarSurvivesThreeTimesTheTextSize() = runComposeUiTest { assertTopBarSurvivesLargeText(FoundationSkin, fontScale = 3f) }
+
     @Test
     fun aSingleLineTopBarIsCaughtTruncatingAtLargeText() = runComposeUiTest {
         val e = assertFails { assertTopBarSurvivesLargeText(SingleLineTitleSkin) }

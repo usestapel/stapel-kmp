@@ -678,6 +678,7 @@ public final class stapel/ui/skin/FoundationSkinKt {
 	public static final field SHIMMER_PERIOD_MS I
 	public static final field TOP_BAR_TITLE_MAX_LINES I
 	public static final fun getPULL_REFRESH_THRESHOLD ()F
+	public static final fun getTOP_BAR_TITLE_MIN_SIZE ()J
 	public static final fun optionalTestTag (Landroidx/compose/ui/Modifier;Ljava/lang/String;)Landroidx/compose/ui/Modifier;
 	public static final fun shimmerBrush (Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/Brush;
 	public static final fun stapelShadow (Landroidx/compose/ui/Modifier;Lstapel/tokens/Shadow;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/Modifier;

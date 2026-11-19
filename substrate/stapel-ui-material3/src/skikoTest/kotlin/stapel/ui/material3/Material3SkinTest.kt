@@ -54,6 +54,16 @@ class Material3SkinTest {
         assertTopBarSurvivesLargeText(Material3Skin, theme = MaterialContractTheme)
     }
 
+    /**
+     * Font metrics differ per platform (the Linux CI fonts are wider than macOS's): a title that needs
+     * more than the allowed lines at full size shrinks instead of truncating. Three times the text size
+     * needs more than three lines in every font, so this holds the rule on any host.
+     */
+    @Test
+    fun theTopBarSurvivesThreeTimesTheTextSize() = runComposeUiTest {
+        assertTopBarSurvivesLargeText(Material3Skin, theme = MaterialContractTheme, fontScale = 3f)
+    }
+
     @Test
     fun theLaterSlotsSurviveTwiceTheTextSize() = runComposeUiTest { assertSlotsSurviveLargeText(Material3Skin, theme = MaterialContractTheme) }
 

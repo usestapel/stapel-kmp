@@ -100,6 +100,7 @@ import androidx.compose.material3.OutlinedSecureTextField
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -123,6 +124,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import stapel.i18n.CoreUiStrings
@@ -156,6 +158,7 @@ import stapel.ui.skin.stapelShadow
 import stapel.ui.skin.stapelTouchTarget
 import stapel.ui.skin.toneIcon
 import stapel.ui.skin.TOP_BAR_TITLE_MAX_LINES
+import stapel.ui.skin.TOP_BAR_TITLE_MIN_SIZE
 import stapel.ui.stapelString
 import androidx.compose.material3.Button as M3Button
 import androidx.compose.material3.IconButton as M3IconButton
@@ -558,11 +561,14 @@ public object Material3Skin : StapelSkin {
                 ) {
                     spec.navigation?.let { IconButton(it, Modifier) }
                     Column(Modifier.weight(1f).padding(horizontal = 12.dp, vertical = 8.dp).then(if (fraction != null) Modifier.alpha(fraction) else Modifier)) {
+                        val titleStyle = MaterialTheme.typography.titleLarge
+                        // Wraps up to the allowed lines; a title that still does not fit (large text, wide
+                        // fonts) steps its size down instead of truncating.
                         Text(
                             spec.title,
-                            style = MaterialTheme.typography.titleLarge,
+                            style = titleStyle,
                             maxLines = TOP_BAR_TITLE_MAX_LINES,
-                            overflow = TextOverflow.Ellipsis,
+                            autoSize = TextAutoSize.StepBased(minFontSize = TOP_BAR_TITLE_MIN_SIZE, maxFontSize = titleStyle.fontSize, stepSize = 1.sp),
                             modifier = Modifier.semantics { heading() },
                         )
                         if (fraction == null || fraction >= 1f) spec.subtitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = c.textMuted) }

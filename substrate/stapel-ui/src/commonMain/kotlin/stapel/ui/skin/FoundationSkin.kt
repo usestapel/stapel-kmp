@@ -96,6 +96,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import stapel.i18n.CoreUiStrings
@@ -628,7 +632,16 @@ public object FoundationSkin : StapelSkin {
                     Modifier.weight(1f).padding(horizontal = StapelTheme.spacing.s3)
                         .then(if (fraction != null) Modifier.alpha(fraction) else Modifier),
                 ) {
-                    StapelText(spec.title, style = StapelTheme.type.title, maxLines = TOP_BAR_TITLE_MAX_LINES, modifier = Modifier.semantics { heading() })
+                    val titleStyle = StapelTheme.type.title
+                    // Wraps up to the allowed lines; a title that still does not fit (large text, wide fonts)
+                    // steps its size down instead of truncating.
+                    BasicText(
+                        spec.title,
+                        modifier = Modifier.semantics { heading() },
+                        style = titleStyle.copy(color = StapelTheme.colors.text),
+                        maxLines = TOP_BAR_TITLE_MAX_LINES,
+                        autoSize = TextAutoSize.StepBased(minFontSize = TOP_BAR_TITLE_MIN_SIZE, maxFontSize = titleStyle.fontSize, stepSize = 1.sp),
+                    )
                     if (fraction == null || fraction >= 1f) spec.subtitle?.let { StapelText(it, style = StapelTheme.type.caption, color = StapelTheme.colors.textMuted) }
                 }
                 spec.actions.forEach { IconButton(it, Modifier) }
@@ -1135,8 +1148,12 @@ internal fun Spinner(modifier: Modifier, color: Color) {
 }
 
 /**
- * Lines a top-bar title may wrap to before it ellipsizes: the bar grows with large text (200 %
- * scale) instead of truncating a title to its first words; both skins use the same policy.
+ * Lines a top-bar title may wrap to: the bar grows with large text (200 % scale) instead of
+ * truncating a title to its first words, and a title that still does not fit steps its size down
+ * to [TOP_BAR_TITLE_MIN_SIZE]; both skins use the same policy.
  */
 public const val TOP_BAR_TITLE_MAX_LINES: Int = 3
+
+/** The smallest size a top-bar title steps down to when it does not fit in [TOP_BAR_TITLE_MAX_LINES] at its style's size. */
+public val TOP_BAR_TITLE_MIN_SIZE: TextUnit = 12.sp
 
