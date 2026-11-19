@@ -1,0 +1,6 @@
+public final class stapel/cache/testing/CacheStoreContract {
+	public static final field INSTANCE Lstapel/cache/testing/CacheStoreContract;
+	public final fun getCaseNames ()Ljava/util/List;
+	public final fun verify (Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

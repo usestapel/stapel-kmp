@@ -1,0 +1,60 @@
+public abstract interface class stapel/cache/CacheStore {
+	public abstract fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun count (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun delete (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun deletePrefix (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun get (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun markInvalidated (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun put (Lstapel/cache/StoredEntry;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/cache/CacheStoreFactory {
+	public abstract fun destroy (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getDurable ()Z
+	public abstract fun listPartitions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun open (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/MemoryCacheStoreFactory : stapel/cache/CacheStoreFactory {
+	public fun <init> ()V
+	public fun destroy (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getDurable ()Z
+	public fun listPartitions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun open (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/PartitionId {
+	public static final field Companion Lstapel/cache/PartitionId$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isAccount ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/PartitionId$Companion {
+	public final fun account (Ljava/lang/String;)Lstapel/cache/PartitionId;
+	public final fun getApp ()Lstapel/cache/PartitionId;
+	public final fun parse (Ljava/lang/String;)Lstapel/cache/PartitionId;
+}
+
+public final class stapel/cache/PartitionStores {
+	public fun <init> (Lstapel/cache/CacheStore;Lkotlin/jvm/functions/Function1;)V
+	public final fun getClose ()Lkotlin/jvm/functions/Function1;
+	public final fun getEntries ()Lstapel/cache/CacheStore;
+}
+
+public final class stapel/cache/StoredEntry {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLjava/lang/String;JZ)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFetchedAtMillis ()J
+	public final fun getInvalidated ()Z
+	public final fun getNamespace ()Ljava/lang/String;
+	public final fun getPayload ()[B
+	public final fun getSchemaHash ()Ljava/lang/String;
+	public final fun getStorageKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public final fun withInvalidated (Z)Lstapel/cache/StoredEntry;
+}
+

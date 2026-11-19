@@ -1,0 +1,14 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-cache-testing>
+final object stapel.cache.testing/CacheStoreContract { // stapel.cache.testing/CacheStoreContract|null[0]
+    final val caseNames // stapel.cache.testing/CacheStoreContract.caseNames|{}caseNames[0]
+        final fun <get-caseNames>(): kotlin.collections/List<kotlin/String> // stapel.cache.testing/CacheStoreContract.caseNames.<get-caseNames>|<get-caseNames>(){}[0]
+
+    final suspend fun verify(kotlin.coroutines/SuspendFunction0<stapel.cache/CacheStoreFactory>): kotlin/Int // stapel.cache.testing/CacheStoreContract.verify|verify(kotlin.coroutines.SuspendFunction0<stapel.cache.CacheStoreFactory>){}[0]
+}

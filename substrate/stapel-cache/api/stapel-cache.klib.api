@@ -1,0 +1,87 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-cache>
+abstract interface stapel.cache/CacheStore { // stapel.cache/CacheStore|null[0]
+    abstract suspend fun clear() // stapel.cache/CacheStore.clear|clear(){}[0]
+    abstract suspend fun count(): kotlin/Int // stapel.cache/CacheStore.count|count(){}[0]
+    abstract suspend fun delete(kotlin/String) // stapel.cache/CacheStore.delete|delete(kotlin.String){}[0]
+    abstract suspend fun deletePrefix(kotlin/String): kotlin/Int // stapel.cache/CacheStore.deletePrefix|deletePrefix(kotlin.String){}[0]
+    abstract suspend fun get(kotlin/String): stapel.cache/StoredEntry? // stapel.cache/CacheStore.get|get(kotlin.String){}[0]
+    abstract suspend fun markInvalidated(kotlin/String): kotlin/Int // stapel.cache/CacheStore.markInvalidated|markInvalidated(kotlin.String){}[0]
+    abstract suspend fun put(stapel.cache/StoredEntry) // stapel.cache/CacheStore.put|put(stapel.cache.StoredEntry){}[0]
+}
+
+abstract interface stapel.cache/CacheStoreFactory { // stapel.cache/CacheStoreFactory|null[0]
+    abstract val durable // stapel.cache/CacheStoreFactory.durable|{}durable[0]
+        abstract fun <get-durable>(): kotlin/Boolean // stapel.cache/CacheStoreFactory.durable.<get-durable>|<get-durable>(){}[0]
+
+    abstract suspend fun destroy(stapel.cache/PartitionId) // stapel.cache/CacheStoreFactory.destroy|destroy(stapel.cache.PartitionId){}[0]
+    abstract suspend fun listPartitions(): kotlin.collections/List<stapel.cache/PartitionId> // stapel.cache/CacheStoreFactory.listPartitions|listPartitions(){}[0]
+    abstract suspend fun open(stapel.cache/PartitionId): stapel.cache/PartitionStores // stapel.cache/CacheStoreFactory.open|open(stapel.cache.PartitionId){}[0]
+}
+
+final class stapel.cache/MemoryCacheStoreFactory : stapel.cache/CacheStoreFactory { // stapel.cache/MemoryCacheStoreFactory|null[0]
+    constructor <init>() // stapel.cache/MemoryCacheStoreFactory.<init>|<init>(){}[0]
+
+    final val durable // stapel.cache/MemoryCacheStoreFactory.durable|{}durable[0]
+        final fun <get-durable>(): kotlin/Boolean // stapel.cache/MemoryCacheStoreFactory.durable.<get-durable>|<get-durable>(){}[0]
+
+    final suspend fun destroy(stapel.cache/PartitionId) // stapel.cache/MemoryCacheStoreFactory.destroy|destroy(stapel.cache.PartitionId){}[0]
+    final suspend fun listPartitions(): kotlin.collections/List<stapel.cache/PartitionId> // stapel.cache/MemoryCacheStoreFactory.listPartitions|listPartitions(){}[0]
+    final suspend fun open(stapel.cache/PartitionId): stapel.cache/PartitionStores // stapel.cache/MemoryCacheStoreFactory.open|open(stapel.cache.PartitionId){}[0]
+}
+
+final class stapel.cache/PartitionId { // stapel.cache/PartitionId|null[0]
+    final val isAccount // stapel.cache/PartitionId.isAccount|{}isAccount[0]
+        final fun <get-isAccount>(): kotlin/Boolean // stapel.cache/PartitionId.isAccount.<get-isAccount>|<get-isAccount>(){}[0]
+    final val name // stapel.cache/PartitionId.name|{}name[0]
+        final fun <get-name>(): kotlin/String // stapel.cache/PartitionId.name.<get-name>|<get-name>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/PartitionId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.cache/PartitionId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.cache/PartitionId.toString|toString(){}[0]
+
+    final object Companion { // stapel.cache/PartitionId.Companion|null[0]
+        final val App // stapel.cache/PartitionId.Companion.App|{}App[0]
+            final fun <get-App>(): stapel.cache/PartitionId // stapel.cache/PartitionId.Companion.App.<get-App>|<get-App>(){}[0]
+
+        final fun account(kotlin/String): stapel.cache/PartitionId // stapel.cache/PartitionId.Companion.account|account(kotlin.String){}[0]
+        final fun parse(kotlin/String): stapel.cache/PartitionId? // stapel.cache/PartitionId.Companion.parse|parse(kotlin.String){}[0]
+    }
+}
+
+final class stapel.cache/PartitionStores { // stapel.cache/PartitionStores|null[0]
+    constructor <init>(stapel.cache/CacheStore, kotlin.coroutines/SuspendFunction0<kotlin/Unit>) // stapel.cache/PartitionStores.<init>|<init>(stapel.cache.CacheStore;kotlin.coroutines.SuspendFunction0<kotlin.Unit>){}[0]
+
+    final val close // stapel.cache/PartitionStores.close|{}close[0]
+        final fun <get-close>(): kotlin.coroutines/SuspendFunction0<kotlin/Unit> // stapel.cache/PartitionStores.close.<get-close>|<get-close>(){}[0]
+    final val entries // stapel.cache/PartitionStores.entries|{}entries[0]
+        final fun <get-entries>(): stapel.cache/CacheStore // stapel.cache/PartitionStores.entries.<get-entries>|<get-entries>(){}[0]
+}
+
+final class stapel.cache/StoredEntry { // stapel.cache/StoredEntry|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/ByteArray, kotlin/String, kotlin/Long, kotlin/Boolean) // stapel.cache/StoredEntry.<init>|<init>(kotlin.String;kotlin.String;kotlin.ByteArray;kotlin.String;kotlin.Long;kotlin.Boolean){}[0]
+
+    final val fetchedAtMillis // stapel.cache/StoredEntry.fetchedAtMillis|{}fetchedAtMillis[0]
+        final fun <get-fetchedAtMillis>(): kotlin/Long // stapel.cache/StoredEntry.fetchedAtMillis.<get-fetchedAtMillis>|<get-fetchedAtMillis>(){}[0]
+    final val invalidated // stapel.cache/StoredEntry.invalidated|{}invalidated[0]
+        final fun <get-invalidated>(): kotlin/Boolean // stapel.cache/StoredEntry.invalidated.<get-invalidated>|<get-invalidated>(){}[0]
+    final val namespace // stapel.cache/StoredEntry.namespace|{}namespace[0]
+        final fun <get-namespace>(): kotlin/String // stapel.cache/StoredEntry.namespace.<get-namespace>|<get-namespace>(){}[0]
+    final val payload // stapel.cache/StoredEntry.payload|{}payload[0]
+        final fun <get-payload>(): kotlin/ByteArray // stapel.cache/StoredEntry.payload.<get-payload>|<get-payload>(){}[0]
+    final val schemaHash // stapel.cache/StoredEntry.schemaHash|{}schemaHash[0]
+        final fun <get-schemaHash>(): kotlin/String // stapel.cache/StoredEntry.schemaHash.<get-schemaHash>|<get-schemaHash>(){}[0]
+    final val storageKey // stapel.cache/StoredEntry.storageKey|{}storageKey[0]
+        final fun <get-storageKey>(): kotlin/String // stapel.cache/StoredEntry.storageKey.<get-storageKey>|<get-storageKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/StoredEntry.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.cache/StoredEntry.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.cache/StoredEntry.toString|toString(){}[0]
+    final fun withInvalidated(kotlin/Boolean): stapel.cache/StoredEntry // stapel.cache/StoredEntry.withInvalidated|withInvalidated(kotlin.Boolean){}[0]
+}
