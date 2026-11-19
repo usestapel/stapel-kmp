@@ -1,0 +1,785 @@
+{
+  "schema": "stapel.tokens.resolved/1",
+  "source": {
+    "package": "@stapel/tokens",
+    "version": "0.8.1",
+    "themeSha256": "e3852fff95d57a428491b25c8e7de170a49d686cc25775b34d8b8af509559289",
+    "rampsSha256": "6a92ee6836480ce2158ca702ee722018404dfd0a0f1ff85ccc134139136fcb21"
+  },
+  "colors": {
+    "accent-alt": {
+      "light": "#3948b8",
+      "dark": "#eef0fd",
+      "lightRef": "brand.700",
+      "darkRef": "brand.100"
+    },
+    "border": {
+      "light": "#aeb6c2",
+      "dark": "#7b828f",
+      "lightRef": "gray.400",
+      "darkRef": "gray.500"
+    },
+    "border-subtle": {
+      "light": "#d9dde3",
+      "dark": "#6b737f",
+      "lightRef": "gray.300",
+      "darkRef": "gray.550"
+    },
+    "brand": {
+      "light": "#4657d9",
+      "dark": "#98a5fa",
+      "lightRef": "brand.500",
+      "darkRef": "brand.300"
+    },
+    "brand-active": {
+      "light": "#232b4d",
+      "dark": "#eef0fd",
+      "lightRef": "brand.900",
+      "darkRef": "brand.100"
+    },
+    "brand-hover": {
+      "light": "#3948b8",
+      "dark": "#eef0fd",
+      "lightRef": "brand.700",
+      "darkRef": "brand.100"
+    },
+    "brand-subtle": {
+      "light": "#eef0fd",
+      "dark": "#232b4d",
+      "lightRef": "brand.100",
+      "darkRef": "brand.900"
+    },
+    "error": {
+      "light": "#c13838",
+      "dark": "#f28b8b",
+      "lightRef": "red.500",
+      "darkRef": "red.300"
+    },
+    "error-bg": {
+      "light": "#fdeeee",
+      "dark": "#3a2020",
+      "lightRef": "red.100",
+      "darkRef": "red.900"
+    },
+    "error-border": {
+      "light": "#f28b8b",
+      "dark": "#a12d2d",
+      "lightRef": "red.300",
+      "darkRef": "red.700"
+    },
+    "error-on": {
+      "light": "#ffffff",
+      "dark": "#151a23",
+      "lightRef": "gray.25",
+      "darkRef": "gray.900"
+    },
+    "focus-ring": {
+      "light": "#4657d9",
+      "dark": "#98a5fa",
+      "lightRef": "brand.500",
+      "darkRef": "brand.300"
+    },
+    "info": {
+      "light": "#1168a7",
+      "dark": "#6cb8e8",
+      "lightRef": "blue.500",
+      "darkRef": "blue.300"
+    },
+    "info-bg": {
+      "light": "#e9f4fb",
+      "dark": "#12293a",
+      "lightRef": "blue.100",
+      "darkRef": "blue.900"
+    },
+    "info-border": {
+      "light": "#6cb8e8",
+      "dark": "#0d4f80",
+      "lightRef": "blue.300",
+      "darkRef": "blue.700"
+    },
+    "info-on": {
+      "light": "#ffffff",
+      "dark": "#151a23",
+      "lightRef": "gray.25",
+      "darkRef": "gray.900"
+    },
+    "link": {
+      "light": "#4657d9",
+      "dark": "#98a5fa",
+      "lightRef": "brand.500",
+      "darkRef": "brand.300"
+    },
+    "link-hover": {
+      "light": "#3948b8",
+      "dark": "#eef0fd",
+      "lightRef": "brand.700",
+      "darkRef": "brand.100"
+    },
+    "success": {
+      "light": "#1f7a4d",
+      "dark": "#6fd0a0",
+      "lightRef": "green.500",
+      "darkRef": "green.300"
+    },
+    "success-bg": {
+      "light": "#eaf7f0",
+      "dark": "#152e22",
+      "lightRef": "green.100",
+      "darkRef": "green.900"
+    },
+    "success-border": {
+      "light": "#6fd0a0",
+      "dark": "#175c3a",
+      "lightRef": "green.300",
+      "darkRef": "green.700"
+    },
+    "success-on": {
+      "light": "#ffffff",
+      "dark": "#151a23",
+      "lightRef": "gray.25",
+      "darkRef": "gray.900"
+    },
+    "surface": {
+      "light": "#ffffff",
+      "dark": "#0b0e14",
+      "lightRef": "gray.25",
+      "darkRef": "gray.950"
+    },
+    "surface-overlay": {
+      "light": "#ffffff",
+      "dark": "#1c2230",
+      "lightRef": "gray.25",
+      "darkRef": "gray.850"
+    },
+    "surface-raised": {
+      "light": "#ffffff",
+      "dark": "#1c2230",
+      "lightRef": "gray.25",
+      "darkRef": "gray.850"
+    },
+    "surface-sunken": {
+      "light": "#f4f5f7",
+      "dark": "#151a23",
+      "lightRef": "gray.100",
+      "darkRef": "gray.900"
+    },
+    "text": {
+      "light": "#151a23",
+      "dark": "#f4f5f7",
+      "lightRef": "gray.900",
+      "darkRef": "gray.100"
+    },
+    "text-muted": {
+      "light": "#5c6470",
+      "dark": "#aeb6c2",
+      "lightRef": "gray.600",
+      "darkRef": "gray.400"
+    },
+    "text-on-accent": {
+      "light": "#ffffff",
+      "dark": "#151a23",
+      "lightRef": "gray.25",
+      "darkRef": "gray.900"
+    },
+    "text-subtle": {
+      "light": "#636b77",
+      "dark": "#959ca9",
+      "lightRef": "gray.575",
+      "darkRef": "gray.450"
+    },
+    "warning": {
+      "light": "#9a6700",
+      "dark": "#e8b34b",
+      "lightRef": "amber.500",
+      "darkRef": "amber.300"
+    },
+    "warning-bg": {
+      "light": "#fdf6e7",
+      "dark": "#33270f",
+      "lightRef": "amber.100",
+      "darkRef": "amber.900"
+    },
+    "warning-border": {
+      "light": "#e8b34b",
+      "dark": "#7a5100",
+      "lightRef": "amber.300",
+      "darkRef": "amber.700"
+    },
+    "warning-on": {
+      "light": "#ffffff",
+      "dark": "#151a23",
+      "lightRef": "gray.25",
+      "darkRef": "gray.900"
+    }
+  },
+  "roleOrder": [
+    "surface",
+    "surface-raised",
+    "surface-sunken",
+    "surface-overlay",
+    "text",
+    "text-muted",
+    "text-subtle",
+    "text-on-accent",
+    "border",
+    "border-subtle",
+    "focus-ring",
+    "brand",
+    "brand-hover",
+    "brand-active",
+    "brand-subtle",
+    "link",
+    "link-hover",
+    "success",
+    "success-bg",
+    "success-border",
+    "success-on",
+    "warning",
+    "warning-bg",
+    "warning-border",
+    "warning-on",
+    "error",
+    "error-bg",
+    "error-border",
+    "error-on",
+    "info",
+    "info-bg",
+    "info-border",
+    "info-on",
+    "accent-alt"
+  ],
+  "elevation": {
+    "high": {
+      "light": {
+        "raw": "0 8px 24px rgba(15, 18, 24, 0.16)",
+        "x": 0,
+        "y": 8,
+        "blur": 24,
+        "spread": 0,
+        "color": "#0f121829"
+      },
+      "dark": {
+        "raw": "0 8px 24px rgba(0, 0, 0, 0.6)",
+        "x": 0,
+        "y": 8,
+        "blur": 24,
+        "spread": 0,
+        "color": "#00000099"
+      }
+    },
+    "low": {
+      "light": {
+        "raw": "0 1px 2px rgba(15, 18, 24, 0.08)",
+        "x": 0,
+        "y": 1,
+        "blur": 2,
+        "spread": 0,
+        "color": "#0f121814"
+      },
+      "dark": {
+        "raw": "0 1px 2px rgba(0, 0, 0, 0.4)",
+        "x": 0,
+        "y": 1,
+        "blur": 2,
+        "spread": 0,
+        "color": "#00000066"
+      }
+    },
+    "medium": {
+      "light": {
+        "raw": "0 2px 8px rgba(15, 18, 24, 0.12)",
+        "x": 0,
+        "y": 2,
+        "blur": 8,
+        "spread": 0,
+        "color": "#0f12181f"
+      },
+      "dark": {
+        "raw": "0 2px 8px rgba(0, 0, 0, 0.5)",
+        "x": 0,
+        "y": 2,
+        "blur": 8,
+        "spread": 0,
+        "color": "#00000080"
+      }
+    },
+    "none": {
+      "light": null,
+      "dark": null
+    }
+  },
+  "scales": {
+    "fontFamily": {
+      "mono": [
+        "JetBrains Mono",
+        "SF Mono",
+        "Menlo",
+        "Consolas",
+        "monospace"
+      ],
+      "sans": [
+        "Inter",
+        "Helvetica Neue",
+        "Helvetica",
+        "Arial",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "fontSize": {
+      "2xl": {
+        "fontSize": 28,
+        "lineHeight": 36
+      },
+      "3xl": {
+        "fontSize": 36,
+        "lineHeight": 44
+      },
+      "lg": {
+        "fontSize": 18,
+        "lineHeight": 28
+      },
+      "md": {
+        "fontSize": 16,
+        "lineHeight": 24
+      },
+      "sm": {
+        "fontSize": 14,
+        "lineHeight": 20
+      },
+      "xl": {
+        "fontSize": 22,
+        "lineHeight": 30
+      },
+      "xs": {
+        "fontSize": 12,
+        "lineHeight": 16
+      }
+    },
+    "fontWeight": {
+      "bold": 700,
+      "medium": 500,
+      "regular": 400,
+      "semibold": 600
+    },
+    "spacing": {
+      "0": 0,
+      "1": 4,
+      "2": 8,
+      "3": 12,
+      "4": 16,
+      "5": 24,
+      "6": 32,
+      "7": 48,
+      "8": 64
+    },
+    "radii": {
+      "full": 9999,
+      "lg": 12,
+      "md": 8,
+      "none": 0,
+      "sm": 4,
+      "xl": 20
+    },
+    "controls": {
+      "height": 32,
+      "height-phone": 44
+    },
+    "breakpoints": {
+      "desktop": 1200,
+      "phone": 0,
+      "tablet": 768
+    }
+  },
+  "responsive": {
+    "page-gutter": {
+      "desktop": 24,
+      "phone": 4,
+      "tablet": 8
+    }
+  },
+  "contrast": {
+    "pairs": [
+      [
+        "text",
+        "surface",
+        "text"
+      ],
+      [
+        "text",
+        "surface-raised",
+        "text"
+      ],
+      [
+        "text",
+        "surface-sunken",
+        "text"
+      ],
+      [
+        "text",
+        "surface-overlay",
+        "text"
+      ],
+      [
+        "text",
+        "brand-subtle",
+        "text"
+      ],
+      [
+        "text",
+        "success-bg",
+        "text"
+      ],
+      [
+        "text",
+        "warning-bg",
+        "text"
+      ],
+      [
+        "text",
+        "error-bg",
+        "text"
+      ],
+      [
+        "text",
+        "info-bg",
+        "text"
+      ],
+      [
+        "text-muted",
+        "surface",
+        "text"
+      ],
+      [
+        "text-muted",
+        "surface-raised",
+        "text"
+      ],
+      [
+        "text-muted",
+        "surface-sunken",
+        "text"
+      ],
+      [
+        "text-muted",
+        "surface-overlay",
+        "text"
+      ],
+      [
+        "text-muted",
+        "brand-subtle",
+        "text"
+      ],
+      [
+        "text-muted",
+        "success-bg",
+        "text"
+      ],
+      [
+        "text-muted",
+        "warning-bg",
+        "text"
+      ],
+      [
+        "text-muted",
+        "error-bg",
+        "text"
+      ],
+      [
+        "text-muted",
+        "info-bg",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "surface",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "surface-raised",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "surface-sunken",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "surface-overlay",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "brand-subtle",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "success-bg",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "warning-bg",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "error-bg",
+        "text"
+      ],
+      [
+        "text-subtle",
+        "info-bg",
+        "text"
+      ],
+      [
+        "link",
+        "surface",
+        "text"
+      ],
+      [
+        "link",
+        "surface-raised",
+        "text"
+      ],
+      [
+        "link",
+        "surface-sunken",
+        "text"
+      ],
+      [
+        "link",
+        "surface-overlay",
+        "text"
+      ],
+      [
+        "link",
+        "brand-subtle",
+        "text"
+      ],
+      [
+        "link",
+        "success-bg",
+        "text"
+      ],
+      [
+        "link",
+        "warning-bg",
+        "text"
+      ],
+      [
+        "link",
+        "error-bg",
+        "text"
+      ],
+      [
+        "link",
+        "info-bg",
+        "text"
+      ],
+      [
+        "link-hover",
+        "surface",
+        "text"
+      ],
+      [
+        "link-hover",
+        "surface-raised",
+        "text"
+      ],
+      [
+        "link-hover",
+        "surface-sunken",
+        "text"
+      ],
+      [
+        "link-hover",
+        "surface-overlay",
+        "text"
+      ],
+      [
+        "link-hover",
+        "brand-subtle",
+        "text"
+      ],
+      [
+        "link-hover",
+        "success-bg",
+        "text"
+      ],
+      [
+        "link-hover",
+        "warning-bg",
+        "text"
+      ],
+      [
+        "link-hover",
+        "error-bg",
+        "text"
+      ],
+      [
+        "link-hover",
+        "info-bg",
+        "text"
+      ],
+      [
+        "focus-ring",
+        "surface",
+        "ui"
+      ],
+      [
+        "focus-ring",
+        "surface-raised",
+        "ui"
+      ],
+      [
+        "focus-ring",
+        "surface-sunken",
+        "ui"
+      ],
+      [
+        "focus-ring",
+        "surface-overlay",
+        "ui"
+      ],
+      [
+        "border",
+        "surface",
+        "decorative"
+      ],
+      [
+        "border",
+        "surface-raised",
+        "decorative"
+      ],
+      [
+        "border",
+        "surface-sunken",
+        "decorative"
+      ],
+      [
+        "border",
+        "surface-overlay",
+        "decorative"
+      ],
+      [
+        "border-subtle",
+        "surface",
+        "decorative"
+      ],
+      [
+        "border-subtle",
+        "surface-raised",
+        "decorative"
+      ],
+      [
+        "border-subtle",
+        "surface-sunken",
+        "decorative"
+      ],
+      [
+        "border-subtle",
+        "surface-overlay",
+        "decorative"
+      ],
+      [
+        "success",
+        "success-bg",
+        "text"
+      ],
+      [
+        "error",
+        "error-bg",
+        "text"
+      ],
+      [
+        "warning",
+        "warning-bg",
+        "text"
+      ],
+      [
+        "info",
+        "info-bg",
+        "text"
+      ],
+      [
+        "text-on-accent",
+        "brand",
+        "text"
+      ],
+      [
+        "success-on",
+        "success",
+        "text"
+      ],
+      [
+        "warning-on",
+        "warning",
+        "text"
+      ],
+      [
+        "error-on",
+        "error",
+        "text"
+      ],
+      [
+        "info-on",
+        "info",
+        "text"
+      ]
+    ],
+    "exceptions": [
+      {
+        "fg": "border",
+        "bg": "surface",
+        "mode": "light",
+        "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+      },
+      {
+        "fg": "border",
+        "bg": "surface-raised",
+        "mode": "light",
+        "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+      },
+      {
+        "fg": "border",
+        "bg": "surface-sunken",
+        "mode": "light",
+        "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+      },
+      {
+        "fg": "border",
+        "bg": "surface-overlay",
+        "mode": "light",
+        "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+      },
+      {
+        "fg": "border-subtle",
+        "bg": "surface",
+        "mode": "light",
+        "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+      },
+      {
+        "fg": "border-subtle",
+        "bg": "surface-raised",
+        "mode": "light",
+        "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+      },
+      {
+        "fg": "border-subtle",
+        "bg": "surface-sunken",
+        "mode": "light",
+        "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+      },
+      {
+        "fg": "border-subtle",
+        "bg": "surface-overlay",
+        "mode": "light",
+        "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+      }
+    ]
+  }
+}

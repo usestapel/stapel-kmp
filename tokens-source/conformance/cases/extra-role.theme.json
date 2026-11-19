@@ -1,0 +1,8 @@
+{
+  "core": {
+    "accent-alt": {
+      "light": "brand.700",
+      "dark": "brand.100"
+    }
+  }
+}

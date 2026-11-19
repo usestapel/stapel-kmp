@@ -1,0 +1,8 @@
+{
+  "core": {
+    "backdrop": {
+      "light": "scrim.medium",
+      "dark": "scrim.strong"
+    }
+  }
+}

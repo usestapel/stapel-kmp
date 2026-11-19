@@ -1,0 +1,44 @@
+{
+  "_comment": "Theme presets: the scaffold's `--theme <preset>` choices. Each swaps only the private `brand` ramp of theme.default.json; `null` keeps the package's own. Copied from stapel-tools stapel_tools/_theme_presets.py THEME_PRESETS at the ref in SOURCE.json.",
+  "default": null,
+  "ocean": {
+    "100": "#e6f2fb",
+    "300": "#7cc0ef",
+    "400": "#4fa6e3",
+    "500": "#0f63a3",
+    "700": "#0b4c7e",
+    "900": "#0f2a40"
+  },
+  "forest": {
+    "100": "#e7f5ec",
+    "300": "#79cf9a",
+    "400": "#4fb877",
+    "500": "#1b7a43",
+    "700": "#145e33",
+    "900": "#12301f"
+  },
+  "crimson": {
+    "100": "#fdecee",
+    "300": "#f59aa6",
+    "400": "#ef7385",
+    "500": "#b4233c",
+    "700": "#8d1a2e",
+    "900": "#3f1219"
+  },
+  "graphite": {
+    "100": "#eef0f3",
+    "300": "#a9b2c0",
+    "400": "#8d97a8",
+    "500": "#3f4a5c",
+    "700": "#2e3746",
+    "900": "#1b2029"
+  },
+  "amber": {
+    "100": "#fdf3e1",
+    "300": "#f5c46b",
+    "400": "#eeac3a",
+    "500": "#8f5600",
+    "700": "#6e4200",
+    "900": "#3a2405"
+  }
+}

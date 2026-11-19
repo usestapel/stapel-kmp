@@ -1,0 +1,14 @@
+{
+  "scales": {
+    "responsive": {
+      "page-gutter": {
+        "phone": "9"
+      },
+      "card-inset": {
+        "phone": "2",
+        "tablet": "3",
+        "desktop": "4"
+      }
+    }
+  }
+}

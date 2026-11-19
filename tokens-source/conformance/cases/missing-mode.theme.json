@@ -1,0 +1,11 @@
+{
+  "core": {
+    "hero": {
+      "light": "gray.25"
+    },
+    "hero-2": {
+      "light": "gray.25",
+      "dark": ""
+    }
+  }
+}

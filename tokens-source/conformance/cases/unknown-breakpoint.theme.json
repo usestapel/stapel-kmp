@@ -1,0 +1,9 @@
+{
+  "scales": {
+    "responsive": {
+      "page-gutter": {
+        "watch": "1"
+      }
+    }
+  }
+}

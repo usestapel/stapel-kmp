@@ -1,0 +1,19 @@
+{
+  "_comment": "Pinned source of the design tokens. theme.default.json and ramps.standard.json are byte copies of stapel-react packages/tokens at `ref`; presets.json is THEME_PRESETS of stapel-tools at `presets.ref`. The conformance corpus (conformance/expected) and tokens.resolved.json were produced by conformance/produce.mjs with Node 22 from `ref`: --base = packages/tokens unmodified (the published stapel-tokens bin), --patched = the same tree with the resolved@1 target patch (sha256 of the patch file below). tokens.resolved.json is a copy of conformance/expected/default.tokens.resolved.json.",
+  "repo": "usestapel/stapel-react",
+  "ref": "6f7cd6c8a551c627a7c415324ccdb78bf5a393e5",
+  "package": "@stapel/tokens",
+  "version": "0.8.1",
+  "files": ["theme.default.json", "ramps.standard.json"],
+  "presets": {
+    "repo": "usestapel/stapel-tools",
+    "ref": "741df8d74c520c4213676b997611d2df144e500a",
+    "file": "stapel_tools/_theme_presets.py",
+    "symbol": "THEME_PRESETS"
+  },
+  "corpus": {
+    "producer": "tokens-source/conformance/produce.mjs",
+    "node": "22.23.4",
+    "resolvedPatchSha256": "5288d7bc02f96936f9539968cbdfb456fee0f8c5796964e3ead2c524639d3cd6"
+  }
+}

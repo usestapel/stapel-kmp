@@ -1,0 +1,13 @@
+{
+  "core": {
+    "text": {
+      "light": "gray.300"
+    },
+    "focus-ring": {
+      "dark": "gray.900"
+    },
+    "text-on-accent": {
+      "light": "gray.900"
+    }
+  }
+}

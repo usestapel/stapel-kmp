@@ -1,0 +1,30 @@
+{
+  "ramps": {
+    "violet": {
+      "100": "#F3E8FF",
+      "300": "#C4B5FD",
+      "500": "#7C3AED",
+      "700": "#5B21B6",
+      "900": "#2E1065",
+      "950": "#a0f"
+    }
+  },
+  "core": {
+    "promo": {
+      "light": "violet.500",
+      "dark": "violet.300"
+    },
+    "promo-bg": {
+      "light": "violet.100",
+      "dark": "violet.900"
+    },
+    "promo-border": {
+      "light": "violet.300",
+      "dark": "violet.700"
+    },
+    "promo-on": {
+      "light": "violet.950",
+      "dark": "gray.900"
+    }
+  }
+}

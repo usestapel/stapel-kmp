@@ -1,0 +1,16 @@
+{
+  "case": "missing-exceptions",
+  "valid": false,
+  "errors": [
+    "contrast: border on surface (light) = 2.0:1 < 3 (WCAG 1.4.11, decorative)",
+    "contrast: border on surface-raised (light) = 2.0:1 < 3 (WCAG 1.4.11, decorative)",
+    "contrast: border on surface-sunken (light) = 1.9:1 < 3 (WCAG 1.4.11, decorative)",
+    "contrast: border on surface-overlay (light) = 2.0:1 < 3 (WCAG 1.4.11, decorative)",
+    "contrast: border-subtle on surface (light) = 1.4:1 < 3 (WCAG 1.4.11, decorative)",
+    "contrast: border-subtle on surface-raised (light) = 1.4:1 < 3 (WCAG 1.4.11, decorative)",
+    "contrast: border-subtle on surface-sunken (light) = 1.2:1 < 3 (WCAG 1.4.11, decorative)",
+    "contrast: border-subtle on surface-overlay (light) = 1.4:1 < 3 (WCAG 1.4.11, decorative)"
+  ],
+  "warnings": [],
+  "resolvedError": null
+}

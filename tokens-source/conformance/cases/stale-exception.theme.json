@@ -1,0 +1,58 @@
+{
+  "contrastExceptions": [
+    {
+      "fg": "border",
+      "bg": "surface",
+      "mode": "light",
+      "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+    },
+    {
+      "fg": "border",
+      "bg": "surface-raised",
+      "mode": "light",
+      "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+    },
+    {
+      "fg": "border",
+      "bg": "surface-sunken",
+      "mode": "light",
+      "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+    },
+    {
+      "fg": "border",
+      "bg": "surface-overlay",
+      "mode": "light",
+      "reason": "border light stays gray.400 (2.0:1 on white) — the reference's light outlines are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: cards, dialogs, sheets and the mega menu carry an elevation shadow for their boundary, tables and lists a fill on hover/selection, and the focused field its 3:1 focus-ring; the resting Input/Select outline is the one edge this is the sole boundary of, and that is the accepted trade"
+    },
+    {
+      "fg": "border-subtle",
+      "bg": "surface",
+      "mode": "light",
+      "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+    },
+    {
+      "fg": "border-subtle",
+      "bg": "surface-raised",
+      "mode": "light",
+      "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+    },
+    {
+      "fg": "border-subtle",
+      "bg": "surface-sunken",
+      "mode": "light",
+      "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+    },
+    {
+      "fg": "border-subtle",
+      "bg": "surface-overlay",
+      "mode": "light",
+      "reason": "border-subtle light stays gray.300 (1.4:1 on white) — the reference's light dividers are this light and the founder compares against it (owner decision 2026-09-14). Decorative under WCAG 1.4.11: it is only ever a separator between rows, panes and menu sections whose content and spacing already carry the grouping; no component's boundary is this line alone"
+    },
+    {
+      "fg": "text",
+      "bg": "surface",
+      "mode": "light",
+      "reason": "no longer true"
+    }
+  ]
+}

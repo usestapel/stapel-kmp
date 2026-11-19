@@ -1,0 +1,17 @@
+{
+  "scales": {
+    "spacing": {
+      "1": 6,
+      "9": 80
+    },
+    "fontFamily": {
+      "sans": "\"SF Pro Text\", system-ui"
+    },
+    "controls": {
+      "height": 36
+    },
+    "breakpoints": {
+      "tablet": 700
+    }
+  }
+}
