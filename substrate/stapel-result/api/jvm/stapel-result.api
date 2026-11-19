@@ -1,0 +1,735 @@
+public final class stapel/result/CoreErrorCodes {
+	public static final field HTTP_PREFIX Ljava/lang/String;
+	public static final field INSTANCE Lstapel/result/CoreErrorCodes;
+	public final fun getActionBlockedLoadFailed-KSB7eyA ()Ljava/lang/String;
+	public final fun getActionBlockedLoading-KSB7eyA ()Ljava/lang/String;
+	public final fun getContractDecode-KSB7eyA ()Ljava/lang/String;
+	public final fun getDetail-KSB7eyA ()Ljava/lang/String;
+	public final fun getDetailWithRequestId-KSB7eyA ()Ljava/lang/String;
+	public final fun getTransportFailed-KSB7eyA ()Ljava/lang/String;
+	public final fun getUnknown-KSB7eyA ()Ljava/lang/String;
+	public final fun http-e2lb-MQ (I)Ljava/lang/String;
+}
+
+public abstract interface class stapel/result/DomainError : stapel/result/StapelError {
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public abstract fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getStatus ()Ljava/lang/Integer;
+}
+
+public final class stapel/result/DomainError$DefaultImpls {
+	public static fun getCode-KSB7eyA (Lstapel/result/DomainError;)Ljava/lang/String;
+	public static fun getParams (Lstapel/result/DomainError;)Lstapel/result/ErrorParams;
+	public static fun getStatus (Lstapel/result/DomainError;)Ljava/lang/Integer;
+}
+
+public final class stapel/result/ErrorCode {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/result/ErrorCode;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun getEmbeddedStatus-impl (Ljava/lang/String;)Ljava/lang/Integer;
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public static final fun isClientSynthesized-impl (Ljava/lang/String;)Z
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class stapel/result/ErrorEnvelope {
+	public static final field Companion Lstapel/result/ErrorEnvelope$Companion;
+	public synthetic fun <init> (Ljava/lang/String;ILstapel/result/ErrorParams;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;ILstapel/result/ErrorParams;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-KSB7eyA ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()Lstapel/result/ErrorParams;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun copy-b7TwtBg (Ljava/lang/String;ILstapel/result/ErrorParams;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/result/ErrorEnvelope;
+	public static synthetic fun copy-b7TwtBg$default (Lstapel/result/ErrorEnvelope;Ljava/lang/String;ILstapel/result/ErrorParams;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/ErrorEnvelope;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode-KSB7eyA ()Ljava/lang/String;
+	public final fun getParams ()Lstapel/result/ErrorParams;
+	public final fun getRequestId ()Ljava/lang/String;
+	public final fun getServerLanguage ()Ljava/lang/String;
+	public final fun getServerText ()Ljava/lang/String;
+	public final fun getStatus ()I
+	public fun hashCode ()I
+	public final fun isSynthesized ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/ErrorEnvelope$Companion {
+	public final fun synthesized (ILjava/lang/String;)Lstapel/result/ErrorEnvelope;
+	public static synthetic fun synthesized$default (Lstapel/result/ErrorEnvelope$Companion;ILjava/lang/String;ILjava/lang/Object;)Lstapel/result/ErrorEnvelope;
+}
+
+public final class stapel/result/ErrorParams {
+	public static final field Companion Lstapel/result/ErrorParams$Companion;
+	public fun <init> (Ljava/util/Map;)V
+	public final fun asMap ()Ljava/util/Map;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getNames ()Ljava/util/Set;
+	public fun hashCode ()I
+	public final fun int (Ljava/lang/String;)Ljava/lang/Integer;
+	public final fun isEmpty ()Z
+	public final fun long (Ljava/lang/String;)Ljava/lang/Long;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/ErrorParams$Companion {
+	public final fun getEmpty ()Lstapel/result/ErrorParams;
+}
+
+public final class stapel/result/ErrorSnapshot {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/util/Map;Lstapel/result/Remediation;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/util/Map;Lstapel/result/Remediation;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/util/Map;
+	public final fun component4 ()Lstapel/result/Remediation;
+	public final fun component5 ()Z
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Integer;Ljava/util/Map;Lstapel/result/Remediation;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/result/ErrorSnapshot;
+	public static synthetic fun copy$default (Lstapel/result/ErrorSnapshot;Ljava/lang/String;Ljava/lang/Integer;Ljava/util/Map;Lstapel/result/Remediation;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/ErrorSnapshot;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode ()Ljava/lang/String;
+	public final fun getParams ()Ljava/util/Map;
+	public final fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRequestId ()Ljava/lang/String;
+	public final fun getServerLanguage ()Ljava/lang/String;
+	public final fun getServerText ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/Integer;
+	public final fun getTransient ()Z
+	public fun hashCode ()I
+	public final fun toError ()Lstapel/result/StapelError;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/FailureClassifierKt {
+	public static final fun classifyFailure-5_5nbZA (Lstapel/result/ErrorEnvelope;Lstapel/result/VerificationChallenge;Lkotlin/time/Duration;Lkotlin/jvm/functions/Function1;)Lstapel/result/TransportFailure;
+	public static synthetic fun classifyFailure-5_5nbZA$default (Lstapel/result/ErrorEnvelope;Lstapel/result/VerificationChallenge;Lkotlin/time/Duration;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lstapel/result/TransportFailure;
+}
+
+public abstract interface annotation class stapel/result/InternalStapelApi : java/lang/annotation/Annotation {
+}
+
+public final class stapel/result/Remediation : java/lang/Enum {
+	public static final field Bug Lstapel/result/Remediation;
+	public static final field Companion Lstapel/result/Remediation$Companion;
+	public static final field ContactSupport Lstapel/result/Remediation;
+	public static final field FixInput Lstapel/result/Remediation;
+	public static final field Reauthenticate Lstapel/result/Remediation;
+	public static final field Retry Lstapel/result/Remediation;
+	public static final field Unknown Lstapel/result/Remediation;
+	public static final field Verify Lstapel/result/Remediation;
+	public static final field WaitAndRetry Lstapel/result/Remediation;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getWire ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/result/Remediation;
+	public static fun values ()[Lstapel/result/Remediation;
+}
+
+public final class stapel/result/Remediation$Companion {
+	public final fun default (Ljava/lang/String;ILjava/util/Collection;)Lstapel/result/Remediation;
+	public final fun fromWire (Ljava/lang/String;)Lstapel/result/Remediation;
+}
+
+public final class stapel/result/ServerRefusal : stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/result/ServerRefusal;
+	public static synthetic fun copy$default (Lstapel/result/ServerRefusal;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/result/ServerRefusal;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/result/StapelError {
+	public abstract fun getCode-KSB7eyA ()Ljava/lang/String;
+	public abstract fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public abstract fun getParams ()Lstapel/result/ErrorParams;
+	public abstract fun getRemediation ()Lstapel/result/Remediation;
+	public abstract fun getStatus ()Ljava/lang/Integer;
+}
+
+public final class stapel/result/StapelErrorKt {
+	public static final fun getRetryAfter (Lstapel/result/StapelError;)Lkotlin/time/Duration;
+	public static final fun hasCode (Lstapel/result/StapelError;[Ljava/lang/String;)Z
+	public static final fun hasCode-fNDpgE4 (Lstapel/result/StapelError;Ljava/lang/String;)Z
+	public static final fun isTransient (Lstapel/result/StapelError;)Z
+	public static final fun snapshot (Lstapel/result/StapelError;)Lstapel/result/ErrorSnapshot;
+	public static final fun transportFailureOrNull (Lstapel/result/StapelError;)Lstapel/result/TransportFailure;
+}
+
+public final class stapel/result/StapelException : java/lang/RuntimeException {
+	public fun <init> (Lstapel/result/StapelError;)V
+	public final fun getError ()Lstapel/result/StapelError;
+}
+
+public abstract interface class stapel/result/StapelResult {
+}
+
+public final class stapel/result/StapelResult$Err : stapel/result/StapelResult {
+	public fun <init> (Lstapel/result/StapelError;)V
+	public final fun component1 ()Lstapel/result/StapelError;
+	public final fun copy (Lstapel/result/StapelError;)Lstapel/result/StapelResult$Err;
+	public static synthetic fun copy$default (Lstapel/result/StapelResult$Err;Lstapel/result/StapelError;ILjava/lang/Object;)Lstapel/result/StapelResult$Err;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/result/StapelError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/StapelResult$Ok : stapel/result/StapelResult {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lstapel/result/StapelResult$Ok;
+	public static synthetic fun copy$default (Lstapel/result/StapelResult$Ok;Ljava/lang/Object;ILjava/lang/Object;)Lstapel/result/StapelResult$Ok;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/StapelResultKt {
+	public static final fun errorOrNull (Lstapel/result/StapelResult;)Lstapel/result/StapelError;
+	public static final fun flatMap (Lstapel/result/StapelResult;Lkotlin/jvm/functions/Function1;)Lstapel/result/StapelResult;
+	public static final fun fold (Lstapel/result/StapelResult;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun getOrElse (Lstapel/result/StapelResult;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun getOrNull (Lstapel/result/StapelResult;)Ljava/lang/Object;
+	public static final fun getOrThrow (Lstapel/result/StapelResult;)Ljava/lang/Object;
+	public static final fun isErr (Lstapel/result/StapelResult;)Z
+	public static final fun isOk (Lstapel/result/StapelResult;)Z
+	public static final fun map (Lstapel/result/StapelResult;Lkotlin/jvm/functions/Function1;)Lstapel/result/StapelResult;
+	public static final fun mapError (Lstapel/result/StapelResult;Lkotlin/jvm/functions/Function1;)Lstapel/result/StapelResult;
+	public static final fun onErr (Lstapel/result/StapelResult;Lkotlin/jvm/functions/Function1;)Lstapel/result/StapelResult;
+	public static final fun onOk (Lstapel/result/StapelResult;Lkotlin/jvm/functions/Function1;)Lstapel/result/StapelResult;
+}
+
+public final class stapel/result/TimeoutPhase : java/lang/Enum {
+	public static final field Connect Lstapel/result/TimeoutPhase;
+	public static final field Request Lstapel/result/TimeoutPhase;
+	public static final field Socket Lstapel/result/TimeoutPhase;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/result/TimeoutPhase;
+	public static fun values ()[Lstapel/result/TimeoutPhase;
+}
+
+public abstract interface class stapel/result/TransportCarrier : stapel/result/StapelError {
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public abstract fun getFailure ()Lstapel/result/TransportFailure;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+}
+
+public final class stapel/result/TransportCarrier$DefaultImpls {
+	public static fun getCode-KSB7eyA (Lstapel/result/TransportCarrier;)Ljava/lang/String;
+	public static fun getEnvelope (Lstapel/result/TransportCarrier;)Lstapel/result/ErrorEnvelope;
+	public static fun getParams (Lstapel/result/TransportCarrier;)Lstapel/result/ErrorParams;
+	public static fun getRemediation (Lstapel/result/TransportCarrier;)Lstapel/result/Remediation;
+	public static fun getStatus (Lstapel/result/TransportCarrier;)Ljava/lang/Integer;
+}
+
+public abstract interface class stapel/result/TransportFailure : stapel/result/StapelError {
+}
+
+public abstract interface class stapel/result/TransportFailure$Answered : stapel/result/TransportFailure {
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public abstract fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getStatus ()Ljava/lang/Integer;
+}
+
+public final class stapel/result/TransportFailure$Answered$DefaultImpls {
+	public static fun getCode-KSB7eyA (Lstapel/result/TransportFailure$Answered;)Ljava/lang/String;
+	public static fun getParams (Lstapel/result/TransportFailure$Answered;)Lstapel/result/ErrorParams;
+	public static fun getStatus (Lstapel/result/TransportFailure$Answered;)Ljava/lang/Integer;
+}
+
+public final class stapel/result/TransportFailure$ConnectionFailed : stapel/result/TransportFailure$NoResponse {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/result/TransportFailure$ConnectionFailed;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$ConnectionFailed;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/TransportFailure$ConnectionFailed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getDetail ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$ContractViolation : stapel/result/TransportFailure {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;)Lstapel/result/TransportFailure$ContractViolation;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$ContractViolation;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;ILjava/lang/Object;)Lstapel/result/TransportFailure$ContractViolation;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public final fun getDetail ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getOperationId ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$HttpStatus : stapel/result/TransportFailure$Answered {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/result/TransportFailure$HttpStatus;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$HttpStatus;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/result/TransportFailure$HttpStatus;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/result/TransportFailure$NoResponse : stapel/result/TransportFailure {
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public abstract fun getDetail ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+}
+
+public final class stapel/result/TransportFailure$NoResponse$DefaultImpls {
+	public static fun getCode-KSB7eyA (Lstapel/result/TransportFailure$NoResponse;)Ljava/lang/String;
+	public static fun getEnvelope (Lstapel/result/TransportFailure$NoResponse;)Lstapel/result/ErrorEnvelope;
+	public static fun getParams (Lstapel/result/TransportFailure$NoResponse;)Lstapel/result/ErrorParams;
+	public static fun getRemediation (Lstapel/result/TransportFailure$NoResponse;)Lstapel/result/Remediation;
+	public static fun getStatus (Lstapel/result/TransportFailure$NoResponse;)Ljava/lang/Integer;
+}
+
+public final class stapel/result/TransportFailure$Offline : stapel/result/TransportFailure$NoResponse {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/result/TransportFailure$Offline;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$Offline;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/TransportFailure$Offline;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getDetail ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$RateLimited : stapel/result/TransportFailure$Answered {
+	public synthetic fun <init> (Lkotlin/time/Duration;Lstapel/result/ErrorEnvelope;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-FghU774 ()Lkotlin/time/Duration;
+	public final fun component2 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy-dnQKTGw (Lkotlin/time/Duration;Lstapel/result/ErrorEnvelope;)Lstapel/result/TransportFailure$RateLimited;
+	public static synthetic fun copy-dnQKTGw$default (Lstapel/result/TransportFailure$RateLimited;Lkotlin/time/Duration;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/result/TransportFailure$RateLimited;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter-FghU774 ()Lkotlin/time/Duration;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$ServerFault : stapel/result/TransportFailure$Answered {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/result/TransportFailure$ServerFault;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$ServerFault;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/result/TransportFailure$ServerFault;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$Timeout : stapel/result/TransportFailure$NoResponse {
+	public fun <init> (Lstapel/result/TimeoutPhase;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/result/TimeoutPhase;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/result/TimeoutPhase;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/result/TimeoutPhase;Ljava/lang/String;)Lstapel/result/TransportFailure$Timeout;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$Timeout;Lstapel/result/TimeoutPhase;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/TransportFailure$Timeout;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getDetail ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public final fun getPhase ()Lstapel/result/TimeoutPhase;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$TlsRejected : stapel/result/TransportFailure$NoResponse {
+	public fun <init> (ZLjava/lang/String;)V
+	public synthetic fun <init> (ZLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (ZLjava/lang/String;)Lstapel/result/TransportFailure$TlsRejected;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$TlsRejected;ZLjava/lang/String;ILjava/lang/Object;)Lstapel/result/TransportFailure$TlsRejected;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getDetail ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public final fun getPinMismatch ()Z
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$Unauthenticated : stapel/result/TransportFailure {
+	public fun <init> ()V
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public synthetic fun <init> (Lstapel/result/ErrorEnvelope;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/result/TransportFailure$Unauthenticated;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$Unauthenticated;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/result/TransportFailure$Unauthenticated;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$Unavailable : stapel/result/TransportFailure$Answered {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/result/TransportFailure$Unavailable;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$Unavailable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/result/TransportFailure$Unavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$Unexpected : stapel/result/TransportFailure {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/result/TransportFailure$Unexpected;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$Unexpected;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/TransportFailure$Unexpected;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public final fun getDetail ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/TransportFailure$VerificationRequired : stapel/result/TransportFailure$Answered {
+	public fun <init> (Lstapel/result/VerificationChallenge;Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/VerificationChallenge;
+	public final fun component2 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/VerificationChallenge;Lstapel/result/ErrorEnvelope;)Lstapel/result/TransportFailure$VerificationRequired;
+	public static synthetic fun copy$default (Lstapel/result/TransportFailure$VerificationRequired;Lstapel/result/VerificationChallenge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/result/TransportFailure$VerificationRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChallenge ()Lstapel/result/VerificationChallenge;
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/VerificationChallenge {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/result/ErrorParams;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/result/ErrorParams;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Lstapel/result/ErrorParams;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/result/ErrorParams;)Lstapel/result/VerificationChallenge;
+	public static synthetic fun copy$default (Lstapel/result/VerificationChallenge;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/result/ErrorParams;ILjava/lang/Object;)Lstapel/result/VerificationChallenge;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChallengeId ()Ljava/lang/String;
+	public final fun getFactors ()Ljava/util/List;
+	public final fun getRaw ()Lstapel/result/ErrorParams;
+	public final fun getScope ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/result/state/ActionAvailability {
+}
+
+public final class stapel/result/state/ActionAvailability$Available : stapel/result/state/ActionAvailability {
+	public static final field INSTANCE Lstapel/result/state/ActionAvailability$Available;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/ActionAvailability$Blocked : stapel/result/state/ActionAvailability {
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/result/ErrorParams;Lstapel/result/StapelError;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/result/ErrorParams;Lstapel/result/StapelError;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-KSB7eyA ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/result/ErrorParams;
+	public final fun component3 ()Lstapel/result/StapelError;
+	public final fun copy-g0mB8rA (Ljava/lang/String;Lstapel/result/ErrorParams;Lstapel/result/StapelError;)Lstapel/result/state/ActionAvailability$Blocked;
+	public static synthetic fun copy-g0mB8rA$default (Lstapel/result/state/ActionAvailability$Blocked;Ljava/lang/String;Lstapel/result/ErrorParams;Lstapel/result/StapelError;ILjava/lang/Object;)Lstapel/result/state/ActionAvailability$Blocked;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Lstapel/result/StapelError;
+	public final fun getCode-KSB7eyA ()Ljava/lang/String;
+	public final fun getParams ()Lstapel/result/ErrorParams;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/ActionAvailabilityKt {
+	public static final fun firstBlock ([Lstapel/result/state/ActionAvailability;)Lstapel/result/state/ActionAvailability;
+	public static final fun requireReady (Lstapel/result/state/Resource;Lkotlin/jvm/functions/Function1;)Lstapel/result/state/ActionAvailability;
+	public static synthetic fun requireReady$default (Lstapel/result/state/Resource;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lstapel/result/state/ActionAvailability;
+}
+
+public final class stapel/result/state/Freshness {
+	public static final field Companion Lstapel/result/state/Freshness$Companion;
+	public fun <init> (Lstapel/result/state/Origin;JZZLstapel/result/StapelError;I)V
+	public synthetic fun <init> (Lstapel/result/state/Origin;JZZLstapel/result/StapelError;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/result/state/Origin;
+	public final fun component2 ()J
+	public final fun component3 ()Z
+	public final fun component4 ()Z
+	public final fun component5 ()Lstapel/result/StapelError;
+	public final fun component6 ()I
+	public final fun copy (Lstapel/result/state/Origin;JZZLstapel/result/StapelError;I)Lstapel/result/state/Freshness;
+	public static synthetic fun copy$default (Lstapel/result/state/Freshness;Lstapel/result/state/Origin;JZZLstapel/result/StapelError;IILjava/lang/Object;)Lstapel/result/state/Freshness;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFetchedAtMillis ()J
+	public final fun getOrigin ()Lstapel/result/state/Origin;
+	public final fun getPendingWrites ()I
+	public final fun getRefreshError ()Lstapel/result/StapelError;
+	public final fun getRefreshing ()Z
+	public final fun getStale ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/Freshness$Companion {
+	public final fun network (J)Lstapel/result/state/Freshness;
+}
+
+public final class stapel/result/state/MandatePrincipal : java/lang/Enum {
+	public static final field Anonymous Lstapel/result/state/MandatePrincipal;
+	public static final field Guest Lstapel/result/state/MandatePrincipal;
+	public static final field Member Lstapel/result/state/MandatePrincipal;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/result/state/MandatePrincipal;
+	public static fun values ()[Lstapel/result/state/MandatePrincipal;
+}
+
+public abstract interface class stapel/result/state/MandateState {
+}
+
+public final class stapel/result/state/MandateState$Asking : stapel/result/state/MandateState {
+	public static final field INSTANCE Lstapel/result/state/MandateState$Asking;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/MandateState$Resolved : stapel/result/state/MandateState {
+	public fun <init> (Lstapel/result/state/MandatePrincipal;)V
+	public final fun component1 ()Lstapel/result/state/MandatePrincipal;
+	public final fun copy (Lstapel/result/state/MandatePrincipal;)Lstapel/result/state/MandateState$Resolved;
+	public static synthetic fun copy$default (Lstapel/result/state/MandateState$Resolved;Lstapel/result/state/MandatePrincipal;ILjava/lang/Object;)Lstapel/result/state/MandateState$Resolved;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPrincipal ()Lstapel/result/state/MandatePrincipal;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/MandateState$Unavailable : stapel/result/state/MandateState {
+	public fun <init> (Lstapel/result/StapelError;)V
+	public final fun component1 ()Lstapel/result/StapelError;
+	public final fun copy (Lstapel/result/StapelError;)Lstapel/result/state/MandateState$Unavailable;
+	public static synthetic fun copy$default (Lstapel/result/state/MandateState$Unavailable;Lstapel/result/StapelError;ILjava/lang/Object;)Lstapel/result/state/MandateState$Unavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/result/StapelError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/Origin : java/lang/Enum {
+	public static final field Disk Lstapel/result/state/Origin;
+	public static final field Memory Lstapel/result/state/Origin;
+	public static final field Network Lstapel/result/state/Origin;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/result/state/Origin;
+	public static fun values ()[Lstapel/result/state/Origin;
+}
+
+public abstract interface class stapel/result/state/Resource {
+}
+
+public final class stapel/result/state/Resource$Failed : stapel/result/state/Resource {
+	public fun <init> (Lstapel/result/StapelError;)V
+	public final fun component1 ()Lstapel/result/StapelError;
+	public final fun copy (Lstapel/result/StapelError;)Lstapel/result/state/Resource$Failed;
+	public static synthetic fun copy$default (Lstapel/result/state/Resource$Failed;Lstapel/result/StapelError;ILjava/lang/Object;)Lstapel/result/state/Resource$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/result/StapelError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/Resource$Loading : stapel/result/state/Resource {
+	public static final field INSTANCE Lstapel/result/state/Resource$Loading;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/Resource$Ready : stapel/result/state/Resource {
+	public fun <init> (Ljava/lang/Object;Lstapel/result/state/Freshness;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Lstapel/result/state/Freshness;
+	public final fun copy (Ljava/lang/Object;Lstapel/result/state/Freshness;)Lstapel/result/state/Resource$Ready;
+	public static synthetic fun copy$default (Lstapel/result/state/Resource$Ready;Ljava/lang/Object;Lstapel/result/state/Freshness;ILjava/lang/Object;)Lstapel/result/state/Resource$Ready;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getData ()Ljava/lang/Object;
+	public final fun getFreshness ()Lstapel/result/state/Freshness;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/state/ResourceKt {
+	public static final fun bothReady (Lstapel/result/state/Resource;Lstapel/result/state/Resource;)Lstapel/result/state/Resource;
+	public static final fun dataOrNull (Lstapel/result/state/Resource;)Ljava/lang/Object;
+	public static final fun errorOrNull (Lstapel/result/state/Resource;)Lstapel/result/StapelError;
+	public static final fun isLoading (Lstapel/result/state/Resource;)Z
+	public static final fun keepPrevious (Lstapel/result/state/Resource;Lstapel/result/state/Resource$Ready;)Lstapel/result/state/Resource;
+	public static final fun map (Lstapel/result/state/Resource;Lkotlin/jvm/functions/Function1;)Lstapel/result/state/Resource;
+	public static final fun matchList (Lstapel/result/state/Resource;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public static final fun toResource (Lstapel/result/StapelResult;Lstapel/result/state/Freshness;)Lstapel/result/state/Resource;
+}
+
+public final class stapel/result/text/ClientErrorCatalog : stapel/result/text/ErrorCatalog {
+	public static final field INSTANCE Lstapel/result/text/ClientErrorCatalog;
+	public final fun entries (Ljava/lang/String;)Ljava/util/Map;
+	public final fun getLocales ()Ljava/util/Set;
+	public fun getOwner ()Ljava/lang/String;
+	public fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/result/text/ErrorCatalog {
+	public abstract fun getOwner ()Ljava/lang/String;
+	public abstract fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public abstract fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/result/text/ErrorSpec {
+	public synthetic fun <init> (Ljava/lang/String;ILjava/util/List;Lstapel/result/Remediation;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-KSB7eyA ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Lstapel/result/Remediation;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun copy-LzrEZoI (Ljava/lang/String;ILjava/util/List;Lstapel/result/Remediation;Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public static synthetic fun copy-LzrEZoI$default (Lstapel/result/text/ErrorSpec;Ljava/lang/String;ILjava/util/List;Lstapel/result/Remediation;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/text/ErrorSpec;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode-KSB7eyA ()Ljava/lang/String;
+	public final fun getEn ()Ljava/lang/String;
+	public final fun getParams ()Ljava/util/List;
+	public final fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getStatus ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/text/ErrorText {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lstapel/result/text/ErrorText;
+	public static synthetic fun copy$default (Lstapel/result/text/ErrorText;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/result/text/ErrorText;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDetail ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/result/text/ErrorTextKt {
+	public static final fun interpolate (Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+}
+
+public final class stapel/result/text/ErrorTextResolver {
+	public fun <init> (Ljava/util/List;Lstapel/result/text/ErrorCatalog;)V
+	public synthetic fun <init> (Ljava/util/List;Lstapel/result/text/ErrorCatalog;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun describe-9X-8zTI (Lstapel/result/StapelError;Ljava/lang/String;)Lstapel/result/text/ErrorText;
+	public final fun message-9X-8zTI (Lstapel/result/StapelError;Ljava/lang/String;)Ljava/lang/String;
+	public final fun remediation (Lstapel/result/StapelError;)Lstapel/result/Remediation;
+	public final fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public final fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/result/text/LocaleTag {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/result/text/LocaleTag;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun getLanguage-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+

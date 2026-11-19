@@ -1,0 +1,799 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-result>
+open annotation class stapel.result/InternalStapelApi : kotlin/Annotation { // stapel.result/InternalStapelApi|null[0]
+    constructor <init>() // stapel.result/InternalStapelApi.<init>|<init>(){}[0]
+}
+
+final enum class stapel.result.state/MandatePrincipal : kotlin/Enum<stapel.result.state/MandatePrincipal> { // stapel.result.state/MandatePrincipal|null[0]
+    enum entry Anonymous // stapel.result.state/MandatePrincipal.Anonymous|null[0]
+    enum entry Guest // stapel.result.state/MandatePrincipal.Guest|null[0]
+    enum entry Member // stapel.result.state/MandatePrincipal.Member|null[0]
+
+    final val entries // stapel.result.state/MandatePrincipal.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.result.state/MandatePrincipal> // stapel.result.state/MandatePrincipal.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.result.state/MandatePrincipal // stapel.result.state/MandatePrincipal.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.result.state/MandatePrincipal> // stapel.result.state/MandatePrincipal.values|values#static(){}[0]
+}
+
+final enum class stapel.result.state/Origin : kotlin/Enum<stapel.result.state/Origin> { // stapel.result.state/Origin|null[0]
+    enum entry Disk // stapel.result.state/Origin.Disk|null[0]
+    enum entry Memory // stapel.result.state/Origin.Memory|null[0]
+    enum entry Network // stapel.result.state/Origin.Network|null[0]
+
+    final val entries // stapel.result.state/Origin.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.result.state/Origin> // stapel.result.state/Origin.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.result.state/Origin // stapel.result.state/Origin.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.result.state/Origin> // stapel.result.state/Origin.values|values#static(){}[0]
+}
+
+final enum class stapel.result/Remediation : kotlin/Enum<stapel.result/Remediation> { // stapel.result/Remediation|null[0]
+    enum entry Bug // stapel.result/Remediation.Bug|null[0]
+    enum entry ContactSupport // stapel.result/Remediation.ContactSupport|null[0]
+    enum entry FixInput // stapel.result/Remediation.FixInput|null[0]
+    enum entry Reauthenticate // stapel.result/Remediation.Reauthenticate|null[0]
+    enum entry Retry // stapel.result/Remediation.Retry|null[0]
+    enum entry Unknown // stapel.result/Remediation.Unknown|null[0]
+    enum entry Verify // stapel.result/Remediation.Verify|null[0]
+    enum entry WaitAndRetry // stapel.result/Remediation.WaitAndRetry|null[0]
+
+    final val entries // stapel.result/Remediation.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.result/Remediation> // stapel.result/Remediation.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wire // stapel.result/Remediation.wire|{}wire[0]
+        final fun <get-wire>(): kotlin/String // stapel.result/Remediation.wire.<get-wire>|<get-wire>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.result/Remediation // stapel.result/Remediation.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.result/Remediation> // stapel.result/Remediation.values|values#static(){}[0]
+
+    final object Companion { // stapel.result/Remediation.Companion|null[0]
+        final fun default(kotlin/String, kotlin/Int, kotlin.collections/Collection<kotlin/String>): stapel.result/Remediation // stapel.result/Remediation.Companion.default|default(kotlin.String;kotlin.Int;kotlin.collections.Collection<kotlin.String>){}[0]
+        final fun fromWire(kotlin/String): stapel.result/Remediation // stapel.result/Remediation.Companion.fromWire|fromWire(kotlin.String){}[0]
+    }
+}
+
+final enum class stapel.result/TimeoutPhase : kotlin/Enum<stapel.result/TimeoutPhase> { // stapel.result/TimeoutPhase|null[0]
+    enum entry Connect // stapel.result/TimeoutPhase.Connect|null[0]
+    enum entry Request // stapel.result/TimeoutPhase.Request|null[0]
+    enum entry Socket // stapel.result/TimeoutPhase.Socket|null[0]
+
+    final val entries // stapel.result/TimeoutPhase.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.result/TimeoutPhase> // stapel.result/TimeoutPhase.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.result/TimeoutPhase // stapel.result/TimeoutPhase.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.result/TimeoutPhase> // stapel.result/TimeoutPhase.values|values#static(){}[0]
+}
+
+abstract interface stapel.result.text/ErrorCatalog { // stapel.result.text/ErrorCatalog|null[0]
+    abstract val owner // stapel.result.text/ErrorCatalog.owner|{}owner[0]
+        abstract fun <get-owner>(): kotlin/String // stapel.result.text/ErrorCatalog.owner.<get-owner>|<get-owner>(){}[0]
+
+    abstract fun spec(stapel.result/ErrorCode): stapel.result.text/ErrorSpec? // stapel.result.text/ErrorCatalog.spec|spec(stapel.result.ErrorCode){}[0]
+    abstract fun template(stapel.result/ErrorCode, stapel.result.text/LocaleTag): kotlin/String? // stapel.result.text/ErrorCatalog.template|template(stapel.result.ErrorCode;stapel.result.text.LocaleTag){}[0]
+}
+
+abstract interface stapel.result/DomainError : stapel.result/StapelError { // stapel.result/DomainError|null[0]
+    abstract val envelope // stapel.result/DomainError.envelope|{}envelope[0]
+        abstract fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/DomainError.envelope.<get-envelope>|<get-envelope>(){}[0]
+    open val code // stapel.result/DomainError.code|{}code[0]
+        open fun <get-code>(): stapel.result/ErrorCode // stapel.result/DomainError.code.<get-code>|<get-code>(){}[0]
+    open val params // stapel.result/DomainError.params|{}params[0]
+        open fun <get-params>(): stapel.result/ErrorParams // stapel.result/DomainError.params.<get-params>|<get-params>(){}[0]
+    open val status // stapel.result/DomainError.status|{}status[0]
+        open fun <get-status>(): kotlin/Int // stapel.result/DomainError.status.<get-status>|<get-status>(){}[0]
+}
+
+abstract interface stapel.result/StapelError { // stapel.result/StapelError|null[0]
+    abstract val code // stapel.result/StapelError.code|{}code[0]
+        abstract fun <get-code>(): stapel.result/ErrorCode // stapel.result/StapelError.code.<get-code>|<get-code>(){}[0]
+    abstract val envelope // stapel.result/StapelError.envelope|{}envelope[0]
+        abstract fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.result/StapelError.envelope.<get-envelope>|<get-envelope>(){}[0]
+    abstract val params // stapel.result/StapelError.params|{}params[0]
+        abstract fun <get-params>(): stapel.result/ErrorParams // stapel.result/StapelError.params.<get-params>|<get-params>(){}[0]
+    abstract val remediation // stapel.result/StapelError.remediation|{}remediation[0]
+        abstract fun <get-remediation>(): stapel.result/Remediation // stapel.result/StapelError.remediation.<get-remediation>|<get-remediation>(){}[0]
+    abstract val status // stapel.result/StapelError.status|{}status[0]
+        abstract fun <get-status>(): kotlin/Int? // stapel.result/StapelError.status.<get-status>|<get-status>(){}[0]
+}
+
+abstract interface stapel.result/TransportCarrier : stapel.result/StapelError { // stapel.result/TransportCarrier|null[0]
+    abstract val failure // stapel.result/TransportCarrier.failure|{}failure[0]
+        abstract fun <get-failure>(): stapel.result/TransportFailure // stapel.result/TransportCarrier.failure.<get-failure>|<get-failure>(){}[0]
+    open val code // stapel.result/TransportCarrier.code|{}code[0]
+        open fun <get-code>(): stapel.result/ErrorCode // stapel.result/TransportCarrier.code.<get-code>|<get-code>(){}[0]
+    open val envelope // stapel.result/TransportCarrier.envelope|{}envelope[0]
+        open fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.result/TransportCarrier.envelope.<get-envelope>|<get-envelope>(){}[0]
+    open val params // stapel.result/TransportCarrier.params|{}params[0]
+        open fun <get-params>(): stapel.result/ErrorParams // stapel.result/TransportCarrier.params.<get-params>|<get-params>(){}[0]
+    open val remediation // stapel.result/TransportCarrier.remediation|{}remediation[0]
+        open fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportCarrier.remediation.<get-remediation>|<get-remediation>(){}[0]
+    open val status // stapel.result/TransportCarrier.status|{}status[0]
+        open fun <get-status>(): kotlin/Int? // stapel.result/TransportCarrier.status.<get-status>|<get-status>(){}[0]
+}
+
+sealed interface <#A: out kotlin/Any?, #B: out stapel.result/StapelError> stapel.result/StapelResult { // stapel.result/StapelResult|null[0]
+    final class <#A1: out kotlin/Any?> Ok : stapel.result/StapelResult<#A1, kotlin/Nothing> { // stapel.result/StapelResult.Ok|null[0]
+        constructor <init>(#A1) // stapel.result/StapelResult.Ok.<init>|<init>(1:0){}[0]
+
+        final val value // stapel.result/StapelResult.Ok.value|{}value[0]
+            final fun <get-value>(): #A1 // stapel.result/StapelResult.Ok.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): #A1 // stapel.result/StapelResult.Ok.component1|component1(){}[0]
+        final fun copy(#A1 = ...): stapel.result/StapelResult.Ok<#A1> // stapel.result/StapelResult.Ok.copy|copy(1:0){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/StapelResult.Ok.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/StapelResult.Ok.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/StapelResult.Ok.toString|toString(){}[0]
+    }
+
+    final class <#A1: out stapel.result/StapelError> Err : stapel.result/StapelResult<kotlin/Nothing, #A1> { // stapel.result/StapelResult.Err|null[0]
+        constructor <init>(#A1) // stapel.result/StapelResult.Err.<init>|<init>(1:0){}[0]
+
+        final val error // stapel.result/StapelResult.Err.error|{}error[0]
+            final fun <get-error>(): #A1 // stapel.result/StapelResult.Err.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): #A1 // stapel.result/StapelResult.Err.component1|component1(){}[0]
+        final fun copy(#A1 = ...): stapel.result/StapelResult.Err<#A1> // stapel.result/StapelResult.Err.copy|copy(1:0){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/StapelResult.Err.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/StapelResult.Err.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/StapelResult.Err.toString|toString(){}[0]
+    }
+}
+
+sealed interface <#A: out kotlin/Any?> stapel.result.state/Resource { // stapel.result.state/Resource|null[0]
+    final class <#A1: out kotlin/Any?> Ready : stapel.result.state/Resource<#A1> { // stapel.result.state/Resource.Ready|null[0]
+        constructor <init>(#A1, stapel.result.state/Freshness) // stapel.result.state/Resource.Ready.<init>|<init>(1:0;stapel.result.state.Freshness){}[0]
+
+        final val data // stapel.result.state/Resource.Ready.data|{}data[0]
+            final fun <get-data>(): #A1 // stapel.result.state/Resource.Ready.data.<get-data>|<get-data>(){}[0]
+        final val freshness // stapel.result.state/Resource.Ready.freshness|{}freshness[0]
+            final fun <get-freshness>(): stapel.result.state/Freshness // stapel.result.state/Resource.Ready.freshness.<get-freshness>|<get-freshness>(){}[0]
+
+        final fun component1(): #A1 // stapel.result.state/Resource.Ready.component1|component1(){}[0]
+        final fun component2(): stapel.result.state/Freshness // stapel.result.state/Resource.Ready.component2|component2(){}[0]
+        final fun copy(#A1 = ..., stapel.result.state/Freshness = ...): stapel.result.state/Resource.Ready<#A1> // stapel.result.state/Resource.Ready.copy|copy(1:0;stapel.result.state.Freshness){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/Resource.Ready.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/Resource.Ready.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/Resource.Ready.toString|toString(){}[0]
+    }
+
+    final class Failed : stapel.result.state/Resource<kotlin/Nothing> { // stapel.result.state/Resource.Failed|null[0]
+        constructor <init>(stapel.result/StapelError) // stapel.result.state/Resource.Failed.<init>|<init>(stapel.result.StapelError){}[0]
+
+        final val error // stapel.result.state/Resource.Failed.error|{}error[0]
+            final fun <get-error>(): stapel.result/StapelError // stapel.result.state/Resource.Failed.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): stapel.result/StapelError // stapel.result.state/Resource.Failed.component1|component1(){}[0]
+        final fun copy(stapel.result/StapelError = ...): stapel.result.state/Resource.Failed // stapel.result.state/Resource.Failed.copy|copy(stapel.result.StapelError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/Resource.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/Resource.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/Resource.Failed.toString|toString(){}[0]
+    }
+
+    final object Loading : stapel.result.state/Resource<kotlin/Nothing> { // stapel.result.state/Resource.Loading|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/Resource.Loading.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/Resource.Loading.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/Resource.Loading.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.result.state/ActionAvailability { // stapel.result.state/ActionAvailability|null[0]
+    final class Blocked : stapel.result.state/ActionAvailability { // stapel.result.state/ActionAvailability.Blocked|null[0]
+        constructor <init>(stapel.result/ErrorCode, stapel.result/ErrorParams = ..., stapel.result/StapelError? = ...) // stapel.result.state/ActionAvailability.Blocked.<init>|<init>(stapel.result.ErrorCode;stapel.result.ErrorParams;stapel.result.StapelError?){}[0]
+
+        final val cause // stapel.result.state/ActionAvailability.Blocked.cause|{}cause[0]
+            final fun <get-cause>(): stapel.result/StapelError? // stapel.result.state/ActionAvailability.Blocked.cause.<get-cause>|<get-cause>(){}[0]
+        final val code // stapel.result.state/ActionAvailability.Blocked.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.result.state/ActionAvailability.Blocked.code.<get-code>|<get-code>(){}[0]
+        final val params // stapel.result.state/ActionAvailability.Blocked.params|{}params[0]
+            final fun <get-params>(): stapel.result/ErrorParams // stapel.result.state/ActionAvailability.Blocked.params.<get-params>|<get-params>(){}[0]
+
+        final fun component1(): stapel.result/ErrorCode // stapel.result.state/ActionAvailability.Blocked.component1|component1(){}[0]
+        final fun component2(): stapel.result/ErrorParams // stapel.result.state/ActionAvailability.Blocked.component2|component2(){}[0]
+        final fun component3(): stapel.result/StapelError? // stapel.result.state/ActionAvailability.Blocked.component3|component3(){}[0]
+        final fun copy(stapel.result/ErrorCode = ..., stapel.result/ErrorParams = ..., stapel.result/StapelError? = ...): stapel.result.state/ActionAvailability.Blocked // stapel.result.state/ActionAvailability.Blocked.copy|copy(stapel.result.ErrorCode;stapel.result.ErrorParams;stapel.result.StapelError?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/ActionAvailability.Blocked.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/ActionAvailability.Blocked.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/ActionAvailability.Blocked.toString|toString(){}[0]
+    }
+
+    final object Available : stapel.result.state/ActionAvailability { // stapel.result.state/ActionAvailability.Available|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/ActionAvailability.Available.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/ActionAvailability.Available.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/ActionAvailability.Available.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.result.state/MandateState { // stapel.result.state/MandateState|null[0]
+    final class Resolved : stapel.result.state/MandateState { // stapel.result.state/MandateState.Resolved|null[0]
+        constructor <init>(stapel.result.state/MandatePrincipal) // stapel.result.state/MandateState.Resolved.<init>|<init>(stapel.result.state.MandatePrincipal){}[0]
+
+        final val principal // stapel.result.state/MandateState.Resolved.principal|{}principal[0]
+            final fun <get-principal>(): stapel.result.state/MandatePrincipal // stapel.result.state/MandateState.Resolved.principal.<get-principal>|<get-principal>(){}[0]
+
+        final fun component1(): stapel.result.state/MandatePrincipal // stapel.result.state/MandateState.Resolved.component1|component1(){}[0]
+        final fun copy(stapel.result.state/MandatePrincipal = ...): stapel.result.state/MandateState.Resolved // stapel.result.state/MandateState.Resolved.copy|copy(stapel.result.state.MandatePrincipal){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/MandateState.Resolved.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/MandateState.Resolved.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/MandateState.Resolved.toString|toString(){}[0]
+    }
+
+    final class Unavailable : stapel.result.state/MandateState { // stapel.result.state/MandateState.Unavailable|null[0]
+        constructor <init>(stapel.result/StapelError) // stapel.result.state/MandateState.Unavailable.<init>|<init>(stapel.result.StapelError){}[0]
+
+        final val error // stapel.result.state/MandateState.Unavailable.error|{}error[0]
+            final fun <get-error>(): stapel.result/StapelError // stapel.result.state/MandateState.Unavailable.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): stapel.result/StapelError // stapel.result.state/MandateState.Unavailable.component1|component1(){}[0]
+        final fun copy(stapel.result/StapelError = ...): stapel.result.state/MandateState.Unavailable // stapel.result.state/MandateState.Unavailable.copy|copy(stapel.result.StapelError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/MandateState.Unavailable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/MandateState.Unavailable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/MandateState.Unavailable.toString|toString(){}[0]
+    }
+
+    final object Asking : stapel.result.state/MandateState { // stapel.result.state/MandateState.Asking|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/MandateState.Asking.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result.state/MandateState.Asking.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result.state/MandateState.Asking.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.result/TransportFailure : stapel.result/StapelError { // stapel.result/TransportFailure|null[0]
+    sealed interface Answered : stapel.result/TransportFailure { // stapel.result/TransportFailure.Answered|null[0]
+        abstract val envelope // stapel.result/TransportFailure.Answered.envelope|{}envelope[0]
+            abstract fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.Answered.envelope.<get-envelope>|<get-envelope>(){}[0]
+        open val code // stapel.result/TransportFailure.Answered.code|{}code[0]
+            open fun <get-code>(): stapel.result/ErrorCode // stapel.result/TransportFailure.Answered.code.<get-code>|<get-code>(){}[0]
+        open val params // stapel.result/TransportFailure.Answered.params|{}params[0]
+            open fun <get-params>(): stapel.result/ErrorParams // stapel.result/TransportFailure.Answered.params.<get-params>|<get-params>(){}[0]
+        open val status // stapel.result/TransportFailure.Answered.status|{}status[0]
+            open fun <get-status>(): kotlin/Int // stapel.result/TransportFailure.Answered.status.<get-status>|<get-status>(){}[0]
+    }
+
+    sealed interface NoResponse : stapel.result/TransportFailure { // stapel.result/TransportFailure.NoResponse|null[0]
+        abstract val detail // stapel.result/TransportFailure.NoResponse.detail|{}detail[0]
+            abstract fun <get-detail>(): kotlin/String? // stapel.result/TransportFailure.NoResponse.detail.<get-detail>|<get-detail>(){}[0]
+        open val code // stapel.result/TransportFailure.NoResponse.code|{}code[0]
+            open fun <get-code>(): stapel.result/ErrorCode // stapel.result/TransportFailure.NoResponse.code.<get-code>|<get-code>(){}[0]
+        open val envelope // stapel.result/TransportFailure.NoResponse.envelope|{}envelope[0]
+            open fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.result/TransportFailure.NoResponse.envelope.<get-envelope>|<get-envelope>(){}[0]
+        open val params // stapel.result/TransportFailure.NoResponse.params|{}params[0]
+            open fun <get-params>(): stapel.result/ErrorParams // stapel.result/TransportFailure.NoResponse.params.<get-params>|<get-params>(){}[0]
+        open val remediation // stapel.result/TransportFailure.NoResponse.remediation|{}remediation[0]
+            open fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.NoResponse.remediation.<get-remediation>|<get-remediation>(){}[0]
+        open val status // stapel.result/TransportFailure.NoResponse.status|{}status[0]
+            open fun <get-status>(): kotlin/Int? // stapel.result/TransportFailure.NoResponse.status.<get-status>|<get-status>(){}[0]
+    }
+
+    final class ConnectionFailed : stapel.result/TransportFailure.NoResponse { // stapel.result/TransportFailure.ConnectionFailed|null[0]
+        constructor <init>(kotlin/String? = ...) // stapel.result/TransportFailure.ConnectionFailed.<init>|<init>(kotlin.String?){}[0]
+
+        final val detail // stapel.result/TransportFailure.ConnectionFailed.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String? // stapel.result/TransportFailure.ConnectionFailed.detail.<get-detail>|<get-detail>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.result/TransportFailure.ConnectionFailed.component1|component1(){}[0]
+        final fun copy(kotlin/String? = ...): stapel.result/TransportFailure.ConnectionFailed // stapel.result/TransportFailure.ConnectionFailed.copy|copy(kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.ConnectionFailed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.ConnectionFailed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.ConnectionFailed.toString|toString(){}[0]
+    }
+
+    final class ContractViolation : stapel.result/TransportFailure { // stapel.result/TransportFailure.ContractViolation|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin/Int? = ...) // stapel.result/TransportFailure.ContractViolation.<init>|<init>(kotlin.String;kotlin.String;kotlin.Int?){}[0]
+
+        final val code // stapel.result/TransportFailure.ContractViolation.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.result/TransportFailure.ContractViolation.code.<get-code>|<get-code>(){}[0]
+        final val detail // stapel.result/TransportFailure.ContractViolation.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String // stapel.result/TransportFailure.ContractViolation.detail.<get-detail>|<get-detail>(){}[0]
+        final val envelope // stapel.result/TransportFailure.ContractViolation.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.result/TransportFailure.ContractViolation.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val operationId // stapel.result/TransportFailure.ContractViolation.operationId|{}operationId[0]
+            final fun <get-operationId>(): kotlin/String // stapel.result/TransportFailure.ContractViolation.operationId.<get-operationId>|<get-operationId>(){}[0]
+        final val params // stapel.result/TransportFailure.ContractViolation.params|{}params[0]
+            final fun <get-params>(): stapel.result/ErrorParams // stapel.result/TransportFailure.ContractViolation.params.<get-params>|<get-params>(){}[0]
+        final val remediation // stapel.result/TransportFailure.ContractViolation.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.ContractViolation.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val status // stapel.result/TransportFailure.ContractViolation.status|{}status[0]
+            final fun <get-status>(): kotlin/Int? // stapel.result/TransportFailure.ContractViolation.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.result/TransportFailure.ContractViolation.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.result/TransportFailure.ContractViolation.component2|component2(){}[0]
+        final fun component3(): kotlin/Int? // stapel.result/TransportFailure.ContractViolation.component3|component3(){}[0]
+        final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/Int? = ...): stapel.result/TransportFailure.ContractViolation // stapel.result/TransportFailure.ContractViolation.copy|copy(kotlin.String;kotlin.String;kotlin.Int?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.ContractViolation.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.ContractViolation.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.ContractViolation.toString|toString(){}[0]
+    }
+
+    final class HttpStatus : stapel.result/TransportFailure.Answered { // stapel.result/TransportFailure.HttpStatus|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.result/TransportFailure.HttpStatus.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.result/TransportFailure.HttpStatus.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.HttpStatus.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.result/TransportFailure.HttpStatus.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.HttpStatus.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.HttpStatus.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.result/TransportFailure.HttpStatus // stapel.result/TransportFailure.HttpStatus.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.HttpStatus.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.HttpStatus.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.HttpStatus.toString|toString(){}[0]
+    }
+
+    final class Offline : stapel.result/TransportFailure.NoResponse { // stapel.result/TransportFailure.Offline|null[0]
+        constructor <init>(kotlin/String? = ...) // stapel.result/TransportFailure.Offline.<init>|<init>(kotlin.String?){}[0]
+
+        final val detail // stapel.result/TransportFailure.Offline.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String? // stapel.result/TransportFailure.Offline.detail.<get-detail>|<get-detail>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.result/TransportFailure.Offline.component1|component1(){}[0]
+        final fun copy(kotlin/String? = ...): stapel.result/TransportFailure.Offline // stapel.result/TransportFailure.Offline.copy|copy(kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.Offline.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.Offline.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.Offline.toString|toString(){}[0]
+    }
+
+    final class RateLimited : stapel.result/TransportFailure.Answered { // stapel.result/TransportFailure.RateLimited|null[0]
+        constructor <init>(kotlin.time/Duration?, stapel.result/ErrorEnvelope) // stapel.result/TransportFailure.RateLimited.<init>|<init>(kotlin.time.Duration?;stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.result/TransportFailure.RateLimited.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.RateLimited.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.result/TransportFailure.RateLimited.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.RateLimited.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val retryAfter // stapel.result/TransportFailure.RateLimited.retryAfter|{}retryAfter[0]
+            final fun <get-retryAfter>(): kotlin.time/Duration? // stapel.result/TransportFailure.RateLimited.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+
+        final fun component1(): kotlin.time/Duration? // stapel.result/TransportFailure.RateLimited.component1|component1(){}[0]
+        final fun component2(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.RateLimited.component2|component2(){}[0]
+        final fun copy(kotlin.time/Duration? = ..., stapel.result/ErrorEnvelope = ...): stapel.result/TransportFailure.RateLimited // stapel.result/TransportFailure.RateLimited.copy|copy(kotlin.time.Duration?;stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.RateLimited.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.RateLimited.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.RateLimited.toString|toString(){}[0]
+    }
+
+    final class ServerFault : stapel.result/TransportFailure.Answered { // stapel.result/TransportFailure.ServerFault|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.result/TransportFailure.ServerFault.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.result/TransportFailure.ServerFault.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.ServerFault.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.result/TransportFailure.ServerFault.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.ServerFault.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.ServerFault.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.result/TransportFailure.ServerFault // stapel.result/TransportFailure.ServerFault.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.ServerFault.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.ServerFault.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.ServerFault.toString|toString(){}[0]
+    }
+
+    final class Timeout : stapel.result/TransportFailure.NoResponse { // stapel.result/TransportFailure.Timeout|null[0]
+        constructor <init>(stapel.result/TimeoutPhase, kotlin/String? = ...) // stapel.result/TransportFailure.Timeout.<init>|<init>(stapel.result.TimeoutPhase;kotlin.String?){}[0]
+
+        final val detail // stapel.result/TransportFailure.Timeout.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String? // stapel.result/TransportFailure.Timeout.detail.<get-detail>|<get-detail>(){}[0]
+        final val phase // stapel.result/TransportFailure.Timeout.phase|{}phase[0]
+            final fun <get-phase>(): stapel.result/TimeoutPhase // stapel.result/TransportFailure.Timeout.phase.<get-phase>|<get-phase>(){}[0]
+
+        final fun component1(): stapel.result/TimeoutPhase // stapel.result/TransportFailure.Timeout.component1|component1(){}[0]
+        final fun component2(): kotlin/String? // stapel.result/TransportFailure.Timeout.component2|component2(){}[0]
+        final fun copy(stapel.result/TimeoutPhase = ..., kotlin/String? = ...): stapel.result/TransportFailure.Timeout // stapel.result/TransportFailure.Timeout.copy|copy(stapel.result.TimeoutPhase;kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.Timeout.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.Timeout.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.Timeout.toString|toString(){}[0]
+    }
+
+    final class TlsRejected : stapel.result/TransportFailure.NoResponse { // stapel.result/TransportFailure.TlsRejected|null[0]
+        constructor <init>(kotlin/Boolean, kotlin/String? = ...) // stapel.result/TransportFailure.TlsRejected.<init>|<init>(kotlin.Boolean;kotlin.String?){}[0]
+
+        final val detail // stapel.result/TransportFailure.TlsRejected.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String? // stapel.result/TransportFailure.TlsRejected.detail.<get-detail>|<get-detail>(){}[0]
+        final val pinMismatch // stapel.result/TransportFailure.TlsRejected.pinMismatch|{}pinMismatch[0]
+            final fun <get-pinMismatch>(): kotlin/Boolean // stapel.result/TransportFailure.TlsRejected.pinMismatch.<get-pinMismatch>|<get-pinMismatch>(){}[0]
+        final val remediation // stapel.result/TransportFailure.TlsRejected.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.TlsRejected.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): kotlin/Boolean // stapel.result/TransportFailure.TlsRejected.component1|component1(){}[0]
+        final fun component2(): kotlin/String? // stapel.result/TransportFailure.TlsRejected.component2|component2(){}[0]
+        final fun copy(kotlin/Boolean = ..., kotlin/String? = ...): stapel.result/TransportFailure.TlsRejected // stapel.result/TransportFailure.TlsRejected.copy|copy(kotlin.Boolean;kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.TlsRejected.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.TlsRejected.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.TlsRejected.toString|toString(){}[0]
+    }
+
+    final class Unauthenticated : stapel.result/TransportFailure { // stapel.result/TransportFailure.Unauthenticated|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope? = ...) // stapel.result/TransportFailure.Unauthenticated.<init>|<init>(stapel.result.ErrorEnvelope?){}[0]
+
+        final val code // stapel.result/TransportFailure.Unauthenticated.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.result/TransportFailure.Unauthenticated.code.<get-code>|<get-code>(){}[0]
+        final val envelope // stapel.result/TransportFailure.Unauthenticated.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.result/TransportFailure.Unauthenticated.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val params // stapel.result/TransportFailure.Unauthenticated.params|{}params[0]
+            final fun <get-params>(): stapel.result/ErrorParams // stapel.result/TransportFailure.Unauthenticated.params.<get-params>|<get-params>(){}[0]
+        final val remediation // stapel.result/TransportFailure.Unauthenticated.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.Unauthenticated.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val status // stapel.result/TransportFailure.Unauthenticated.status|{}status[0]
+            final fun <get-status>(): kotlin/Int? // stapel.result/TransportFailure.Unauthenticated.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope? // stapel.result/TransportFailure.Unauthenticated.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope? = ...): stapel.result/TransportFailure.Unauthenticated // stapel.result/TransportFailure.Unauthenticated.copy|copy(stapel.result.ErrorEnvelope?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.Unauthenticated.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.Unauthenticated.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.Unauthenticated.toString|toString(){}[0]
+    }
+
+    final class Unavailable : stapel.result/TransportFailure.Answered { // stapel.result/TransportFailure.Unavailable|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.result/TransportFailure.Unavailable.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.result/TransportFailure.Unavailable.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.Unavailable.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.result/TransportFailure.Unavailable.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.Unavailable.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.Unavailable.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.result/TransportFailure.Unavailable // stapel.result/TransportFailure.Unavailable.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.Unavailable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.Unavailable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.Unavailable.toString|toString(){}[0]
+    }
+
+    final class Unexpected : stapel.result/TransportFailure { // stapel.result/TransportFailure.Unexpected|null[0]
+        constructor <init>(kotlin/String) // stapel.result/TransportFailure.Unexpected.<init>|<init>(kotlin.String){}[0]
+
+        final val code // stapel.result/TransportFailure.Unexpected.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.result/TransportFailure.Unexpected.code.<get-code>|<get-code>(){}[0]
+        final val detail // stapel.result/TransportFailure.Unexpected.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String // stapel.result/TransportFailure.Unexpected.detail.<get-detail>|<get-detail>(){}[0]
+        final val envelope // stapel.result/TransportFailure.Unexpected.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.result/TransportFailure.Unexpected.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val params // stapel.result/TransportFailure.Unexpected.params|{}params[0]
+            final fun <get-params>(): stapel.result/ErrorParams // stapel.result/TransportFailure.Unexpected.params.<get-params>|<get-params>(){}[0]
+        final val remediation // stapel.result/TransportFailure.Unexpected.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.Unexpected.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val status // stapel.result/TransportFailure.Unexpected.status|{}status[0]
+            final fun <get-status>(): kotlin/Int? // stapel.result/TransportFailure.Unexpected.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.result/TransportFailure.Unexpected.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.result/TransportFailure.Unexpected // stapel.result/TransportFailure.Unexpected.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.Unexpected.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.Unexpected.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.Unexpected.toString|toString(){}[0]
+    }
+
+    final class VerificationRequired : stapel.result/TransportFailure.Answered { // stapel.result/TransportFailure.VerificationRequired|null[0]
+        constructor <init>(stapel.result/VerificationChallenge, stapel.result/ErrorEnvelope) // stapel.result/TransportFailure.VerificationRequired.<init>|<init>(stapel.result.VerificationChallenge;stapel.result.ErrorEnvelope){}[0]
+
+        final val challenge // stapel.result/TransportFailure.VerificationRequired.challenge|{}challenge[0]
+            final fun <get-challenge>(): stapel.result/VerificationChallenge // stapel.result/TransportFailure.VerificationRequired.challenge.<get-challenge>|<get-challenge>(){}[0]
+        final val envelope // stapel.result/TransportFailure.VerificationRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.VerificationRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.result/TransportFailure.VerificationRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.result/TransportFailure.VerificationRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/VerificationChallenge // stapel.result/TransportFailure.VerificationRequired.component1|component1(){}[0]
+        final fun component2(): stapel.result/ErrorEnvelope // stapel.result/TransportFailure.VerificationRequired.component2|component2(){}[0]
+        final fun copy(stapel.result/VerificationChallenge = ..., stapel.result/ErrorEnvelope = ...): stapel.result/TransportFailure.VerificationRequired // stapel.result/TransportFailure.VerificationRequired.copy|copy(stapel.result.VerificationChallenge;stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/TransportFailure.VerificationRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.result/TransportFailure.VerificationRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.result/TransportFailure.VerificationRequired.toString|toString(){}[0]
+    }
+}
+
+final class stapel.result.state/Freshness { // stapel.result.state/Freshness|null[0]
+    constructor <init>(stapel.result.state/Origin, kotlin/Long, kotlin/Boolean = ..., kotlin/Boolean = ..., stapel.result/StapelError? = ..., kotlin/Int = ...) // stapel.result.state/Freshness.<init>|<init>(stapel.result.state.Origin;kotlin.Long;kotlin.Boolean;kotlin.Boolean;stapel.result.StapelError?;kotlin.Int){}[0]
+
+    final val fetchedAtMillis // stapel.result.state/Freshness.fetchedAtMillis|{}fetchedAtMillis[0]
+        final fun <get-fetchedAtMillis>(): kotlin/Long // stapel.result.state/Freshness.fetchedAtMillis.<get-fetchedAtMillis>|<get-fetchedAtMillis>(){}[0]
+    final val origin // stapel.result.state/Freshness.origin|{}origin[0]
+        final fun <get-origin>(): stapel.result.state/Origin // stapel.result.state/Freshness.origin.<get-origin>|<get-origin>(){}[0]
+    final val pendingWrites // stapel.result.state/Freshness.pendingWrites|{}pendingWrites[0]
+        final fun <get-pendingWrites>(): kotlin/Int // stapel.result.state/Freshness.pendingWrites.<get-pendingWrites>|<get-pendingWrites>(){}[0]
+    final val refreshError // stapel.result.state/Freshness.refreshError|{}refreshError[0]
+        final fun <get-refreshError>(): stapel.result/StapelError? // stapel.result.state/Freshness.refreshError.<get-refreshError>|<get-refreshError>(){}[0]
+    final val refreshing // stapel.result.state/Freshness.refreshing|{}refreshing[0]
+        final fun <get-refreshing>(): kotlin/Boolean // stapel.result.state/Freshness.refreshing.<get-refreshing>|<get-refreshing>(){}[0]
+    final val stale // stapel.result.state/Freshness.stale|{}stale[0]
+        final fun <get-stale>(): kotlin/Boolean // stapel.result.state/Freshness.stale.<get-stale>|<get-stale>(){}[0]
+
+    final fun component1(): stapel.result.state/Origin // stapel.result.state/Freshness.component1|component1(){}[0]
+    final fun component2(): kotlin/Long // stapel.result.state/Freshness.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // stapel.result.state/Freshness.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // stapel.result.state/Freshness.component4|component4(){}[0]
+    final fun component5(): stapel.result/StapelError? // stapel.result.state/Freshness.component5|component5(){}[0]
+    final fun component6(): kotlin/Int // stapel.result.state/Freshness.component6|component6(){}[0]
+    final fun copy(stapel.result.state/Origin = ..., kotlin/Long = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., stapel.result/StapelError? = ..., kotlin/Int = ...): stapel.result.state/Freshness // stapel.result.state/Freshness.copy|copy(stapel.result.state.Origin;kotlin.Long;kotlin.Boolean;kotlin.Boolean;stapel.result.StapelError?;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.state/Freshness.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result.state/Freshness.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result.state/Freshness.toString|toString(){}[0]
+
+    final object Companion { // stapel.result.state/Freshness.Companion|null[0]
+        final fun network(kotlin/Long): stapel.result.state/Freshness // stapel.result.state/Freshness.Companion.network|network(kotlin.Long){}[0]
+    }
+}
+
+final class stapel.result.text/ErrorSpec { // stapel.result.text/ErrorSpec|null[0]
+    constructor <init>(stapel.result/ErrorCode, kotlin/Int, kotlin.collections/List<kotlin/String>, stapel.result/Remediation, kotlin/String) // stapel.result.text/ErrorSpec.<init>|<init>(stapel.result.ErrorCode;kotlin.Int;kotlin.collections.List<kotlin.String>;stapel.result.Remediation;kotlin.String){}[0]
+
+    final val code // stapel.result.text/ErrorSpec.code|{}code[0]
+        final fun <get-code>(): stapel.result/ErrorCode // stapel.result.text/ErrorSpec.code.<get-code>|<get-code>(){}[0]
+    final val en // stapel.result.text/ErrorSpec.en|{}en[0]
+        final fun <get-en>(): kotlin/String // stapel.result.text/ErrorSpec.en.<get-en>|<get-en>(){}[0]
+    final val params // stapel.result.text/ErrorSpec.params|{}params[0]
+        final fun <get-params>(): kotlin.collections/List<kotlin/String> // stapel.result.text/ErrorSpec.params.<get-params>|<get-params>(){}[0]
+    final val remediation // stapel.result.text/ErrorSpec.remediation|{}remediation[0]
+        final fun <get-remediation>(): stapel.result/Remediation // stapel.result.text/ErrorSpec.remediation.<get-remediation>|<get-remediation>(){}[0]
+    final val status // stapel.result.text/ErrorSpec.status|{}status[0]
+        final fun <get-status>(): kotlin/Int // stapel.result.text/ErrorSpec.status.<get-status>|<get-status>(){}[0]
+
+    final fun component1(): stapel.result/ErrorCode // stapel.result.text/ErrorSpec.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // stapel.result.text/ErrorSpec.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/List<kotlin/String> // stapel.result.text/ErrorSpec.component3|component3(){}[0]
+    final fun component4(): stapel.result/Remediation // stapel.result.text/ErrorSpec.component4|component4(){}[0]
+    final fun component5(): kotlin/String // stapel.result.text/ErrorSpec.component5|component5(){}[0]
+    final fun copy(stapel.result/ErrorCode = ..., kotlin/Int = ..., kotlin.collections/List<kotlin/String> = ..., stapel.result/Remediation = ..., kotlin/String = ...): stapel.result.text/ErrorSpec // stapel.result.text/ErrorSpec.copy|copy(stapel.result.ErrorCode;kotlin.Int;kotlin.collections.List<kotlin.String>;stapel.result.Remediation;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.text/ErrorSpec.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result.text/ErrorSpec.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result.text/ErrorSpec.toString|toString(){}[0]
+}
+
+final class stapel.result.text/ErrorText { // stapel.result.text/ErrorText|null[0]
+    constructor <init>(kotlin/String, kotlin/String?) // stapel.result.text/ErrorText.<init>|<init>(kotlin.String;kotlin.String?){}[0]
+
+    final val detail // stapel.result.text/ErrorText.detail|{}detail[0]
+        final fun <get-detail>(): kotlin/String? // stapel.result.text/ErrorText.detail.<get-detail>|<get-detail>(){}[0]
+    final val message // stapel.result.text/ErrorText.message|{}message[0]
+        final fun <get-message>(): kotlin/String // stapel.result.text/ErrorText.message.<get-message>|<get-message>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.result.text/ErrorText.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // stapel.result.text/ErrorText.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String? = ...): stapel.result.text/ErrorText // stapel.result.text/ErrorText.copy|copy(kotlin.String;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.text/ErrorText.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result.text/ErrorText.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result.text/ErrorText.toString|toString(){}[0]
+}
+
+final class stapel.result.text/ErrorTextResolver { // stapel.result.text/ErrorTextResolver|null[0]
+    constructor <init>(kotlin.collections/List<stapel.result.text/ErrorCatalog>, stapel.result.text/ErrorCatalog = ...) // stapel.result.text/ErrorTextResolver.<init>|<init>(kotlin.collections.List<stapel.result.text.ErrorCatalog>;stapel.result.text.ErrorCatalog){}[0]
+
+    final fun describe(stapel.result/StapelError, stapel.result.text/LocaleTag): stapel.result.text/ErrorText // stapel.result.text/ErrorTextResolver.describe|describe(stapel.result.StapelError;stapel.result.text.LocaleTag){}[0]
+    final fun message(stapel.result/StapelError, stapel.result.text/LocaleTag): kotlin/String // stapel.result.text/ErrorTextResolver.message|message(stapel.result.StapelError;stapel.result.text.LocaleTag){}[0]
+    final fun remediation(stapel.result/StapelError): stapel.result/Remediation // stapel.result.text/ErrorTextResolver.remediation|remediation(stapel.result.StapelError){}[0]
+    final fun spec(stapel.result/ErrorCode): stapel.result.text/ErrorSpec? // stapel.result.text/ErrorTextResolver.spec|spec(stapel.result.ErrorCode){}[0]
+    final fun template(stapel.result/ErrorCode, stapel.result.text/LocaleTag): kotlin/String? // stapel.result.text/ErrorTextResolver.template|template(stapel.result.ErrorCode;stapel.result.text.LocaleTag){}[0]
+}
+
+final class stapel.result/ErrorEnvelope { // stapel.result/ErrorEnvelope|null[0]
+    constructor <init>(stapel.result/ErrorCode, kotlin/Int, stapel.result/ErrorParams = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...) // stapel.result/ErrorEnvelope.<init>|<init>(stapel.result.ErrorCode;kotlin.Int;stapel.result.ErrorParams;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+
+    final val code // stapel.result/ErrorEnvelope.code|{}code[0]
+        final fun <get-code>(): stapel.result/ErrorCode // stapel.result/ErrorEnvelope.code.<get-code>|<get-code>(){}[0]
+    final val isSynthesized // stapel.result/ErrorEnvelope.isSynthesized|{}isSynthesized[0]
+        final fun <get-isSynthesized>(): kotlin/Boolean // stapel.result/ErrorEnvelope.isSynthesized.<get-isSynthesized>|<get-isSynthesized>(){}[0]
+    final val params // stapel.result/ErrorEnvelope.params|{}params[0]
+        final fun <get-params>(): stapel.result/ErrorParams // stapel.result/ErrorEnvelope.params.<get-params>|<get-params>(){}[0]
+    final val requestId // stapel.result/ErrorEnvelope.requestId|{}requestId[0]
+        final fun <get-requestId>(): kotlin/String? // stapel.result/ErrorEnvelope.requestId.<get-requestId>|<get-requestId>(){}[0]
+    final val serverLanguage // stapel.result/ErrorEnvelope.serverLanguage|{}serverLanguage[0]
+        final fun <get-serverLanguage>(): kotlin/String? // stapel.result/ErrorEnvelope.serverLanguage.<get-serverLanguage>|<get-serverLanguage>(){}[0]
+    final val serverText // stapel.result/ErrorEnvelope.serverText|{}serverText[0]
+        final fun <get-serverText>(): kotlin/String? // stapel.result/ErrorEnvelope.serverText.<get-serverText>|<get-serverText>(){}[0]
+    final val status // stapel.result/ErrorEnvelope.status|{}status[0]
+        final fun <get-status>(): kotlin/Int // stapel.result/ErrorEnvelope.status.<get-status>|<get-status>(){}[0]
+
+    final fun component1(): stapel.result/ErrorCode // stapel.result/ErrorEnvelope.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // stapel.result/ErrorEnvelope.component2|component2(){}[0]
+    final fun component3(): stapel.result/ErrorParams // stapel.result/ErrorEnvelope.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // stapel.result/ErrorEnvelope.component4|component4(){}[0]
+    final fun component5(): kotlin/String? // stapel.result/ErrorEnvelope.component5|component5(){}[0]
+    final fun component6(): kotlin/String? // stapel.result/ErrorEnvelope.component6|component6(){}[0]
+    final fun copy(stapel.result/ErrorCode = ..., kotlin/Int = ..., stapel.result/ErrorParams = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.result/ErrorEnvelope // stapel.result/ErrorEnvelope.copy|copy(stapel.result.ErrorCode;kotlin.Int;stapel.result.ErrorParams;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/ErrorEnvelope.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result/ErrorEnvelope.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result/ErrorEnvelope.toString|toString(){}[0]
+
+    final object Companion { // stapel.result/ErrorEnvelope.Companion|null[0]
+        final fun synthesized(kotlin/Int, kotlin/String? = ...): stapel.result/ErrorEnvelope // stapel.result/ErrorEnvelope.Companion.synthesized|synthesized(kotlin.Int;kotlin.String?){}[0]
+    }
+}
+
+final class stapel.result/ErrorParams { // stapel.result/ErrorParams|null[0]
+    constructor <init>(kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.result/ErrorParams.<init>|<init>(kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val names // stapel.result/ErrorParams.names|{}names[0]
+        final fun <get-names>(): kotlin.collections/Set<kotlin/String> // stapel.result/ErrorParams.names.<get-names>|<get-names>(){}[0]
+
+    final fun asMap(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.result/ErrorParams.asMap|asMap(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/ErrorParams.equals|equals(kotlin.Any?){}[0]
+    final fun get(kotlin/String): kotlin/String? // stapel.result/ErrorParams.get|get(kotlin.String){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result/ErrorParams.hashCode|hashCode(){}[0]
+    final fun int(kotlin/String): kotlin/Int? // stapel.result/ErrorParams.int|int(kotlin.String){}[0]
+    final fun isEmpty(): kotlin/Boolean // stapel.result/ErrorParams.isEmpty|isEmpty(){}[0]
+    final fun long(kotlin/String): kotlin/Long? // stapel.result/ErrorParams.long|long(kotlin.String){}[0]
+    final fun toString(): kotlin/String // stapel.result/ErrorParams.toString|toString(){}[0]
+
+    final object Companion { // stapel.result/ErrorParams.Companion|null[0]
+        final val Empty // stapel.result/ErrorParams.Companion.Empty|{}Empty[0]
+            final fun <get-Empty>(): stapel.result/ErrorParams // stapel.result/ErrorParams.Companion.Empty.<get-Empty>|<get-Empty>(){}[0]
+    }
+}
+
+final class stapel.result/ErrorSnapshot { // stapel.result/ErrorSnapshot|null[0]
+    constructor <init>(kotlin/String, kotlin/Int?, kotlin.collections/Map<kotlin/String, kotlin/String>, stapel.result/Remediation, kotlin/Boolean, kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...) // stapel.result/ErrorSnapshot.<init>|<init>(kotlin.String;kotlin.Int?;kotlin.collections.Map<kotlin.String,kotlin.String>;stapel.result.Remediation;kotlin.Boolean;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+
+    final val code // stapel.result/ErrorSnapshot.code|{}code[0]
+        final fun <get-code>(): kotlin/String // stapel.result/ErrorSnapshot.code.<get-code>|<get-code>(){}[0]
+    final val params // stapel.result/ErrorSnapshot.params|{}params[0]
+        final fun <get-params>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.result/ErrorSnapshot.params.<get-params>|<get-params>(){}[0]
+    final val remediation // stapel.result/ErrorSnapshot.remediation|{}remediation[0]
+        final fun <get-remediation>(): stapel.result/Remediation // stapel.result/ErrorSnapshot.remediation.<get-remediation>|<get-remediation>(){}[0]
+    final val requestId // stapel.result/ErrorSnapshot.requestId|{}requestId[0]
+        final fun <get-requestId>(): kotlin/String? // stapel.result/ErrorSnapshot.requestId.<get-requestId>|<get-requestId>(){}[0]
+    final val serverLanguage // stapel.result/ErrorSnapshot.serverLanguage|{}serverLanguage[0]
+        final fun <get-serverLanguage>(): kotlin/String? // stapel.result/ErrorSnapshot.serverLanguage.<get-serverLanguage>|<get-serverLanguage>(){}[0]
+    final val serverText // stapel.result/ErrorSnapshot.serverText|{}serverText[0]
+        final fun <get-serverText>(): kotlin/String? // stapel.result/ErrorSnapshot.serverText.<get-serverText>|<get-serverText>(){}[0]
+    final val status // stapel.result/ErrorSnapshot.status|{}status[0]
+        final fun <get-status>(): kotlin/Int? // stapel.result/ErrorSnapshot.status.<get-status>|<get-status>(){}[0]
+    final val transient // stapel.result/ErrorSnapshot.transient|{}transient[0]
+        final fun <get-transient>(): kotlin/Boolean // stapel.result/ErrorSnapshot.transient.<get-transient>|<get-transient>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.result/ErrorSnapshot.component1|component1(){}[0]
+    final fun component2(): kotlin/Int? // stapel.result/ErrorSnapshot.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.result/ErrorSnapshot.component3|component3(){}[0]
+    final fun component4(): stapel.result/Remediation // stapel.result/ErrorSnapshot.component4|component4(){}[0]
+    final fun component5(): kotlin/Boolean // stapel.result/ErrorSnapshot.component5|component5(){}[0]
+    final fun component6(): kotlin/String? // stapel.result/ErrorSnapshot.component6|component6(){}[0]
+    final fun component7(): kotlin/String? // stapel.result/ErrorSnapshot.component7|component7(){}[0]
+    final fun component8(): kotlin/String? // stapel.result/ErrorSnapshot.component8|component8(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Int? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., stapel.result/Remediation = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.result/ErrorSnapshot // stapel.result/ErrorSnapshot.copy|copy(kotlin.String;kotlin.Int?;kotlin.collections.Map<kotlin.String,kotlin.String>;stapel.result.Remediation;kotlin.Boolean;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/ErrorSnapshot.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result/ErrorSnapshot.hashCode|hashCode(){}[0]
+    final fun toError(): stapel.result/StapelError // stapel.result/ErrorSnapshot.toError|toError(){}[0]
+    final fun toString(): kotlin/String // stapel.result/ErrorSnapshot.toString|toString(){}[0]
+}
+
+final class stapel.result/ServerRefusal : stapel.result/DomainError { // stapel.result/ServerRefusal|null[0]
+    constructor <init>(stapel.result/ErrorEnvelope) // stapel.result/ServerRefusal.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+    final val envelope // stapel.result/ServerRefusal.envelope|{}envelope[0]
+        final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.result/ServerRefusal.envelope.<get-envelope>|<get-envelope>(){}[0]
+    final val remediation // stapel.result/ServerRefusal.remediation|{}remediation[0]
+        final fun <get-remediation>(): stapel.result/Remediation // stapel.result/ServerRefusal.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+    final fun component1(): stapel.result/ErrorEnvelope // stapel.result/ServerRefusal.component1|component1(){}[0]
+    final fun copy(stapel.result/ErrorEnvelope = ...): stapel.result/ServerRefusal // stapel.result/ServerRefusal.copy|copy(stapel.result.ErrorEnvelope){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/ServerRefusal.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result/ServerRefusal.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result/ServerRefusal.toString|toString(){}[0]
+}
+
+final class stapel.result/StapelException : kotlin/RuntimeException { // stapel.result/StapelException|null[0]
+    constructor <init>(stapel.result/StapelError) // stapel.result/StapelException.<init>|<init>(stapel.result.StapelError){}[0]
+
+    final val error // stapel.result/StapelException.error|{}error[0]
+        final fun <get-error>(): stapel.result/StapelError // stapel.result/StapelException.error.<get-error>|<get-error>(){}[0]
+}
+
+final class stapel.result/VerificationChallenge { // stapel.result/VerificationChallenge|null[0]
+    constructor <init>(kotlin/String, kotlin/String? = ..., kotlin.collections/List<kotlin/String> = ..., stapel.result/ErrorParams = ...) // stapel.result/VerificationChallenge.<init>|<init>(kotlin.String;kotlin.String?;kotlin.collections.List<kotlin.String>;stapel.result.ErrorParams){}[0]
+
+    final val challengeId // stapel.result/VerificationChallenge.challengeId|{}challengeId[0]
+        final fun <get-challengeId>(): kotlin/String // stapel.result/VerificationChallenge.challengeId.<get-challengeId>|<get-challengeId>(){}[0]
+    final val factors // stapel.result/VerificationChallenge.factors|{}factors[0]
+        final fun <get-factors>(): kotlin.collections/List<kotlin/String> // stapel.result/VerificationChallenge.factors.<get-factors>|<get-factors>(){}[0]
+    final val raw // stapel.result/VerificationChallenge.raw|{}raw[0]
+        final fun <get-raw>(): stapel.result/ErrorParams // stapel.result/VerificationChallenge.raw.<get-raw>|<get-raw>(){}[0]
+    final val scope // stapel.result/VerificationChallenge.scope|{}scope[0]
+        final fun <get-scope>(): kotlin/String? // stapel.result/VerificationChallenge.scope.<get-scope>|<get-scope>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.result/VerificationChallenge.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // stapel.result/VerificationChallenge.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/List<kotlin/String> // stapel.result/VerificationChallenge.component3|component3(){}[0]
+    final fun component4(): stapel.result/ErrorParams // stapel.result/VerificationChallenge.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String? = ..., kotlin.collections/List<kotlin/String> = ..., stapel.result/ErrorParams = ...): stapel.result/VerificationChallenge // stapel.result/VerificationChallenge.copy|copy(kotlin.String;kotlin.String?;kotlin.collections.List<kotlin.String>;stapel.result.ErrorParams){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/VerificationChallenge.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result/VerificationChallenge.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result/VerificationChallenge.toString|toString(){}[0]
+}
+
+final value class stapel.result.text/LocaleTag { // stapel.result.text/LocaleTag|null[0]
+    constructor <init>(kotlin/String) // stapel.result.text/LocaleTag.<init>|<init>(kotlin.String){}[0]
+
+    final val language // stapel.result.text/LocaleTag.language|{}language[0]
+        final fun <get-language>(): kotlin/String // stapel.result.text/LocaleTag.language.<get-language>|<get-language>(){}[0]
+    final val value // stapel.result.text/LocaleTag.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.result.text/LocaleTag.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result.text/LocaleTag.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result.text/LocaleTag.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result.text/LocaleTag.toString|toString(){}[0]
+}
+
+final value class stapel.result/ErrorCode { // stapel.result/ErrorCode|null[0]
+    constructor <init>(kotlin/String) // stapel.result/ErrorCode.<init>|<init>(kotlin.String){}[0]
+
+    final val embeddedStatus // stapel.result/ErrorCode.embeddedStatus|{}embeddedStatus[0]
+        final fun <get-embeddedStatus>(): kotlin/Int? // stapel.result/ErrorCode.embeddedStatus.<get-embeddedStatus>|<get-embeddedStatus>(){}[0]
+    final val isClientSynthesized // stapel.result/ErrorCode.isClientSynthesized|{}isClientSynthesized[0]
+        final fun <get-isClientSynthesized>(): kotlin/Boolean // stapel.result/ErrorCode.isClientSynthesized.<get-isClientSynthesized>|<get-isClientSynthesized>(){}[0]
+    final val value // stapel.result/ErrorCode.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.result/ErrorCode.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.result/ErrorCode.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.result/ErrorCode.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.result/ErrorCode.toString|toString(){}[0]
+}
+
+final object stapel.result.text/ClientErrorCatalog : stapel.result.text/ErrorCatalog { // stapel.result.text/ClientErrorCatalog|null[0]
+    final val locales // stapel.result.text/ClientErrorCatalog.locales|{}locales[0]
+        final fun <get-locales>(): kotlin.collections/Set<kotlin/String> // stapel.result.text/ClientErrorCatalog.locales.<get-locales>|<get-locales>(){}[0]
+    final val owner // stapel.result.text/ClientErrorCatalog.owner|{}owner[0]
+        final fun <get-owner>(): kotlin/String // stapel.result.text/ClientErrorCatalog.owner.<get-owner>|<get-owner>(){}[0]
+
+    final fun entries(kotlin/String): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.result.text/ClientErrorCatalog.entries|entries(kotlin.String){}[0]
+    final fun spec(stapel.result/ErrorCode): stapel.result.text/ErrorSpec? // stapel.result.text/ClientErrorCatalog.spec|spec(stapel.result.ErrorCode){}[0]
+    final fun template(stapel.result/ErrorCode, stapel.result.text/LocaleTag): kotlin/String? // stapel.result.text/ClientErrorCatalog.template|template(stapel.result.ErrorCode;stapel.result.text.LocaleTag){}[0]
+}
+
+final object stapel.result/CoreErrorCodes { // stapel.result/CoreErrorCodes|null[0]
+    final const val HTTP_PREFIX // stapel.result/CoreErrorCodes.HTTP_PREFIX|{}HTTP_PREFIX[0]
+        final fun <get-HTTP_PREFIX>(): kotlin/String // stapel.result/CoreErrorCodes.HTTP_PREFIX.<get-HTTP_PREFIX>|<get-HTTP_PREFIX>(){}[0]
+
+    final val ActionBlockedLoadFailed // stapel.result/CoreErrorCodes.ActionBlockedLoadFailed|{}ActionBlockedLoadFailed[0]
+        final fun <get-ActionBlockedLoadFailed>(): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.ActionBlockedLoadFailed.<get-ActionBlockedLoadFailed>|<get-ActionBlockedLoadFailed>(){}[0]
+    final val ActionBlockedLoading // stapel.result/CoreErrorCodes.ActionBlockedLoading|{}ActionBlockedLoading[0]
+        final fun <get-ActionBlockedLoading>(): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.ActionBlockedLoading.<get-ActionBlockedLoading>|<get-ActionBlockedLoading>(){}[0]
+    final val ContractDecode // stapel.result/CoreErrorCodes.ContractDecode|{}ContractDecode[0]
+        final fun <get-ContractDecode>(): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.ContractDecode.<get-ContractDecode>|<get-ContractDecode>(){}[0]
+    final val Detail // stapel.result/CoreErrorCodes.Detail|{}Detail[0]
+        final fun <get-Detail>(): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.Detail.<get-Detail>|<get-Detail>(){}[0]
+    final val DetailWithRequestId // stapel.result/CoreErrorCodes.DetailWithRequestId|{}DetailWithRequestId[0]
+        final fun <get-DetailWithRequestId>(): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.DetailWithRequestId.<get-DetailWithRequestId>|<get-DetailWithRequestId>(){}[0]
+    final val TransportFailed // stapel.result/CoreErrorCodes.TransportFailed|{}TransportFailed[0]
+        final fun <get-TransportFailed>(): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.TransportFailed.<get-TransportFailed>|<get-TransportFailed>(){}[0]
+    final val Unknown // stapel.result/CoreErrorCodes.Unknown|{}Unknown[0]
+        final fun <get-Unknown>(): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.Unknown.<get-Unknown>|<get-Unknown>(){}[0]
+
+    final fun http(kotlin/Int): stapel.result/ErrorCode // stapel.result/CoreErrorCodes.http|http(kotlin.Int){}[0]
+}
+
+final val stapel.result.state/isLoading // stapel.result.state/isLoading|@stapel.result.state.Resource<*>{}isLoading[0]
+    final fun (stapel.result.state/Resource<*>).<get-isLoading>(): kotlin/Boolean // stapel.result.state/isLoading.<get-isLoading>|<get-isLoading>@stapel.result.state.Resource<*>(){}[0]
+final val stapel.result/isErr // stapel.result/isErr|@stapel.result.StapelResult<*,*>{}isErr[0]
+    final fun (stapel.result/StapelResult<*, *>).<get-isErr>(): kotlin/Boolean // stapel.result/isErr.<get-isErr>|<get-isErr>@stapel.result.StapelResult<*,*>(){}[0]
+final val stapel.result/isOk // stapel.result/isOk|@stapel.result.StapelResult<*,*>{}isOk[0]
+    final fun (stapel.result/StapelResult<*, *>).<get-isOk>(): kotlin/Boolean // stapel.result/isOk.<get-isOk>|<get-isOk>@stapel.result.StapelResult<*,*>(){}[0]
+final val stapel.result/isTransient // stapel.result/isTransient|@stapel.result.StapelError{}isTransient[0]
+    final fun (stapel.result/StapelError).<get-isTransient>(): kotlin/Boolean // stapel.result/isTransient.<get-isTransient>|<get-isTransient>@stapel.result.StapelError(){}[0]
+final val stapel.result/retryAfter // stapel.result/retryAfter|@stapel.result.StapelError{}retryAfter[0]
+    final fun (stapel.result/StapelError).<get-retryAfter>(): kotlin.time/Duration? // stapel.result/retryAfter.<get-retryAfter>|<get-retryAfter>@stapel.result.StapelError(){}[0]
+
+final fun (stapel.result.state/Resource<*>).stapel.result.state/errorOrNull(): stapel.result/StapelError? // stapel.result.state/errorOrNull|errorOrNull@stapel.result.state.Resource<*>(){}[0]
+final fun (stapel.result/StapelError).stapel.result/hasCode(kotlin/Array<out kotlin/String>...): kotlin/Boolean // stapel.result/hasCode|hasCode@stapel.result.StapelError(kotlin.Array<out|kotlin.String>...){}[0]
+final fun (stapel.result/StapelError).stapel.result/hasCode(stapel.result/ErrorCode): kotlin/Boolean // stapel.result/hasCode|hasCode@stapel.result.StapelError(stapel.result.ErrorCode){}[0]
+final fun (stapel.result/StapelError).stapel.result/snapshot(): stapel.result/ErrorSnapshot // stapel.result/snapshot|snapshot@stapel.result.StapelError(){}[0]
+final fun (stapel.result/StapelError).stapel.result/transportFailureOrNull(): stapel.result/TransportFailure? // stapel.result/transportFailureOrNull|transportFailureOrNull@stapel.result.StapelError(){}[0]
+final fun <#A: kotlin/Any?, #B: kotlin/Any?> stapel.result.state/bothReady(stapel.result.state/Resource<#A>, stapel.result.state/Resource<#B>): stapel.result.state/Resource<kotlin/Pair<#A, #B>> // stapel.result.state/bothReady|bothReady(stapel.result.state.Resource<0:0>;stapel.result.state.Resource<0:1>){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (stapel.result.state/Resource<#A>).stapel.result.state/dataOrNull(): #A? // stapel.result.state/dataOrNull|dataOrNull@stapel.result.state.Resource<0:0>(){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (stapel.result.state/Resource<#A>).stapel.result.state/keepPrevious(stapel.result.state/Resource.Ready<#A>?): stapel.result.state/Resource<#A> // stapel.result.state/keepPrevious|keepPrevious@stapel.result.state.Resource<0:0>(stapel.result.state.Resource.Ready<0:0>?){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (stapel.result/StapelResult<#A, *>).stapel.result.state/toResource(stapel.result.state/Freshness): stapel.result.state/Resource<#A> // stapel.result.state/toResource|toResource@stapel.result.StapelResult<0:0,*>(stapel.result.state.Freshness){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (stapel.result/StapelResult<#A, *>).stapel.result/getOrNull(): #A? // stapel.result/getOrNull|getOrNull@stapel.result.StapelResult<0:0,*>(){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (stapel.result/StapelResult<#A, *>).stapel.result/getOrThrow(): #A // stapel.result/getOrThrow|getOrThrow@stapel.result.StapelResult<0:0,*>(){0§<kotlin.Any?>}[0]
+final fun <#A: stapel.result/StapelError> (stapel.result/StapelResult<*, #A>).stapel.result/errorOrNull(): #A? // stapel.result/errorOrNull|errorOrNull@stapel.result.StapelResult<*,0:0>(){0§<stapel.result.StapelError>}[0]
+final fun stapel.result.state/firstBlock(kotlin/Array<out stapel.result.state/ActionAvailability>...): stapel.result.state/ActionAvailability // stapel.result.state/firstBlock|firstBlock(kotlin.Array<out|stapel.result.state.ActionAvailability>...){}[0]
+final fun stapel.result.text/interpolate(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>): kotlin/String // stapel.result.text/interpolate|interpolate(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+final fun stapel.result/classifyFailure(stapel.result/ErrorEnvelope, stapel.result/VerificationChallenge? = ..., kotlin.time/Duration? = ..., kotlin/Function1<stapel.result/ErrorCode, kotlin/Boolean> = ...): stapel.result/TransportFailure? // stapel.result/classifyFailure|classifyFailure(stapel.result.ErrorEnvelope;stapel.result.VerificationChallenge?;kotlin.time.Duration?;kotlin.Function1<stapel.result.ErrorCode,kotlin.Boolean>){}[0]
+final inline fun <#A: kotlin/Any?, #B: kotlin/Any?> (stapel.result.state/Resource<#A>).stapel.result.state/map(kotlin/Function1<#A, #B>): stapel.result.state/Resource<#B> // stapel.result.state/map|map@stapel.result.state.Resource<0:0>(kotlin.Function1<0:0,0:1>){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+final inline fun <#A: kotlin/Any?, #B: kotlin/Any?> (stapel.result.state/Resource<kotlin.collections/List<#A>>).stapel.result.state/matchList(kotlin/Function0<#B>, kotlin/Function1<stapel.result/StapelError, #B>, kotlin/Function1<stapel.result.state/Freshness, #B>, kotlin/Function2<kotlin.collections/List<#A>, stapel.result.state/Freshness, #B>): #B // stapel.result.state/matchList|matchList@stapel.result.state.Resource<kotlin.collections.List<0:0>>(kotlin.Function0<0:1>;kotlin.Function1<stapel.result.StapelError,0:1>;kotlin.Function1<stapel.result.state.Freshness,0:1>;kotlin.Function2<kotlin.collections.List<0:0>,stapel.result.state.Freshness,0:1>){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+final inline fun <#A: kotlin/Any?, #B: stapel.result/StapelError, #C: kotlin/Any?> (stapel.result/StapelResult<#A, #B>).stapel.result/flatMap(kotlin/Function1<#A, stapel.result/StapelResult<#C, #B>>): stapel.result/StapelResult<#C, #B> // stapel.result/flatMap|flatMap@stapel.result.StapelResult<0:0,0:1>(kotlin.Function1<0:0,stapel.result.StapelResult<0:2,0:1>>){0§<kotlin.Any?>;1§<stapel.result.StapelError>;2§<kotlin.Any?>}[0]
+final inline fun <#A: kotlin/Any?, #B: stapel.result/StapelError, #C: kotlin/Any?> (stapel.result/StapelResult<#A, #B>).stapel.result/fold(kotlin/Function1<#A, #C>, kotlin/Function1<#B, #C>): #C // stapel.result/fold|fold@stapel.result.StapelResult<0:0,0:1>(kotlin.Function1<0:0,0:2>;kotlin.Function1<0:1,0:2>){0§<kotlin.Any?>;1§<stapel.result.StapelError>;2§<kotlin.Any?>}[0]
+final inline fun <#A: kotlin/Any?, #B: stapel.result/StapelError, #C: kotlin/Any?> (stapel.result/StapelResult<#A, #B>).stapel.result/map(kotlin/Function1<#A, #C>): stapel.result/StapelResult<#C, #B> // stapel.result/map|map@stapel.result.StapelResult<0:0,0:1>(kotlin.Function1<0:0,0:2>){0§<kotlin.Any?>;1§<stapel.result.StapelError>;2§<kotlin.Any?>}[0]
+final inline fun <#A: kotlin/Any?, #B: stapel.result/StapelError, #C: stapel.result/StapelError> (stapel.result/StapelResult<#A, #B>).stapel.result/mapError(kotlin/Function1<#B, #C>): stapel.result/StapelResult<#A, #C> // stapel.result/mapError|mapError@stapel.result.StapelResult<0:0,0:1>(kotlin.Function1<0:1,0:2>){0§<kotlin.Any?>;1§<stapel.result.StapelError>;2§<stapel.result.StapelError>}[0]
+final inline fun <#A: kotlin/Any?, #B: stapel.result/StapelError> (stapel.result/StapelResult<#A, #B>).stapel.result/getOrElse(kotlin/Function1<#B, #A>): #A // stapel.result/getOrElse|getOrElse@stapel.result.StapelResult<0:0,0:1>(kotlin.Function1<0:1,0:0>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
+final inline fun <#A: kotlin/Any?, #B: stapel.result/StapelError> (stapel.result/StapelResult<#A, #B>).stapel.result/onErr(kotlin/Function1<#B, kotlin/Unit>): stapel.result/StapelResult<#A, #B> // stapel.result/onErr|onErr@stapel.result.StapelResult<0:0,0:1>(kotlin.Function1<0:1,kotlin.Unit>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
+final inline fun <#A: kotlin/Any?, #B: stapel.result/StapelError> (stapel.result/StapelResult<#A, #B>).stapel.result/onOk(kotlin/Function1<#A, kotlin/Unit>): stapel.result/StapelResult<#A, #B> // stapel.result/onOk|onOk@stapel.result.StapelResult<0:0,0:1>(kotlin.Function1<0:0,kotlin.Unit>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
+final inline fun <#A: kotlin/Any?> stapel.result.state/requireReady(stapel.result.state/Resource<#A>, kotlin/Function1<#A, stapel.result.state/ActionAvailability> = ...): stapel.result.state/ActionAvailability // stapel.result.state/requireReady|requireReady(stapel.result.state.Resource<0:0>;kotlin.Function1<0:0,stapel.result.state.ActionAvailability>){0§<kotlin.Any?>}[0]
