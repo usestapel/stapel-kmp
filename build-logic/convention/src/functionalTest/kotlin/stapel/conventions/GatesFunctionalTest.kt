@@ -149,6 +149,23 @@ class GatesFunctionalTest {
     }
 
     @Test
+    fun `the di module itself may name koin in its own package but not outside it`() {
+        val fx = FixtureBuild("koin-di-module")
+            .module("substrate/stapel-di", substrate("api(libs.koin.core)"))
+            .file(
+                "substrate/stapel-di/src/commonMain/kotlin/stapel/di/StapelKoin.kt",
+                "package stapel.di\nimport org.koin.core.KoinApplication\n",
+            )
+        fx.succeeds(":stapel-di:checkKoinLeak")
+        fx.file(
+            "substrate/stapel-di/src/commonMain/kotlin/stapel/Elsewhere.kt",
+            "package stapel\nimport org.koin.core.Koin\n",
+        )
+        val r = fx.fails(":stapel-di:checkKoinLeak")
+        assertContains(r.output, "org.koin is allowed only in package 'stapel.di'")
+    }
+
+    @Test
     fun `a commonMain dependency without a wasm variant is refused in a pure library`() {
         val r = FixtureBuild("wasm")
             .module("substrate/stapel-network", substrate("implementation(libs.ktor.client.okhttp)"))

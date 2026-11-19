@@ -122,7 +122,8 @@ abstract class CheckModuleDocs : StapelSourceGate() {
 
 /**
  * `checkKoinLeak` (ruling R6): `org.koin` may appear only in files whose package is `<module>.di`
- * (or below). Main source sets only; tests may use koin-test anywhere.
+ * (or below; for a module whose package already ends in `.di`, that package). Main source sets
+ * only; tests may use koin-test anywhere.
  */
 @CacheableTask
 abstract class CheckKoinLeak : StapelSourceGate() {
@@ -141,7 +142,9 @@ abstract class CheckKoinLeak : StapelSourceGate() {
 
     @TaskAction
     fun run() {
-        val diPkg = packageName.get() + ".di"
+        // A module whose own package is already a `di` package (stapel-di: the Koin conventions
+        // themselves) may name Koin anywhere in it.
+        val diPkg = packageName.get().let { if (it.endsWith(".di")) it else "$it.di" }
         val bad = sources.files.filter { it.extension == "kt" }.mapNotNull { f ->
             val text = f.readText()
             if (!text.contains("org.koin")) return@mapNotNull null
