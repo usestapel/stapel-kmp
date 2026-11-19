@@ -62,6 +62,8 @@ public final class stapel/wire/CacheKey {
 }
 
 public final class stapel/wire/CacheKey$Companion {
+	public final fun fromStorageKey (Ljava/lang/String;Lstapel/wire/CacheScope;)Lstapel/wire/CacheKey;
+	public static synthetic fun fromStorageKey$default (Lstapel/wire/CacheKey$Companion;Ljava/lang/String;Lstapel/wire/CacheScope;ILjava/lang/Object;)Lstapel/wire/CacheKey;
 	public final fun of (Ljava/lang/String;[Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Lstapel/wire/CacheScope;)Lstapel/wire/CacheKey;
 	public static synthetic fun of$default (Lstapel/wire/CacheKey$Companion;Ljava/lang/String;[Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Lstapel/wire/CacheScope;ILjava/lang/Object;)Lstapel/wire/CacheKey;
 }
@@ -132,9 +134,12 @@ public final class stapel/wire/FormPart$Text : stapel/wire/FormPart {
 public final class stapel/wire/KeyPattern {
 	public static final field Companion Lstapel/wire/KeyPattern$Companion;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExactKey ()Lstapel/wire/CacheKey;
 	public final fun getNamespace ()Ljava/lang/String;
 	public final fun getPathPrefix ()Ljava/util/List;
+	public final fun getStoragePrefix ()Ljava/lang/String;
 	public fun hashCode ()I
+	public final fun isExact ()Z
 	public final fun matches (Lstapel/wire/CacheKey;)Z
 	public fun toString ()Ljava/lang/String;
 }

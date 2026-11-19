@@ -309,6 +309,7 @@ final class stapel.wire/CacheKey { // stapel.wire/CacheKey|null[0]
     final fun toString(): kotlin/String // stapel.wire/CacheKey.toString|toString(){}[0]
 
     final object Companion { // stapel.wire/CacheKey.Companion|null[0]
+        final fun fromStorageKey(kotlin/String, stapel.wire/CacheScope = ...): stapel.wire/CacheKey? // stapel.wire/CacheKey.Companion.fromStorageKey|fromStorageKey(kotlin.String;stapel.wire.CacheScope){}[0]
         final fun of(kotlin/String, kotlin/Array<out kotlin/String>..., kotlinx.serialization.json/JsonElement? = ..., stapel.wire/CacheScope = ...): stapel.wire/CacheKey // stapel.wire/CacheKey.Companion.of|of(kotlin.String;kotlin.Array<out|kotlin.String>...;kotlinx.serialization.json.JsonElement?;stapel.wire.CacheScope){}[0]
     }
 }
@@ -338,10 +339,16 @@ final class stapel.wire/FilePart { // stapel.wire/FilePart|null[0]
 }
 
 final class stapel.wire/KeyPattern { // stapel.wire/KeyPattern|null[0]
+    final val exactKey // stapel.wire/KeyPattern.exactKey|{}exactKey[0]
+        final fun <get-exactKey>(): stapel.wire/CacheKey? // stapel.wire/KeyPattern.exactKey.<get-exactKey>|<get-exactKey>(){}[0]
+    final val isExact // stapel.wire/KeyPattern.isExact|{}isExact[0]
+        final fun <get-isExact>(): kotlin/Boolean // stapel.wire/KeyPattern.isExact.<get-isExact>|<get-isExact>(){}[0]
     final val namespace // stapel.wire/KeyPattern.namespace|{}namespace[0]
         final fun <get-namespace>(): kotlin/String // stapel.wire/KeyPattern.namespace.<get-namespace>|<get-namespace>(){}[0]
     final val pathPrefix // stapel.wire/KeyPattern.pathPrefix|{}pathPrefix[0]
         final fun <get-pathPrefix>(): kotlin.collections/List<kotlin/String> // stapel.wire/KeyPattern.pathPrefix.<get-pathPrefix>|<get-pathPrefix>(){}[0]
+    final val storagePrefix // stapel.wire/KeyPattern.storagePrefix|{}storagePrefix[0]
+        final fun <get-storagePrefix>(): kotlin/String // stapel.wire/KeyPattern.storagePrefix.<get-storagePrefix>|<get-storagePrefix>(){}[0]
 
     final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/KeyPattern.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // stapel.wire/KeyPattern.hashCode|hashCode(){}[0]
