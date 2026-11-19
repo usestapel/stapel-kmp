@@ -20,12 +20,6 @@ public final class stapel/app/di/BrickSession$DefaultImpls {
 	public static fun attach (Lstapel/app/di/BrickSession;Lstapel/navigation/StapelNavigator;)V
 }
 
-public final class stapel/app/di/ComposableSingletons$StapelAppKt {
-	public static final field INSTANCE Lstapel/app/di/ComposableSingletons$StapelAppKt;
-	public fun <init> ()V
-	public final fun getLambda$-1013369742$io_github_usestapel_stapel_app ()Lkotlin/jvm/functions/Function3;
-}
-
 public final class stapel/app/di/StapelApp : java/lang/AutoCloseable {
 	public static final field $stable I
 	public fun close ()V

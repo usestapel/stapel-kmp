@@ -1,10 +1,3 @@
-public final class stapel/navigation/compose/ComposableSingletons$HostKt {
-	public static final field INSTANCE Lstapel/navigation/compose/ComposableSingletons$HostKt;
-	public fun <init> ()V
-	public final fun getLambda$-1518029007$io_github_usestapel_stapel_navigation_compose ()Lkotlin/jvm/functions/Function5;
-	public final fun getLambda$-437902951$io_github_usestapel_stapel_navigation_compose ()Lkotlin/jvm/functions/Function2;
-}
-
 public final class stapel/navigation/compose/ContributionKt {
 	public static final fun navContribution (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lstapel/navigation/compose/NavContribution;
 	public static final fun overriding-al1nbsk (Lstapel/navigation/compose/NavContribution;Ljava/lang/String;Lkotlin/jvm/functions/Function4;)Lstapel/navigation/compose/NavContribution;

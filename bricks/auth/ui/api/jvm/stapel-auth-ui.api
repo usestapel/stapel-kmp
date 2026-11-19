@@ -247,12 +247,6 @@ public final class stapel/auth/ui/CommonKt {
 	public static final fun authErrorText (Lstapel/result/StapelError;Landroidx/compose/runtime/Composer;I)Ljava/lang/String;
 }
 
-public final class stapel/auth/ui/ComposableSingletons$AccountScreensKt {
-	public static final field INSTANCE Lstapel/auth/ui/ComposableSingletons$AccountScreensKt;
-	public fun <init> ()V
-	public final fun getLambda$-1990585654$io_github_usestapel_stapel_auth_ui ()Lkotlin/jvm/functions/Function2;
-}
-
 public final class stapel/auth/ui/DefaultAuthScreens : stapel/auth/ui/AuthScreens {
 	public static final field $stable I
 	public static final field INSTANCE Lstapel/auth/ui/DefaultAuthScreens;

@@ -34,24 +34,6 @@ public final class stapel/ui/ComponentsKt {
 	public static final fun getLARGE_TITLE_COLLAPSE_DISTANCE ()F
 }
 
-public final class stapel/ui/ComposableSingletons$ComponentsKt {
-	public static final field INSTANCE Lstapel/ui/ComposableSingletons$ComponentsKt;
-	public fun <init> ()V
-	public final fun getLambda$248018804$io_github_usestapel_stapel_ui ()Lkotlin/jvm/functions/Function2;
-}
-
-public final class stapel/ui/ComposableSingletons$CompositesKt {
-	public static final field INSTANCE Lstapel/ui/ComposableSingletons$CompositesKt;
-	public fun <init> ()V
-	public final fun getLambda$1638464551$io_github_usestapel_stapel_ui ()Lkotlin/jvm/functions/Function2;
-}
-
-public final class stapel/ui/ComposableSingletons$SectionsKt {
-	public static final field INSTANCE Lstapel/ui/ComposableSingletons$SectionsKt;
-	public fun <init> ()V
-	public final fun getLambda$-122183629$io_github_usestapel_stapel_ui ()Lkotlin/jvm/functions/Function2;
-}
-
 public final class stapel/ui/CompositesKt {
 	public static final fun ConfirmDialog (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/lang/String;ZZLjava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun EmptyState (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lstapel/ui/StapelIcon;Lstapel/ui/skin/ButtonSpec;Ljava/lang/String;Lstapel/ui/skin/ButtonSpec;Lstapel/ui/StatusSize;Landroidx/compose/runtime/Composer;II)V
@@ -617,12 +599,6 @@ public final class stapel/ui/skin/CodeFieldSpec {
 	public final fun getOnComplete ()Lkotlin/jvm/functions/Function1;
 	public final fun getState ()Landroidx/compose/foundation/text/input/TextFieldState;
 	public final fun getTestTag ()Ljava/lang/String;
-}
-
-public final class stapel/ui/skin/ComposableSingletons$FoundationSkinKt {
-	public static final field INSTANCE Lstapel/ui/skin/ComposableSingletons$FoundationSkinKt;
-	public fun <init> ()V
-	public final fun getLambda$201591478$io_github_usestapel_stapel_ui ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class stapel/ui/skin/ControlSize : java/lang/Enum {

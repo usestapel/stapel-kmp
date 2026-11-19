@@ -169,6 +169,31 @@ class GatesFunctionalTest {
     }
 
     @Test
+    fun `a callee's signature change does not move a compose dependent's abi dump`() {
+        val fx = FixtureBuild("compose-singletons")
+            .module("substrate/stapel-ui", substrate(plugin = "stapel.substrate-ui"))
+            .module("substrate/stapel-shell", substrate("api(projects.stapelUi)", plugin = "stapel.substrate-ui"))
+        fx.file(
+            "substrate/stapel-ui/src/commonMain/kotlin/stapel/ui/Leaf.kt",
+            "package stapel.ui\n/** Leaf. */\n@androidx.compose.runtime.Composable public fun Leaf(x: Int) { androidx.compose.foundation.layout.Box { } }",
+        )
+        fx.file(
+            "substrate/stapel-shell/src/commonMain/kotlin/stapel/shell/Host.kt",
+            "package stapel.shell\n/** Host. */\n@androidx.compose.runtime.Composable public fun Host(content: @androidx.compose.runtime.Composable () -> Unit = { stapel.ui.Leaf(1) }) { content() }",
+        )
+        fx.succeeds(":stapel-ui:updateKotlinAbi", ":stapel-shell:updateKotlinAbi")
+        val dump = fx.dir.resolve("substrate/stapel-shell/api/jvm/stapel-shell.api").readText()
+        kotlin.test.assertFalse("ComposableSingletons" in dump, dump)
+        assertContains(dump, "Host")
+        // The callee changes shape; the dependent's own source does not change.
+        fx.file(
+            "substrate/stapel-ui/src/commonMain/kotlin/stapel/ui/Leaf.kt",
+            "package stapel.ui\n/** Leaf. */\n@androidx.compose.runtime.Composable public fun Leaf(x: Int, y: String = \"\") { androidx.compose.foundation.layout.Box { } }",
+        )
+        fx.succeeds(":stapel-ui:updateKotlinAbi", ":stapel-shell:checkKotlinAbi")
+    }
+
+    @Test
     fun `brick ui may not depend on another brick's domain`() {
         val r = FixtureBuild("ui-to-other-brick")
             .module("bricks/chat/domain", substrate(plugin = "stapel.brick-domain"))

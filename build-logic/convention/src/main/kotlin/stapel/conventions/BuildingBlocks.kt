@@ -233,6 +233,11 @@ internal fun Project.applyStapelAbi() {
                 // Compose resources' generated `Res` accessors are internal; the compiler's synthetic
                 // `$stableprop` members would otherwise appear in klib dumps.
                 byNames.add("**.generated.resources.**")
+                // Compose compiler singletons holding composable lambdas (`ComposableSingletons$<File>Kt`
+                // with `getLambda$<hash>$<module>` members): not API, and the hash moves whenever a
+                // callee's signature in another module changes, which turned dependents' ABI checks red
+                // with no source change of their own. Klib dumps do not list them; the filter is shared.
+                byNames.add("**.ComposableSingletons**")
             }
         }
     }

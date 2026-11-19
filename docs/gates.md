@@ -144,3 +144,12 @@ there).
 the change that moved the public surface. `checkKotlinAbi` is part of `check`
 and `stapelCheckFast`. Types and members annotated with `@InternalStapelApi`
 are excluded.
+
+Compiler-generated Compose singletons (`ComposableSingletons$<File>Kt`, whose
+`getLambda$<hash>$<module>` members change hash whenever a callee's signature
+in another module changes) are excluded from every dump by the class-name
+filter `**.ComposableSingletons**` (KGP `abiValidation.filters.exclude.byNames`,
+shared by the JVM and klib dumps; klib dumps never listed them). `$stable`
+fields and `$stableprop` members stay: their names do not move with callees.
+TestKit fixture: a callee's signature change leaves a dependent's dump
+unchanged.

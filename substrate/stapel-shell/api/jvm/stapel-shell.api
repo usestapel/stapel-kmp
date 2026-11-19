@@ -2,17 +2,6 @@ public abstract interface class stapel/shell/BadgeSource {
 	public abstract fun count ()Lkotlinx/coroutines/flow/Flow;
 }
 
-public final class stapel/shell/ComposableSingletons$ShellKt {
-	public static final field INSTANCE Lstapel/shell/ComposableSingletons$ShellKt;
-	public fun <init> ()V
-	public final fun getLambda$-123119995$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda$-1382041852$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function5;
-	public final fun getLambda$-1682695421$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-2119224227$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function4;
-	public final fun getLambda$2017341606$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$697590914$io_github_usestapel_stapel_shell ()Lkotlin/jvm/functions/Function2;
-}
-
 public final class stapel/shell/ModelKt {
 	public static final fun shellTemplatesJson ()Ljava/lang/String;
 }
