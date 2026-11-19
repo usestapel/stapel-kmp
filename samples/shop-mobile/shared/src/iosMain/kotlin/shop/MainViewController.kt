@@ -5,7 +5,14 @@ import platform.UIKit.UIViewController
 import stapel.app.di.StapelApp
 import stapel.runtime.PlatformContext
 
-private val app: StapelApp by lazy { createShopApp(PlatformContext(), "ios") }
+private var baseUrlOverride: String? = null
+
+private val app: StapelApp by lazy { createShopApp(PlatformContext(), "ios", baseUrlOverride) }
+
+/** Points the app at another backend (UI tests: a stand on its own port); call before anything else. */
+fun useBaseUrl(url: String) {
+    baseUrlOverride = url
+}
 
 /** The Compose root the Swift host embeds. */
 fun MainViewController(): UIViewController = ComposeUIViewController { ShopApp(app) }
