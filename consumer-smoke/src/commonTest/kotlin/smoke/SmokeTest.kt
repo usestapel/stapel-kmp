@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 
 class SmokeTest {
     @Test
-    fun resolvesThePublishedProbeByCoordinates() {
-        assertEquals("consumer-smoke", smokeSlug())
+    fun resolvesThePublishedResultArtifactByCoordinates() {
+        assertEquals("21 HTTP 503", smokeText())
     }
 }

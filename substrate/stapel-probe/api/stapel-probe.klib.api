@@ -1,9 +1,0 @@
-// Klib ABI Dump
-// Targets: [iosArm64, iosSimulatorArm64]
-// Rendering settings:
-// - Signature version: 2
-// - Show manifest properties: true
-// - Show declarations: true
-
-// Library unique name: <io.github.usestapel:stapel-probe>
-final fun stapel.probe/probeSlug(kotlin/Array<out kotlin/String>...): kotlin/String // stapel.probe/probeSlug|probeSlug(kotlin.Array<out|kotlin.String>...){}[0]

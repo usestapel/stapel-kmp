@@ -24,7 +24,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project.dependencies.platform("$stapelGroup:stapel-bom:$stapelVersion"))
-            implementation("$stapelGroup:stapel-probe")
+            implementation("$stapelGroup:stapel-result")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

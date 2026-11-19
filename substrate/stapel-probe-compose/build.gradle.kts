@@ -8,11 +8,3 @@ plugins {
 stapel {
     description = "Build probe for the stapel.substrate-ui convention (not a product module)."
 }
-
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-            api(projects.stapelProbe)
-        }
-    }
-}
