@@ -22,6 +22,40 @@ class GatesFunctionalTest {
     }
 
     @Test
+    fun `every family plugin applies and compiles its jvm target`() {
+        val fx = FixtureBuild("families")
+            .module("substrate/stapel-result", substrate())
+            .module("substrate/stapel-ui", substrate(plugin = "stapel.substrate-ui"))
+            .module("capabilities/stapel-captcha", substrate("api(projects.stapelResult)", plugin = "stapel.capability"))
+            .module("capabilities/stapel-captcha-ui", substrate("api(projects.stapelCaptcha)", plugin = "stapel.capability-ui"))
+            .module("bricks/auth/domain", substrate("api(projects.stapelResult)", plugin = "stapel.brick-domain"))
+            .module("bricks/auth/ui", substrate(plugin = "stapel.brick-ui"))
+            .module("bricks/auth/adapters/biometric", substrate(plugin = "stapel.brick-adapter"))
+            .module("bricks/auth/demo", "plugins { id(\"stapel.brick-demo\") }")
+            .module("bricks/auth/e2e", "plugins { id(\"stapel.brick-e2e\") }\ndependencies { testImplementation(projects.stapelAuth) }")
+            .module("tools/codegen/ir", "plugins { id(\"stapel.jvm-tool\") }")
+            .module("showcase/gallery", "plugins { id(\"stapel.showcase\") }")
+            .module("bom", "plugins { id(\"stapel.bom\") }")
+        listOf(
+            "bricks/auth/domain/src/commonMain/kotlin/stapel/auth/A.kt" to "package stapel.auth\n/** A. */\npublic class A",
+            "bricks/auth/ui/src/commonMain/kotlin/stapel/auth/ui/B.kt" to "package stapel.auth.ui\n/** B. */\npublic fun b(): stapel.auth.A = stapel.auth.A()",
+            "bricks/auth/demo/src/commonMain/kotlin/stapel/auth/ui/demo/D.kt" to "package stapel.auth.ui.demo\nfun d() = stapel.auth.ui.b()",
+            "bricks/auth/e2e/src/test/kotlin/stapel/auth/e2e/E.kt" to "package stapel.auth.e2e\nclass E { @org.junit.jupiter.api.Test fun e() { stapel.auth.A() } }",
+            "tools/codegen/ir/src/main/kotlin/stapel/tools/codegen/ir/Ir.kt" to "package stapel.tools.codegen.ir\nfun ir() = 1",
+            "showcase/gallery/src/commonMain/kotlin/stapel/showcase/G.kt" to "package stapel.showcase\nfun g() = 1",
+        ).forEach { (path, text) -> fx.file(path, text) }
+        val r = fx.succeeds(
+            "compileKotlinJvm", ":tools:codegen:ir:compileKotlin", ":stapel-auth-e2e:compileTestKotlin",
+            "checkDependencyDirection", "checkPackageRoot", ":stapel-auth-e2e:test",
+            ":stapel-bom:generatePomFileForMavenPublication",
+        )
+        assertContains(r.output, ":stapel-auth-e2e:test SKIPPED")
+        val bomPom = fx.dir.resolve("bom/build/publications/maven/pom-default.xml").readText()
+        assertContains(bomPom, "<artifactId>stapel-auth-ui</artifactId>")
+        kotlin.test.assertFalse(bomPom.contains("stapel-auth-ui-demo"), "demo must not be in the BOM")
+    }
+
+    @Test
     fun `brick may not depend on another brick`() {
         val r = FixtureBuild("brick-to-brick")
             .module("substrate/stapel-result", substrate())

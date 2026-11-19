@@ -54,8 +54,11 @@ class FixtureBuild(private val name: String) {
         val p = path.split('/')
         return when (p[0]) {
             "substrate", "capabilities" -> p[1]
+            "bom" -> "stapel-bom"
+            "tools", "showcase" -> ":" + p.joinToString(":")
             "bricks" -> when (p[2]) {
                 "domain" -> "stapel-${p[1]}"
+                "e2e" -> "stapel-${p[1]}-e2e"
                 "ui" -> "stapel-${p[1]}-ui"
                 "demo" -> "stapel-${p[1]}-ui-demo"
                 "adapters" -> "stapel-${p[1]}-${p[3]}"
@@ -67,7 +70,8 @@ class FixtureBuild(private val name: String) {
 
     private fun writeSettings() {
         val includes = modules.joinToString("\n") { (path, name) ->
-            "include(\":$name\")\nproject(\":$name\").projectDir = file(\"$path\")"
+            val gradlePath = if (name.startsWith(":")) name else ":$name"
+            "include(\"$gradlePath\")\nproject(\"$gradlePath\").projectDir = file(\"$path\")"
         }
         File(dir, "settings.gradle.kts").writeText(
             """
