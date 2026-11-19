@@ -20,7 +20,8 @@ import kotlin.test.assertTrue
 /**
  * Measures what ARCH-UI §testing left open before any baseline is committed: does capture run with no
  * display (`java.awt.headless=true`), and is it deterministic on one machine. The numbers are written
- * to `build/captures/measurement.txt`. Cross-OS identity (macOS vs Linux) is not measurable here.
+ * to `build/captures/measurement.txt`. Cross-OS identity is measured by `.github/workflows/measure-capture.yml`,
+ * which runs this on Linux and macOS with a pinned locale and uploads both captures.
  */
 @OptIn(ExperimentalTestApi::class)
 class ScreenshotMeasurementTest {
@@ -35,8 +36,8 @@ class ScreenshotMeasurementTest {
 
     @Test
     fun headlessCaptureIsDeterministicOnOneMachine() {
-        // macOS only until the Linux runner's headless behaviour is measured on its own (CI uses xvfb).
-        org.junit.Assume.assumeTrue(System.getProperty("os.name").startsWith("Mac"))
+        // macOS by default; the measure-capture workflow runs it on Linux too (STAPEL_MEASURE_CAPTURE=1).
+        org.junit.Assume.assumeTrue(System.getProperty("os.name").startsWith("Mac") || System.getenv("STAPEL_MEASURE_CAPTURE") == "1")
         val shots = mutableListOf<File>()
         val started = System.nanoTime()
         repeat(2) { run ->
@@ -58,6 +59,7 @@ class ScreenshotMeasurementTest {
         val img = ImageIO.read(r0)
         val report = buildString {
             appendLine("os=${System.getProperty("os.name")} ${System.getProperty("os.arch")} java=${System.getProperty("java.version")}")
+            appendLine("locale=${java.util.Locale.getDefault().toLanguageTag()} tz=${java.util.TimeZone.getDefault().id}")
             appendLine("headless=${GraphicsEnvironment.isHeadless()}")
             appendLine("size=${img.width}x${img.height} two runs in ${millis} ms")
             appendLine("roborazzi run0=${sha(r0)} run1=${sha(r1)}")
