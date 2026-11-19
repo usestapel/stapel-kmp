@@ -43,6 +43,7 @@ import stapel.tokens.ThemeMode
 import stapel.ui.DialogSurface
 import stapel.ui.StapelIconIds
 import stapel.ui.StapelInput
+import stapel.ui.StapelLayout
 import stapel.ui.StapelText
 import stapel.ui.StapelTheme
 import stapel.ui.StapelTone
@@ -83,11 +84,26 @@ private class Hits {
     operator fun get(key: String) = counts[key] ?: 0
 }
 
+/** How the contract wraps its screen in a theme (a skin may need its design system's own root). */
+public interface SkinContractTheme {
+    /** Provides the theme for [skin] around [content]. */
+    @Composable
+    public fun Wrap(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMode, layout: StapelLayout, content: @Composable () -> Unit)
+}
+
+/** Plain [StapelTheme]. */
+public object PlainContractTheme : SkinContractTheme {
+    @Composable
+    override fun Wrap(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMode, layout: StapelLayout, content: @Composable () -> Unit) {
+        StapelTheme(skin = skin, tokens = tokens, mode = mode, layout = layout, content = content)
+    }
+}
+
 /** Every slot of [skin] with the contract's fixtures; [dialogs] switches to the dialog phase. */
 @Composable
-private fun ContractScreen(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMode, hits: Hits, fields: Fields, dialogs: Boolean) {
+private fun ContractScreen(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMode, theme: SkinContractTheme, hits: Hits, fields: Fields, dialogs: Boolean) {
     val layout = stapelLayout(tokens, 390.dp, input = StapelInput.Pointer)
-    StapelTheme(skin = skin, tokens = tokens, mode = mode, layout = layout) {
+    theme.Wrap(skin, tokens, mode, layout) {
         val s = StapelTheme.skin
         if (dialogs) {
             s.Dialog(
@@ -96,7 +112,7 @@ private fun ContractScreen(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMo
             s.Dialog(
                 DialogSpec({ hits.hit("locked.dismiss") }, DialogSurface.Sheet, accessibleName = "Locked sheet", dismissLabel = "Close locked", dismissible = false),
             ) { StapelText("Locked body") }
-            return@StapelTheme
+            return@Wrap
         }
         Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
             s.Button(ButtonSpec("Go", { hits.hit("button") }, testTag = "c.button"), Modifier)
@@ -172,12 +188,17 @@ public val SKIN_CONTRACT_TAGS: List<String> = listOf(
  * headings, toggles, dialog pane titles and dismissal rules). Throws on the first broken duty.
  */
 @OptIn(ExperimentalTestApi::class)
-public fun ComposeUiTest.assertSkinContract(skin: StapelSkin, tokens: StapelTokens = StapelDefaultTokens, mode: ThemeMode = ThemeMode.Light) {
+public fun ComposeUiTest.assertSkinContract(
+    skin: StapelSkin,
+    tokens: StapelTokens = StapelDefaultTokens,
+    mode: ThemeMode = ThemeMode.Light,
+    theme: SkinContractTheme = PlainContractTheme,
+) {
     val hits = Hits()
     val fields = Fields()
     var dialogs by mutableStateOf(false)
     mainClock.autoAdvance = false
-    setContent { ContractScreen(skin, tokens, mode, hits, fields, dialogs) }
+    setContent { ContractScreen(skin, tokens, mode, theme, hits, fields, dialogs) }
     mainClock.advanceTimeBy(500)
     waitForIdle()
 

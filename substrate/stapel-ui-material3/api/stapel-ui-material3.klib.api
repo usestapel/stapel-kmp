@@ -1,0 +1,30 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-ui-material3>
+final object stapel.ui.material3/Material3Skin : stapel.ui.skin/StapelSkin { // stapel.ui.material3/Material3Skin|null[0]
+    final fun Banner(stapel.ui.skin/BannerSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.Banner|Banner(stapel.ui.skin.BannerSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun Button(stapel.ui.skin/ButtonSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.Button|Button(stapel.ui.skin.ButtonSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun CodeField(stapel.ui.skin/CodeFieldSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.CodeField|CodeField(stapel.ui.skin.CodeFieldSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun Dialog(stapel.ui.skin/DialogSpec, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.Dialog|Dialog(stapel.ui.skin.DialogSpec;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun Divider(androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.Divider|Divider(androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun IconButton(stapel.ui.skin/IconButtonSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.IconButton|IconButton(stapel.ui.skin.IconButtonSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun ListItem(stapel.ui.skin/ListItemSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.ListItem|ListItem(stapel.ui.skin.ListItemSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun Progress(stapel.ui.skin/ProgressSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.Progress|Progress(stapel.ui.skin.ProgressSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun Snackbar(stapel.ui.skin/SnackbarSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.Snackbar|Snackbar(stapel.ui.skin.SnackbarSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun Surface(stapel.ui.skin/SurfaceSpec, androidx.compose.ui/Modifier, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.Surface|Surface(stapel.ui.skin.SurfaceSpec;androidx.compose.ui.Modifier;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun TextField(stapel.ui.skin/TextFieldSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.TextField|TextField(stapel.ui.skin.TextFieldSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun TopBar(stapel.ui.skin/TopBarSpec, androidx.compose.ui/Modifier, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.ui.material3/Material3Skin.TopBar|TopBar(stapel.ui.skin.TopBarSpec;androidx.compose.ui.Modifier;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+final val stapel.ui.material3/stapel_ui_material3_Material3Skin$stableprop // stapel.ui.material3/stapel_ui_material3_Material3Skin$stableprop|#static{}stapel_ui_material3_Material3Skin$stableprop[0]
+
+final fun (stapel.tokens/StapelTokens).stapel.ui.material3/toColorScheme(stapel.tokens/ThemeMode): androidx.compose.material3/ColorScheme // stapel.ui.material3/toColorScheme|toColorScheme@stapel.tokens.StapelTokens(stapel.tokens.ThemeMode){}[0]
+final fun (stapel.tokens/StapelTokens).stapel.ui.material3/toShapes(): androidx.compose.material3/Shapes // stapel.ui.material3/toShapes|toShapes@stapel.tokens.StapelTokens(){}[0]
+final fun (stapel.tokens/StapelTokens).stapel.ui.material3/toTypography(stapel.ui/StapelFonts): androidx.compose.material3/Typography // stapel.ui.material3/toTypography|toTypography@stapel.tokens.StapelTokens(stapel.ui.StapelFonts){}[0]
+final fun stapel.ui.material3/StapelMaterialTheme(stapel.tokens/StapelTokens?, stapel.tokens/ThemeMode?, stapel.ui.skin/StapelSkin?, stapel.ui/StapelFontResolver?, stapel.ui/StapelIconSet?, stapel.i18n/StapelStrings?, stapel.ui/StapelLayout?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui.material3/StapelMaterialTheme|StapelMaterialTheme(stapel.tokens.StapelTokens?;stapel.tokens.ThemeMode?;stapel.ui.skin.StapelSkin?;stapel.ui.StapelFontResolver?;stapel.ui.StapelIconSet?;stapel.i18n.StapelStrings?;stapel.ui.StapelLayout?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui.material3/stapel_ui_material3_Material3Skin$stableprop_getter(): kotlin/Int // stapel.ui.material3/stapel_ui_material3_Material3Skin$stableprop_getter|stapel_ui_material3_Material3Skin$stableprop_getter(){}[0]

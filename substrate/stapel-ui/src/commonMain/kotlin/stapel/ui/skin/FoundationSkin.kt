@@ -70,6 +70,7 @@ import stapel.i18n.CoreUiStrings
 import stapel.tokens.Shadow
 import stapel.ui.DialogSurface
 import stapel.ui.LocalStapelContentColor
+import stapel.ui.StapelIcon
 import stapel.ui.StapelIconIds
 import stapel.ui.StapelIconView
 import stapel.ui.StapelInput
@@ -85,11 +86,11 @@ import androidx.compose.ui.graphics.shadow.Shadow as ComposeShadow
 public const val GATED_REASON_TAG_SUFFIX: String = ".reason"
 
 /** Applies [tag] as a test tag when non-null. */
-internal fun Modifier.optionalTestTag(tag: String?): Modifier = if (tag == null) this else testTag(tag)
+public fun Modifier.optionalTestTag(tag: String?): Modifier = if (tag == null) this else testTag(tag)
 
-/** Draws a token shadow with Compose's drop shadow. */
+/** Draws a token elevation [shadow] (null = none) with Compose's drop shadow, outside [shape]. */
 @Composable
-internal fun Modifier.tokenShadow(shadow: Shadow?, shape: Shape): Modifier =
+public fun Modifier.stapelShadow(shadow: Shadow?, shape: Shape): Modifier =
     if (shadow == null) {
         this
     } else {
@@ -99,9 +100,9 @@ internal fun Modifier.tokenShadow(shadow: Shadow?, shape: Shape): Modifier =
         )
     }
 
-/** The touch floor (zero under a pointer) as a minimum size. */
+/** Enforces `StapelTheme.layout.minTouchTarget` (zero under a pointer) as a minimum size. */
 @Composable
-internal fun Modifier.touchTarget(): Modifier {
+public fun Modifier.stapelTouchTarget(): Modifier {
     val min = StapelTheme.layout.minTouchTarget
     return if (min.value <= 0f) this else sizeIn(minWidth = min, minHeight = min)
 }
@@ -131,7 +132,7 @@ public object FoundationSkin : StapelSkin {
             Box(
                 modifier = Modifier
                     .then(if (spec.fillWidth) Modifier.fillMaxWidth() else Modifier)
-                    .touchTarget()
+                    .stapelTouchTarget()
                     .heightIn(min = height)
                     .clip(shape)
                     .background(if (active) fill else colors.surfaceSunken, shape)
@@ -176,7 +177,7 @@ public object FoundationSkin : StapelSkin {
         val tint = if (spec.tone == StapelTone.Neutral) colors.text else colors.status(spec.tone).base
         Box(
             modifier = modifier
-                .touchTarget()
+                .stapelTouchTarget()
                 .sizeIn(minWidth = 32.dp, minHeight = 32.dp)
                 .clip(CircleShape)
                 .clickable(interactionSource = interaction, indication = null, enabled = spec.enabled, role = Role.Button, onClick = spec.onClick)
@@ -385,7 +386,7 @@ public object FoundationSkin : StapelSkin {
                 Column(
                     modifier = Modifier
                         .then(if (sheet) Modifier.fillMaxWidth() else Modifier.widthIn(min = 280.dp, max = 560.dp))
-                        .tokenShadow(StapelTheme.elevation.high, shape)
+                        .stapelShadow(StapelTheme.elevation.high, shape)
                         .background(colors.surfaceOverlay, shape)
                         .semantics {
                             paneTitle = spec.title ?: spec.accessibleName ?: ""
@@ -490,7 +491,7 @@ public object FoundationSkin : StapelSkin {
         val interaction = remember { MutableInteractionSource() }
         Box(
             modifier = modifier
-                .tokenShadow(shadow, shape)
+                .stapelShadow(shadow, shape)
                 .clip(shape)
                 .background(fill, shape)
                 .then(if (spec.bordered) Modifier.border(1.dp, colors.borderSubtle, shape) else Modifier)
@@ -572,7 +573,7 @@ public object FoundationSkin : StapelSkin {
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .tokenShadow(StapelTheme.elevation.medium, shape)
+                .stapelShadow(StapelTheme.elevation.medium, shape)
                 .background(colors.surfaceOverlay, shape)
                 .border(1.dp, if (spec.tone == StapelTone.Neutral) colors.borderSubtle else tone.border, shape)
                 .semantics { liveRegion = LiveRegionMode.Polite }
@@ -596,7 +597,7 @@ public object FoundationSkin : StapelSkin {
         val on = if (spec.enabled) colors.brand else colors.textSubtle
         Row(
             modifier = modifier
-                .touchTarget()
+                .stapelTouchTarget()
                 .toggleable(
                     value = spec.checked,
                     enabled = spec.enabled,
@@ -647,7 +648,7 @@ public object FoundationSkin : StapelSkin {
                 Box(
                     Modifier
                         .weight(1f)
-                        .touchTarget()
+                        .stapelTouchTarget()
                         .heightIn(min = 40.dp)
                         .then(if (segmented && selected) Modifier.background(colors.surface, StapelTheme.shapes.md) else Modifier)
                         .selectable(selected = selected, role = Role.Tab) { spec.onSelect(i) },
@@ -747,7 +748,7 @@ public object FoundationSkin : StapelSkin {
         val colors = StapelTheme.colors
         Column(
             modifier = modifier
-                .touchTarget()
+                .stapelTouchTarget()
                 .heightIn(min = 56.dp)
                 .selectable(selected = selected, role = Role.Tab, onClick = onClick)
                 .padding(vertical = StapelTheme.spacing.s1),
@@ -777,7 +778,8 @@ public object FoundationSkin : StapelSkin {
     }
 }
 
-internal fun toneIcon(tone: StapelTone) = when (tone) {
+/** The status glyph of [tone]. */
+public fun toneIcon(tone: StapelTone): StapelIcon = when (tone) {
     StapelTone.Neutral, StapelTone.Info -> StapelIconIds.Info
     StapelTone.Success -> StapelIconIds.CheckCircle
     StapelTone.Warning -> StapelIconIds.AlertTriangle

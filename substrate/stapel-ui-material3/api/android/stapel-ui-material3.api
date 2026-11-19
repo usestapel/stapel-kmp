@@ -1,0 +1,36 @@
+public final class stapel/ui/material3/MappingKt {
+	public static final fun toColorScheme (Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;)Landroidx/compose/material3/ColorScheme;
+	public static final fun toShapes (Lstapel/tokens/StapelTokens;)Landroidx/compose/material3/Shapes;
+	public static final fun toTypography (Lstapel/tokens/StapelTokens;Lstapel/ui/StapelFonts;)Landroidx/compose/material3/Typography;
+}
+
+public final class stapel/ui/material3/Material3Skin : stapel/ui/skin/StapelSkin {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/ui/material3/Material3Skin;
+	public fun Avatar (Lstapel/ui/skin/AvatarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Badge (Lstapel/ui/skin/BadgeSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Banner (Lstapel/ui/skin/BannerSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Button (Lstapel/ui/skin/ButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Chip (Lstapel/ui/skin/ChipSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun CodeField (Lstapel/ui/skin/CodeFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Dialog (Lstapel/ui/skin/DialogSpec;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Divider (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun IconButton (Lstapel/ui/skin/IconButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun ListItem (Lstapel/ui/skin/ListItemSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun NavigationBar (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun NavigationRail (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Progress (Lstapel/ui/skin/ProgressSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun PullToRefresh (Lstapel/ui/skin/PullToRefreshSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Snackbar (Lstapel/ui/skin/SnackbarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Surface (Lstapel/ui/skin/SurfaceSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Tabs (Lstapel/ui/skin/TabsSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun TextField (Lstapel/ui/skin/TextFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Toggle (Lstapel/ui/skin/ToggleSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun TopBar (Lstapel/ui/skin/TopBarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun extension (Lstapel/ui/skin/SkinExtensionKey;)Ljava/lang/Object;
+}
+
+public final class stapel/ui/material3/StapelMaterialThemeKt {
+	public static final fun StapelMaterialTheme (Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;Lstapel/ui/skin/StapelSkin;Lstapel/ui/StapelFontResolver;Lstapel/ui/StapelIconSet;Lstapel/i18n/StapelStrings;Lstapel/ui/StapelLayout;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
