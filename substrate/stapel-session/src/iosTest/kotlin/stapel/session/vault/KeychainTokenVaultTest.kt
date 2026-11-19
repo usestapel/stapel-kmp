@@ -5,6 +5,7 @@ import platform.Foundation.NSUserDefaults
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
@@ -13,15 +14,23 @@ private class FakeKeychain : KeychainAccess {
     var item: ByteArray? = null
     val log = mutableListOf<String>()
 
-    override fun copy(): ByteArray? = item.also { log += "copy" }
+    /** Every call fails with this status (a process without a keychain), when set. */
+    var failing: Int? = null
+
+    override fun copy(): ByteArray? {
+        failing?.let { throw KeychainException(it, "read") }
+        return item.also { log += "copy" }
+    }
 
     override fun add(bytes: ByteArray) {
+        failing?.let { throw KeychainException(it, "write") }
         log += "add"
         if (item != null) throw KeychainException(-25299, "write") // errSecDuplicateItem
         item = bytes
     }
 
     override fun delete() {
+        failing?.let { throw KeychainException(it, "delete") }
         log += "delete"
         item = null
     }
@@ -58,6 +67,29 @@ class KeychainTokenVaultTest {
         NSUserDefaults.standardUserDefaults.removeObjectForKey("$service.installed") // what an uninstall does
         assertIs<VaultRead.Empty>(vault().read())
         assertTrue(NSUserDefaults.standardUserDefaults.boolForKey("$service.installed"))
+    }
+
+    /**
+     * A first launch without a Keychain entitlement (an unsigned simulator build): the first-run wipe and
+     * the read find no store; that is "no session" (Empty), never an unreadable one that the session
+     * would report as lost. Writing still fails, so the loss of persistence is not silent.
+     */
+    @Test
+    fun aKeychainTheAppHasNoEntitlementForReadsAsNoSession() = runTest {
+        keychain.failing = KeychainException.ERR_SEC_MISSING_ENTITLEMENT
+        val vault = vault()
+        assertIs<VaultRead.Empty>(vault.read())
+        vault.clear()
+        assertFailsWith<KeychainException> { vault.write(sample) }
+        keychain.failing = KeychainException.ERR_SEC_NOT_AVAILABLE
+        assertIs<VaultRead.Empty>(vault().read())
+    }
+
+    @Test
+    fun anyOtherKeychainFailureStillFailsTheRead() = runTest {
+        NSUserDefaults.standardUserDefaults.setBool(true, "$service.installed")
+        keychain.failing = -25308 // errSecInteractionNotAllowed: a store exists but cannot be read now
+        assertFailsWith<KeychainException> { vault().read() }
     }
 
     @Test

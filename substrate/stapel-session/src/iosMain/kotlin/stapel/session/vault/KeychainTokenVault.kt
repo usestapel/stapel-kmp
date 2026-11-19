@@ -56,7 +56,22 @@ public actual fun platformTokenVault(
 }
 
 /** Raised for a Keychain status other than success / not found. */
-internal class KeychainException(val status: Int, operation: String) : Exception("Keychain $operation failed: OSStatus $status")
+internal class KeychainException(val status: Int, operation: String) : Exception("Keychain $operation failed: OSStatus $status") {
+    /**
+     * The process has no Keychain at all (`errSecMissingEntitlement` -34018: an unsigned build or no
+     * application identifier; `errSecNotAvailable` -25291: no keychain in this process): nothing can
+     * ever have been written, so there is nothing to read or wipe.
+     */
+    val noStore: Boolean get() = status == ERR_SEC_MISSING_ENTITLEMENT || status == ERR_SEC_NOT_AVAILABLE
+
+    companion object {
+        /** `errSecMissingEntitlement`. */
+        const val ERR_SEC_MISSING_ENTITLEMENT: Int = -34018
+
+        /** `errSecNotAvailable`. */
+        const val ERR_SEC_NOT_AVAILABLE: Int = -25291
+    }
+}
 
 /** The three Keychain operations the vault needs; [SystemKeychain] is the real one. Throws [KeychainException]. */
 internal interface KeychainAccess {
@@ -73,7 +88,9 @@ internal interface KeychainAccess {
 /**
  * One generic-password item, `AfterFirstUnlockThisDeviceOnly`. Keychain items survive an uninstall;
  * [installMarkerKey] in `NSUserDefaults` (which does not) detects the first run after a reinstall
- * and deletes the stale item before anything reads it.
+ * and deletes the stale item before anything reads it. A wiped or never-written item reads as
+ * [VaultRead.Empty] (no session), and so does a Keychain the app has no entitlement for (nothing can
+ * have been written there); a write to such a Keychain still fails, so the session manager logs it.
  */
 internal class KeychainTokenVault(
     service: String,
@@ -86,7 +103,8 @@ internal class KeychainTokenVault(
     private var installChecked = false
 
     override suspend fun read(): VaultRead = io {
-        when (val bytes = keychain.copy()) {
+        // A store the app cannot have (no entitlement) was never written: no session, not a lost one.
+        when (val bytes = withoutStore(null) { keychain.copy() }) {
             null -> VaultRead.Empty
             else -> decodeRecord(bytes)?.let { VaultRead.Present(it) } ?: VaultRead.Unreadable("unrecognised record")
         }
@@ -100,7 +118,13 @@ internal class KeychainTokenVault(
     }
 
     override suspend fun clear() {
-        io { keychain.delete() }
+        io { withoutStore(Unit) { keychain.delete() } }
+    }
+
+    private inline fun <T> withoutStore(absent: T, block: () -> T): T = try {
+        block()
+    } catch (e: KeychainException) {
+        if (e.noStore) absent else throw e
     }
 
     private suspend fun <T> io(block: () -> T): T = withContext(dispatchers.io) {
@@ -108,7 +132,7 @@ internal class KeychainTokenVault(
             if (!installChecked) {
                 if (!defaults.boolForKey(installMarkerKey)) {
                     // First run of this installation: an item found now belongs to a previous install.
-                    keychain.delete()
+                    withoutStore(Unit) { keychain.delete() }
                     defaults.setBool(true, installMarkerKey)
                 }
                 installChecked = true

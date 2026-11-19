@@ -14,8 +14,10 @@
 Born `Initializing`; single-flight refresh; compare-before-rotate; three outcomes (a transient
 refresh never signs out); rotated pair persisted before any waiter gets it, rotation marker before
 the call; teardown order vault → hooks → state → event, `sessionLost` a no-op during logout;
-proactive refresh before `exp` on the request path (none offline); unreadable vault =
-`StorageLost`, never plaintext.
+proactive refresh before `exp` on the request path (none offline); unreadable vault (a record that
+exists but cannot be read) = `StorageLost`, never plaintext; a wiped or never-written vault, and an
+iOS process with no Keychain at all (`errSecMissingEntitlement` / `errSecNotAvailable`: nothing can
+have been written) = `Empty`, no session and no "session lost" (a write there still fails and is logged).
 
 ## Platform vaults — what is measured
 | Platform | Mechanism | Proven by | Not proven |

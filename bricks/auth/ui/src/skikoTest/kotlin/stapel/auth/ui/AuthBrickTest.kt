@@ -22,6 +22,13 @@ import stapel.navigation.NavAuthState
 import stapel.navigation.compose.NavContribution
 import stapel.runtime.PlatformContext
 import stapel.session.vault.InMemoryTokenVault
+import stapel.session.vault.StoredSession
+import stapel.session.vault.TokenVaultConfig
+import stapel.session.vault.VaultRead
+import stapel.session.vault.platformTokenVault
+import stapel.runtime.defaultDispatchers
+import stapel.auth.session.SignOutReason
+import kotlin.random.Random
 import stapel.shell.ShellTags
 import stapel.session.vault.TokenVault
 import stapel.result.TransportFailure
@@ -47,17 +54,51 @@ private class OfflineTransport(private val fake: FakeApiTransport = FakeApiTrans
 /** `AuthBrick()` is the whole auth wiring of an app: nothing else is installed for auth here. */
 @OptIn(ExperimentalTestApi::class)
 class AuthBrickTest {
-    private val offline: Module = module {
-        single<TokenVault> { InMemoryTokenVault() }
+    private fun offline(vault: () -> TokenVault): Module = module {
+        single<TokenVault> { vault() }
         // Offline: the sign-in screen renders its retry state and nothing leaves the test.
         single<ApiTransport> { OfflineTransport() }
     }
 
-    private fun app(vararg bricks: StapelBrick) = stapelApp(PlatformContext()) {
+    private fun app(vararg bricks: StapelBrick, vault: () -> TokenVault = { InMemoryTokenVault() }) = stapelApp(PlatformContext()) {
         environment(testEnvironment())
         bricks(*bricks)
-        overrides(offline)
+        overrides(offline(vault))
         global(false)
+    }
+
+    private fun androidx.compose.ui.test.ComposeUiTest.firstLaunch(vault: () -> TokenVault): AuthState {
+        val app = app(AuthBrick(), vault = vault)
+        try {
+            setContent { StapelAppContent(app) }
+            waitUntil(timeoutMillis = 10_000) { onAllNodes(hasTestTag(AuthTestTags.SIGN_IN)).fetchSemanticsNodes().isNotEmpty() }
+            waitForIdle()
+            return app.koin.get<StapelAuth>().session.state.value
+        } finally {
+            app.close()
+        }
+    }
+
+    @Test
+    fun aNeverWrittenPlatformVaultIsNoSessionAndShowsPlainSignIn() = runComposeUiTest {
+        // The JVM platform vault (owner-only file) under a namespace nothing ever wrote.
+        val state = firstLaunch { platformTokenVault(PlatformContext(), defaultDispatchers(), TokenVaultConfig(namespace = "stapel.test.never-${Random.nextLong()}")) }
+        assertEquals(AuthState.SignedOut(null), state)
+        assertEquals(0, onAllNodes(hasTestTag(AuthTestTags.NOTICE)).fetchSemanticsNodes().size, "no notice on a first launch")
+    }
+
+    @Test
+    fun anUnreadableStoredSessionIsReportedAsLost() = runComposeUiTest {
+        // The inversion: a record that exists but cannot be read is a lost session and is said so.
+        val state = firstLaunch {
+            object : TokenVault {
+                override suspend fun read(): VaultRead = VaultRead.Unreadable("key invalidated")
+                override suspend fun write(session: StoredSession) {}
+                override suspend fun clear() {}
+            }
+        }
+        assertEquals(AuthState.SignedOut(SignOutReason.StorageLost), state)
+        assertEquals(1, onAllNodes(hasTestTag(AuthTestTags.NOTICE)).fetchSemanticsNodes().size)
     }
 
     @Test
