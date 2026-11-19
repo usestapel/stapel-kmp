@@ -90,7 +90,19 @@ What the family plugin gives you, so you do not write it:
   simulator; Android host tests do not run Compose UI).
 - **Material** only in `stapel-ui-material3` (R9); brick UI never sees Coil.
 - **Room** only in `*-room` artifacts with `id("stapel.room")`; schemas are
-  committed under `schemas/`.
+  committed under `schemas/`. Proven by `substrate/stapel-probe-room` on every
+  target (Room 3.0.3 + KSP 2.3.14 + bundled SQLite 2.7.1). What it showed:
+  - keep Room types (`@Database`, `@Dao`, `@Entity`) `internal`; a public
+    `RoomDatabase` subclass drags Room's KDoc (unresolvable links) into the
+    Dokka gate;
+  - the builder is platform API: an `internal expect fun …Builder()` with
+    actuals in `androidMain`/`jvmMain`/`iosMain` calling
+    `Room.inMemoryDatabaseBuilder<T>()` / `Room.databaseBuilder<T>(path)`;
+  - the `@ConstructedBy` `expect object` needs `-Xexpect-actual-classes`, which
+    `stapel.room` sets for `*-room` modules only;
+  - Android host tests cannot load the bundled SQLite JNI library, so database
+    tests go to `src/sqliteTest` (runs on jvm + iOS simulator); `commonTest`
+    still runs on all three.
 - **Generated code** (brick domain): `src/commonMain/generated/kotlin` is already
   a source root. Generated packages that are under the KDoc ratchet (R11) are
   declared with `stapel { ratchetedPackages.add("stapel\\.auth\\.api(\\..*)?") }`;

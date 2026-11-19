@@ -112,9 +112,34 @@ internal fun Project.applyStapelRoom() {
         schemaDirectory("$projectDir/schemas")
     }
     val kmp = extensions.getByType(KotlinMultiplatformExtension::class.java)
+    // Android host tests cannot load the bundled SQLite JNI library (UnsatisfiedLinkError: sqliteJni,
+    // measured): database tests live in `src/sqliteTest` (jvm + iOS); `commonTest` still runs everywhere.
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+    kmp.applyDefaultHierarchyTemplate {
+        common {
+            group("sqlite") {
+                withJvm()
+                group("ios") { withIos() }
+            }
+        }
+    }
+    // Room's KMP setup is an `expect object` constructor whose actuals KSP generates; the flag is
+    // scoped to `*-room` artifacts (everywhere else platform variation is interface + expect fun).
+    kmp.compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
     kmp.sourceSets.getByName("commonMain").dependencies {
         api(lib("room3-runtime"))
         implementation(lib("androidx-sqlite-bundled"))
+    }
+    // Room types stay internal (a public RoomDatabase subclass drags Room's KDoc, whose links do not
+    // resolve, into our docs - measured on iosArm64Main); KSP output is not documentation.
+    pluginManager.withPlugin("org.jetbrains.dokka") {
+        extensions.configure(DokkaExtension::class.java) {
+            dokkaSourceSets.configureEach {
+                val generated = layout.buildDirectory.dir("generated/ksp").get().asFile.absolutePath
+                val roots = sourceRoots.from.toList()
+                sourceRoots.setFrom(files(roots).filter { !it.absolutePath.startsWith(generated) })
+            }
+        }
     }
     listOf("kspAndroid", "kspJvm", "kspIosArm64", "kspIosSimulatorArm64").forEach { conf ->
         dependencies.add(conf, lib("room3-compiler"))
