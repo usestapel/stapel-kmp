@@ -1,0 +1,744 @@
+public final class stapel/ui/ComponentsKt {
+	public static final field STAPEL_PAGE_CONTENT_TAG Ljava/lang/String;
+	public static final fun StapelBanner (Lstapel/ui/StapelTone;Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Ljava/lang/String;Lstapel/ui/skin/ButtonSpec;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelButton (Ljava/lang/String;Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Lstapel/ui/skin/ButtonVariant;Lstapel/ui/skin/ControlSize;ZZLjava/lang/String;Lstapel/ui/StapelIcon;ZLjava/lang/String;Landroidx/compose/runtime/Composer;III)V
+	public static final fun StapelCodeField (Landroidx/compose/foundation/text/input/TextFieldState;ILjava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelDialog (Lkotlin/jvm/functions/Function0;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelDivider (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelIconButton (Lstapel/ui/StapelIcon;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLstapel/ui/StapelTone;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelListItem (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ZZLjava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelPage (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lstapel/ui/PaneMeasure;ZZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelProgress (Lstapel/ui/skin/ProgressKind;Landroidx/compose/ui/Modifier;Ljava/lang/String;Ljava/lang/Float;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelSurface (Landroidx/compose/ui/Modifier;Lstapel/ui/skin/SurfaceTone;Lstapel/ui/skin/ElevationStep;ZLkotlin/jvm/functions/Function0;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelTextField-7MyUqlY (Landroidx/compose/foundation/text/input/TextFieldState;Ljava/lang/String;Landroidx/compose/ui/Modifier;Lstapel/ui/skin/TextFieldKind;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZLstapel/ui/StapelIcon;Ljava/lang/String;Lstapel/ui/skin/IconButtonSpec;ILkotlin/jvm/functions/Function0;Landroidx/compose/ui/autofill/ContentType;IILjava/lang/String;Landroidx/compose/runtime/Composer;III)V
+	public static final fun StapelTopBar (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lstapel/ui/skin/IconButtonSpec;Ljava/util/List;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class stapel/ui/ComposableSingletons$CompositesKt {
+	public static final field INSTANCE Lstapel/ui/ComposableSingletons$CompositesKt;
+	public fun <init> ()V
+	public final fun getLambda$1638464551$io_github_usestapel_stapel_ui ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class stapel/ui/CompositesKt {
+	public static final fun ConfirmDialog (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/lang/String;ZZLjava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun EmptyState (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lstapel/ui/StapelIcon;Lstapel/ui/skin/ButtonSpec;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun ErrorState (Lstapel/result/StapelError;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun LoadBoundary (Lstapel/result/state/Resource;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun LoadList (Lstapel/result/state/Resource;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelSnackbarHost (Lstapel/ui/StapelSnackbarHostState;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class stapel/ui/DialogSurface : java/lang/Enum {
+	public static final field Modal Lstapel/ui/DialogSurface;
+	public static final field Sheet Lstapel/ui/DialogSurface;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/DialogSurface;
+	public static fun values ()[Lstapel/ui/DialogSurface;
+}
+
+public final class stapel/ui/FoundationKt {
+	public static final fun StapelIconView-xfPyhaw (Lstapel/ui/StapelIcon;Ljava/lang/String;Landroidx/compose/ui/Modifier;FJLandroidx/compose/runtime/Composer;II)V
+	public static final fun StapelLink (Ljava/lang/String;Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelText-sKVk3PE (Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/TextStyle;JIILandroidx/compose/ui/text/style/TextAlign;Landroidx/compose/runtime/Composer;II)V
+	public static final fun getLocalStapelContentColor ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun stapelFocusRing (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/Modifier;
+	public static final fun stapelPlural-8TSTRs8 (Ljava/lang/String;J[Lkotlin/Pair;Landroidx/compose/runtime/Composer;I)Ljava/lang/String;
+	public static final fun stapelString-6vbWYtg (Ljava/lang/String;[Lkotlin/Pair;Landroidx/compose/runtime/Composer;I)Ljava/lang/String;
+}
+
+public final class stapel/ui/IconsKt {
+	public static final fun getStapelIconIdsDrawn ()Ljava/util/Set;
+	public static final fun getStapelIcons ()Lstapel/ui/StapelIconSet;
+	public static final fun orElse (Lstapel/ui/StapelIconSet;Lstapel/ui/StapelIconSet;)Lstapel/ui/StapelIconSet;
+}
+
+public final class stapel/ui/InMemoryThemePreferenceStore : stapel/ui/ThemePreferenceStore {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Lstapel/ui/ThemePreference;)V
+	public synthetic fun <init> (Lstapel/ui/ThemePreference;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getPreference ()Lkotlinx/coroutines/flow/StateFlow;
+	public fun set (Lstapel/ui/ThemePreference;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/ui/LayoutKt {
+	public static final fun currentWindowWidth (Landroidx/compose/runtime/Composer;I)F
+	public static final fun rememberStapelLayout-rAjV9yQ (Lstapel/tokens/StapelTokens;FLandroidx/compose/runtime/Composer;II)Lstapel/ui/StapelLayout;
+	public static final fun stapelLayout-vfC735M (Lstapel/tokens/StapelTokens;FLstapel/ui/StapelInput;F)Lstapel/ui/StapelLayout;
+	public static synthetic fun stapelLayout-vfC735M$default (Lstapel/tokens/StapelTokens;FLstapel/ui/StapelInput;FILjava/lang/Object;)Lstapel/ui/StapelLayout;
+}
+
+public final class stapel/ui/PaneMeasure : java/lang/Enum {
+	public static final field Full Lstapel/ui/PaneMeasure;
+	public static final field Narrow Lstapel/ui/PaneMeasure;
+	public static final field Reading Lstapel/ui/PaneMeasure;
+	public static final field Wide Lstapel/ui/PaneMeasure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getMaxWidthDp ()Ljava/lang/Integer;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/PaneMeasure;
+	public static fun values ()[Lstapel/ui/PaneMeasure;
+}
+
+public final class stapel/ui/StapelColors {
+	public static final field $stable I
+	public fun <init> (Lstapel/tokens/ColorTokens;)V
+	public final fun get-vNxB06k (Lstapel/tokens/ColorRole;)J
+	public final fun getBorder-0d7_KjU ()J
+	public final fun getBorderSubtle-0d7_KjU ()J
+	public final fun getBrand-0d7_KjU ()J
+	public final fun getBrandActive-0d7_KjU ()J
+	public final fun getBrandHover-0d7_KjU ()J
+	public final fun getBrandSubtle-0d7_KjU ()J
+	public final fun getError-0d7_KjU ()J
+	public final fun getErrorBg-0d7_KjU ()J
+	public final fun getErrorBorder-0d7_KjU ()J
+	public final fun getErrorOn-0d7_KjU ()J
+	public final fun getFocusRing-0d7_KjU ()J
+	public final fun getInfo-0d7_KjU ()J
+	public final fun getInfoBg-0d7_KjU ()J
+	public final fun getInfoBorder-0d7_KjU ()J
+	public final fun getInfoOn-0d7_KjU ()J
+	public final fun getLink-0d7_KjU ()J
+	public final fun getLinkHover-0d7_KjU ()J
+	public final fun getOrNull-ijrfgN4 (Ljava/lang/String;)Landroidx/compose/ui/graphics/Color;
+	public final fun getSuccess-0d7_KjU ()J
+	public final fun getSuccessBg-0d7_KjU ()J
+	public final fun getSuccessBorder-0d7_KjU ()J
+	public final fun getSuccessOn-0d7_KjU ()J
+	public final fun getSurface-0d7_KjU ()J
+	public final fun getSurfaceOverlay-0d7_KjU ()J
+	public final fun getSurfaceRaised-0d7_KjU ()J
+	public final fun getSurfaceSunken-0d7_KjU ()J
+	public final fun getText-0d7_KjU ()J
+	public final fun getTextMuted-0d7_KjU ()J
+	public final fun getTextOnAccent-0d7_KjU ()J
+	public final fun getTextSubtle-0d7_KjU ()J
+	public final fun getTokens ()Lstapel/tokens/ColorTokens;
+	public final fun getWarning-0d7_KjU ()J
+	public final fun getWarningBg-0d7_KjU ()J
+	public final fun getWarningBorder-0d7_KjU ()J
+	public final fun getWarningOn-0d7_KjU ()J
+	public final fun status (Lstapel/ui/StapelTone;)Lstapel/ui/StapelStatusColors;
+}
+
+public final class stapel/ui/StapelColorsKt {
+	public static final fun toColor-YNui8gA (I)J
+}
+
+public final class stapel/ui/StapelElevations {
+	public static final field $stable I
+	public fun <init> (Lstapel/tokens/Shadow;Lstapel/tokens/Shadow;Lstapel/tokens/Shadow;Lstapel/tokens/Shadow;)V
+	public final fun getHigh ()Lstapel/tokens/Shadow;
+	public final fun getLow ()Lstapel/tokens/Shadow;
+	public final fun getMedium ()Lstapel/tokens/Shadow;
+	public final fun getNone ()Lstapel/tokens/Shadow;
+}
+
+public abstract interface class stapel/ui/StapelFontResolver {
+	public abstract fun resolve (Lstapel/tokens/FontFamilies;Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelFonts;
+}
+
+public final class stapel/ui/StapelFonts {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/ui/text/font/FontFamily;Landroidx/compose/ui/text/font/FontFamily;)V
+	public final fun getMono ()Landroidx/compose/ui/text/font/FontFamily;
+	public final fun getSans ()Landroidx/compose/ui/text/font/FontFamily;
+}
+
+public final class stapel/ui/StapelIcon {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Z)V
+	public synthetic fun <init> (Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAutoMirror ()Z
+	public final fun getId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/ui/StapelIconIds {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/ui/StapelIconIds;
+	public final fun getAlertCircle ()Lstapel/ui/StapelIcon;
+	public final fun getAlertTriangle ()Lstapel/ui/StapelIcon;
+	public final fun getArrowBack ()Lstapel/ui/StapelIcon;
+	public final fun getBell ()Lstapel/ui/StapelIcon;
+	public final fun getCheck ()Lstapel/ui/StapelIcon;
+	public final fun getCheckCircle ()Lstapel/ui/StapelIcon;
+	public final fun getChevronDown ()Lstapel/ui/StapelIcon;
+	public final fun getChevronRight ()Lstapel/ui/StapelIcon;
+	public final fun getClose ()Lstapel/ui/StapelIcon;
+	public final fun getDevice ()Lstapel/ui/StapelIcon;
+	public final fun getEye ()Lstapel/ui/StapelIcon;
+	public final fun getEyeOff ()Lstapel/ui/StapelIcon;
+	public final fun getHome ()Lstapel/ui/StapelIcon;
+	public final fun getInfo ()Lstapel/ui/StapelIcon;
+	public final fun getKey ()Lstapel/ui/StapelIcon;
+	public final fun getLock ()Lstapel/ui/StapelIcon;
+	public final fun getLogIn ()Lstapel/ui/StapelIcon;
+	public final fun getLogOut ()Lstapel/ui/StapelIcon;
+	public final fun getMail ()Lstapel/ui/StapelIcon;
+	public final fun getMore ()Lstapel/ui/StapelIcon;
+	public final fun getPhone ()Lstapel/ui/StapelIcon;
+	public final fun getPlus ()Lstapel/ui/StapelIcon;
+	public final fun getRefresh ()Lstapel/ui/StapelIcon;
+	public final fun getSearch ()Lstapel/ui/StapelIcon;
+	public final fun getSettings ()Lstapel/ui/StapelIcon;
+	public final fun getShieldCheck ()Lstapel/ui/StapelIcon;
+	public final fun getUnknown ()Lstapel/ui/StapelIcon;
+	public final fun getUser ()Lstapel/ui/StapelIcon;
+}
+
+public abstract interface class stapel/ui/StapelIconSet {
+	public abstract fun resolve (Ljava/lang/String;)Landroidx/compose/ui/graphics/vector/ImageVector;
+}
+
+public final class stapel/ui/StapelInput : java/lang/Enum {
+	public static final field Pointer Lstapel/ui/StapelInput;
+	public static final field Touch Lstapel/ui/StapelInput;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/StapelInput;
+	public static fun values ()[Lstapel/ui/StapelInput;
+}
+
+public final class stapel/ui/StapelLayout {
+	public static final field $stable I
+	public synthetic fun <init> (Lstapel/ui/StapelSizeClass;Lstapel/ui/StapelInput;FFFLstapel/ui/DialogSurface;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getControlHeight-D9Ej5fM ()F
+	public final fun getDialogSurface ()Lstapel/ui/DialogSurface;
+	public final fun getInput ()Lstapel/ui/StapelInput;
+	public final fun getMinTouchTarget-D9Ej5fM ()F
+	public final fun getPageGutter-D9Ej5fM ()F
+	public final fun getSizeClass ()Lstapel/ui/StapelSizeClass;
+}
+
+public final class stapel/ui/StapelShapes {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/ui/graphics/Shape;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/ui/graphics/Shape;)V
+	public final fun getFull ()Landroidx/compose/ui/graphics/Shape;
+	public final fun getLg ()Landroidx/compose/ui/graphics/Shape;
+	public final fun getMd ()Landroidx/compose/ui/graphics/Shape;
+	public final fun getNone ()Landroidx/compose/ui/graphics/Shape;
+	public final fun getSm ()Landroidx/compose/ui/graphics/Shape;
+	public final fun getXl ()Landroidx/compose/ui/graphics/Shape;
+}
+
+public final class stapel/ui/StapelSizeClass : java/lang/Enum {
+	public static final field Companion Lstapel/ui/StapelSizeClass$Companion;
+	public static final field Desktop Lstapel/ui/StapelSizeClass;
+	public static final field Phone Lstapel/ui/StapelSizeClass;
+	public static final field Tablet Lstapel/ui/StapelSizeClass;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/StapelSizeClass;
+	public static fun values ()[Lstapel/ui/StapelSizeClass;
+}
+
+public final class stapel/ui/StapelSizeClass$Companion {
+	public final fun of (FLstapel/tokens/Breakpoints;)Lstapel/ui/StapelSizeClass;
+}
+
+public final class stapel/ui/StapelSnackbarHostState {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun dismissCurrent ()V
+	public final fun getCurrentSpec ()Lstapel/ui/skin/SnackbarSpec;
+	public final fun show (Lstapel/ui/skin/SnackbarSpec;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/ui/StapelSpacing {
+	public static final field $stable I
+	public synthetic fun <init> (FFFFFFFFFLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getS0-D9Ej5fM ()F
+	public final fun getS1-D9Ej5fM ()F
+	public final fun getS2-D9Ej5fM ()F
+	public final fun getS3-D9Ej5fM ()F
+	public final fun getS4-D9Ej5fM ()F
+	public final fun getS5-D9Ej5fM ()F
+	public final fun getS6-D9Ej5fM ()F
+	public final fun getS7-D9Ej5fM ()F
+	public final fun getS8-D9Ej5fM ()F
+}
+
+public final class stapel/ui/StapelStatusColors {
+	public static final field $stable I
+	public synthetic fun <init> (JJJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBase-0d7_KjU ()J
+	public final fun getBg-0d7_KjU ()J
+	public final fun getBorder-0d7_KjU ()J
+	public final fun getOn-0d7_KjU ()J
+}
+
+public final class stapel/ui/StapelTheme {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/ui/StapelTheme;
+	public final fun getColors (Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelColors;
+	public final fun getElevation (Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelElevations;
+	public final fun getIcons (Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelIconSet;
+	public final fun getLayout (Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelLayout;
+	public final fun getMode (Landroidx/compose/runtime/Composer;I)Lstapel/tokens/ThemeMode;
+	public final fun getShapes (Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelShapes;
+	public final fun getSkin (Landroidx/compose/runtime/Composer;I)Lstapel/ui/skin/StapelSkin;
+	public final fun getSpacing (Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelSpacing;
+	public final fun getTokens (Landroidx/compose/runtime/Composer;I)Lstapel/tokens/StapelTokens;
+	public final fun getType (Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelTypography;
+}
+
+public final class stapel/ui/StapelThemeKt {
+	public static final fun StapelTheme (Lstapel/ui/skin/StapelSkin;Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;Lstapel/ui/StapelFontResolver;Lstapel/ui/StapelIconSet;Lstapel/i18n/StapelStrings;Lstapel/ui/StapelLayout;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun getLocalStapelErrorText ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocalStapelStrings ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun rememberThemeMode (Lstapel/ui/ThemePreferenceStore;Landroidx/compose/runtime/Composer;I)Lstapel/tokens/ThemeMode;
+}
+
+public final class stapel/ui/StapelTone : java/lang/Enum {
+	public static final field Error Lstapel/ui/StapelTone;
+	public static final field Info Lstapel/ui/StapelTone;
+	public static final field Neutral Lstapel/ui/StapelTone;
+	public static final field Success Lstapel/ui/StapelTone;
+	public static final field Warning Lstapel/ui/StapelTone;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/StapelTone;
+	public static fun values ()[Lstapel/ui/StapelTone;
+}
+
+public final class stapel/ui/StapelTypography {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Lstapel/tokens/FontWeights;Landroidx/compose/ui/text/font/FontFamily;Landroidx/compose/ui/text/font/FontFamily;)V
+	public final fun getBody ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getBodySmall ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getCaption ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getDisplay ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getHeading ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getLabel ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getLg ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getMd ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getMono ()Landroidx/compose/ui/text/font/FontFamily;
+	public final fun getSans ()Landroidx/compose/ui/text/font/FontFamily;
+	public final fun getSm ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getTitle ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getWeights ()Lstapel/tokens/FontWeights;
+	public final fun getXl ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getXs ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getXxl ()Landroidx/compose/ui/text/TextStyle;
+	public final fun getXxxl ()Landroidx/compose/ui/text/TextStyle;
+}
+
+public final class stapel/ui/SystemFonts : stapel/ui/StapelFontResolver {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/ui/SystemFonts;
+	public fun resolve (Lstapel/tokens/FontFamilies;Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelFonts;
+}
+
+public final class stapel/ui/ThemePreference : java/lang/Enum {
+	public static final field Dark Lstapel/ui/ThemePreference;
+	public static final field Light Lstapel/ui/ThemePreference;
+	public static final field System Lstapel/ui/ThemePreference;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/ThemePreference;
+	public static fun values ()[Lstapel/ui/ThemePreference;
+}
+
+public abstract interface class stapel/ui/ThemePreferenceStore {
+	public abstract fun getPreference ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun set (Lstapel/ui/ThemePreference;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/ui/skin/AvatarSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getContentDescription ()Ljava/lang/String;
+	public final fun getInitials ()Ljava/lang/String;
+	public final fun getSizeDp ()I
+	public final fun getTestTag ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/BadgeSpec {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getContentDescription ()Ljava/lang/String;
+	public final fun getCount ()Ljava/lang/Integer;
+	public final fun getTestTag ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/BannerSpec {
+	public static final field $stable I
+	public fun <init> (Lstapel/ui/StapelTone;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/ui/skin/ButtonSpec;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/ui/StapelTone;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/ui/skin/ButtonSpec;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAction ()Lstapel/ui/skin/ButtonSpec;
+	public final fun getDetail ()Ljava/lang/String;
+	public final fun getDismissLabel ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getOnDismiss ()Lkotlin/jvm/functions/Function0;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun getTone ()Lstapel/ui/StapelTone;
+}
+
+public final class stapel/ui/skin/ButtonSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lstapel/ui/skin/ButtonVariant;Lstapel/ui/skin/ControlSize;ZZLjava/lang/String;Lstapel/ui/StapelIcon;ZLjava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lstapel/ui/skin/ButtonVariant;Lstapel/ui/skin/ControlSize;ZZLjava/lang/String;Lstapel/ui/StapelIcon;ZLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getEnabled ()Z
+	public final fun getFillWidth ()Z
+	public final fun getGatedReason ()Ljava/lang/String;
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getLeadingIcon ()Lstapel/ui/StapelIcon;
+	public final fun getLoading ()Z
+	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
+	public final fun getSize ()Lstapel/ui/skin/ControlSize;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getVariant ()Lstapel/ui/skin/ButtonVariant;
+}
+
+public final class stapel/ui/skin/ButtonVariant : java/lang/Enum {
+	public static final field Danger Lstapel/ui/skin/ButtonVariant;
+	public static final field Primary Lstapel/ui/skin/ButtonVariant;
+	public static final field Secondary Lstapel/ui/skin/ButtonVariant;
+	public static final field Text Lstapel/ui/skin/ButtonVariant;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/ButtonVariant;
+	public static fun values ()[Lstapel/ui/skin/ButtonVariant;
+}
+
+public final class stapel/ui/skin/ChipKind : java/lang/Enum {
+	public static final field Choice Lstapel/ui/skin/ChipKind;
+	public static final field Filter Lstapel/ui/skin/ChipKind;
+	public static final field Status Lstapel/ui/skin/ChipKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/ChipKind;
+	public static fun values ()[Lstapel/ui/skin/ChipKind;
+}
+
+public final class stapel/ui/skin/ChipSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Lstapel/ui/skin/ChipKind;ZLkotlin/jvm/functions/Function0;Lstapel/ui/StapelTone;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/ui/skin/ChipKind;ZLkotlin/jvm/functions/Function0;Lstapel/ui/StapelTone;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKind ()Lstapel/ui/skin/ChipKind;
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
+	public final fun getSelected ()Z
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTone ()Lstapel/ui/StapelTone;
+}
+
+public final class stapel/ui/skin/CodeFieldSpec {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/foundation/text/input/TextFieldState;ILjava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;Ljava/lang/String;)V
+	public synthetic fun <init> (Landroidx/compose/foundation/text/input/TextFieldState;ILjava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function1;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getEnabled ()Z
+	public final fun getError ()Ljava/lang/String;
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getLength ()I
+	public final fun getOnComplete ()Lkotlin/jvm/functions/Function1;
+	public final fun getState ()Landroidx/compose/foundation/text/input/TextFieldState;
+	public final fun getTestTag ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/ControlSize : java/lang/Enum {
+	public static final field Regular Lstapel/ui/skin/ControlSize;
+	public static final field Small Lstapel/ui/skin/ControlSize;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/ControlSize;
+	public static fun values ()[Lstapel/ui/skin/ControlSize;
+}
+
+public final class stapel/ui/skin/DialogSpec {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function0;Lstapel/ui/DialogSurface;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;Ljava/lang/String;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function0;Lstapel/ui/DialogSurface;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAccessibleName ()Ljava/lang/String;
+	public final fun getDismissLabel ()Ljava/lang/String;
+	public final fun getDismissible ()Z
+	public final fun getFooter ()Lkotlin/jvm/functions/Function2;
+	public final fun getOnDismiss ()Lkotlin/jvm/functions/Function0;
+	public final fun getSurface ()Lstapel/ui/DialogSurface;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/ElevationStep : java/lang/Enum {
+	public static final field High Lstapel/ui/skin/ElevationStep;
+	public static final field Low Lstapel/ui/skin/ElevationStep;
+	public static final field Medium Lstapel/ui/skin/ElevationStep;
+	public static final field None Lstapel/ui/skin/ElevationStep;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/ElevationStep;
+	public static fun values ()[Lstapel/ui/skin/ElevationStep;
+}
+
+public final class stapel/ui/skin/FoundationSkin : stapel/ui/skin/StapelSkin {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/ui/skin/FoundationSkin;
+	public fun Avatar (Lstapel/ui/skin/AvatarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Badge (Lstapel/ui/skin/BadgeSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Banner (Lstapel/ui/skin/BannerSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Button (Lstapel/ui/skin/ButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Chip (Lstapel/ui/skin/ChipSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun CodeField (Lstapel/ui/skin/CodeFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Dialog (Lstapel/ui/skin/DialogSpec;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Divider (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun IconButton (Lstapel/ui/skin/IconButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun ListItem (Lstapel/ui/skin/ListItemSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun NavigationBar (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun NavigationRail (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Progress (Lstapel/ui/skin/ProgressSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun PullToRefresh (Lstapel/ui/skin/PullToRefreshSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Snackbar (Lstapel/ui/skin/SnackbarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Surface (Lstapel/ui/skin/SurfaceSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Tabs (Lstapel/ui/skin/TabsSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun TextField (Lstapel/ui/skin/TextFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Toggle (Lstapel/ui/skin/ToggleSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun TopBar (Lstapel/ui/skin/TopBarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun extension (Lstapel/ui/skin/SkinExtensionKey;)Ljava/lang/Object;
+}
+
+public final class stapel/ui/skin/FoundationSkinKt {
+	public static final field GATED_REASON_TAG_SUFFIX Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/IconButtonSpec {
+	public static final field $stable I
+	public fun <init> (Lstapel/ui/StapelIcon;Ljava/lang/String;Lkotlin/jvm/functions/Function0;ZLstapel/ui/StapelTone;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/ui/StapelIcon;Ljava/lang/String;Lkotlin/jvm/functions/Function0;ZLstapel/ui/StapelTone;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getContentDescription ()Ljava/lang/String;
+	public final fun getEnabled ()Z
+	public final fun getIcon ()Lstapel/ui/StapelIcon;
+	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTone ()Lstapel/ui/StapelTone;
+}
+
+public final class stapel/ui/skin/ListItemSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ZZLjava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ZZLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getEnabled ()Z
+	public final fun getHeadline ()Ljava/lang/String;
+	public final fun getLeading ()Lkotlin/jvm/functions/Function2;
+	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
+	public final fun getOverline ()Ljava/lang/String;
+	public final fun getSelected ()Z
+	public final fun getSupporting ()Ljava/lang/String;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTrailing ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class stapel/ui/skin/NavigationItemSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lstapel/ui/StapelIcon;Lstapel/ui/skin/BadgeSpec;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lstapel/ui/StapelIcon;Lstapel/ui/skin/BadgeSpec;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBadge ()Lstapel/ui/skin/BadgeSpec;
+	public final fun getIcon ()Lstapel/ui/StapelIcon;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getLabel ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/NavigationSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getItems ()Ljava/util/List;
+	public final fun getOnSelect ()Lkotlin/jvm/functions/Function1;
+	public final fun getSelectedId ()Ljava/lang/String;
+	public final fun getTestTag ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/ProgressKind : java/lang/Enum {
+	public static final field Linear Lstapel/ui/skin/ProgressKind;
+	public static final field Skeleton Lstapel/ui/skin/ProgressKind;
+	public static final field Spinner Lstapel/ui/skin/ProgressKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/ProgressKind;
+	public static fun values ()[Lstapel/ui/skin/ProgressKind;
+}
+
+public final class stapel/ui/skin/ProgressSpec {
+	public static final field $stable I
+	public fun <init> (Lstapel/ui/skin/ProgressKind;Ljava/lang/String;Ljava/lang/Float;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/ui/skin/ProgressKind;Ljava/lang/String;Ljava/lang/Float;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getFraction ()Ljava/lang/Float;
+	public final fun getKind ()Lstapel/ui/skin/ProgressKind;
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getTestTag ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/PullToRefreshSpec {
+	public static final field $stable I
+	public fun <init> (ZLkotlin/jvm/functions/Function0;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (ZLkotlin/jvm/functions/Function0;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getOnRefresh ()Lkotlin/jvm/functions/Function0;
+	public final fun getRefreshing ()Z
+	public final fun getTestTag ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/SkinExtensionKey {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/Object;)V
+	public final fun getDefault ()Ljava/lang/Object;
+	public final fun getName ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/SnackbarSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Lstapel/ui/StapelTone;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/ui/StapelTone;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getActionLabel ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getOnAction ()Lkotlin/jvm/functions/Function0;
+	public final fun getOnDismiss ()Lkotlin/jvm/functions/Function0;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTone ()Lstapel/ui/StapelTone;
+}
+
+public abstract interface class stapel/ui/skin/StapelSkin {
+	public fun Avatar (Lstapel/ui/skin/AvatarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Badge (Lstapel/ui/skin/BadgeSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Banner (Lstapel/ui/skin/BannerSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Button (Lstapel/ui/skin/ButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Chip (Lstapel/ui/skin/ChipSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun CodeField (Lstapel/ui/skin/CodeFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Dialog (Lstapel/ui/skin/DialogSpec;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Divider (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun IconButton (Lstapel/ui/skin/IconButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun ListItem (Lstapel/ui/skin/ListItemSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun NavigationBar (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun NavigationRail (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Progress (Lstapel/ui/skin/ProgressSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun PullToRefresh (Lstapel/ui/skin/PullToRefreshSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Snackbar (Lstapel/ui/skin/SnackbarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Surface (Lstapel/ui/skin/SurfaceSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Tabs (Lstapel/ui/skin/TabsSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun TextField (Lstapel/ui/skin/TextFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Toggle (Lstapel/ui/skin/ToggleSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun TopBar (Lstapel/ui/skin/TopBarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun extension (Lstapel/ui/skin/SkinExtensionKey;)Ljava/lang/Object;
+}
+
+public final class stapel/ui/skin/StapelSkin$DefaultImpls {
+	public static fun Avatar (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/AvatarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public static fun Badge (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/BadgeSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static fun Chip (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/ChipSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public static fun NavigationBar (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public static fun NavigationRail (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public static fun PullToRefresh (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/PullToRefreshSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static fun Tabs (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/TabsSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public static fun Toggle (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/ToggleSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public static fun extension (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/SkinExtensionKey;)Ljava/lang/Object;
+}
+
+public final class stapel/ui/skin/StapelSkinKt {
+	public static final fun getStapelSkinSlots ()Ljava/util/List;
+}
+
+public final class stapel/ui/skin/SurfaceSpec {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Lstapel/ui/skin/SurfaceTone;Lstapel/ui/skin/ElevationStep;ZLkotlin/jvm/functions/Function0;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/ui/skin/SurfaceTone;Lstapel/ui/skin/ElevationStep;ZLkotlin/jvm/functions/Function0;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBordered ()Z
+	public final fun getElevation ()Lstapel/ui/skin/ElevationStep;
+	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTone ()Lstapel/ui/skin/SurfaceTone;
+}
+
+public final class stapel/ui/skin/SurfaceTone : java/lang/Enum {
+	public static final field Overlay Lstapel/ui/skin/SurfaceTone;
+	public static final field Plain Lstapel/ui/skin/SurfaceTone;
+	public static final field Raised Lstapel/ui/skin/SurfaceTone;
+	public static final field Sunken Lstapel/ui/skin/SurfaceTone;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/SurfaceTone;
+	public static fun values ()[Lstapel/ui/skin/SurfaceTone;
+}
+
+public final class stapel/ui/skin/TabsSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/util/List;ILkotlin/jvm/functions/Function1;Lstapel/ui/skin/TabsVariant;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/List;ILkotlin/jvm/functions/Function1;Lstapel/ui/skin/TabsVariant;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getItems ()Ljava/util/List;
+	public final fun getOnSelect ()Lkotlin/jvm/functions/Function1;
+	public final fun getSelectedIndex ()I
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getVariant ()Lstapel/ui/skin/TabsVariant;
+}
+
+public final class stapel/ui/skin/TabsVariant : java/lang/Enum {
+	public static final field Segmented Lstapel/ui/skin/TabsVariant;
+	public static final field Tabs Lstapel/ui/skin/TabsVariant;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/TabsVariant;
+	public static fun values ()[Lstapel/ui/skin/TabsVariant;
+}
+
+public final class stapel/ui/skin/TextFieldKind : java/lang/Enum {
+	public static final field Email Lstapel/ui/skin/TextFieldKind;
+	public static final field Multiline Lstapel/ui/skin/TextFieldKind;
+	public static final field Number Lstapel/ui/skin/TextFieldKind;
+	public static final field Password Lstapel/ui/skin/TextFieldKind;
+	public static final field Phone Lstapel/ui/skin/TextFieldKind;
+	public static final field Text Lstapel/ui/skin/TextFieldKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/TextFieldKind;
+	public static fun values ()[Lstapel/ui/skin/TextFieldKind;
+}
+
+public final class stapel/ui/skin/TextFieldSpec {
+	public static final field $stable I
+	public synthetic fun <init> (Landroidx/compose/foundation/text/input/TextFieldState;Ljava/lang/String;Lstapel/ui/skin/TextFieldKind;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZLstapel/ui/StapelIcon;Ljava/lang/String;Lstapel/ui/skin/IconButtonSpec;ILkotlin/jvm/functions/Function0;Landroidx/compose/ui/autofill/ContentType;IILjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Landroidx/compose/foundation/text/input/TextFieldState;Ljava/lang/String;Lstapel/ui/skin/TextFieldKind;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZLstapel/ui/StapelIcon;Ljava/lang/String;Lstapel/ui/skin/IconButtonSpec;ILkotlin/jvm/functions/Function0;Landroidx/compose/ui/autofill/ContentType;IILjava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAutofill ()Landroidx/compose/ui/autofill/ContentType;
+	public final fun getEnabled ()Z
+	public final fun getError ()Ljava/lang/String;
+	public final fun getImeAction-eUduSuo ()I
+	public final fun getKind ()Lstapel/ui/skin/TextFieldKind;
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getLeadingIcon ()Lstapel/ui/StapelIcon;
+	public final fun getMaxLines ()I
+	public final fun getMinLines ()I
+	public final fun getOnImeAction ()Lkotlin/jvm/functions/Function0;
+	public final fun getPlaceholder ()Ljava/lang/String;
+	public final fun getReadOnly ()Z
+	public final fun getState ()Landroidx/compose/foundation/text/input/TextFieldState;
+	public final fun getSuffix ()Ljava/lang/String;
+	public final fun getSupportingText ()Ljava/lang/String;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTrailingAction ()Lstapel/ui/skin/IconButtonSpec;
+}
+
+public final class stapel/ui/skin/ToggleKind : java/lang/Enum {
+	public static final field Checkbox Lstapel/ui/skin/ToggleKind;
+	public static final field Radio Lstapel/ui/skin/ToggleKind;
+	public static final field Switch Lstapel/ui/skin/ToggleKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/ToggleKind;
+	public static fun values ()[Lstapel/ui/skin/ToggleKind;
+}
+
+public final class stapel/ui/skin/ToggleSpec {
+	public static final field $stable I
+	public fun <init> (Lstapel/ui/skin/ToggleKind;ZLkotlin/jvm/functions/Function1;Ljava/lang/String;ZLjava/lang/String;)V
+	public synthetic fun <init> (Lstapel/ui/skin/ToggleKind;ZLkotlin/jvm/functions/Function1;Ljava/lang/String;ZLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getChecked ()Z
+	public final fun getEnabled ()Z
+	public final fun getKind ()Lstapel/ui/skin/ToggleKind;
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getOnCheckedChange ()Lkotlin/jvm/functions/Function1;
+	public final fun getTestTag ()Ljava/lang/String;
+}
+
+public final class stapel/ui/skin/TopBarSpec {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Lstapel/ui/skin/IconButtonSpec;Ljava/util/List;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/ui/skin/IconButtonSpec;Ljava/util/List;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getActions ()Ljava/util/List;
+	public final fun getNavigation ()Lstapel/ui/skin/IconButtonSpec;
+	public final fun getTestTag ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+}
+
