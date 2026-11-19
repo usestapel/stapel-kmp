@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import stapel.auth.api.AuthContract
+import stapel.auth.api.error.AuthApiError
 import stapel.auth.api.model.PasswordOtpMethod
 import stapel.auth.api.model.PasswordOtpRequest
 import stapel.auth.api.model.PasswordOtpVerify
@@ -27,9 +28,12 @@ import stapel.result.StapelResult
 import stapel.session.SessionState
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 /** Preconditions and sign-in scenarios (frame D12, ARCH-AUTH §9.2 D-1…D-5) against the real stand. */
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
@@ -88,6 +92,29 @@ class SignInScenariosTest {
             assertNotNull(stored)
             val me = (d.auth.session.refreshUser() as StapelResult.Ok).value
             assertEquals(done.outcome.user.id, me.id)
+        }
+    }
+
+    @Test
+    @Order(2)
+    fun `a code request inside the server's cooldown is the operation's typed rate limit, with the wait`(): Unit = runBlocking {
+        Device("rate").use { d ->
+            val email = Stand.email()
+            val first = OtpSignInPresenter(d.auth, d.context())
+            first.dispatch(OtpSignInIntent.RequestCode(OtpChannel.Email, email))
+            assertIs<OtpSignInState.CodeSent>(first.state.await { it is OtpSignInState.CodeSent || it is OtpSignInState.RequestFailed })
+            // A second presenter has no client-side timer: the server's 2 s cooldown answers.
+            val second = OtpSignInPresenter(d.auth, d.context())
+            second.dispatch(OtpSignInIntent.RequestCode(OtpChannel.Email, email))
+            val locked = assertIs<OtpSignInState.Locked>(second.state.await { it !is OtpSignInState.Idle && it !is OtpSignInState.Requesting })
+            assertEquals(AuthErrorReason.RateLimited, locked.error.reason)
+            assertIs<AuthApiError.RateLimit>(locked.error.cause, "bound by the contract: a domain error, not TransportFailure.RateLimited")
+            val wait = assertNotNull(locked.error.retryAfter)
+            assertTrue(wait > Duration.ZERO && wait <= 2.seconds, "retry_after in seconds, not the rounded-up minute: $wait")
+            assertTrue(Regex("""\d+:\d{2}""").matches(locked.error.retryAfterDisplay.orEmpty()), "display: ${locked.error.retryAfterDisplay}")
+            assertNotNull(locked.until)
+            second.dispatch(OtpSignInIntent.EditIdentifier)
+            assertEquals(OtpSignInState.Idle(OtpChannel.Email, email), second.state.await { it is OtpSignInState.Idle })
         }
     }
 

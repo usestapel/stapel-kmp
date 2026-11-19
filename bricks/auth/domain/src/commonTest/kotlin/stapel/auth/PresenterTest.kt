@@ -3,6 +3,7 @@ package stapel.auth
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import stapel.auth.api.error.AuthApiError
 import stapel.auth.api.model.AuthResponseStatus
 import stapel.auth.api.model.FirstLoginChallengeResponse
 import stapel.auth.api.model.FirstLoginChallengeResponseStatus
@@ -148,6 +149,28 @@ class PresenterTest {
         runCurrent()
         val locked = assertIs<OtpSignInState.Locked>(p.state.value)
         assertEquals(f.clock.now() + (15 * 60).seconds, locked.until)
+    }
+
+    @Test
+    fun aRateLimitOnTheCodeRequestIsATypedLockWithTheServersWaitAndAWayBack() = runTest {
+        val f = Fixture(this).start()
+        f.transport.on(Ops.EMAIL_REQUEST) {
+            refusal("error.429.rate_limit", 429, mapOf("retry_after" to "30", "retry_after_display" to "0:30", "retry_after_minutes" to "1"))
+        }
+        val p = OtpSignInPresenter(f.auth, f.context)
+        p.dispatch(OtpSignInIntent.RequestCode(OtpChannel.Email, "a@example.com"))
+        runCurrent()
+        val locked = assertIs<OtpSignInState.Locked>(p.state.value)
+        assertEquals(AuthErrorReason.RateLimited, locked.error.reason)
+        assertIs<AuthApiError.RateLimit>(locked.error.cause, "the operation's typed domain error, not a transport failure")
+        assertEquals(30.seconds, locked.error.retryAfter, "seconds win over the rounded-up minutes")
+        assertEquals("0:30", locked.error.retryAfterDisplay)
+        assertEquals(f.clock.now() + 30.seconds, locked.until)
+        assertEquals(1, f.calls(Ops.EMAIL_REQUEST), "no blind retry")
+
+        p.dispatch(OtpSignInIntent.EditIdentifier)
+        runCurrent()
+        assertEquals(OtpSignInState.Idle(OtpChannel.Email, "a@example.com"), p.state.value)
     }
 
     @Test

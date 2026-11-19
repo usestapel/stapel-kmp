@@ -19,6 +19,7 @@ import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
+import kotlin.time.Duration.Companion.minutes
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
@@ -181,16 +182,24 @@ public fun ForcedPasswordChangeScreen(state: ForcedPasswordChangeState, onEvent:
 }
 
 /**
- * A lockout: what the server said (through the error ladder, so `retry_after_minutes` is in the
- * sentence when the catalog has it), when to try again, and the way back.
+ * A lockout or rate limit: what the server said (through the error ladder, with the wait in the
+ * sentence when the catalog has it), when to try again (seconds under a minute, else minutes), and
+ * the way back.
  */
 @Composable
 public fun LockedScreen(state: LockedState, onEvent: (SignInEvent) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier.fillMaxWidth().testTag(AuthTestTags.LOCKED), verticalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s3)) {
         AuthHeading(stapelString(AuthUiStrings.LockedTitle))
-        val minutes = state.retryIn?.let { ceil(it.inWholeSeconds / 60.0).toLong().coerceAtLeast(1) }
+        val retryIn = state.retryIn
         StapelBanner(tone = StapelTone.Error, message = authErrorText(state.error), testTag = AuthTestTags.FORM_ERROR)
-        StapelText(if (minutes != null) stapelPlural(AuthUiStrings.LockedMinutes, minutes) else stapelString(AuthUiStrings.LockedLater))
+        StapelText(
+            when {
+                retryIn == null -> stapelString(AuthUiStrings.LockedLater)
+                retryIn < 1.minutes -> stapelPlural(AuthUiStrings.LockedSeconds, ceil(retryIn.inWholeMilliseconds / 1000.0).toLong().coerceAtLeast(1))
+                else -> stapelPlural(AuthUiStrings.LockedMinutes, ceil(retryIn.inWholeSeconds / 60.0).toLong().coerceAtLeast(1))
+            },
+            modifier = Modifier.testTag(AuthTestTags.LOCKED_WAIT),
+        )
         BackToForm(onEvent)
     }
 }

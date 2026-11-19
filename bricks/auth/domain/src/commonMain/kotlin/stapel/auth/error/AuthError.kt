@@ -9,6 +9,7 @@ import stapel.result.TransportCarrier
 import stapel.result.TransportFailure
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * What went wrong in an auth operation, classified for the flows and screens. [reason] is the typed
@@ -27,7 +28,7 @@ public data class AuthError(
     /** HTTP status, null for transport failures and client-raised errors. */
     override val status: Int? get() = cause?.status
 
-    /** The server's params (`attempts_remaining`, `retry_after_minutes`, `field`, …). */
+    /** The server's params (`attempts_remaining`, `retry_after`, `field`, …). */
     override val params: ErrorParams get() = cause?.params ?: ErrorParams.Empty
 
     /** What the user can do. */
@@ -39,10 +40,17 @@ public data class AuthError(
     /** `attempts_remaining` of a wrong-code answer, when the server sent it. */
     val attemptsRemaining: Int? get() = params.int("attempts_remaining")
 
-    /** `retry_after_minutes` of a lockout or rate limit, when the server sent it. */
+    /**
+     * How long a lockout or rate limit lasts, when the server said: `retry_after` (seconds) first,
+     * then `retry_after_minutes` (rounded up by the server), then a transport rate limit's wait.
+     */
     val retryAfter: Duration?
-        get() = params.int("retry_after_minutes")?.minutes
+        get() = params.long("retry_after")?.takeIf { it >= 0 }?.seconds
+            ?: params.int("retry_after_minutes")?.minutes
             ?: (((cause as? TransportCarrier)?.failure ?: cause) as? TransportFailure.RateLimited)?.retryAfter
+
+    /** The server's own rendering of the wait (`retry_after_display`, `M:SS` or `H:MM:SS`), when sent. */
+    val retryAfterDisplay: String? get() = params["retry_after_display"]
 
     /** The field a validation error names, when the server sent one. */
     val field: String? get() = params["field"]

@@ -9160,6 +9160,7 @@ public final class stapel/auth/error/AuthError : stapel/result/StapelError {
 	public final fun getReason ()Lstapel/auth/error/AuthErrorReason;
 	public fun getRemediation ()Lstapel/result/Remediation;
 	public final fun getRetryAfter-FghU774 ()Lkotlin/time/Duration;
+	public final fun getRetryAfterDisplay ()Ljava/lang/String;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public final fun isTransient ()Z

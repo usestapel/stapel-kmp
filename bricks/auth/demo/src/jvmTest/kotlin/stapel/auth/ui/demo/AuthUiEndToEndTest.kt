@@ -81,8 +81,8 @@ class AuthUiEndToEndTest {
         stack.auth.session.restore()
         val p = OtpSignInPresenter(stack.auth, PresenterContext(stack.scope))
         p.dispatch(OtpSignInIntent.RequestCode(OtpChannel.Email, address))
-        var s = withTimeout(20.seconds) { p.state.first { it is OtpSignInState.CodeSent || it is OtpSignInState.RequestFailed } }
-        if (s is OtpSignInState.RequestFailed) { // the stand's 2 s per-identifier cooldown
+        var s = withTimeout(20.seconds) { p.state.first { it is OtpSignInState.CodeSent || it is OtpSignInState.RequestFailed || it is OtpSignInState.Locked } }
+        if (s is OtpSignInState.Locked) { // the stand's 2 s per-identifier cooldown
             Thread.sleep(2_500)
             p.dispatch(OtpSignInIntent.RequestCode(OtpChannel.Email, address))
             s = withTimeout(20.seconds) { p.state.first { it is OtpSignInState.CodeSent } }
@@ -284,6 +284,45 @@ class AuthUiEndToEndTest {
                 }
             }
         }
+    }
+
+    private fun requestCodeHeadless(stack: DemoStack, address: String) = runBlocking {
+        stack.auth.session.restore()
+        val p = OtpSignInPresenter(stack.auth, PresenterContext(stack.scope))
+        p.dispatch(OtpSignInIntent.RequestCode(OtpChannel.Email, address))
+        withTimeout(20.seconds) { p.state.first { it is OtpSignInState.CodeSent } }
+    }
+
+    private fun ComposeUiTest.rateLimitedRequestShowsTheWait(locale: String, wait: Regex, title: String) {
+        val url = stand()
+        val address = email()
+        DemoStack(url, "u9-$locale-other").use { other ->
+            DemoStack(url, "u9-$locale").use { stack ->
+                app(stack, locale = locale)
+                awaitTag(AuthTestTags.IDENTIFIER)
+                onNode(hasTestTag(AuthTestTags.IDENTIFIER) and hasSetTextAction()).performTextInput(address)
+                requestCodeHeadless(other, address) // starts the server's 2 s cooldown for this address
+                onNodeWithTag(AuthTestTags.SEND_CODE).performClick()
+                awaitTag(AuthTestTags.LOCKED)
+                onNodeWithText(title).assertExists()
+                val text = onNodeWithTag(AuthTestTags.LOCKED_WAIT, useUnmergedTree = true).fetchSemanticsNode()
+                    .config[SemanticsProperties.Text].joinToString()
+                assertTrue(wait.matches(text), "wait text: $text")
+                onNodeWithTag(AuthTestTags.BACK_TO_FORM).performClick()
+                awaitTag(AuthTestTags.IDENTIFIER)
+                assertEquals(address, onNode(hasTestTag(AuthTestTags.IDENTIFIER) and hasSetTextAction()).fetchSemanticsNode().config[SemanticsProperties.EditableText].text)
+            }
+        }
+    }
+
+    @Test
+    fun u9_rateLimitedCodeRequestShowsTheLocalizedWaitAndGoesBack_en() = runComposeUiTest {
+        rateLimitedRequestShowsTheWait("en", Regex("""Try again in [12] seconds?\."""), "Sign-in is paused")
+    }
+
+    @Test
+    fun u9_rateLimitedCodeRequestShowsTheLocalizedWaitAndGoesBack_ru() = runComposeUiTest {
+        rateLimitedRequestShowsTheWait("ru", Regex("""Попробуйте через [12] секунд[уы]\."""), "Вход временно недоступен")
     }
 
     private companion object {

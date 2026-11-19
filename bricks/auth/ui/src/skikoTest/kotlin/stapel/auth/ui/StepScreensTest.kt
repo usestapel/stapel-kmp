@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsFocused
@@ -159,6 +160,19 @@ class StepScreensTest {
         waitForIdle()
         onNodeWithText("Попробуйте через 5 минут.", substring = true, useUnmergedTree = true).assertExists()
         onNodeWithText("Повторите попытку через 5:00 (300 с, около 5 мин).", substring = true, useUnmergedTree = true).assertExists()
+    }
+
+    @Test
+    fun aRateLimitNamesTheWaitInSecondsInTheLocale() = runComposeUiTest {
+        val limit = refusal("error.429.rate_limit", 429, "retry_after" to "30", "retry_after_display" to "0:30", "retry_after_minutes" to "1")
+        val h = harness { LockedScreen(LockedState(limit, retryIn = 30.seconds), {}) }
+        eachSkin(h) {
+            onNodeWithTag(AuthTestTags.LOCKED_WAIT).assertTextEquals("Try again in 30 seconds.")
+            onNodeWithText("Try again in 0:30", substring = true, useUnmergedTree = true).assertExists()
+        }
+        h.locale = "ru"
+        waitForIdle()
+        onNodeWithTag(AuthTestTags.LOCKED_WAIT).assertTextEquals("Попробуйте через 30 секунд.")
     }
 
     @Test

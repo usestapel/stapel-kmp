@@ -10531,6 +10531,8 @@ final class stapel.auth.error/AuthError : stapel.result/StapelError { // stapel.
         final fun <get-remediation>(): stapel.result/Remediation // stapel.auth.error/AuthError.remediation.<get-remediation>|<get-remediation>(){}[0]
     final val retryAfter // stapel.auth.error/AuthError.retryAfter|{}retryAfter[0]
         final fun <get-retryAfter>(): kotlin.time/Duration? // stapel.auth.error/AuthError.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+    final val retryAfterDisplay // stapel.auth.error/AuthError.retryAfterDisplay|{}retryAfterDisplay[0]
+        final fun <get-retryAfterDisplay>(): kotlin/String? // stapel.auth.error/AuthError.retryAfterDisplay.<get-retryAfterDisplay>|<get-retryAfterDisplay>(){}[0]
     final val status // stapel.auth.error/AuthError.status|{}status[0]
         final fun <get-status>(): kotlin/Int? // stapel.auth.error/AuthError.status.<get-status>|<get-status>(){}[0]
 

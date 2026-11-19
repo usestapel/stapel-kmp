@@ -119,6 +119,7 @@ public final class stapel/auth/ui/AuthTestTags {
 	public static final field IDENTIFIER Ljava/lang/String;
 	public static final field INSTANCE Lstapel/auth/ui/AuthTestTags;
 	public static final field LOCKED Ljava/lang/String;
+	public static final field LOCKED_WAIT Ljava/lang/String;
 	public static final field LOGIN Ljava/lang/String;
 	public static final field METHOD_BUTTON Ljava/lang/String;
 	public static final field METHOD_TABS Ljava/lang/String;
@@ -176,6 +177,7 @@ public final class stapel/auth/ui/AuthUiStrings {
 	public final fun getGuestTitle-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getLockedLater-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getLockedMinutes-J4f0JxU ()Ljava/lang/String;
+	public final fun getLockedSeconds-J4f0JxU ()Ljava/lang/String;
 	public final fun getLockedTitle-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getLoginTitle-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getMfaEnrollOnWeb-GpgQ0-4 ()Ljava/lang/String;

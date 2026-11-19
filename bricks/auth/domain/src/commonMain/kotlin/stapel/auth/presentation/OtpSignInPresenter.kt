@@ -60,7 +60,7 @@ public sealed interface OtpSignInState {
         val canResend: Boolean get() = resendIn <= Duration.ZERO
     }
 
-    /** The request was refused (input, rate limit, captcha, network). */
+    /** The request was refused (input, captcha, network); a rate limit is [Locked]. */
     public data class RequestFailed(
         /** Channel. */
         val channel: OtpChannel,
@@ -70,7 +70,11 @@ public sealed interface OtpSignInState {
         val error: AuthError,
     ) : OtpSignInState
 
-    /** Too many attempts: blocked or locked until [until] (null when the server did not say). */
+    /**
+     * Too many attempts: blocked, locked or rate-limited ([AuthErrorReason.Blocked],
+     * [AuthErrorReason.AccountLocked], [AuthErrorReason.RateLimited]) until [until] (null when the
+     * server did not say); [error] carries [AuthError.retryAfter] and [AuthError.retryAfterDisplay].
+     */
     public data class Locked(
         /** Channel. */
         val channel: OtpChannel,
@@ -224,7 +228,7 @@ public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
     }
 
     private fun lockedOr(error: AuthError, channel: OtpChannel, identifier: String, otherwise: () -> OtpSignInState): OtpSignInState =
-        if (error.reason == AuthErrorReason.Blocked || error.reason == AuthErrorReason.AccountLocked) {
+        if (error.reason in LOCKING) {
             OtpSignInState.Locked(channel, identifier, error.retryAfter?.let { auth.config.clock.now() + it }, error)
         } else {
             otherwise()
@@ -238,6 +242,9 @@ public class OtpSignInPresenter(auth: StapelAuth, context: PresenterContext) :
 
     private companion object {
         const val KEY_TIMER = "resend-timer"
+
+        /** Refusals that end in [OtpSignInState.Locked]: the user can only wait (or go back). */
+        val LOCKING = setOf(AuthErrorReason.Blocked, AuthErrorReason.AccountLocked, AuthErrorReason.RateLimited)
 
         /** Used only when capabilities cannot be read; the server still enforces its own values. */
         val FALLBACK_OTP = OtpParameters(

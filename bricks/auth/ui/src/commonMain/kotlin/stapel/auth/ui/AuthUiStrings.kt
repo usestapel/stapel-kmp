@@ -196,6 +196,9 @@ public object AuthUiStrings {
     /** Mobile: "Try again in {count} minutes." — a plural family. */
     public val LockedMinutes: PluralKey = PluralKey("auth.ui.locked_minutes")
 
+    /** Mobile: "Try again in {count} seconds." — a plural family, for a wait under a minute. */
+    public val LockedSeconds: PluralKey = PluralKey("auth.ui.locked_seconds")
+
     /** Mobile: "Try again later." — a lockout with no known end. */
     public val LockedLater: StringKey = StringKey("auth.ui.locked_later")
 
@@ -269,6 +272,7 @@ public object AuthUiStrings {
 /** The plural families of [AuthUiBundle] (for the completeness audit). */
 public val AuthUiPluralFamilies: Set<String> = setOf(
     AuthUiStrings.LockedMinutes.key,
+    AuthUiStrings.LockedSeconds.key,
     AuthUiStrings.TimeMinutesAgo.key,
     AuthUiStrings.TimeHoursAgo.key,
     AuthUiStrings.TimeDaysAgo.key,
@@ -277,7 +281,7 @@ public val AuthUiPluralFamilies: Set<String> = setOf(
 /** Keys this library adds that the web pair does not have (everything else mirrors a web key). */
 public val AuthUiMobileOnlyKeys: Set<String> = setOf(
     "auth.ui.edit_identifier", "auth.ui.totp_title", "auth.ui.totp_use_app", "auth.ui.back_to_sign_in",
-    "auth.ui.locked_title", "auth.ui.locked_minutes", "auth.ui.locked_later", "auth.ui.notice_signed_out",
+    "auth.ui.locked_title", "auth.ui.locked_minutes", "auth.ui.locked_seconds", "auth.ui.locked_later", "auth.ui.notice_signed_out",
     "auth.ui.notice_expired", "auth.ui.notice_revoked", "auth.ui.notice_account_disabled",
     "auth.ui.notice_account_closed", "auth.ui.no_methods", "auth.ui.mfa_enroll_on_web", "auth.ui.guest_title",
     "auth.ui.guest_body", "auth.ui.guest_sign_in", "auth.ui.guest_register", "auth.ui.guest_not_now",
@@ -360,6 +364,8 @@ private val AUTH_UI_EN: Map<String, String> = mapOf(
     "auth.ui.locked_title" to "Sign-in is paused",
     "auth.ui.locked_minutes.one" to "Try again in {count} minute.",
     "auth.ui.locked_minutes.other" to "Try again in {count} minutes.",
+    "auth.ui.locked_seconds.one" to "Try again in {count} second.",
+    "auth.ui.locked_seconds.other" to "Try again in {count} seconds.",
     "auth.ui.locked_later" to "Try again later.",
     "auth.ui.notice_signed_out" to "You have signed out.",
     "auth.ui.notice_expired" to "Your session has expired. Please sign in again.",
@@ -455,6 +461,10 @@ private val AUTH_UI_RU: Map<String, String> = mapOf(
     "auth.ui.locked_minutes.few" to "Попробуйте через {count} минуты.",
     "auth.ui.locked_minutes.many" to "Попробуйте через {count} минут.",
     "auth.ui.locked_minutes.other" to "Попробуйте через {count} минуты.",
+    "auth.ui.locked_seconds.one" to "Попробуйте через {count} секунду.",
+    "auth.ui.locked_seconds.few" to "Попробуйте через {count} секунды.",
+    "auth.ui.locked_seconds.many" to "Попробуйте через {count} секунд.",
+    "auth.ui.locked_seconds.other" to "Попробуйте через {count} секунды.",
     "auth.ui.locked_later" to "Попробуйте позже.",
     "auth.ui.notice_signed_out" to "Вы вышли из аккаунта.",
     "auth.ui.notice_expired" to "Сессия истекла. Войдите снова.",

@@ -124,6 +124,9 @@ public object AuthTestTags {
     /** The lockout root. */
     public const val LOCKED: String = "auth.locked"
 
+    /** The lockout's "try again in …" line. */
+    public const val LOCKED_WAIT: String = "auth.locked.wait"
+
     /** "Back to sign in". */
     public const val BACK_TO_FORM: String = "auth.back_to_form"
 
