@@ -24,7 +24,7 @@ have been written) = `Empty`, no session and no "session lost" (a write there st
 |---|---|---|---|
 | Desktop | owner-only file (`0600`, dir `0700`), atomic replace | jvm test (permissions, corrupt file → `Unreadable`) | Windows ACL path |
 | Android | AES-256-GCM key in `AndroidKeyStore`, ciphertext under `noBackupFilesDir` | host test of the envelope and file with a JVM key (no plaintext on disk, wrong key / tampered → `Unreadable`) | **the Keystore itself** (needs a device; no emulator image) |
-| iOS | Keychain item `AfterFirstUnlockThisDeviceOnly`; `NSUserDefaults` marker wipes it after a reinstall | simulator test of the vault logic over the Keychain seam and the reinstall wipe with real `NSUserDefaults` | **the real Keychain round trip**: a bare simulator test process has no keychain (`errSecNotAvailable`); ad-hoc entitlement signing is killed by the simulator. A host-app test is needed. |
+| iOS | Keychain item `AfterFirstUnlockThisDeviceOnly`; `NSUserDefaults` marker wipes it after a reinstall | simulator test of the vault logic over the Keychain seam and the reinstall wipe with real `NSUserDefaults`; **the real Keychain in a host app on the simulator**: the reference app's XCUITest (`samples/shop-mobile`, `ios-smoke.sh --uitest`) signs in, relaunches into the stored session, signs out and relaunches signed out | the Keychain on a device (accessibility class, Secure Enclave-backed storage, restore from backup); a bare simulator test process has no keychain (`errSecNotAvailable`) |
 
 ## What not to do
 - Do not refresh from a second process (app extension, widget): one process owns rotation.
