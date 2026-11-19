@@ -270,6 +270,37 @@ public object StapelTheme {
 private fun TypeStep.style(family: FontFamily, weight: Int): TextStyle =
     TextStyle(fontSize = fontSize.sp, lineHeight = lineHeight.sp, fontFamily = family, fontWeight = FontWeight(weight))
 
+/** The type-scale step names of the token source, in scale order. */
+public val TYPE_STEP_NAMES: List<String> = listOf("xs", "sm", "md", "lg", "xl", "2xl", "3xl")
+
+/**
+ * The seam for per-size-class type and spacing: a tokens object may carry responsive roles in
+ * `responsive.extra` under `type.<step>` (font size), `type.<step>.line` (line height) and
+ * `space.<n>` (spacing step 0–8). For each role present, [sizeClass] picks its value; every absent
+ * role keeps the single scale. Pure: the theme calls it once per size class.
+ */
+public fun responsiveScales(tokens: StapelTokens, sizeClass: StapelSizeClass): Pair<List<TypeStep>, List<Float>> {
+    val extra = tokens.responsive.extra
+    fun pick(key: String): Float? = extra[key]?.let {
+        when (sizeClass) {
+            StapelSizeClass.Phone -> it.phone
+            StapelSizeClass.Tablet -> it.tablet
+            StapelSizeClass.Desktop -> it.desktop
+        }
+    }
+    val fs = tokens.fontSize
+    val base = listOf(fs.xs, fs.sm, fs.md, fs.lg, fs.xl, fs.xxl, fs.xxxl)
+    val type = base.mapIndexed { i, step ->
+        val name = TYPE_STEP_NAMES[i]
+        val size = pick("type.$name")
+        val line = pick("type.$name.line")
+        if (size == null && line == null) step else TypeStep(size ?: step.fontSize, line ?: step.lineHeight)
+    }
+    val sp = tokens.spacing
+    val space = listOf(sp.s0, sp.s1, sp.s2, sp.s3, sp.s4, sp.s5, sp.s6, sp.s7, sp.s8).mapIndexed { i, v -> pick("space.$i") ?: v }
+    return type to space
+}
+
 internal fun buildThemeValues(
     tokens: StapelTokens,
     mode: ThemeMode,
@@ -279,8 +310,7 @@ internal fun buildThemeValues(
     icons: StapelIconSet,
 ): StapelThemeValues {
     val w = tokens.fontWeight
-    val fs = tokens.fontSize
-    val sp = tokens.spacing
+    val (fs, sp) = responsiveScales(tokens, layout.sizeClass)
     val r = tokens.radii
     val e = tokens.elevation
     return StapelThemeValues(
@@ -288,11 +318,11 @@ internal fun buildThemeValues(
         mode = mode,
         colors = StapelColors(tokens.colors(mode)),
         type = StapelTypography(
-            fs.xs.style(fonts.sans, w.regular), fs.sm.style(fonts.sans, w.regular), fs.md.style(fonts.sans, w.regular),
-            fs.lg.style(fonts.sans, w.regular), fs.xl.style(fonts.sans, w.regular), fs.xxl.style(fonts.sans, w.regular),
-            fs.xxxl.style(fonts.sans, w.regular), w, fonts.sans, fonts.mono,
+            fs[0].style(fonts.sans, w.regular), fs[1].style(fonts.sans, w.regular), fs[2].style(fonts.sans, w.regular),
+            fs[3].style(fonts.sans, w.regular), fs[4].style(fonts.sans, w.regular), fs[5].style(fonts.sans, w.regular),
+            fs[6].style(fonts.sans, w.regular), w, fonts.sans, fonts.mono,
         ),
-        spacing = StapelSpacing(sp.s0.dp, sp.s1.dp, sp.s2.dp, sp.s3.dp, sp.s4.dp, sp.s5.dp, sp.s6.dp, sp.s7.dp, sp.s8.dp),
+        spacing = StapelSpacing(sp[0].dp, sp[1].dp, sp[2].dp, sp[3].dp, sp[4].dp, sp[5].dp, sp[6].dp, sp[7].dp, sp[8].dp),
         shapes = StapelShapes(
             RoundedCornerShape(r.none.dp), RoundedCornerShape(r.sm.dp), RoundedCornerShape(r.md.dp),
             RoundedCornerShape(r.lg.dp), RoundedCornerShape(r.xl.dp), RoundedCornerShape(r.full.dp),

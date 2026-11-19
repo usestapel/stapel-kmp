@@ -404,7 +404,9 @@ public final class stapel/ui/StapelThemeKt {
 	public static final fun getLocalStapelErrorText ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 	public static final fun getLocalStapelReduceMotion ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 	public static final fun getLocalStapelStrings ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getTYPE_STEP_NAMES ()Ljava/util/List;
 	public static final fun rememberThemeMode (Lstapel/ui/ThemePreferenceStore;Landroidx/compose/runtime/Composer;I)Lstapel/tokens/ThemeMode;
+	public static final fun responsiveScales (Lstapel/tokens/StapelTokens;Lstapel/ui/StapelSizeClass;)Lkotlin/Pair;
 }
 
 public final class stapel/ui/StapelTone : java/lang/Enum {

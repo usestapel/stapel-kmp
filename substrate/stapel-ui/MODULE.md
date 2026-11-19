@@ -29,6 +29,10 @@
   never adds its own horizontal root padding.
 - **Size classes** come from the token breakpoints and the window width (`LocalWindowInfo`), not
   from Material's adaptive classes.
+- **Responsive type and spacing (seam only):** `responsiveScales` reads `responsive.extra` roles
+  `type.<step>`, `type.<step>.line` and `space.<n>` when the tokens carry them and picks the size class's
+  value; absent roles keep the single scale. The token source (shared with the web) does not emit them
+  yet — no Kotlin-only token is ever added here.
 - **Input:** `Touch` on Android and iOS, `Pointer` on desktop (platform source sets exist only for
   this and the touch floor: 48 dp Android, 44 pt iOS).
 - **Colours** only from `StapelTheme.colors`; no colour literal in a brick.
