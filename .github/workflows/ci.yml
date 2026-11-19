@@ -8,8 +8,12 @@ on:
 permissions:
   contents: read
 
+# A pull request's newer push supersedes its older run. A push to main never does:
+# each commit gets its own group, because GitHub keeps only one pending run per
+# group and silently cancels the previous pending one even without
+# cancel-in-progress. Rule tested by build-logic CiWorkflowTest.
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.event_name }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
@@ -119,4 +123,4 @@ jobs:
           RESULTS: ${{ toJSON(needs.*.result) }}
         run: |
           echo "$RESULTS"
-          echo "$RESULTS" | grep -v -q -E '"(failure|cancelled|skipped)"' || { echo "a required job did not succeed"; exit 1; }
+          echo "$RESULTS" | jq -e 'length > 0 and all(.[]; . == "success")' > /dev/null || { echo "a required job did not succeed"; exit 1; }

@@ -91,4 +91,7 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
 
 tasks.named("check") { dependsOn(functionalTestTask) }
 
-tasks.withType<Test>().configureEach { useJUnitPlatform() }
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    systemProperty("stapel.repoRoot", rootDir.parentFile.absolutePath)
+}
