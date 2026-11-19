@@ -1,0 +1,50 @@
+public final class stapel/navigation/compose/ComposableSingletons$HostKt {
+	public static final field INSTANCE Lstapel/navigation/compose/ComposableSingletons$HostKt;
+	public fun <init> ()V
+	public final fun getLambda$-1518029007$io_github_usestapel_stapel_navigation_compose ()Lkotlin/jvm/functions/Function5;
+}
+
+public final class stapel/navigation/compose/ContributionKt {
+	public static final fun navContribution (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lstapel/navigation/compose/NavContribution;
+	public static final fun overriding-al1nbsk (Lstapel/navigation/compose/NavContribution;Ljava/lang/String;Lkotlin/jvm/functions/Function4;)Lstapel/navigation/compose/NavContribution;
+}
+
+public abstract interface class stapel/navigation/compose/EmbedScope {
+	public abstract fun getNavigator ()Lstapel/navigation/Navigator;
+	public abstract fun getParams ()Ljava/util/Map;
+	public abstract fun getSpec ()Lstapel/navigation/EmbedSpec;
+	public abstract fun open ()V
+}
+
+public final class stapel/navigation/compose/HostKt {
+	public static final fun StapelNavHost (Lstapel/navigation/StapelNavigator;Ljava/util/List;Landroidx/compose/ui/Modifier;Ljava/util/Set;Lkotlin/jvm/functions/Function5;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun getDefaultOverlay ()Lkotlin/jvm/functions/Function5;
+	public static final fun rememberStapelNavigator (Ljava/util/List;Lstapel/navigation/NavPolicy;Lstapel/navigation/NavAuthSource;Lstapel/navigation/DeepLinkConfig;Lstapel/navigation/NavOverrides;Landroidx/compose/runtime/Composer;II)Lstapel/navigation/StapelNavigator;
+}
+
+public final class stapel/navigation/compose/NavContribution {
+	public static final field $stable I
+	public final fun getManifest ()Lstapel/navigation/NavManifest;
+}
+
+public final class stapel/navigation/compose/NavContributionBuilder {
+	public static final field $stable I
+	public final fun destination-c3ceLdo (Lkotlin/reflect/KClass;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/navigation/PathCodec;Lstapel/navigation/Placement;ZZLstapel/navigation/Surface;ILjava/lang/String;Lstapel/navigation/Presentation;Lstapel/navigation/PaneRole;Ljava/lang/String;Ljava/util/Set;Ljava/util/Set;Lkotlin/jvm/functions/Function4;)V
+	public final fun embed-6VXU0I4 (Ljava/lang/String;Ljava/lang/String;ILstapel/navigation/EmbedSurface;Ljava/util/Set;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Lkotlin/jvm/functions/Function3;)V
+	public static synthetic fun embed-6VXU0I4$default (Lstapel/navigation/compose/NavContributionBuilder;Ljava/lang/String;Ljava/lang/String;ILstapel/navigation/EmbedSurface;Ljava/util/Set;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Lkotlin/jvm/functions/Function3;ILjava/lang/Object;)V
+}
+
+public final class stapel/navigation/compose/ScopesKt {
+	public static final fun EmbedSlot-ITc8qfQ (Ljava/lang/String;Lstapel/navigation/StapelNavigator;Ljava/util/List;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun NavBackInterceptor (ZLkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ResultEffect (Lstapel/navigation/ResultKey;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public static final fun getLocalNavigator ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+}
+
+public abstract interface class stapel/navigation/compose/ScreenScope {
+	public abstract fun PageSlot-t-jROwI (Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun getDestination ()Lstapel/navigation/ResolvedDestination;
+	public abstract fun getEntry ()Lstapel/navigation/StackEntry;
+	public abstract fun getNavigator ()Lstapel/navigation/Navigator;
+}
+
