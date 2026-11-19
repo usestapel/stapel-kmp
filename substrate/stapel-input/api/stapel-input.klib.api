@@ -1,0 +1,661 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-input>
+final enum class stapel.input/DateOrder : kotlin/Enum<stapel.input/DateOrder> { // stapel.input/DateOrder|null[0]
+    enum entry DayMonthYear // stapel.input/DateOrder.DayMonthYear|null[0]
+    enum entry MonthDayYear // stapel.input/DateOrder.MonthDayYear|null[0]
+    enum entry YearMonthDay // stapel.input/DateOrder.YearMonthDay|null[0]
+
+    final val entries // stapel.input/DateOrder.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.input/DateOrder> // stapel.input/DateOrder.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.input/DateOrder // stapel.input/DateOrder.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.input/DateOrder> // stapel.input/DateOrder.values|values#static(){}[0]
+}
+
+final enum class stapel.input/InputKeyboard : kotlin/Enum<stapel.input/InputKeyboard> { // stapel.input/InputKeyboard|null[0]
+    enum entry Decimal // stapel.input/InputKeyboard.Decimal|null[0]
+    enum entry Number // stapel.input/InputKeyboard.Number|null[0]
+    enum entry Phone // stapel.input/InputKeyboard.Phone|null[0]
+    enum entry Text // stapel.input/InputKeyboard.Text|null[0]
+
+    final val entries // stapel.input/InputKeyboard.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.input/InputKeyboard> // stapel.input/InputKeyboard.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.input/InputKeyboard // stapel.input/InputKeyboard.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.input/InputKeyboard> // stapel.input/InputKeyboard.values|values#static(){}[0]
+}
+
+final enum class stapel.input/SlotKind : kotlin/Enum<stapel.input/SlotKind> { // stapel.input/SlotKind|null[0]
+    enum entry Digit // stapel.input/SlotKind.Digit|null[0]
+    enum entry Letter // stapel.input/SlotKind.Letter|null[0]
+    enum entry LetterOrDigit // stapel.input/SlotKind.LetterOrDigit|null[0]
+
+    final val entries // stapel.input/SlotKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.input/SlotKind> // stapel.input/SlotKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.input/SlotKind // stapel.input/SlotKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.input/SlotKind> // stapel.input/SlotKind.values|values#static(){}[0]
+}
+
+abstract fun interface <#A: in kotlin/Any?> stapel.input.validation/Validator { // stapel.input.validation/Validator|null[0]
+    abstract fun validate(#A): stapel.input.validation/ValidationResult // stapel.input.validation/Validator.validate|validate(1:0){}[0]
+}
+
+abstract interface stapel.input/InputFormat { // stapel.input/InputFormat|null[0]
+    abstract val keyboard // stapel.input/InputFormat.keyboard|{}keyboard[0]
+        abstract fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/InputFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+
+    abstract fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/InputFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    abstract fun format(kotlin/String): stapel.input/Formatted // stapel.input/InputFormat.format|format(kotlin.String){}[0]
+    open fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/InputFormat.isComplete|isComplete(kotlin.String){}[0]
+}
+
+abstract interface stapel.input/PhoneMetadata { // stapel.input/PhoneMetadata|null[0]
+    open val internationalPrefixes // stapel.input/PhoneMetadata.internationalPrefixes|{}internationalPrefixes[0]
+        open fun <get-internationalPrefixes>(): kotlin.collections/List<kotlin/String> // stapel.input/PhoneMetadata.internationalPrefixes.<get-internationalPrefixes>|<get-internationalPrefixes>(){}[0]
+
+    abstract fun callingCodeLength(kotlin/String): kotlin/Int? // stapel.input/PhoneMetadata.callingCodeLength|callingCodeLength(kotlin.String){}[0]
+    abstract fun nationalGroups(kotlin/String, kotlin/String): kotlin.collections/List<kotlin/Int>? // stapel.input/PhoneMetadata.nationalGroups|nationalGroups(kotlin.String;kotlin.String){}[0]
+    open fun isPossible(kotlin/String): kotlin/Boolean // stapel.input/PhoneMetadata.isPossible|isPossible(kotlin.String){}[0]
+    open fun maxDigits(kotlin/String?): kotlin/Int // stapel.input/PhoneMetadata.maxDigits|maxDigits(kotlin.String?){}[0]
+    open fun nationalToE164(kotlin/String, kotlin/String): kotlin/String // stapel.input/PhoneMetadata.nationalToE164|nationalToE164(kotlin.String;kotlin.String){}[0]
+
+    final object Companion { // stapel.input/PhoneMetadata.Companion|null[0]
+        final const val E164_MAX_DIGITS // stapel.input/PhoneMetadata.Companion.E164_MAX_DIGITS|{}E164_MAX_DIGITS[0]
+            final fun <get-E164_MAX_DIGITS>(): kotlin/Int // stapel.input/PhoneMetadata.Companion.E164_MAX_DIGITS.<get-E164_MAX_DIGITS>|<get-E164_MAX_DIGITS>(){}[0]
+        final const val GENERIC_MIN_DIGITS // stapel.input/PhoneMetadata.Companion.GENERIC_MIN_DIGITS|{}GENERIC_MIN_DIGITS[0]
+            final fun <get-GENERIC_MIN_DIGITS>(): kotlin/Int // stapel.input/PhoneMetadata.Companion.GENERIC_MIN_DIGITS.<get-GENERIC_MIN_DIGITS>|<get-GENERIC_MIN_DIGITS>(){}[0]
+        final const val ITU_INTERNATIONAL_PREFIX // stapel.input/PhoneMetadata.Companion.ITU_INTERNATIONAL_PREFIX|{}ITU_INTERNATIONAL_PREFIX[0]
+            final fun <get-ITU_INTERNATIONAL_PREFIX>(): kotlin/String // stapel.input/PhoneMetadata.Companion.ITU_INTERNATIONAL_PREFIX.<get-ITU_INTERNATIONAL_PREFIX>|<get-ITU_INTERNATIONAL_PREFIX>(){}[0]
+    }
+}
+
+sealed interface stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec|null[0]
+    final class Code : stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec.Code|null[0]
+        constructor <init>(kotlin/Int) // stapel.input.rules/FormatSpec.Code.<init>|<init>(kotlin.Int){}[0]
+
+        final val length // stapel.input.rules/FormatSpec.Code.length|{}length[0]
+            final fun <get-length>(): kotlin/Int // stapel.input.rules/FormatSpec.Code.length.<get-length>|<get-length>(){}[0]
+    }
+
+    final class Digits : stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec.Digits|null[0]
+        constructor <init>(kotlin.collections/List<kotlin/Int> = ..., kotlin/String = ..., kotlin/Int? = ..., kotlin/Int? = ...) // stapel.input.rules/FormatSpec.Digits.<init>|<init>(kotlin.collections.List<kotlin.Int>;kotlin.String;kotlin.Int?;kotlin.Int?){}[0]
+
+        final val groups // stapel.input.rules/FormatSpec.Digits.groups|{}groups[0]
+            final fun <get-groups>(): kotlin.collections/List<kotlin/Int> // stapel.input.rules/FormatSpec.Digits.groups.<get-groups>|<get-groups>(){}[0]
+        final val maxDigits // stapel.input.rules/FormatSpec.Digits.maxDigits|{}maxDigits[0]
+            final fun <get-maxDigits>(): kotlin/Int? // stapel.input.rules/FormatSpec.Digits.maxDigits.<get-maxDigits>|<get-maxDigits>(){}[0]
+        final val minDigits // stapel.input.rules/FormatSpec.Digits.minDigits|{}minDigits[0]
+            final fun <get-minDigits>(): kotlin/Int? // stapel.input.rules/FormatSpec.Digits.minDigits.<get-minDigits>|<get-minDigits>(){}[0]
+        final val separator // stapel.input.rules/FormatSpec.Digits.separator|{}separator[0]
+            final fun <get-separator>(): kotlin/String // stapel.input.rules/FormatSpec.Digits.separator.<get-separator>|<get-separator>(){}[0]
+    }
+
+    final class Money : stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec.Money|null[0]
+        constructor <init>(kotlin/Int, kotlin/String = ..., kotlin/String = ..., kotlin/Boolean = ...) // stapel.input.rules/FormatSpec.Money.<init>|<init>(kotlin.Int;kotlin.String;kotlin.String;kotlin.Boolean){}[0]
+
+        final val allowNegative // stapel.input.rules/FormatSpec.Money.allowNegative|{}allowNegative[0]
+            final fun <get-allowNegative>(): kotlin/Boolean // stapel.input.rules/FormatSpec.Money.allowNegative.<get-allowNegative>|<get-allowNegative>(){}[0]
+        final val minorUnits // stapel.input.rules/FormatSpec.Money.minorUnits|{}minorUnits[0]
+            final fun <get-minorUnits>(): kotlin/Int // stapel.input.rules/FormatSpec.Money.minorUnits.<get-minorUnits>|<get-minorUnits>(){}[0]
+        final val prefix // stapel.input.rules/FormatSpec.Money.prefix|{}prefix[0]
+            final fun <get-prefix>(): kotlin/String // stapel.input.rules/FormatSpec.Money.prefix.<get-prefix>|<get-prefix>(){}[0]
+        final val suffix // stapel.input.rules/FormatSpec.Money.suffix|{}suffix[0]
+            final fun <get-suffix>(): kotlin/String // stapel.input.rules/FormatSpec.Money.suffix.<get-suffix>|<get-suffix>(){}[0]
+    }
+
+    final class Number : stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec.Number|null[0]
+        constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Boolean = ...) // stapel.input.rules/FormatSpec.Number.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Boolean){}[0]
+
+        final val allowNegative // stapel.input.rules/FormatSpec.Number.allowNegative|{}allowNegative[0]
+            final fun <get-allowNegative>(): kotlin/Boolean // stapel.input.rules/FormatSpec.Number.allowNegative.<get-allowNegative>|<get-allowNegative>(){}[0]
+        final val maxFractionDigits // stapel.input.rules/FormatSpec.Number.maxFractionDigits|{}maxFractionDigits[0]
+            final fun <get-maxFractionDigits>(): kotlin/Int // stapel.input.rules/FormatSpec.Number.maxFractionDigits.<get-maxFractionDigits>|<get-maxFractionDigits>(){}[0]
+        final val maxIntegerDigits // stapel.input.rules/FormatSpec.Number.maxIntegerDigits|{}maxIntegerDigits[0]
+            final fun <get-maxIntegerDigits>(): kotlin/Int // stapel.input.rules/FormatSpec.Number.maxIntegerDigits.<get-maxIntegerDigits>|<get-maxIntegerDigits>(){}[0]
+    }
+
+    final class Pattern : stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec.Pattern|null[0]
+        constructor <init>(kotlin/String, kotlin/Boolean = ...) // stapel.input.rules/FormatSpec.Pattern.<init>|<init>(kotlin.String;kotlin.Boolean){}[0]
+
+        final val mask // stapel.input.rules/FormatSpec.Pattern.mask|{}mask[0]
+            final fun <get-mask>(): kotlin/String // stapel.input.rules/FormatSpec.Pattern.mask.<get-mask>|<get-mask>(){}[0]
+        final val upperCase // stapel.input.rules/FormatSpec.Pattern.upperCase|{}upperCase[0]
+            final fun <get-upperCase>(): kotlin/Boolean // stapel.input.rules/FormatSpec.Pattern.upperCase.<get-upperCase>|<get-upperCase>(){}[0]
+    }
+
+    final class Phone : stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec.Phone|null[0]
+        constructor <init>(kotlin/String? = ..., kotlin/Boolean = ...) // stapel.input.rules/FormatSpec.Phone.<init>|<init>(kotlin.String?;kotlin.Boolean){}[0]
+
+        final val defaultCallingCode // stapel.input.rules/FormatSpec.Phone.defaultCallingCode|{}defaultCallingCode[0]
+            final fun <get-defaultCallingCode>(): kotlin/String? // stapel.input.rules/FormatSpec.Phone.defaultCallingCode.<get-defaultCallingCode>|<get-defaultCallingCode>(){}[0]
+        final val lockCallingCode // stapel.input.rules/FormatSpec.Phone.lockCallingCode|{}lockCallingCode[0]
+            final fun <get-lockCallingCode>(): kotlin/Boolean // stapel.input.rules/FormatSpec.Phone.lockCallingCode.<get-lockCallingCode>|<get-lockCallingCode>(){}[0]
+    }
+
+    final class Text : stapel.input.rules/FormatSpec { // stapel.input.rules/FormatSpec.Text|null[0]
+        constructor <init>(kotlin/Int? = ...) // stapel.input.rules/FormatSpec.Text.<init>|<init>(kotlin.Int?){}[0]
+
+        final val maxLength // stapel.input.rules/FormatSpec.Text.maxLength|{}maxLength[0]
+            final fun <get-maxLength>(): kotlin/Int? // stapel.input.rules/FormatSpec.Text.maxLength.<get-maxLength>|<get-maxLength>(){}[0]
+    }
+
+    final object Date : stapel.input.rules/FormatSpec // stapel.input.rules/FormatSpec.Date|null[0]
+}
+
+sealed interface stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec|null[0]
+    final class Complete : stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec.Complete|null[0]
+        constructor <init>(kotlin/String? = ...) // stapel.input.rules/RuleSpec.Complete.<init>|<init>(kotlin.String?){}[0]
+
+        final val key // stapel.input.rules/RuleSpec.Complete.key|{}key[0]
+            final fun <get-key>(): kotlin/String? // stapel.input.rules/RuleSpec.Complete.key.<get-key>|<get-key>(){}[0]
+    }
+
+    final class DateRange : stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec.DateRange|null[0]
+        constructor <init>(kotlinx.datetime/LocalDate? = ..., kotlinx.datetime/LocalDate? = ...) // stapel.input.rules/RuleSpec.DateRange.<init>|<init>(kotlinx.datetime.LocalDate?;kotlinx.datetime.LocalDate?){}[0]
+
+        final val max // stapel.input.rules/RuleSpec.DateRange.max|{}max[0]
+            final fun <get-max>(): kotlinx.datetime/LocalDate? // stapel.input.rules/RuleSpec.DateRange.max.<get-max>|<get-max>(){}[0]
+        final val min // stapel.input.rules/RuleSpec.DateRange.min|{}min[0]
+            final fun <get-min>(): kotlinx.datetime/LocalDate? // stapel.input.rules/RuleSpec.DateRange.min.<get-min>|<get-min>(){}[0]
+    }
+
+    final class Length : stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec.Length|null[0]
+        constructor <init>(kotlin/Int? = ..., kotlin/Int? = ...) // stapel.input.rules/RuleSpec.Length.<init>|<init>(kotlin.Int?;kotlin.Int?){}[0]
+
+        final val max // stapel.input.rules/RuleSpec.Length.max|{}max[0]
+            final fun <get-max>(): kotlin/Int? // stapel.input.rules/RuleSpec.Length.max.<get-max>|<get-max>(){}[0]
+        final val min // stapel.input.rules/RuleSpec.Length.min|{}min[0]
+            final fun <get-min>(): kotlin/Int? // stapel.input.rules/RuleSpec.Length.min.<get-min>|<get-min>(){}[0]
+    }
+
+    final class Luhn : stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec.Luhn|null[0]
+        constructor <init>(kotlin/String? = ...) // stapel.input.rules/RuleSpec.Luhn.<init>|<init>(kotlin.String?){}[0]
+
+        final val key // stapel.input.rules/RuleSpec.Luhn.key|{}key[0]
+            final fun <get-key>(): kotlin/String? // stapel.input.rules/RuleSpec.Luhn.key.<get-key>|<get-key>(){}[0]
+    }
+
+    final class Pattern : stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec.Pattern|null[0]
+        constructor <init>(kotlin/String, kotlin/String? = ...) // stapel.input.rules/RuleSpec.Pattern.<init>|<init>(kotlin.String;kotlin.String?){}[0]
+
+        final val key // stapel.input.rules/RuleSpec.Pattern.key|{}key[0]
+            final fun <get-key>(): kotlin/String? // stapel.input.rules/RuleSpec.Pattern.key.<get-key>|<get-key>(){}[0]
+        final val regex // stapel.input.rules/RuleSpec.Pattern.regex|{}regex[0]
+            final fun <get-regex>(): kotlin/String // stapel.input.rules/RuleSpec.Pattern.regex.<get-regex>|<get-regex>(){}[0]
+    }
+
+    final class Range : stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec.Range|null[0]
+        constructor <init>(stapel.wire/Decimal? = ..., stapel.wire/Decimal? = ...) // stapel.input.rules/RuleSpec.Range.<init>|<init>(stapel.wire.Decimal?;stapel.wire.Decimal?){}[0]
+
+        final val max // stapel.input.rules/RuleSpec.Range.max|{}max[0]
+            final fun <get-max>(): stapel.wire/Decimal? // stapel.input.rules/RuleSpec.Range.max.<get-max>|<get-max>(){}[0]
+        final val min // stapel.input.rules/RuleSpec.Range.min|{}min[0]
+            final fun <get-min>(): stapel.wire/Decimal? // stapel.input.rules/RuleSpec.Range.min.<get-min>|<get-min>(){}[0]
+    }
+
+    final class Required : stapel.input.rules/RuleSpec { // stapel.input.rules/RuleSpec.Required|null[0]
+        constructor <init>(kotlin/String? = ...) // stapel.input.rules/RuleSpec.Required.<init>|<init>(kotlin.String?){}[0]
+
+        final val key // stapel.input.rules/RuleSpec.Required.key|{}key[0]
+            final fun <get-key>(): kotlin/String? // stapel.input.rules/RuleSpec.Required.key.<get-key>|<get-key>(){}[0]
+    }
+
+    final object Phone : stapel.input.rules/RuleSpec // stapel.input.rules/RuleSpec.Phone|null[0]
+}
+
+sealed interface stapel.input.validation/ValidationResult { // stapel.input.validation/ValidationResult|null[0]
+    abstract val issues // stapel.input.validation/ValidationResult.issues|{}issues[0]
+        abstract fun <get-issues>(): kotlin.collections/List<stapel.input.validation/FieldIssue> // stapel.input.validation/ValidationResult.issues.<get-issues>|<get-issues>(){}[0]
+    open val isValid // stapel.input.validation/ValidationResult.isValid|{}isValid[0]
+        open fun <get-isValid>(): kotlin/Boolean // stapel.input.validation/ValidationResult.isValid.<get-isValid>|<get-isValid>(){}[0]
+
+    final class Invalid : stapel.input.validation/ValidationResult { // stapel.input.validation/ValidationResult.Invalid|null[0]
+        constructor <init>(kotlin.collections/List<stapel.input.validation/FieldIssue>) // stapel.input.validation/ValidationResult.Invalid.<init>|<init>(kotlin.collections.List<stapel.input.validation.FieldIssue>){}[0]
+
+        final val issues // stapel.input.validation/ValidationResult.Invalid.issues|{}issues[0]
+            final fun <get-issues>(): kotlin.collections/List<stapel.input.validation/FieldIssue> // stapel.input.validation/ValidationResult.Invalid.issues.<get-issues>|<get-issues>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.input.validation/ValidationResult.Invalid.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.input.validation/ValidationResult.Invalid.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.input.validation/ValidationResult.Invalid.toString|toString(){}[0]
+    }
+
+    final object Companion { // stapel.input.validation/ValidationResult.Companion|null[0]
+        final fun invalid(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ...): stapel.input.validation/ValidationResult // stapel.input.validation/ValidationResult.Companion.invalid|invalid(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+        final fun of(kotlin.collections/List<stapel.input.validation/FieldIssue>): stapel.input.validation/ValidationResult // stapel.input.validation/ValidationResult.Companion.of|of(kotlin.collections.List<stapel.input.validation.FieldIssue>){}[0]
+    }
+
+    final object Valid : stapel.input.validation/ValidationResult { // stapel.input.validation/ValidationResult.Valid|null[0]
+        final val issues // stapel.input.validation/ValidationResult.Valid.issues|{}issues[0]
+            final fun <get-issues>(): kotlin.collections/List<stapel.input.validation/FieldIssue> // stapel.input.validation/ValidationResult.Valid.issues.<get-issues>|<get-issues>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.input.validation/ValidationResult.Valid.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.input.validation/ValidationResult.Valid.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.input.validation/ValidationResult.Valid.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.input/FormatPiece { // stapel.input/FormatPiece|null[0]
+    final class Insert : stapel.input/FormatPiece { // stapel.input/FormatPiece.Insert|null[0]
+        constructor <init>(kotlin/Int, kotlin/String) // stapel.input/FormatPiece.Insert.<init>|<init>(kotlin.Int;kotlin.String){}[0]
+
+        final val rawOffset // stapel.input/FormatPiece.Insert.rawOffset|{}rawOffset[0]
+            final fun <get-rawOffset>(): kotlin/Int // stapel.input/FormatPiece.Insert.rawOffset.<get-rawOffset>|<get-rawOffset>(){}[0]
+        final val text // stapel.input/FormatPiece.Insert.text|{}text[0]
+            final fun <get-text>(): kotlin/String // stapel.input/FormatPiece.Insert.text.<get-text>|<get-text>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.input/FormatPiece.Insert.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.input/FormatPiece.Insert.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.input/FormatPiece.Insert.toString|toString(){}[0]
+    }
+
+    final class Substitute : stapel.input/FormatPiece { // stapel.input/FormatPiece.Substitute|null[0]
+        constructor <init>(kotlin/Int, kotlin/Char) // stapel.input/FormatPiece.Substitute.<init>|<init>(kotlin.Int;kotlin.Char){}[0]
+
+        final val rawIndex // stapel.input/FormatPiece.Substitute.rawIndex|{}rawIndex[0]
+            final fun <get-rawIndex>(): kotlin/Int // stapel.input/FormatPiece.Substitute.rawIndex.<get-rawIndex>|<get-rawIndex>(){}[0]
+        final val shownAs // stapel.input/FormatPiece.Substitute.shownAs|{}shownAs[0]
+            final fun <get-shownAs>(): kotlin/Char // stapel.input/FormatPiece.Substitute.shownAs.<get-shownAs>|<get-shownAs>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.input/FormatPiece.Substitute.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.input/FormatPiece.Substitute.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.input/FormatPiece.Substitute.toString|toString(){}[0]
+    }
+}
+
+final class stapel.input.rules/FieldRules { // stapel.input.rules/FieldRules|null[0]
+    constructor <init>(stapel.input/InputFormat, stapel.input.validation/Validator<kotlin/String>, kotlin.collections/List<kotlin/String>) // stapel.input.rules/FieldRules.<init>|<init>(stapel.input.InputFormat;stapel.input.validation.Validator<kotlin.String>;kotlin.collections.List<kotlin.String>){}[0]
+
+    final val format // stapel.input.rules/FieldRules.format|{}format[0]
+        final fun <get-format>(): stapel.input/InputFormat // stapel.input.rules/FieldRules.format.<get-format>|<get-format>(){}[0]
+    final val problems // stapel.input.rules/FieldRules.problems|{}problems[0]
+        final fun <get-problems>(): kotlin.collections/List<kotlin/String> // stapel.input.rules/FieldRules.problems.<get-problems>|<get-problems>(){}[0]
+    final val validator // stapel.input.rules/FieldRules.validator|{}validator[0]
+        final fun <get-validator>(): stapel.input.validation/Validator<kotlin/String> // stapel.input.rules/FieldRules.validator.<get-validator>|<get-validator>(){}[0]
+
+    final fun validate(kotlin/String): stapel.input.validation/ValidationResult // stapel.input.rules/FieldRules.validate|validate(kotlin.String){}[0]
+}
+
+final class stapel.input.rules/FieldSpec { // stapel.input.rules/FieldSpec|null[0]
+    constructor <init>(stapel.input.rules/FormatSpec = ..., kotlin.collections/List<stapel.input.rules/RuleSpec> = ...) // stapel.input.rules/FieldSpec.<init>|<init>(stapel.input.rules.FormatSpec;kotlin.collections.List<stapel.input.rules.RuleSpec>){}[0]
+
+    final val format // stapel.input.rules/FieldSpec.format|{}format[0]
+        final fun <get-format>(): stapel.input.rules/FormatSpec // stapel.input.rules/FieldSpec.format.<get-format>|<get-format>(){}[0]
+    final val rules // stapel.input.rules/FieldSpec.rules|{}rules[0]
+        final fun <get-rules>(): kotlin.collections/List<stapel.input.rules/RuleSpec> // stapel.input.rules/FieldSpec.rules.<get-rules>|<get-rules>(){}[0]
+}
+
+final class stapel.input.rules/ParsedFieldSpec { // stapel.input.rules/ParsedFieldSpec|null[0]
+    constructor <init>(stapel.input.rules/FieldSpec, kotlin.collections/List<kotlin/String>) // stapel.input.rules/ParsedFieldSpec.<init>|<init>(stapel.input.rules.FieldSpec;kotlin.collections.List<kotlin.String>){}[0]
+
+    final val problems // stapel.input.rules/ParsedFieldSpec.problems|{}problems[0]
+        final fun <get-problems>(): kotlin.collections/List<kotlin/String> // stapel.input.rules/ParsedFieldSpec.problems.<get-problems>|<get-problems>(){}[0]
+    final val spec // stapel.input.rules/ParsedFieldSpec.spec|{}spec[0]
+        final fun <get-spec>(): stapel.input.rules/FieldSpec // stapel.input.rules/ParsedFieldSpec.spec.<get-spec>|<get-spec>(){}[0]
+}
+
+final class stapel.input.rules/RuleContext { // stapel.input.rules/RuleContext|null[0]
+    constructor <init>(stapel.input/InputLocale = ..., stapel.input/PhoneMetadata = ...) // stapel.input.rules/RuleContext.<init>|<init>(stapel.input.InputLocale;stapel.input.PhoneMetadata){}[0]
+
+    final val locale // stapel.input.rules/RuleContext.locale|{}locale[0]
+        final fun <get-locale>(): stapel.input/InputLocale // stapel.input.rules/RuleContext.locale.<get-locale>|<get-locale>(){}[0]
+    final val phoneMetadata // stapel.input.rules/RuleContext.phoneMetadata|{}phoneMetadata[0]
+        final fun <get-phoneMetadata>(): stapel.input/PhoneMetadata // stapel.input.rules/RuleContext.phoneMetadata.<get-phoneMetadata>|<get-phoneMetadata>(){}[0]
+}
+
+final class stapel.input.validation/FieldIssue { // stapel.input.validation/FieldIssue|null[0]
+    constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.input.validation/FieldIssue.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val key // stapel.input.validation/FieldIssue.key|{}key[0]
+        final fun <get-key>(): kotlin/String // stapel.input.validation/FieldIssue.key.<get-key>|<get-key>(){}[0]
+    final val params // stapel.input.validation/FieldIssue.params|{}params[0]
+        final fun <get-params>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.input.validation/FieldIssue.params.<get-params>|<get-params>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.input.validation/FieldIssue.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.input.validation/FieldIssue.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.input.validation/FieldIssue.toString|toString(){}[0]
+}
+
+final class stapel.input/CodeFormat : stapel.input/InputFormat { // stapel.input/CodeFormat|null[0]
+    constructor <init>(kotlin/Int) // stapel.input/CodeFormat.<init>|<init>(kotlin.Int){}[0]
+
+    final val keyboard // stapel.input/CodeFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/CodeFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val length // stapel.input/CodeFormat.length|{}length[0]
+        final fun <get-length>(): kotlin/Int // stapel.input/CodeFormat.length.<get-length>|<get-length>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/CodeFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/CodeFormat.format|format(kotlin.String){}[0]
+    final fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/CodeFormat.isComplete|isComplete(kotlin.String){}[0]
+}
+
+final class stapel.input/DateFormat : stapel.input/InputFormat { // stapel.input/DateFormat|null[0]
+    constructor <init>(stapel.input/DateOrder = ..., kotlin/Char = ..., kotlin/Char = ...) // stapel.input/DateFormat.<init>|<init>(stapel.input.DateOrder;kotlin.Char;kotlin.Char){}[0]
+    constructor <init>(stapel.input/InputLocale) // stapel.input/DateFormat.<init>|<init>(stapel.input.InputLocale){}[0]
+
+    final val keyboard // stapel.input/DateFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/DateFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val order // stapel.input/DateFormat.order|{}order[0]
+        final fun <get-order>(): stapel.input/DateOrder // stapel.input/DateFormat.order.<get-order>|<get-order>(){}[0]
+    final val separator // stapel.input/DateFormat.separator|{}separator[0]
+        final fun <get-separator>(): kotlin/Char // stapel.input/DateFormat.separator.<get-separator>|<get-separator>(){}[0]
+    final val zeroDigit // stapel.input/DateFormat.zeroDigit|{}zeroDigit[0]
+        final fun <get-zeroDigit>(): kotlin/Char // stapel.input/DateFormat.zeroDigit.<get-zeroDigit>|<get-zeroDigit>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/DateFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/DateFormat.format|format(kotlin.String){}[0]
+    final fun fromDate(kotlinx.datetime/LocalDate): kotlin/String // stapel.input/DateFormat.fromDate|fromDate(kotlinx.datetime.LocalDate){}[0]
+    final fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/DateFormat.isComplete|isComplete(kotlin.String){}[0]
+    final fun toDate(kotlin/String): kotlinx.datetime/LocalDate? // stapel.input/DateFormat.toDate|toDate(kotlin.String){}[0]
+}
+
+final class stapel.input/DecimalFormat : stapel.input/InputFormat { // stapel.input/DecimalFormat|null[0]
+    constructor <init>(stapel.input/InputLocale = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Boolean = ..., kotlin/String = ..., kotlin/String = ...) // stapel.input/DecimalFormat.<init>|<init>(stapel.input.InputLocale;kotlin.Int;kotlin.Int;kotlin.Boolean;kotlin.String;kotlin.String){}[0]
+
+    final val allowNegative // stapel.input/DecimalFormat.allowNegative|{}allowNegative[0]
+        final fun <get-allowNegative>(): kotlin/Boolean // stapel.input/DecimalFormat.allowNegative.<get-allowNegative>|<get-allowNegative>(){}[0]
+    final val keyboard // stapel.input/DecimalFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/DecimalFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val locale // stapel.input/DecimalFormat.locale|{}locale[0]
+        final fun <get-locale>(): stapel.input/InputLocale // stapel.input/DecimalFormat.locale.<get-locale>|<get-locale>(){}[0]
+    final val maxFractionDigits // stapel.input/DecimalFormat.maxFractionDigits|{}maxFractionDigits[0]
+        final fun <get-maxFractionDigits>(): kotlin/Int // stapel.input/DecimalFormat.maxFractionDigits.<get-maxFractionDigits>|<get-maxFractionDigits>(){}[0]
+    final val maxIntegerDigits // stapel.input/DecimalFormat.maxIntegerDigits|{}maxIntegerDigits[0]
+        final fun <get-maxIntegerDigits>(): kotlin/Int // stapel.input/DecimalFormat.maxIntegerDigits.<get-maxIntegerDigits>|<get-maxIntegerDigits>(){}[0]
+    final val prefix // stapel.input/DecimalFormat.prefix|{}prefix[0]
+        final fun <get-prefix>(): kotlin/String // stapel.input/DecimalFormat.prefix.<get-prefix>|<get-prefix>(){}[0]
+    final val suffix // stapel.input/DecimalFormat.suffix|{}suffix[0]
+        final fun <get-suffix>(): kotlin/String // stapel.input/DecimalFormat.suffix.<get-suffix>|<get-suffix>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/DecimalFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/DecimalFormat.format|format(kotlin.String){}[0]
+    final fun fromDecimal(stapel.wire/Decimal): kotlin/String // stapel.input/DecimalFormat.fromDecimal|fromDecimal(stapel.wire.Decimal){}[0]
+    final fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/DecimalFormat.isComplete|isComplete(kotlin.String){}[0]
+    final fun toDecimal(kotlin/String): stapel.wire/Decimal? // stapel.input/DecimalFormat.toDecimal|toDecimal(kotlin.String){}[0]
+}
+
+final class stapel.input/Formatted { // stapel.input/Formatted|null[0]
+    final val pieces // stapel.input/Formatted.pieces|{}pieces[0]
+        final fun <get-pieces>(): kotlin.collections/List<stapel.input/FormatPiece> // stapel.input/Formatted.pieces.<get-pieces>|<get-pieces>(){}[0]
+    final val raw // stapel.input/Formatted.raw|{}raw[0]
+        final fun <get-raw>(): kotlin/String // stapel.input/Formatted.raw.<get-raw>|<get-raw>(){}[0]
+    final val text // stapel.input/Formatted.text|{}text[0]
+        final fun <get-text>(): kotlin/String // stapel.input/Formatted.text.<get-text>|<get-text>(){}[0]
+
+    final fun displayToRaw(kotlin/Int): kotlin/Int // stapel.input/Formatted.displayToRaw|displayToRaw(kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.input/Formatted.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.input/Formatted.hashCode|hashCode(){}[0]
+    final fun isLiteralAt(kotlin/Int): kotlin/Boolean // stapel.input/Formatted.isLiteralAt|isLiteralAt(kotlin.Int){}[0]
+    final fun rawToDisplay(kotlin/Int): kotlin/Int // stapel.input/Formatted.rawToDisplay|rawToDisplay(kotlin.Int){}[0]
+    final fun snapCursor(kotlin/Int): kotlin/Int // stapel.input/Formatted.snapCursor|snapCursor(kotlin.Int){}[0]
+    final fun toString(): kotlin/String // stapel.input/Formatted.toString|toString(){}[0]
+
+    final class Builder { // stapel.input/Formatted.Builder|null[0]
+        constructor <init>() // stapel.input/Formatted.Builder.<init>|<init>(){}[0]
+
+        final val rawLength // stapel.input/Formatted.Builder.rawLength|{}rawLength[0]
+            final fun <get-rawLength>(): kotlin/Int // stapel.input/Formatted.Builder.rawLength.<get-rawLength>|<get-rawLength>(){}[0]
+
+        final fun build(): stapel.input/Formatted // stapel.input/Formatted.Builder.build|build(){}[0]
+        final fun literal(kotlin/String): stapel.input/Formatted.Builder // stapel.input/Formatted.Builder.literal|literal(kotlin.String){}[0]
+        final fun raw(kotlin/Char, kotlin/Char = ...): stapel.input/Formatted.Builder // stapel.input/Formatted.Builder.raw|raw(kotlin.Char;kotlin.Char){}[0]
+    }
+
+    final object Companion { // stapel.input/Formatted.Companion|null[0]
+        final fun identity(kotlin/String): stapel.input/Formatted // stapel.input/Formatted.Companion.identity|identity(kotlin.String){}[0]
+    }
+}
+
+final class stapel.input/GroupedDigitsFormat : stapel.input/InputFormat { // stapel.input/GroupedDigitsFormat|null[0]
+    constructor <init>(kotlin.collections/List<kotlin/Int>, kotlin/String = ..., kotlin/Int = ..., kotlin/Int? = ..., kotlin/Char = ...) // stapel.input/GroupedDigitsFormat.<init>|<init>(kotlin.collections.List<kotlin.Int>;kotlin.String;kotlin.Int;kotlin.Int?;kotlin.Char){}[0]
+
+    final val groupSizes // stapel.input/GroupedDigitsFormat.groupSizes|{}groupSizes[0]
+        final fun <get-groupSizes>(): kotlin.collections/List<kotlin/Int> // stapel.input/GroupedDigitsFormat.groupSizes.<get-groupSizes>|<get-groupSizes>(){}[0]
+    final val keyboard // stapel.input/GroupedDigitsFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/GroupedDigitsFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val maxDigits // stapel.input/GroupedDigitsFormat.maxDigits|{}maxDigits[0]
+        final fun <get-maxDigits>(): kotlin/Int // stapel.input/GroupedDigitsFormat.maxDigits.<get-maxDigits>|<get-maxDigits>(){}[0]
+    final val minDigits // stapel.input/GroupedDigitsFormat.minDigits|{}minDigits[0]
+        final fun <get-minDigits>(): kotlin/Int? // stapel.input/GroupedDigitsFormat.minDigits.<get-minDigits>|<get-minDigits>(){}[0]
+    final val separator // stapel.input/GroupedDigitsFormat.separator|{}separator[0]
+        final fun <get-separator>(): kotlin/String // stapel.input/GroupedDigitsFormat.separator.<get-separator>|<get-separator>(){}[0]
+    final val zeroDigit // stapel.input/GroupedDigitsFormat.zeroDigit|{}zeroDigit[0]
+        final fun <get-zeroDigit>(): kotlin/Char // stapel.input/GroupedDigitsFormat.zeroDigit.<get-zeroDigit>|<get-zeroDigit>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/GroupedDigitsFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/GroupedDigitsFormat.format|format(kotlin.String){}[0]
+    final fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/GroupedDigitsFormat.isComplete|isComplete(kotlin.String){}[0]
+
+    final object Companion { // stapel.input/GroupedDigitsFormat.Companion|null[0]
+        final fun paymentCard(kotlin/String = ...): stapel.input/GroupedDigitsFormat // stapel.input/GroupedDigitsFormat.Companion.paymentCard|paymentCard(kotlin.String){}[0]
+    }
+}
+
+final class stapel.input/InputLocale { // stapel.input/InputLocale|null[0]
+    constructor <init>(kotlin/Char = ..., kotlin/String = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Char = ..., stapel.input/DateOrder = ..., kotlin/Char = ...) // stapel.input/InputLocale.<init>|<init>(kotlin.Char;kotlin.String;kotlin.Int;kotlin.Int;kotlin.Char;stapel.input.DateOrder;kotlin.Char){}[0]
+
+    final val dateOrder // stapel.input/InputLocale.dateOrder|{}dateOrder[0]
+        final fun <get-dateOrder>(): stapel.input/DateOrder // stapel.input/InputLocale.dateOrder.<get-dateOrder>|<get-dateOrder>(){}[0]
+    final val dateSeparator // stapel.input/InputLocale.dateSeparator|{}dateSeparator[0]
+        final fun <get-dateSeparator>(): kotlin/Char // stapel.input/InputLocale.dateSeparator.<get-dateSeparator>|<get-dateSeparator>(){}[0]
+    final val decimalSeparator // stapel.input/InputLocale.decimalSeparator|{}decimalSeparator[0]
+        final fun <get-decimalSeparator>(): kotlin/Char // stapel.input/InputLocale.decimalSeparator.<get-decimalSeparator>|<get-decimalSeparator>(){}[0]
+    final val groupSeparator // stapel.input/InputLocale.groupSeparator|{}groupSeparator[0]
+        final fun <get-groupSeparator>(): kotlin/String // stapel.input/InputLocale.groupSeparator.<get-groupSeparator>|<get-groupSeparator>(){}[0]
+    final val primaryGroupSize // stapel.input/InputLocale.primaryGroupSize|{}primaryGroupSize[0]
+        final fun <get-primaryGroupSize>(): kotlin/Int // stapel.input/InputLocale.primaryGroupSize.<get-primaryGroupSize>|<get-primaryGroupSize>(){}[0]
+    final val secondaryGroupSize // stapel.input/InputLocale.secondaryGroupSize|{}secondaryGroupSize[0]
+        final fun <get-secondaryGroupSize>(): kotlin/Int // stapel.input/InputLocale.secondaryGroupSize.<get-secondaryGroupSize>|<get-secondaryGroupSize>(){}[0]
+    final val zeroDigit // stapel.input/InputLocale.zeroDigit|{}zeroDigit[0]
+        final fun <get-zeroDigit>(): kotlin/Char // stapel.input/InputLocale.zeroDigit.<get-zeroDigit>|<get-zeroDigit>(){}[0]
+
+    final object Companion { // stapel.input/InputLocale.Companion|null[0]
+        final val Neutral // stapel.input/InputLocale.Companion.Neutral|{}Neutral[0]
+            final fun <get-Neutral>(): stapel.input/InputLocale // stapel.input/InputLocale.Companion.Neutral.<get-Neutral>|<get-Neutral>(){}[0]
+    }
+}
+
+final class stapel.input/MaskPattern { // stapel.input/MaskPattern|null[0]
+    final val literalsBefore // stapel.input/MaskPattern.literalsBefore|{}literalsBefore[0]
+        final fun <get-literalsBefore>(): kotlin.collections/List<kotlin/String> // stapel.input/MaskPattern.literalsBefore.<get-literalsBefore>|<get-literalsBefore>(){}[0]
+    final val requiredSlots // stapel.input/MaskPattern.requiredSlots|{}requiredSlots[0]
+        final fun <get-requiredSlots>(): kotlin/Int // stapel.input/MaskPattern.requiredSlots.<get-requiredSlots>|<get-requiredSlots>(){}[0]
+    final val slots // stapel.input/MaskPattern.slots|{}slots[0]
+        final fun <get-slots>(): kotlin.collections/List<stapel.input/SlotKind> // stapel.input/MaskPattern.slots.<get-slots>|<get-slots>(){}[0]
+    final val trailingLiterals // stapel.input/MaskPattern.trailingLiterals|{}trailingLiterals[0]
+        final fun <get-trailingLiterals>(): kotlin/String // stapel.input/MaskPattern.trailingLiterals.<get-trailingLiterals>|<get-trailingLiterals>(){}[0]
+
+    final object Companion { // stapel.input/MaskPattern.Companion|null[0]
+        final fun parse(kotlin/String): stapel.input/MaskPattern // stapel.input/MaskPattern.Companion.parse|parse(kotlin.String){}[0]
+    }
+}
+
+final class stapel.input/MaskedText { // stapel.input/MaskedText|null[0]
+    final val format // stapel.input/MaskedText.format|{}format[0]
+        final fun <get-format>(): stapel.input/InputFormat // stapel.input/MaskedText.format.<get-format>|<get-format>(){}[0]
+    final val formatted // stapel.input/MaskedText.formatted|{}formatted[0]
+        final fun <get-formatted>(): stapel.input/Formatted // stapel.input/MaskedText.formatted.<get-formatted>|<get-formatted>(){}[0]
+    final val raw // stapel.input/MaskedText.raw|{}raw[0]
+        final fun <get-raw>(): kotlin/String // stapel.input/MaskedText.raw.<get-raw>|<get-raw>(){}[0]
+    final val selectionEnd // stapel.input/MaskedText.selectionEnd|{}selectionEnd[0]
+        final fun <get-selectionEnd>(): kotlin/Int // stapel.input/MaskedText.selectionEnd.<get-selectionEnd>|<get-selectionEnd>(){}[0]
+    final val selectionStart // stapel.input/MaskedText.selectionStart|{}selectionStart[0]
+        final fun <get-selectionStart>(): kotlin/Int // stapel.input/MaskedText.selectionStart.<get-selectionStart>|<get-selectionStart>(){}[0]
+    final val text // stapel.input/MaskedText.text|{}text[0]
+        final fun <get-text>(): kotlin/String // stapel.input/MaskedText.text.<get-text>|<get-text>(){}[0]
+
+    final fun backspace(): stapel.input/MaskedText // stapel.input/MaskedText.backspace|backspace(){}[0]
+    final fun deleteForward(): stapel.input/MaskedText // stapel.input/MaskedText.deleteForward|deleteForward(){}[0]
+    final fun replace(kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/MaskedText // stapel.input/MaskedText.replace|replace(kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun select(kotlin/Int, kotlin/Int = ...): stapel.input/MaskedText // stapel.input/MaskedText.select|select(kotlin.Int;kotlin.Int){}[0]
+    final fun toString(): kotlin/String // stapel.input/MaskedText.toString|toString(){}[0]
+    final fun type(kotlin/CharSequence): stapel.input/MaskedText // stapel.input/MaskedText.type|type(kotlin.CharSequence){}[0]
+
+    final object Companion { // stapel.input/MaskedText.Companion|null[0]
+        final fun of(stapel.input/InputFormat, kotlin/CharSequence = ...): stapel.input/MaskedText // stapel.input/MaskedText.Companion.of|of(stapel.input.InputFormat;kotlin.CharSequence){}[0]
+    }
+}
+
+final class stapel.input/MoneyFormat : stapel.input/InputFormat { // stapel.input/MoneyFormat|null[0]
+    constructor <init>(stapel.input/InputLocale = ..., kotlin/Int, kotlin/String = ..., kotlin/String = ..., kotlin/Boolean = ..., kotlin/Int = ...) // stapel.input/MoneyFormat.<init>|<init>(stapel.input.InputLocale;kotlin.Int;kotlin.String;kotlin.String;kotlin.Boolean;kotlin.Int){}[0]
+
+    final val allowNegative // stapel.input/MoneyFormat.allowNegative|{}allowNegative[0]
+        final fun <get-allowNegative>(): kotlin/Boolean // stapel.input/MoneyFormat.allowNegative.<get-allowNegative>|<get-allowNegative>(){}[0]
+    final val decimal // stapel.input/MoneyFormat.decimal|{}decimal[0]
+        final fun <get-decimal>(): stapel.input/DecimalFormat // stapel.input/MoneyFormat.decimal.<get-decimal>|<get-decimal>(){}[0]
+    final val keyboard // stapel.input/MoneyFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/MoneyFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val locale // stapel.input/MoneyFormat.locale|{}locale[0]
+        final fun <get-locale>(): stapel.input/InputLocale // stapel.input/MoneyFormat.locale.<get-locale>|<get-locale>(){}[0]
+    final val maxIntegerDigits // stapel.input/MoneyFormat.maxIntegerDigits|{}maxIntegerDigits[0]
+        final fun <get-maxIntegerDigits>(): kotlin/Int // stapel.input/MoneyFormat.maxIntegerDigits.<get-maxIntegerDigits>|<get-maxIntegerDigits>(){}[0]
+    final val minorUnits // stapel.input/MoneyFormat.minorUnits|{}minorUnits[0]
+        final fun <get-minorUnits>(): kotlin/Int // stapel.input/MoneyFormat.minorUnits.<get-minorUnits>|<get-minorUnits>(){}[0]
+    final val prefix // stapel.input/MoneyFormat.prefix|{}prefix[0]
+        final fun <get-prefix>(): kotlin/String // stapel.input/MoneyFormat.prefix.<get-prefix>|<get-prefix>(){}[0]
+    final val suffix // stapel.input/MoneyFormat.suffix|{}suffix[0]
+        final fun <get-suffix>(): kotlin/String // stapel.input/MoneyFormat.suffix.<get-suffix>|<get-suffix>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/MoneyFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/MoneyFormat.format|format(kotlin.String){}[0]
+    final fun fromDecimal(stapel.wire/Decimal): kotlin/String // stapel.input/MoneyFormat.fromDecimal|fromDecimal(stapel.wire.Decimal){}[0]
+    final fun fromMinorUnits(kotlin/Long): kotlin/String // stapel.input/MoneyFormat.fromMinorUnits|fromMinorUnits(kotlin.Long){}[0]
+    final fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/MoneyFormat.isComplete|isComplete(kotlin.String){}[0]
+    final fun toDecimal(kotlin/String): stapel.wire/Decimal? // stapel.input/MoneyFormat.toDecimal|toDecimal(kotlin.String){}[0]
+    final fun toMinorUnits(kotlin/String): kotlin/Long? // stapel.input/MoneyFormat.toMinorUnits|toMinorUnits(kotlin.String){}[0]
+}
+
+final class stapel.input/PatternFormat : stapel.input/InputFormat { // stapel.input/PatternFormat|null[0]
+    constructor <init>(kotlin/String, kotlin/Boolean = ..., kotlin/Char = ...) // stapel.input/PatternFormat.<init>|<init>(kotlin.String;kotlin.Boolean;kotlin.Char){}[0]
+    constructor <init>(stapel.input/MaskPattern, kotlin/Boolean = ..., kotlin/Char = ...) // stapel.input/PatternFormat.<init>|<init>(stapel.input.MaskPattern;kotlin.Boolean;kotlin.Char){}[0]
+
+    final val keyboard // stapel.input/PatternFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/PatternFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val pattern // stapel.input/PatternFormat.pattern|{}pattern[0]
+        final fun <get-pattern>(): stapel.input/MaskPattern // stapel.input/PatternFormat.pattern.<get-pattern>|<get-pattern>(){}[0]
+    final val upperCase // stapel.input/PatternFormat.upperCase|{}upperCase[0]
+        final fun <get-upperCase>(): kotlin/Boolean // stapel.input/PatternFormat.upperCase.<get-upperCase>|<get-upperCase>(){}[0]
+    final val zeroDigit // stapel.input/PatternFormat.zeroDigit|{}zeroDigit[0]
+        final fun <get-zeroDigit>(): kotlin/Char // stapel.input/PatternFormat.zeroDigit.<get-zeroDigit>|<get-zeroDigit>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/PatternFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/PatternFormat.format|format(kotlin.String){}[0]
+    final fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/PatternFormat.isComplete|isComplete(kotlin.String){}[0]
+}
+
+final class stapel.input/PhoneFormat : stapel.input/InputFormat { // stapel.input/PhoneFormat|null[0]
+    constructor <init>(stapel.input/PhoneMetadata = ..., kotlin/String? = ..., kotlin/Boolean = ..., kotlin/Char = ...) // stapel.input/PhoneFormat.<init>|<init>(stapel.input.PhoneMetadata;kotlin.String?;kotlin.Boolean;kotlin.Char){}[0]
+
+    final val defaultCallingCode // stapel.input/PhoneFormat.defaultCallingCode|{}defaultCallingCode[0]
+        final fun <get-defaultCallingCode>(): kotlin/String? // stapel.input/PhoneFormat.defaultCallingCode.<get-defaultCallingCode>|<get-defaultCallingCode>(){}[0]
+    final val keyboard // stapel.input/PhoneFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/PhoneFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val lockCallingCode // stapel.input/PhoneFormat.lockCallingCode|{}lockCallingCode[0]
+        final fun <get-lockCallingCode>(): kotlin/Boolean // stapel.input/PhoneFormat.lockCallingCode.<get-lockCallingCode>|<get-lockCallingCode>(){}[0]
+    final val metadata // stapel.input/PhoneFormat.metadata|{}metadata[0]
+        final fun <get-metadata>(): stapel.input/PhoneMetadata // stapel.input/PhoneFormat.metadata.<get-metadata>|<get-metadata>(){}[0]
+    final val zeroDigit // stapel.input/PhoneFormat.zeroDigit|{}zeroDigit[0]
+        final fun <get-zeroDigit>(): kotlin/Char // stapel.input/PhoneFormat.zeroDigit.<get-zeroDigit>|<get-zeroDigit>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/PhoneFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/PhoneFormat.format|format(kotlin.String){}[0]
+    final fun isComplete(kotlin/String): kotlin/Boolean // stapel.input/PhoneFormat.isComplete|isComplete(kotlin.String){}[0]
+}
+
+final class stapel.input/PlainFormat : stapel.input/InputFormat { // stapel.input/PlainFormat|null[0]
+    constructor <init>(kotlin/Int? = ..., kotlin/Function1<kotlin/Char, kotlin/Boolean> = ...) // stapel.input/PlainFormat.<init>|<init>(kotlin.Int?;kotlin.Function1<kotlin.Char,kotlin.Boolean>){}[0]
+
+    final val keyboard // stapel.input/PlainFormat.keyboard|{}keyboard[0]
+        final fun <get-keyboard>(): stapel.input/InputKeyboard // stapel.input/PlainFormat.keyboard.<get-keyboard>|<get-keyboard>(){}[0]
+    final val maxLength // stapel.input/PlainFormat.maxLength|{}maxLength[0]
+        final fun <get-maxLength>(): kotlin/Int? // stapel.input/PlainFormat.maxLength.<get-maxLength>|<get-maxLength>(){}[0]
+
+    final fun edit(kotlin/String, kotlin/Int, kotlin/Int, kotlin/CharSequence): stapel.input/RawEdit // stapel.input/PlainFormat.edit|edit(kotlin.String;kotlin.Int;kotlin.Int;kotlin.CharSequence){}[0]
+    final fun format(kotlin/String): stapel.input/Formatted // stapel.input/PlainFormat.format|format(kotlin.String){}[0]
+}
+
+final class stapel.input/RawEdit { // stapel.input/RawEdit|null[0]
+    constructor <init>(kotlin/String, kotlin/Int) // stapel.input/RawEdit.<init>|<init>(kotlin.String;kotlin.Int){}[0]
+
+    final val cursor // stapel.input/RawEdit.cursor|{}cursor[0]
+        final fun <get-cursor>(): kotlin/Int // stapel.input/RawEdit.cursor.<get-cursor>|<get-cursor>(){}[0]
+    final val raw // stapel.input/RawEdit.raw|{}raw[0]
+        final fun <get-raw>(): kotlin/String // stapel.input/RawEdit.raw.<get-raw>|<get-raw>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.input/RawEdit.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.input/RawEdit.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.input/RawEdit.toString|toString(){}[0]
+}
+
+final object stapel.input.rules/InputRules { // stapel.input.rules/InputRules|null[0]
+    final fun build(stapel.input.rules/FieldSpec, stapel.input.rules/RuleContext = ...): stapel.input.rules/FieldRules // stapel.input.rules/InputRules.build|build(stapel.input.rules.FieldSpec;stapel.input.rules.RuleContext){}[0]
+    final fun fromJson(kotlinx.serialization.json/JsonElement, stapel.input.rules/RuleContext = ...): stapel.input.rules/FieldRules // stapel.input.rules/InputRules.fromJson|fromJson(kotlinx.serialization.json.JsonElement;stapel.input.rules.RuleContext){}[0]
+    final fun parse(kotlinx.serialization.json/JsonElement): stapel.input.rules/ParsedFieldSpec // stapel.input.rules/InputRules.parse|parse(kotlinx.serialization.json.JsonElement){}[0]
+}
+
+final object stapel.input.validation/InputIssueKeys { // stapel.input.validation/InputIssueKeys|null[0]
+    final const val ABOVE_MAX // stapel.input.validation/InputIssueKeys.ABOVE_MAX|{}ABOVE_MAX[0]
+        final fun <get-ABOVE_MAX>(): kotlin/String // stapel.input.validation/InputIssueKeys.ABOVE_MAX.<get-ABOVE_MAX>|<get-ABOVE_MAX>(){}[0]
+    final const val BELOW_MIN // stapel.input.validation/InputIssueKeys.BELOW_MIN|{}BELOW_MIN[0]
+        final fun <get-BELOW_MIN>(): kotlin/String // stapel.input.validation/InputIssueKeys.BELOW_MIN.<get-BELOW_MIN>|<get-BELOW_MIN>(){}[0]
+    final const val CHECKSUM // stapel.input.validation/InputIssueKeys.CHECKSUM|{}CHECKSUM[0]
+        final fun <get-CHECKSUM>(): kotlin/String // stapel.input.validation/InputIssueKeys.CHECKSUM.<get-CHECKSUM>|<get-CHECKSUM>(){}[0]
+    final const val INCOMPLETE // stapel.input.validation/InputIssueKeys.INCOMPLETE|{}INCOMPLETE[0]
+        final fun <get-INCOMPLETE>(): kotlin/String // stapel.input.validation/InputIssueKeys.INCOMPLETE.<get-INCOMPLETE>|<get-INCOMPLETE>(){}[0]
+    final const val INVALID_DATE // stapel.input.validation/InputIssueKeys.INVALID_DATE|{}INVALID_DATE[0]
+        final fun <get-INVALID_DATE>(): kotlin/String // stapel.input.validation/InputIssueKeys.INVALID_DATE.<get-INVALID_DATE>|<get-INVALID_DATE>(){}[0]
+    final const val INVALID_PHONE // stapel.input.validation/InputIssueKeys.INVALID_PHONE|{}INVALID_PHONE[0]
+        final fun <get-INVALID_PHONE>(): kotlin/String // stapel.input.validation/InputIssueKeys.INVALID_PHONE.<get-INVALID_PHONE>|<get-INVALID_PHONE>(){}[0]
+    final const val NOT_A_NUMBER // stapel.input.validation/InputIssueKeys.NOT_A_NUMBER|{}NOT_A_NUMBER[0]
+        final fun <get-NOT_A_NUMBER>(): kotlin/String // stapel.input.validation/InputIssueKeys.NOT_A_NUMBER.<get-NOT_A_NUMBER>|<get-NOT_A_NUMBER>(){}[0]
+    final const val PATTERN // stapel.input.validation/InputIssueKeys.PATTERN|{}PATTERN[0]
+        final fun <get-PATTERN>(): kotlin/String // stapel.input.validation/InputIssueKeys.PATTERN.<get-PATTERN>|<get-PATTERN>(){}[0]
+    final const val REQUIRED // stapel.input.validation/InputIssueKeys.REQUIRED|{}REQUIRED[0]
+        final fun <get-REQUIRED>(): kotlin/String // stapel.input.validation/InputIssueKeys.REQUIRED.<get-REQUIRED>|<get-REQUIRED>(){}[0]
+    final const val TOO_LONG // stapel.input.validation/InputIssueKeys.TOO_LONG|{}TOO_LONG[0]
+        final fun <get-TOO_LONG>(): kotlin/String // stapel.input.validation/InputIssueKeys.TOO_LONG.<get-TOO_LONG>|<get-TOO_LONG>(){}[0]
+    final const val TOO_SHORT // stapel.input.validation/InputIssueKeys.TOO_SHORT|{}TOO_SHORT[0]
+        final fun <get-TOO_SHORT>(): kotlin/String // stapel.input.validation/InputIssueKeys.TOO_SHORT.<get-TOO_SHORT>|<get-TOO_SHORT>(){}[0]
+}
+
+final object stapel.input.validation/Validators { // stapel.input.validation/Validators|null[0]
+    final fun <#A1: kotlin/Any?> custom(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function1<#A1, kotlin/Boolean>): stapel.input.validation/Validator<#A1> // stapel.input.validation/Validators.custom|custom(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function1<0:0,kotlin.Boolean>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Comparable<#A1>> range(#A1? = ..., #A1? = ..., kotlin/Function1<#A1, kotlin/String> = ...): stapel.input.validation/Validator<#A1> // stapel.input.validation/Validators.range|range(0:0?;0:0?;kotlin.Function1<0:0,kotlin.String>){0§<kotlin.Comparable<0:0>>}[0]
+    final fun complete(stapel.input/InputFormat, kotlin/String = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.complete|complete(stapel.input.InputFormat;kotlin.String){}[0]
+    final fun date(stapel.input/DateFormat, kotlinx.datetime/LocalDate? = ..., kotlinx.datetime/LocalDate? = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.date|date(stapel.input.DateFormat;kotlinx.datetime.LocalDate?;kotlinx.datetime.LocalDate?){}[0]
+    final fun decimalRange(stapel.wire/Decimal? = ..., stapel.wire/Decimal? = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.decimalRange|decimalRange(stapel.wire.Decimal?;stapel.wire.Decimal?){}[0]
+    final fun length(kotlin/Int? = ..., kotlin/Int? = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.length|length(kotlin.Int?;kotlin.Int?){}[0]
+    final fun luhn(kotlin/String = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.luhn|luhn(kotlin.String){}[0]
+    final fun pattern(kotlin.text/Regex, kotlin/String = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.pattern|pattern(kotlin.text.Regex;kotlin.String){}[0]
+    final fun phone(stapel.input/PhoneMetadata = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.phone|phone(stapel.input.PhoneMetadata){}[0]
+    final fun required(kotlin/String = ...): stapel.input.validation/Validator<kotlin/String> // stapel.input.validation/Validators.required|required(kotlin.String){}[0]
+}
+
+final object stapel.input/GenericPhoneMetadata : stapel.input/PhoneMetadata { // stapel.input/GenericPhoneMetadata|null[0]
+    final fun callingCodeLength(kotlin/String): kotlin/Int? // stapel.input/GenericPhoneMetadata.callingCodeLength|callingCodeLength(kotlin.String){}[0]
+    final fun nationalGroups(kotlin/String, kotlin/String): kotlin.collections/List<kotlin/Int>? // stapel.input/GenericPhoneMetadata.nationalGroups|nationalGroups(kotlin.String;kotlin.String){}[0]
+}
+
+final object stapel.input/InputChars { // stapel.input/InputChars|null[0]
+    final fun asciiDigit(kotlin/Char): kotlin/Char? // stapel.input/InputChars.asciiDigit|asciiDigit(kotlin.Char){}[0]
+    final fun isInvisible(kotlin/Char): kotlin/Boolean // stapel.input/InputChars.isInvisible|isInvisible(kotlin.Char){}[0]
+    final fun isMinus(kotlin/Char): kotlin/Boolean // stapel.input/InputChars.isMinus|isMinus(kotlin.Char){}[0]
+    final fun isPlus(kotlin/Char): kotlin/Boolean // stapel.input/InputChars.isPlus|isPlus(kotlin.Char){}[0]
+    final fun isSpace(kotlin/Char): kotlin/Boolean // stapel.input/InputChars.isSpace|isSpace(kotlin.Char){}[0]
+    final fun shapeDigit(kotlin/Char, kotlin/Char): kotlin/Char // stapel.input/InputChars.shapeDigit|shapeDigit(kotlin.Char;kotlin.Char){}[0]
+}
+
+final val stapel.input.validation/InputBundle // stapel.input.validation/InputBundle|{}InputBundle[0]
+    final fun <get-InputBundle>(): stapel.i18n/I18nBundle // stapel.input.validation/InputBundle.<get-InputBundle>|<get-InputBundle>(){}[0]
+
+final fun (stapel.input/InputFormat).stapel.input/normalize(kotlin/CharSequence): kotlin/String // stapel.input/normalize|normalize@stapel.input.InputFormat(kotlin.CharSequence){}[0]
+final fun <#A: kotlin/Any?> (stapel.input.validation/Validator<#A>).stapel.input.validation/and(stapel.input.validation/Validator<#A>): stapel.input.validation/Validator<#A> // stapel.input.validation/and|and@stapel.input.validation.Validator<0:0>(stapel.input.validation.Validator<0:0>){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (stapel.input.validation/Validator<#A>).stapel.input.validation/then(stapel.input.validation/Validator<#A>): stapel.input.validation/Validator<#A> // stapel.input.validation/then|then@stapel.input.validation.Validator<0:0>(stapel.input.validation.Validator<0:0>){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> stapel.input.validation/allOf(kotlin.collections/List<stapel.input.validation/Validator<#A>>): stapel.input.validation/Validator<#A> // stapel.input.validation/allOf|allOf(kotlin.collections.List<stapel.input.validation.Validator<0:0>>){0§<kotlin.Any?>}[0]

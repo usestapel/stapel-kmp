@@ -1,0 +1,577 @@
+public final class stapel/input/CodeFormat : stapel/input/InputFormat {
+	public fun <init> (I)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getLength ()I
+	public fun isComplete (Ljava/lang/String;)Z
+}
+
+public final class stapel/input/DateFormat : stapel/input/InputFormat {
+	public fun <init> ()V
+	public fun <init> (Lstapel/input/DateOrder;CC)V
+	public synthetic fun <init> (Lstapel/input/DateOrder;CCILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lstapel/input/InputLocale;)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public final fun fromDate (Lkotlinx/datetime/LocalDate;)Ljava/lang/String;
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getOrder ()Lstapel/input/DateOrder;
+	public final fun getSeparator ()C
+	public final fun getZeroDigit ()C
+	public fun isComplete (Ljava/lang/String;)Z
+	public final fun toDate (Ljava/lang/String;)Lkotlinx/datetime/LocalDate;
+}
+
+public final class stapel/input/DateOrder : java/lang/Enum {
+	public static final field DayMonthYear Lstapel/input/DateOrder;
+	public static final field MonthDayYear Lstapel/input/DateOrder;
+	public static final field YearMonthDay Lstapel/input/DateOrder;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/input/DateOrder;
+	public static fun values ()[Lstapel/input/DateOrder;
+}
+
+public final class stapel/input/DecimalFormat : stapel/input/InputFormat {
+	public fun <init> ()V
+	public fun <init> (Lstapel/input/InputLocale;IIZLjava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/input/InputLocale;IIZLjava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public final fun fromDecimal-QMGHKt0 (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getAllowNegative ()Z
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getLocale ()Lstapel/input/InputLocale;
+	public final fun getMaxFractionDigits ()I
+	public final fun getMaxIntegerDigits ()I
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getSuffix ()Ljava/lang/String;
+	public fun isComplete (Ljava/lang/String;)Z
+	public final fun toDecimal-7hft3hM (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/input/FormatPiece {
+}
+
+public final class stapel/input/FormatPiece$Insert : stapel/input/FormatPiece {
+	public fun <init> (ILjava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRawOffset ()I
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/input/FormatPiece$Substitute : stapel/input/FormatPiece {
+	public fun <init> (IC)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRawIndex ()I
+	public final fun getShownAs ()C
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/input/Formatted {
+	public static final field Companion Lstapel/input/Formatted$Companion;
+	public final fun displayToRaw (I)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPieces ()Ljava/util/List;
+	public final fun getRaw ()Ljava/lang/String;
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isLiteralAt (I)Z
+	public final fun rawToDisplay (I)I
+	public final fun snapCursor (I)I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/input/Formatted$Builder {
+	public fun <init> ()V
+	public final fun build ()Lstapel/input/Formatted;
+	public final fun getRawLength ()I
+	public final fun literal (Ljava/lang/String;)Lstapel/input/Formatted$Builder;
+	public final fun raw (CC)Lstapel/input/Formatted$Builder;
+	public static synthetic fun raw$default (Lstapel/input/Formatted$Builder;CCILjava/lang/Object;)Lstapel/input/Formatted$Builder;
+}
+
+public final class stapel/input/Formatted$Companion {
+	public final fun identity (Ljava/lang/String;)Lstapel/input/Formatted;
+}
+
+public final class stapel/input/GenericPhoneMetadata : stapel/input/PhoneMetadata {
+	public static final field INSTANCE Lstapel/input/GenericPhoneMetadata;
+	public fun callingCodeLength (Ljava/lang/String;)Ljava/lang/Integer;
+	public fun getInternationalPrefixes ()Ljava/util/List;
+	public fun isPossible (Ljava/lang/String;)Z
+	public fun maxDigits (Ljava/lang/String;)I
+	public fun nationalGroups (Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+	public fun nationalToE164 (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/input/GroupedDigitsFormat : stapel/input/InputFormat {
+	public static final field Companion Lstapel/input/GroupedDigitsFormat$Companion;
+	public fun <init> (Ljava/util/List;Ljava/lang/String;ILjava/lang/Integer;C)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;ILjava/lang/Integer;CILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public final fun getGroupSizes ()Ljava/util/List;
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getMaxDigits ()I
+	public final fun getMinDigits ()Ljava/lang/Integer;
+	public final fun getSeparator ()Ljava/lang/String;
+	public final fun getZeroDigit ()C
+	public fun isComplete (Ljava/lang/String;)Z
+}
+
+public final class stapel/input/GroupedDigitsFormat$Companion {
+	public final fun paymentCard (Ljava/lang/String;)Lstapel/input/GroupedDigitsFormat;
+	public static synthetic fun paymentCard$default (Lstapel/input/GroupedDigitsFormat$Companion;Ljava/lang/String;ILjava/lang/Object;)Lstapel/input/GroupedDigitsFormat;
+}
+
+public final class stapel/input/InputChars {
+	public static final field INSTANCE Lstapel/input/InputChars;
+	public final fun asciiDigit (C)Ljava/lang/Character;
+	public final fun isInvisible (C)Z
+	public final fun isMinus (C)Z
+	public final fun isPlus (C)Z
+	public final fun isSpace (C)Z
+	public final fun shapeDigit (CC)C
+}
+
+public abstract interface class stapel/input/InputFormat {
+	public abstract fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public abstract fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public abstract fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public fun isComplete (Ljava/lang/String;)Z
+}
+
+public final class stapel/input/InputFormat$DefaultImpls {
+	public static fun isComplete (Lstapel/input/InputFormat;Ljava/lang/String;)Z
+}
+
+public final class stapel/input/InputFormatKt {
+	public static final fun normalize (Lstapel/input/InputFormat;Ljava/lang/CharSequence;)Ljava/lang/String;
+}
+
+public final class stapel/input/InputKeyboard : java/lang/Enum {
+	public static final field Decimal Lstapel/input/InputKeyboard;
+	public static final field Number Lstapel/input/InputKeyboard;
+	public static final field Phone Lstapel/input/InputKeyboard;
+	public static final field Text Lstapel/input/InputKeyboard;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/input/InputKeyboard;
+	public static fun values ()[Lstapel/input/InputKeyboard;
+}
+
+public final class stapel/input/InputLocale {
+	public static final field Companion Lstapel/input/InputLocale$Companion;
+	public fun <init> ()V
+	public fun <init> (CLjava/lang/String;IICLstapel/input/DateOrder;C)V
+	public synthetic fun <init> (CLjava/lang/String;IICLstapel/input/DateOrder;CILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDateOrder ()Lstapel/input/DateOrder;
+	public final fun getDateSeparator ()C
+	public final fun getDecimalSeparator ()C
+	public final fun getGroupSeparator ()Ljava/lang/String;
+	public final fun getPrimaryGroupSize ()I
+	public final fun getSecondaryGroupSize ()I
+	public final fun getZeroDigit ()C
+}
+
+public final class stapel/input/InputLocale$Companion {
+	public final fun getNeutral ()Lstapel/input/InputLocale;
+}
+
+public final class stapel/input/MaskPattern {
+	public static final field Companion Lstapel/input/MaskPattern$Companion;
+	public final fun getLiteralsBefore ()Ljava/util/List;
+	public final fun getRequiredSlots ()I
+	public final fun getSlots ()Ljava/util/List;
+	public final fun getTrailingLiterals ()Ljava/lang/String;
+}
+
+public final class stapel/input/MaskPattern$Companion {
+	public final fun parse (Ljava/lang/String;)Lstapel/input/MaskPattern;
+}
+
+public final class stapel/input/MaskedText {
+	public static final field Companion Lstapel/input/MaskedText$Companion;
+	public final fun backspace ()Lstapel/input/MaskedText;
+	public final fun deleteForward ()Lstapel/input/MaskedText;
+	public final fun getFormat ()Lstapel/input/InputFormat;
+	public final fun getFormatted ()Lstapel/input/Formatted;
+	public final fun getRaw ()Ljava/lang/String;
+	public final fun getSelectionEnd ()I
+	public final fun getSelectionStart ()I
+	public final fun getText ()Ljava/lang/String;
+	public final fun replace (IILjava/lang/CharSequence;)Lstapel/input/MaskedText;
+	public final fun select (II)Lstapel/input/MaskedText;
+	public static synthetic fun select$default (Lstapel/input/MaskedText;IIILjava/lang/Object;)Lstapel/input/MaskedText;
+	public fun toString ()Ljava/lang/String;
+	public final fun type (Ljava/lang/CharSequence;)Lstapel/input/MaskedText;
+}
+
+public final class stapel/input/MaskedText$Companion {
+	public final fun of (Lstapel/input/InputFormat;Ljava/lang/CharSequence;)Lstapel/input/MaskedText;
+	public static synthetic fun of$default (Lstapel/input/MaskedText$Companion;Lstapel/input/InputFormat;Ljava/lang/CharSequence;ILjava/lang/Object;)Lstapel/input/MaskedText;
+}
+
+public final class stapel/input/MoneyFormat : stapel/input/InputFormat {
+	public fun <init> (Lstapel/input/InputLocale;ILjava/lang/String;Ljava/lang/String;ZI)V
+	public synthetic fun <init> (Lstapel/input/InputLocale;ILjava/lang/String;Ljava/lang/String;ZIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public final fun fromDecimal-QMGHKt0 (Ljava/lang/String;)Ljava/lang/String;
+	public final fun fromMinorUnits (J)Ljava/lang/String;
+	public final fun getAllowNegative ()Z
+	public final fun getDecimal ()Lstapel/input/DecimalFormat;
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getLocale ()Lstapel/input/InputLocale;
+	public final fun getMaxIntegerDigits ()I
+	public final fun getMinorUnits ()I
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getSuffix ()Ljava/lang/String;
+	public fun isComplete (Ljava/lang/String;)Z
+	public final fun toDecimal-7hft3hM (Ljava/lang/String;)Ljava/lang/String;
+	public final fun toMinorUnits (Ljava/lang/String;)Ljava/lang/Long;
+}
+
+public final class stapel/input/PatternFormat : stapel/input/InputFormat {
+	public fun <init> (Ljava/lang/String;ZC)V
+	public synthetic fun <init> (Ljava/lang/String;ZCILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lstapel/input/MaskPattern;ZC)V
+	public synthetic fun <init> (Lstapel/input/MaskPattern;ZCILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getPattern ()Lstapel/input/MaskPattern;
+	public final fun getUpperCase ()Z
+	public final fun getZeroDigit ()C
+	public fun isComplete (Ljava/lang/String;)Z
+}
+
+public final class stapel/input/PhoneFormat : stapel/input/InputFormat {
+	public fun <init> ()V
+	public fun <init> (Lstapel/input/PhoneMetadata;Ljava/lang/String;ZC)V
+	public synthetic fun <init> (Lstapel/input/PhoneMetadata;Ljava/lang/String;ZCILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public final fun getDefaultCallingCode ()Ljava/lang/String;
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getLockCallingCode ()Z
+	public final fun getMetadata ()Lstapel/input/PhoneMetadata;
+	public final fun getZeroDigit ()C
+	public fun isComplete (Ljava/lang/String;)Z
+}
+
+public abstract interface class stapel/input/PhoneMetadata {
+	public static final field Companion Lstapel/input/PhoneMetadata$Companion;
+	public static final field E164_MAX_DIGITS I
+	public static final field GENERIC_MIN_DIGITS I
+	public static final field ITU_INTERNATIONAL_PREFIX Ljava/lang/String;
+	public abstract fun callingCodeLength (Ljava/lang/String;)Ljava/lang/Integer;
+	public fun getInternationalPrefixes ()Ljava/util/List;
+	public fun isPossible (Ljava/lang/String;)Z
+	public fun maxDigits (Ljava/lang/String;)I
+	public abstract fun nationalGroups (Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+	public fun nationalToE164 (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/input/PhoneMetadata$Companion {
+	public static final field E164_MAX_DIGITS I
+	public static final field GENERIC_MIN_DIGITS I
+	public static final field ITU_INTERNATIONAL_PREFIX Ljava/lang/String;
+}
+
+public final class stapel/input/PhoneMetadata$DefaultImpls {
+	public static fun getInternationalPrefixes (Lstapel/input/PhoneMetadata;)Ljava/util/List;
+	public static fun isPossible (Lstapel/input/PhoneMetadata;Ljava/lang/String;)Z
+	public static fun maxDigits (Lstapel/input/PhoneMetadata;Ljava/lang/String;)I
+	public static fun nationalToE164 (Lstapel/input/PhoneMetadata;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/input/PlainFormat : stapel/input/InputFormat {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Ljava/lang/Integer;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun edit (Ljava/lang/String;IILjava/lang/CharSequence;)Lstapel/input/RawEdit;
+	public fun format (Ljava/lang/String;)Lstapel/input/Formatted;
+	public fun getKeyboard ()Lstapel/input/InputKeyboard;
+	public final fun getMaxLength ()Ljava/lang/Integer;
+	public fun isComplete (Ljava/lang/String;)Z
+}
+
+public final class stapel/input/RawEdit {
+	public fun <init> (Ljava/lang/String;I)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCursor ()I
+	public final fun getRaw ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/input/SlotKind : java/lang/Enum {
+	public static final field Digit Lstapel/input/SlotKind;
+	public static final field Letter Lstapel/input/SlotKind;
+	public static final field LetterOrDigit Lstapel/input/SlotKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/input/SlotKind;
+	public static fun values ()[Lstapel/input/SlotKind;
+}
+
+public final class stapel/input/rules/FieldRules {
+	public fun <init> (Lstapel/input/InputFormat;Lstapel/input/validation/Validator;Ljava/util/List;)V
+	public final fun getFormat ()Lstapel/input/InputFormat;
+	public final fun getProblems ()Ljava/util/List;
+	public final fun getValidator ()Lstapel/input/validation/Validator;
+	public final fun validate (Ljava/lang/String;)Lstapel/input/validation/ValidationResult;
+}
+
+public final class stapel/input/rules/FieldSpec {
+	public fun <init> ()V
+	public fun <init> (Lstapel/input/rules/FormatSpec;Ljava/util/List;)V
+	public synthetic fun <init> (Lstapel/input/rules/FormatSpec;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getFormat ()Lstapel/input/rules/FormatSpec;
+	public final fun getRules ()Ljava/util/List;
+}
+
+public abstract interface class stapel/input/rules/FormatSpec {
+}
+
+public final class stapel/input/rules/FormatSpec$Code : stapel/input/rules/FormatSpec {
+	public fun <init> (I)V
+	public final fun getLength ()I
+}
+
+public final class stapel/input/rules/FormatSpec$Date : stapel/input/rules/FormatSpec {
+	public static final field INSTANCE Lstapel/input/rules/FormatSpec$Date;
+}
+
+public final class stapel/input/rules/FormatSpec$Digits : stapel/input/rules/FormatSpec {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getGroups ()Ljava/util/List;
+	public final fun getMaxDigits ()Ljava/lang/Integer;
+	public final fun getMinDigits ()Ljava/lang/Integer;
+	public final fun getSeparator ()Ljava/lang/String;
+}
+
+public final class stapel/input/rules/FormatSpec$Money : stapel/input/rules/FormatSpec {
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;Z)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAllowNegative ()Z
+	public final fun getMinorUnits ()I
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getSuffix ()Ljava/lang/String;
+}
+
+public final class stapel/input/rules/FormatSpec$Number : stapel/input/rules/FormatSpec {
+	public fun <init> ()V
+	public fun <init> (IIZ)V
+	public synthetic fun <init> (IIZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAllowNegative ()Z
+	public final fun getMaxFractionDigits ()I
+	public final fun getMaxIntegerDigits ()I
+}
+
+public final class stapel/input/rules/FormatSpec$Pattern : stapel/input/rules/FormatSpec {
+	public fun <init> (Ljava/lang/String;Z)V
+	public synthetic fun <init> (Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMask ()Ljava/lang/String;
+	public final fun getUpperCase ()Z
+}
+
+public final class stapel/input/rules/FormatSpec$Phone : stapel/input/rules/FormatSpec {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Z)V
+	public synthetic fun <init> (Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDefaultCallingCode ()Ljava/lang/String;
+	public final fun getLockCallingCode ()Z
+}
+
+public final class stapel/input/rules/FormatSpec$Text : stapel/input/rules/FormatSpec {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMaxLength ()Ljava/lang/Integer;
+}
+
+public final class stapel/input/rules/InputRules {
+	public static final field INSTANCE Lstapel/input/rules/InputRules;
+	public final fun build (Lstapel/input/rules/FieldSpec;Lstapel/input/rules/RuleContext;)Lstapel/input/rules/FieldRules;
+	public static synthetic fun build$default (Lstapel/input/rules/InputRules;Lstapel/input/rules/FieldSpec;Lstapel/input/rules/RuleContext;ILjava/lang/Object;)Lstapel/input/rules/FieldRules;
+	public final fun fromJson (Lkotlinx/serialization/json/JsonElement;Lstapel/input/rules/RuleContext;)Lstapel/input/rules/FieldRules;
+	public static synthetic fun fromJson$default (Lstapel/input/rules/InputRules;Lkotlinx/serialization/json/JsonElement;Lstapel/input/rules/RuleContext;ILjava/lang/Object;)Lstapel/input/rules/FieldRules;
+	public final fun parse (Lkotlinx/serialization/json/JsonElement;)Lstapel/input/rules/ParsedFieldSpec;
+}
+
+public final class stapel/input/rules/ParsedFieldSpec {
+	public fun <init> (Lstapel/input/rules/FieldSpec;Ljava/util/List;)V
+	public final fun getProblems ()Ljava/util/List;
+	public final fun getSpec ()Lstapel/input/rules/FieldSpec;
+}
+
+public final class stapel/input/rules/RuleContext {
+	public fun <init> ()V
+	public fun <init> (Lstapel/input/InputLocale;Lstapel/input/PhoneMetadata;)V
+	public synthetic fun <init> (Lstapel/input/InputLocale;Lstapel/input/PhoneMetadata;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getLocale ()Lstapel/input/InputLocale;
+	public final fun getPhoneMetadata ()Lstapel/input/PhoneMetadata;
+}
+
+public abstract interface class stapel/input/rules/RuleSpec {
+}
+
+public final class stapel/input/rules/RuleSpec$Complete : stapel/input/rules/RuleSpec {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKey ()Ljava/lang/String;
+}
+
+public final class stapel/input/rules/RuleSpec$DateRange : stapel/input/rules/RuleSpec {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/LocalDate;)V
+	public synthetic fun <init> (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/LocalDate;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMax ()Lkotlinx/datetime/LocalDate;
+	public final fun getMin ()Lkotlinx/datetime/LocalDate;
+}
+
+public final class stapel/input/rules/RuleSpec$Length : stapel/input/rules/RuleSpec {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMax ()Ljava/lang/Integer;
+	public final fun getMin ()Ljava/lang/Integer;
+}
+
+public final class stapel/input/rules/RuleSpec$Luhn : stapel/input/rules/RuleSpec {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKey ()Ljava/lang/String;
+}
+
+public final class stapel/input/rules/RuleSpec$Pattern : stapel/input/rules/RuleSpec {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getRegex ()Ljava/lang/String;
+}
+
+public final class stapel/input/rules/RuleSpec$Phone : stapel/input/rules/RuleSpec {
+	public static final field INSTANCE Lstapel/input/rules/RuleSpec$Phone;
+}
+
+public final class stapel/input/rules/RuleSpec$Range : stapel/input/rules/RuleSpec {
+	public fun <init> ()V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMax-Qu7mA_0 ()Ljava/lang/String;
+	public final fun getMin-Qu7mA_0 ()Ljava/lang/String;
+}
+
+public final class stapel/input/rules/RuleSpec$Required : stapel/input/rules/RuleSpec {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKey ()Ljava/lang/String;
+}
+
+public final class stapel/input/validation/FieldIssue {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getParams ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/input/validation/InputBundleKt {
+	public static final fun getInputBundle ()Lstapel/i18n/I18nBundle;
+}
+
+public final class stapel/input/validation/InputIssueKeys {
+	public static final field ABOVE_MAX Ljava/lang/String;
+	public static final field BELOW_MIN Ljava/lang/String;
+	public static final field CHECKSUM Ljava/lang/String;
+	public static final field INCOMPLETE Ljava/lang/String;
+	public static final field INSTANCE Lstapel/input/validation/InputIssueKeys;
+	public static final field INVALID_DATE Ljava/lang/String;
+	public static final field INVALID_PHONE Ljava/lang/String;
+	public static final field NOT_A_NUMBER Ljava/lang/String;
+	public static final field PATTERN Ljava/lang/String;
+	public static final field REQUIRED Ljava/lang/String;
+	public static final field TOO_LONG Ljava/lang/String;
+	public static final field TOO_SHORT Ljava/lang/String;
+}
+
+public final class stapel/input/validation/ValidationKt {
+	public static final fun allOf (Ljava/util/List;)Lstapel/input/validation/Validator;
+	public static final fun and (Lstapel/input/validation/Validator;Lstapel/input/validation/Validator;)Lstapel/input/validation/Validator;
+	public static final fun then (Lstapel/input/validation/Validator;Lstapel/input/validation/Validator;)Lstapel/input/validation/Validator;
+}
+
+public abstract interface class stapel/input/validation/ValidationResult {
+	public static final field Companion Lstapel/input/validation/ValidationResult$Companion;
+	public abstract fun getIssues ()Ljava/util/List;
+	public fun isValid ()Z
+}
+
+public final class stapel/input/validation/ValidationResult$Companion {
+	public final fun invalid (Ljava/lang/String;Ljava/util/Map;)Lstapel/input/validation/ValidationResult;
+	public static synthetic fun invalid$default (Lstapel/input/validation/ValidationResult$Companion;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lstapel/input/validation/ValidationResult;
+	public final fun of (Ljava/util/List;)Lstapel/input/validation/ValidationResult;
+}
+
+public final class stapel/input/validation/ValidationResult$DefaultImpls {
+	public static fun isValid (Lstapel/input/validation/ValidationResult;)Z
+}
+
+public final class stapel/input/validation/ValidationResult$Invalid : stapel/input/validation/ValidationResult {
+	public fun <init> (Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getIssues ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun isValid ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/input/validation/ValidationResult$Valid : stapel/input/validation/ValidationResult {
+	public static final field INSTANCE Lstapel/input/validation/ValidationResult$Valid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getIssues ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun isValid ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/input/validation/Validator {
+	public abstract fun validate (Ljava/lang/Object;)Lstapel/input/validation/ValidationResult;
+}
+
+public final class stapel/input/validation/Validators {
+	public static final field INSTANCE Lstapel/input/validation/Validators;
+	public final fun complete (Lstapel/input/InputFormat;Ljava/lang/String;)Lstapel/input/validation/Validator;
+	public static synthetic fun complete$default (Lstapel/input/validation/Validators;Lstapel/input/InputFormat;Ljava/lang/String;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun custom (Ljava/lang/String;Ljava/util/Map;Lkotlin/jvm/functions/Function1;)Lstapel/input/validation/Validator;
+	public static synthetic fun custom$default (Lstapel/input/validation/Validators;Ljava/lang/String;Ljava/util/Map;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun date (Lstapel/input/DateFormat;Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/LocalDate;)Lstapel/input/validation/Validator;
+	public static synthetic fun date$default (Lstapel/input/validation/Validators;Lstapel/input/DateFormat;Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/LocalDate;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun decimalRange-VCS8rYI (Ljava/lang/String;Ljava/lang/String;)Lstapel/input/validation/Validator;
+	public static synthetic fun decimalRange-VCS8rYI$default (Lstapel/input/validation/Validators;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun length (Ljava/lang/Integer;Ljava/lang/Integer;)Lstapel/input/validation/Validator;
+	public static synthetic fun length$default (Lstapel/input/validation/Validators;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun luhn (Ljava/lang/String;)Lstapel/input/validation/Validator;
+	public static synthetic fun luhn$default (Lstapel/input/validation/Validators;Ljava/lang/String;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun pattern (Lkotlin/text/Regex;Ljava/lang/String;)Lstapel/input/validation/Validator;
+	public static synthetic fun pattern$default (Lstapel/input/validation/Validators;Lkotlin/text/Regex;Ljava/lang/String;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun phone (Lstapel/input/PhoneMetadata;)Lstapel/input/validation/Validator;
+	public static synthetic fun phone$default (Lstapel/input/validation/Validators;Lstapel/input/PhoneMetadata;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun range (Ljava/lang/Comparable;Ljava/lang/Comparable;Lkotlin/jvm/functions/Function1;)Lstapel/input/validation/Validator;
+	public static synthetic fun range$default (Lstapel/input/validation/Validators;Ljava/lang/Comparable;Ljava/lang/Comparable;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+	public final fun required (Ljava/lang/String;)Lstapel/input/validation/Validator;
+	public static synthetic fun required$default (Lstapel/input/validation/Validators;Ljava/lang/String;ILjava/lang/Object;)Lstapel/input/validation/Validator;
+}
+
