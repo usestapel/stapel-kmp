@@ -2,5 +2,3 @@
 # Format: <project> <module-relative path> <rule> <YYYY-MM-DD>  # owner, reason
 # Owned by the build: a line may only be removed (the gate fails on a line that matches nothing)
 # or, with the owner's consent, extended once. A new hit is never added here — fix it.
-stapel-auth src/commonMain/kotlin/stapel/auth/StapelAuth.kt G-R1 2026-12-03  # auth brigade: Clock.System default; take the runtime Clock
-stapel-auth-ui src/commonMain/kotlin/stapel/auth/ui/StepScreens.kt G-R2 2026-12-03  # auth brigade: runCatching around requestFocus
