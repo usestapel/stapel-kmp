@@ -1,0 +1,86 @@
+public final class stapel/config/ClientInfo {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/config/ClientPlatform;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/config/ClientPlatform;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lstapel/config/ClientPlatform;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/config/ClientPlatform;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/config/ClientInfo;
+	public static synthetic fun copy$default (Lstapel/config/ClientInfo;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/config/ClientPlatform;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/config/ClientInfo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAppId ()Ljava/lang/String;
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getBuild ()Ljava/lang/String;
+	public final fun getClientHints ()Ljava/util/Map;
+	public final fun getDeviceModel ()Ljava/lang/String;
+	public final fun getOsName ()Ljava/lang/String;
+	public final fun getOsVersion ()Ljava/lang/String;
+	public final fun getPlatform ()Lstapel/config/ClientPlatform;
+	public final fun getSdkVersion ()Ljava/lang/String;
+	public final fun getUserAgent ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/config/ClientInfo_jvmKt {
+	public static final fun platformClientInfo (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/config/ClientInfo;
+}
+
+public final class stapel/config/ClientPlatform : java/lang/Enum {
+	public static final field Android Lstapel/config/ClientPlatform;
+	public static final field Desktop Lstapel/config/ClientPlatform;
+	public static final field Ios Lstapel/config/ClientPlatform;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getHintName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/config/ClientPlatform;
+	public static fun values ()[Lstapel/config/ClientPlatform;
+}
+
+public final class stapel/config/Posture : java/lang/Enum {
+	public static final field Live Lstapel/config/Posture;
+	public static final field Prototype Lstapel/config/Posture;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/config/Posture;
+	public static fun values ()[Lstapel/config/Posture;
+}
+
+public final class stapel/config/ServiceEndpoint {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBaseUrl ()Ljava/lang/String;
+	public final fun getHost ()Ljava/lang/String;
+	public final fun getOrigin ()Ljava/lang/String;
+	public final fun getScheme ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isBareOrigin ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/config/StapelEnvironment {
+	public static final field Companion Lstapel/config/StapelEnvironment$Companion;
+	public fun <init> (Ljava/lang/String;Lstapel/config/Posture;Ljava/util/Map;Lstapel/config/ServiceEndpoint;Lstapel/config/ClientInfo;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/config/Posture;Ljava/util/Map;Lstapel/config/ServiceEndpoint;Lstapel/config/ClientInfo;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun endpoint (Ljava/lang/String;)Lstapel/config/ServiceEndpoint;
+	public final fun getClient ()Lstapel/config/ClientInfo;
+	public final fun getDefaultEndpoint ()Lstapel/config/ServiceEndpoint;
+	public final fun getModules ()Ljava/util/Set;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getPosture ()Lstapel/config/Posture;
+	public final fun getSupportedLocales ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+	public final fun url (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public final fun websocketOrigin (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/config/StapelEnvironment$Companion {
+	public final fun single (Ljava/lang/String;Ljava/lang/String;Lstapel/config/Posture;Lstapel/config/ClientInfo;)Lstapel/config/StapelEnvironment;
+}
+
+public final class stapel/config/StapelEnvironmentKt {
+	public static final fun isLocalHost (Ljava/lang/String;)Z
+}
+

@@ -1,0 +1,118 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-config>
+final enum class stapel.config/ClientPlatform : kotlin/Enum<stapel.config/ClientPlatform> { // stapel.config/ClientPlatform|null[0]
+    enum entry Android // stapel.config/ClientPlatform.Android|null[0]
+    enum entry Desktop // stapel.config/ClientPlatform.Desktop|null[0]
+    enum entry Ios // stapel.config/ClientPlatform.Ios|null[0]
+
+    final val entries // stapel.config/ClientPlatform.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.config/ClientPlatform> // stapel.config/ClientPlatform.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val hintName // stapel.config/ClientPlatform.hintName|{}hintName[0]
+        final fun <get-hintName>(): kotlin/String // stapel.config/ClientPlatform.hintName.<get-hintName>|<get-hintName>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.config/ClientPlatform // stapel.config/ClientPlatform.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.config/ClientPlatform> // stapel.config/ClientPlatform.values|values#static(){}[0]
+}
+
+final enum class stapel.config/Posture : kotlin/Enum<stapel.config/Posture> { // stapel.config/Posture|null[0]
+    enum entry Live // stapel.config/Posture.Live|null[0]
+    enum entry Prototype // stapel.config/Posture.Prototype|null[0]
+
+    final val entries // stapel.config/Posture.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.config/Posture> // stapel.config/Posture.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.config/Posture // stapel.config/Posture.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.config/Posture> // stapel.config/Posture.values|values#static(){}[0]
+}
+
+final class stapel.config/ClientInfo { // stapel.config/ClientInfo|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String, stapel.config/ClientPlatform, kotlin/String, kotlin/String, kotlin/String?, kotlin/String = ...) // stapel.config/ClientInfo.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;stapel.config.ClientPlatform;kotlin.String;kotlin.String;kotlin.String?;kotlin.String){}[0]
+
+    final val appId // stapel.config/ClientInfo.appId|{}appId[0]
+        final fun <get-appId>(): kotlin/String // stapel.config/ClientInfo.appId.<get-appId>|<get-appId>(){}[0]
+    final val appVersion // stapel.config/ClientInfo.appVersion|{}appVersion[0]
+        final fun <get-appVersion>(): kotlin/String // stapel.config/ClientInfo.appVersion.<get-appVersion>|<get-appVersion>(){}[0]
+    final val build // stapel.config/ClientInfo.build|{}build[0]
+        final fun <get-build>(): kotlin/String // stapel.config/ClientInfo.build.<get-build>|<get-build>(){}[0]
+    final val clientHints // stapel.config/ClientInfo.clientHints|{}clientHints[0]
+        final fun <get-clientHints>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.config/ClientInfo.clientHints.<get-clientHints>|<get-clientHints>(){}[0]
+    final val deviceModel // stapel.config/ClientInfo.deviceModel|{}deviceModel[0]
+        final fun <get-deviceModel>(): kotlin/String? // stapel.config/ClientInfo.deviceModel.<get-deviceModel>|<get-deviceModel>(){}[0]
+    final val osName // stapel.config/ClientInfo.osName|{}osName[0]
+        final fun <get-osName>(): kotlin/String // stapel.config/ClientInfo.osName.<get-osName>|<get-osName>(){}[0]
+    final val osVersion // stapel.config/ClientInfo.osVersion|{}osVersion[0]
+        final fun <get-osVersion>(): kotlin/String // stapel.config/ClientInfo.osVersion.<get-osVersion>|<get-osVersion>(){}[0]
+    final val platform // stapel.config/ClientInfo.platform|{}platform[0]
+        final fun <get-platform>(): stapel.config/ClientPlatform // stapel.config/ClientInfo.platform.<get-platform>|<get-platform>(){}[0]
+    final val sdkVersion // stapel.config/ClientInfo.sdkVersion|{}sdkVersion[0]
+        final fun <get-sdkVersion>(): kotlin/String // stapel.config/ClientInfo.sdkVersion.<get-sdkVersion>|<get-sdkVersion>(){}[0]
+    final val userAgent // stapel.config/ClientInfo.userAgent|{}userAgent[0]
+        final fun <get-userAgent>(): kotlin/String // stapel.config/ClientInfo.userAgent.<get-userAgent>|<get-userAgent>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.config/ClientInfo.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.config/ClientInfo.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.config/ClientInfo.component3|component3(){}[0]
+    final fun component4(): stapel.config/ClientPlatform // stapel.config/ClientInfo.component4|component4(){}[0]
+    final fun component5(): kotlin/String // stapel.config/ClientInfo.component5|component5(){}[0]
+    final fun component6(): kotlin/String // stapel.config/ClientInfo.component6|component6(){}[0]
+    final fun component7(): kotlin/String? // stapel.config/ClientInfo.component7|component7(){}[0]
+    final fun component8(): kotlin/String // stapel.config/ClientInfo.component8|component8(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., stapel.config/ClientPlatform = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/String = ...): stapel.config/ClientInfo // stapel.config/ClientInfo.copy|copy(kotlin.String;kotlin.String;kotlin.String;stapel.config.ClientPlatform;kotlin.String;kotlin.String;kotlin.String?;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.config/ClientInfo.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.config/ClientInfo.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.config/ClientInfo.toString|toString(){}[0]
+}
+
+final class stapel.config/ServiceEndpoint { // stapel.config/ServiceEndpoint|null[0]
+    constructor <init>(kotlin/String) // stapel.config/ServiceEndpoint.<init>|<init>(kotlin.String){}[0]
+
+    final val baseUrl // stapel.config/ServiceEndpoint.baseUrl|{}baseUrl[0]
+        final fun <get-baseUrl>(): kotlin/String // stapel.config/ServiceEndpoint.baseUrl.<get-baseUrl>|<get-baseUrl>(){}[0]
+    final val host // stapel.config/ServiceEndpoint.host|{}host[0]
+        final fun <get-host>(): kotlin/String // stapel.config/ServiceEndpoint.host.<get-host>|<get-host>(){}[0]
+    final val isBareOrigin // stapel.config/ServiceEndpoint.isBareOrigin|{}isBareOrigin[0]
+        final fun <get-isBareOrigin>(): kotlin/Boolean // stapel.config/ServiceEndpoint.isBareOrigin.<get-isBareOrigin>|<get-isBareOrigin>(){}[0]
+    final val origin // stapel.config/ServiceEndpoint.origin|{}origin[0]
+        final fun <get-origin>(): kotlin/String // stapel.config/ServiceEndpoint.origin.<get-origin>|<get-origin>(){}[0]
+    final val scheme // stapel.config/ServiceEndpoint.scheme|{}scheme[0]
+        final fun <get-scheme>(): kotlin/String // stapel.config/ServiceEndpoint.scheme.<get-scheme>|<get-scheme>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.config/ServiceEndpoint.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.config/ServiceEndpoint.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.config/ServiceEndpoint.toString|toString(){}[0]
+}
+
+final class stapel.config/StapelEnvironment { // stapel.config/StapelEnvironment|null[0]
+    constructor <init>(kotlin/String, stapel.config/Posture, kotlin.collections/Map<kotlin/String, stapel.config/ServiceEndpoint> = ..., stapel.config/ServiceEndpoint? = ..., stapel.config/ClientInfo, kotlin.collections/List<kotlin/String> = ...) // stapel.config/StapelEnvironment.<init>|<init>(kotlin.String;stapel.config.Posture;kotlin.collections.Map<kotlin.String,stapel.config.ServiceEndpoint>;stapel.config.ServiceEndpoint?;stapel.config.ClientInfo;kotlin.collections.List<kotlin.String>){}[0]
+
+    final val client // stapel.config/StapelEnvironment.client|{}client[0]
+        final fun <get-client>(): stapel.config/ClientInfo // stapel.config/StapelEnvironment.client.<get-client>|<get-client>(){}[0]
+    final val defaultEndpoint // stapel.config/StapelEnvironment.defaultEndpoint|{}defaultEndpoint[0]
+        final fun <get-defaultEndpoint>(): stapel.config/ServiceEndpoint? // stapel.config/StapelEnvironment.defaultEndpoint.<get-defaultEndpoint>|<get-defaultEndpoint>(){}[0]
+    final val modules // stapel.config/StapelEnvironment.modules|{}modules[0]
+        final fun <get-modules>(): kotlin.collections/Set<kotlin/String> // stapel.config/StapelEnvironment.modules.<get-modules>|<get-modules>(){}[0]
+    final val name // stapel.config/StapelEnvironment.name|{}name[0]
+        final fun <get-name>(): kotlin/String // stapel.config/StapelEnvironment.name.<get-name>|<get-name>(){}[0]
+    final val posture // stapel.config/StapelEnvironment.posture|{}posture[0]
+        final fun <get-posture>(): stapel.config/Posture // stapel.config/StapelEnvironment.posture.<get-posture>|<get-posture>(){}[0]
+    final val supportedLocales // stapel.config/StapelEnvironment.supportedLocales|{}supportedLocales[0]
+        final fun <get-supportedLocales>(): kotlin.collections/List<kotlin/String> // stapel.config/StapelEnvironment.supportedLocales.<get-supportedLocales>|<get-supportedLocales>(){}[0]
+
+    final fun endpoint(kotlin/String): stapel.config/ServiceEndpoint // stapel.config/StapelEnvironment.endpoint|endpoint(kotlin.String){}[0]
+    final fun toString(): kotlin/String // stapel.config/StapelEnvironment.toString|toString(){}[0]
+    final fun url(kotlin/String, kotlin/String): kotlin/String // stapel.config/StapelEnvironment.url|url(kotlin.String;kotlin.String){}[0]
+    final fun websocketOrigin(kotlin/String): kotlin/String // stapel.config/StapelEnvironment.websocketOrigin|websocketOrigin(kotlin.String){}[0]
+
+    final object Companion { // stapel.config/StapelEnvironment.Companion|null[0]
+        final fun single(kotlin/String, kotlin/String, stapel.config/Posture, stapel.config/ClientInfo): stapel.config/StapelEnvironment // stapel.config/StapelEnvironment.Companion.single|single(kotlin.String;kotlin.String;stapel.config.Posture;stapel.config.ClientInfo){}[0]
+    }
+}
+
+final fun stapel.config/isLocalHost(kotlin/String): kotlin/Boolean // stapel.config/isLocalHost|isLocalHost(kotlin.String){}[0]
+final fun stapel.config/platformClientInfo(kotlin/String, kotlin/String, kotlin/String): stapel.config/ClientInfo // stapel.config/platformClientInfo|platformClientInfo(kotlin.String;kotlin.String;kotlin.String){}[0]
