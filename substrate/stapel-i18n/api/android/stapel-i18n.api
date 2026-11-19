@@ -1,0 +1,117 @@
+public final class stapel/i18n/CoreUiStrings {
+	public static final field INSTANCE Lstapel/i18n/CoreUiStrings;
+	public final fun getBack-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getCancel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getCharactersLeft-J4f0JxU ()Ljava/lang/String;
+	public final fun getClose-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getConfirm-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getDetails-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getDismiss-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getEmptyTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getHidePassword-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLoading-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRetry-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getShowPassword-GpgQ0-4 ()Ljava/lang/String;
+}
+
+public final class stapel/i18n/CoreUiStringsKt {
+	public static final fun getCoreUiBundle ()Lstapel/i18n/I18nBundle;
+}
+
+public final class stapel/i18n/I18nBundle {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun getLocales ()Ljava/util/Map;
+	public final fun getNamespace ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/i18n/LocaleLoader {
+	public abstract fun load (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/i18n/PluralCategory : java/lang/Enum {
+	public static final field Few Lstapel/i18n/PluralCategory;
+	public static final field Many Lstapel/i18n/PluralCategory;
+	public static final field One Lstapel/i18n/PluralCategory;
+	public static final field Other Lstapel/i18n/PluralCategory;
+	public static final field Two Lstapel/i18n/PluralCategory;
+	public static final field Zero Lstapel/i18n/PluralCategory;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getSuffix ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/i18n/PluralCategory;
+	public static fun values ()[Lstapel/i18n/PluralCategory;
+}
+
+public final class stapel/i18n/PluralKey {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/i18n/PluralKey;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/i18n/PluralRule {
+	public abstract fun category (J)Lstapel/i18n/PluralCategory;
+}
+
+public final class stapel/i18n/PluralRules {
+	public static final field INSTANCE Lstapel/i18n/PluralRules;
+	public final fun forLanguage (Ljava/lang/String;)Lstapel/i18n/PluralRule;
+	public final fun getEnglish ()Lstapel/i18n/PluralRule;
+	public final fun getRussian ()Lstapel/i18n/PluralRule;
+	public final fun getSpanish ()Lstapel/i18n/PluralRule;
+	public final fun register (Ljava/lang/String;Lstapel/i18n/PluralRule;)V
+	public final fun requiredCategories (Ljava/lang/String;)Ljava/util/Set;
+}
+
+public abstract interface class stapel/i18n/StapelStrings {
+	public abstract fun getLocale ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun lookup (Ljava/lang/String;)Ljava/lang/String;
+	public abstract fun setLocale (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun t (Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+	public static synthetic fun t$default (Lstapel/i18n/StapelStrings;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Ljava/lang/String;
+	public abstract fun t-aWsF1h4 (Ljava/lang/String;[Lkotlin/Pair;)Ljava/lang/String;
+	public abstract fun tPlural-NZmEa54 (Ljava/lang/String;J[Lkotlin/Pair;)Ljava/lang/String;
+}
+
+public final class stapel/i18n/StapelStrings$DefaultImpls {
+	public static synthetic fun t$default (Lstapel/i18n/StapelStrings;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class stapel/i18n/StapelStringsBuilder {
+	public final fun getDefaultLocale ()Ljava/lang/String;
+	public final fun getInitialLocale ()Ljava/lang/String;
+	public final fun getLoader ()Lstapel/i18n/LocaleLoader;
+	public final fun override (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun register (Lstapel/i18n/I18nBundle;)V
+	public final fun setDefaultLocale (Ljava/lang/String;)V
+	public final fun setInitialLocale (Ljava/lang/String;)V
+	public final fun setLoader (Lstapel/i18n/LocaleLoader;)V
+}
+
+public final class stapel/i18n/StapelStringsKt {
+	public static final fun StapelStrings (Lkotlin/jvm/functions/Function1;)Lstapel/i18n/StapelStrings;
+	public static final fun audit (Lstapel/i18n/I18nBundle;Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;
+	public static synthetic fun audit$default (Lstapel/i18n/I18nBundle;Ljava/lang/String;Ljava/util/Set;ILjava/lang/Object;)Ljava/util/List;
+	public static final fun interpolate (Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+}
+
+public final class stapel/i18n/StringKey {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/i18n/StringKey;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+

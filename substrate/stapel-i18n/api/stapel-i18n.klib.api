@@ -1,0 +1,136 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-i18n>
+final enum class stapel.i18n/PluralCategory : kotlin/Enum<stapel.i18n/PluralCategory> { // stapel.i18n/PluralCategory|null[0]
+    enum entry Few // stapel.i18n/PluralCategory.Few|null[0]
+    enum entry Many // stapel.i18n/PluralCategory.Many|null[0]
+    enum entry One // stapel.i18n/PluralCategory.One|null[0]
+    enum entry Other // stapel.i18n/PluralCategory.Other|null[0]
+    enum entry Two // stapel.i18n/PluralCategory.Two|null[0]
+    enum entry Zero // stapel.i18n/PluralCategory.Zero|null[0]
+
+    final val entries // stapel.i18n/PluralCategory.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.i18n/PluralCategory> // stapel.i18n/PluralCategory.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val suffix // stapel.i18n/PluralCategory.suffix|{}suffix[0]
+        final fun <get-suffix>(): kotlin/String // stapel.i18n/PluralCategory.suffix.<get-suffix>|<get-suffix>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.i18n/PluralCategory // stapel.i18n/PluralCategory.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.i18n/PluralCategory> // stapel.i18n/PluralCategory.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.i18n/LocaleLoader { // stapel.i18n/LocaleLoader|null[0]
+    abstract suspend fun load(kotlin/String): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.i18n/LocaleLoader.load|load(kotlin.String){}[0]
+}
+
+abstract fun interface stapel.i18n/PluralRule { // stapel.i18n/PluralRule|null[0]
+    abstract fun category(kotlin/Long): stapel.i18n/PluralCategory // stapel.i18n/PluralRule.category|category(kotlin.Long){}[0]
+}
+
+abstract interface stapel.i18n/StapelStrings { // stapel.i18n/StapelStrings|null[0]
+    abstract val locale // stapel.i18n/StapelStrings.locale|{}locale[0]
+        abstract fun <get-locale>(): kotlinx.coroutines.flow/StateFlow<kotlin/String> // stapel.i18n/StapelStrings.locale.<get-locale>|<get-locale>(){}[0]
+
+    abstract fun lookup(kotlin/String): kotlin/String? // stapel.i18n/StapelStrings.lookup|lookup(kotlin.String){}[0]
+    abstract fun t(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Any?> = ...): kotlin/String // stapel.i18n/StapelStrings.t|t(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Any?>){}[0]
+    abstract fun t(stapel.i18n/StringKey, kotlin/Array<out kotlin/Pair<kotlin/String, kotlin/Any?>>...): kotlin/String // stapel.i18n/StapelStrings.t|t(stapel.i18n.StringKey;kotlin.Array<out|kotlin.Pair<kotlin.String,kotlin.Any?>>...){}[0]
+    abstract fun tPlural(stapel.i18n/PluralKey, kotlin/Long, kotlin/Array<out kotlin/Pair<kotlin/String, kotlin/Any?>>...): kotlin/String // stapel.i18n/StapelStrings.tPlural|tPlural(stapel.i18n.PluralKey;kotlin.Long;kotlin.Array<out|kotlin.Pair<kotlin.String,kotlin.Any?>>...){}[0]
+    abstract suspend fun setLocale(kotlin/String) // stapel.i18n/StapelStrings.setLocale|setLocale(kotlin.String){}[0]
+}
+
+final class stapel.i18n/I18nBundle { // stapel.i18n/I18nBundle|null[0]
+    constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Function0<kotlin.collections/Map<kotlin/String, kotlin/String>>>) // stapel.i18n/I18nBundle.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Function0<kotlin.collections.Map<kotlin.String,kotlin.String>>>){}[0]
+
+    final val locales // stapel.i18n/I18nBundle.locales|{}locales[0]
+        final fun <get-locales>(): kotlin.collections/Map<kotlin/String, kotlin/Function0<kotlin.collections/Map<kotlin/String, kotlin/String>>> // stapel.i18n/I18nBundle.locales.<get-locales>|<get-locales>(){}[0]
+    final val namespace // stapel.i18n/I18nBundle.namespace|{}namespace[0]
+        final fun <get-namespace>(): kotlin/String // stapel.i18n/I18nBundle.namespace.<get-namespace>|<get-namespace>(){}[0]
+}
+
+final class stapel.i18n/StapelStringsBuilder { // stapel.i18n/StapelStringsBuilder|null[0]
+    final var defaultLocale // stapel.i18n/StapelStringsBuilder.defaultLocale|{}defaultLocale[0]
+        final fun <get-defaultLocale>(): kotlin/String // stapel.i18n/StapelStringsBuilder.defaultLocale.<get-defaultLocale>|<get-defaultLocale>(){}[0]
+        final fun <set-defaultLocale>(kotlin/String) // stapel.i18n/StapelStringsBuilder.defaultLocale.<set-defaultLocale>|<set-defaultLocale>(kotlin.String){}[0]
+    final var initialLocale // stapel.i18n/StapelStringsBuilder.initialLocale|{}initialLocale[0]
+        final fun <get-initialLocale>(): kotlin/String? // stapel.i18n/StapelStringsBuilder.initialLocale.<get-initialLocale>|<get-initialLocale>(){}[0]
+        final fun <set-initialLocale>(kotlin/String?) // stapel.i18n/StapelStringsBuilder.initialLocale.<set-initialLocale>|<set-initialLocale>(kotlin.String?){}[0]
+    final var loader // stapel.i18n/StapelStringsBuilder.loader|{}loader[0]
+        final fun <get-loader>(): stapel.i18n/LocaleLoader? // stapel.i18n/StapelStringsBuilder.loader.<get-loader>|<get-loader>(){}[0]
+        final fun <set-loader>(stapel.i18n/LocaleLoader?) // stapel.i18n/StapelStringsBuilder.loader.<set-loader>|<set-loader>(stapel.i18n.LocaleLoader?){}[0]
+
+    final fun override(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.i18n/StapelStringsBuilder.override|override(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final fun register(stapel.i18n/I18nBundle) // stapel.i18n/StapelStringsBuilder.register|register(stapel.i18n.I18nBundle){}[0]
+}
+
+final value class stapel.i18n/PluralKey { // stapel.i18n/PluralKey|null[0]
+    constructor <init>(kotlin/String) // stapel.i18n/PluralKey.<init>|<init>(kotlin.String){}[0]
+
+    final val key // stapel.i18n/PluralKey.key|{}key[0]
+        final fun <get-key>(): kotlin/String // stapel.i18n/PluralKey.key.<get-key>|<get-key>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.i18n/PluralKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.i18n/PluralKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.i18n/PluralKey.toString|toString(){}[0]
+}
+
+final value class stapel.i18n/StringKey { // stapel.i18n/StringKey|null[0]
+    constructor <init>(kotlin/String) // stapel.i18n/StringKey.<init>|<init>(kotlin.String){}[0]
+
+    final val key // stapel.i18n/StringKey.key|{}key[0]
+        final fun <get-key>(): kotlin/String // stapel.i18n/StringKey.key.<get-key>|<get-key>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.i18n/StringKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.i18n/StringKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.i18n/StringKey.toString|toString(){}[0]
+}
+
+final object stapel.i18n/CoreUiStrings { // stapel.i18n/CoreUiStrings|null[0]
+    final val Back // stapel.i18n/CoreUiStrings.Back|{}Back[0]
+        final fun <get-Back>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Back.<get-Back>|<get-Back>(){}[0]
+    final val Cancel // stapel.i18n/CoreUiStrings.Cancel|{}Cancel[0]
+        final fun <get-Cancel>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Cancel.<get-Cancel>|<get-Cancel>(){}[0]
+    final val CharactersLeft // stapel.i18n/CoreUiStrings.CharactersLeft|{}CharactersLeft[0]
+        final fun <get-CharactersLeft>(): stapel.i18n/PluralKey // stapel.i18n/CoreUiStrings.CharactersLeft.<get-CharactersLeft>|<get-CharactersLeft>(){}[0]
+    final val Close // stapel.i18n/CoreUiStrings.Close|{}Close[0]
+        final fun <get-Close>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Close.<get-Close>|<get-Close>(){}[0]
+    final val Confirm // stapel.i18n/CoreUiStrings.Confirm|{}Confirm[0]
+        final fun <get-Confirm>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Confirm.<get-Confirm>|<get-Confirm>(){}[0]
+    final val Details // stapel.i18n/CoreUiStrings.Details|{}Details[0]
+        final fun <get-Details>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Details.<get-Details>|<get-Details>(){}[0]
+    final val Dismiss // stapel.i18n/CoreUiStrings.Dismiss|{}Dismiss[0]
+        final fun <get-Dismiss>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Dismiss.<get-Dismiss>|<get-Dismiss>(){}[0]
+    final val EmptyTitle // stapel.i18n/CoreUiStrings.EmptyTitle|{}EmptyTitle[0]
+        final fun <get-EmptyTitle>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.EmptyTitle.<get-EmptyTitle>|<get-EmptyTitle>(){}[0]
+    final val HidePassword // stapel.i18n/CoreUiStrings.HidePassword|{}HidePassword[0]
+        final fun <get-HidePassword>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.HidePassword.<get-HidePassword>|<get-HidePassword>(){}[0]
+    final val Loading // stapel.i18n/CoreUiStrings.Loading|{}Loading[0]
+        final fun <get-Loading>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Loading.<get-Loading>|<get-Loading>(){}[0]
+    final val Retry // stapel.i18n/CoreUiStrings.Retry|{}Retry[0]
+        final fun <get-Retry>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.Retry.<get-Retry>|<get-Retry>(){}[0]
+    final val ShowPassword // stapel.i18n/CoreUiStrings.ShowPassword|{}ShowPassword[0]
+        final fun <get-ShowPassword>(): stapel.i18n/StringKey // stapel.i18n/CoreUiStrings.ShowPassword.<get-ShowPassword>|<get-ShowPassword>(){}[0]
+}
+
+final object stapel.i18n/PluralRules { // stapel.i18n/PluralRules|null[0]
+    final val English // stapel.i18n/PluralRules.English|{}English[0]
+        final fun <get-English>(): stapel.i18n/PluralRule // stapel.i18n/PluralRules.English.<get-English>|<get-English>(){}[0]
+    final val Russian // stapel.i18n/PluralRules.Russian|{}Russian[0]
+        final fun <get-Russian>(): stapel.i18n/PluralRule // stapel.i18n/PluralRules.Russian.<get-Russian>|<get-Russian>(){}[0]
+    final val Spanish // stapel.i18n/PluralRules.Spanish|{}Spanish[0]
+        final fun <get-Spanish>(): stapel.i18n/PluralRule // stapel.i18n/PluralRules.Spanish.<get-Spanish>|<get-Spanish>(){}[0]
+
+    final fun forLanguage(kotlin/String): stapel.i18n/PluralRule // stapel.i18n/PluralRules.forLanguage|forLanguage(kotlin.String){}[0]
+    final fun register(kotlin/String, stapel.i18n/PluralRule) // stapel.i18n/PluralRules.register|register(kotlin.String;stapel.i18n.PluralRule){}[0]
+    final fun requiredCategories(kotlin/String): kotlin.collections/Set<stapel.i18n/PluralCategory> // stapel.i18n/PluralRules.requiredCategories|requiredCategories(kotlin.String){}[0]
+}
+
+final val stapel.i18n/CoreUiBundle // stapel.i18n/CoreUiBundle|{}CoreUiBundle[0]
+    final fun <get-CoreUiBundle>(): stapel.i18n/I18nBundle // stapel.i18n/CoreUiBundle.<get-CoreUiBundle>|<get-CoreUiBundle>(){}[0]
+
+final fun (stapel.i18n/I18nBundle).stapel.i18n/audit(kotlin/String = ..., kotlin.collections/Set<kotlin/String> = ...): kotlin.collections/List<kotlin/String> // stapel.i18n/audit|audit@stapel.i18n.I18nBundle(kotlin.String;kotlin.collections.Set<kotlin.String>){}[0]
+final fun stapel.i18n/StapelStrings(kotlin/Function1<stapel.i18n/StapelStringsBuilder, kotlin/Unit>): stapel.i18n/StapelStrings // stapel.i18n/StapelStrings|StapelStrings(kotlin.Function1<stapel.i18n.StapelStringsBuilder,kotlin.Unit>){}[0]
+final fun stapel.i18n/interpolate(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Any?>): kotlin/String // stapel.i18n/interpolate|interpolate(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Any?>){}[0]
