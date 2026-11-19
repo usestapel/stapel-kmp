@@ -10,7 +10,9 @@ JWT_REFRESH_TOKEN_LIFETIME = 600
 # on two devices do not wait 30 s; capabilities publish the value, the client reads it from there.
 from config.settings import STAPEL_AUTH  # noqa: E402
 
-STAPEL_AUTH = {**STAPEL_AUTH, "OTP_RESEND_COOLDOWN": 2}
+# Guests minted per client IP per hour: every scenario runs from 127.0.0.1, so the default (20) is
+# spent after a few runs of the suites and later guest scenarios answer 429.
+STAPEL_AUTH = {**STAPEL_AUTH, "OTP_RESEND_COOLDOWN": 2, "ANONYMOUS_RATE_LIMIT_PER_HOUR": 1000}
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "e2e-main.sqlite3"}}
 

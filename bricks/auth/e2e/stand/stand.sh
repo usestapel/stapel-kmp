@@ -74,7 +74,7 @@ start() { # name port settings-module
     (cd "$PROJECT" && DJANGO_SETTINGS_MODULE="$settings" .venv/bin/python manage.py migrate --noinput >"$STAND/$name-migrate.log" 2>&1)
     log "starting $name on 127.0.0.1:$port"
     (cd "$PROJECT" && DJANGO_SETTINGS_MODULE="$settings" nohup .venv/bin/python manage.py runserver \
-        "127.0.0.1:$port" --noreload </dev/null >"$STAND/$name.log" 2>&1 & echo $! >"$(pidfile "$name")")
+        "127.0.0.1:$port" --noreload </dev/null >"$STAND/$name.log" 2>&1 & echo $! >"$(pidfile "$name")") >/dev/null 2>&1
     for _ in $(seq 1 60); do
         if curl -fsS "http://127.0.0.1:$port/auth/api/v1/capabilities/" >/dev/null 2>&1; then
             # The venv interpreter may re-exec: record the process that actually listens.
