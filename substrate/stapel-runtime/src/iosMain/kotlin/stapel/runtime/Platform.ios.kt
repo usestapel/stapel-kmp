@@ -101,7 +101,10 @@ public actual fun platformLogger(minLevel: LogLevel): StapelLogger = object : St
     override fun isEnabled(level: LogLevel, tag: String): Boolean = level >= minLevel
 
     override fun log(level: LogLevel, tag: String, message: String, error: Throwable?, fields: Map<String, String>) {
-        if (level >= minLevel) NSLog("%@", "${level.name.uppercase()} $tag: ${formatRecord(message, error, fields)}")
+        // The record is the format string, `%` escaped: a Kotlin String passed through NSLog's C varargs
+        // is not bridged to an NSString, so `NSLog("%@", text)` reads the characters as an object pointer
+        // and crashes (measured: SIGSEGV in objc_opt_respondsToSelector on the first info record).
+        if (level >= minLevel) NSLog("${level.name.uppercase()} $tag: ${formatRecord(message, error, fields)}".replace("%", "%%"))
     }
 }
 
