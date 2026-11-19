@@ -39,6 +39,7 @@ import kotlin.reflect.KClass
 @Serializable data object FilterRoute : stapel.navigation.Route
 @Serializable data object CameraRoute : stapel.navigation.Route
 @Serializable data object WizardRoute : stapel.navigation.Route
+@Serializable data object PrivacyRoute : stapel.navigation.Route
 
 val HOME = DestinationId("t.home")
 val PROFILE = DestinationId("t.profile")
@@ -122,6 +123,10 @@ val testContribution: NavContribution = navContribution("test:app-ui", "0") {
         NavBackInterceptor(enabled = step > 1) { step-- }
         BasicText("step $step", Modifier.testTag("wizard").clickable { step++ })
     }
+    destination<PrivacyRoute>(
+        id = "t.privacy", path = "privacy", labelKey = "t.privacy.label", icon = NavIcons.ShieldCheck,
+        codec = PathCodec.constant(PrivacyRoute), placement = Placement.Submenu(DestinationId("account.root")),
+    ) { BasicText("privacy", Modifier.testTag("screen-privacy")) }
     embed(id = "t.profile_action", slot = SlotId("page.actions"), order = 1, scope = PROFILE) {
         BasicText("edit profile", Modifier.testTag("embed-action"))
     }

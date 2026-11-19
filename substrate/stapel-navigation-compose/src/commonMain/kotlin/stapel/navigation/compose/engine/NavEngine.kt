@@ -1,6 +1,5 @@
 package stapel.navigation.compose.engine
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -62,6 +61,7 @@ internal fun NavEngine(
     overlay: OverlayHost,
     unavailable: @Composable (ResolvedDestination, Set<CapabilityKey>) -> Unit,
     waiting: @Composable () -> Unit,
+    section: @Composable (ResolvedDestination) -> Unit,
 ) {
     val state by navigator.state.collectAsState()
     val nav = navigator.nav
@@ -85,7 +85,7 @@ internal fun NavEngine(
             onBack = { navigator.back() },
             entryDecorators = listOf(decorator),
             sceneStrategies = strategies,
-            entryProvider = { entry -> navEntry(entry, nav, navigator, screens, embeds, capabilities, unavailable) },
+            entryProvider = { entry -> navEntry(entry, nav, navigator, screens, embeds, capabilities, unavailable, section) },
         )
     }
 }
@@ -132,6 +132,7 @@ private fun navEntry(
     embeds: Map<stapel.navigation.EmbedId, EmbedContent>,
     capabilities: Set<CapabilityKey>,
     unavailable: @Composable (ResolvedDestination, Set<CapabilityKey>) -> Unit,
+    section: @Composable (ResolvedDestination) -> Unit,
 ): NavEntry<StackEntry> {
     val destination = nav.destinationOf(entry.route)
     val metadata = buildMap<String, Any> {
@@ -149,16 +150,10 @@ private fun navEntry(
         when {
             missing.isNotEmpty() -> unavailable(destination, missing)
             content != null -> scope.content(entry.route)
-            entry.route is SectionRoute -> scope.SectionFallback()
+            entry.route is SectionRoute -> section(destination)
             else -> unavailable(destination, emptySet())
         }
     }
-}
-
-/** A container root without a project screen: lists its children as embeds would (named, not blank). */
-@Composable
-private fun ScreenScopeImpl.SectionFallback() {
-    Column { PageSlot(SlotId("page.section"), Modifier) }
 }
 
 internal class ScreenScopeImpl(

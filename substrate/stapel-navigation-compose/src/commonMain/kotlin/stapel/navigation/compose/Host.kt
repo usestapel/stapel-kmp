@@ -1,7 +1,10 @@
 package stapel.navigation.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -93,6 +96,8 @@ public fun rememberStapelNavigator(
  * @param unavailable names a destination that cannot be shown and why (never a blank screen).
  * @param waiting shown while the navigation state is empty (auth unresolved at start).
  * @param overlay draws sheets.
+ * @param section draws a container root (`account.root`, `admin.root`): by default its children as
+ *   plain rows; the shell supplies a skinned section screen.
  */
 @Composable
 public fun StapelNavHost(
@@ -103,6 +108,18 @@ public fun StapelNavHost(
     overlay: OverlayHost = DefaultOverlay,
     unavailable: @Composable (destination: ResolvedDestination, missing: Set<CapabilityKey>) -> Unit,
     waiting: @Composable () -> Unit,
+    section: @Composable (destination: ResolvedDestination) -> Unit = { DefaultSection(navigator, it) },
 ) {
-    NavEngine(navigator, contributions, modifier, capabilities, overlay, unavailable, waiting)
+    NavEngine(navigator, contributions, modifier, capabilities, overlay, unavailable, waiting, section)
+}
+
+/** Unskinned section screen: one row per child, opening it. */
+@Composable
+private fun DefaultSection(navigator: StapelNavigator, destination: ResolvedDestination) {
+    Column {
+        for (child in destination.children) {
+            val route = navigator.nav.defaultRoute(child.id) ?: continue
+            BasicText(child.labelKey, Modifier.clickable { navigator.navigate(route) })
+        }
+    }
 }

@@ -15,6 +15,7 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.v2.runComposeUiTest
 import androidx.lifecycle.Lifecycle
@@ -258,6 +259,17 @@ class NavHostUiTest {
         onNodeWithTag("wizard").assertTextEquals("step 1")
         h.systemBack()
         h.shows("screen-home")
+    }
+
+    @Test
+    fun aContainerRootShowsItsChildrenAsASection() = runComposeUiTest {
+        val h = Harness(this)
+        h.start()
+        runOnIdle { h.navigator.selectTab(stapel.navigation.DestinationId("account.root")) }
+        waitForIdle()
+        onNodeWithText("t.privacy.label").performClick()
+        waitForIdle()
+        h.shows("screen-privacy")
     }
 
     @Test
