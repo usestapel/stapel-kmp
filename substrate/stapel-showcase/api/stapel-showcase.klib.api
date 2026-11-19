@@ -1,0 +1,316 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-showcase>
+final enum class stapel.showcase/StoryKind : kotlin/Enum<stapel.showcase/StoryKind> { // stapel.showcase/StoryKind|null[0]
+    enum entry Component // stapel.showcase/StoryKind.Component|null[0]
+    enum entry Composite // stapel.showcase/StoryKind.Composite|null[0]
+    enum entry Flow // stapel.showcase/StoryKind.Flow|null[0]
+    enum entry Foundation // stapel.showcase/StoryKind.Foundation|null[0]
+    enum entry Screen // stapel.showcase/StoryKind.Screen|null[0]
+
+    final val entries // stapel.showcase/StoryKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.showcase/StoryKind> // stapel.showcase/StoryKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.showcase/StoryKind // stapel.showcase/StoryKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.showcase/StoryKind> // stapel.showcase/StoryKind.values|values#static(){}[0]
+}
+
+abstract interface stapel.showcase/StoryScope { // stapel.showcase/StoryScope|null[0]
+    abstract val state // stapel.showcase/StoryScope.state|{}state[0]
+        abstract fun <get-state>(): stapel.showcase/StoryState // stapel.showcase/StoryScope.state.<get-state>|<get-state>(){}[0]
+
+    abstract fun (androidx.compose.ui/Modifier).anatomy(kotlin/String): androidx.compose.ui/Modifier // stapel.showcase/StoryScope.anatomy|anatomy@androidx.compose.ui.Modifier(kotlin.String){}[0]
+    abstract fun <#A1: kotlin/Any?> value(stapel.showcase/Knob<#A1>): #A1 // stapel.showcase/StoryScope.value|value(stapel.showcase.Knob<0:0>){0§<kotlin.Any?>}[0]
+    abstract fun event(kotlin/String) // stapel.showcase/StoryScope.event|event(kotlin.String){}[0]
+}
+
+final class stapel.showcase/AnatomyPart { // stapel.showcase/AnatomyPart|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String? = ...) // stapel.showcase/AnatomyPart.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?){}[0]
+
+    final val description // stapel.showcase/AnatomyPart.description|{}description[0]
+        final fun <get-description>(): kotlin/String? // stapel.showcase/AnatomyPart.description.<get-description>|<get-description>(){}[0]
+    final val id // stapel.showcase/AnatomyPart.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.showcase/AnatomyPart.id.<get-id>|<get-id>(){}[0]
+    final val label // stapel.showcase/AnatomyPart.label|{}label[0]
+        final fun <get-label>(): kotlin/String // stapel.showcase/AnatomyPart.label.<get-label>|<get-label>(){}[0]
+}
+
+final class stapel.showcase/CanvasOptions { // stapel.showcase/CanvasOptions|null[0]
+    constructor <init>(kotlin/Boolean = ..., androidx.compose.ui.unit/Dp = ..., androidx.compose.ui.unit/Dp? = ...) // stapel.showcase/CanvasOptions.<init>|<init>(kotlin.Boolean;androidx.compose.ui.unit.Dp;androidx.compose.ui.unit.Dp?){}[0]
+
+    final val checkerboard // stapel.showcase/CanvasOptions.checkerboard|{}checkerboard[0]
+        final fun <get-checkerboard>(): kotlin/Boolean // stapel.showcase/CanvasOptions.checkerboard.<get-checkerboard>|<get-checkerboard>(){}[0]
+    final val maxWidth // stapel.showcase/CanvasOptions.maxWidth|{}maxWidth[0]
+        final fun <get-maxWidth>(): androidx.compose.ui.unit/Dp? // stapel.showcase/CanvasOptions.maxWidth.<get-maxWidth>|<get-maxWidth>(){}[0]
+    final val padding // stapel.showcase/CanvasOptions.padding|{}padding[0]
+        final fun <get-padding>(): androidx.compose.ui.unit/Dp // stapel.showcase/CanvasOptions.padding.<get-padding>|<get-padding>(){}[0]
+}
+
+final class stapel.showcase/KnobValues { // stapel.showcase/KnobValues|null[0]
+    constructor <init>(kotlin.collections/List<stapel.showcase/Knob<*>>) // stapel.showcase/KnobValues.<init>|<init>(kotlin.collections.List<stapel.showcase.Knob<*>>){}[0]
+
+    final val knobs // stapel.showcase/KnobValues.knobs|{}knobs[0]
+        final fun <get-knobs>(): kotlin.collections/List<stapel.showcase/Knob<*>> // stapel.showcase/KnobValues.knobs.<get-knobs>|<get-knobs>(){}[0]
+    final val modified // stapel.showcase/KnobValues.modified|{}modified[0]
+        final fun <get-modified>(): kotlin.collections/Set<kotlin/String> // stapel.showcase/KnobValues.modified.<get-modified>|<get-modified>(){}[0]
+
+    final fun <#A1: kotlin/Any?> get(stapel.showcase/Knob<#A1>): #A1 // stapel.showcase/KnobValues.get|get(stapel.showcase.Knob<0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> set(stapel.showcase/Knob<#A1>, #A1) // stapel.showcase/KnobValues.set|set(stapel.showcase.Knob<0:0>;0:0){0§<kotlin.Any?>}[0]
+    final fun reset() // stapel.showcase/KnobValues.reset|reset(){}[0]
+    final fun reset(stapel.showcase/Knob<*>) // stapel.showcase/KnobValues.reset|reset(stapel.showcase.Knob<*>){}[0]
+    final fun snapshot(): kotlin.collections/Map<kotlin/String, kotlin/Any?> // stapel.showcase/KnobValues.snapshot|snapshot(){}[0]
+    final fun trySet(kotlin/String, kotlin/Any?): kotlin/Boolean // stapel.showcase/KnobValues.trySet|trySet(kotlin.String;kotlin.Any?){}[0]
+}
+
+final class stapel.showcase/MatrixCell { // stapel.showcase/MatrixCell|null[0]
+    constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Any?>) // stapel.showcase/MatrixCell.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Any?>){}[0]
+
+    final val label // stapel.showcase/MatrixCell.label|{}label[0]
+        final fun <get-label>(): kotlin/String // stapel.showcase/MatrixCell.label.<get-label>|<get-label>(){}[0]
+    final val values // stapel.showcase/MatrixCell.values|{}values[0]
+        final fun <get-values>(): kotlin.collections/Map<kotlin/String, kotlin/Any?> // stapel.showcase/MatrixCell.values.<get-values>|<get-values>(){}[0]
+}
+
+final class stapel.showcase/Story { // stapel.showcase/Story|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String, stapel.showcase/StoryKind = ..., kotlin/String? = ..., kotlin.collections/List<stapel.showcase/StoryState> = ..., kotlin.collections/List<stapel.showcase/Knob<*>> = ..., kotlin.collections/Set<stapel.showcase/StoryTarget> = ..., kotlin.collections/List<stapel.showcase/AnatomyPart> = ..., stapel.showcase/CanvasOptions = ..., kotlin/String? = ..., kotlin/Function3<stapel.showcase/StoryScope, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>) // stapel.showcase/Story.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;stapel.showcase.StoryKind;kotlin.String?;kotlin.collections.List<stapel.showcase.StoryState>;kotlin.collections.List<stapel.showcase.Knob<*>>;kotlin.collections.Set<stapel.showcase.StoryTarget>;kotlin.collections.List<stapel.showcase.AnatomyPart>;stapel.showcase.CanvasOptions;kotlin.String?;kotlin.Function3<stapel.showcase.StoryScope,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>){}[0]
+
+    final val anatomy // stapel.showcase/Story.anatomy|{}anatomy[0]
+        final fun <get-anatomy>(): kotlin.collections/List<stapel.showcase/AnatomyPart> // stapel.showcase/Story.anatomy.<get-anatomy>|<get-anatomy>(){}[0]
+    final val canvas // stapel.showcase/Story.canvas|{}canvas[0]
+        final fun <get-canvas>(): stapel.showcase/CanvasOptions // stapel.showcase/Story.canvas.<get-canvas>|<get-canvas>(){}[0]
+    final val content // stapel.showcase/Story.content|{}content[0]
+        final fun <get-content>(): kotlin/Function3<stapel.showcase/StoryScope, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit> // stapel.showcase/Story.content.<get-content>|<get-content>(){}[0]
+    final val covers // stapel.showcase/Story.covers|{}covers[0]
+        final fun <get-covers>(): kotlin.collections/Set<stapel.showcase/StoryTarget> // stapel.showcase/Story.covers.<get-covers>|<get-covers>(){}[0]
+    final val description // stapel.showcase/Story.description|{}description[0]
+        final fun <get-description>(): kotlin/String? // stapel.showcase/Story.description.<get-description>|<get-description>(){}[0]
+    final val group // stapel.showcase/Story.group|{}group[0]
+        final fun <get-group>(): kotlin/String // stapel.showcase/Story.group.<get-group>|<get-group>(){}[0]
+    final val groupPath // stapel.showcase/Story.groupPath|{}groupPath[0]
+        final fun <get-groupPath>(): kotlin.collections/List<kotlin/String> // stapel.showcase/Story.groupPath.<get-groupPath>|<get-groupPath>(){}[0]
+    final val id // stapel.showcase/Story.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.showcase/Story.id.<get-id>|<get-id>(){}[0]
+    final val kind // stapel.showcase/Story.kind|{}kind[0]
+        final fun <get-kind>(): stapel.showcase/StoryKind // stapel.showcase/Story.kind.<get-kind>|<get-kind>(){}[0]
+    final val knobs // stapel.showcase/Story.knobs|{}knobs[0]
+        final fun <get-knobs>(): kotlin.collections/List<stapel.showcase/Knob<*>> // stapel.showcase/Story.knobs.<get-knobs>|<get-knobs>(){}[0]
+    final val snippet // stapel.showcase/Story.snippet|{}snippet[0]
+        final fun <get-snippet>(): kotlin/String? // stapel.showcase/Story.snippet.<get-snippet>|<get-snippet>(){}[0]
+    final val states // stapel.showcase/Story.states|{}states[0]
+        final fun <get-states>(): kotlin.collections/List<stapel.showcase/StoryState> // stapel.showcase/Story.states.<get-states>|<get-states>(){}[0]
+    final val title // stapel.showcase/Story.title|{}title[0]
+        final fun <get-title>(): kotlin/String // stapel.showcase/Story.title.<get-title>|<get-title>(){}[0]
+
+    final fun state(kotlin/String): stapel.showcase/StoryState? // stapel.showcase/Story.state|state(kotlin.String){}[0]
+}
+
+final class stapel.showcase/StoryCatalog { // stapel.showcase/StoryCatalog|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/List<stapel.showcase/Story>, stapel.showcase/StoryEnvironment = ...) // stapel.showcase/StoryCatalog.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.List<stapel.showcase.Story>;stapel.showcase.StoryEnvironment){}[0]
+
+    final val environment // stapel.showcase/StoryCatalog.environment|{}environment[0]
+        final fun <get-environment>(): stapel.showcase/StoryEnvironment // stapel.showcase/StoryCatalog.environment.<get-environment>|<get-environment>(){}[0]
+    final val groups // stapel.showcase/StoryCatalog.groups|{}groups[0]
+        final fun <get-groups>(): kotlin.collections/List<kotlin/String> // stapel.showcase/StoryCatalog.groups.<get-groups>|<get-groups>(){}[0]
+    final val id // stapel.showcase/StoryCatalog.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.showcase/StoryCatalog.id.<get-id>|<get-id>(){}[0]
+    final val stories // stapel.showcase/StoryCatalog.stories|{}stories[0]
+        final fun <get-stories>(): kotlin.collections/List<stapel.showcase/Story> // stapel.showcase/StoryCatalog.stories.<get-stories>|<get-stories>(){}[0]
+    final val title // stapel.showcase/StoryCatalog.title|{}title[0]
+        final fun <get-title>(): kotlin/String // stapel.showcase/StoryCatalog.title.<get-title>|<get-title>(){}[0]
+
+    final fun qualifiedId(stapel.showcase/Story): kotlin/String // stapel.showcase/StoryCatalog.qualifiedId|qualifiedId(stapel.showcase.Story){}[0]
+    final fun story(kotlin/String): stapel.showcase/Story? // stapel.showcase/StoryCatalog.story|story(kotlin.String){}[0]
+}
+
+final class stapel.showcase/StoryEnvironment { // stapel.showcase/StoryEnvironment|null[0]
+    constructor <init>(kotlin.collections/List<stapel.i18n/I18nBundle> = ..., kotlin.collections/List<kotlin/String> = ..., kotlin/Function3<kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit> = ...) // stapel.showcase/StoryEnvironment.<init>|<init>(kotlin.collections.List<stapel.i18n.I18nBundle>;kotlin.collections.List<kotlin.String>;kotlin.Function3<kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>){}[0]
+
+    final val bundles // stapel.showcase/StoryEnvironment.bundles|{}bundles[0]
+        final fun <get-bundles>(): kotlin.collections/List<stapel.i18n/I18nBundle> // stapel.showcase/StoryEnvironment.bundles.<get-bundles>|<get-bundles>(){}[0]
+    final val locales // stapel.showcase/StoryEnvironment.locales|{}locales[0]
+        final fun <get-locales>(): kotlin.collections/List<kotlin/String> // stapel.showcase/StoryEnvironment.locales.<get-locales>|<get-locales>(){}[0]
+    final val provide // stapel.showcase/StoryEnvironment.provide|{}provide[0]
+        final fun <get-provide>(): kotlin/Function3<kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit> // stapel.showcase/StoryEnvironment.provide.<get-provide>|<get-provide>(){}[0]
+
+    final object Companion { // stapel.showcase/StoryEnvironment.Companion|null[0]
+        final val None // stapel.showcase/StoryEnvironment.Companion.None|{}None[0]
+            final fun <get-None>(): stapel.showcase/StoryEnvironment // stapel.showcase/StoryEnvironment.Companion.None.<get-None>|<get-None>(){}[0]
+    }
+}
+
+final class stapel.showcase/StoryHit { // stapel.showcase/StoryHit|null[0]
+    constructor <init>(stapel.showcase/StoryCatalog, stapel.showcase/Story, kotlin/Int) // stapel.showcase/StoryHit.<init>|<init>(stapel.showcase.StoryCatalog;stapel.showcase.Story;kotlin.Int){}[0]
+
+    final val catalog // stapel.showcase/StoryHit.catalog|{}catalog[0]
+        final fun <get-catalog>(): stapel.showcase/StoryCatalog // stapel.showcase/StoryHit.catalog.<get-catalog>|<get-catalog>(){}[0]
+    final val rank // stapel.showcase/StoryHit.rank|{}rank[0]
+        final fun <get-rank>(): kotlin/Int // stapel.showcase/StoryHit.rank.<get-rank>|<get-rank>(){}[0]
+    final val story // stapel.showcase/StoryHit.story|{}story[0]
+        final fun <get-story>(): stapel.showcase/Story // stapel.showcase/StoryHit.story.<get-story>|<get-story>(){}[0]
+}
+
+final class stapel.showcase/StoryState { // stapel.showcase/StoryState|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Any?> = ...) // stapel.showcase/StoryState.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Any?>){}[0]
+
+    final val id // stapel.showcase/StoryState.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.showcase/StoryState.id.<get-id>|<get-id>(){}[0]
+    final val title // stapel.showcase/StoryState.title|{}title[0]
+        final fun <get-title>(): kotlin/String // stapel.showcase/StoryState.title.<get-title>|<get-title>(){}[0]
+    final val values // stapel.showcase/StoryState.values|{}values[0]
+        final fun <get-values>(): kotlin.collections/Map<kotlin/String, kotlin/Any?> // stapel.showcase/StoryState.values.<get-values>|<get-values>(){}[0]
+
+    final object Companion { // stapel.showcase/StoryState.Companion|null[0]
+        final val Default // stapel.showcase/StoryState.Companion.Default|{}Default[0]
+            final fun <get-Default>(): stapel.showcase/StoryState // stapel.showcase/StoryState.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+sealed class <#A: kotlin/Any?> stapel.showcase/Knob { // stapel.showcase/Knob|null[0]
+    abstract val kindName // stapel.showcase/Knob.kindName|{}kindName[0]
+        abstract fun <get-kindName>(): kotlin/String // stapel.showcase/Knob.kindName.<get-kindName>|<get-kindName>(){}[0]
+    final val default // stapel.showcase/Knob.default|{}default[0]
+        final fun <get-default>(): #A // stapel.showcase/Knob.default.<get-default>|<get-default>(){}[0]
+    final val key // stapel.showcase/Knob.key|{}key[0]
+        final fun <get-key>(): kotlin/String // stapel.showcase/Knob.key.<get-key>|<get-key>(){}[0]
+    final val label // stapel.showcase/Knob.label|{}label[0]
+        final fun <get-label>(): kotlin/String // stapel.showcase/Knob.label.<get-label>|<get-label>(){}[0]
+
+    abstract fun accepts(kotlin/Any?): kotlin/Boolean // stapel.showcase/Knob.accepts|accepts(kotlin.Any?){}[0]
+    open fun describe(#A): kotlin/String // stapel.showcase/Knob.describe|describe(1:0){}[0]
+
+    final class <#A1: kotlin/Any?> Choice : stapel.showcase/Knob<#A1> { // stapel.showcase/Knob.Choice|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin.collections/List<kotlin/Pair<kotlin/String, #A1>>, #A1) // stapel.showcase/Knob.Choice.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.List<kotlin.Pair<kotlin.String,1:0>>;1:0){}[0]
+
+        final val kindName // stapel.showcase/Knob.Choice.kindName|{}kindName[0]
+            final fun <get-kindName>(): kotlin/String // stapel.showcase/Knob.Choice.kindName.<get-kindName>|<get-kindName>(){}[0]
+        final val options // stapel.showcase/Knob.Choice.options|{}options[0]
+            final fun <get-options>(): kotlin.collections/List<kotlin/Pair<kotlin/String, #A1>> // stapel.showcase/Knob.Choice.options.<get-options>|<get-options>(){}[0]
+
+        final fun accepts(kotlin/Any?): kotlin/Boolean // stapel.showcase/Knob.Choice.accepts|accepts(kotlin.Any?){}[0]
+        final fun describe(#A1): kotlin/String // stapel.showcase/Knob.Choice.describe|describe(1:0){}[0]
+    }
+
+    final class Color : stapel.showcase/Knob<stapel.tokens/ColorRole> { // stapel.showcase/Knob.Color|null[0]
+        constructor <init>(kotlin/String, kotlin/String, stapel.tokens/ColorRole, kotlin.collections/List<stapel.tokens/ColorRole> = ...) // stapel.showcase/Knob.Color.<init>|<init>(kotlin.String;kotlin.String;stapel.tokens.ColorRole;kotlin.collections.List<stapel.tokens.ColorRole>){}[0]
+
+        final val kindName // stapel.showcase/Knob.Color.kindName|{}kindName[0]
+            final fun <get-kindName>(): kotlin/String // stapel.showcase/Knob.Color.kindName.<get-kindName>|<get-kindName>(){}[0]
+        final val roles // stapel.showcase/Knob.Color.roles|{}roles[0]
+            final fun <get-roles>(): kotlin.collections/List<stapel.tokens/ColorRole> // stapel.showcase/Knob.Color.roles.<get-roles>|<get-roles>(){}[0]
+
+        final fun accepts(kotlin/Any?): kotlin/Boolean // stapel.showcase/Knob.Color.accepts|accepts(kotlin.Any?){}[0]
+        final fun describe(stapel.tokens/ColorRole): kotlin/String // stapel.showcase/Knob.Color.describe|describe(stapel.tokens.ColorRole){}[0]
+    }
+
+    final class Flag : stapel.showcase/Knob<kotlin/Boolean> { // stapel.showcase/Knob.Flag|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin/Boolean = ...) // stapel.showcase/Knob.Flag.<init>|<init>(kotlin.String;kotlin.String;kotlin.Boolean){}[0]
+
+        final val kindName // stapel.showcase/Knob.Flag.kindName|{}kindName[0]
+            final fun <get-kindName>(): kotlin/String // stapel.showcase/Knob.Flag.kindName.<get-kindName>|<get-kindName>(){}[0]
+
+        final fun accepts(kotlin/Any?): kotlin/Boolean // stapel.showcase/Knob.Flag.accepts|accepts(kotlin.Any?){}[0]
+    }
+
+    final class Number : stapel.showcase/Knob<kotlin/Int> { // stapel.showcase/Knob.Number|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin.ranges/IntRange, kotlin/Int, kotlin/Int = ...) // stapel.showcase/Knob.Number.<init>|<init>(kotlin.String;kotlin.String;kotlin.ranges.IntRange;kotlin.Int;kotlin.Int){}[0]
+
+        final val kindName // stapel.showcase/Knob.Number.kindName|{}kindName[0]
+            final fun <get-kindName>(): kotlin/String // stapel.showcase/Knob.Number.kindName.<get-kindName>|<get-kindName>(){}[0]
+        final val range // stapel.showcase/Knob.Number.range|{}range[0]
+            final fun <get-range>(): kotlin.ranges/IntRange // stapel.showcase/Knob.Number.range.<get-range>|<get-range>(){}[0]
+        final val step // stapel.showcase/Knob.Number.step|{}step[0]
+            final fun <get-step>(): kotlin/Int // stapel.showcase/Knob.Number.step.<get-step>|<get-step>(){}[0]
+
+        final fun accepts(kotlin/Any?): kotlin/Boolean // stapel.showcase/Knob.Number.accepts|accepts(kotlin.Any?){}[0]
+    }
+
+    final class Text : stapel.showcase/Knob<kotlin/String?> { // stapel.showcase/Knob.Text|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin/String?, kotlin/Boolean = ...) // stapel.showcase/Knob.Text.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?;kotlin.Boolean){}[0]
+
+        final val kindName // stapel.showcase/Knob.Text.kindName|{}kindName[0]
+            final fun <get-kindName>(): kotlin/String // stapel.showcase/Knob.Text.kindName.<get-kindName>|<get-kindName>(){}[0]
+        final val optional // stapel.showcase/Knob.Text.optional|{}optional[0]
+            final fun <get-optional>(): kotlin/Boolean // stapel.showcase/Knob.Text.optional.<get-optional>|<get-optional>(){}[0]
+
+        final fun accepts(kotlin/Any?): kotlin/Boolean // stapel.showcase/Knob.Text.accepts|accepts(kotlin.Any?){}[0]
+        final fun describe(kotlin/String?): kotlin/String // stapel.showcase/Knob.Text.describe|describe(kotlin.String?){}[0]
+    }
+
+    final object Companion { // stapel.showcase/Knob.Companion|null[0]
+        final inline fun <#A2: reified kotlin/Enum<#A2>> enumOf(kotlin/String, kotlin/String, #A2): stapel.showcase/Knob.Choice<#A2> // stapel.showcase/Knob.Companion.enumOf|enumOf(kotlin.String;kotlin.String;0:0){0§<kotlin.Enum<0:0>>}[0]
+    }
+}
+
+sealed class stapel.showcase/StoryTarget { // stapel.showcase/StoryTarget|null[0]
+    final val key // stapel.showcase/StoryTarget.key|{}key[0]
+        final fun <get-key>(): kotlin/String // stapel.showcase/StoryTarget.key.<get-key>|<get-key>(){}[0]
+
+    open fun equals(kotlin/Any?): kotlin/Boolean // stapel.showcase/StoryTarget.equals|equals(kotlin.Any?){}[0]
+    open fun hashCode(): kotlin/Int // stapel.showcase/StoryTarget.hashCode|hashCode(){}[0]
+    open fun toString(): kotlin/String // stapel.showcase/StoryTarget.toString|toString(){}[0]
+
+    final class Screen : stapel.showcase/StoryTarget { // stapel.showcase/StoryTarget.Screen|null[0]
+        constructor <init>(kotlin/String) // stapel.showcase/StoryTarget.Screen.<init>|<init>(kotlin.String){}[0]
+
+        final val name // stapel.showcase/StoryTarget.Screen.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.showcase/StoryTarget.Screen.name.<get-name>|<get-name>(){}[0]
+    }
+
+    final class Slot : stapel.showcase/StoryTarget { // stapel.showcase/StoryTarget.Slot|null[0]
+        constructor <init>(kotlin/String) // stapel.showcase/StoryTarget.Slot.<init>|<init>(kotlin.String){}[0]
+
+        final val name // stapel.showcase/StoryTarget.Slot.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.showcase/StoryTarget.Slot.name.<get-name>|<get-name>(){}[0]
+    }
+}
+
+final const val stapel.showcase/STORY_CANVAS_TAG // stapel.showcase/STORY_CANVAS_TAG|{}STORY_CANVAS_TAG[0]
+    final fun <get-STORY_CANVAS_TAG>(): kotlin/String // stapel.showcase/STORY_CANVAS_TAG.<get-STORY_CANVAS_TAG>|<get-STORY_CANVAS_TAG>(){}[0]
+
+final val stapel.showcase/stapel_showcase_AnatomyPart$stableprop // stapel.showcase/stapel_showcase_AnatomyPart$stableprop|#static{}stapel_showcase_AnatomyPart$stableprop[0]
+final val stapel.showcase/stapel_showcase_CanvasOptions$stableprop // stapel.showcase/stapel_showcase_CanvasOptions$stableprop|#static{}stapel_showcase_CanvasOptions$stableprop[0]
+final val stapel.showcase/stapel_showcase_Knob$stableprop // stapel.showcase/stapel_showcase_Knob$stableprop|#static{}stapel_showcase_Knob$stableprop[0]
+final val stapel.showcase/stapel_showcase_KnobValues$stableprop // stapel.showcase/stapel_showcase_KnobValues$stableprop|#static{}stapel_showcase_KnobValues$stableprop[0]
+final val stapel.showcase/stapel_showcase_Knob_Choice$stableprop // stapel.showcase/stapel_showcase_Knob_Choice$stableprop|#static{}stapel_showcase_Knob_Choice$stableprop[0]
+final val stapel.showcase/stapel_showcase_Knob_Color$stableprop // stapel.showcase/stapel_showcase_Knob_Color$stableprop|#static{}stapel_showcase_Knob_Color$stableprop[0]
+final val stapel.showcase/stapel_showcase_Knob_Flag$stableprop // stapel.showcase/stapel_showcase_Knob_Flag$stableprop|#static{}stapel_showcase_Knob_Flag$stableprop[0]
+final val stapel.showcase/stapel_showcase_Knob_Number$stableprop // stapel.showcase/stapel_showcase_Knob_Number$stableprop|#static{}stapel_showcase_Knob_Number$stableprop[0]
+final val stapel.showcase/stapel_showcase_Knob_Text$stableprop // stapel.showcase/stapel_showcase_Knob_Text$stableprop|#static{}stapel_showcase_Knob_Text$stableprop[0]
+final val stapel.showcase/stapel_showcase_MatrixCell$stableprop // stapel.showcase/stapel_showcase_MatrixCell$stableprop|#static{}stapel_showcase_MatrixCell$stableprop[0]
+final val stapel.showcase/stapel_showcase_Story$stableprop // stapel.showcase/stapel_showcase_Story$stableprop|#static{}stapel_showcase_Story$stableprop[0]
+final val stapel.showcase/stapel_showcase_StoryCatalog$stableprop // stapel.showcase/stapel_showcase_StoryCatalog$stableprop|#static{}stapel_showcase_StoryCatalog$stableprop[0]
+final val stapel.showcase/stapel_showcase_StoryEnvironment$stableprop // stapel.showcase/stapel_showcase_StoryEnvironment$stableprop|#static{}stapel_showcase_StoryEnvironment$stableprop[0]
+final val stapel.showcase/stapel_showcase_StoryHit$stableprop // stapel.showcase/stapel_showcase_StoryHit$stableprop|#static{}stapel_showcase_StoryHit$stableprop[0]
+final val stapel.showcase/stapel_showcase_StoryState$stableprop // stapel.showcase/stapel_showcase_StoryState$stableprop|#static{}stapel_showcase_StoryState$stableprop[0]
+final val stapel.showcase/stapel_showcase_StoryTarget$stableprop // stapel.showcase/stapel_showcase_StoryTarget$stableprop|#static{}stapel_showcase_StoryTarget$stableprop[0]
+final val stapel.showcase/stapel_showcase_StoryTarget_Screen$stableprop // stapel.showcase/stapel_showcase_StoryTarget_Screen$stableprop|#static{}stapel_showcase_StoryTarget_Screen$stableprop[0]
+final val stapel.showcase/stapel_showcase_StoryTarget_Slot$stableprop // stapel.showcase/stapel_showcase_StoryTarget_Slot$stableprop|#static{}stapel_showcase_StoryTarget_Slot$stableprop[0]
+
+final fun (androidx.compose.ui/Modifier).stapel.showcase/checkerboard(androidx.compose.ui.unit/Dp = ..., androidx.compose.ui.graphics/Color = ..., androidx.compose.ui.graphics/Color = ...): androidx.compose.ui/Modifier // stapel.showcase/checkerboard|checkerboard@androidx.compose.ui.Modifier(androidx.compose.ui.unit.Dp;androidx.compose.ui.graphics.Color;androidx.compose.ui.graphics.Color){}[0]
+final fun (stapel.showcase/Story).stapel.showcase/matrix(kotlin.collections/List<kotlin/String>? = ..., kotlin/Int = ...): kotlin.collections/List<stapel.showcase/MatrixCell>? // stapel.showcase/matrix|matrix@stapel.showcase.Story(kotlin.collections.List<kotlin.String>?;kotlin.Int){}[0]
+final fun stapel.showcase/StoryCanvas(stapel.showcase/Story, stapel.showcase/StoryState?, stapel.showcase/KnobValues?, androidx.compose.ui/Modifier?, kotlin.collections/Map<kotlin/String, kotlin/Any?>?, kotlin/Function1<kotlin/String, kotlin/Unit>?, kotlin/Boolean, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.showcase/StoryCanvas|StoryCanvas(stapel.showcase.Story;stapel.showcase.StoryState?;stapel.showcase.KnobValues?;androidx.compose.ui.Modifier?;kotlin.collections.Map<kotlin.String,kotlin.Any?>?;kotlin.Function1<kotlin.String,kotlin.Unit>?;kotlin.Boolean;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.showcase/catalogProblems(kotlin.collections/List<stapel.showcase/StoryCatalog>): kotlin.collections/List<kotlin/String> // stapel.showcase/catalogProblems|catalogProblems(kotlin.collections.List<stapel.showcase.StoryCatalog>){}[0]
+final fun stapel.showcase/searchStories(kotlin.collections/List<stapel.showcase/StoryCatalog>, kotlin/String): kotlin.collections/List<stapel.showcase/StoryHit> // stapel.showcase/searchStories|searchStories(kotlin.collections.List<stapel.showcase.StoryCatalog>;kotlin.String){}[0]
+final fun stapel.showcase/stapel_showcase_AnatomyPart$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_AnatomyPart$stableprop_getter|stapel_showcase_AnatomyPart$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_CanvasOptions$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_CanvasOptions$stableprop_getter|stapel_showcase_CanvasOptions$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_Knob$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_Knob$stableprop_getter|stapel_showcase_Knob$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_KnobValues$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_KnobValues$stableprop_getter|stapel_showcase_KnobValues$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_Knob_Choice$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_Knob_Choice$stableprop_getter|stapel_showcase_Knob_Choice$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_Knob_Color$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_Knob_Color$stableprop_getter|stapel_showcase_Knob_Color$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_Knob_Flag$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_Knob_Flag$stableprop_getter|stapel_showcase_Knob_Flag$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_Knob_Number$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_Knob_Number$stableprop_getter|stapel_showcase_Knob_Number$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_Knob_Text$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_Knob_Text$stableprop_getter|stapel_showcase_Knob_Text$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_MatrixCell$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_MatrixCell$stableprop_getter|stapel_showcase_MatrixCell$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_Story$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_Story$stableprop_getter|stapel_showcase_Story$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_StoryCatalog$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_StoryCatalog$stableprop_getter|stapel_showcase_StoryCatalog$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_StoryEnvironment$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_StoryEnvironment$stableprop_getter|stapel_showcase_StoryEnvironment$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_StoryHit$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_StoryHit$stableprop_getter|stapel_showcase_StoryHit$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_StoryState$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_StoryState$stableprop_getter|stapel_showcase_StoryState$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_StoryTarget$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_StoryTarget$stableprop_getter|stapel_showcase_StoryTarget$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_StoryTarget_Screen$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_StoryTarget_Screen$stableprop_getter|stapel_showcase_StoryTarget_Screen$stableprop_getter(){}[0]
+final fun stapel.showcase/stapel_showcase_StoryTarget_Slot$stableprop_getter(): kotlin/Int // stapel.showcase/stapel_showcase_StoryTarget_Slot$stableprop_getter|stapel_showcase_StoryTarget_Slot$stableprop_getter(){}[0]

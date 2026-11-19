@@ -1,0 +1,229 @@
+public final class stapel/showcase/AnatomyPart {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getLabel ()Ljava/lang/String;
+}
+
+public final class stapel/showcase/CanvasKt {
+	public static final field STORY_CANVAS_TAG Ljava/lang/String;
+	public static final fun StoryCanvas (Lstapel/showcase/Story;Lstapel/showcase/StoryState;Lstapel/showcase/KnobValues;Landroidx/compose/ui/Modifier;Ljava/util/Map;Lkotlin/jvm/functions/Function1;ZLandroidx/compose/runtime/Composer;II)V
+	public static final fun checkerboard-gUc8pyA (Landroidx/compose/ui/Modifier;FJJ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun checkerboard-gUc8pyA$default (Landroidx/compose/ui/Modifier;FJJILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class stapel/showcase/CanvasOptions {
+	public static final field $stable I
+	public fun <init> ()V
+	public synthetic fun <init> (ZFLandroidx/compose/ui/unit/Dp;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (ZFLandroidx/compose/ui/unit/Dp;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCheckerboard ()Z
+	public final fun getMaxWidth-lTKBWiU ()Landroidx/compose/ui/unit/Dp;
+	public final fun getPadding-D9Ej5fM ()F
+}
+
+public final class stapel/showcase/CatalogKt {
+	public static final fun catalogProblems (Ljava/util/List;)Ljava/util/List;
+	public static final fun searchStories (Ljava/util/List;Ljava/lang/String;)Ljava/util/List;
+}
+
+public abstract class stapel/showcase/Knob {
+	public static final field $stable I
+	public static final field Companion Lstapel/showcase/Knob$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public abstract fun accepts (Ljava/lang/Object;)Z
+	public fun describe (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun getDefault ()Ljava/lang/Object;
+	public final fun getKey ()Ljava/lang/String;
+	public abstract fun getKindName ()Ljava/lang/String;
+	public final fun getLabel ()Ljava/lang/String;
+}
+
+public final class stapel/showcase/Knob$Choice : stapel/showcase/Knob {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Object;)V
+	public fun accepts (Ljava/lang/Object;)Z
+	public fun describe (Ljava/lang/Object;)Ljava/lang/String;
+	public fun getKindName ()Ljava/lang/String;
+	public final fun getOptions ()Ljava/util/List;
+}
+
+public final class stapel/showcase/Knob$Color : stapel/showcase/Knob {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lstapel/tokens/ColorRole;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lstapel/tokens/ColorRole;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun accepts (Ljava/lang/Object;)Z
+	public synthetic fun describe (Ljava/lang/Object;)Ljava/lang/String;
+	public fun describe (Lstapel/tokens/ColorRole;)Ljava/lang/String;
+	public fun getKindName ()Ljava/lang/String;
+	public final fun getRoles ()Ljava/util/List;
+}
+
+public final class stapel/showcase/Knob$Companion {
+}
+
+public final class stapel/showcase/Knob$Flag : stapel/showcase/Knob {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Z)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun accepts (Ljava/lang/Object;)Z
+	public fun getKindName ()Ljava/lang/String;
+}
+
+public final class stapel/showcase/Knob$Number : stapel/showcase/Knob {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;II)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun accepts (Ljava/lang/Object;)Z
+	public fun getKindName ()Ljava/lang/String;
+	public final fun getRange ()Lkotlin/ranges/IntRange;
+	public final fun getStep ()I
+}
+
+public final class stapel/showcase/Knob$Text : stapel/showcase/Knob {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun accepts (Ljava/lang/Object;)Z
+	public synthetic fun describe (Ljava/lang/Object;)Ljava/lang/String;
+	public fun describe (Ljava/lang/String;)Ljava/lang/String;
+	public fun getKindName ()Ljava/lang/String;
+	public final fun getOptional ()Z
+}
+
+public final class stapel/showcase/KnobValues {
+	public static final field $stable I
+	public fun <init> (Ljava/util/List;)V
+	public final fun get (Lstapel/showcase/Knob;)Ljava/lang/Object;
+	public final fun getKnobs ()Ljava/util/List;
+	public final fun getModified ()Ljava/util/Set;
+	public final fun reset ()V
+	public final fun reset (Lstapel/showcase/Knob;)V
+	public final fun set (Lstapel/showcase/Knob;Ljava/lang/Object;)V
+	public final fun snapshot ()Ljava/util/Map;
+	public final fun trySet (Ljava/lang/String;Ljava/lang/Object;)Z
+}
+
+public final class stapel/showcase/MatrixCell {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun getLabel ()Ljava/lang/String;
+	public final fun getValues ()Ljava/util/Map;
+}
+
+public final class stapel/showcase/MatrixKt {
+	public static final fun matrix (Lstapel/showcase/Story;Ljava/util/List;I)Ljava/util/List;
+	public static synthetic fun matrix$default (Lstapel/showcase/Story;Ljava/util/List;IILjava/lang/Object;)Ljava/util/List;
+}
+
+public final class stapel/showcase/Story {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/showcase/StoryKind;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/Set;Ljava/util/List;Lstapel/showcase/CanvasOptions;Ljava/lang/String;Lkotlin/jvm/functions/Function3;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/showcase/StoryKind;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/Set;Ljava/util/List;Lstapel/showcase/CanvasOptions;Ljava/lang/String;Lkotlin/jvm/functions/Function3;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAnatomy ()Ljava/util/List;
+	public final fun getCanvas ()Lstapel/showcase/CanvasOptions;
+	public final fun getContent ()Lkotlin/jvm/functions/Function3;
+	public final fun getCovers ()Ljava/util/Set;
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getGroup ()Ljava/lang/String;
+	public final fun getGroupPath ()Ljava/util/List;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getKind ()Lstapel/showcase/StoryKind;
+	public final fun getKnobs ()Ljava/util/List;
+	public final fun getSnippet ()Ljava/lang/String;
+	public final fun getStates ()Ljava/util/List;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun state (Ljava/lang/String;)Lstapel/showcase/StoryState;
+}
+
+public final class stapel/showcase/StoryCatalog {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/showcase/StoryEnvironment;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/showcase/StoryEnvironment;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getEnvironment ()Lstapel/showcase/StoryEnvironment;
+	public final fun getGroups ()Ljava/util/List;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getStories ()Ljava/util/List;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun qualifiedId (Lstapel/showcase/Story;)Ljava/lang/String;
+	public final fun story (Ljava/lang/String;)Lstapel/showcase/Story;
+}
+
+public final class stapel/showcase/StoryEnvironment {
+	public static final field $stable I
+	public static final field Companion Lstapel/showcase/StoryEnvironment$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function3;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function3;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBundles ()Ljava/util/List;
+	public final fun getLocales ()Ljava/util/List;
+	public final fun getProvide ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class stapel/showcase/StoryEnvironment$Companion {
+	public final fun getNone ()Lstapel/showcase/StoryEnvironment;
+}
+
+public final class stapel/showcase/StoryHit {
+	public static final field $stable I
+	public fun <init> (Lstapel/showcase/StoryCatalog;Lstapel/showcase/Story;I)V
+	public final fun getCatalog ()Lstapel/showcase/StoryCatalog;
+	public final fun getRank ()I
+	public final fun getStory ()Lstapel/showcase/Story;
+}
+
+public final class stapel/showcase/StoryKind : java/lang/Enum {
+	public static final field Component Lstapel/showcase/StoryKind;
+	public static final field Composite Lstapel/showcase/StoryKind;
+	public static final field Flow Lstapel/showcase/StoryKind;
+	public static final field Foundation Lstapel/showcase/StoryKind;
+	public static final field Screen Lstapel/showcase/StoryKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/showcase/StoryKind;
+	public static fun values ()[Lstapel/showcase/StoryKind;
+}
+
+public abstract interface class stapel/showcase/StoryScope {
+	public abstract fun anatomy (Landroidx/compose/ui/Modifier;Ljava/lang/String;)Landroidx/compose/ui/Modifier;
+	public abstract fun event (Ljava/lang/String;)V
+	public abstract fun getState ()Lstapel/showcase/StoryState;
+	public abstract fun value (Lstapel/showcase/Knob;)Ljava/lang/Object;
+}
+
+public final class stapel/showcase/StoryState {
+	public static final field $stable I
+	public static final field Companion Lstapel/showcase/StoryState$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getId ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun getValues ()Ljava/util/Map;
+}
+
+public final class stapel/showcase/StoryState$Companion {
+	public final fun getDefault ()Lstapel/showcase/StoryState;
+}
+
+public abstract class stapel/showcase/StoryTarget {
+	public static final field $stable I
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/showcase/StoryTarget$Screen : stapel/showcase/StoryTarget {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getName ()Ljava/lang/String;
+}
+
+public final class stapel/showcase/StoryTarget$Slot : stapel/showcase/StoryTarget {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getName ()Ljava/lang/String;
+}
+
