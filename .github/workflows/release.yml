@@ -1,0 +1,63 @@
+name: release
+
+# DISABLED until the owner bootstrap (docs/release.md) is done: the job runs only when the
+# repository variable STAPEL_RELEASE_ENABLED is 'true' AND the `maven-central` environment holds
+# the Portal token and the signing key. Agents never publish.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag (vX.Y.Z), already pushed, on main
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+
+jobs:
+  release:
+    if: vars.STAPEL_RELEASE_ENABLED == 'true'
+    runs-on: macos-26
+    environment: maven-central
+    timeout-minutes: 60
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.tag }}
+          fetch-depth: 0
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+        with:
+          cache-read-only: true
+      - name: Tag guards
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -eu
+          git fetch origin main
+          git merge-base --is-ancestor "$TAG^{commit}" origin/main || { echo "tag not on main"; exit 1; }
+          v="$(sed -n 's/^VERSION_NAME=//p' gradle.properties)"
+          [ "v$v" = "$TAG" ] || { echo "VERSION_NAME $v does not match $TAG"; exit 1; }
+          if [ -n "$(ls .changes 2>/dev/null | grep -v -e README.md -e .gitkeep || true)" ]; then echo "unconsumed .changes"; exit 1; fi
+      - name: Signing key and Portal token present
+        env:
+          K: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          U: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+        run: |
+          [ -n "$K" ] && [ -n "$U" ] || { echo "bootstrap secrets missing (docs/release.md)"; exit 1; }
+      - run: ./gradlew stapelGenerateCheck checkKotlinAbi checkReleaseCoordinates
+      - name: Upload to the Central Portal (manual Publish click follows)
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: ./gradlew publishToMavenCentral --no-configuration-cache

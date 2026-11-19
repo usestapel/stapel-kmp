@@ -1,0 +1,17 @@
+# External dependencies allowed on commonMain of pure families (substrate,
+# capability, brick-domain, brick-adapter): each publishes a wasmJs variant, so
+# nothing in a domain library precludes a future wasmJs target (D2).
+# Format: group:name   # evidence (Gradle module metadata with platform.type "wasm")
+# Adding a line is a reviewed act. Checked by `checkWasmReady`.
+org.jetbrains.kotlinx:kotlinx-coroutines-core   # https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.11.0/kotlinx-coroutines-core-1.11.0.module
+org.jetbrains.kotlinx:kotlinx-coroutines-test   # same publication family as coroutines-core
+org.jetbrains.kotlinx:kotlinx-serialization-core   # https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core/1.13.0/kotlinx-serialization-core-1.13.0.module
+org.jetbrains.kotlinx:kotlinx-serialization-json   # https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-json/1.13.0/kotlinx-serialization-json-1.13.0.module
+org.jetbrains.kotlinx:kotlinx-datetime   # https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-datetime/0.8.0/kotlinx-datetime-0.8.0.module
+org.jetbrains.kotlinx:kotlinx-io-core   # https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-core/0.9.3/kotlinx-io-core-0.9.3.module
+io.ktor:ktor-client-core   # https://repo1.maven.org/maven2/io/ktor/ktor-client-core/3.6.1/ktor-client-core-3.6.1.module
+io.ktor:ktor-client-websockets   # https://repo1.maven.org/maven2/io/ktor/ktor-client-websockets/3.6.1/ktor-client-websockets-3.6.1.module
+io.ktor:ktor-client-mock   # https://repo1.maven.org/maven2/io/ktor/ktor-client-mock/3.6.1/ktor-client-mock-3.6.1.module
+io.insert-koin:koin-core   # https://repo1.maven.org/maven2/io/insert-koin/koin-core/4.2.2/koin-core-4.2.2.module
+androidx.paging:paging-common   # https://dl.google.com/android/maven2/androidx/paging/paging-common/3.5.3/paging-common-3.5.3.module
+app.cash.turbine:turbine   # https://repo1.maven.org/maven2/app/cash/turbine/turbine/1.2.1/turbine-1.2.1.module

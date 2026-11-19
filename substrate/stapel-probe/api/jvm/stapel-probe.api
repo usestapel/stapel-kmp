@@ -1,0 +1,4 @@
+public final class stapel/probe/ProbeKt {
+	public static final fun probeSlug ([Ljava/lang/String;)Ljava/lang/String;
+}
+

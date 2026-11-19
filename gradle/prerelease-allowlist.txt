@@ -1,0 +1,8 @@
+# Pre-release coordinates allowed for DEVELOPMENT (ruling R1).
+# Format: group:name:version   # reason, owner, until (YYYY-MM-DD)
+# A published POM never carries one of these: `checkReleaseCoordinates` refuses
+# every pre-release coordinate regardless of this list.
+#
+# Empty on 2026-11-19: org.jetbrains.androidx.navigation3:navigation3-ui has a
+# stable 1.2.0 (requires compose runtime 1.10.0, compatible with CMP 1.12.2),
+# so the Navigation 3 rc the ARCH sections planned for is not needed.

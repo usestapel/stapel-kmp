@@ -1,0 +1,12 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-probe-compose>
+final const val stapel.probe.compose/PROBE_LABEL_TAG // stapel.probe.compose/PROBE_LABEL_TAG|{}PROBE_LABEL_TAG[0]
+    final fun <get-PROBE_LABEL_TAG>(): kotlin/String // stapel.probe.compose/PROBE_LABEL_TAG.<get-PROBE_LABEL_TAG>|<get-PROBE_LABEL_TAG>(){}[0]
+
+final fun stapel.probe.compose/ProbeLabel(kotlin/Array<out kotlin/String>..., androidx.compose.ui/Modifier?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.probe.compose/ProbeLabel|ProbeLabel(kotlin.Array<out|kotlin.String>...;androidx.compose.ui.Modifier?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]

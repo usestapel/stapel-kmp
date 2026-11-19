@@ -1,0 +1,3 @@
+# Exceptions to the dependency-direction table (docs/gates.md). Empty by design.
+# Each entry: [[exception]] from = "stapel-x", to = "stapel-y", reason = "...", until = "YYYY-MM-DD"
+# `checkCatalog` fails once `until` has passed.

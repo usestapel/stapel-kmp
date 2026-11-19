@@ -1,0 +1,3 @@
+# Substrate-ui artifacts allowed to depend on Material (ruling R9: Material 3
+# lives only in the default skin). Brick UI artifacts are never allowed.
+stapel-ui-material3

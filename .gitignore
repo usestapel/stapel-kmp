@@ -1,0 +1,14 @@
+build/
+# ...but a Kotlin package segment named `build` under src/ is source, not output.
+!**/src/**/build/
+.gradle/
+.kotlin/
+local.properties
+*.iml
+.idea/
+xcuserdata/
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
