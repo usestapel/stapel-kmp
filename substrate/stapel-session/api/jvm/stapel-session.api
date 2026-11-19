@@ -8,6 +8,8 @@ public final class stapel/session/InstallationIdentity_jvmKt {
 }
 
 public final class stapel/session/JwtKt {
+	public static final field ACCOUNT_ID_CLAIM Ljava/lang/String;
+	public static final fun jwtAccountId (Ljava/lang/String;)Ljava/lang/String;
 	public static final fun jwtExpiry (Ljava/lang/String;)Lkotlin/time/Instant;
 }
 
@@ -151,6 +153,7 @@ public final class stapel/session/SessionManager$DefaultImpls {
 }
 
 public final class stapel/session/SessionManagerKt {
+	public static final field PROACTIVE_WINDOW_SHARE D
 	public static final fun SessionManager (Lstapel/session/SessionDependencies;Lstapel/session/TokenRefresher;Lstapel/session/SessionConfig;)Lstapel/session/SessionManager;
 	public static synthetic fun SessionManager$default (Lstapel/session/SessionDependencies;Lstapel/session/TokenRefresher;Lstapel/session/SessionConfig;ILjava/lang/Object;)Lstapel/session/SessionManager;
 }
@@ -159,22 +162,28 @@ public abstract interface class stapel/session/SessionState {
 }
 
 public final class stapel/session/SessionState$Anonymous : stapel/session/SessionState {
-	public fun <init> (J)V
+	public fun <init> (JLjava/lang/String;)V
+	public synthetic fun <init> (JLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()J
-	public final fun copy (J)Lstapel/session/SessionState$Anonymous;
-	public static synthetic fun copy$default (Lstapel/session/SessionState$Anonymous;JILjava/lang/Object;)Lstapel/session/SessionState$Anonymous;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (JLjava/lang/String;)Lstapel/session/SessionState$Anonymous;
+	public static synthetic fun copy$default (Lstapel/session/SessionState$Anonymous;JLjava/lang/String;ILjava/lang/Object;)Lstapel/session/SessionState$Anonymous;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccountId ()Ljava/lang/String;
 	public final fun getGeneration ()J
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class stapel/session/SessionState$Authenticated : stapel/session/SessionState {
-	public fun <init> (J)V
+	public fun <init> (JLjava/lang/String;)V
+	public synthetic fun <init> (JLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()J
-	public final fun copy (J)Lstapel/session/SessionState$Authenticated;
-	public static synthetic fun copy$default (Lstapel/session/SessionState$Authenticated;JILjava/lang/Object;)Lstapel/session/SessionState$Authenticated;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (JLjava/lang/String;)Lstapel/session/SessionState$Authenticated;
+	public static synthetic fun copy$default (Lstapel/session/SessionState$Authenticated;JLjava/lang/String;ILjava/lang/Object;)Lstapel/session/SessionState$Authenticated;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccountId ()Ljava/lang/String;
 	public final fun getGeneration ()J
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;

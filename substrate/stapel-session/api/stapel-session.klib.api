@@ -164,26 +164,32 @@ sealed interface stapel.session/SessionEvent { // stapel.session/SessionEvent|nu
 
 sealed interface stapel.session/SessionState { // stapel.session/SessionState|null[0]
     final class Anonymous : stapel.session/SessionState { // stapel.session/SessionState.Anonymous|null[0]
-        constructor <init>(kotlin/Long) // stapel.session/SessionState.Anonymous.<init>|<init>(kotlin.Long){}[0]
+        constructor <init>(kotlin/Long, kotlin/String? = ...) // stapel.session/SessionState.Anonymous.<init>|<init>(kotlin.Long;kotlin.String?){}[0]
 
+        final val accountId // stapel.session/SessionState.Anonymous.accountId|{}accountId[0]
+            final fun <get-accountId>(): kotlin/String? // stapel.session/SessionState.Anonymous.accountId.<get-accountId>|<get-accountId>(){}[0]
         final val generation // stapel.session/SessionState.Anonymous.generation|{}generation[0]
             final fun <get-generation>(): kotlin/Long // stapel.session/SessionState.Anonymous.generation.<get-generation>|<get-generation>(){}[0]
 
         final fun component1(): kotlin/Long // stapel.session/SessionState.Anonymous.component1|component1(){}[0]
-        final fun copy(kotlin/Long = ...): stapel.session/SessionState.Anonymous // stapel.session/SessionState.Anonymous.copy|copy(kotlin.Long){}[0]
+        final fun component2(): kotlin/String? // stapel.session/SessionState.Anonymous.component2|component2(){}[0]
+        final fun copy(kotlin/Long = ..., kotlin/String? = ...): stapel.session/SessionState.Anonymous // stapel.session/SessionState.Anonymous.copy|copy(kotlin.Long;kotlin.String?){}[0]
         final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionState.Anonymous.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // stapel.session/SessionState.Anonymous.hashCode|hashCode(){}[0]
         final fun toString(): kotlin/String // stapel.session/SessionState.Anonymous.toString|toString(){}[0]
     }
 
     final class Authenticated : stapel.session/SessionState { // stapel.session/SessionState.Authenticated|null[0]
-        constructor <init>(kotlin/Long) // stapel.session/SessionState.Authenticated.<init>|<init>(kotlin.Long){}[0]
+        constructor <init>(kotlin/Long, kotlin/String? = ...) // stapel.session/SessionState.Authenticated.<init>|<init>(kotlin.Long;kotlin.String?){}[0]
 
+        final val accountId // stapel.session/SessionState.Authenticated.accountId|{}accountId[0]
+            final fun <get-accountId>(): kotlin/String? // stapel.session/SessionState.Authenticated.accountId.<get-accountId>|<get-accountId>(){}[0]
         final val generation // stapel.session/SessionState.Authenticated.generation|{}generation[0]
             final fun <get-generation>(): kotlin/Long // stapel.session/SessionState.Authenticated.generation.<get-generation>|<get-generation>(){}[0]
 
         final fun component1(): kotlin/Long // stapel.session/SessionState.Authenticated.component1|component1(){}[0]
-        final fun copy(kotlin/Long = ...): stapel.session/SessionState.Authenticated // stapel.session/SessionState.Authenticated.copy|copy(kotlin.Long){}[0]
+        final fun component2(): kotlin/String? // stapel.session/SessionState.Authenticated.component2|component2(){}[0]
+        final fun copy(kotlin/Long = ..., kotlin/String? = ...): stapel.session/SessionState.Authenticated // stapel.session/SessionState.Authenticated.copy|copy(kotlin.Long;kotlin.String?){}[0]
         final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionState.Authenticated.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // stapel.session/SessionState.Authenticated.hashCode|hashCode(){}[0]
         final fun toString(): kotlin/String // stapel.session/SessionState.Authenticated.toString|toString(){}[0]
@@ -296,8 +302,14 @@ final class stapel.session/TokenPair { // stapel.session/TokenPair|null[0]
     final fun toString(): kotlin/String // stapel.session/TokenPair.toString|toString(){}[0]
 }
 
+final const val stapel.session/ACCOUNT_ID_CLAIM // stapel.session/ACCOUNT_ID_CLAIM|{}ACCOUNT_ID_CLAIM[0]
+    final fun <get-ACCOUNT_ID_CLAIM>(): kotlin/String // stapel.session/ACCOUNT_ID_CLAIM.<get-ACCOUNT_ID_CLAIM>|<get-ACCOUNT_ID_CLAIM>(){}[0]
+final const val stapel.session/PROACTIVE_WINDOW_SHARE // stapel.session/PROACTIVE_WINDOW_SHARE|{}PROACTIVE_WINDOW_SHARE[0]
+    final fun <get-PROACTIVE_WINDOW_SHARE>(): kotlin/Double // stapel.session/PROACTIVE_WINDOW_SHARE.<get-PROACTIVE_WINDOW_SHARE>|<get-PROACTIVE_WINDOW_SHARE>(){}[0]
+
 final fun stapel.session.di/sessionModule(stapel.session/SessionConfig = ..., stapel.session.vault/TokenVaultConfig = ...): org.koin.core.module/Module // stapel.session.di/sessionModule|sessionModule(stapel.session.SessionConfig;stapel.session.vault.TokenVaultConfig){}[0]
 final fun stapel.session.vault/platformTokenVault(stapel.runtime/PlatformContext, stapel.runtime/StapelDispatchers, stapel.session.vault/TokenVaultConfig = ...): stapel.session.vault/TokenVault // stapel.session.vault/platformTokenVault|platformTokenVault(stapel.runtime.PlatformContext;stapel.runtime.StapelDispatchers;stapel.session.vault.TokenVaultConfig){}[0]
 final fun stapel.session/SessionManager(stapel.session/SessionDependencies, stapel.session/TokenRefresher, stapel.session/SessionConfig = ...): stapel.session/SessionManager // stapel.session/SessionManager|SessionManager(stapel.session.SessionDependencies;stapel.session.TokenRefresher;stapel.session.SessionConfig){}[0]
+final fun stapel.session/jwtAccountId(kotlin/String): kotlin/String? // stapel.session/jwtAccountId|jwtAccountId(kotlin.String){}[0]
 final fun stapel.session/jwtExpiry(kotlin/String): kotlin.time/Instant? // stapel.session/jwtExpiry|jwtExpiry(kotlin.String){}[0]
 final fun stapel.session/platformInstallationIdentity(stapel.runtime/PlatformContext, stapel.runtime/StapelDispatchers, stapel.runtime/IdGenerator, kotlin/String = ...): stapel.session/InstallationIdentity // stapel.session/platformInstallationIdentity|platformInstallationIdentity(stapel.runtime.PlatformContext;stapel.runtime.StapelDispatchers;stapel.runtime.IdGenerator;kotlin.String){}[0]

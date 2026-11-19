@@ -28,6 +28,7 @@ import stapel.runtime.warn
 import stapel.session.vault.StoredSession
 import stapel.session.vault.VaultRead
 import kotlin.time.Duration
+import kotlin.time.Instant
 
 private const val TAG = "stapel.session"
 
@@ -86,7 +87,7 @@ internal class DefaultSessionManager(
                         current = read.session
                         ++generation
                     }
-                    mutableState.value = stateFor(read.session.kind, gen)
+                    mutableState.value = stateFor(read.session.kind, gen, read.session.tokens)
                 }
             }
         }
@@ -103,7 +104,7 @@ internal class DefaultSessionManager(
             ++generation
         }
         restoreLock.withLock { restored = true }
-        mutableState.value = stateFor(kind, gen)
+        mutableState.value = stateFor(kind, gen, tokens)
     }
 
     override suspend fun accessToken(): String? {
@@ -127,7 +128,7 @@ internal class DefaultSessionManager(
         if (config.proactiveRefreshWindow <= Duration.ZERO) return false
         if (deps.connectivity?.status?.value == NetworkStatus.Offline) return false
         val expiry = session.tokens.accessExpiry ?: return false
-        return expiry - deps.clock.now() < config.proactiveRefreshWindow
+        return expiry - deps.clock.now() < effectiveProactiveWindow(config.proactiveRefreshWindow, session.tokens.accessToken, expiry)
     }
 
     override suspend fun refresh(failedToken: String?): RefreshVerdict {
@@ -285,8 +286,20 @@ internal class DefaultSessionManager(
         }
     }
 
-    private fun stateFor(kind: SessionKind, generation: Long): SessionState = when (kind) {
-        SessionKind.Authenticated -> SessionState.Authenticated(generation)
-        SessionKind.Anonymous -> SessionState.Anonymous(generation)
+    private fun stateFor(kind: SessionKind, generation: Long, tokens: TokenPair): SessionState {
+        val account = jwtAccountId(tokens.accessToken)
+        return when (kind) {
+            SessionKind.Authenticated -> SessionState.Authenticated(generation, account)
+            SessionKind.Anonymous -> SessionState.Anonymous(generation, account)
+        }
     }
 }
+
+/** [configured], clamped to [PROACTIVE_WINDOW_SHARE] of the token's `exp − iat` when it carries `iat`. */
+internal fun effectiveProactiveWindow(configured: Duration, accessToken: String, expiry: Instant): Duration {
+    val issued = jwtIssuedAt(accessToken) ?: return configured
+    val lifetime = expiry - issued
+    if (lifetime <= Duration.ZERO) return configured
+    return minOf(configured, lifetime * PROACTIVE_WINDOW_SHARE)
+}
+

@@ -1,5 +1,7 @@
 package stapel.session
 
+import stapel.testing.SequentialIdGenerator
+import stapel.testing.TestClock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -24,7 +26,6 @@ import stapel.result.StapelError
 import stapel.result.StapelResult
 import stapel.result.TransportCarrier
 import stapel.result.TransportFailure
-import stapel.runtime.IdGenerator
 import stapel.session.vault.StoredSession
 import stapel.wire.ApiTransport
 import stapel.wire.AuthRequirement
@@ -116,12 +117,6 @@ private class BareRefresher(private val bare: ApiTransport) : TokenRefresher {
         }
 }
 
-private class Ids : IdGenerator {
-    private var n = 0
-
-    override fun uuid(): String = "call-${++n}"
-}
-
 /**
  * G-D2 + the session rows of G-N2: runtime → network → session wired by constructors only, a real
  * [SessionManager] behind the real pipeline, a fake backend on the wire.
@@ -131,9 +126,9 @@ class PipelineSessionTest {
     private val client = ClientInfo("com.example.app", "1", "1", ClientPlatform.Ios, "iOS", "18", null, "0")
     private val environment = StapelEnvironment.single("test", "https://api.example.com/", Posture.Prototype, client)
 
-    private inner class Stack(scope: TestScope, initial: TokenPair = pair("A"), clock: FakeClock = FakeClock()) {
+    private inner class Stack(scope: TestScope, initial: TokenPair = pair("A"), clock: TestClock = FakeClock()) {
         val backend = Backend()
-        val deps = NetworkDependencies(environment, clock, Ids(), random = Random(1))
+        val deps = NetworkDependencies(environment, clock, SequentialIdGenerator(), random = Random(1))
         val bare = StapelTransport(deps, transport = backend)
         val vault = RecordingVault(StoredSession(initial, SessionKind.Authenticated))
         val session = SessionManager(SessionDependencies(vault, scope.backgroundScope, clock), BareRefresher(bare))
@@ -189,7 +184,7 @@ class PipelineSessionTest {
     @Test
     fun accessTokenAboutToExpireIsRefreshedBeforeTheRequest() = runTest {
         val clock = FakeClock()
-        val stack = Stack(this, initial = pair("A", exp = clock.now + 5.seconds), clock = clock)
+        val stack = Stack(this, initial = pair("A", exp = clock.now() + 5.seconds), clock = clock)
         stack.session.restore()
         assertIs<StapelResult.Ok<Me>>(stack.api.execute(getMe, OperationCall()))
         assertEquals(

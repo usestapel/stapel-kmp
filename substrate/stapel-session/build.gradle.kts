@@ -18,6 +18,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(projects.stapelConfig)
+            implementation(projects.stapelTesting)
         }
     }
 }

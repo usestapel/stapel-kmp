@@ -28,7 +28,9 @@ import kotlin.time.Duration.Companion.seconds
  * 6. Teardown: tokens dropped → vault cleared → every logout hook (one throwing does not stop the
  *    rest) → state published → [SessionEvent.Ended]. During an explicit [logout], [sessionLost] is a no-op.
  * 7. Proactive refresh on the request path when the access token expires within
- *    [SessionConfig.proactiveRefreshWindow]; skipped while offline. No timers.
+ *    [SessionConfig.proactiveRefreshWindow], clamped to a quarter of the token's own lifetime
+ *    (`exp − iat`) so a short-lived token is not refreshed before every request; skipped while
+ *    offline. No timers.
  * 8. An unreadable vault settles [SessionEnd.StorageLost] and is cleared; never a crash, never plaintext.
  * 9. One process owns the session: the vault is not safe for concurrent writers in several processes.
  */
@@ -94,7 +96,12 @@ public class SessionDependencies(
 
 /** Tunables. */
 public data class SessionConfig(
-    /** Refresh before sending when the access token expires within this window; [Duration.ZERO] disables. */
+    /**
+     * Refresh before sending when the access token expires within this window; [Duration.ZERO]
+     * disables. The effective window is at most [PROACTIVE_WINDOW_SHARE] of the token's lifetime
+     * (`exp − iat`, when both claims are present): a 5-second token refreshes in its last 1.25 s,
+     * not before every request; a 15-minute token keeps the full 30 s.
+     */
     val proactiveRefreshWindow: Duration = 30.seconds,
     /**
      * A rotation marker younger than this on start means another process may still be persisting:
@@ -110,3 +117,12 @@ public fun SessionManager(
     refresher: TokenRefresher,
     config: SessionConfig = SessionConfig(),
 ): SessionManager = DefaultSessionManager(deps, refresher, config)
+
+/**
+ * Largest share of an access token's lifetime the proactive window may cover: the token is used
+ * for at least the first three quarters of its life, and the refresh still lands before expiry
+ * with a margin proportional to the lifetime (the request that triggers it is not delayed by a
+ * refresh on every call, which a window longer than the lifetime would cause).
+ */
+public const val PROACTIVE_WINDOW_SHARE: Double = 0.25
+

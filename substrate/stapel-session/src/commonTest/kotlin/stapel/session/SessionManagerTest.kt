@@ -1,5 +1,6 @@
 package stapel.session
 
+import stapel.testing.FakeConnectivity
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -20,6 +21,7 @@ import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -205,8 +207,8 @@ class SessionManagerTest {
     fun youngMarkerOnStartIsWaitedOutOnceAndReRead() = runTest {
         val clock = FakeClock()
         val h = Harness(this, config = SessionConfig(rotationHandoffWindow = 3.seconds))
-        h.clock.now = clock.now
-        h.vault.record = StoredSession(pair("A"), SessionKind.Authenticated, rotationStartedAt = clock.now - 1.seconds)
+        h.clock.set(clock.now())
+        h.vault.record = StoredSession(pair("A"), SessionKind.Authenticated, rotationStartedAt = clock.now() - 1.seconds)
         val restore = async { h.manager.restore() }
         advanceTimeBy(1.seconds)
         assertFalse(restore.isCompleted)
@@ -220,7 +222,7 @@ class SessionManagerTest {
     @Test
     fun oldMarkerMeansInterruptedRotationAndIsMeasuredWhenRevoked() = runTest {
         val h = Harness(this, answer = { RefreshOutcome.Rejected(SessionEnd.Revoked) })
-        h.vault.record = StoredSession(pair("A"), SessionKind.Authenticated, rotationStartedAt = h.clock.now - 60.seconds)
+        h.vault.record = StoredSession(pair("A"), SessionKind.Authenticated, rotationStartedAt = h.clock.now() - 60.seconds)
         h.manager.restore()
         assertEquals(SessionState.Authenticated(1), h.manager.state.value, "the next refresh decides, not the marker")
         h.manager.refresh("access-A")
@@ -299,26 +301,59 @@ class SessionManagerTest {
         val clock = FakeClock()
         val h = Harness(
             this,
-            initial = StoredSession(pair("A", exp = clock.now + 10.seconds), SessionKind.Authenticated),
-            answer = { RefreshOutcome.Rotated(pair("B", exp = clock.now + 300.seconds)) },
+            initial = StoredSession(pair("A", exp = clock.now() + 10.seconds), SessionKind.Authenticated),
+            answer = { RefreshOutcome.Rotated(pair("B", exp = clock.now() + 300.seconds)) },
         )
-        h.clock.now = clock.now
+        h.clock.set(clock.now())
         h.manager.restore()
-        assertEquals(jwt("B", clock.now + 300.seconds), h.manager.accessToken())
+        assertEquals(jwt("B", clock.now() + 300.seconds), h.manager.accessToken())
         assertEquals(1, h.refresher.calls)
         // Inversion: a token far from expiry is not refreshed.
-        assertEquals(jwt("B", clock.now + 300.seconds), h.manager.accessToken())
+        assertEquals(jwt("B", clock.now() + 300.seconds), h.manager.accessToken())
         assertEquals(1, h.refresher.calls)
+    }
+
+    @Test
+    fun aShortLivedTokenIsNotRefreshedBeforeEveryRequest() = runTest {
+        val start = FakeClock().now()
+        val short = TokenPair(jwt("A", iat = start, exp = start + 5.seconds), "refresh-A")
+        val h = Harness(
+            this,
+            initial = StoredSession(short, SessionKind.Authenticated),
+            answer = { RefreshOutcome.Rotated(TokenPair(jwt("B", iat = start + 4.seconds, exp = start + 9.seconds), "refresh-B")) },
+        )
+        h.clock.set(start)
+        h.manager.restore()
+        // Inversion of the unclamped 30 s window, which is longer than the whole 5 s lifetime.
+        assertEquals(short.accessToken, h.manager.accessToken())
+        h.clock.set(start + 3.seconds)
+        assertEquals(short.accessToken, h.manager.accessToken())
+        assertEquals(0, h.refresher.calls, "a 5 s token refreshed with more than a quarter of its life left")
+        // Inside the last quarter (1.25 s) it refreshes.
+        h.clock.set(start + 4.seconds)
+        assertEquals(jwt("B", iat = start + 4.seconds, exp = start + 9.seconds), h.manager.accessToken())
+        assertEquals(1, h.refresher.calls)
+    }
+
+    @Test
+    fun theProactiveWindowIsClampedToAQuarterOfTheLifetime() {
+        val now = FakeClock().now()
+        val longToken = jwt("L", iat = now, exp = now + 15.minutes)
+        assertEquals(30.seconds, effectiveProactiveWindow(30.seconds, longToken, now + 15.minutes))
+        val shortToken = jwt("S", iat = now, exp = now + 8.seconds)
+        assertEquals(2.seconds, effectiveProactiveWindow(30.seconds, shortToken, now + 8.seconds))
+        // Without `iat` the lifetime is unknown: the configured window stands.
+        assertEquals(30.seconds, effectiveProactiveWindow(30.seconds, jwt("X", now + 8.seconds), now + 8.seconds))
     }
 
     @Test
     fun noProactiveRefreshWhileOffline() = runTest {
         val clock = FakeClock()
-        val h = Harness(this, initial = StoredSession(pair("A", exp = clock.now + 10.seconds), SessionKind.Authenticated))
-        h.clock.now = clock.now
-        h.connectivity.mutable.value = NetworkStatus.Offline
+        val h = Harness(this, initial = StoredSession(pair("A", exp = clock.now() + 10.seconds), SessionKind.Authenticated))
+        h.clock.set(clock.now())
+        h.connectivity.set(NetworkStatus.Offline)
         h.manager.restore()
-        assertEquals(jwt("A", clock.now + 10.seconds), h.manager.accessToken())
+        assertEquals(jwt("A", clock.now() + 10.seconds), h.manager.accessToken())
         assertEquals(0, h.refresher.calls)
     }
 
@@ -327,18 +362,18 @@ class SessionManagerTest {
         val clock = FakeClock()
         val h = Harness(
             this,
-            initial = StoredSession(pair("A", exp = clock.now + 10.seconds), SessionKind.Authenticated),
+            initial = StoredSession(pair("A", exp = clock.now() + 10.seconds), SessionKind.Authenticated),
             answer = { RefreshOutcome.Transient("timeout") },
         )
-        h.clock.now = clock.now
+        h.clock.set(clock.now())
         h.manager.restore()
-        assertEquals(jwt("A", clock.now + 10.seconds), h.manager.accessToken())
+        assertEquals(jwt("A", clock.now() + 10.seconds), h.manager.accessToken())
         assertEquals(SessionState.Authenticated(1), h.manager.state.value)
     }
 
     @Test
     fun jwtExpiryIsReadWithoutVerification() {
-        val exp = FakeClock().now + 42.milliseconds
+        val exp = FakeClock().now() + 42.milliseconds
         assertEquals(exp.epochSeconds, jwtExpiry(jwt("x", exp))!!.epochSeconds)
         assertNull(jwtExpiry("not-a-jwt"))
         assertNull(jwtExpiry("a.%%%.c"))

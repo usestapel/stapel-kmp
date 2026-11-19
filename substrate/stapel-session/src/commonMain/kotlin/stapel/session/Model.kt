@@ -11,12 +11,19 @@ public sealed interface SessionState {
     public data class Authenticated(
         /** Id of this session within the process; keys session-scoped objects and caches. */
         val generation: Long,
+        /**
+         * The account the session belongs to: the access token's [ACCOUNT_ID_CLAIM], read when the
+         * session is adopted or restored (no request needed). Null when the token carries none.
+         */
+        val accountId: String? = null,
     ) : SessionState
 
     /** A guest session: real tokens, anonymous principal. */
     public data class Anonymous(
         /** Id of this session within the process. */
         val generation: Long,
+        /** The guest account's id ([ACCOUNT_ID_CLAIM]); null when the token carries none. */
+        val accountId: String? = null,
     ) : SessionState
 
     /** No session. [cause] is null when there never was one in this process. */

@@ -1,32 +1,29 @@
 package stapel.session
 
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import stapel.runtime.Connectivity
-import stapel.runtime.NetworkStatus
 import stapel.runtime.SessionTelemetryEvent
 import stapel.runtime.StapelTelemetry
 import stapel.session.vault.StoredSession
+import stapel.testing.TestClock
 import stapel.session.vault.TokenVault
 import stapel.session.vault.VaultRead
 import kotlin.io.encoding.Base64
-import kotlin.time.Clock
-import kotlin.time.Duration
 import kotlin.time.Instant
 
-internal class FakeClock(var now: Instant = Instant.fromEpochSeconds(1_800_000_000)) : Clock {
-    override fun now(): Instant = now
-
-    fun advance(by: Duration) {
-        now += by
-    }
-}
+/** The session tests' clock: stapel-testing's [TestClock] at a fixed start. */
+internal fun FakeClock(): TestClock = TestClock(Instant.fromEpochSeconds(1_800_000_000))
 
 /** A JWT-shaped token whose payload carries [exp] (signature is not checked by the client). */
 internal fun jwt(name: String, exp: Instant): String {
     val payload = Base64.UrlSafe.withPadding(Base64.PaddingOption.ABSENT)
         .encode("{\"sub\":\"$name\",\"exp\":${exp.epochSeconds}}".encodeToByteArray())
+    return "eyJhbGciOiJIUzI1NiJ9.$payload.sig-$name"
+}
+
+/** A JWT-shaped token carrying `iat` and `exp`, like the backend's access tokens. */
+internal fun jwt(name: String, iat: Instant, exp: Instant): String {
+    val payload = Base64.UrlSafe.withPadding(Base64.PaddingOption.ABSENT)
+        .encode("{\"user_id\":\"$name\",\"iat\":${iat.epochSeconds},\"exp\":${exp.epochSeconds}}".encodeToByteArray())
     return "eyJhbGciOiJIUzI1NiJ9.$payload.sig-$name"
 }
 
@@ -71,15 +68,6 @@ internal class ScriptedRefresher(var answer: suspend (TokenPair) -> RefreshOutco
         gate?.await()
         return answer(current)
     }
-}
-
-internal class FakeConnectivity(initial: NetworkStatus = NetworkStatus.Online()) : Connectivity {
-    val mutable = MutableStateFlow(initial)
-    override val status: StateFlow<NetworkStatus> = mutable
-
-    override fun reportReachable() {}
-
-    override fun reportUnreachable() {}
 }
 
 internal class RecordingTelemetry : StapelTelemetry {
