@@ -1,0 +1,33 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-profiles-testing>
+final class stapel.profiles.testing/ProfilesWalkException : kotlin/AssertionError { // stapel.profiles.testing/ProfilesWalkException|null[0]
+    constructor <init>(kotlin/String) // stapel.profiles.testing/ProfilesWalkException.<init>|<init>(kotlin.String){}[0]
+}
+
+final object stapel.profiles.testing/ProfilesSamples { // stapel.profiles.testing/ProfilesSamples|null[0]
+    final val contacts // stapel.profiles.testing/ProfilesSamples.contacts|{}contacts[0]
+        final fun <get-contacts>(): stapel.profiles.model/Contacts // stapel.profiles.testing/ProfilesSamples.contacts.<get-contacts>|<get-contacts>(){}[0]
+    final val languages // stapel.profiles.testing/ProfilesSamples.languages|{}languages[0]
+        final fun <get-languages>(): kotlin.collections/List<stapel.profiles.model/Language> // stapel.profiles.testing/ProfilesSamples.languages.<get-languages>|<get-languages>(){}[0]
+    final val me // stapel.profiles.testing/ProfilesSamples.me|{}me[0]
+        final fun <get-me>(): stapel.profiles.model/MyProfile // stapel.profiles.testing/ProfilesSamples.me.<get-me>|<get-me>(){}[0]
+    final val people // stapel.profiles.testing/ProfilesSamples.people|{}people[0]
+        final fun <get-people>(): kotlin.collections/List<stapel.profiles.model/Person> // stapel.profiles.testing/ProfilesSamples.people.<get-people>|<get-people>(){}[0]
+
+    final fun person(kotlin/String = ..., kotlin/String = ..., stapel.profiles.model/RelationshipStatus = ...): stapel.profiles.model/PublicProfile // stapel.profiles.testing/ProfilesSamples.person|person(kotlin.String;kotlin.String;stapel.profiles.model.RelationshipStatus){}[0]
+}
+
+final val stapel.profiles.testing/stapel_profiles_testing_ProfilesSamples$stableprop // stapel.profiles.testing/stapel_profiles_testing_ProfilesSamples$stableprop|#static{}stapel_profiles_testing_ProfilesSamples$stableprop[0]
+final val stapel.profiles.testing/stapel_profiles_testing_ProfilesWalkException$stableprop // stapel.profiles.testing/stapel_profiles_testing_ProfilesWalkException$stableprop|#static{}stapel_profiles_testing_ProfilesWalkException$stableprop[0]
+
+final fun (androidx.compose.ui.test/ComposeUiTest).stapel.profiles.testing/chooseLanguage(kotlin/String?, kotlin/Long = ...) // stapel.profiles.testing/chooseLanguage|chooseLanguage@androidx.compose.ui.test.ComposeUiTest(kotlin.String?;kotlin.Long){}[0]
+final fun (androidx.compose.ui.test/ComposeUiTest).stapel.profiles.testing/openSettingsSection(kotlin/String, kotlin/String, kotlin/Long = ...) // stapel.profiles.testing/openSettingsSection|openSettingsSection@androidx.compose.ui.test.ComposeUiTest(kotlin.String;kotlin.String;kotlin.Long){}[0]
+final fun (androidx.compose.ui.test/ComposeUiTest).stapel.profiles.testing/renameInSettings(kotlin/String, kotlin/Long = ...) // stapel.profiles.testing/renameInSettings|renameInSettings@androidx.compose.ui.test.ComposeUiTest(kotlin.String;kotlin.Long){}[0]
+final fun stapel.profiles.testing/stapel_profiles_testing_ProfilesSamples$stableprop_getter(): kotlin/Int // stapel.profiles.testing/stapel_profiles_testing_ProfilesSamples$stableprop_getter|stapel_profiles_testing_ProfilesSamples$stableprop_getter(){}[0]
+final fun stapel.profiles.testing/stapel_profiles_testing_ProfilesWalkException$stableprop_getter(): kotlin/Int // stapel.profiles.testing/stapel_profiles_testing_ProfilesWalkException$stableprop_getter|stapel_profiles_testing_ProfilesWalkException$stableprop_getter(){}[0]

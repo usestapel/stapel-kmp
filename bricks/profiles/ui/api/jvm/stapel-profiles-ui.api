@@ -1,0 +1,379 @@
+public abstract interface class stapel/profiles/ui/AvatarPicker {
+	public abstract fun pick (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/profiles/ui/ConnectionsRoute : stapel/navigation/Route {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/ConnectionsRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/ContactsRoute : stapel/navigation/Route {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/ContactsRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/ContactsScreenKt {
+	public static final fun ContactsScreen (Lstapel/profiles/presentation/ContactsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class stapel/profiles/ui/DefaultProfilesScreens : stapel/profiles/ui/ProfilesScreens {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/DefaultProfilesScreens;
+	public fun Connections (Lstapel/profiles/presentation/ConnectionsState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public fun Contacts (Lstapel/profiles/presentation/ContactsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public fun Language (Lstapel/profiles/presentation/ProfileSettingsState;Lstapel/profiles/presentation/LanguageCatalogueState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public fun Notifications (Lstapel/profiles/presentation/ProfileSettingsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public fun PublicProfile (Lstapel/profiles/presentation/PublicProfileState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Settings (Lstapel/profiles/presentation/ProfileSettingsState;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class stapel/profiles/ui/LanguageRoute : stapel/navigation/Route {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/LanguageRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/NotificationsRoute : stapel/navigation/Route {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/NotificationsRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/PeopleScreensKt {
+	public static final fun ConnectionsScreen (Lstapel/profiles/presentation/ConnectionsState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun PublicProfileScreen (Lstapel/profiles/presentation/PublicProfileState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class stapel/profiles/ui/ProfilesBindingsKt {
+	public static final fun ProfileConnections (Lstapel/navigation/compose/ScreenScope;Lstapel/profiles/StapelProfiles;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ProfileContacts (Lstapel/profiles/StapelProfiles;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ProfileLanguage (Lstapel/profiles/StapelProfiles;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ProfileNotifications (Lstapel/profiles/StapelProfiles;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ProfileSettings (Lstapel/navigation/compose/ScreenScope;Lstapel/profiles/StapelProfiles;Lstapel/profiles/ui/AvatarPicker;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ProvideProfilesPresenters (Lstapel/profiles/StapelProfiles;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static final fun PublicProfile (Lstapel/navigation/compose/ScreenScope;Lstapel/profiles/StapelProfiles;Lstapel/profiles/ui/PublicProfileRoute;Landroidx/compose/runtime/Composer;I)V
+	public static final fun settingsSections (Lstapel/navigation/ResolvedDestination;)Ljava/util/List;
+}
+
+public final class stapel/profiles/ui/ProfilesErrorTextsRu : stapel/result/text/ErrorCatalog {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/ProfilesErrorTextsRu;
+	public final fun getCodes ()Ljava/util/Set;
+	public fun getOwner ()Ljava/lang/String;
+	public fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/ProfilesNavIds {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/ProfilesNavIds;
+	public final fun getConnections-x5gaQ_A ()Ljava/lang/String;
+	public final fun getContacts-x5gaQ_A ()Ljava/lang/String;
+	public final fun getLanguage-x5gaQ_A ()Ljava/lang/String;
+	public final fun getNotifications-x5gaQ_A ()Ljava/lang/String;
+	public final fun getPageActions-EmFWfVM ()Ljava/lang/String;
+	public final fun getPublic-x5gaQ_A ()Ljava/lang/String;
+	public final fun getSettings-x5gaQ_A ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/ProfilesNavKt {
+	public static final field PROFILES_UI_ARTIFACT Ljava/lang/String;
+	public static final fun profilesNavContribution (Ljava/lang/String;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;)Lstapel/navigation/compose/NavContribution;
+}
+
+public final class stapel/profiles/ui/ProfilesPresenterFactory : stapel/mvi/compose/PresenterFactory {
+	public static final field $stable I
+	public fun <init> (Lstapel/profiles/StapelProfiles;Lstapel/mvi/compose/PresenterFactory;)V
+	public synthetic fun <init> (Lstapel/profiles/StapelProfiles;Lstapel/mvi/compose/PresenterFactory;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun create (Lkotlin/reflect/KClass;Lstapel/mvi/PresenterContext;Ljava/util/List;)Lstapel/mvi/Presenter;
+}
+
+public abstract interface class stapel/profiles/ui/ProfilesScreens {
+	public abstract fun Connections (Lstapel/profiles/presentation/ConnectionsState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Contacts (Lstapel/profiles/presentation/ContactsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Language (Lstapel/profiles/presentation/ProfileSettingsState;Lstapel/profiles/presentation/LanguageCatalogueState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Notifications (Lstapel/profiles/presentation/ProfileSettingsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun PublicProfile (Lstapel/profiles/presentation/PublicProfileState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Settings (Lstapel/profiles/presentation/ProfileSettingsState;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class stapel/profiles/ui/ProfilesScreensKt {
+	public static final fun getLocalProfilesScreens ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+}
+
+public final class stapel/profiles/ui/ProfilesStrings {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/ProfilesStrings;
+	public final fun getActionClose-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getActionRetry-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getConnectionsKindLabel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getConnectionsSubtitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getConnectionsTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsAdd-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsAdding-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsConfirmDeleteBody-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsConfirmDeleteTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsDelete-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsEmpty-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsEmptyHint-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsEnabledLabel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsHideNumber-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsLabelField-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsLabelPlaceholder-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsNumberField-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsNumberPlaceholder-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsPolicyLabel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsPolicyMembers-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsPolicyNobody-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsPolicyVerified-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealBudget-J4f0JxU ()Ljava/lang/String;
+	public final fun getContactsRevealCall-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealCopied-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealCopy-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealLoading-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealNone-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealRegister-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealShow-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealsLast24h-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealsLast7d-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsRevealsTotal-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsShowNumber-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsSubtitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsUnverified-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsUnverifiedHint-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerified-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerify-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifyAttemptsLeft-J4f0JxU ()Ljava/lang/String;
+	public final fun getContactsVerifyCancel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifyCodeField-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifyCodePlaceholder-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifyConfirm-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifyConfirming-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifyExpiresIn-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifyResend-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifySending-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getContactsVerifySent-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getErrorUnknown-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getInitialSetupBlockedNameRequired-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getInitialSetupNamePlaceholder-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getInitialSetupSave-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getInitialSetupSaving-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getInitialSetupSkip-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getInitialSetupSubtitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getInitialSetupTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLanguageCatalogueEmpty-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLanguageFieldAppLanguage-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLanguageFieldAuto-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLanguageFieldUnderstands-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLanguageSubtitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLanguageTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListBlocked-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListCountBlocked-J4f0JxU ()Ljava/lang/String;
+	public final fun getListCountFollowers-J4f0JxU ()Ljava/lang/String;
+	public final fun getListCountFollowing-J4f0JxU ()Ljava/lang/String;
+	public final fun getListEmpty-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListEmptyBlocked-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListEmptyBlockedHint-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListEmptyFollowers-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListEmptyFollowersHint-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListEmptyFollowing-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListEmptyFollowingHint-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListFollowers-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getListFollowing-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNavConnections-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNavContacts-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNavLanguage-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNavNotifications-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNavPublicProfile-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNavSettings-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNotifPrefsCategoryMessages-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNotifPrefsCategorySystem-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNotifPrefsChannelEmail-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNotifPrefsChannelPush-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNotifPrefsSubtitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNotifPrefsTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getNotifPrefsToggleLabel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPersonMissing-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPersonUnnamed-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPersonYou-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getProfileLoading-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getProfileNoChanges-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getProfileSave-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getProfileSaved-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getProfileSaving-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPublicCountFollowing-J4f0JxU ()Ljava/lang/String;
+	public final fun getPublicLocation-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPublicMemberSince-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPublicSellerType-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPublicUnwritten-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipBlock-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipBlocked-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipBlockedBlocked-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipBlockedNotice-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipBlockedSelf-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipBlockedUnknown-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipConfirmBlockBody-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipConfirmBlockTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipConfirmUnblockBody-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipConfirmUnblockTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipFollow-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipFollowBack-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipFollowing-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipSelf-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipUnblock-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getRelationshipUnfollow-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSellerTabListings-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSellerTabOverview-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSellerTabReviews-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSellerTypeBusiness-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSellerTypePrivate-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsAvatarChange-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsAvatarUploadError-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsAvatarUploading-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsFieldDisplayName-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsFieldEdit-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsFieldTheme-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsSubtitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsThemeDark-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsThemeLight-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsThemeSystem-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsTitle-GpgQ0-4 ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/ProfilesTestTags {
+	public static final field $stable I
+	public static final field AUTO_TRANSLATE Ljava/lang/String;
+	public static final field AVATAR Ljava/lang/String;
+	public static final field AVATAR_CHANGE Ljava/lang/String;
+	public static final field CONNECTIONS Ljava/lang/String;
+	public static final field CONTACTS Ljava/lang/String;
+	public static final field CONTACT_ADD Ljava/lang/String;
+	public static final field CONTACT_CODE Ljava/lang/String;
+	public static final field CONTACT_NUMBER Ljava/lang/String;
+	public static final field CONTACT_ROW Ljava/lang/String;
+	public static final field DISPLAY_NAME Ljava/lang/String;
+	public static final field DISPLAY_NAME_SAVE Ljava/lang/String;
+	public static final field ERROR Ljava/lang/String;
+	public static final field INSTANCE Lstapel/profiles/ui/ProfilesTestTags;
+	public static final field LANGUAGE Ljava/lang/String;
+	public static final field LANGUAGE_CHOICE Ljava/lang/String;
+	public static final field NOTIFICATIONS Ljava/lang/String;
+	public static final field NOTIFICATION_SWITCH Ljava/lang/String;
+	public static final field PERSON Ljava/lang/String;
+	public static final field PUBLIC Ljava/lang/String;
+	public static final field PUBLIC_ACTION Ljava/lang/String;
+	public static final field SECTION Ljava/lang/String;
+	public static final field SETTINGS Ljava/lang/String;
+	public static final field THEME Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/ProfilesUiStrings {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/ProfilesUiStrings;
+	public final fun getAutoTranslate-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getAvatarLabel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getCancel-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLanguageDevice-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPublicFollowers-J4f0JxU ()Ljava/lang/String;
+	public final fun getPublicNotFound-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getPublicSignInHint-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getSettingsSections-GpgQ0-4 ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/ProfilesUiStringsKt {
+	public static final fun getProfilesPluralFamilies ()Ljava/util/Set;
+	public static final fun getProfilesUiBundle ()Lstapel/i18n/I18nBundle;
+	public static final fun getProfilesUiMobileOnlyKeys ()Ljava/util/Set;
+	public static final fun profilesErrorCatalogs ()Ljava/util/List;
+}
+
+public final class stapel/profiles/ui/PublicProfileRoute : stapel/navigation/Route {
+	public static final field $stable I
+	public static final field Companion Lstapel/profiles/ui/PublicProfileRoute$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/profiles/ui/PublicProfileRoute;
+	public static synthetic fun copy$default (Lstapel/profiles/ui/PublicProfileRoute;Ljava/lang/String;ILjava/lang/Object;)Lstapel/profiles/ui/PublicProfileRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUserId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/profiles/ui/PublicProfileRoute$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/PublicProfileRoute$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/profiles/ui/PublicProfileRoute;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/profiles/ui/PublicProfileRoute;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/profiles/ui/PublicProfileRoute$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/profiles/ui/SettingsRoute : stapel/navigation/Route {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/ui/SettingsRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/SettingsScreensKt {
+	public static final fun LanguageScreen (Lstapel/profiles/presentation/ProfileSettingsState;Lstapel/profiles/presentation/LanguageCatalogueState;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun NotificationsScreen (Lstapel/profiles/presentation/ProfileSettingsState;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+	public static final fun ProfileSettingsScreen (Lstapel/profiles/presentation/ProfileSettingsState;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class stapel/profiles/ui/SettingsSection {
+	public static final field $stable I
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-x5gaQ_A ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3-SiOSXmI ()Ljava/lang/String;
+	public final fun copy-0zd3WDI (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/profiles/ui/SettingsSection;
+	public static synthetic fun copy-0zd3WDI$default (Lstapel/profiles/ui/SettingsSection;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/profiles/ui/SettingsSection;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIcon-SiOSXmI ()Ljava/lang/String;
+	public final fun getId-x5gaQ_A ()Ljava/lang/String;
+	public final fun getLabelKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/ui/di/ProfilesBrick : stapel/app/di/StapelBrick {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Lstapel/profiles/di/AvatarUpload;Lstapel/profiles/ui/AvatarPicker;Lstapel/profiles/ui/ProfilesScreens;)V
+	public synthetic fun <init> (Lstapel/profiles/di/AvatarUpload;Lstapel/profiles/ui/AvatarPicker;Lstapel/profiles/ui/ProfilesScreens;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getErrorCatalogs ()Ljava/util/List;
+	public fun getKey ()Ljava/lang/String;
+	public fun getRequires ()Ljava/util/Set;
+	public fun getStrings ()Ljava/util/List;
+	public fun modules ()Ljava/util/List;
+	public fun navigation (Lstapel/app/di/BrickContext;)Lstapel/navigation/compose/NavContribution;
+	public fun presenters (Lstapel/app/di/BrickContext;Lstapel/mvi/compose/PresenterFactory;)Lstapel/mvi/compose/PresenterFactory;
+	public fun session (Lstapel/app/di/BrickContext;)Lstapel/app/di/BrickSession;
+}
+

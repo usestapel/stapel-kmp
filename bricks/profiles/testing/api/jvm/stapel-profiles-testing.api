@@ -1,0 +1,25 @@
+public final class stapel/profiles/testing/ProfilesSamples {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/profiles/testing/ProfilesSamples;
+	public final fun getContacts ()Lstapel/profiles/model/Contacts;
+	public final fun getLanguages ()Ljava/util/List;
+	public final fun getMe ()Lstapel/profiles/model/MyProfile;
+	public final fun getPeople ()Ljava/util/List;
+	public final fun person (Ljava/lang/String;Ljava/lang/String;Lstapel/profiles/model/RelationshipStatus;)Lstapel/profiles/model/PublicProfile;
+	public static synthetic fun person$default (Lstapel/profiles/testing/ProfilesSamples;Ljava/lang/String;Ljava/lang/String;Lstapel/profiles/model/RelationshipStatus;ILjava/lang/Object;)Lstapel/profiles/model/PublicProfile;
+}
+
+public final class stapel/profiles/testing/ProfilesWalkException : java/lang/AssertionError {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class stapel/profiles/testing/ProfilesWalkerKt {
+	public static final fun chooseLanguage (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;J)V
+	public static synthetic fun chooseLanguage$default (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;JILjava/lang/Object;)V
+	public static final fun openSettingsSection (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;Ljava/lang/String;J)V
+	public static synthetic fun openSettingsSection$default (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;Ljava/lang/String;JILjava/lang/Object;)V
+	public static final fun renameInSettings (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;J)V
+	public static synthetic fun renameInSettings$default (Landroidx/compose/ui/test/ComposeUiTest;Ljava/lang/String;JILjava/lang/Object;)V
+}
+
