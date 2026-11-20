@@ -36,5 +36,7 @@ let package = Package(
             exclude: ["check", "README.md", "build"],
             sources: ["core", "firebase", "appmetrica"]
         ),
-    ]
+    ],
+    // The app shell compiles these files in Swift 5 mode (SWIFT_VERSION = 5.0 in the templated project).
+    swiftLanguageModes: [.v5]
 )
