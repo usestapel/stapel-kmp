@@ -35,13 +35,23 @@ final class ShopUITests: XCTestCase {
         return element
     }
 
-    /// Waits until [element] can receive a tap, then taps it. XCUITest's own `tap()` does not wait for
-    /// hittability: on an element still being laid out or animated in (Safari's "Open in …?" prompt on a
-    /// slow simulator) it computes the hit point {-1, -1}, synthesizes nothing and reports no failure.
-    private func tapWhenHittable(_ element: XCUIElement, _ message: String) {
-        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == true AND hittable == true"), object: element)
-        XCTAssertEqual(XCTWaiter().wait(for: [hittable], timeout: timeout), .completed, message)
-        element.tap()
+    /// Taps the centre of [element]'s on-screen frame in [app]'s coordinate space, once that frame is real.
+    /// On the macos-26 runner (iOS 26.5) Safari's accessibility tree for the web view sometimes comes back
+    /// half-fetched: the prompt's ancestors report the frame {{inf, inf}, {0, 0}} while the button itself
+    /// has its real frame. XCUITest's own `tap()` derives hittability from the ancestors, computes the hit
+    /// point {-1, -1}, synthesizes nothing and reports no failure; a tap at the button's frame lands.
+    private func tapAtFrame(of element: XCUIElement, in app: XCUIApplication, _ message: String) {
+        let framed = XCTNSPredicateExpectation(
+            predicate: NSPredicate { object, _ in
+                guard let e = object as? XCUIElement, e.exists else { return false }
+                let f = e.frame
+                return !f.isEmpty && !f.isInfinite && !f.isNull && f.minX.isFinite && f.minY.isFinite
+            },
+            object: element
+        )
+        XCTAssertEqual(XCTWaiter().wait(for: [framed], timeout: timeout), .completed, message)
+        let f = element.frame
+        app.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: f.midX, dy: f.midY)).tap()
     }
 
     private func waitUntilGone(_ element: XCUIElement, timeout: TimeInterval) -> Bool {
@@ -86,10 +96,10 @@ final class ShopUITests: XCTestCase {
         safari.typeText("shopmobile://app/orders/42\n")
         let prompt = safari.descendants(matching: .any).matching(identifier: "SFDialogView").firstMatch
         XCTAssertTrue(prompt.waitForExistence(timeout: 10), "the system's open-in-app prompt")
-        // Confirm with the prompt's last button ("Open"), whatever the simulator's language, once it can
-        // take the tap; the prompt must then close (a tap that landed nowhere would leave it open).
+        // Confirm with the prompt's last button ("Open"), whatever the simulator's language, tapped where it
+        // is on screen; the prompt must then close (a tap that landed nowhere would leave it open).
         let open = prompt.buttons.element(boundBy: prompt.buttons.count - 1)
-        tapWhenHittable(open, "the prompt's Open button becomes tappable")
+        tapAtFrame(of: open, in: safari, "the prompt's Open button has an on-screen frame")
         XCTAssertTrue(waitUntilGone(prompt, timeout: timeout), "the prompt closed: the link was handed to the app")
         let order = waitFor(app, "shop.order", "the deep link opened the order")
         XCTAssertTrue(app.staticTexts["Order 42"].waitForExistence(timeout: timeout), "the order id from the link")
