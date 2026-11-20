@@ -177,6 +177,16 @@
       "family": "substrate",
       "released": false
     },
+    "stapel-notifications": {
+      "version": "0.0.1",
+      "family": "brick-domain",
+      "released": false
+    },
+    "stapel-notifications-push": {
+      "version": "0.0.1",
+      "family": "brick-adapter",
+      "released": false
+    },
     "stapel-profiles": {
       "version": "0.0.1",
       "family": "brick-domain",
