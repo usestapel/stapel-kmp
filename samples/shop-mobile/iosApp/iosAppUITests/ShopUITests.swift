@@ -54,11 +54,6 @@ final class ShopUITests: XCTestCase {
         app.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: f.midX, dy: f.midY)).tap()
     }
 
-    private func waitUntilGone(_ element: XCUIElement, timeout: TimeInterval) -> Bool {
-        let gone = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: element)
-        return XCTWaiter().wait(for: [gone], timeout: timeout) == .completed
-    }
-
     private func type(_ app: XCUIApplication, into tag: String, _ text: String) {
         let field = waitFor(app, tag, "field \(tag)")
         let editable = field.descendants(matching: .textField).firstMatch.exists ? field.descendants(matching: .textField).firstMatch : field
@@ -97,10 +92,10 @@ final class ShopUITests: XCTestCase {
         let prompt = safari.descendants(matching: .any).matching(identifier: "SFDialogView").firstMatch
         XCTAssertTrue(prompt.waitForExistence(timeout: 10), "the system's open-in-app prompt")
         // Confirm with the prompt's last button ("Open"), whatever the simulator's language, tapped where it
-        // is on screen; the prompt must then close (a tap that landed nowhere would leave it open).
+        // is on screen. (Whether the prompt closed is not asked of Safari: once the app is in front, Safari
+        // is suspended and its last snapshot still lists the prompt.)
         let open = prompt.buttons.element(boundBy: prompt.buttons.count - 1)
         tapAtFrame(of: open, in: safari, "the prompt's Open button has an on-screen frame")
-        XCTAssertTrue(waitUntilGone(prompt, timeout: timeout), "the prompt closed: the link was handed to the app")
         let order = waitFor(app, "shop.order", "the deep link opened the order")
         XCTAssertTrue(app.staticTexts["Order 42"].waitForExistence(timeout: timeout), "the order id from the link")
         // Edge swipe from the left edge: the system back gesture on a pushed screen.
