@@ -12,6 +12,7 @@ import kotlinx.io.writeString
 import stapel.cache.PartitionId
 import stapel.cache.StoredEntry
 import stapel.cache.testing.CacheStoreContract
+import stapel.cache.testing.ListStoreContract
 import kotlin.random.Random
 import kotlin.test.AfterTest
 import kotlin.test.Test
@@ -43,6 +44,12 @@ class RoomCacheStoreTest {
     fun roomStorePassesTheContract() = runTest {
         val ran = CacheStoreContract.verify { RoomCacheStoreFactory(tempDir().toString(), RoomCacheOptions(Dispatchers.Default)) }
         assertEquals(CacheStoreContract.caseNames.size, ran)
+    }
+
+    @Test
+    fun roomListStorePassesTheListContract() = runTest {
+        val ran = ListStoreContract.verify { RoomCacheStoreFactory(tempDir().toString(), RoomCacheOptions(Dispatchers.Default)) }
+        assertEquals(ListStoreContract.caseNames.size, ran)
     }
 
     @Test

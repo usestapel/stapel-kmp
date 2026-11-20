@@ -126,6 +126,20 @@ public abstract interface class stapel/cache/CacheStoreFactory {
 	public abstract fun open (Lstapel/cache/PartitionId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public abstract interface class stapel/cache/ListStore {
+	public abstract fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun delete (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun deletePrefix (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun head (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun items (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun keys (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun markInvalidated (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun merge (Lstapel/cache/StoredListHead;Ljava/util/List;Ljava/util/Collection;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun readCursor (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun replace (Lstapel/cache/StoredListHead;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun writeCursor (Ljava/lang/String;JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public abstract interface class stapel/cache/ManagedStapelCache : stapel/cache/StapelCache {
 	public abstract fun addWipeHook (Lstapel/cache/WipeHook;)Ljava/lang/AutoCloseable;
 	public abstract fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -176,9 +190,10 @@ public final class stapel/cache/PartitionId$Companion {
 }
 
 public final class stapel/cache/PartitionStores {
-	public fun <init> (Lstapel/cache/CacheStore;Lkotlin/jvm/functions/Function1;)V
+	public fun <init> (Lstapel/cache/CacheStore;Lstapel/cache/ListStore;Lkotlin/jvm/functions/Function1;)V
 	public final fun getClose ()Lkotlin/jvm/functions/Function1;
 	public final fun getEntries ()Lstapel/cache/CacheStore;
+	public final fun getLists ()Lstapel/cache/ListStore;
 }
 
 public final class stapel/cache/Persistence : java/lang/Enum {
@@ -276,6 +291,49 @@ public final class stapel/cache/Refetch : java/lang/Enum {
 	public static fun values ()[Lstapel/cache/Refetch;
 }
 
+public abstract interface class stapel/cache/RevisionCollection {
+	public abstract fun getState ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun sync (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cache/RevisionPage {
+	public fun <init> (Ljava/util/List;Ljava/util/List;ZJ)V
+	public final fun getDeletedIds ()Ljava/util/List;
+	public final fun getGlobalMax ()J
+	public final fun getHasNext ()Z
+	public final fun getResults ()Ljava/util/List;
+}
+
+public final class stapel/cache/RevisionRequest {
+	public fun <init> (Ljava/lang/Long;Ljava/lang/Long;II)V
+	public final fun component1 ()Ljava/lang/Long;
+	public final fun component2 ()Ljava/lang/Long;
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun copy (Ljava/lang/Long;Ljava/lang/Long;II)Lstapel/cache/RevisionRequest;
+	public static synthetic fun copy$default (Lstapel/cache/RevisionRequest;Ljava/lang/Long;Ljava/lang/Long;IIILjava/lang/Object;)Lstapel/cache/RevisionRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxRevision ()Ljava/lang/Long;
+	public final fun getMinRevision ()Ljava/lang/Long;
+	public final fun getPage ()I
+	public final fun getPageSize ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/RevisionSpec {
+	public fun <init> (Lstapel/wire/CacheKey;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lkotlin/jvm/functions/Function1;IILstapel/cache/ReadPolicy;)V
+	public synthetic fun <init> (Lstapel/wire/CacheKey;Lkotlinx/serialization/KSerializer;Ljava/lang/String;Lkotlin/jvm/functions/Function1;IILstapel/cache/ReadPolicy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getItemId ()Lkotlin/jvm/functions/Function1;
+	public final fun getItemSerializer ()Lkotlinx/serialization/KSerializer;
+	public final fun getKey ()Lstapel/wire/CacheKey;
+	public final fun getMaxPages ()I
+	public final fun getPageSize ()I
+	public final fun getPolicy ()Lstapel/cache/ReadPolicy;
+	public final fun getSchemaHash ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
 public abstract interface class stapel/cache/StapelCache {
 	public abstract fun get (Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun get$default (Lstapel/cache/StapelCache;Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
@@ -286,6 +344,7 @@ public abstract interface class stapel/cache/StapelCache {
 	public static synthetic fun observe$default (Lstapel/cache/StapelCache;Lstapel/cache/QuerySpec;Lstapel/cache/ReadOptions;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
 	public abstract fun peek (Lstapel/cache/QuerySpec;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun remove (Lstapel/wire/KeyPattern;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun revisioned (Lstapel/cache/RevisionSpec;Lkotlin/jvm/functions/Function2;)Lstapel/cache/RevisionCollection;
 	public abstract fun update (Lstapel/cache/QuerySpec;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun write (Lstapel/cache/QuerySpec;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
@@ -325,6 +384,50 @@ public final class stapel/cache/StoredEntry {
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 	public final fun withInvalidated (Z)Lstapel/cache/StoredEntry;
+}
+
+public final class stapel/cache/StoredListHead {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLjava/lang/String;Ljava/lang/String;ZZLjava/lang/String;JZ)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEnvelope ()[B
+	public final fun getFetchedAtMillis ()J
+	public final fun getHasNext ()Z
+	public final fun getHasPrev ()Z
+	public final fun getInvalidated ()Z
+	public final fun getNamespace ()Ljava/lang/String;
+	public final fun getNextAnchor ()Ljava/lang/String;
+	public final fun getPrevAnchor ()Ljava/lang/String;
+	public final fun getSchemaHash ()Ljava/lang/String;
+	public final fun getStorageKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public final fun withInvalidated (Z)Lstapel/cache/StoredListHead;
+}
+
+public final class stapel/cache/StoredListItem {
+	public fun <init> (Ljava/lang/String;[B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getItemId ()Ljava/lang/String;
+	public final fun getPayload ()[B
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cache/SyncReport {
+	public fun <init> (ZIZLjava/lang/Long;)V
+	public final fun component1 ()Z
+	public final fun component2 ()I
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/lang/Long;
+	public final fun copy (ZIZLjava/lang/Long;)Lstapel/cache/SyncReport;
+	public static synthetic fun copy$default (Lstapel/cache/SyncReport;ZIZLjava/lang/Long;ILjava/lang/Object;)Lstapel/cache/SyncReport;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFullSync ()Z
+	public final fun getPages ()I
+	public final fun getRevision ()Ljava/lang/Long;
+	public final fun getTruncated ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract interface class stapel/cache/WipeHook {

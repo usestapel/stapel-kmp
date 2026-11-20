@@ -89,11 +89,13 @@ public interface CacheStore {
  * The open stores of one partition.
  *
  * @property entries the generic document cache of the partition.
+ * @property lists the lists (paged windows, revision-synced collections) and cursors of the partition.
  * @property close releases the partition's resources (database connections). Data of a durable
  *   store survives; a non-durable store forgets it.
  */
 public class PartitionStores(
     public val entries: CacheStore,
+    public val lists: ListStore,
     public val close: suspend () -> Unit,
 )
 

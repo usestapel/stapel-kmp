@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -71,6 +72,7 @@ internal class Runtime(val partition: PartitionId?, val stores: PartitionStores?
     val scope = CoroutineScope(parent.coroutineContext + SupervisorJob(parent.coroutineContext[Job]))
     val lock = Mutex()
     val slots = mutableMapOf<String, Slot>()
+    val revisions = mutableMapOf<String, RevisionHolder>()
     var alive = true
 
     /** Scope of the keys this partition holds. */
@@ -90,8 +92,8 @@ internal sealed interface Target {
     data class Live(val runtime: Runtime) : Target
 }
 
-internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStapelCache {
-    private val json = config.json
+internal class CacheEngine(internal val config: StapelCacheConfig) : ManagedStapelCache {
+    internal val json = config.json
     private val factory = config.storeFactory
     private val adminLock = Mutex()
     private val user = MutableStateFlow<Target>(Target.Waiting)
@@ -127,11 +129,11 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
         }
     }
 
-    private fun now(): Long = config.clock.now().toEpochMilliseconds()
+    internal fun now(): Long = config.clock.now().toEpochMilliseconds()
 
     // ---------------------------------------------------------------- partitions
 
-    private fun targetFlow(scope: CacheScope): Flow<Target> = when (scope) {
+    internal fun targetFlow(scope: CacheScope): Flow<Target> = when (scope) {
         CacheScope.User -> user
         CacheScope.App -> flow {
             ensureApp()
@@ -523,6 +525,7 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
                 if (memoryOnly) matched++
                 if (refetch == Refetch.Active && slot.observers > 0) startFetch(runtime, slot)
             }
+            matched += invalidateRevisions(runtime, pattern, refetch)
         }
         config.observer.onEvent(CacheEvent.Invalidated(pattern, matched))
         return matched
@@ -544,6 +547,7 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
                 if (memoryOnly) removed++
                 if (slot.observers > 0) startFetch(runtime, slot)
             }
+            removed += removeRevisions(runtime, pattern)
         }
         return removed
     }
@@ -561,4 +565,59 @@ internal class CacheEngine(private val config: StapelCacheConfig) : ManagedStape
         store.delete(exact.storageKey)
         return 1
     }
+
+    // ---------------------------------------------------------------- revision collections
+
+    override fun <T, E : StapelError> revisioned(
+        spec: RevisionSpec<T>,
+        fetch: suspend (RevisionRequest) -> StapelResult<RevisionPage<T>, E>,
+    ): RevisionCollection<T> = RevisionCollectionImpl(this, spec, fetch)
+
+    internal fun liveRuntimesForRevisions(): List<Runtime> = liveRuntimes()
+
+    /** The runtime of [scope], waiting for the account when user-scoped. */
+    internal suspend fun awaitRuntime(scope: CacheScope): Runtime = when (scope) {
+        CacheScope.App -> ensureApp()
+        CacheScope.User -> (user.first { it is Target.Live } as Target.Live).runtime
+    }
+
+    private suspend fun invalidateRevisions(runtime: Runtime, pattern: KeyPattern, refetch: Refetch): Int {
+        val stored = runtime.stores?.lists?.let { lists ->
+            runCatchingStore {
+                val exact = pattern.exactKey
+                if (exact == null) lists.markInvalidated(pattern.storagePrefix)
+                else lists.head(exact.storageKey)?.let { lists.merge(it.withInvalidated(true), emptyList(), emptyList()); 1 } ?: 0
+            }
+        } ?: 0
+        val holders = runtime.lock.withLock { runtime.revisions.values.filter { pattern.matches(it.key) } }
+        var memoryOnly = 0
+        for (holder in holders) {
+            var had = false
+            holder.state.update { if (it.rows == null) it else it.copy(invalidated = true).also { had = true } }
+            if (had && runtime.stores?.lists == null) memoryOnly++
+            if (refetch == Refetch.Active && holder.observers > 0) holder.launchSync(runtime)
+        }
+        return stored + memoryOnly
+    }
+
+    private suspend fun removeRevisions(runtime: Runtime, pattern: KeyPattern): Int {
+        val stored = runtime.stores?.lists?.let { lists ->
+            runCatchingStore {
+                val exact = pattern.exactKey
+                if (exact == null) lists.deletePrefix(pattern.storagePrefix)
+                else (if (lists.head(exact.storageKey) != null) 1 else 0).also { lists.delete(exact.storageKey) }
+            }
+        } ?: 0
+        val holders = runtime.lock.withLock { runtime.revisions.values.filter { pattern.matches(it.key) } }
+        var memoryOnly = 0
+        for (holder in holders) {
+            var had = false
+            holder.state.update { if (it.rows == null) it else RevisionState(loaded = true).also { had = true } }
+            if (had && runtime.stores?.lists == null) memoryOnly++
+            if (holder.observers > 0) holder.launchSync(runtime)
+        }
+        return stored + memoryOnly
+    }
+
+    internal suspend fun <R> storeCall(block: suspend () -> R): R? = runCatchingStore(block)
 }

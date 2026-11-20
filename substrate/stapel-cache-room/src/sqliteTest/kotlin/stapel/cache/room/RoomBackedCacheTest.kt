@@ -5,6 +5,7 @@ package stapel.cache.room
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
@@ -20,6 +21,10 @@ import stapel.cache.ManagedStapelCache
 import stapel.cache.PartitionId
 import stapel.cache.QuerySpec
 import stapel.cache.ReadPolicy
+import stapel.cache.RevisionPage
+import stapel.cache.RevisionRequest
+import stapel.cache.RevisionSpec
+import stapel.cache.SyncReport
 import stapel.cache.StapelCache
 import stapel.cache.StapelCacheConfig
 import stapel.cache.WipeTarget
@@ -28,6 +33,7 @@ import stapel.result.TransportFailure
 import stapel.result.state.Origin
 import stapel.result.state.Resource
 import stapel.wire.CacheKey
+import stapel.wire.CacheScope
 import kotlin.random.Random
 import kotlin.test.AfterTest
 import kotlin.test.Test
@@ -128,6 +134,38 @@ class RoomBackedCacheTest {
         job.cancel()
 
         assertFalse(SystemFileSystem.exists(partitionDir), "partition directory exists after logout")
+    }
+
+    @Test
+    fun aRevisionCollectionSurvivesTheProcessAndSyncsOnlyTheDelta() = runTest {
+        val dir = tempDir()
+        val spec = RevisionSpec(
+            key = CacheKey.of("categories", "tree", scope = CacheScope.App),
+            itemSerializer = String.serializer(),
+            schemaHash = "c1",
+            itemId = { it.substringBefore(':') },
+            pageSize = 2,
+        )
+        val asked = mutableListOf<RevisionRequest>()
+        fun server(rows: List<String>, deleted: List<String>, max: Long): suspend (RevisionRequest) -> StapelResult<RevisionPage<String>, TransportFailure> = { r ->
+            asked += r
+            val page = rows.drop((r.page - 1) * r.pageSize).take(r.pageSize)
+            StapelResult.Ok(RevisionPage(page, deleted, r.page * r.pageSize < rows.size, max))
+        }
+        val first = cache(dir).revisioned(spec, server(listOf("a:Apple", "b:Banana", "c:Cherry"), emptyList(), 3))
+        assertEquals(SyncReport(fullSync = true, pages = 2, truncated = false, revision = 3), (first.sync() as StapelResult.Ok).value)
+        // The first process dies here: no close, no flush.
+
+        asked.clear()
+        val second = cache(dir).revisioned(spec, server(listOf("b:Blueberry", "d:Date"), listOf("a"), 5))
+        val cold = assertIs<Resource.Ready<List<String>>>(second.state.first { it !is Resource.Loading })
+        assertEquals(listOf("a:Apple", "b:Banana", "c:Cherry"), cold.data)
+        assertEquals(Origin.Disk, cold.freshness.origin)
+        assertEquals(SyncReport(fullSync = false, pages = 1, truncated = false, revision = 5), (second.sync() as StapelResult.Ok).value)
+        assertEquals(3L, asked.single().minRevision)
+
+        val third = cache(dir).revisioned(spec, server(emptyList(), emptyList(), 5))
+        assertEquals(listOf("b:Blueberry", "c:Cherry", "d:Date"), (third.state.first { it !is Resource.Loading } as Resource.Ready).data)
     }
 
     private fun deleteTree(path: Path) {

@@ -12,13 +12,13 @@ import kotlinx.coroutines.sync.withLock
  */
 public class MemoryCacheStoreFactory : CacheStoreFactory {
     private val lock = Mutex()
-    private val open = mutableMapOf<PartitionId, MemoryCacheStore>()
+    private val open = mutableMapOf<PartitionId, MemoryPartition>()
 
     override val durable: Boolean get() = false
 
     override suspend fun open(partition: PartitionId): PartitionStores = lock.withLock {
-        val store = open.getOrPut(partition) { MemoryCacheStore() }
-        PartitionStores(entries = store, close = { forget(partition, store) })
+        val stores = open.getOrPut(partition) { MemoryPartition(MemoryCacheStore(), MemoryListStore()) }
+        PartitionStores(entries = stores.entries, lists = stores.lists, close = { forget(partition, stores) })
     }
 
     override suspend fun destroy(partition: PartitionId) {
@@ -26,12 +26,21 @@ public class MemoryCacheStoreFactory : CacheStoreFactory {
     }
 
     override suspend fun listPartitions(): List<PartitionId> = lock.withLock {
-        open.filterValues { it.count() > 0 }.keys.sortedBy { it.name }
+        open.filterValues { it.holdsData() }.keys.sortedBy { it.name }
     }
 
-    private suspend fun forget(partition: PartitionId, store: MemoryCacheStore) {
-        lock.withLock { if (open[partition] === store) open.remove(partition) }
-        store.clear()
+    private suspend fun forget(partition: PartitionId, stores: MemoryPartition) {
+        lock.withLock { if (open[partition] === stores) open.remove(partition) }
+        stores.clear()
+    }
+}
+
+private class MemoryPartition(val entries: MemoryCacheStore, val lists: MemoryListStore) {
+    suspend fun holdsData(): Boolean = entries.count() > 0 || lists.holdsData()
+
+    suspend fun clear() {
+        entries.clear()
+        lists.clear()
     }
 }
 
@@ -69,5 +78,71 @@ internal class MemoryCacheStore : CacheStore {
 
     override suspend fun clear() {
         lock.withLock { entries.clear() }
+    }
+}
+
+/** In-memory [ListStore]: ordered rows per list key and a cursor map, behind one mutex. */
+internal class MemoryListStore : ListStore {
+    private class MemoryList(val head: StoredListHead, val items: LinkedHashMap<String, StoredListItem>)
+
+    private val lock = Mutex()
+    private val lists = mutableMapOf<String, MemoryList>()
+    private val cursors = mutableMapOf<String, Long>()
+
+    suspend fun holdsData(): Boolean = lock.withLock { lists.isNotEmpty() || cursors.isNotEmpty() }
+
+    override suspend fun head(storageKey: String): StoredListHead? = lock.withLock { lists[storageKey]?.head }
+
+    override suspend fun items(storageKey: String): List<StoredListItem> =
+        lock.withLock { lists[storageKey]?.items?.values?.toList().orEmpty() }
+
+    override suspend fun replace(head: StoredListHead, items: List<StoredListItem>) {
+        val rows = LinkedHashMap<String, StoredListItem>()
+        items.forEach { rows[it.itemId] = it }
+        lock.withLock { lists[head.storageKey] = MemoryList(head, rows) }
+    }
+
+    override suspend fun merge(head: StoredListHead, upserts: List<StoredListItem>, removedIds: Collection<String>) {
+        lock.withLock {
+            val rows = LinkedHashMap(lists[head.storageKey]?.items.orEmpty())
+            upserts.forEach { rows[it.itemId] = it }
+            removedIds.forEach { rows.remove(it) }
+            lists[head.storageKey] = MemoryList(head, rows)
+        }
+    }
+
+    override suspend fun delete(storageKey: String) {
+        lock.withLock {
+            lists.remove(storageKey)
+            cursors.remove(storageKey)
+        }
+    }
+
+    override suspend fun markInvalidated(keyPrefix: String): Int = lock.withLock {
+        val matched = lists.filterKeys { it.startsWith(keyPrefix) }
+        matched.forEach { (key, list) -> lists[key] = MemoryList(list.head.withInvalidated(true), list.items) }
+        matched.size
+    }
+
+    override suspend fun deletePrefix(keyPrefix: String): Int = lock.withLock {
+        val matched = lists.keys.filter { it.startsWith(keyPrefix) }
+        matched.forEach { lists.remove(it) }
+        cursors.keys.filter { it.startsWith(keyPrefix) }.forEach { cursors.remove(it) }
+        matched.size
+    }
+
+    override suspend fun keys(keyPrefix: String): List<String> = lock.withLock { lists.keys.filter { it.startsWith(keyPrefix) } }
+
+    override suspend fun readCursor(storageKey: String): Long? = lock.withLock { cursors[storageKey] }
+
+    override suspend fun writeCursor(storageKey: String, value: Long) {
+        lock.withLock { cursors[storageKey] = value }
+    }
+
+    override suspend fun clear() {
+        lock.withLock {
+            lists.clear()
+            cursors.clear()
+        }
     }
 }

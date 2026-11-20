@@ -12,3 +12,10 @@ final object stapel.cache.testing/CacheStoreContract { // stapel.cache.testing/C
 
     final suspend fun verify(kotlin.coroutines/SuspendFunction0<stapel.cache/CacheStoreFactory>): kotlin/Int // stapel.cache.testing/CacheStoreContract.verify|verify(kotlin.coroutines.SuspendFunction0<stapel.cache.CacheStoreFactory>){}[0]
 }
+
+final object stapel.cache.testing/ListStoreContract { // stapel.cache.testing/ListStoreContract|null[0]
+    final val caseNames // stapel.cache.testing/ListStoreContract.caseNames|{}caseNames[0]
+        final fun <get-caseNames>(): kotlin.collections/List<kotlin/String> // stapel.cache.testing/ListStoreContract.caseNames.<get-caseNames>|<get-caseNames>(){}[0]
+
+    final suspend fun verify(kotlin.coroutines/SuspendFunction0<stapel.cache/CacheStoreFactory>): kotlin/Int // stapel.cache.testing/ListStoreContract.verify|verify(kotlin.coroutines.SuspendFunction0<stapel.cache.CacheStoreFactory>){}[0]
+}

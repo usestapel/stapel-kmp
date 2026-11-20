@@ -66,6 +66,13 @@ abstract fun interface stapel.cache/WipeHook { // stapel.cache/WipeHook|null[0]
     abstract suspend fun onWipe(stapel.cache/WipeTarget) // stapel.cache/WipeHook.onWipe|onWipe(stapel.cache.WipeTarget){}[0]
 }
 
+abstract interface <#A: kotlin/Any?> stapel.cache/RevisionCollection { // stapel.cache/RevisionCollection|null[0]
+    abstract val state // stapel.cache/RevisionCollection.state|{}state[0]
+        abstract fun <get-state>(): kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<kotlin.collections/List<#A>>> // stapel.cache/RevisionCollection.state.<get-state>|<get-state>(){}[0]
+
+    abstract suspend fun sync(): stapel.result/StapelResult<stapel.cache/SyncReport, stapel.result/StapelError> // stapel.cache/RevisionCollection.sync|sync(){}[0]
+}
+
 abstract interface stapel.cache/CacheStore { // stapel.cache/CacheStore|null[0]
     abstract suspend fun clear() // stapel.cache/CacheStore.clear|clear(){}[0]
     abstract suspend fun count(): kotlin/Int // stapel.cache/CacheStore.count|count(){}[0]
@@ -86,6 +93,20 @@ abstract interface stapel.cache/CacheStoreFactory { // stapel.cache/CacheStoreFa
     abstract suspend fun open(stapel.cache/PartitionId): stapel.cache/PartitionStores // stapel.cache/CacheStoreFactory.open|open(stapel.cache.PartitionId){}[0]
 }
 
+abstract interface stapel.cache/ListStore { // stapel.cache/ListStore|null[0]
+    abstract suspend fun clear() // stapel.cache/ListStore.clear|clear(){}[0]
+    abstract suspend fun delete(kotlin/String) // stapel.cache/ListStore.delete|delete(kotlin.String){}[0]
+    abstract suspend fun deletePrefix(kotlin/String): kotlin/Int // stapel.cache/ListStore.deletePrefix|deletePrefix(kotlin.String){}[0]
+    abstract suspend fun head(kotlin/String): stapel.cache/StoredListHead? // stapel.cache/ListStore.head|head(kotlin.String){}[0]
+    abstract suspend fun items(kotlin/String): kotlin.collections/List<stapel.cache/StoredListItem> // stapel.cache/ListStore.items|items(kotlin.String){}[0]
+    abstract suspend fun keys(kotlin/String): kotlin.collections/List<kotlin/String> // stapel.cache/ListStore.keys|keys(kotlin.String){}[0]
+    abstract suspend fun markInvalidated(kotlin/String): kotlin/Int // stapel.cache/ListStore.markInvalidated|markInvalidated(kotlin.String){}[0]
+    abstract suspend fun merge(stapel.cache/StoredListHead, kotlin.collections/List<stapel.cache/StoredListItem>, kotlin.collections/Collection<kotlin/String>) // stapel.cache/ListStore.merge|merge(stapel.cache.StoredListHead;kotlin.collections.List<stapel.cache.StoredListItem>;kotlin.collections.Collection<kotlin.String>){}[0]
+    abstract suspend fun readCursor(kotlin/String): kotlin/Long? // stapel.cache/ListStore.readCursor|readCursor(kotlin.String){}[0]
+    abstract suspend fun replace(stapel.cache/StoredListHead, kotlin.collections/List<stapel.cache/StoredListItem>) // stapel.cache/ListStore.replace|replace(stapel.cache.StoredListHead;kotlin.collections.List<stapel.cache.StoredListItem>){}[0]
+    abstract suspend fun writeCursor(kotlin/String, kotlin/Long) // stapel.cache/ListStore.writeCursor|writeCursor(kotlin.String;kotlin.Long){}[0]
+}
+
 abstract interface stapel.cache/ManagedStapelCache : stapel.cache/StapelCache { // stapel.cache/ManagedStapelCache|null[0]
     abstract fun addWipeHook(stapel.cache/WipeHook): kotlin/AutoCloseable // stapel.cache/ManagedStapelCache.addWipeHook|addWipeHook(stapel.cache.WipeHook){}[0]
     abstract fun onForeground() // stapel.cache/ManagedStapelCache.onForeground|onForeground(){}[0]
@@ -99,6 +120,7 @@ abstract interface stapel.cache/StapelCache { // stapel.cache/StapelCache|null[0
         abstract fun <get-capabilities>(): stapel.cache/CacheCapabilities // stapel.cache/StapelCache.capabilities.<get-capabilities>|<get-capabilities>(){}[0]
 
     abstract fun <#A1: kotlin/Any?, #B1: stapel.result/StapelError> observe(stapel.cache/QuerySpec<#A1>, stapel.cache/ReadOptions = ..., kotlin.coroutines/SuspendFunction0<stapel.result/StapelResult<#A1, #B1>>): kotlinx.coroutines.flow/Flow<stapel.result.state/Resource<#A1>> // stapel.cache/StapelCache.observe|observe(stapel.cache.QuerySpec<0:0>;stapel.cache.ReadOptions;kotlin.coroutines.SuspendFunction0<stapel.result.StapelResult<0:0,0:1>>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
+    abstract fun <#A1: kotlin/Any?, #B1: stapel.result/StapelError> revisioned(stapel.cache/RevisionSpec<#A1>, kotlin.coroutines/SuspendFunction1<stapel.cache/RevisionRequest, stapel.result/StapelResult<stapel.cache/RevisionPage<#A1>, #B1>>): stapel.cache/RevisionCollection<#A1> // stapel.cache/StapelCache.revisioned|revisioned(stapel.cache.RevisionSpec<0:0>;kotlin.coroutines.SuspendFunction1<stapel.cache.RevisionRequest,stapel.result.StapelResult<stapel.cache.RevisionPage<0:0>,0:1>>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
     abstract suspend fun <#A1: kotlin/Any?, #B1: stapel.result/StapelError> get(stapel.cache/QuerySpec<#A1>, stapel.cache/ReadOptions = ..., kotlin.coroutines/SuspendFunction0<stapel.result/StapelResult<#A1, #B1>>): stapel.result/StapelResult<#A1, stapel.result/StapelError> // stapel.cache/StapelCache.get|get(stapel.cache.QuerySpec<0:0>;stapel.cache.ReadOptions;kotlin.coroutines.SuspendFunction0<stapel.result.StapelResult<0:0,0:1>>){0§<kotlin.Any?>;1§<stapel.result.StapelError>}[0]
     abstract suspend fun <#A1: kotlin/Any?> peek(stapel.cache/QuerySpec<#A1>): stapel.result.state/Resource.Ready<#A1>? // stapel.cache/StapelCache.peek|peek(stapel.cache.QuerySpec<0:0>){0§<kotlin.Any?>}[0]
     abstract suspend fun <#A1: kotlin/Any?> update(stapel.cache/QuerySpec<#A1>, kotlin/Function1<#A1, #A1>): kotlin/Boolean // stapel.cache/StapelCache.update|update(stapel.cache.QuerySpec<0:0>;kotlin.Function1<0:0,0:0>){0§<kotlin.Any?>}[0]
@@ -338,6 +360,40 @@ final class <#A: kotlin/Any?> stapel.cache/QuerySpec { // stapel.cache/QuerySpec
     final fun toString(): kotlin/String // stapel.cache/QuerySpec.toString|toString(){}[0]
 }
 
+final class <#A: kotlin/Any?> stapel.cache/RevisionSpec { // stapel.cache/RevisionSpec|null[0]
+    constructor <init>(stapel.wire/CacheKey, kotlinx.serialization/KSerializer<#A>, kotlin/String, kotlin/Function1<#A, kotlin/String>, kotlin/Int = ..., kotlin/Int = ..., stapel.cache/ReadPolicy = ...) // stapel.cache/RevisionSpec.<init>|<init>(stapel.wire.CacheKey;kotlinx.serialization.KSerializer<1:0>;kotlin.String;kotlin.Function1<1:0,kotlin.String>;kotlin.Int;kotlin.Int;stapel.cache.ReadPolicy){}[0]
+
+    final val itemId // stapel.cache/RevisionSpec.itemId|{}itemId[0]
+        final fun <get-itemId>(): kotlin/Function1<#A, kotlin/String> // stapel.cache/RevisionSpec.itemId.<get-itemId>|<get-itemId>(){}[0]
+    final val itemSerializer // stapel.cache/RevisionSpec.itemSerializer|{}itemSerializer[0]
+        final fun <get-itemSerializer>(): kotlinx.serialization/KSerializer<#A> // stapel.cache/RevisionSpec.itemSerializer.<get-itemSerializer>|<get-itemSerializer>(){}[0]
+    final val key // stapel.cache/RevisionSpec.key|{}key[0]
+        final fun <get-key>(): stapel.wire/CacheKey // stapel.cache/RevisionSpec.key.<get-key>|<get-key>(){}[0]
+    final val maxPages // stapel.cache/RevisionSpec.maxPages|{}maxPages[0]
+        final fun <get-maxPages>(): kotlin/Int // stapel.cache/RevisionSpec.maxPages.<get-maxPages>|<get-maxPages>(){}[0]
+    final val pageSize // stapel.cache/RevisionSpec.pageSize|{}pageSize[0]
+        final fun <get-pageSize>(): kotlin/Int // stapel.cache/RevisionSpec.pageSize.<get-pageSize>|<get-pageSize>(){}[0]
+    final val policy // stapel.cache/RevisionSpec.policy|{}policy[0]
+        final fun <get-policy>(): stapel.cache/ReadPolicy // stapel.cache/RevisionSpec.policy.<get-policy>|<get-policy>(){}[0]
+    final val schemaHash // stapel.cache/RevisionSpec.schemaHash|{}schemaHash[0]
+        final fun <get-schemaHash>(): kotlin/String // stapel.cache/RevisionSpec.schemaHash.<get-schemaHash>|<get-schemaHash>(){}[0]
+
+    final fun toString(): kotlin/String // stapel.cache/RevisionSpec.toString|toString(){}[0]
+}
+
+final class <#A: out kotlin/Any?> stapel.cache/RevisionPage { // stapel.cache/RevisionPage|null[0]
+    constructor <init>(kotlin.collections/List<#A>, kotlin.collections/List<kotlin/String>, kotlin/Boolean, kotlin/Long) // stapel.cache/RevisionPage.<init>|<init>(kotlin.collections.List<1:0>;kotlin.collections.List<kotlin.String>;kotlin.Boolean;kotlin.Long){}[0]
+
+    final val deletedIds // stapel.cache/RevisionPage.deletedIds|{}deletedIds[0]
+        final fun <get-deletedIds>(): kotlin.collections/List<kotlin/String> // stapel.cache/RevisionPage.deletedIds.<get-deletedIds>|<get-deletedIds>(){}[0]
+    final val globalMax // stapel.cache/RevisionPage.globalMax|{}globalMax[0]
+        final fun <get-globalMax>(): kotlin/Long // stapel.cache/RevisionPage.globalMax.<get-globalMax>|<get-globalMax>(){}[0]
+    final val hasNext // stapel.cache/RevisionPage.hasNext|{}hasNext[0]
+        final fun <get-hasNext>(): kotlin/Boolean // stapel.cache/RevisionPage.hasNext.<get-hasNext>|<get-hasNext>(){}[0]
+    final val results // stapel.cache/RevisionPage.results|{}results[0]
+        final fun <get-results>(): kotlin.collections/List<#A> // stapel.cache/RevisionPage.results.<get-results>|<get-results>(){}[0]
+}
+
 final class stapel.cache/CacheCapabilities { // stapel.cache/CacheCapabilities|null[0]
     constructor <init>(kotlin/Boolean, kotlin/Boolean) // stapel.cache/CacheCapabilities.<init>|<init>(kotlin.Boolean;kotlin.Boolean){}[0]
 
@@ -380,12 +436,14 @@ final class stapel.cache/PartitionId { // stapel.cache/PartitionId|null[0]
 }
 
 final class stapel.cache/PartitionStores { // stapel.cache/PartitionStores|null[0]
-    constructor <init>(stapel.cache/CacheStore, kotlin.coroutines/SuspendFunction0<kotlin/Unit>) // stapel.cache/PartitionStores.<init>|<init>(stapel.cache.CacheStore;kotlin.coroutines.SuspendFunction0<kotlin.Unit>){}[0]
+    constructor <init>(stapel.cache/CacheStore, stapel.cache/ListStore, kotlin.coroutines/SuspendFunction0<kotlin/Unit>) // stapel.cache/PartitionStores.<init>|<init>(stapel.cache.CacheStore;stapel.cache.ListStore;kotlin.coroutines.SuspendFunction0<kotlin.Unit>){}[0]
 
     final val close // stapel.cache/PartitionStores.close|{}close[0]
         final fun <get-close>(): kotlin.coroutines/SuspendFunction0<kotlin/Unit> // stapel.cache/PartitionStores.close.<get-close>|<get-close>(){}[0]
     final val entries // stapel.cache/PartitionStores.entries|{}entries[0]
         final fun <get-entries>(): stapel.cache/CacheStore // stapel.cache/PartitionStores.entries.<get-entries>|<get-entries>(){}[0]
+    final val lists // stapel.cache/PartitionStores.lists|{}lists[0]
+        final fun <get-lists>(): stapel.cache/ListStore // stapel.cache/PartitionStores.lists.<get-lists>|<get-lists>(){}[0]
 }
 
 final class stapel.cache/ReadOptions { // stapel.cache/ReadOptions|null[0]
@@ -400,6 +458,28 @@ final class stapel.cache/ReadOptions { // stapel.cache/ReadOptions|null[0]
         final val Default // stapel.cache/ReadOptions.Companion.Default|{}Default[0]
             final fun <get-Default>(): stapel.cache/ReadOptions // stapel.cache/ReadOptions.Companion.Default.<get-Default>|<get-Default>(){}[0]
     }
+}
+
+final class stapel.cache/RevisionRequest { // stapel.cache/RevisionRequest|null[0]
+    constructor <init>(kotlin/Long?, kotlin/Long?, kotlin/Int, kotlin/Int) // stapel.cache/RevisionRequest.<init>|<init>(kotlin.Long?;kotlin.Long?;kotlin.Int;kotlin.Int){}[0]
+
+    final val maxRevision // stapel.cache/RevisionRequest.maxRevision|{}maxRevision[0]
+        final fun <get-maxRevision>(): kotlin/Long? // stapel.cache/RevisionRequest.maxRevision.<get-maxRevision>|<get-maxRevision>(){}[0]
+    final val minRevision // stapel.cache/RevisionRequest.minRevision|{}minRevision[0]
+        final fun <get-minRevision>(): kotlin/Long? // stapel.cache/RevisionRequest.minRevision.<get-minRevision>|<get-minRevision>(){}[0]
+    final val page // stapel.cache/RevisionRequest.page|{}page[0]
+        final fun <get-page>(): kotlin/Int // stapel.cache/RevisionRequest.page.<get-page>|<get-page>(){}[0]
+    final val pageSize // stapel.cache/RevisionRequest.pageSize|{}pageSize[0]
+        final fun <get-pageSize>(): kotlin/Int // stapel.cache/RevisionRequest.pageSize.<get-pageSize>|<get-pageSize>(){}[0]
+
+    final fun component1(): kotlin/Long? // stapel.cache/RevisionRequest.component1|component1(){}[0]
+    final fun component2(): kotlin/Long? // stapel.cache/RevisionRequest.component2|component2(){}[0]
+    final fun component3(): kotlin/Int // stapel.cache/RevisionRequest.component3|component3(){}[0]
+    final fun component4(): kotlin/Int // stapel.cache/RevisionRequest.component4|component4(){}[0]
+    final fun copy(kotlin/Long? = ..., kotlin/Long? = ..., kotlin/Int = ..., kotlin/Int = ...): stapel.cache/RevisionRequest // stapel.cache/RevisionRequest.copy|copy(kotlin.Long?;kotlin.Long?;kotlin.Int;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/RevisionRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.cache/RevisionRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.cache/RevisionRequest.toString|toString(){}[0]
 }
 
 final class stapel.cache/StapelCacheConfig { // stapel.cache/StapelCacheConfig|null[0]
@@ -441,6 +521,71 @@ final class stapel.cache/StoredEntry { // stapel.cache/StoredEntry|null[0]
     final fun hashCode(): kotlin/Int // stapel.cache/StoredEntry.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // stapel.cache/StoredEntry.toString|toString(){}[0]
     final fun withInvalidated(kotlin/Boolean): stapel.cache/StoredEntry // stapel.cache/StoredEntry.withInvalidated|withInvalidated(kotlin.Boolean){}[0]
+}
+
+final class stapel.cache/StoredListHead { // stapel.cache/StoredListHead|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/ByteArray, kotlin/String?, kotlin/String?, kotlin/Boolean, kotlin/Boolean, kotlin/String, kotlin/Long, kotlin/Boolean) // stapel.cache/StoredListHead.<init>|<init>(kotlin.String;kotlin.String;kotlin.ByteArray;kotlin.String?;kotlin.String?;kotlin.Boolean;kotlin.Boolean;kotlin.String;kotlin.Long;kotlin.Boolean){}[0]
+
+    final val envelope // stapel.cache/StoredListHead.envelope|{}envelope[0]
+        final fun <get-envelope>(): kotlin/ByteArray // stapel.cache/StoredListHead.envelope.<get-envelope>|<get-envelope>(){}[0]
+    final val fetchedAtMillis // stapel.cache/StoredListHead.fetchedAtMillis|{}fetchedAtMillis[0]
+        final fun <get-fetchedAtMillis>(): kotlin/Long // stapel.cache/StoredListHead.fetchedAtMillis.<get-fetchedAtMillis>|<get-fetchedAtMillis>(){}[0]
+    final val hasNext // stapel.cache/StoredListHead.hasNext|{}hasNext[0]
+        final fun <get-hasNext>(): kotlin/Boolean // stapel.cache/StoredListHead.hasNext.<get-hasNext>|<get-hasNext>(){}[0]
+    final val hasPrev // stapel.cache/StoredListHead.hasPrev|{}hasPrev[0]
+        final fun <get-hasPrev>(): kotlin/Boolean // stapel.cache/StoredListHead.hasPrev.<get-hasPrev>|<get-hasPrev>(){}[0]
+    final val invalidated // stapel.cache/StoredListHead.invalidated|{}invalidated[0]
+        final fun <get-invalidated>(): kotlin/Boolean // stapel.cache/StoredListHead.invalidated.<get-invalidated>|<get-invalidated>(){}[0]
+    final val namespace // stapel.cache/StoredListHead.namespace|{}namespace[0]
+        final fun <get-namespace>(): kotlin/String // stapel.cache/StoredListHead.namespace.<get-namespace>|<get-namespace>(){}[0]
+    final val nextAnchor // stapel.cache/StoredListHead.nextAnchor|{}nextAnchor[0]
+        final fun <get-nextAnchor>(): kotlin/String? // stapel.cache/StoredListHead.nextAnchor.<get-nextAnchor>|<get-nextAnchor>(){}[0]
+    final val prevAnchor // stapel.cache/StoredListHead.prevAnchor|{}prevAnchor[0]
+        final fun <get-prevAnchor>(): kotlin/String? // stapel.cache/StoredListHead.prevAnchor.<get-prevAnchor>|<get-prevAnchor>(){}[0]
+    final val schemaHash // stapel.cache/StoredListHead.schemaHash|{}schemaHash[0]
+        final fun <get-schemaHash>(): kotlin/String // stapel.cache/StoredListHead.schemaHash.<get-schemaHash>|<get-schemaHash>(){}[0]
+    final val storageKey // stapel.cache/StoredListHead.storageKey|{}storageKey[0]
+        final fun <get-storageKey>(): kotlin/String // stapel.cache/StoredListHead.storageKey.<get-storageKey>|<get-storageKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/StoredListHead.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.cache/StoredListHead.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.cache/StoredListHead.toString|toString(){}[0]
+    final fun withInvalidated(kotlin/Boolean): stapel.cache/StoredListHead // stapel.cache/StoredListHead.withInvalidated|withInvalidated(kotlin.Boolean){}[0]
+}
+
+final class stapel.cache/StoredListItem { // stapel.cache/StoredListItem|null[0]
+    constructor <init>(kotlin/String, kotlin/ByteArray) // stapel.cache/StoredListItem.<init>|<init>(kotlin.String;kotlin.ByteArray){}[0]
+
+    final val itemId // stapel.cache/StoredListItem.itemId|{}itemId[0]
+        final fun <get-itemId>(): kotlin/String // stapel.cache/StoredListItem.itemId.<get-itemId>|<get-itemId>(){}[0]
+    final val payload // stapel.cache/StoredListItem.payload|{}payload[0]
+        final fun <get-payload>(): kotlin/ByteArray // stapel.cache/StoredListItem.payload.<get-payload>|<get-payload>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/StoredListItem.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.cache/StoredListItem.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.cache/StoredListItem.toString|toString(){}[0]
+}
+
+final class stapel.cache/SyncReport { // stapel.cache/SyncReport|null[0]
+    constructor <init>(kotlin/Boolean, kotlin/Int, kotlin/Boolean, kotlin/Long?) // stapel.cache/SyncReport.<init>|<init>(kotlin.Boolean;kotlin.Int;kotlin.Boolean;kotlin.Long?){}[0]
+
+    final val fullSync // stapel.cache/SyncReport.fullSync|{}fullSync[0]
+        final fun <get-fullSync>(): kotlin/Boolean // stapel.cache/SyncReport.fullSync.<get-fullSync>|<get-fullSync>(){}[0]
+    final val pages // stapel.cache/SyncReport.pages|{}pages[0]
+        final fun <get-pages>(): kotlin/Int // stapel.cache/SyncReport.pages.<get-pages>|<get-pages>(){}[0]
+    final val revision // stapel.cache/SyncReport.revision|{}revision[0]
+        final fun <get-revision>(): kotlin/Long? // stapel.cache/SyncReport.revision.<get-revision>|<get-revision>(){}[0]
+    final val truncated // stapel.cache/SyncReport.truncated|{}truncated[0]
+        final fun <get-truncated>(): kotlin/Boolean // stapel.cache/SyncReport.truncated.<get-truncated>|<get-truncated>(){}[0]
+
+    final fun component1(): kotlin/Boolean // stapel.cache/SyncReport.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // stapel.cache/SyncReport.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // stapel.cache/SyncReport.component3|component3(){}[0]
+    final fun component4(): kotlin/Long? // stapel.cache/SyncReport.component4|component4(){}[0]
+    final fun copy(kotlin/Boolean = ..., kotlin/Int = ..., kotlin/Boolean = ..., kotlin/Long? = ...): stapel.cache/SyncReport // stapel.cache/SyncReport.copy|copy(kotlin.Boolean;kotlin.Int;kotlin.Boolean;kotlin.Long?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.cache/SyncReport.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.cache/SyncReport.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.cache/SyncReport.toString|toString(){}[0]
 }
 
 final class stapel.cache/WipeReport { // stapel.cache/WipeReport|null[0]

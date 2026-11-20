@@ -60,7 +60,8 @@ class DurableMemoryFactory : CacheStoreFactory {
 
     override suspend fun open(partition: PartitionId): PartitionStores {
         val stores = handles.getOrPut(partition) {
-            val raw = inner.open(partition).entries
+            val opened = inner.open(partition)
+            val raw = opened.entries
             PartitionStores(
                 object : CacheStore by raw {
                     override suspend fun put(entry: StoredEntry) {
@@ -68,10 +69,11 @@ class DurableMemoryFactory : CacheStoreFactory {
                         raw.put(entry)
                     }
                 },
+                lists = opened.lists,
                 close = {},
             ).also { wrapped -> rawOf[wrapped.entries] = raw }
         }
-        return PartitionStores(stores.entries, close = {})
+        return PartitionStores(stores.entries, stores.lists, close = {})
     }
 
     private val rawOf = mutableMapOf<CacheStore, CacheStore>()

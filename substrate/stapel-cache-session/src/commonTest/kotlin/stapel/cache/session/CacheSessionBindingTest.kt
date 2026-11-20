@@ -230,7 +230,7 @@ private class KeepingFactory : stapel.cache.CacheStoreFactory {
     private val open = mutableMapOf<PartitionId, stapel.cache.PartitionStores>()
     override val durable: Boolean get() = true
     override suspend fun open(partition: PartitionId): stapel.cache.PartitionStores =
-        stapel.cache.PartitionStores(open.getOrPut(partition) { inner.open(partition) }.entries, close = {})
+        open.getOrPut(partition) { inner.open(partition) }.let { stapel.cache.PartitionStores(it.entries, it.lists, close = {}) }
     override suspend fun destroy(partition: PartitionId) {
         open.remove(partition)
         inner.destroy(partition)

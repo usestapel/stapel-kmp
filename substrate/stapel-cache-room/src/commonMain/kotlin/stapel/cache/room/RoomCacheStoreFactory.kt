@@ -1,5 +1,6 @@
 package stapel.cache.room
 
+import androidx.room3.withWriteTransaction
 import androidx.sqlite.SQLiteDriver
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.CancellationException
@@ -10,9 +11,12 @@ import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
 import stapel.cache.CacheStore
 import stapel.cache.CacheStoreFactory
+import stapel.cache.ListStore
 import stapel.cache.PartitionId
 import stapel.cache.PartitionStores
 import stapel.cache.StoredEntry
+import stapel.cache.StoredListHead
+import stapel.cache.StoredListItem
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -43,7 +47,8 @@ public class RoomCacheOptions(
  * The app opts in by passing this factory to the cache (the default is the memory store); nothing
  * is discovered from the classpath. [destroy] closes the partition and deletes its directory with
  * every file in it (`-wal`, `-shm` included). `cache.db` is disposable: a file that cannot be
- * opened, that carries another schema, or another store format is deleted and recreated empty.
+ * opened, that carries another schema, or another store format is deleted and recreated empty; a
+ * version with a migration (1 → 2, the list tables) is migrated and keeps its entries.
  *
  * Platform entry points pick the directory: `RoomCacheStoreFactory(context, options)` on Android
  * (`noBackupFilesDir`), `RoomCacheStoreFactory(options)` on iOS (Application Support, excluded from
@@ -74,6 +79,7 @@ public class RoomCacheStoreFactory(
         handle.refs++
         PartitionStores(
             entries = RoomCacheStore(handle.db.entries()),
+            lists = RoomListStore(handle.db),
             close = { release(partition, handle) },
         )
     }
@@ -136,6 +142,7 @@ public class RoomCacheStoreFactory(
         cacheDatabaseBuilder(Path(dir, DB_NAME).toString())
             .setDriver(options.driver())
             .setQueryCoroutineContext(options.ioContext)
+            .addMigrations(MIGRATION_1_2)
             .fallbackToDestructiveMigration(dropAllTables = true)
             .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
             .build()
@@ -214,4 +221,86 @@ internal class RoomCacheStore(private val dao: EntryDao) : CacheStore {
     override suspend fun count(): Int = dao.count()
 
     override suspend fun clear(): Unit = dao.clear()
+}
+
+/**
+ * [ListStore] over the `list_head`, `list_item` and `cursor` tables of one partition's `cache.db`;
+ * every call that writes runs in one write transaction.
+ */
+internal class RoomListStore(private val db: CacheDatabase) : ListStore {
+    private val dao = db.lists()
+
+    override suspend fun head(storageKey: String): StoredListHead? = dao.head(storageKey)?.let {
+        StoredListHead(
+            it.key, it.namespace, it.envelope, it.nextAnchor, it.prevAnchor, it.hasNext, it.hasPrev,
+            it.schemaHash, it.fetchedAt, it.invalidated,
+        )
+    }
+
+    override suspend fun items(storageKey: String): List<StoredListItem> =
+        dao.items(storageKey).map { StoredListItem(it.itemId, it.payload) }
+
+    override suspend fun replace(head: StoredListHead, items: List<StoredListItem>) {
+        val rows = LinkedHashMap<String, StoredListItem>()
+        items.forEach { rows[it.itemId] = it }
+        db.withWriteTransaction {
+            dao.putHead(head.toRow(rows.values.sumOf { it.payload.size.toLong() }))
+            dao.deleteItems(head.storageKey)
+            dao.putItems(rows.values.mapIndexed { i, item -> ListItemRow(head.storageKey, item.itemId, i.toLong(), item.payload) })
+        }
+    }
+
+    override suspend fun merge(head: StoredListHead, upserts: List<StoredListItem>, removedIds: Collection<String>) {
+        db.withWriteTransaction {
+            dao.putHead(head.toRow(upserts.sumOf { it.payload.size.toLong() }))
+            var next = (dao.maxPosition(head.storageKey) ?: -1L) + 1
+            for (item in upserts) {
+                if (dao.updatePayload(head.storageKey, item.itemId, item.payload) == 0) {
+                    dao.putItems(listOf(ListItemRow(head.storageKey, item.itemId, next++, item.payload)))
+                }
+            }
+            removedIds.distinct().chunked(ID_CHUNK).forEach { dao.deleteItemIds(head.storageKey, it) }
+        }
+    }
+
+    override suspend fun delete(storageKey: String) {
+        db.withWriteTransaction {
+            dao.deleteItems(storageKey)
+            dao.deleteHead(storageKey)
+            dao.deleteCursor(storageKey)
+        }
+    }
+
+    override suspend fun markInvalidated(keyPrefix: String): Int = dao.markInvalidated(keyPrefix)
+
+    override suspend fun deletePrefix(keyPrefix: String): Int = db.withWriteTransaction {
+        dao.deleteItemsPrefix(keyPrefix)
+        dao.deleteCursorsPrefix(keyPrefix)
+        dao.deleteHeadsPrefix(keyPrefix)
+    }
+
+    override suspend fun keys(keyPrefix: String): List<String> = dao.keys(keyPrefix)
+
+    override suspend fun readCursor(storageKey: String): Long? = dao.cursor(storageKey)
+
+    override suspend fun writeCursor(storageKey: String, value: Long): Unit = dao.putCursor(CursorRow(storageKey, value))
+
+    override suspend fun clear() {
+        db.withWriteTransaction {
+            dao.clearItems()
+            dao.clearHeads()
+            dao.clearCursors()
+        }
+    }
+
+    private fun StoredListHead.toRow(size: Long) = ListHeadRow(
+        key = storageKey, namespace = namespace, envelope = envelope, nextAnchor = nextAnchor, prevAnchor = prevAnchor,
+        hasNext = hasNext, hasPrev = hasPrev, schemaHash = schemaHash, fetchedAt = fetchedAtMillis, size = size,
+        invalidated = invalidated,
+    )
+
+    private companion object {
+        /** Bound variables per `IN (…)` statement, well under SQLite's limit. */
+        const val ID_CHUNK = 500
+    }
 }

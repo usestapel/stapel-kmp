@@ -102,7 +102,7 @@ class CacheStoreContractTest {
         override val durable: Boolean get() = inner.durable
         override suspend fun open(partition: PartitionId): PartitionStores {
             val stores = inner.open(partition)
-            return PartitionStores(wrap(stores.entries), stores.close)
+            return PartitionStores(wrap(stores.entries), stores.lists, stores.close)
         }
         override suspend fun destroy(partition: PartitionId) = inner.destroy(partition)
         override suspend fun listPartitions() = inner.listPartitions()

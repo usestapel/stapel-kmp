@@ -57,6 +57,17 @@ public interface StapelCache {
 
     /** Delete every entry matching [pattern] from memory and store. Returns the number deleted. */
     public suspend fun remove(pattern: KeyPattern): Int
+
+    /**
+     * The revision-synced collection of [spec], whose pages come from [fetch] (see
+     * [RevisionCollection]). Stored as a list plus a revision cursor in the key's partition;
+     * [invalidate] marks it stale (an observed one syncs a delta), [remove] drops it with its
+     * revision (the next sync is a full one).
+     */
+    public fun <T, E : StapelError> revisioned(
+        spec: RevisionSpec<T>,
+        fetch: suspend (RevisionRequest) -> StapelResult<RevisionPage<T>, E>,
+    ): RevisionCollection<T>
 }
 
 /**
