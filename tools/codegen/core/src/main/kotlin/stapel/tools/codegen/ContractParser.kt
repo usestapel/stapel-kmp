@@ -605,10 +605,19 @@ class ContractParser(private val set: ContractSet) {
         val money = Regex("(^|_)(price|amount|total|cost|fee|balance|rate)(_|$)")
         for (d in types.values) {
             if (d !is ObjectDecl) continue
-            d.properties.filter { (it.type as? TypeRef.Scalar)?.kind == ScalarKind.DOUBLE && money.containsMatchIn(it.wireName) }.forEach {
+            d.properties.filter {
+                (it.type as? TypeRef.Scalar)?.kind == ScalarKind.DOUBLE && money.containsMatchIn(it.wireName) && !isRatio(it.constraints)
+            }.forEach {
                 diagnostics.error("E-MONEY-AS-DOUBLE", it.pointer, "money-like number ${d.name}.${it.wireName} must be format: decimal at the source")
             }
         }
+    }
+
+    /** A number the source bounds to [0, 1] (`minimum >= 0`, `maximum <= 1`) is a ratio, never money, whatever its name. */
+    private fun isRatio(c: stapel.tools.codegen.ir.Constraints): Boolean {
+        val min = c.minimum?.toBigDecimalOrNull() ?: return false
+        val max = c.maximum?.toBigDecimalOrNull() ?: return false
+        return min >= java.math.BigDecimal.ZERO && max <= java.math.BigDecimal.ONE
     }
 
     companion object {
