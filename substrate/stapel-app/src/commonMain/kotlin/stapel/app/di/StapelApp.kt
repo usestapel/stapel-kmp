@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
 import org.koin.core.module.Module
@@ -216,6 +217,12 @@ public class StapelAppBuilder internal constructor(private val platform: Platfor
             register(CoreUiBundle)
             bricks.flatMap { it.strings }.forEach { register(it) }
             stringConfig.forEach { it() }
+        }
+        // The app's strings follow the effective locale: the device's, or the in-app choice
+        // (`LocaleProvider.setAppLocale`, e.g. the profiles brick's app language) — at once, and with
+        // them the layout direction of every StapelTheme under the app (R17).
+        koin.getOrNull<LocaleProvider>()?.let { provider ->
+            context.appScope.launch { provider.locale.collect { strings.setLocale(it.value) } }
         }
         val embedsBySlot = contributions.flatMap { it.manifest.embeds }.groupBy { it.slot }
             .mapValues { (_, specs) -> specs.sortedWith(compareBy({ it.order }, { it.id.value })).map { it.id } }

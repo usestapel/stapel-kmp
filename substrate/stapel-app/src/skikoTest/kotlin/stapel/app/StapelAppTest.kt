@@ -5,6 +5,7 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.v2.runComposeUiTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.LayoutDirection
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.Serializable
@@ -26,6 +27,8 @@ import stapel.navigation.PathCodec
 import stapel.navigation.Route
 import stapel.navigation.compose.NavContribution
 import stapel.navigation.compose.navContribution
+import stapel.result.text.LocaleTag
+import stapel.runtime.LocaleProvider
 import stapel.runtime.PlatformContext
 import stapel.session.TokenRefresher
 import stapel.session.vault.TokenVault
@@ -34,6 +37,7 @@ import stapel.shell.Slots
 import stapel.testing.RecordingLogger
 import stapel.testing.testEnvironment
 import stapel.ui.StapelText
+import stapel.ui.layoutDirectionOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -120,6 +124,22 @@ class StapelAppTest {
         val e = assertFailsWith<IllegalArgumentException> { app(DemoBrick(), DemoBrick(key = "other", refresher = false)) }
         assertTrue("more than one brick owns sign-in" in e.message.orEmpty(), e.message)
     }
+
+    @Test
+    fun anInAppLocaleSwitchesTheAppStringsAndTheirDirectionAtOnce() = runComposeUiTest {
+        app(DemoBrick()).use { app ->
+            val locales = app.koin.get<LocaleProvider>()
+            val device = locales.locale.value.value
+            assertEquals(normalized(device), app.strings.locale.value, "the strings start in the effective locale")
+            locales.setAppLocale(LocaleTag("ar"))
+            waitUntil(timeoutMillis = 5_000) { app.strings.locale.value == "ar" }
+            assertEquals(LayoutDirection.Rtl, layoutDirectionOf(app.strings.locale.value))
+            locales.setAppLocale(null)
+            waitUntil(timeoutMillis = 5_000) { app.strings.locale.value == normalized(device) }
+        }
+    }
+
+    private fun normalized(tag: String): String = stapel.i18n.StapelStrings { initialLocale = tag }.locale.value
 
     @Test
     fun withoutASessionBrickNavigationIsSignedOut() {

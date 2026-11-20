@@ -16,6 +16,7 @@ kotlin {
             api(projects.stapelUi)
             api(projects.stapelImage)
             api(projects.stapelNetwork)
+            api(projects.stapelSession)
             api(libs.coil.compose)
             implementation(libs.coil.network.ktor3)
             api(libs.ktor.client.core)

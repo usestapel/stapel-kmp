@@ -227,6 +227,40 @@ class PagingMachineTest {
     }
 
     @Test
+    fun aRefreshCancelsTheAppendInFlightAndAFailedRefreshLeavesTheListAppendable() = runTest {
+        val server = Server("anchor")
+        var appendCancelled = false
+        val appendGate = CompletableDeferred<Unit>()
+        val m = PagingMachine(backgroundScope, FixedClock, { it.id }) { cursor ->
+            if (cursor != null && !appendGate.isCompleted) {
+                try {
+                    appendGate.await()
+                } catch (e: kotlinx.coroutines.CancellationException) {
+                    appendCancelled = true
+                    throw e
+                }
+            }
+            server.fetch(cursor)
+        }
+        m.start(); runCurrent()
+        m.loadMore(); runCurrent()
+        assertEquals(AppendStatus.Loading, m.state.value.append)
+
+        server.failNext = TransportFailure.Offline()
+        m.refresh(); runCurrent()
+        assertTrue(appendCancelled, "the refresh cancelled the append's request, not only its answer")
+        val failed = m.state.value
+        assertEquals(listOf(1, 2), ids(failed), "a failed refresh keeps the rows")
+        assertIs<TransportFailure.Offline>(assertIs<Resource.Ready<List<Row>>>(failed.content).freshness.refreshError)
+        assertEquals(AppendStatus.Idle, failed.append, "the cancelled append is not left loading")
+        assertTrue(failed.canLoadMore)
+
+        appendGate.complete(Unit)
+        m.loadMore(); runCurrent()
+        assertEquals(listOf(1, 2, 3, 4), ids(m.state.value), "the next page is asked again after the failed refresh")
+    }
+
+    @Test
     fun heldRowsShowStaleWhileTheHeadRevalidates() = runTest {
         val server = Server("anchor")
         val m = PagingMachine(backgroundScope, FixedClock, { it.id }, server::fetch)

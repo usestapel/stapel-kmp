@@ -11,7 +11,8 @@
 - **Paging rules** (each a test in `PagingMachineTest`, run per style): an append only with rows held,
   nothing in flight, not refreshing and before the end; a failed append keeps the rows and retries the
   same cursor; a row already held is replaced in place; refresh keeps rows on screen (`refreshing`),
-  replaces them with the head page or keeps them with `refreshError`; a refresh discards a late append;
+  replaces them with the head page or keeps them with `refreshError`; a refresh cancels an append in flight
+  (the request, its late answer is never applied, the list is not left `Loading` if the refresh fails);
   `start(held)` shows cached rows stale + refreshing while the head revalidates. A brick presenter owns
   one machine per list and forwards its intents (`loadMore`, `retry`, `refresh`).
 - **Invariants:** intents are handled one at a time in dispatch order; an effect is delivered to

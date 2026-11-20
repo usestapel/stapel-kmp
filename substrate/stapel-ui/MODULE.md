@@ -101,8 +101,9 @@
 - **Layout direction follows the strings locale:** `StapelTheme` provides `LocalLayoutDirection` from the
   active locale of its `StapelStrings` (`layoutDirectionOf` over `stapel-i18n`'s `writingDirectionOf`), so
   `strings.setLocale("ar")` mirrors the UI with no other wiring; the app starts its strings in the
-  platform locale (`stapelApp` does, from `LocaleProvider`). A direction provided above the theme is
-  ignored. `StapelTheme(layoutDirection = …)` (also on `StapelMaterialTheme`) is the explicit override;
+  platform locale (`stapelApp` does, from `LocaleProvider`, and follows its changes). A direction
+  provided above the theme is ignored — except under a bare theme without app strings (the `en` library
+  floor), which keeps the platform's direction. `StapelTheme(layoutDirection = …)` (also on `StapelMaterialTheme`) is the explicit override;
   nested themes that pass none inherit it. Proven by `LayoutDirectionTest`; the skin contract's RTL pass
   reaches RTL through an Arabic strings locale.
 - Not yet here: `StapelSvg` (backend-sent SVG), Inter font artifact.

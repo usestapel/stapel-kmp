@@ -2,7 +2,8 @@
 
 - **Provides:** `stapelImageLoader(context, httpClient, auth, configure)`, `ImageAuth(authenticator, hosts)`,
   `CoilStapelImages(loader)` (a `stapel.ui.StapelImages`), `ProvideStapelImages(loader) { … }`,
-  `ImageLoader.clearStapelCaches()`.
+  `ImageLoader.clearStapelCaches()`, `ImageLoader.clearCachesOnSessionEnd(session)` (memory + disk caches
+  cleared from the session's logout hook on every session end; `SessionEndClearsImagesTest`).
 - **One HTTP stack:** fetches go through the app's Ktor `HttpClient` (`coil-network-ktor3`); Coil's
   service-loaded components are off, so Coil never builds a default client of its own.
 - **Bearer only at home (each a wire test, `src/wireTest`, jvm/OkHttp and iOS simulator/Darwin against a

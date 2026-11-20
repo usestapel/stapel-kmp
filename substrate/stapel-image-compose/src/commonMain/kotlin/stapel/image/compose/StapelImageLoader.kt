@@ -19,6 +19,8 @@ import coil3.size.Size
 import io.ktor.client.HttpClient
 import stapel.image.ImageError
 import stapel.image.ImageRequest
+import stapel.session.LogoutHook
+import stapel.session.SessionManager
 import stapel.ui.LocalStapelImages
 import stapel.ui.StapelImageState
 import stapel.ui.StapelImages
@@ -28,9 +30,9 @@ import stapel.ui.StapelImages
  * through [httpClient] (the app's Ktor client — no second HTTP stack); with [auth] the requests for
  * its hosts carry the session's bearer token through a copy of the client that does not follow
  * redirects, and no other request ever carries one. Coil's own memory and disk caches keep images
- * available offline (independent of `stapel-cache`; clear them on logout with
- * [ImageLoader.clearStapelCaches]). Service-loaded Coil components are off, so no default client
- * is created behind the app's back.
+ * available offline (independent of `stapel-cache`): wire them to the session once with
+ * [ImageLoader.clearCachesOnSessionEnd] so that a sign-out clears them. Service-loaded Coil components
+ * are off, so no default client is created behind the app's back.
  *
  * @param configure further Coil settings (cache sizes, a logger, a decoder).
  */
@@ -63,6 +65,15 @@ public fun ImageLoader.clearStapelCaches() {
     memoryCache?.clear()
     diskCache?.clear()
 }
+
+/**
+ * Clears this loader's memory and disk caches ([clearStapelCaches]) whenever [session] ends — sign-out,
+ * expiry, revocation, any cause — from the session's logout hook, which runs before the session
+ * publishes "signed out": the next account never sees the previous one's pictures. Call once where the
+ * loader is built; close the handle to stop.
+ */
+public fun ImageLoader.clearCachesOnSessionEnd(session: SessionManager): AutoCloseable =
+    session.registerLogoutHook(LogoutHook { clearStapelCaches() })
 
 /** [StapelImages] over a Coil [loader]: what `LocalStapelImages` holds in an app that wired images. */
 public class CoilStapelImages(private val loader: ImageLoader) : StapelImages {

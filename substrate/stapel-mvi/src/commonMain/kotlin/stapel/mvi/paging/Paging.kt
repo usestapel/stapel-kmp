@@ -71,8 +71,9 @@ public data class PagingState<out T>(
  * a page has no next cursor; a failed append keeps the rows and asks the same cursor again on
  * [retry]; an id already present (by [itemKey]) is replaced in place, never duplicated; [refresh]
  * keeps the rows on screen marked `refreshing`, replaces them with the head page on success and
- * keeps them with `refreshError` on failure; a refresh cancels an append in flight and that
- * append's late answer is never applied.
+ * keeps them with `refreshError` on failure; a refresh cancels an append in flight (its request,
+ * not only its answer: the late answer is never applied, and the list is not left `Loading` when the
+ * refresh fails).
  *
  * @param scope where loads run (the presenter's scope).
  * @param clock stamps [Freshness.fetchedAtMillis].
@@ -158,6 +159,8 @@ public class PagingMachine<T, E : StapelError>(
         generation++
         val token = generation
         job?.cancel()
+        // The append in flight (if any) was just cancelled: it is not loading any more.
+        mutable.update { if (it.append == AppendStatus.Loading) it.copy(append = AppendStatus.Idle) else it }
         job = scope.launch {
             val result = call(null)
             if (token != generation) return@launch

@@ -364,7 +364,8 @@ internal fun buildThemeValues(
  * @param reduceMotion the user asked for less motion (the platform setting by default); read through [LocalStapelReduceMotion].
  * @param layoutDirection an explicit direction for the subtree; null (the default) derives it from the
  *   active locale of [strings] ([layoutDirectionOf]), so an in-app switch to a right-to-left language
- *   mirrors the UI. An explicit value is inherited by nested themes that pass none.
+ *   mirrors the UI; a bare theme without app strings keeps the platform's direction (the platform
+ *   locale's). An explicit value is inherited by nested themes that pass none.
  * @param content the UI.
  */
 @Composable
@@ -386,8 +387,11 @@ public fun StapelTheme(
     }
     val locale by strings.locale.collectAsState()
     val explicit = layoutDirection ?: LocalExplicitLayoutDirection.current
+    // Without app strings (the library floor, fixed in `en`) there is no app locale to follow: the
+    // direction stays the platform's, which the host derives from the platform locale.
+    val derived = if (strings === DefaultStrings) LocalLayoutDirection.current else layoutDirectionOf(locale)
     CompositionLocalProvider(
-        LocalLayoutDirection provides (explicit ?: layoutDirectionOf(locale)),
+        LocalLayoutDirection provides (explicit ?: derived),
         LocalExplicitLayoutDirection provides explicit,
         LocalStapelTheme provides values,
         LocalStapelStrings provides strings,

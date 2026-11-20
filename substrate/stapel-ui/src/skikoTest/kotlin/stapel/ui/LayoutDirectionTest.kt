@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
@@ -72,6 +75,23 @@ class LayoutDirectionTest {
                 StapelTheme(skin = FoundationSkin, mode = ThemeMode.Light, strings = strings) { Probe() }
             }
         }
+        waitForIdle()
+        assertEquals(LayoutDirection.Ltr, seen)
+    }
+
+    @Test
+    fun aBareThemeWithoutAppStringsFollowsThePlatformDirection() = runComposeUiTest {
+        var platform by mutableStateOf(LayoutDirection.Rtl)
+        setContent {
+            // The host's direction comes from the platform locale; no app strings means no app locale.
+            CompositionLocalProvider(LocalLayoutDirection provides platform) {
+                StapelTheme(skin = FoundationSkin, mode = ThemeMode.Light) { Probe() }
+            }
+        }
+        waitForIdle()
+        assertEquals(LayoutDirection.Rtl, seen)
+        assertTrue(firstIsRightOfSecond(), "an RTL platform mirrors a bare theme")
+        platform = LayoutDirection.Ltr
         waitForIdle()
         assertEquals(LayoutDirection.Ltr, seen)
     }
