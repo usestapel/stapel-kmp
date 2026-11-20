@@ -104,6 +104,7 @@ kotlin {
             dependencies {
                 api(project.dependencies.platform(libs.stapel.bom))
                 api(libs.stapel.app)
+                implementation(libs.stapel.analytics)
                 implementation(libs.stapel.auth.ui)
                 implementation(libs.stapel.profiles.ui)
                 implementation(libs.stapel.cdn)
@@ -161,4 +162,12 @@ providers.gradleProperty("stapel.ios.simulator").orNull?.let { udid ->
 
 tasks.withType<Test>().configureEach {
     testLogging { events("passed", "failed", "skipped"); exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL }
+}
+
+// Analytics vendor provider (README "Analytics and Firebase"): off by default, so the sample needs nothing
+// from Google's services to build; -Pshop.firebase=true adds Google Analytics for Firebase on Android.
+val shopFirebase = providers.gradleProperty("shop.firebase").orNull == "true"
+kotlin.sourceSets.named("androidMain") {
+    kotlin.srcDir(if (shopFirebase) "src/androidFirebase/kotlin" else "src/androidNoVendor/kotlin")
+    if (shopFirebase) dependencies { implementation(libs.stapel.analytics.firebase) }
 }

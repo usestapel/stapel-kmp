@@ -109,6 +109,7 @@ fun createShopApp(
     if (pushProvider != null) {
         modules(pushModule(PushOptions(routing = notificationsPushRouting())), notificationsPushModule(), pushProvider)
     }
+    modules(*shopAnalyticsModules().toTypedArray())
     navigation(
         home = DestinationId("shop.home"),
         deepLinks = DeepLinkConfig(schemes = setOf("shopmobile"), hosts = setOf("shop.example.com")),
@@ -116,7 +117,10 @@ fun createShopApp(
     theme { content -> StapelMaterialTheme(tokens = AppTokens, content = content) }
     strings { register(ShopStrings) }
     configure()
-}.also { app -> app.koin.getOrNull<PushController>()?.attach { app.openUrl(it) } }
+}.also { app ->
+    app.koin.getOrNull<PushController>()?.attach { app.openUrl(it) }
+    bindAnalyticsIdentity(app)
+}
 
 /** The home screen's title. */
 const val SHOP_HOME_TITLE: String = "Shop"
@@ -154,6 +158,7 @@ private fun HomeScreen(context: BrickContext) {
     // Every screen titles itself once: in the shell the top bar shows it, hosted bare it is the heading.
     StapelPage(Modifier.testTag("shop.home")) {
         StapelScreenTitle(SHOP_HOME_TITLE)
+        AnalyticsConsentSheet(context.koin)
         orders?.let { StapelText(it, Modifier.testTag("shop.home.orders")) }
         StapelButton("Load orders", {
             scope.launch {
