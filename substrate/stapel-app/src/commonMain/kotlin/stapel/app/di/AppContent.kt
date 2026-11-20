@@ -13,6 +13,7 @@ import stapel.mvi.compose.di.KoinPresenterFactory
 import stapel.mvi.compose.LocalPresenterFactory
 import stapel.navigation.StapelNavigator
 import stapel.navigation.compose.rememberStapelNavigator
+import stapel.runtime.Analytics
 import stapel.runtime.StapelLogger
 import stapel.runtime.info
 import stapel.shell.ShellConfig
@@ -29,13 +30,15 @@ public const val APP_LOG_TAG: String = "stapel.app"
  * Koin), the navigator, and the shell around the navigation host. Restores the session brick's stored
  * session once, and writes two log markers through the app's [StapelLogger]: `stapel.app.ready` on the
  * first composition and `stapel.nav <id>` whenever the topmost destination changes (what launch and
- * deep-link smokes wait for).
+ * deep-link smokes wait for). On the same change it records `Analytics.page(<id>)` when the graph
+ * binds an [Analytics] (the optional `stapel-analytics` hub); without one nothing is recorded.
  *
  * @param onNavigator receives the navigator once created (tests, platform glue).
  */
 @Composable
 public fun StapelAppContent(app: StapelApp, modifier: Modifier = Modifier, onNavigator: (StapelNavigator) -> Unit = {}) {
     val logger = remember(app) { app.koin.get<StapelLogger>() }
+    val analytics = remember(app) { app.koin.getOrNull<Analytics>() }
     val presenters = remember(app) {
         app.bricks.foldRight(KoinPresenterFactory(app.koin) as stapel.mvi.compose.PresenterFactory) { brick, next ->
             brick.presenters(app.context, next)
@@ -61,7 +64,12 @@ public fun StapelAppContent(app: StapelApp, modifier: Modifier = Modifier, onNav
                 navigator.state
                     .map { s -> s.top?.let { navigator.nav.destinationOf(it.route)?.id?.value } }
                     .distinctUntilChanged()
-                    .collect { id -> if (id != null) logger.info(APP_LOG_TAG) { "stapel.nav $id" } }
+                    .collect { id ->
+                        if (id != null) {
+                            logger.info(APP_LOG_TAG) { "stapel.nav $id" }
+                            analytics?.page(id)
+                        }
+                    }
             }
             val config = remember(app) {
                 ShellConfig(

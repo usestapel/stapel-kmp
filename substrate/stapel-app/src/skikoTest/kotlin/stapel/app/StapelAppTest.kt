@@ -86,10 +86,11 @@ private val memoryVault = module { single<TokenVault> { InMemoryTokenVault() } }
 
 @OptIn(ExperimentalTestApi::class)
 class StapelAppTest {
-    private fun app(vararg bricks: StapelBrick, logger: RecordingLogger = RecordingLogger()) = stapelApp(PlatformContext()) {
+    private fun app(vararg bricks: StapelBrick, logger: RecordingLogger = RecordingLogger(), extra: List<Module> = emptyList()) = stapelApp(PlatformContext()) {
         environment(testEnvironment())
         logger(logger)
         bricks(*bricks)
+        modules(*extra.toTypedArray())
         overrides(memoryVault)
         global(false)
     }
@@ -147,6 +148,31 @@ class StapelAppTest {
             // A link received before the navigator exists is queued, then handed to it (and refused: no deep-link config).
             assertTrue("stapel.link elsewhere://nowhere/login queued" in messages, "$messages")
             assertTrue("stapel.link elsewhere://nowhere/login refused" in messages, "$messages")
+        } finally {
+            app.close()
+        }
+    }
+
+    private class PageRecorder : stapel.runtime.Analytics {
+        val pages = mutableListOf<String>()
+        override fun track(event: String, props: Map<String, String>) {}
+        override fun page(name: String, props: Map<String, String>) {
+            pages += name
+        }
+        override fun identify(userHash: String?) {}
+    }
+
+    @Test
+    fun aBoundAnalyticsRecordsAPageOnEveryTopDestinationChange() = runComposeUiTest {
+        val recorder = PageRecorder()
+        val brick = DemoBrick()
+        val app = app(brick, extra = listOf(module { single<stapel.runtime.Analytics> { recorder } }))
+        try {
+            setContent { StapelAppContent(app) }
+            waitUntil(timeoutMillis = 10_000) { onAllNodes(hasTestTag("demo.login")).fetchSemanticsNodes().isNotEmpty() }
+            brick.auth.value = NavAuthState.Member
+            waitUntil(timeoutMillis = 10_000) { recorder.pages.contains("demo.home") }
+            assertEquals(listOf("demo.login", "demo.home"), recorder.pages)
         } finally {
             app.close()
         }
