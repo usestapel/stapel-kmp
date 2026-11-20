@@ -224,7 +224,13 @@ Known note: Skiko's ICU data object (`libicu.icudtl_dat.o`, a 6 MB table, no
 instructions, no imports) is tagged minimum iOS 18.5; the app link prints
 `ld: warning: object file … was built for newer 'iOS-simulator' version (18.5)
 than being linked (15.0)`. It cannot call an API, so `checkIosBinaries`
-reports it as a note.
+reports it as a note. Upstream: SKIKO-1210 ("Pass the minimum iOS target to ASM flags when building
+Skia") names this exact warning as a false positive (the minimum reached the C flags, not the ASM
+flags, so the data object took the build Xcode's version); fixed for Skiko 0.157.0, not yet on Maven
+Central (latest 0.156.1, measured 2026-11-20). Only the simulator object is affected: the
+`ios_arm64` (device) ICU object is tagged 14.0. Neither Compose Multiplatform 1.12.2 (Skiko 0.150.2,
+the newest 1.12 patch) nor 1.13.0-rc01 (Skiko 0.156.1) carries the fix. Compose Multiplatform's own
+documented iOS minimum is 14; raising it to 15 is CMP-10511 (target 1.14.0-alpha01).
 
 ## CI capacity and the `ci-ok` verdict
 
