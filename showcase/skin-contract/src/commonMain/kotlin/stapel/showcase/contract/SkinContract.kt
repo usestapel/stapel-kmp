@@ -1119,7 +1119,8 @@ private fun ComposeUiTest.centerX(matcher: SemanticsMatcher): Float {
 }
 
 /**
- * The slots lay out right to left: under `LayoutDirection.Rtl` on a 360 dp phone, start and end swap
+ * The slots lay out right to left: with the strings locale `ar` (the theme derives `LayoutDirection.Rtl`
+ * from it) on a 360 dp phone, start and end swap
  * in every slot where order or placement carries meaning — the top bar's navigation sits right of the
  * title and its actions left; a row's value block and chevron sit left of the headline; a banner's
  * dismiss and a removable chip's remove button sit left of their text; the first tab, navigation item,
@@ -1138,7 +1139,13 @@ public fun ComposeUiTest.assertSlotsMirrorInRtl(
     val label = TextFieldState("shoes")
     setContent {
         val layout = stapelLayout(tokens, 360.dp, input = StapelInput.Touch)
-        androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Rtl) {
+        // Right to left the way an app gets there: the active strings locale is Arabic and the theme
+        // derives the direction from it (the platform direction says LTR and must not win).
+        val arabic = androidx.compose.runtime.remember { stapel.i18n.StapelStrings { initialLocale = "ar"; register(stapel.i18n.CoreUiBundle) } }
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Ltr,
+            stapel.ui.LocalStapelStrings provides arabic,
+        ) {
             theme.Wrap(skin, tokens, ThemeMode.Light, layout) {
                 val s = StapelTheme.skin
                 Column(Modifier.size(width = 360.dp, height = 2000.dp)) {

@@ -400,11 +400,12 @@ public final class stapel/ui/StapelTheme {
 }
 
 public final class stapel/ui/StapelThemeKt {
-	public static final fun StapelTheme (Lstapel/ui/skin/StapelSkin;Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;Lstapel/ui/StapelFontResolver;Lstapel/ui/StapelIconSet;Lstapel/i18n/StapelStrings;Lstapel/ui/StapelLayout;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelTheme (Lstapel/ui/skin/StapelSkin;Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;Lstapel/ui/StapelFontResolver;Lstapel/ui/StapelIconSet;Lstapel/i18n/StapelStrings;Lstapel/ui/StapelLayout;ZLandroidx/compose/ui/unit/LayoutDirection;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 	public static final fun getLocalStapelErrorText ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 	public static final fun getLocalStapelReduceMotion ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 	public static final fun getLocalStapelStrings ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 	public static final fun getTYPE_STEP_NAMES ()Ljava/util/List;
+	public static final fun layoutDirectionOf (Ljava/lang/String;)Landroidx/compose/ui/unit/LayoutDirection;
 	public static final fun rememberThemeMode (Lstapel/ui/ThemePreferenceStore;Landroidx/compose/runtime/Composer;I)Lstapel/tokens/ThemeMode;
 	public static final fun responsiveScales (Lstapel/tokens/StapelTokens;Lstapel/ui/StapelSizeClass;)Lkotlin/Pair;
 }

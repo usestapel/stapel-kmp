@@ -23,6 +23,17 @@ final enum class stapel.i18n/PluralCategory : kotlin/Enum<stapel.i18n/PluralCate
     final fun values(): kotlin/Array<stapel.i18n/PluralCategory> // stapel.i18n/PluralCategory.values|values#static(){}[0]
 }
 
+final enum class stapel.i18n/WritingDirection : kotlin/Enum<stapel.i18n/WritingDirection> { // stapel.i18n/WritingDirection|null[0]
+    enum entry Ltr // stapel.i18n/WritingDirection.Ltr|null[0]
+    enum entry Rtl // stapel.i18n/WritingDirection.Rtl|null[0]
+
+    final val entries // stapel.i18n/WritingDirection.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.i18n/WritingDirection> // stapel.i18n/WritingDirection.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.i18n/WritingDirection // stapel.i18n/WritingDirection.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.i18n/WritingDirection> // stapel.i18n/WritingDirection.values|values#static(){}[0]
+}
+
 abstract fun interface stapel.i18n/LocaleLoader { // stapel.i18n/LocaleLoader|null[0]
     abstract suspend fun load(kotlin/String): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.i18n/LocaleLoader.load|load(kotlin.String){}[0]
 }
@@ -146,3 +157,4 @@ final val stapel.i18n/CoreUiBundle // stapel.i18n/CoreUiBundle|{}CoreUiBundle[0]
 final fun (stapel.i18n/I18nBundle).stapel.i18n/audit(kotlin/String = ..., kotlin.collections/Set<kotlin/String> = ...): kotlin.collections/List<kotlin/String> // stapel.i18n/audit|audit@stapel.i18n.I18nBundle(kotlin.String;kotlin.collections.Set<kotlin.String>){}[0]
 final fun stapel.i18n/StapelStrings(kotlin/Function1<stapel.i18n/StapelStringsBuilder, kotlin/Unit>): stapel.i18n/StapelStrings // stapel.i18n/StapelStrings|StapelStrings(kotlin.Function1<stapel.i18n.StapelStringsBuilder,kotlin.Unit>){}[0]
 final fun stapel.i18n/interpolate(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Any?>): kotlin/String // stapel.i18n/interpolate|interpolate(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Any?>){}[0]
+final fun stapel.i18n/writingDirectionOf(kotlin/String): stapel.i18n/WritingDirection // stapel.i18n/writingDirectionOf|writingDirectionOf(kotlin.String){}[0]

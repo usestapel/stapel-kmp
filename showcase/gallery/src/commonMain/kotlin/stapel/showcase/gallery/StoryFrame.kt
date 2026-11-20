@@ -9,7 +9,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -62,9 +61,11 @@ fun StoryFrame(
         platformTouchFloor = if (controls.size == SizeChoice.Phone) 44.dp else 24.dp,
     )
     val density = LocalDensity.current
+    // The direction follows the strings locale inside the theme; the gallery's RTL switch (and a state
+    // marked `rtl`) forces it, as an app's explicit override would.
+    val direction = if (controls.rtl || state.rtl) LayoutDirection.Rtl else null
     CompositionLocalProvider(
         LocalDensity provides Density(density.density, controls.textScale / 100f),
-        LocalLayoutDirection provides if (controls.rtl || state.rtl) LayoutDirection.Rtl else LayoutDirection.Ltr,
     ) {
         val body: @Composable () -> Unit = {
             CompositionLocalProvider(LocalStapelReduceMotion provides controls.reduceMotion) {
@@ -78,8 +79,8 @@ fun StoryFrame(
             }
         }
         when (controls.skin) {
-            GallerySkin.Material3 -> StapelMaterialTheme(tokens = tokens, mode = mode, skin = controls.skin.skin, strings = strings, layout = layout, content = body)
-            GallerySkin.Foundation -> StapelTheme(skin = controls.skin.skin, tokens = tokens, mode = mode, strings = strings, layout = layout, reduceMotion = controls.reduceMotion, content = body)
+            GallerySkin.Material3 -> StapelMaterialTheme(tokens = tokens, mode = mode, skin = controls.skin.skin, strings = strings, layout = layout, layoutDirection = direction, content = body)
+            GallerySkin.Foundation -> StapelTheme(skin = controls.skin.skin, tokens = tokens, mode = mode, strings = strings, layout = layout, reduceMotion = controls.reduceMotion, layoutDirection = direction, content = body)
         }
     }
 }

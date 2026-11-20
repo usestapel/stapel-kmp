@@ -36,6 +36,6 @@ public final class stapel/ui/material3/Material3Skin : stapel/ui/skin/StapelSkin
 }
 
 public final class stapel/ui/material3/StapelMaterialThemeKt {
-	public static final fun StapelMaterialTheme (Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;Lstapel/ui/skin/StapelSkin;Lstapel/ui/StapelFontResolver;Lstapel/ui/StapelIconSet;Lstapel/i18n/StapelStrings;Lstapel/ui/StapelLayout;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelMaterialTheme (Lstapel/tokens/StapelTokens;Lstapel/tokens/ThemeMode;Lstapel/ui/skin/StapelSkin;Lstapel/ui/StapelFontResolver;Lstapel/ui/StapelIconSet;Lstapel/i18n/StapelStrings;Lstapel/ui/StapelLayout;Landroidx/compose/ui/unit/LayoutDirection;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 

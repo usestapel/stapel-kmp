@@ -121,3 +121,15 @@ public final class stapel/i18n/StringKey {
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
+public final class stapel/i18n/WritingDirection : java/lang/Enum {
+	public static final field Ltr Lstapel/i18n/WritingDirection;
+	public static final field Rtl Lstapel/i18n/WritingDirection;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/i18n/WritingDirection;
+	public static fun values ()[Lstapel/i18n/WritingDirection;
+}
+
+public final class stapel/i18n/WritingDirectionKt {
+	public static final fun writingDirectionOf (Ljava/lang/String;)Lstapel/i18n/WritingDirection;
+}
+

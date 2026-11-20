@@ -81,6 +81,12 @@
   `outputTransformation` and `CodeFieldSpec.inputTransformation` are forwarded, never invented by a skin;
   `TextFieldSpec.keyboardOptions()` lets a transformation's keyboard type win over the kind's. The code
   field's own filter keeps ASCII digits only and runs after the caller's transformation.
+- **Layout direction follows the strings locale:** `StapelTheme` provides `LocalLayoutDirection` from the
+  active locale of its `StapelStrings` (`layoutDirectionOf` over `stapel-i18n`'s `writingDirectionOf`), so
+  `strings.setLocale("ar")` mirrors the UI with no other wiring; the app starts its strings in the
+  platform locale (`stapelApp` does, from `LocaleProvider`). A direction provided above the theme is
+  ignored. `StapelTheme(layoutDirection = …)` (also on `StapelMaterialTheme`) is the explicit override;
+  nested themes that pass none inherit it. Proven by `LayoutDirectionTest`; the skin contract's RTL pass
+  reaches RTL through an Arabic strings locale.
 - Not yet here: `StapelSvg`/images loader (`stapel-image-compose`; `LocalStapelImages` is the seam),
-  Inter font artifact, a lazy paged `LoadList`; layout direction follows the platform, not the in-app
-  strings locale (an app that switches to an RTL language in-app provides `LocalLayoutDirection` itself).
+  Inter font artifact.

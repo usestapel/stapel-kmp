@@ -11,10 +11,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +24,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import stapel.i18n.CoreUiBundle
 import stapel.i18n.StapelStrings
+import stapel.i18n.WritingDirection
+import stapel.i18n.writingDirectionOf
 import stapel.result.text.ErrorTextResolver
 import stapel.tokens.FontFamilies
 import stapel.tokens.FontWeights
@@ -217,7 +221,11 @@ internal val LocalStapelTheme = staticCompositionLocalOf<StapelThemeValues> {
     error("No StapelTheme in this composition: wrap the UI in StapelTheme(skin = …) or StapelMaterialTheme { … }")
 }
 
-/** The UI strings of the subtree (default: the `stapel.ui.*` floor in the platform locale). */
+/**
+ * The UI strings of the subtree. Default: the `stapel.ui.*` floor in `en`; an app passes strings
+ * started in the platform locale (`stapelApp` feeds `LocaleProvider`), and their active locale also
+ * sets the layout direction of [StapelTheme].
+ */
 public val LocalStapelStrings: androidx.compose.runtime.ProvidableCompositionLocal<StapelStrings> =
     staticCompositionLocalOf { DefaultStrings }
 
@@ -233,6 +241,13 @@ public val LocalStapelReduceMotion: androidx.compose.runtime.ProvidableCompositi
 /** The error-text resolver of the subtree (the app registers its bricks' catalogs here). */
 public val LocalStapelErrorText: androidx.compose.runtime.ProvidableCompositionLocal<ErrorTextResolver> =
     staticCompositionLocalOf { ErrorTextResolver(emptyList()) }
+
+/** The direction a project set explicitly on an enclosing [StapelTheme], inherited by nested ones. */
+private val LocalExplicitLayoutDirection = staticCompositionLocalOf<LayoutDirection?> { null }
+
+/** The layout direction of [locale] (a BCP 47 tag): right to left for a right-to-left script. */
+public fun layoutDirectionOf(locale: String): LayoutDirection =
+    if (writingDirectionOf(locale) == WritingDirection.Rtl) LayoutDirection.Rtl else LayoutDirection.Ltr
 
 /** Read access to the current theme. Every getter throws outside a [StapelTheme]. */
 public object StapelTheme {
@@ -347,6 +362,9 @@ internal fun buildThemeValues(
  * @param strings the UI strings.
  * @param layout size class, input kind, gutter; derived from the window width by default.
  * @param reduceMotion the user asked for less motion (the platform setting by default); read through [LocalStapelReduceMotion].
+ * @param layoutDirection an explicit direction for the subtree; null (the default) derives it from the
+ *   active locale of [strings] ([layoutDirectionOf]), so an in-app switch to a right-to-left language
+ *   mirrors the UI. An explicit value is inherited by nested themes that pass none.
  * @param content the UI.
  */
 @Composable
@@ -359,13 +377,18 @@ public fun StapelTheme(
     strings: StapelStrings = LocalStapelStrings.current,
     layout: StapelLayout = rememberStapelLayout(tokens),
     reduceMotion: Boolean = platformReduceMotion(),
+    layoutDirection: LayoutDirection? = null,
     content: @Composable () -> Unit,
 ) {
     val resolvedFonts = fonts.resolve(tokens.fontFamily)
     val values = remember(tokens, mode, resolvedFonts, layout, skin, icons) {
         buildThemeValues(tokens, mode, resolvedFonts, layout, skin, icons)
     }
+    val locale by strings.locale.collectAsState()
+    val explicit = layoutDirection ?: LocalExplicitLayoutDirection.current
     CompositionLocalProvider(
+        LocalLayoutDirection provides (explicit ?: layoutDirectionOf(locale)),
+        LocalExplicitLayoutDirection provides explicit,
         LocalStapelTheme provides values,
         LocalStapelStrings provides strings,
         LocalStapelContentColor provides values.colors.text,

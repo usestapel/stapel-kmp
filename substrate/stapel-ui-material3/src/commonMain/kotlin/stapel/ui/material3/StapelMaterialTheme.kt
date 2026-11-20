@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.LayoutDirection
 import stapel.i18n.StapelStrings
 import stapel.tokens.StapelDefaultTokens
 import stapel.tokens.StapelTokens
@@ -23,6 +24,7 @@ import stapel.ui.skin.StapelSkin
  * typography, shapes), so Material components an app uses directly agree with the skin.
  *
  * @param skin [Material3Skin] or a delegation of it (`object AppSkin : StapelSkin by Material3Skin { … }`).
+ * @param layoutDirection an explicit direction; null derives it from the active locale of [strings] (see [StapelTheme]).
  */
 @Composable
 public fun StapelMaterialTheme(
@@ -33,13 +35,14 @@ public fun StapelMaterialTheme(
     icons: StapelIconSet = StapelIcons,
     strings: StapelStrings = LocalStapelStrings.current,
     layout: StapelLayout = rememberStapelLayout(tokens),
+    layoutDirection: LayoutDirection? = null,
     content: @Composable () -> Unit,
 ) {
     val resolved = fonts.resolve(tokens.fontFamily)
     val scheme = remember(tokens, mode) { tokens.toColorScheme(mode) }
     val typography = remember(tokens, resolved) { tokens.toTypography(resolved) }
     val shapes = remember(tokens) { tokens.toShapes() }
-    StapelTheme(skin = skin, tokens = tokens, mode = mode, fonts = fonts, icons = icons, strings = strings, layout = layout) {
+    StapelTheme(skin = skin, tokens = tokens, mode = mode, fonts = fonts, icons = icons, strings = strings, layout = layout, layoutDirection = layoutDirection) {
         MaterialTheme(colorScheme = scheme, typography = typography, shapes = shapes, content = content)
     }
 }

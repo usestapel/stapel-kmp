@@ -16,3 +16,6 @@
 - **No platform reads:** without `initialLocale` the strings start in `defaultLocale`; the app feeds the
   effective locale from `stapel-runtime`'s `LocaleProvider` (gate G-R1: only stapel-runtime reads the
   platform locale).
+- **Writing direction:** `writingDirectionOf(tag)` — an explicit script subtag decides (`az-Arab` RTL,
+  `ku-Latn` LTR), else the language's default script (ar, he, fa, ur, ps, yi, ckb, ug, dv, sd …). The UI
+  theme derives its layout direction from the active locale through it.
