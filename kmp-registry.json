@@ -32,7 +32,17 @@
       "family": "substrate",
       "released": false
     },
+    "stapel-analytics-appmetrica": {
+      "version": "0.0.1",
+      "family": "capability",
+      "released": false
+    },
     "stapel-analytics-collector": {
+      "version": "0.0.1",
+      "family": "capability",
+      "released": false
+    },
+    "stapel-analytics-firebase": {
       "version": "0.0.1",
       "family": "capability",
       "released": false

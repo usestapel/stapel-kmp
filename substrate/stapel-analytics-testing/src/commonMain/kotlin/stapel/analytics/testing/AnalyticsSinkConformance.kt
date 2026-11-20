@@ -37,7 +37,7 @@ public class SinkUnderTest(public val sink: AnalyticsSink, public val probe: Ven
  * - `events-in-order` — every track event of a batch reaches the vendor once, in order, accepted;
  * - `page-is-a-screen` — a page event becomes the provider's screen call;
  * - `identity-follows-and-resets` — an identify event sets the vendor user id to the hash,
- *   [AnalyticsSink.reset] clears it;
+ *   [AnalyticsSink.reset] clears it (a vendor with a full data reset also records [VendorCall.Reset]);
  * - `user-property` — a user property reaches the vendor;
  * - `failure-is-retry` — a vendor failure is [SinkReceipt.Retry], never an exception, and the next
  *   delivery works again.
@@ -140,7 +140,6 @@ public abstract class AnalyticsSinkConformance {
             subject.sink.deliver(listOf(event(EventKind.Identify, "identify", userHash = hash), event(EventKind.Track, "signed.in", userHash = hash)))
             check(subject.probe.userId() == hash) { "vendor user id is ${subject.probe.userId()}, expected the hash" }
             subject.sink.reset()
-            check(VendorCall.Reset in subject.probe.calls) { "reset did not reach the vendor" }
             check(subject.probe.userId() == null) { "the vendor user id survived reset" }
         },
         "user-property" to {

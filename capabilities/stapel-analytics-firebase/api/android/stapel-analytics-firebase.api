@@ -1,0 +1,23 @@
+public final class stapel/analytics/firebase/AndroidFirebaseAnalyticsKt {
+	public static final fun firebaseAnalyticsSink (Lstapel/runtime/PlatformContext;)Lstapel/analytics/AnalyticsSink;
+}
+
+public abstract interface class stapel/analytics/firebase/FirebaseAnalyticsBridge {
+	public abstract fun configured ()Z
+	public abstract fun logEvent (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun logScreen (Ljava/lang/String;)V
+	public abstract fun reset ()V
+	public abstract fun setCollectionEnabled (Z)V
+	public abstract fun setUserId (Ljava/lang/String;)V
+	public abstract fun setUserProperty (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class stapel/analytics/firebase/FirebaseAnalyticsSinkKt {
+	public static final field FIREBASE_ANALYTICS_BRIDGE_ABI I
+	public static final fun firebaseAnalyticsSink (Lstapel/analytics/firebase/FirebaseAnalyticsBridge;Lstapel/analytics/SinkAvailability;Ljava/lang/String;)Lstapel/analytics/AnalyticsSink;
+}
+
+public final class stapel/analytics/firebase/di/FirebaseAnalyticsModule_androidKt {
+	public static final fun firebaseAnalyticsModule ()Lorg/koin/core/module/Module;
+}
+

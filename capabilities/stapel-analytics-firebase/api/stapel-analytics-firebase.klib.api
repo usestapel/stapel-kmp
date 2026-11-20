@@ -1,0 +1,23 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-analytics-firebase>
+abstract interface stapel.analytics.firebase/FirebaseAnalyticsBridge { // stapel.analytics.firebase/FirebaseAnalyticsBridge|null[0]
+    abstract fun configured(): kotlin/Boolean // stapel.analytics.firebase/FirebaseAnalyticsBridge.configured|configured(){}[0]
+    abstract fun logEvent(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics.firebase/FirebaseAnalyticsBridge.logEvent|logEvent(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    abstract fun logScreen(kotlin/String) // stapel.analytics.firebase/FirebaseAnalyticsBridge.logScreen|logScreen(kotlin.String){}[0]
+    abstract fun reset() // stapel.analytics.firebase/FirebaseAnalyticsBridge.reset|reset(){}[0]
+    abstract fun setCollectionEnabled(kotlin/Boolean) // stapel.analytics.firebase/FirebaseAnalyticsBridge.setCollectionEnabled|setCollectionEnabled(kotlin.Boolean){}[0]
+    abstract fun setUserId(kotlin/String?) // stapel.analytics.firebase/FirebaseAnalyticsBridge.setUserId|setUserId(kotlin.String?){}[0]
+    abstract fun setUserProperty(kotlin/String, kotlin/String?) // stapel.analytics.firebase/FirebaseAnalyticsBridge.setUserProperty|setUserProperty(kotlin.String;kotlin.String?){}[0]
+}
+
+final const val stapel.analytics.firebase/FIREBASE_ANALYTICS_BRIDGE_ABI // stapel.analytics.firebase/FIREBASE_ANALYTICS_BRIDGE_ABI|{}FIREBASE_ANALYTICS_BRIDGE_ABI[0]
+    final fun <get-FIREBASE_ANALYTICS_BRIDGE_ABI>(): kotlin/Int // stapel.analytics.firebase/FIREBASE_ANALYTICS_BRIDGE_ABI.<get-FIREBASE_ANALYTICS_BRIDGE_ABI>|<get-FIREBASE_ANALYTICS_BRIDGE_ABI>(){}[0]
+
+final fun stapel.analytics.firebase.di/firebaseAnalyticsModule(stapel.analytics.firebase/FirebaseAnalyticsBridge?): org.koin.core.module/Module // stapel.analytics.firebase.di/firebaseAnalyticsModule|firebaseAnalyticsModule(stapel.analytics.firebase.FirebaseAnalyticsBridge?){}[0]
+final fun stapel.analytics.firebase/firebaseAnalyticsSink(stapel.analytics.firebase/FirebaseAnalyticsBridge?, stapel.analytics/SinkAvailability, kotlin/String): stapel.analytics/AnalyticsSink // stapel.analytics.firebase/firebaseAnalyticsSink|firebaseAnalyticsSink(stapel.analytics.firebase.FirebaseAnalyticsBridge?;stapel.analytics.SinkAvailability;kotlin.String){}[0]

@@ -1,0 +1,25 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-analytics-appmetrica>
+abstract interface stapel.analytics.appmetrica/AppMetricaAnalyticsBridge { // stapel.analytics.appmetrica/AppMetricaAnalyticsBridge|null[0]
+    abstract fun configured(): kotlin/Boolean // stapel.analytics.appmetrica/AppMetricaAnalyticsBridge.configured|configured(){}[0]
+    abstract fun reportEvent(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics.appmetrica/AppMetricaAnalyticsBridge.reportEvent|reportEvent(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    abstract fun setDataSendingEnabled(kotlin/Boolean) // stapel.analytics.appmetrica/AppMetricaAnalyticsBridge.setDataSendingEnabled|setDataSendingEnabled(kotlin.Boolean){}[0]
+    abstract fun setProfileAttribute(kotlin/String, kotlin/String?) // stapel.analytics.appmetrica/AppMetricaAnalyticsBridge.setProfileAttribute|setProfileAttribute(kotlin.String;kotlin.String?){}[0]
+    abstract fun setUserProfileId(kotlin/String?) // stapel.analytics.appmetrica/AppMetricaAnalyticsBridge.setUserProfileId|setUserProfileId(kotlin.String?){}[0]
+}
+
+final const val stapel.analytics.appmetrica/APPMETRICA_ANALYTICS_BRIDGE_ABI // stapel.analytics.appmetrica/APPMETRICA_ANALYTICS_BRIDGE_ABI|{}APPMETRICA_ANALYTICS_BRIDGE_ABI[0]
+    final fun <get-APPMETRICA_ANALYTICS_BRIDGE_ABI>(): kotlin/Int // stapel.analytics.appmetrica/APPMETRICA_ANALYTICS_BRIDGE_ABI.<get-APPMETRICA_ANALYTICS_BRIDGE_ABI>|<get-APPMETRICA_ANALYTICS_BRIDGE_ABI>(){}[0]
+final const val stapel.analytics.appmetrica/APPMETRICA_SCREEN_EVENT // stapel.analytics.appmetrica/APPMETRICA_SCREEN_EVENT|{}APPMETRICA_SCREEN_EVENT[0]
+    final fun <get-APPMETRICA_SCREEN_EVENT>(): kotlin/String // stapel.analytics.appmetrica/APPMETRICA_SCREEN_EVENT.<get-APPMETRICA_SCREEN_EVENT>|<get-APPMETRICA_SCREEN_EVENT>(){}[0]
+final const val stapel.analytics.appmetrica/APPMETRICA_SCREEN_PARAM // stapel.analytics.appmetrica/APPMETRICA_SCREEN_PARAM|{}APPMETRICA_SCREEN_PARAM[0]
+    final fun <get-APPMETRICA_SCREEN_PARAM>(): kotlin/String // stapel.analytics.appmetrica/APPMETRICA_SCREEN_PARAM.<get-APPMETRICA_SCREEN_PARAM>|<get-APPMETRICA_SCREEN_PARAM>(){}[0]
+
+final fun stapel.analytics.appmetrica.di/appMetricaAnalyticsModule(stapel.analytics.appmetrica/AppMetricaAnalyticsBridge?): org.koin.core.module/Module // stapel.analytics.appmetrica.di/appMetricaAnalyticsModule|appMetricaAnalyticsModule(stapel.analytics.appmetrica.AppMetricaAnalyticsBridge?){}[0]
+final fun stapel.analytics.appmetrica/appMetricaSink(stapel.analytics.appmetrica/AppMetricaAnalyticsBridge?, stapel.analytics/SinkAvailability): stapel.analytics/AnalyticsSink // stapel.analytics.appmetrica/appMetricaSink|appMetricaSink(stapel.analytics.appmetrica.AppMetricaAnalyticsBridge?;stapel.analytics.SinkAvailability){}[0]

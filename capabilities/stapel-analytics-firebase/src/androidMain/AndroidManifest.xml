@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- No advertising identifier: Stapel offers no ads purpose in v0. -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
+    <application>
+        <!-- The consent gate starts closed in the built app: the SDK collects nothing on its own
+             (first_open, screen_view) until the hub calls setAnalyticsCollectionEnabled(true) after
+             consent. Keys: firebase.google.com/docs/analytics/android/configure-data-collection. -->
+        <meta-data android:name="firebase_analytics_collection_enabled" android:value="false" />
+        <meta-data android:name="google_analytics_adid_collection_enabled" android:value="false" />
+        <meta-data android:name="google_analytics_default_allow_ad_personalization_signals" android:value="false" />
+    </application>
+</manifest>

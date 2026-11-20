@@ -1,0 +1,23 @@
+public final class stapel/analytics/appmetrica/AndroidAppMetricaKt {
+	public static final fun appMetricaSink (Lstapel/runtime/PlatformContext;Ljava/lang/String;)Lstapel/analytics/AnalyticsSink;
+}
+
+public abstract interface class stapel/analytics/appmetrica/AppMetricaAnalyticsBridge {
+	public abstract fun configured ()Z
+	public abstract fun reportEvent (Ljava/lang/String;Ljava/util/Map;)V
+	public abstract fun setDataSendingEnabled (Z)V
+	public abstract fun setProfileAttribute (Ljava/lang/String;Ljava/lang/String;)V
+	public abstract fun setUserProfileId (Ljava/lang/String;)V
+}
+
+public final class stapel/analytics/appmetrica/AppMetricaSinkKt {
+	public static final field APPMETRICA_ANALYTICS_BRIDGE_ABI I
+	public static final field APPMETRICA_SCREEN_EVENT Ljava/lang/String;
+	public static final field APPMETRICA_SCREEN_PARAM Ljava/lang/String;
+	public static final fun appMetricaSink (Lstapel/analytics/appmetrica/AppMetricaAnalyticsBridge;Lstapel/analytics/SinkAvailability;)Lstapel/analytics/AnalyticsSink;
+}
+
+public final class stapel/analytics/appmetrica/di/AppMetricaAnalyticsModule_androidKt {
+	public static final fun appMetricaAnalyticsModule (Ljava/lang/String;)Lorg/koin/core/module/Module;
+}
+
