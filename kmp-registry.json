@@ -32,6 +32,11 @@
       "family": "substrate",
       "released": false
     },
+    "stapel-analytics-collector": {
+      "version": "0.0.1",
+      "family": "capability",
+      "released": false
+    },
     "stapel-analytics-testing": {
       "version": "0.0.1",
       "family": "substrate",
