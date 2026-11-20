@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import shop.ShopApp
 import shop.createAndroidShopApp
+import stapel.push.firebase.handleFirebasePushIntent
 import stapel.app.di.StapelApp
 
 /** Holds the one app instance. */
@@ -32,6 +33,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
+        // A tapped notification while the app runs; the launch intent's tap is read by the provider itself.
+        if (handleFirebasePushIntent(intent)) return
         intent.data?.let { app.openUrl(it.toString()) }
     }
 }

@@ -1,6 +1,7 @@
 package shop
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -10,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
+import org.koin.core.module.Module
 import org.koin.dsl.module
 import shop.generated.APP_BASE_URLS
 import shop.generated.APP_ENVIRONMENT
@@ -38,6 +40,11 @@ import stapel.navigation.Route
 import stapel.navigation.RouteAddress
 import stapel.navigation.compose.NavContribution
 import stapel.navigation.compose.navContribution
+import stapel.notifications.push.di.notificationsPushModule
+import stapel.notifications.push.notificationsPushRouting
+import stapel.push.PushController
+import stapel.push.PushOptions
+import stapel.push.di.pushModule
 import stapel.result.StapelResult
 import stapel.runtime.PlatformContext
 import stapel.ui.StapelButton
@@ -76,12 +83,15 @@ private val ShopStrings = I18nBundle(
  * @param baseUrl overrides the environment's base URL (tests, a stand on another port).
  * @param avatarPicker the platform's picture picker for the profile avatar (the one wiring point of the
  *   upload); null = the settings screen offers no avatar change.
+ * @param pushProvider the platform's push provider module (`firebasePushModule(...)`): push through
+ *   stapel-push with the notifications brick's registry; taps open their deep link. Null = no push.
  */
 fun createShopApp(
     platform: PlatformContext,
     target: String,
     baseUrl: String? = null,
     avatarPicker: AvatarPicker? = null,
+    pushProvider: Module? = null,
     configure: StapelAppBuilder.() -> Unit = {},
 ): StapelApp = stapelApp(platform) {
     environment(
@@ -96,6 +106,9 @@ fun createShopApp(
     screens(::shopScreens)
     // stapel-cdn as the app's media uploader: where the profiles avatar goes.
     modules(cdnModule(), module { single<OrdersApi> { OrdersApiClient(get<ApiTransport>()) } })
+    if (pushProvider != null) {
+        modules(pushModule(PushOptions(routing = notificationsPushRouting())), notificationsPushModule(), pushProvider)
+    }
     navigation(
         home = DestinationId("shop.home"),
         deepLinks = DeepLinkConfig(schemes = setOf("shopmobile"), hosts = setOf("shop.example.com")),
@@ -103,7 +116,7 @@ fun createShopApp(
     theme { content -> StapelMaterialTheme(tokens = AppTokens, content = content) }
     strings { register(ShopStrings) }
     configure()
-}
+}.also { app -> app.koin.getOrNull<PushController>()?.attach { app.openUrl(it) } }
 
 /** The home screen's title. */
 const val SHOP_HOME_TITLE: String = "Shop"
@@ -150,5 +163,11 @@ private fun HomeScreen(context: BrickContext) {
                 }
             }
         }, testTag = "shop.home.load")
+        // Push is switched on by a deliberate act, never at launch (the button is its own rationale).
+        context.koin.getOrNull<PushController>()?.let { push ->
+            val state by push.state.collectAsState()
+            StapelText("Notifications: ${state.permission} / ${state.registration}", Modifier.testTag("shop.home.push.state"))
+            if (!state.enabled) StapelButton("Turn on notifications", { scope.launch { push.enable() } }, testTag = "shop.home.push")
+        }
     }
 }

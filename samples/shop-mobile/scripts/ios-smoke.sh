@@ -3,6 +3,7 @@
 #
 #   samples/shop-mobile/scripts/ios-smoke.sh [<simulator udid>]
 #   samples/shop-mobile/scripts/ios-smoke.sh --uitest [<simulator udid>]   # + the XCUITest suite
+#   samples/shop-mobile/scripts/ios-smoke.sh --push [<simulator udid>]     # + the push walk (PushUITests)
 #
 # Builds iosApp with xcodebuild for the simulator (the Xcode build phase runs
 # :shared:embedAndSignAppleFrameworkForXcode), boots the simulator, installs and launches the app,
@@ -18,6 +19,11 @@
 # sign-in against the stand, a system deep link through the "Open in …?" prompt, the edge-swipe back,
 # the Keychain vault across relaunches and its wipe on sign-out. It needs a local auth stand at
 # SHOP_STAND_URL (default http://127.0.0.1:18741/; bricks/auth/e2e/stand/stand.sh up, K7_STAND_PORT).
+# --push then runs PushUITests on a fresh install: sign-in, the person turns push on (the system prompt,
+# "Allow"), the app goes to the background, `xcrun simctl push` delivers a notification whose data.url is
+# the order's deep link, the test taps the banner in SpringBoard and lands on the order; then a push in the
+# foreground. The test and this script meet through a handshake directory on the host. Afterwards the
+# app's markers must show `stapel.push received … fg=true` and `stapel.push opened … link=opened`.
 # Needs DEVELOPER_DIR (default /Applications/Xcode.app/Contents/Developer).
 set -euo pipefail
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
@@ -28,7 +34,9 @@ BUNDLE_ID="io.github.usestapel.sample.shop"
 LINK="${SHOP_SMOKE_LINK:-shopmobile://app/orders/42}"
 mkdir -p "$OUT"
 UITEST=0
+PUSH=0
 if [[ "${1:-}" == "--uitest" ]]; then UITEST=1; shift; fi
+if [[ "${1:-}" == "--push" ]]; then PUSH=1; shift; fi
 STAND_URL="${SHOP_STAND_URL:-http://127.0.0.1:18741/}"
 SIGN=(CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM=)
 
@@ -165,4 +173,45 @@ if [[ $UITEST == 1 ]]; then
     keep_uitest_markers
     grep -E "Test Case .*(passed|failed)" "$OUT/uitest.log" | sed 's/^/[ios-smoke] /'
     echo "[ios-smoke] XCUITest OK — result bundle $OUT/uitest.xcresult"
+fi
+
+push_payload() { # $1 = message id; the shape stapel-notifications sends (docs/push.json v1) as APNs delivers it
+    cat <<JSON
+{"Simulator Target Bundle": "$BUNDLE_ID",
+ "aps": {"alert": {"title": "Order shipped", "body": "Order 42 is on its way"}, "sound": "default", "thread-id": "system", "badge": 1},
+ "gcm.message_id": "$1", "v": "1", "notification_id": "00000000-0000-4000-8000-0000000000$2",
+ "notification_type": "order_shipped", "group": "system", "badge": "1", "url": "shopmobile://app/orders/42"}
+JSON
+}
+
+if [[ $PUSH == 1 ]]; then
+    echo "[ios-smoke] push walk against the stand at $STAND_URL (fresh install)"
+    HS="$OUT/push-handshake"
+    rm -rf "$HS" "$OUT/push.xcresult"; mkdir -p "$HS"
+    xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
+    xcrun simctl uninstall "$UDID" "$BUNDLE_ID"
+    TEST_RUNNER_STAPEL_STAND_URL="$STAND_URL" TEST_RUNNER_STAPEL_PUSH_HANDSHAKE="$HS" xcodebuild -project "$HERE/iosApp/iosApp.xcodeproj" \
+        -scheme iosApp -configuration Debug -sdk iphonesimulator -destination "id=$UDID" -derivedDataPath "$DERIVED" \
+        -only-testing:iosAppUITests/PushUITests -resultBundlePath "$OUT/push.xcresult" "${SIGN[@]}" test >"$OUT/push.log" 2>&1 &
+    TEST=$!
+    n=0
+    for step in background foreground; do
+        while [[ ! -f "$HS/$step.ready" ]] && kill -0 $TEST 2>/dev/null; do sleep 1; done
+        [[ -f "$HS/$step.ready" ]] || break
+        n=$((n + 1))
+        push_payload "kp-$step" "0$n" >"$HS/$step.apns"
+        xcrun simctl push "$UDID" "$BUNDLE_ID" "$HS/$step.apns"
+        echo "[ios-smoke] pushed ($step)"
+        touch "$HS/$step.sent"
+    done
+    status=0; wait $TEST || status=$?
+    data="$(xcrun simctl get_app_container "$UDID" "$BUNDLE_ID" data 2>/dev/null || true)"
+    cp "$data/Documents/push-markers.log" "$OUT/push-markers.log" 2>/dev/null || true
+    grep -h 'stapel\.\(push\|link\)' "$OUT/push-markers.log" 2>/dev/null | sed 's/^/[ios-smoke] push marker: /' || true
+    grep -E "Test Case .*(passed|failed|skipped)" "$OUT/push.log" | sed 's/^/[ios-smoke] /'
+    if [[ $status != 0 ]]; then grep -E "error|failed" "$OUT/push.log" | tail -30; exit 1; fi
+    grep -q "Test Case .*PushUITests.*passed" "$OUT/push.log" || { echo "[ios-smoke] PushUITests did not pass (skipped?)"; exit 1; }
+    grep -q 'stapel.push opened order_shipped link=opened' "$OUT/push-markers.log" || { echo "[ios-smoke] no 'stapel.push opened … link=opened' marker"; exit 1; }
+    grep -q 'stapel.push received order_shipped fg=true' "$OUT/push-markers.log" || { echo "[ios-smoke] no foreground 'stapel.push received' marker"; exit 1; }
+    echo "[ios-smoke] push walk OK — result bundle $OUT/push.xcresult"
 fi

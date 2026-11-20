@@ -18,6 +18,8 @@ import platform.Foundation.seekToEndOfFile
 import platform.Foundation.writeData
 import platform.UIKit.UIViewController
 import stapel.app.di.StapelApp
+import stapel.push.firebase.FirebasePushBridge
+import stapel.push.firebase.di.firebasePushModule
 import stapel.runtime.LogLevel
 import stapel.runtime.PlatformContext
 import stapel.runtime.StapelLogger
@@ -26,10 +28,17 @@ import stapel.runtime.platformLogger
 private var baseUrlOverride: String? = null
 private var logFileName: String? = null
 
+private var pushBridge: FirebasePushBridge? = null
+
 private val app: StapelApp by lazy {
-    createShopApp(PlatformContext(), "ios", baseUrlOverride) {
+    createShopApp(PlatformContext(), "ios", baseUrlOverride, pushProvider = firebasePushModule(pushBridge)) {
         logFileName?.let { logger(FileTeeLogger(platformLogger(LogLevel.Info), documentsPath(it))) }
     }
+}
+
+/** Hands the app shell's Swift Firebase push bridge (`StapelFirebasePush.shared`) to Kotlin; call before anything else. */
+fun installPushBridge(bridge: FirebasePushBridge) {
+    pushBridge = bridge
 }
 
 /** Points the app at another backend (UI tests: a stand on its own port); call before anything else. */
