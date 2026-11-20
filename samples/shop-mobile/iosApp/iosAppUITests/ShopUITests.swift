@@ -18,7 +18,9 @@ final class ShopUITests: XCTestCase {
 
     private func launch() -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments = ["-stapelBaseUrl", Self.standUrl]
+        // The app's own log records (stapel.link … opened|queued|refused) go to Documents/uitest-markers.log;
+        // ios-smoke.sh keeps the file next to the result bundle.
+        app.launchArguments = ["-stapelBaseUrl", Self.standUrl, "-stapelLogFile", "uitest-markers.log"]
         app.launch()
         return app
     }
@@ -31,6 +33,20 @@ final class ShopUITests: XCTestCase {
         let element = node(app, tag)
         XCTAssertTrue(element.waitForExistence(timeout: timeout), message)
         return element
+    }
+
+    /// Waits until [element] can receive a tap, then taps it. XCUITest's own `tap()` does not wait for
+    /// hittability: on an element still being laid out or animated in (Safari's "Open in …?" prompt on a
+    /// slow simulator) it computes the hit point {-1, -1}, synthesizes nothing and reports no failure.
+    private func tapWhenHittable(_ element: XCUIElement, _ message: String) {
+        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == true AND hittable == true"), object: element)
+        XCTAssertEqual(XCTWaiter().wait(for: [hittable], timeout: timeout), .completed, message)
+        element.tap()
+    }
+
+    private func waitUntilGone(_ element: XCUIElement, timeout: TimeInterval) -> Bool {
+        let gone = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: element)
+        return XCTWaiter().wait(for: [gone], timeout: timeout) == .completed
     }
 
     private func type(_ app: XCUIApplication, into tag: String, _ text: String) {
@@ -70,8 +86,11 @@ final class ShopUITests: XCTestCase {
         safari.typeText("shopmobile://app/orders/42\n")
         let prompt = safari.descendants(matching: .any).matching(identifier: "SFDialogView").firstMatch
         XCTAssertTrue(prompt.waitForExistence(timeout: 10), "the system's open-in-app prompt")
-        // Confirm with the prompt's last button ("Open"), whatever the simulator's language.
-        prompt.buttons.element(boundBy: prompt.buttons.count - 1).tap()
+        // Confirm with the prompt's last button ("Open"), whatever the simulator's language, once it can
+        // take the tap; the prompt must then close (a tap that landed nowhere would leave it open).
+        let open = prompt.buttons.element(boundBy: prompt.buttons.count - 1)
+        tapWhenHittable(open, "the prompt's Open button becomes tappable")
+        XCTAssertTrue(waitUntilGone(prompt, timeout: timeout), "the prompt closed: the link was handed to the app")
         let order = waitFor(app, "shop.order", "the deep link opened the order")
         XCTAssertTrue(app.staticTexts["Order 42"].waitForExistence(timeout: timeout), "the order id from the link")
         // Edge swipe from the left edge: the system back gesture on a pushed screen.

@@ -146,6 +146,13 @@ grep -E 'stapel\.(app|nav|link)' "$OUT/markers.log" | sed 's/^/[ios-smoke] marke
 if grep -h 'stapel.session: vault' "$OUT/markers.log" "$LOG"; then echo "[ios-smoke] the token vault failed"; exit 1; fi
 echo "[ios-smoke] OK — artifacts in $OUT"
 
+keep_uitest_markers() { # the app's log records during the suite (launch argument -stapelLogFile)
+    local data
+    data="$(xcrun simctl get_app_container "$UDID" "$BUNDLE_ID" data 2>/dev/null)" || return 0
+    cp "$data/Documents/uitest-markers.log" "$OUT/uitest-markers.log" 2>/dev/null || true
+    grep -h 'stapel.link' "$OUT/uitest-markers.log" 2>/dev/null | sed 's/^/[ios-smoke] uitest marker: /' || true
+}
+
 if [[ $UITEST == 1 ]]; then
     echo "[ios-smoke] XCUITest against the stand at $STAND_URL (fresh install)"
     xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
@@ -154,7 +161,8 @@ if [[ $UITEST == 1 ]]; then
     TEST_RUNNER_STAPEL_STAND_URL="$STAND_URL" xcodebuild -project "$HERE/iosApp/iosApp.xcodeproj" -scheme iosApp \
         -configuration Debug -sdk iphonesimulator -destination "id=$UDID" -derivedDataPath "$DERIVED" \
         -resultBundlePath "$OUT/uitest.xcresult" "${SIGN[@]}" test >"$OUT/uitest.log" 2>&1 \
-        || { grep -E "error|failed|Test Case" "$OUT/uitest.log" | tail -40; exit 1; }
+        || { keep_uitest_markers; grep -E "error|failed|Test Case" "$OUT/uitest.log" | tail -40; exit 1; }
+    keep_uitest_markers
     grep -E "Test Case .*(passed|failed)" "$OUT/uitest.log" | sed 's/^/[ios-smoke] /'
     echo "[ios-smoke] XCUITest OK — result bundle $OUT/uitest.xcresult"
 fi
