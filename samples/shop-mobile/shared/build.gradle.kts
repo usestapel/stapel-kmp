@@ -164,8 +164,8 @@ tasks.withType<Test>().configureEach {
     testLogging { events("passed", "failed", "skipped"); exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL }
 }
 
-// Analytics vendor provider (README "Analytics and Firebase"): off by default, so the sample needs nothing
-// from Google's services to build; -Pshop.firebase=true adds Google Analytics for Firebase on Android.
+// Analytics vendor provider (README "Analytics and Firebase"): off by default (the log sink alone);
+// -Pshop.firebase=true adds Google Analytics for Firebase on Android.
 val shopFirebase = providers.gradleProperty("shop.firebase").orNull == "true"
 kotlin.sourceSets.named("androidMain") {
     kotlin.srcDir(if (shopFirebase) "src/androidFirebase/kotlin" else "src/androidNoVendor/kotlin")
