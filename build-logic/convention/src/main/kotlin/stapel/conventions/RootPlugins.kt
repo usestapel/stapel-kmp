@@ -47,8 +47,9 @@ abstract class CheckCatalog : DefaultTask() {
     @TaskAction
     fun run() {
         val errors = mutableListOf<String>()
-        val allowed = allowList.files.flatMap { it.readLines() }
-            .map { it.substringBefore('#').trim() }.filter { it.isNotEmpty() }
+        // A scoped (transitive-only) entry never allows a catalog version: the catalog is what we declare.
+        val allowed = parsePreReleaseAllowList(allowList.files.flatMap { it.readLines() })
+            .filter { it.via == null }.map { it.coordinate }
         val text = catalog.singleFile.readText()
         val versions = mutableMapOf<String, String>()
         var section = ""

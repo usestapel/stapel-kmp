@@ -291,6 +291,19 @@ class GatesFunctionalTest {
     }
 
     @Test
+    fun `a scoped allow-list entry does not allow the coordinate declared directly`() {
+        val r = FixtureBuild("prerelease-scoped")
+            .file(
+                "gradle/prerelease-allowlist.txt",
+                "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0-rc02 via org.example:vendor in stapel-result\n",
+            )
+            .module("substrate/stapel-result", substrate("implementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0-rc02\")"))
+            .fails(":stapel-result:checkDependencyDirection")
+        assertContains(r.output, "pre-release org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0-rc02")
+        assertContains(r.output, "project) — R1")
+    }
+
+    @Test
     fun `koin outside the di package is refused`() {
         val fx = FixtureBuild("koin-leak")
             .module("substrate/stapel-network", substrate("implementation(libs.koin.core)"))

@@ -120,6 +120,48 @@ internal fun forbiddenCoordinates(materialAllowed: Set<String>): List<ForbiddenC
 private val PRERELEASE =
     Regex("""(?i)[-.+](snapshot|dev|eap|alpha|beta|rc|cr|m|milestone|preview|pre)[-.]?\d*([-.+]|$)""")
 
+/**
+ * One line of `gradle/prerelease-allowlist.txt`: `group:name:version` (allowed anywhere, for
+ * development), or `group:name:version via <group:name> in <module>` — a pre-release that a STABLE
+ * vendor artifact brings transitively, allowed only in that one module and only when every artifact
+ * that depends on it is that parent (declared directly, in another module, or reached through another
+ * parent it still fails). A dependent that is itself a scoped entry for the same parent and module
+ * (one pre-release of the vendor's depending on another) counts as that parent.
+ */
+data class PreReleaseAllowance(val coordinate: String, val via: String?, val module: String?)
+
+/** Parses the allow-list (comments after `#`, blank lines ignored); a malformed scoped line is an error. */
+fun parsePreReleaseAllowList(lines: List<String>): List<PreReleaseAllowance> = lines
+    .map { it.substringBefore('#').trim() }.filter { it.isNotEmpty() }
+    .map { line ->
+        val t = line.split(Regex("\\s+"))
+        when {
+            t.size == 1 -> PreReleaseAllowance(t[0], null, null)
+            t.size == 5 && t[1] == "via" && t[3] == "in" && t[2].count { it == ':' } == 1 ->
+                PreReleaseAllowance(t[0], t[2], t[4])
+            else -> throw GradleException(
+                "gradle/prerelease-allowlist.txt: '$line' is neither 'group:name:version' nor " +
+                    "'group:name:version via <group:name> in <module>'",
+            )
+        }
+    }
+
+/**
+ * Whether pre-release [coordinate], resolved in [module] with direct dependents [parents]
+ * (`group:name:version`, or `project` for a declared edge), is allowed by [entries].
+ */
+fun preReleaseAllowed(entries: List<PreReleaseAllowance>, module: String, coordinate: String, parents: Set<String>): Boolean =
+    entries.any { e ->
+        e.coordinate == coordinate && when (e.via) {
+            null -> true
+            else -> e.module == module && parents.isNotEmpty() && parents.all { p ->
+                (p.substringBeforeLast(':') == e.via && !isPreRelease(p.substringAfterLast(':'))) ||
+                    // a sibling the same stable parent brings, itself allowed for this module and parent
+                    entries.any { o -> o.coordinate == p && o.via == e.via && o.module == module }
+            }
+        }
+    }
+
 /** True for a version string that is not a final release. */
 fun isPreRelease(version: String): Boolean = PRERELEASE.containsMatchIn(version)
 
@@ -158,8 +200,7 @@ abstract class CheckDependencyDirection : DefaultTask() {
         val ranks = Properties().apply { files["substrate-ranks.properties"]?.reader()?.use { load(it) } }
         val materialAllowed = files["material-allowed.txt"]?.readLines().orEmpty()
             .map { it.substringBefore('#').trim() }.filter { it.isNotEmpty() }.toSet()
-        val preAllowed = files["prerelease-allowlist.txt"]?.readLines().orEmpty()
-            .map { it.substringBefore('#').trim() }.filter { it.isNotEmpty() }.toSet()
+        val preAllowed = parsePreReleaseAllowList(files["prerelease-allowlist.txt"]?.readLines().orEmpty())
 
         val me = self.get()
         val family = StapelFamily.valueOf(selfFamily.get())
@@ -228,13 +269,17 @@ abstract class CheckDependencyDirection : DefaultTask() {
                         }
                     }
                 }
+                val parents = component.dependents.mapNotNull { d ->
+                    (d.from.id as? ModuleComponentIdentifier)?.let { "${it.group}:${it.module}:${it.version}" } ?: "project"
+                }.toSet()
                 if (family.published && isPreRelease(id.version) &&
-                    "${id.group}:${id.module}:${id.version}" !in preAllowed
+                    !preReleaseAllowed(preAllowed, me, "${id.group}:${id.module}:${id.version}", parents)
                 ) {
                     val key = "pre|${id.group}:${id.module}:${id.version}"
                     if (seen.add(key)) {
-                        errors += "$me: pre-release ${id.group}:${id.module}:${id.version} on $conf (via $via) — R1: " +
-                            "only coordinates on gradle/prerelease-allowlist.txt, and never in a published POM."
+                        errors += "$me: pre-release ${id.group}:${id.module}:${id.version} on $conf (via $via; " +
+                            "dependents ${parents.sorted().joinToString()}) — R1: only coordinates on " +
+                            "gradle/prerelease-allowlist.txt, and never in a published POM."
                     }
                 }
             }

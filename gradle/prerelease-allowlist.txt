@@ -1,8 +1,21 @@
 # Pre-release coordinates allowed for DEVELOPMENT (ruling R1).
 # Format: group:name:version   # reason, owner, until (YYYY-MM-DD)
+#    or:  group:name:version via <group:name> in <module>   # reason, owner, until
+# The scoped form is for a pre-release a STABLE vendor artifact brings transitively: it is allowed
+# only in that module and only when every artifact depending on it is the named parent (declared
+# directly, in another module or under another parent it still fails). It never allows a catalog
+# version.
 # A published POM never carries one of these: `checkReleaseCoordinates` refuses
 # every pre-release coordinate regardless of this list.
 #
 # Empty on 2026-11-19: org.jetbrains.androidx.navigation3:navigation3-ui has a
 # stable 1.2.0 (requires compose runtime 1.10.0, compatible with CMP 1.12.2),
 # so the Navigation 3 rc the ARCH sections planned for is not needed.
+
+# firebase-analytics 24.0.0 (stable) -> play-services-measurement-impl 24.0.0 (stable) depends on the
+# Privacy Sandbox ad-services library, which Google publishes only as 1.1.0-beta11. Our POM names
+# firebase-analytics only (checkReleaseCoordinates). No advertising id is used (manifest: ad-id
+# collection off, AD_ID removed); excluding the library cannot be proven safe without a device.
+# Owner: brigade KA, 2026-11-20; drop when the measurement SDK depends on a stable ad-services.
+androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11 via com.google.android.gms:play-services-measurement-impl in stapel-analytics-firebase
+androidx.privacysandbox.ads:ads-adservices-java:1.1.0-beta11 via com.google.android.gms:play-services-measurement-impl in stapel-analytics-firebase
