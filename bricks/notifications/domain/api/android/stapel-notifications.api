@@ -1,0 +1,1215 @@
+public abstract interface class stapel/notifications/api/NotificationsApi {
+	public abstract fun getNotificationFeed (Ljava/lang/String;Lstapel/notifications/api/model/GetNotificationFeedDirection;Ljava/lang/Integer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getNotificationFeed$default (Lstapel/notifications/api/NotificationsApi;Ljava/lang/String;Lstapel/notifications/api/model/GetNotificationFeedDirection;Ljava/lang/Integer;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getNotificationKeys (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun listDeviceTokens (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun markNotificationFeedRead (Lstapel/notifications/api/model/FeedReadRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun markNotificationFeedRead$default (Lstapel/notifications/api/NotificationsApi;Lstapel/notifications/api/model/FeedReadRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun registerDeviceToken (Lstapel/notifications/api/model/DeviceTokenRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun unregisterDevice (ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun unregisterDeviceToken (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun unregisterPushDevice (Lstapel/notifications/api/model/DeviceUnregisterRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun unregisterPushDevice$default (Lstapel/notifications/api/NotificationsApi;Lstapel/notifications/api/model/DeviceUnregisterRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class stapel/notifications/api/NotificationsApi$DefaultImpls {
+	public static synthetic fun getNotificationFeed$default (Lstapel/notifications/api/NotificationsApi;Ljava/lang/String;Lstapel/notifications/api/model/GetNotificationFeedDirection;Ljava/lang/Integer;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun markNotificationFeedRead$default (Lstapel/notifications/api/NotificationsApi;Lstapel/notifications/api/model/FeedReadRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun unregisterPushDevice$default (Lstapel/notifications/api/NotificationsApi;Lstapel/notifications/api/model/DeviceUnregisterRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class stapel/notifications/api/NotificationsApiClient : stapel/notifications/api/NotificationsApi {
+	public fun <init> (Lstapel/wire/ApiTransport;)V
+	public fun getNotificationFeed (Ljava/lang/String;Lstapel/notifications/api/model/GetNotificationFeedDirection;Ljava/lang/Integer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getNotificationKeys (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listDeviceTokens (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun markNotificationFeedRead (Lstapel/notifications/api/model/FeedReadRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun registerDeviceToken (Lstapel/notifications/api/model/DeviceTokenRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun unregisterDevice (ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun unregisterDeviceToken (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun unregisterPushDevice (Lstapel/notifications/api/model/DeviceUnregisterRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/notifications/api/NotificationsContract {
+	public static final field INSTANCE Lstapel/notifications/api/NotificationsContract;
+	public static final field MODULE Ljava/lang/String;
+	public static final field PROFILE I
+	public static final field REF Ljava/lang/String;
+	public static final field RUNTIME_ABI I
+	public static final field SCHEMA_SHA256 Ljava/lang/String;
+	public static final field VERSION Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/NotificationsInvalidation {
+	public static final field INSTANCE Lstapel/notifications/api/NotificationsInvalidation;
+	public final fun after (Ljava/lang/String;)Ljava/util/List;
+	public final fun getTable ()Ljava/util/Map;
+}
+
+public final class stapel/notifications/api/NotificationsKeys {
+	public static final field INSTANCE Lstapel/notifications/api/NotificationsKeys;
+	public final fun getAll ()Lstapel/wire/KeyPattern;
+	public final fun getHints ()Ljava/util/Map;
+	public final fun getNotificationFeed (Ljava/lang/String;Lstapel/notifications/api/model/GetNotificationFeedDirection;Ljava/lang/Integer;)Lstapel/wire/CacheKey;
+	public static synthetic fun getNotificationFeed$default (Lstapel/notifications/api/NotificationsKeys;Ljava/lang/String;Lstapel/notifications/api/model/GetNotificationFeedDirection;Ljava/lang/Integer;ILjava/lang/Object;)Lstapel/wire/CacheKey;
+	public final fun getNotificationKeys ()Lstapel/wire/CacheKey;
+	public final fun listDeviceTokens ()Lstapel/wire/CacheKey;
+}
+
+public final class stapel/notifications/api/NotificationsPagersKt {
+	public static final fun getNotificationFeedPager (Lstapel/notifications/api/NotificationsApi;Ljava/lang/Integer;)Lstapel/wire/Pager;
+	public static synthetic fun getNotificationFeedPager$default (Lstapel/notifications/api/NotificationsApi;Ljava/lang/Integer;ILjava/lang/Object;)Lstapel/wire/Pager;
+}
+
+public abstract interface class stapel/notifications/api/error/ListDeviceTokensError : stapel/notifications/api/error/NotificationsApiError {
+}
+
+public abstract interface class stapel/notifications/api/error/MarkNotificationFeedReadError : stapel/notifications/api/error/NotificationsApiError {
+}
+
+public abstract interface class stapel/notifications/api/error/NotificationsApiError : stapel/result/StapelError {
+	public static final field Companion Lstapel/notifications/api/error/NotificationsApiError$Companion;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$AdNotFound : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$AdNotFound;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$AdNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$AdNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$BadRequest : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$BadRequest;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$BadRequest;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$BadRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$CaptchaInvalid : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$CaptchaInvalid;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$CaptchaInvalid;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$CaptchaInvalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$CaptchaRequired : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$CaptchaRequired;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$CaptchaRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$CaptchaRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Companion {
+	public final fun decode (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Conflict : stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/RegisterDeviceTokenError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$Conflict;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Conflict;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Conflict;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$DeviceNotFound : stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/UnregisterDeviceError, stapel/notifications/api/error/UnregisterPushDeviceError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$DeviceNotFound;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$DeviceNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$DeviceNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$DeviceTargetRequired : stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/UnregisterPushDeviceError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$DeviceTargetRequired;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$DeviceTargetRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$DeviceTargetRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$ExpectedList : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$ExpectedList;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$ExpectedList;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$ExpectedList;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldBlank : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldBlank;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldBlank;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldBlank;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldDoesNotExist : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldDoesNotExist;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldDoesNotExist;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldDoesNotExist;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldInvalid : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldInvalid;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldInvalid;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldInvalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldInvalidChoice : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldInvalidChoice;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldInvalidChoice;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldInvalidChoice;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldMaxLength : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldMaxLength;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldMaxLength;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldMaxLength;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMaxLength ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldMaxValue : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldMaxValue;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldMaxValue;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldMaxValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMaxValue ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldMinLength : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldMinLength;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldMinLength;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldMinLength;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMinLength ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldMinValue : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldMinValue;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldMinValue;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldMinValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMinValue ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldNull : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldNull;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldNull;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldNull;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldRequired : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldRequired;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$FieldUnique : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$FieldUnique;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$FieldUnique;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$FieldUnique;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Forbidden : stapel/notifications/api/error/ListDeviceTokensError, stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/RegisterDeviceTokenError, stapel/notifications/api/error/UnregisterDeviceError, stapel/notifications/api/error/UnregisterDeviceTokenError, stapel/notifications/api/error/UnregisterPushDeviceError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$Forbidden;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Forbidden;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Forbidden;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Gone : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$Gone;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Gone;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Gone;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Internal : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$Internal;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Internal;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Internal;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$InvalidAdId : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$InvalidAdId;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$InvalidAdId;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$InvalidAdId;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$InvalidDeviceId : stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/RegisterDeviceTokenError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$InvalidDeviceId;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$InvalidDeviceId;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$InvalidDeviceId;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$InvalidPlatform : stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/RegisterDeviceTokenError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$InvalidPlatform;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$InvalidPlatform;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$InvalidPlatform;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Locked : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$Locked;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Locked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Locked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$MandateUnavailable : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$MandateUnavailable;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$MandateUnavailable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$MandateUnavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$MethodNotAllowed : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$MethodNotAllowed;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$MethodNotAllowed;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$MethodNotAllowed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$NetworkBlocked : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$NetworkBlocked;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$NetworkBlocked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$NetworkBlocked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$NotAcceptable : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$NotAcceptable;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$NotAcceptable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$NotAcceptable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$NotFound : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$NotFound;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$NotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$NotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$PayloadTooLarge : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$PayloadTooLarge;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$PayloadTooLarge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$PayloadTooLarge;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$PaymentRequired : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$PaymentRequired;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$PaymentRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$PaymentRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$RateLimit : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$RateLimit;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$RateLimit;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$RateLimit;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter ()Ljava/lang/Integer;
+	public final fun getRetryAfterDisplay ()Ljava/lang/String;
+	public final fun getRetryAfterMinutes ()Ljava/lang/Integer;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$ReadTargetRequired : stapel/notifications/api/error/MarkNotificationFeedReadError, stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$ReadTargetRequired;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$ReadTargetRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$ReadTargetRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$RequestTimeout : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$RequestTimeout;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$RequestTimeout;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$RequestTimeout;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$TokenNotFound : stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/UnregisterDeviceTokenError, stapel/notifications/api/error/UnregisterPushDeviceError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$TokenNotFound;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$TokenNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$TokenNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$TooManyIds : stapel/notifications/api/error/MarkNotificationFeedReadError, stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$TooManyIds;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$TooManyIds;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$TooManyIds;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getLimit ()Ljava/lang/Integer;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRequested ()Ljava/lang/Integer;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$TooManyRequests : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$TooManyRequests;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$TooManyRequests;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$TooManyRequests;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Transport : stapel/notifications/api/error/ListDeviceTokensError, stapel/notifications/api/error/MarkNotificationFeedReadError, stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/RegisterDeviceTokenError, stapel/notifications/api/error/UnregisterDeviceError, stapel/notifications/api/error/UnregisterDeviceTokenError, stapel/notifications/api/error/UnregisterPushDeviceError, stapel/result/TransportCarrier {
+	public fun <init> (Lstapel/result/TransportFailure;)V
+	public final fun component1 ()Lstapel/result/TransportFailure;
+	public final fun copy (Lstapel/result/TransportFailure;)Lstapel/notifications/api/error/NotificationsApiError$Transport;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Transport;Lstapel/result/TransportFailure;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Transport;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getFailure ()Lstapel/result/TransportFailure;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Unauthorized : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$Unauthorized;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Unauthorized;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Unauthorized;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$Unknown : stapel/notifications/api/error/ListDeviceTokensError, stapel/notifications/api/error/MarkNotificationFeedReadError, stapel/notifications/api/error/NotificationsApiError, stapel/notifications/api/error/RegisterDeviceTokenError, stapel/notifications/api/error/UnregisterDeviceError, stapel/notifications/api/error/UnregisterDeviceTokenError, stapel/notifications/api/error/UnregisterPushDeviceError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$Unknown;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$Unknown;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$UnprocessableEntity : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$UnprocessableEntity;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$UnprocessableEntity;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$UnprocessableEntity;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$UnsupportedMediaType : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$UnsupportedMediaType;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$UnsupportedMediaType;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$UnsupportedMediaType;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$ValidationError : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$ValidationError;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$ValidationError;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$ValidationError;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$VerificationChallengeNotFound : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$VerificationChallengeNotFound;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$VerificationChallengeNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$VerificationChallengeNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$VerificationEnrollmentRequired : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$VerificationEnrollmentRequired;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$VerificationEnrollmentRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$VerificationEnrollmentRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$VerificationFailed : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$VerificationFailed;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$VerificationFailed;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$VerificationFailed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$VerificationInvalidFactor : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$VerificationInvalidFactor;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$VerificationInvalidFactor;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$VerificationInvalidFactor;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$VerificationLocked : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$VerificationLocked;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$VerificationLocked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$VerificationLocked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsApiError$VerificationRequired : stapel/notifications/api/error/NotificationsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/notifications/api/error/NotificationsApiError$VerificationRequired;
+	public static synthetic fun copy$default (Lstapel/notifications/api/error/NotificationsApiError$VerificationRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/notifications/api/error/NotificationsApiError$VerificationRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/error/NotificationsErrorCatalog : stapel/result/text/ErrorCatalog {
+	public static final field INSTANCE Lstapel/notifications/api/error/NotificationsErrorCatalog;
+	public fun getOwner ()Ljava/lang/String;
+	public fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/notifications/api/error/RegisterDeviceTokenError : stapel/notifications/api/error/NotificationsApiError {
+}
+
+public abstract interface class stapel/notifications/api/error/UnregisterDeviceError : stapel/notifications/api/error/NotificationsApiError {
+}
+
+public abstract interface class stapel/notifications/api/error/UnregisterDeviceTokenError : stapel/notifications/api/error/NotificationsApiError {
+}
+
+public abstract interface class stapel/notifications/api/error/UnregisterPushDeviceError : stapel/notifications/api/error/NotificationsApiError {
+}
+
+public final class stapel/notifications/api/model/DeviceListItemResponse {
+	public static final field Companion Lstapel/notifications/api/model/DeviceListItemResponse$Companion;
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Z
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/Boolean;
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)Lstapel/notifications/api/model/DeviceListItemResponse;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/DeviceListItemResponse;ILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;ILjava/lang/Object;)Lstapel/notifications/api/model/DeviceListItemResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCreatedAt ()Ljava/lang/String;
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getId ()I
+	public final fun getLastSeen ()Ljava/lang/String;
+	public final fun getPlatform ()Ljava/lang/String;
+	public final fun getSessionBound ()Ljava/lang/Boolean;
+	public final fun getTokenFingerprint ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isActive ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/DeviceListItemResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/DeviceListItemResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/DeviceListItemResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/DeviceListItemResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/DeviceListItemResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/DeviceTokenRequest {
+	public static final field Companion Lstapel/notifications/api/model/DeviceTokenRequest$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/notifications/api/model/DeviceTokenRequest;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/DeviceTokenRequest;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/notifications/api/model/DeviceTokenRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getPlatform ()Ljava/lang/String;
+	public final fun getSessionId ()Ljava/lang/String;
+	public final fun getToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/DeviceTokenRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/DeviceTokenRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/DeviceTokenRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/DeviceTokenRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/DeviceTokenRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/DeviceTokenResponse {
+	public static final field Companion Lstapel/notifications/api/model/DeviceTokenResponse$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)Lstapel/notifications/api/model/DeviceTokenResponse;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/DeviceTokenResponse;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;ILjava/lang/Object;)Lstapel/notifications/api/model/DeviceTokenResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getPlatform ()Ljava/lang/String;
+	public final fun getSessionBound ()Ljava/lang/Boolean;
+	public final fun getToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/DeviceTokenResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/DeviceTokenResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/DeviceTokenResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/DeviceTokenResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/DeviceTokenResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/DeviceUnregisterRequest {
+	public static final field Companion Lstapel/notifications/api/model/DeviceUnregisterRequest$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lstapel/notifications/api/model/DeviceUnregisterRequest;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/DeviceUnregisterRequest;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/notifications/api/model/DeviceUnregisterRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDeviceId ()Ljava/lang/String;
+	public final fun getToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/DeviceUnregisterRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/DeviceUnregisterRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/DeviceUnregisterRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/DeviceUnregisterRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/DeviceUnregisterRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/FeedItemResponse {
+	public static final field Companion Lstapel/notifications/api/model/FeedItemResponse$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/String;)Lstapel/notifications/api/model/FeedItemResponse;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/FeedItemResponse;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/notifications/api/model/FeedItemResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBody ()Ljava/lang/String;
+	public final fun getCreatedAt ()Ljava/lang/String;
+	public final fun getData ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getNotificationType ()Ljava/lang/String;
+	public final fun getReadAt ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/FeedItemResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/FeedItemResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/FeedItemResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/FeedItemResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/FeedItemResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/FeedReadRequest {
+	public static final field Companion Lstapel/notifications/api/model/FeedReadRequest$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/util/List;Ljava/lang/Boolean;)Lstapel/notifications/api/model/FeedReadRequest;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/FeedReadRequest;Ljava/util/List;Ljava/lang/Boolean;ILjava/lang/Object;)Lstapel/notifications/api/model/FeedReadRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAll ()Ljava/lang/Boolean;
+	public final fun getIds ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/FeedReadRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/FeedReadRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/FeedReadRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/FeedReadRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/FeedReadRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/FeedReadResponse {
+	public static final field Companion Lstapel/notifications/api/model/FeedReadResponse$Companion;
+	public fun <init> (II)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun copy (II)Lstapel/notifications/api/model/FeedReadResponse;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/FeedReadResponse;IIILjava/lang/Object;)Lstapel/notifications/api/model/FeedReadResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMarked ()I
+	public final fun getUnreadCount ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/FeedReadResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/FeedReadResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/FeedReadResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/FeedReadResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/FeedReadResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/notifications/api/model/GetNotificationFeedDirection : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/notifications/api/model/GetNotificationFeedDirection$Companion;
+}
+
+public final class stapel/notifications/api/model/GetNotificationFeedDirection$Center : stapel/notifications/api/model/GetNotificationFeedDirection {
+	public static final field INSTANCE Lstapel/notifications/api/model/GetNotificationFeedDirection$Center;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/model/GetNotificationFeedDirection$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/notifications/api/model/GetNotificationFeedDirection;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/GetNotificationFeedDirection$Next : stapel/notifications/api/model/GetNotificationFeedDirection {
+	public static final field INSTANCE Lstapel/notifications/api/model/GetNotificationFeedDirection$Next;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/model/GetNotificationFeedDirection$Prev : stapel/notifications/api/model/GetNotificationFeedDirection {
+	public static final field INSTANCE Lstapel/notifications/api/model/GetNotificationFeedDirection$Prev;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/model/GetNotificationFeedDirection$Unknown : stapel/notifications/api/model/GetNotificationFeedDirection {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/notifications/api/model/GetNotificationFeedDirection$Unknown;
+	public static synthetic fun copy$default (Lstapel/notifications/api/model/GetNotificationFeedDirection$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/notifications/api/model/GetNotificationFeedDirection$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/api/model/PaginatedFeedItemResponseList : stapel/wire/Page {
+	public static final field Companion Lstapel/notifications/api/model/PaginatedFeedItemResponseList$Companion;
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;ZZIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;ZZIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2-5baGdoY ()Ljava/lang/String;
+	public final fun component3-5baGdoY ()Ljava/lang/String;
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun copy-urkJsXo (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;ZZII)Lstapel/notifications/api/model/PaginatedFeedItemResponseList;
+	public static synthetic fun copy-urkJsXo$default (Lstapel/notifications/api/model/PaginatedFeedItemResponseList;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;ZZIIILjava/lang/Object;)Lstapel/notifications/api/model/PaginatedFeedItemResponseList;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCount ()I
+	public final fun getHasNext ()Z
+	public final fun getHasPrev ()Z
+	public fun getItems ()Ljava/util/List;
+	public final fun getNextAnchor-5baGdoY ()Ljava/lang/String;
+	public fun getNextCursor-5baGdoY ()Ljava/lang/String;
+	public final fun getPrevAnchor-5baGdoY ()Ljava/lang/String;
+	public fun getPrevCursor-5baGdoY ()Ljava/lang/String;
+	public fun getTotal ()Ljava/lang/Integer;
+	public final fun getUnreadCount ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/api/model/PaginatedFeedItemResponseList$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/api/model/PaginatedFeedItemResponseList$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/api/model/PaginatedFeedItemResponseList;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/api/model/PaginatedFeedItemResponseList;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/api/model/PaginatedFeedItemResponseList$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/di/NotificationsModuleKt {
+	public static final fun notificationsModule ()Lorg/koin/core/module/Module;
+}
+

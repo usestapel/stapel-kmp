@@ -1,0 +1,1249 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-notifications>
+abstract interface stapel.notifications.api/NotificationsApi { // stapel.notifications.api/NotificationsApi|null[0]
+    abstract suspend fun getNotificationFeed(kotlin/String? = ..., stapel.notifications.api.model/GetNotificationFeedDirection? = ..., kotlin/Int? = ...): stapel.result/StapelResult<stapel.notifications.api.model/PaginatedFeedItemResponseList, stapel.notifications.api.error/NotificationsApiError> // stapel.notifications.api/NotificationsApi.getNotificationFeed|getNotificationFeed(kotlin.String?;stapel.notifications.api.model.GetNotificationFeedDirection?;kotlin.Int?){}[0]
+    abstract suspend fun getNotificationKeys(): stapel.result/StapelResult<kotlinx.serialization.json/JsonObject, stapel.notifications.api.error/NotificationsApiError> // stapel.notifications.api/NotificationsApi.getNotificationKeys|getNotificationKeys(){}[0]
+    abstract suspend fun listDeviceTokens(): stapel.result/StapelResult<kotlin.collections/List<stapel.notifications.api.model/DeviceListItemResponse>, stapel.notifications.api.error/ListDeviceTokensError> // stapel.notifications.api/NotificationsApi.listDeviceTokens|listDeviceTokens(){}[0]
+    abstract suspend fun markNotificationFeedRead(stapel.notifications.api.model/FeedReadRequest? = ...): stapel.result/StapelResult<stapel.notifications.api.model/FeedReadResponse, stapel.notifications.api.error/MarkNotificationFeedReadError> // stapel.notifications.api/NotificationsApi.markNotificationFeedRead|markNotificationFeedRead(stapel.notifications.api.model.FeedReadRequest?){}[0]
+    abstract suspend fun registerDeviceToken(stapel.notifications.api.model/DeviceTokenRequest): stapel.result/StapelResult<stapel.notifications.api.model/DeviceTokenResponse, stapel.notifications.api.error/RegisterDeviceTokenError> // stapel.notifications.api/NotificationsApi.registerDeviceToken|registerDeviceToken(stapel.notifications.api.model.DeviceTokenRequest){}[0]
+    abstract suspend fun unregisterDevice(kotlin/Int): stapel.result/StapelResult<kotlin/Unit, stapel.notifications.api.error/UnregisterDeviceError> // stapel.notifications.api/NotificationsApi.unregisterDevice|unregisterDevice(kotlin.Int){}[0]
+    abstract suspend fun unregisterDeviceToken(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.notifications.api.error/UnregisterDeviceTokenError> // stapel.notifications.api/NotificationsApi.unregisterDeviceToken|unregisterDeviceToken(kotlin.String){}[0]
+    abstract suspend fun unregisterPushDevice(stapel.notifications.api.model/DeviceUnregisterRequest? = ...): stapel.result/StapelResult<kotlin/Unit, stapel.notifications.api.error/UnregisterPushDeviceError> // stapel.notifications.api/NotificationsApi.unregisterPushDevice|unregisterPushDevice(stapel.notifications.api.model.DeviceUnregisterRequest?){}[0]
+}
+
+sealed interface stapel.notifications.api.error/ListDeviceTokensError : stapel.notifications.api.error/NotificationsApiError // stapel.notifications.api.error/ListDeviceTokensError|null[0]
+
+sealed interface stapel.notifications.api.error/MarkNotificationFeedReadError : stapel.notifications.api.error/NotificationsApiError // stapel.notifications.api.error/MarkNotificationFeedReadError|null[0]
+
+sealed interface stapel.notifications.api.error/NotificationsApiError : stapel.result/StapelError { // stapel.notifications.api.error/NotificationsApiError|null[0]
+    final class AdNotFound : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.AdNotFound|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.AdNotFound.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.AdNotFound.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.AdNotFound.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.AdNotFound.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.AdNotFound.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.AdNotFound.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.AdNotFound // stapel.notifications.api.error/NotificationsApiError.AdNotFound.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.AdNotFound.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.AdNotFound.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.AdNotFound.toString|toString(){}[0]
+    }
+
+    final class BadRequest : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.BadRequest|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.BadRequest.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.BadRequest.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.BadRequest.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.BadRequest.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.BadRequest.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.BadRequest.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.BadRequest // stapel.notifications.api.error/NotificationsApiError.BadRequest.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.BadRequest.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.BadRequest.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.BadRequest.toString|toString(){}[0]
+    }
+
+    final class CaptchaInvalid : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.CaptchaInvalid.toString|toString(){}[0]
+    }
+
+    final class CaptchaRequired : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.CaptchaRequired // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.CaptchaRequired.toString|toString(){}[0]
+    }
+
+    final class Conflict : stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/RegisterDeviceTokenError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.Conflict|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.Conflict.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.Conflict.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Conflict.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.Conflict.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.Conflict.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Conflict.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.Conflict // stapel.notifications.api.error/NotificationsApiError.Conflict.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Conflict.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Conflict.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Conflict.toString|toString(){}[0]
+    }
+
+    final class DeviceNotFound : stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/UnregisterDeviceError, stapel.notifications.api.error/UnregisterPushDeviceError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.DeviceNotFound // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.DeviceNotFound.toString|toString(){}[0]
+    }
+
+    final class DeviceTargetRequired : stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/UnregisterPushDeviceError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.DeviceTargetRequired.toString|toString(){}[0]
+    }
+
+    final class ExpectedList : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.ExpectedList|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.ExpectedList.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.ExpectedList.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.ExpectedList.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.ExpectedList.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.ExpectedList.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.ExpectedList.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.ExpectedList // stapel.notifications.api.error/NotificationsApiError.ExpectedList.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.ExpectedList.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.ExpectedList.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.ExpectedList.toString|toString(){}[0]
+    }
+
+    final class FieldBlank : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldBlank|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldBlank.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldBlank.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldBlank.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldBlank.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldBlank.field.<get-field>|<get-field>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldBlank.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldBlank.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldBlank.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldBlank // stapel.notifications.api.error/NotificationsApiError.FieldBlank.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldBlank.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldBlank.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldBlank.toString|toString(){}[0]
+    }
+
+    final class FieldDoesNotExist : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.field.<get-field>|<get-field>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldDoesNotExist.toString|toString(){}[0]
+    }
+
+    final class FieldInvalid : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldInvalid|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.field.<get-field>|<get-field>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldInvalid // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldInvalid.toString|toString(){}[0]
+    }
+
+    final class FieldInvalidChoice : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.field.<get-field>|<get-field>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldInvalidChoice.toString|toString(){}[0]
+    }
+
+    final class FieldMaxLength : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.field.<get-field>|<get-field>(){}[0]
+        final val maxLength // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.maxLength|{}maxLength[0]
+            final fun <get-maxLength>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.maxLength.<get-maxLength>|<get-maxLength>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldMaxLength // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldMaxLength.toString|toString(){}[0]
+    }
+
+    final class FieldMaxValue : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.field.<get-field>|<get-field>(){}[0]
+        final val maxValue // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.maxValue|{}maxValue[0]
+            final fun <get-maxValue>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.maxValue.<get-maxValue>|<get-maxValue>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldMaxValue // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldMaxValue.toString|toString(){}[0]
+    }
+
+    final class FieldMinLength : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldMinLength|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.field.<get-field>|<get-field>(){}[0]
+        final val minLength // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.minLength|{}minLength[0]
+            final fun <get-minLength>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.minLength.<get-minLength>|<get-minLength>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldMinLength // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldMinLength.toString|toString(){}[0]
+    }
+
+    final class FieldMinValue : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldMinValue|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.field.<get-field>|<get-field>(){}[0]
+        final val minValue // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.minValue|{}minValue[0]
+            final fun <get-minValue>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.minValue.<get-minValue>|<get-minValue>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldMinValue // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldMinValue.toString|toString(){}[0]
+    }
+
+    final class FieldNull : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldNull|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldNull.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldNull.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldNull.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldNull.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldNull.field.<get-field>|<get-field>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldNull.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldNull.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldNull.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldNull // stapel.notifications.api.error/NotificationsApiError.FieldNull.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldNull.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldNull.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldNull.toString|toString(){}[0]
+    }
+
+    final class FieldRequired : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldRequired|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldRequired.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldRequired.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldRequired.field.<get-field>|<get-field>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldRequired.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldRequired // stapel.notifications.api.error/NotificationsApiError.FieldRequired.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldRequired.toString|toString(){}[0]
+    }
+
+    final class FieldUnique : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.FieldUnique|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.FieldUnique.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.FieldUnique.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldUnique.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val field // stapel.notifications.api.error/NotificationsApiError.FieldUnique.field|{}field[0]
+            final fun <get-field>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.FieldUnique.field.<get-field>|<get-field>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.FieldUnique.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.FieldUnique.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.FieldUnique.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.FieldUnique // stapel.notifications.api.error/NotificationsApiError.FieldUnique.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.FieldUnique.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.FieldUnique.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.FieldUnique.toString|toString(){}[0]
+    }
+
+    final class Forbidden : stapel.notifications.api.error/ListDeviceTokensError, stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/RegisterDeviceTokenError, stapel.notifications.api.error/UnregisterDeviceError, stapel.notifications.api.error/UnregisterDeviceTokenError, stapel.notifications.api.error/UnregisterPushDeviceError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.Forbidden|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.Forbidden.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.Forbidden.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Forbidden.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.Forbidden.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.Forbidden.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Forbidden.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.Forbidden // stapel.notifications.api.error/NotificationsApiError.Forbidden.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Forbidden.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Forbidden.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Forbidden.toString|toString(){}[0]
+    }
+
+    final class Gone : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.Gone|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.Gone.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.Gone.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Gone.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.Gone.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.Gone.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Gone.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.Gone // stapel.notifications.api.error/NotificationsApiError.Gone.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Gone.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Gone.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Gone.toString|toString(){}[0]
+    }
+
+    final class Internal : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.Internal|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.Internal.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.Internal.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Internal.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.Internal.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.Internal.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Internal.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.Internal // stapel.notifications.api.error/NotificationsApiError.Internal.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Internal.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Internal.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Internal.toString|toString(){}[0]
+    }
+
+    final class InvalidAdId : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.InvalidAdId|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.InvalidAdId // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.InvalidAdId.toString|toString(){}[0]
+    }
+
+    final class InvalidDeviceId : stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/RegisterDeviceTokenError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.InvalidDeviceId.toString|toString(){}[0]
+    }
+
+    final class InvalidPlatform : stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/RegisterDeviceTokenError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.InvalidPlatform // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.InvalidPlatform.toString|toString(){}[0]
+    }
+
+    final class Locked : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.Locked|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.Locked.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.Locked.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Locked.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.Locked.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.Locked.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Locked.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.Locked // stapel.notifications.api.error/NotificationsApiError.Locked.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Locked.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Locked.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Locked.toString|toString(){}[0]
+    }
+
+    final class MandateUnavailable : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.MandateUnavailable // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.MandateUnavailable.toString|toString(){}[0]
+    }
+
+    final class MethodNotAllowed : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.MethodNotAllowed.toString|toString(){}[0]
+    }
+
+    final class NetworkBlocked : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.NetworkBlocked // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.NetworkBlocked.toString|toString(){}[0]
+    }
+
+    final class NotAcceptable : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.NotAcceptable|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.NotAcceptable // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.NotAcceptable.toString|toString(){}[0]
+    }
+
+    final class NotFound : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.NotFound|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.NotFound.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.NotFound.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.NotFound.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.NotFound.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.NotFound.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.NotFound.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.NotFound // stapel.notifications.api.error/NotificationsApiError.NotFound.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.NotFound.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.NotFound.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.NotFound.toString|toString(){}[0]
+    }
+
+    final class PayloadTooLarge : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.PayloadTooLarge.toString|toString(){}[0]
+    }
+
+    final class PaymentRequired : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.PaymentRequired|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.PaymentRequired // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.PaymentRequired.toString|toString(){}[0]
+    }
+
+    final class RateLimit : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.RateLimit|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.RateLimit.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.RateLimit.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.RateLimit.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.RateLimit.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.RateLimit.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val retryAfter // stapel.notifications.api.error/NotificationsApiError.RateLimit.retryAfter|{}retryAfter[0]
+            final fun <get-retryAfter>(): kotlin/Int? // stapel.notifications.api.error/NotificationsApiError.RateLimit.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+        final val retryAfterDisplay // stapel.notifications.api.error/NotificationsApiError.RateLimit.retryAfterDisplay|{}retryAfterDisplay[0]
+            final fun <get-retryAfterDisplay>(): kotlin/String? // stapel.notifications.api.error/NotificationsApiError.RateLimit.retryAfterDisplay.<get-retryAfterDisplay>|<get-retryAfterDisplay>(){}[0]
+        final val retryAfterMinutes // stapel.notifications.api.error/NotificationsApiError.RateLimit.retryAfterMinutes|{}retryAfterMinutes[0]
+            final fun <get-retryAfterMinutes>(): kotlin/Int? // stapel.notifications.api.error/NotificationsApiError.RateLimit.retryAfterMinutes.<get-retryAfterMinutes>|<get-retryAfterMinutes>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.RateLimit.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.RateLimit // stapel.notifications.api.error/NotificationsApiError.RateLimit.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.RateLimit.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.RateLimit.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.RateLimit.toString|toString(){}[0]
+    }
+
+    final class ReadTargetRequired : stapel.notifications.api.error/MarkNotificationFeedReadError, stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.ReadTargetRequired.toString|toString(){}[0]
+    }
+
+    final class RequestTimeout : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.RequestTimeout|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.RequestTimeout // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.RequestTimeout.toString|toString(){}[0]
+    }
+
+    final class TokenNotFound : stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/UnregisterDeviceTokenError, stapel.notifications.api.error/UnregisterPushDeviceError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.TokenNotFound|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.TokenNotFound // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.TokenNotFound.toString|toString(){}[0]
+    }
+
+    final class TooManyIds : stapel.notifications.api.error/MarkNotificationFeedReadError, stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.TooManyIds|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.TooManyIds.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.TooManyIds.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.TooManyIds.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val limit // stapel.notifications.api.error/NotificationsApiError.TooManyIds.limit|{}limit[0]
+            final fun <get-limit>(): kotlin/Int? // stapel.notifications.api.error/NotificationsApiError.TooManyIds.limit.<get-limit>|<get-limit>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.TooManyIds.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.TooManyIds.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val requested // stapel.notifications.api.error/NotificationsApiError.TooManyIds.requested|{}requested[0]
+            final fun <get-requested>(): kotlin/Int? // stapel.notifications.api.error/NotificationsApiError.TooManyIds.requested.<get-requested>|<get-requested>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.TooManyIds.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.TooManyIds // stapel.notifications.api.error/NotificationsApiError.TooManyIds.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.TooManyIds.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.TooManyIds.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.TooManyIds.toString|toString(){}[0]
+    }
+
+    final class TooManyRequests : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.TooManyRequests|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.TooManyRequests // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.TooManyRequests.toString|toString(){}[0]
+    }
+
+    final class Transport : stapel.notifications.api.error/ListDeviceTokensError, stapel.notifications.api.error/MarkNotificationFeedReadError, stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/RegisterDeviceTokenError, stapel.notifications.api.error/UnregisterDeviceError, stapel.notifications.api.error/UnregisterDeviceTokenError, stapel.notifications.api.error/UnregisterPushDeviceError, stapel.result/TransportCarrier { // stapel.notifications.api.error/NotificationsApiError.Transport|null[0]
+        constructor <init>(stapel.result/TransportFailure) // stapel.notifications.api.error/NotificationsApiError.Transport.<init>|<init>(stapel.result.TransportFailure){}[0]
+
+        final val failure // stapel.notifications.api.error/NotificationsApiError.Transport.failure|{}failure[0]
+            final fun <get-failure>(): stapel.result/TransportFailure // stapel.notifications.api.error/NotificationsApiError.Transport.failure.<get-failure>|<get-failure>(){}[0]
+
+        final fun component1(): stapel.result/TransportFailure // stapel.notifications.api.error/NotificationsApiError.Transport.component1|component1(){}[0]
+        final fun copy(stapel.result/TransportFailure = ...): stapel.notifications.api.error/NotificationsApiError.Transport // stapel.notifications.api.error/NotificationsApiError.Transport.copy|copy(stapel.result.TransportFailure){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Transport.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Transport.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Transport.toString|toString(){}[0]
+    }
+
+    final class Unauthorized : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.Unauthorized|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.Unauthorized.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.Unauthorized.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Unauthorized.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.Unauthorized.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.Unauthorized.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Unauthorized.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.Unauthorized // stapel.notifications.api.error/NotificationsApiError.Unauthorized.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Unauthorized.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Unauthorized.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Unauthorized.toString|toString(){}[0]
+    }
+
+    final class Unknown : stapel.notifications.api.error/ListDeviceTokensError, stapel.notifications.api.error/MarkNotificationFeedReadError, stapel.notifications.api.error/NotificationsApiError, stapel.notifications.api.error/RegisterDeviceTokenError, stapel.notifications.api.error/UnregisterDeviceError, stapel.notifications.api.error/UnregisterDeviceTokenError, stapel.notifications.api.error/UnregisterPushDeviceError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.Unknown|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.Unknown.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.Unknown.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Unknown.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.Unknown.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.Unknown.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.Unknown.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.Unknown // stapel.notifications.api.error/NotificationsApiError.Unknown.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.Unknown.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.Unknown.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.Unknown.toString|toString(){}[0]
+    }
+
+    final class UnprocessableEntity : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.UnprocessableEntity.toString|toString(){}[0]
+    }
+
+    final class UnsupportedMediaType : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.UnsupportedMediaType.toString|toString(){}[0]
+    }
+
+    final class ValidationError : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.ValidationError|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.ValidationError.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.ValidationError.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.ValidationError.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.ValidationError.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.ValidationError.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.ValidationError.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.ValidationError // stapel.notifications.api.error/NotificationsApiError.ValidationError.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.ValidationError.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.ValidationError.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.ValidationError.toString|toString(){}[0]
+    }
+
+    final class VerificationChallengeNotFound : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.VerificationChallengeNotFound.toString|toString(){}[0]
+    }
+
+    final class VerificationEnrollmentRequired : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.VerificationEnrollmentRequired.toString|toString(){}[0]
+    }
+
+    final class VerificationFailed : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.VerificationFailed|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.VerificationFailed // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.VerificationFailed.toString|toString(){}[0]
+    }
+
+    final class VerificationInvalidFactor : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.VerificationInvalidFactor.toString|toString(){}[0]
+    }
+
+    final class VerificationLocked : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.VerificationLocked|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.VerificationLocked // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.VerificationLocked.toString|toString(){}[0]
+    }
+
+    final class VerificationRequired : stapel.notifications.api.error/NotificationsApiError, stapel.result/DomainError { // stapel.notifications.api.error/NotificationsApiError.VerificationRequired|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val remediation // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.notifications.api.error/NotificationsApiError.VerificationRequired // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.error/NotificationsApiError.VerificationRequired.toString|toString(){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.error/NotificationsApiError.Companion|null[0]
+        final fun decode(stapel.result/ErrorEnvelope): stapel.notifications.api.error/NotificationsApiError // stapel.notifications.api.error/NotificationsApiError.Companion.decode|decode(stapel.result.ErrorEnvelope){}[0]
+    }
+}
+
+sealed interface stapel.notifications.api.error/RegisterDeviceTokenError : stapel.notifications.api.error/NotificationsApiError // stapel.notifications.api.error/RegisterDeviceTokenError|null[0]
+
+sealed interface stapel.notifications.api.error/UnregisterDeviceError : stapel.notifications.api.error/NotificationsApiError // stapel.notifications.api.error/UnregisterDeviceError|null[0]
+
+sealed interface stapel.notifications.api.error/UnregisterDeviceTokenError : stapel.notifications.api.error/NotificationsApiError // stapel.notifications.api.error/UnregisterDeviceTokenError|null[0]
+
+sealed interface stapel.notifications.api.error/UnregisterPushDeviceError : stapel.notifications.api.error/NotificationsApiError // stapel.notifications.api.error/UnregisterPushDeviceError|null[0]
+
+sealed interface stapel.notifications.api.model/GetNotificationFeedDirection : stapel.wire/WireEnum { // stapel.notifications.api.model/GetNotificationFeedDirection|null[0]
+    final class Unknown : stapel.notifications.api.model/GetNotificationFeedDirection { // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown|null[0]
+        constructor <init>(kotlin/String) // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.<init>|<init>(kotlin.String){}[0]
+
+        final val wire // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.wire|{}wire[0]
+            final fun <get-wire>(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.wire.<get-wire>|<get-wire>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.notifications.api.model/GetNotificationFeedDirection.Unknown // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Unknown.toString|toString(){}[0]
+    }
+
+    final object Center : stapel.notifications.api.model/GetNotificationFeedDirection { // stapel.notifications.api.model/GetNotificationFeedDirection.Center|null[0]
+        final val wire // stapel.notifications.api.model/GetNotificationFeedDirection.Center.wire|{}wire[0]
+            final fun <get-wire>(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Center.wire.<get-wire>|<get-wire>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/GetNotificationFeedDirection.Center.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.model/GetNotificationFeedDirection.Center.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Center.toString|toString(){}[0]
+    }
+
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // stapel.notifications.api.model/GetNotificationFeedDirection.Companion|null[0]
+        final val known // stapel.notifications.api.model/GetNotificationFeedDirection.Companion.known|{}known[0]
+            final fun <get-known>(): kotlin.collections/List<stapel.notifications.api.model/GetNotificationFeedDirection> // stapel.notifications.api.model/GetNotificationFeedDirection.Companion.known.<get-known>|<get-known>(){}[0]
+
+        final fun of(kotlin/String): stapel.notifications.api.model/GetNotificationFeedDirection // stapel.notifications.api.model/GetNotificationFeedDirection.Companion.of|of(kotlin.String){}[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/GetNotificationFeedDirection> // stapel.notifications.api.model/GetNotificationFeedDirection.Companion.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // stapel.notifications.api.model/GetNotificationFeedDirection.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+
+    final object Next : stapel.notifications.api.model/GetNotificationFeedDirection { // stapel.notifications.api.model/GetNotificationFeedDirection.Next|null[0]
+        final val wire // stapel.notifications.api.model/GetNotificationFeedDirection.Next.wire|{}wire[0]
+            final fun <get-wire>(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Next.wire.<get-wire>|<get-wire>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/GetNotificationFeedDirection.Next.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.model/GetNotificationFeedDirection.Next.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Next.toString|toString(){}[0]
+    }
+
+    final object Prev : stapel.notifications.api.model/GetNotificationFeedDirection { // stapel.notifications.api.model/GetNotificationFeedDirection.Prev|null[0]
+        final val wire // stapel.notifications.api.model/GetNotificationFeedDirection.Prev.wire|{}wire[0]
+            final fun <get-wire>(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Prev.wire.<get-wire>|<get-wire>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/GetNotificationFeedDirection.Prev.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.api.model/GetNotificationFeedDirection.Prev.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.api.model/GetNotificationFeedDirection.Prev.toString|toString(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/DeviceListItemResponse { // stapel.notifications.api.model/DeviceListItemResponse|null[0]
+    constructor <init>(kotlin/Int, kotlin/String, kotlin/String, kotlin/Boolean, kotlin/String, kotlin/String, kotlin/String? = ..., kotlin/Boolean? = ...) // stapel.notifications.api.model/DeviceListItemResponse.<init>|<init>(kotlin.Int;kotlin.String;kotlin.String;kotlin.Boolean;kotlin.String;kotlin.String;kotlin.String?;kotlin.Boolean?){}[0]
+
+    final val createdAt // stapel.notifications.api.model/DeviceListItemResponse.createdAt|{}createdAt[0]
+        final fun <get-createdAt>(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.createdAt.<get-createdAt>|<get-createdAt>(){}[0]
+    final val deviceId // stapel.notifications.api.model/DeviceListItemResponse.deviceId|{}deviceId[0]
+        final fun <get-deviceId>(): kotlin/String? // stapel.notifications.api.model/DeviceListItemResponse.deviceId.<get-deviceId>|<get-deviceId>(){}[0]
+    final val id // stapel.notifications.api.model/DeviceListItemResponse.id|{}id[0]
+        final fun <get-id>(): kotlin/Int // stapel.notifications.api.model/DeviceListItemResponse.id.<get-id>|<get-id>(){}[0]
+    final val isActive // stapel.notifications.api.model/DeviceListItemResponse.isActive|{}isActive[0]
+        final fun <get-isActive>(): kotlin/Boolean // stapel.notifications.api.model/DeviceListItemResponse.isActive.<get-isActive>|<get-isActive>(){}[0]
+    final val lastSeen // stapel.notifications.api.model/DeviceListItemResponse.lastSeen|{}lastSeen[0]
+        final fun <get-lastSeen>(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.lastSeen.<get-lastSeen>|<get-lastSeen>(){}[0]
+    final val platform // stapel.notifications.api.model/DeviceListItemResponse.platform|{}platform[0]
+        final fun <get-platform>(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.platform.<get-platform>|<get-platform>(){}[0]
+    final val sessionBound // stapel.notifications.api.model/DeviceListItemResponse.sessionBound|{}sessionBound[0]
+        final fun <get-sessionBound>(): kotlin/Boolean? // stapel.notifications.api.model/DeviceListItemResponse.sessionBound.<get-sessionBound>|<get-sessionBound>(){}[0]
+    final val tokenFingerprint // stapel.notifications.api.model/DeviceListItemResponse.tokenFingerprint|{}tokenFingerprint[0]
+        final fun <get-tokenFingerprint>(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.tokenFingerprint.<get-tokenFingerprint>|<get-tokenFingerprint>(){}[0]
+
+    final fun component1(): kotlin/Int // stapel.notifications.api.model/DeviceListItemResponse.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // stapel.notifications.api.model/DeviceListItemResponse.component4|component4(){}[0]
+    final fun component5(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.component5|component5(){}[0]
+    final fun component6(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.component6|component6(){}[0]
+    final fun component7(): kotlin/String? // stapel.notifications.api.model/DeviceListItemResponse.component7|component7(){}[0]
+    final fun component8(): kotlin/Boolean? // stapel.notifications.api.model/DeviceListItemResponse.component8|component8(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/String = ..., kotlin/String = ..., kotlin/Boolean = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/Boolean? = ...): stapel.notifications.api.model/DeviceListItemResponse // stapel.notifications.api.model/DeviceListItemResponse.copy|copy(kotlin.Int;kotlin.String;kotlin.String;kotlin.Boolean;kotlin.String;kotlin.String;kotlin.String?;kotlin.Boolean?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/DeviceListItemResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/DeviceListItemResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/DeviceListItemResponse.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/DeviceListItemResponse> { // stapel.notifications.api.model/DeviceListItemResponse.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/DeviceListItemResponse.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/DeviceListItemResponse.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/DeviceListItemResponse.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/DeviceListItemResponse // stapel.notifications.api.model/DeviceListItemResponse.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/DeviceListItemResponse) // stapel.notifications.api.model/DeviceListItemResponse.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.DeviceListItemResponse){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/DeviceListItemResponse.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/DeviceListItemResponse> // stapel.notifications.api.model/DeviceListItemResponse.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/DeviceTokenRequest { // stapel.notifications.api.model/DeviceTokenRequest|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String? = ..., kotlin/String? = ...) // stapel.notifications.api.model/DeviceTokenRequest.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?;kotlin.String?){}[0]
+
+    final val deviceId // stapel.notifications.api.model/DeviceTokenRequest.deviceId|{}deviceId[0]
+        final fun <get-deviceId>(): kotlin/String? // stapel.notifications.api.model/DeviceTokenRequest.deviceId.<get-deviceId>|<get-deviceId>(){}[0]
+    final val platform // stapel.notifications.api.model/DeviceTokenRequest.platform|{}platform[0]
+        final fun <get-platform>(): kotlin/String // stapel.notifications.api.model/DeviceTokenRequest.platform.<get-platform>|<get-platform>(){}[0]
+    final val sessionId // stapel.notifications.api.model/DeviceTokenRequest.sessionId|{}sessionId[0]
+        final fun <get-sessionId>(): kotlin/String? // stapel.notifications.api.model/DeviceTokenRequest.sessionId.<get-sessionId>|<get-sessionId>(){}[0]
+    final val token // stapel.notifications.api.model/DeviceTokenRequest.token|{}token[0]
+        final fun <get-token>(): kotlin/String // stapel.notifications.api.model/DeviceTokenRequest.token.<get-token>|<get-token>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.notifications.api.model/DeviceTokenRequest.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.notifications.api.model/DeviceTokenRequest.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.notifications.api.model/DeviceTokenRequest.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // stapel.notifications.api.model/DeviceTokenRequest.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.notifications.api.model/DeviceTokenRequest // stapel.notifications.api.model/DeviceTokenRequest.copy|copy(kotlin.String;kotlin.String;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/DeviceTokenRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/DeviceTokenRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/DeviceTokenRequest.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/DeviceTokenRequest> { // stapel.notifications.api.model/DeviceTokenRequest.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/DeviceTokenRequest.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/DeviceTokenRequest.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/DeviceTokenRequest.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/DeviceTokenRequest // stapel.notifications.api.model/DeviceTokenRequest.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/DeviceTokenRequest) // stapel.notifications.api.model/DeviceTokenRequest.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.DeviceTokenRequest){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/DeviceTokenRequest.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/DeviceTokenRequest> // stapel.notifications.api.model/DeviceTokenRequest.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/DeviceTokenResponse { // stapel.notifications.api.model/DeviceTokenResponse|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String? = ..., kotlin/Boolean? = ...) // stapel.notifications.api.model/DeviceTokenResponse.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?;kotlin.Boolean?){}[0]
+
+    final val deviceId // stapel.notifications.api.model/DeviceTokenResponse.deviceId|{}deviceId[0]
+        final fun <get-deviceId>(): kotlin/String? // stapel.notifications.api.model/DeviceTokenResponse.deviceId.<get-deviceId>|<get-deviceId>(){}[0]
+    final val platform // stapel.notifications.api.model/DeviceTokenResponse.platform|{}platform[0]
+        final fun <get-platform>(): kotlin/String // stapel.notifications.api.model/DeviceTokenResponse.platform.<get-platform>|<get-platform>(){}[0]
+    final val sessionBound // stapel.notifications.api.model/DeviceTokenResponse.sessionBound|{}sessionBound[0]
+        final fun <get-sessionBound>(): kotlin/Boolean? // stapel.notifications.api.model/DeviceTokenResponse.sessionBound.<get-sessionBound>|<get-sessionBound>(){}[0]
+    final val token // stapel.notifications.api.model/DeviceTokenResponse.token|{}token[0]
+        final fun <get-token>(): kotlin/String // stapel.notifications.api.model/DeviceTokenResponse.token.<get-token>|<get-token>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.notifications.api.model/DeviceTokenResponse.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.notifications.api.model/DeviceTokenResponse.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.notifications.api.model/DeviceTokenResponse.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean? // stapel.notifications.api.model/DeviceTokenResponse.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/Boolean? = ...): stapel.notifications.api.model/DeviceTokenResponse // stapel.notifications.api.model/DeviceTokenResponse.copy|copy(kotlin.String;kotlin.String;kotlin.String?;kotlin.Boolean?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/DeviceTokenResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/DeviceTokenResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/DeviceTokenResponse.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/DeviceTokenResponse> { // stapel.notifications.api.model/DeviceTokenResponse.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/DeviceTokenResponse.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/DeviceTokenResponse.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/DeviceTokenResponse.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/DeviceTokenResponse // stapel.notifications.api.model/DeviceTokenResponse.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/DeviceTokenResponse) // stapel.notifications.api.model/DeviceTokenResponse.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.DeviceTokenResponse){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/DeviceTokenResponse.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/DeviceTokenResponse> // stapel.notifications.api.model/DeviceTokenResponse.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/DeviceUnregisterRequest { // stapel.notifications.api.model/DeviceUnregisterRequest|null[0]
+    constructor <init>(kotlin/String? = ..., kotlin/String? = ...) // stapel.notifications.api.model/DeviceUnregisterRequest.<init>|<init>(kotlin.String?;kotlin.String?){}[0]
+
+    final val deviceId // stapel.notifications.api.model/DeviceUnregisterRequest.deviceId|{}deviceId[0]
+        final fun <get-deviceId>(): kotlin/String? // stapel.notifications.api.model/DeviceUnregisterRequest.deviceId.<get-deviceId>|<get-deviceId>(){}[0]
+    final val token // stapel.notifications.api.model/DeviceUnregisterRequest.token|{}token[0]
+        final fun <get-token>(): kotlin/String? // stapel.notifications.api.model/DeviceUnregisterRequest.token.<get-token>|<get-token>(){}[0]
+
+    final fun component1(): kotlin/String? // stapel.notifications.api.model/DeviceUnregisterRequest.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // stapel.notifications.api.model/DeviceUnregisterRequest.component2|component2(){}[0]
+    final fun copy(kotlin/String? = ..., kotlin/String? = ...): stapel.notifications.api.model/DeviceUnregisterRequest // stapel.notifications.api.model/DeviceUnregisterRequest.copy|copy(kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/DeviceUnregisterRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/DeviceUnregisterRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/DeviceUnregisterRequest.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/DeviceUnregisterRequest> { // stapel.notifications.api.model/DeviceUnregisterRequest.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/DeviceUnregisterRequest.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/DeviceUnregisterRequest.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/DeviceUnregisterRequest.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/DeviceUnregisterRequest // stapel.notifications.api.model/DeviceUnregisterRequest.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/DeviceUnregisterRequest) // stapel.notifications.api.model/DeviceUnregisterRequest.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.DeviceUnregisterRequest){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/DeviceUnregisterRequest.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/DeviceUnregisterRequest> // stapel.notifications.api.model/DeviceUnregisterRequest.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/FeedItemResponse { // stapel.notifications.api.model/FeedItemResponse|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String, kotlin/String, kotlinx.serialization.json/JsonObject, kotlin/String, kotlin/String? = ...) // stapel.notifications.api.model/FeedItemResponse.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;kotlin.String;kotlinx.serialization.json.JsonObject;kotlin.String;kotlin.String?){}[0]
+
+    final val body // stapel.notifications.api.model/FeedItemResponse.body|{}body[0]
+        final fun <get-body>(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.body.<get-body>|<get-body>(){}[0]
+    final val createdAt // stapel.notifications.api.model/FeedItemResponse.createdAt|{}createdAt[0]
+        final fun <get-createdAt>(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.createdAt.<get-createdAt>|<get-createdAt>(){}[0]
+    final val data // stapel.notifications.api.model/FeedItemResponse.data|{}data[0]
+        final fun <get-data>(): kotlinx.serialization.json/JsonObject // stapel.notifications.api.model/FeedItemResponse.data.<get-data>|<get-data>(){}[0]
+    final val id // stapel.notifications.api.model/FeedItemResponse.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.id.<get-id>|<get-id>(){}[0]
+    final val notificationType // stapel.notifications.api.model/FeedItemResponse.notificationType|{}notificationType[0]
+        final fun <get-notificationType>(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.notificationType.<get-notificationType>|<get-notificationType>(){}[0]
+    final val readAt // stapel.notifications.api.model/FeedItemResponse.readAt|{}readAt[0]
+        final fun <get-readAt>(): kotlin/String? // stapel.notifications.api.model/FeedItemResponse.readAt.<get-readAt>|<get-readAt>(){}[0]
+    final val title // stapel.notifications.api.model/FeedItemResponse.title|{}title[0]
+        final fun <get-title>(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.title.<get-title>|<get-title>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.component3|component3(){}[0]
+    final fun component4(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.component4|component4(){}[0]
+    final fun component5(): kotlinx.serialization.json/JsonObject // stapel.notifications.api.model/FeedItemResponse.component5|component5(){}[0]
+    final fun component6(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.component6|component6(){}[0]
+    final fun component7(): kotlin/String? // stapel.notifications.api.model/FeedItemResponse.component7|component7(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., kotlinx.serialization.json/JsonObject = ..., kotlin/String = ..., kotlin/String? = ...): stapel.notifications.api.model/FeedItemResponse // stapel.notifications.api.model/FeedItemResponse.copy|copy(kotlin.String;kotlin.String;kotlin.String;kotlin.String;kotlinx.serialization.json.JsonObject;kotlin.String;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/FeedItemResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/FeedItemResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/FeedItemResponse.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/FeedItemResponse> { // stapel.notifications.api.model/FeedItemResponse.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/FeedItemResponse.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/FeedItemResponse.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/FeedItemResponse.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/FeedItemResponse // stapel.notifications.api.model/FeedItemResponse.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/FeedItemResponse) // stapel.notifications.api.model/FeedItemResponse.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.FeedItemResponse){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/FeedItemResponse.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/FeedItemResponse> // stapel.notifications.api.model/FeedItemResponse.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/FeedReadRequest { // stapel.notifications.api.model/FeedReadRequest|null[0]
+    constructor <init>(kotlin.collections/List<kotlin/String>? = ..., kotlin/Boolean? = ...) // stapel.notifications.api.model/FeedReadRequest.<init>|<init>(kotlin.collections.List<kotlin.String>?;kotlin.Boolean?){}[0]
+
+    final val all // stapel.notifications.api.model/FeedReadRequest.all|{}all[0]
+        final fun <get-all>(): kotlin/Boolean? // stapel.notifications.api.model/FeedReadRequest.all.<get-all>|<get-all>(){}[0]
+    final val ids // stapel.notifications.api.model/FeedReadRequest.ids|{}ids[0]
+        final fun <get-ids>(): kotlin.collections/List<kotlin/String>? // stapel.notifications.api.model/FeedReadRequest.ids.<get-ids>|<get-ids>(){}[0]
+
+    final fun component1(): kotlin.collections/List<kotlin/String>? // stapel.notifications.api.model/FeedReadRequest.component1|component1(){}[0]
+    final fun component2(): kotlin/Boolean? // stapel.notifications.api.model/FeedReadRequest.component2|component2(){}[0]
+    final fun copy(kotlin.collections/List<kotlin/String>? = ..., kotlin/Boolean? = ...): stapel.notifications.api.model/FeedReadRequest // stapel.notifications.api.model/FeedReadRequest.copy|copy(kotlin.collections.List<kotlin.String>?;kotlin.Boolean?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/FeedReadRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/FeedReadRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/FeedReadRequest.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/FeedReadRequest> { // stapel.notifications.api.model/FeedReadRequest.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/FeedReadRequest.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/FeedReadRequest.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/FeedReadRequest.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/FeedReadRequest // stapel.notifications.api.model/FeedReadRequest.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/FeedReadRequest) // stapel.notifications.api.model/FeedReadRequest.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.FeedReadRequest){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/FeedReadRequest.Companion|null[0]
+        final val $childSerializers // stapel.notifications.api.model/FeedReadRequest.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/FeedReadRequest> // stapel.notifications.api.model/FeedReadRequest.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/FeedReadResponse { // stapel.notifications.api.model/FeedReadResponse|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int) // stapel.notifications.api.model/FeedReadResponse.<init>|<init>(kotlin.Int;kotlin.Int){}[0]
+
+    final val marked // stapel.notifications.api.model/FeedReadResponse.marked|{}marked[0]
+        final fun <get-marked>(): kotlin/Int // stapel.notifications.api.model/FeedReadResponse.marked.<get-marked>|<get-marked>(){}[0]
+    final val unreadCount // stapel.notifications.api.model/FeedReadResponse.unreadCount|{}unreadCount[0]
+        final fun <get-unreadCount>(): kotlin/Int // stapel.notifications.api.model/FeedReadResponse.unreadCount.<get-unreadCount>|<get-unreadCount>(){}[0]
+
+    final fun component1(): kotlin/Int // stapel.notifications.api.model/FeedReadResponse.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // stapel.notifications.api.model/FeedReadResponse.component2|component2(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/Int = ...): stapel.notifications.api.model/FeedReadResponse // stapel.notifications.api.model/FeedReadResponse.copy|copy(kotlin.Int;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/FeedReadResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/FeedReadResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/FeedReadResponse.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/FeedReadResponse> { // stapel.notifications.api.model/FeedReadResponse.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/FeedReadResponse.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/FeedReadResponse.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/FeedReadResponse.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/FeedReadResponse // stapel.notifications.api.model/FeedReadResponse.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/FeedReadResponse) // stapel.notifications.api.model/FeedReadResponse.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.FeedReadResponse){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/FeedReadResponse.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/FeedReadResponse> // stapel.notifications.api.model/FeedReadResponse.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api.model/PaginatedFeedItemResponseList : stapel.wire/Page<stapel.notifications.api.model/FeedItemResponse> { // stapel.notifications.api.model/PaginatedFeedItemResponseList|null[0]
+    constructor <init>(kotlin.collections/List<stapel.notifications.api.model/FeedItemResponse>, stapel.wire/PageCursor? = ..., stapel.wire/PageCursor? = ..., kotlin/Boolean, kotlin/Boolean, kotlin/Int, kotlin/Int) // stapel.notifications.api.model/PaginatedFeedItemResponseList.<init>|<init>(kotlin.collections.List<stapel.notifications.api.model.FeedItemResponse>;stapel.wire.PageCursor?;stapel.wire.PageCursor?;kotlin.Boolean;kotlin.Boolean;kotlin.Int;kotlin.Int){}[0]
+
+    final val count // stapel.notifications.api.model/PaginatedFeedItemResponseList.count|{}count[0]
+        final fun <get-count>(): kotlin/Int // stapel.notifications.api.model/PaginatedFeedItemResponseList.count.<get-count>|<get-count>(){}[0]
+    final val hasNext // stapel.notifications.api.model/PaginatedFeedItemResponseList.hasNext|{}hasNext[0]
+        final fun <get-hasNext>(): kotlin/Boolean // stapel.notifications.api.model/PaginatedFeedItemResponseList.hasNext.<get-hasNext>|<get-hasNext>(){}[0]
+    final val hasPrev // stapel.notifications.api.model/PaginatedFeedItemResponseList.hasPrev|{}hasPrev[0]
+        final fun <get-hasPrev>(): kotlin/Boolean // stapel.notifications.api.model/PaginatedFeedItemResponseList.hasPrev.<get-hasPrev>|<get-hasPrev>(){}[0]
+    final val items // stapel.notifications.api.model/PaginatedFeedItemResponseList.items|{}items[0]
+        final fun <get-items>(): kotlin.collections/List<stapel.notifications.api.model/FeedItemResponse> // stapel.notifications.api.model/PaginatedFeedItemResponseList.items.<get-items>|<get-items>(){}[0]
+    final val nextAnchor // stapel.notifications.api.model/PaginatedFeedItemResponseList.nextAnchor|{}nextAnchor[0]
+        final fun <get-nextAnchor>(): stapel.wire/PageCursor? // stapel.notifications.api.model/PaginatedFeedItemResponseList.nextAnchor.<get-nextAnchor>|<get-nextAnchor>(){}[0]
+    final val nextCursor // stapel.notifications.api.model/PaginatedFeedItemResponseList.nextCursor|{}nextCursor[0]
+        final fun <get-nextCursor>(): stapel.wire/PageCursor? // stapel.notifications.api.model/PaginatedFeedItemResponseList.nextCursor.<get-nextCursor>|<get-nextCursor>(){}[0]
+    final val prevAnchor // stapel.notifications.api.model/PaginatedFeedItemResponseList.prevAnchor|{}prevAnchor[0]
+        final fun <get-prevAnchor>(): stapel.wire/PageCursor? // stapel.notifications.api.model/PaginatedFeedItemResponseList.prevAnchor.<get-prevAnchor>|<get-prevAnchor>(){}[0]
+    final val prevCursor // stapel.notifications.api.model/PaginatedFeedItemResponseList.prevCursor|{}prevCursor[0]
+        final fun <get-prevCursor>(): stapel.wire/PageCursor? // stapel.notifications.api.model/PaginatedFeedItemResponseList.prevCursor.<get-prevCursor>|<get-prevCursor>(){}[0]
+    final val total // stapel.notifications.api.model/PaginatedFeedItemResponseList.total|{}total[0]
+        final fun <get-total>(): kotlin/Int? // stapel.notifications.api.model/PaginatedFeedItemResponseList.total.<get-total>|<get-total>(){}[0]
+    final val unreadCount // stapel.notifications.api.model/PaginatedFeedItemResponseList.unreadCount|{}unreadCount[0]
+        final fun <get-unreadCount>(): kotlin/Int // stapel.notifications.api.model/PaginatedFeedItemResponseList.unreadCount.<get-unreadCount>|<get-unreadCount>(){}[0]
+
+    final fun component1(): kotlin.collections/List<stapel.notifications.api.model/FeedItemResponse> // stapel.notifications.api.model/PaginatedFeedItemResponseList.component1|component1(){}[0]
+    final fun component2(): stapel.wire/PageCursor? // stapel.notifications.api.model/PaginatedFeedItemResponseList.component2|component2(){}[0]
+    final fun component3(): stapel.wire/PageCursor? // stapel.notifications.api.model/PaginatedFeedItemResponseList.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // stapel.notifications.api.model/PaginatedFeedItemResponseList.component4|component4(){}[0]
+    final fun component5(): kotlin/Boolean // stapel.notifications.api.model/PaginatedFeedItemResponseList.component5|component5(){}[0]
+    final fun component6(): kotlin/Int // stapel.notifications.api.model/PaginatedFeedItemResponseList.component6|component6(){}[0]
+    final fun component7(): kotlin/Int // stapel.notifications.api.model/PaginatedFeedItemResponseList.component7|component7(){}[0]
+    final fun copy(kotlin.collections/List<stapel.notifications.api.model/FeedItemResponse> = ..., stapel.wire/PageCursor? = ..., stapel.wire/PageCursor? = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Int = ..., kotlin/Int = ...): stapel.notifications.api.model/PaginatedFeedItemResponseList // stapel.notifications.api.model/PaginatedFeedItemResponseList.copy|copy(kotlin.collections.List<stapel.notifications.api.model.FeedItemResponse>;stapel.wire.PageCursor?;stapel.wire.PageCursor?;kotlin.Boolean;kotlin.Boolean;kotlin.Int;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.api.model/PaginatedFeedItemResponseList.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.api.model/PaginatedFeedItemResponseList.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.api.model/PaginatedFeedItemResponseList.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.api.model/PaginatedFeedItemResponseList> { // stapel.notifications.api.model/PaginatedFeedItemResponseList.$serializer|null[0]
+        final val descriptor // stapel.notifications.api.model/PaginatedFeedItemResponseList.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.api.model/PaginatedFeedItemResponseList.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.api.model/PaginatedFeedItemResponseList.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.api.model/PaginatedFeedItemResponseList // stapel.notifications.api.model/PaginatedFeedItemResponseList.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.api.model/PaginatedFeedItemResponseList) // stapel.notifications.api.model/PaginatedFeedItemResponseList.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.api.model.PaginatedFeedItemResponseList){}[0]
+    }
+
+    final object Companion { // stapel.notifications.api.model/PaginatedFeedItemResponseList.Companion|null[0]
+        final val $childSerializers // stapel.notifications.api.model/PaginatedFeedItemResponseList.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.api.model/PaginatedFeedItemResponseList> // stapel.notifications.api.model/PaginatedFeedItemResponseList.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.api/NotificationsApiClient : stapel.notifications.api/NotificationsApi { // stapel.notifications.api/NotificationsApiClient|null[0]
+    constructor <init>(stapel.wire/ApiTransport) // stapel.notifications.api/NotificationsApiClient.<init>|<init>(stapel.wire.ApiTransport){}[0]
+
+    final suspend fun getNotificationFeed(kotlin/String?, stapel.notifications.api.model/GetNotificationFeedDirection?, kotlin/Int?): stapel.result/StapelResult<stapel.notifications.api.model/PaginatedFeedItemResponseList, stapel.notifications.api.error/NotificationsApiError> // stapel.notifications.api/NotificationsApiClient.getNotificationFeed|getNotificationFeed(kotlin.String?;stapel.notifications.api.model.GetNotificationFeedDirection?;kotlin.Int?){}[0]
+    final suspend fun getNotificationKeys(): stapel.result/StapelResult<kotlinx.serialization.json/JsonObject, stapel.notifications.api.error/NotificationsApiError> // stapel.notifications.api/NotificationsApiClient.getNotificationKeys|getNotificationKeys(){}[0]
+    final suspend fun listDeviceTokens(): stapel.result/StapelResult<kotlin.collections/List<stapel.notifications.api.model/DeviceListItemResponse>, stapel.notifications.api.error/ListDeviceTokensError> // stapel.notifications.api/NotificationsApiClient.listDeviceTokens|listDeviceTokens(){}[0]
+    final suspend fun markNotificationFeedRead(stapel.notifications.api.model/FeedReadRequest?): stapel.result/StapelResult<stapel.notifications.api.model/FeedReadResponse, stapel.notifications.api.error/MarkNotificationFeedReadError> // stapel.notifications.api/NotificationsApiClient.markNotificationFeedRead|markNotificationFeedRead(stapel.notifications.api.model.FeedReadRequest?){}[0]
+    final suspend fun registerDeviceToken(stapel.notifications.api.model/DeviceTokenRequest): stapel.result/StapelResult<stapel.notifications.api.model/DeviceTokenResponse, stapel.notifications.api.error/RegisterDeviceTokenError> // stapel.notifications.api/NotificationsApiClient.registerDeviceToken|registerDeviceToken(stapel.notifications.api.model.DeviceTokenRequest){}[0]
+    final suspend fun unregisterDevice(kotlin/Int): stapel.result/StapelResult<kotlin/Unit, stapel.notifications.api.error/UnregisterDeviceError> // stapel.notifications.api/NotificationsApiClient.unregisterDevice|unregisterDevice(kotlin.Int){}[0]
+    final suspend fun unregisterDeviceToken(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.notifications.api.error/UnregisterDeviceTokenError> // stapel.notifications.api/NotificationsApiClient.unregisterDeviceToken|unregisterDeviceToken(kotlin.String){}[0]
+    final suspend fun unregisterPushDevice(stapel.notifications.api.model/DeviceUnregisterRequest?): stapel.result/StapelResult<kotlin/Unit, stapel.notifications.api.error/UnregisterPushDeviceError> // stapel.notifications.api/NotificationsApiClient.unregisterPushDevice|unregisterPushDevice(stapel.notifications.api.model.DeviceUnregisterRequest?){}[0]
+}
+
+final object stapel.notifications.api.error/NotificationsErrorCatalog : stapel.result.text/ErrorCatalog { // stapel.notifications.api.error/NotificationsErrorCatalog|null[0]
+    final val owner // stapel.notifications.api.error/NotificationsErrorCatalog.owner|{}owner[0]
+        final fun <get-owner>(): kotlin/String // stapel.notifications.api.error/NotificationsErrorCatalog.owner.<get-owner>|<get-owner>(){}[0]
+
+    final fun spec(stapel.result/ErrorCode): stapel.result.text/ErrorSpec? // stapel.notifications.api.error/NotificationsErrorCatalog.spec|spec(stapel.result.ErrorCode){}[0]
+    final fun template(stapel.result/ErrorCode, stapel.result.text/LocaleTag): kotlin/String? // stapel.notifications.api.error/NotificationsErrorCatalog.template|template(stapel.result.ErrorCode;stapel.result.text.LocaleTag){}[0]
+}
+
+final object stapel.notifications.api/NotificationsContract { // stapel.notifications.api/NotificationsContract|null[0]
+    final const val MODULE // stapel.notifications.api/NotificationsContract.MODULE|{}MODULE[0]
+        final fun <get-MODULE>(): kotlin/String // stapel.notifications.api/NotificationsContract.MODULE.<get-MODULE>|<get-MODULE>(){}[0]
+    final const val PROFILE // stapel.notifications.api/NotificationsContract.PROFILE|{}PROFILE[0]
+        final fun <get-PROFILE>(): kotlin/Int // stapel.notifications.api/NotificationsContract.PROFILE.<get-PROFILE>|<get-PROFILE>(){}[0]
+    final const val REF // stapel.notifications.api/NotificationsContract.REF|{}REF[0]
+        final fun <get-REF>(): kotlin/String // stapel.notifications.api/NotificationsContract.REF.<get-REF>|<get-REF>(){}[0]
+    final const val RUNTIME_ABI // stapel.notifications.api/NotificationsContract.RUNTIME_ABI|{}RUNTIME_ABI[0]
+        final fun <get-RUNTIME_ABI>(): kotlin/Int // stapel.notifications.api/NotificationsContract.RUNTIME_ABI.<get-RUNTIME_ABI>|<get-RUNTIME_ABI>(){}[0]
+    final const val SCHEMA_SHA256 // stapel.notifications.api/NotificationsContract.SCHEMA_SHA256|{}SCHEMA_SHA256[0]
+        final fun <get-SCHEMA_SHA256>(): kotlin/String // stapel.notifications.api/NotificationsContract.SCHEMA_SHA256.<get-SCHEMA_SHA256>|<get-SCHEMA_SHA256>(){}[0]
+    final const val VERSION // stapel.notifications.api/NotificationsContract.VERSION|{}VERSION[0]
+        final fun <get-VERSION>(): kotlin/String // stapel.notifications.api/NotificationsContract.VERSION.<get-VERSION>|<get-VERSION>(){}[0]
+}
+
+final object stapel.notifications.api/NotificationsInvalidation { // stapel.notifications.api/NotificationsInvalidation|null[0]
+    final val table // stapel.notifications.api/NotificationsInvalidation.table|{}table[0]
+        final fun <get-table>(): kotlin.collections/Map<kotlin/String, kotlin.collections/List<stapel.wire/KeyPattern>> // stapel.notifications.api/NotificationsInvalidation.table.<get-table>|<get-table>(){}[0]
+
+    final fun after(kotlin/String): kotlin.collections/List<stapel.wire/KeyPattern> // stapel.notifications.api/NotificationsInvalidation.after|after(kotlin.String){}[0]
+}
+
+final object stapel.notifications.api/NotificationsKeys { // stapel.notifications.api/NotificationsKeys|null[0]
+    final val all // stapel.notifications.api/NotificationsKeys.all|{}all[0]
+        final fun <get-all>(): stapel.wire/KeyPattern // stapel.notifications.api/NotificationsKeys.all.<get-all>|<get-all>(){}[0]
+    final val hints // stapel.notifications.api/NotificationsKeys.hints|{}hints[0]
+        final fun <get-hints>(): kotlin.collections/Map<kotlin/String, stapel.wire/CacheHint> // stapel.notifications.api/NotificationsKeys.hints.<get-hints>|<get-hints>(){}[0]
+
+    final fun getNotificationFeed(kotlin/String? = ..., stapel.notifications.api.model/GetNotificationFeedDirection? = ..., kotlin/Int? = ...): stapel.wire/CacheKey // stapel.notifications.api/NotificationsKeys.getNotificationFeed|getNotificationFeed(kotlin.String?;stapel.notifications.api.model.GetNotificationFeedDirection?;kotlin.Int?){}[0]
+    final fun getNotificationKeys(): stapel.wire/CacheKey // stapel.notifications.api/NotificationsKeys.getNotificationKeys|getNotificationKeys(){}[0]
+    final fun listDeviceTokens(): stapel.wire/CacheKey // stapel.notifications.api/NotificationsKeys.listDeviceTokens|listDeviceTokens(){}[0]
+}
+
+final fun (stapel.notifications.api/NotificationsApi).stapel.notifications.api/getNotificationFeedPager(kotlin/Int? = ...): stapel.wire/Pager<stapel.notifications.api.model/FeedItemResponse, stapel.notifications.api.error/NotificationsApiError> // stapel.notifications.api/getNotificationFeedPager|getNotificationFeedPager@stapel.notifications.api.NotificationsApi(kotlin.Int?){}[0]
+final fun stapel.notifications.di/notificationsModule(): org.koin.core.module/Module // stapel.notifications.di/notificationsModule|notificationsModule(){}[0]

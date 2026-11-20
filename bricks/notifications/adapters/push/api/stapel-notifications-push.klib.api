@@ -1,0 +1,201 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-notifications-push>
+final enum class stapel.notifications.push/NotificationPushGroup : kotlin/Enum<stapel.notifications.push/NotificationPushGroup> { // stapel.notifications.push/NotificationPushGroup|null[0]
+    enum entry Auth // stapel.notifications.push/NotificationPushGroup.Auth|null[0]
+    enum entry Billing // stapel.notifications.push/NotificationPushGroup.Billing|null[0]
+    enum entry Messages // stapel.notifications.push/NotificationPushGroup.Messages|null[0]
+    enum entry System // stapel.notifications.push/NotificationPushGroup.System|null[0]
+    enum entry Unknown // stapel.notifications.push/NotificationPushGroup.Unknown|null[0]
+
+    final val entries // stapel.notifications.push/NotificationPushGroup.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.notifications.push/NotificationPushGroup> // stapel.notifications.push/NotificationPushGroup.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wire // stapel.notifications.push/NotificationPushGroup.wire|{}wire[0]
+        final fun <get-wire>(): kotlin/String // stapel.notifications.push/NotificationPushGroup.wire.<get-wire>|<get-wire>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.notifications.push/NotificationPushGroup // stapel.notifications.push/NotificationPushGroup.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.notifications.push/NotificationPushGroup> // stapel.notifications.push/NotificationPushGroup.values|values#static(){}[0]
+
+    final object Companion { // stapel.notifications.push/NotificationPushGroup.Companion|null[0]
+        final fun of(kotlin/String): stapel.notifications.push/NotificationPushGroup // stapel.notifications.push/NotificationPushGroup.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final class stapel.notifications.push/MarkReadOnOpen : stapel.push/PushOpenListener { // stapel.notifications.push/MarkReadOnOpen|null[0]
+    constructor <init>(stapel.notifications.api/NotificationsApi, stapel.runtime/StapelLogger = ...) // stapel.notifications.push/MarkReadOnOpen.<init>|<init>(stapel.notifications.api.NotificationsApi;stapel.runtime.StapelLogger){}[0]
+
+    final suspend fun onOpened(stapel.push/PushMessage) // stapel.notifications.push/MarkReadOnOpen.onOpened|onOpened(stapel.push.PushMessage){}[0]
+}
+
+final class stapel.notifications.push/NotificationPushData { // stapel.notifications.push/NotificationPushData|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String, stapel.notifications.push/NotificationPushGroup, kotlin/String? = ..., kotlin/String, kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.notifications.push/NotificationPushData.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;stapel.notifications.push.NotificationPushGroup;kotlin.String?;kotlin.String;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val badge // stapel.notifications.push/NotificationPushData.badge|{}badge[0]
+        final fun <get-badge>(): kotlin/String // stapel.notifications.push/NotificationPushData.badge.<get-badge>|<get-badge>(){}[0]
+    final val chatUrl // stapel.notifications.push/NotificationPushData.chatUrl|{}chatUrl[0]
+        final fun <get-chatUrl>(): kotlin/String? // stapel.notifications.push/NotificationPushData.chatUrl.<get-chatUrl>|<get-chatUrl>(){}[0]
+    final val extras // stapel.notifications.push/NotificationPushData.extras|{}extras[0]
+        final fun <get-extras>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.notifications.push/NotificationPushData.extras.<get-extras>|<get-extras>(){}[0]
+    final val group // stapel.notifications.push/NotificationPushData.group|{}group[0]
+        final fun <get-group>(): stapel.notifications.push/NotificationPushGroup // stapel.notifications.push/NotificationPushData.group.<get-group>|<get-group>(){}[0]
+    final val listingUrl // stapel.notifications.push/NotificationPushData.listingUrl|{}listingUrl[0]
+        final fun <get-listingUrl>(): kotlin/String? // stapel.notifications.push/NotificationPushData.listingUrl.<get-listingUrl>|<get-listingUrl>(){}[0]
+    final val notificationId // stapel.notifications.push/NotificationPushData.notificationId|{}notificationId[0]
+        final fun <get-notificationId>(): kotlin/String // stapel.notifications.push/NotificationPushData.notificationId.<get-notificationId>|<get-notificationId>(){}[0]
+    final val notificationType // stapel.notifications.push/NotificationPushData.notificationType|{}notificationType[0]
+        final fun <get-notificationType>(): kotlin/String // stapel.notifications.push/NotificationPushData.notificationType.<get-notificationType>|<get-notificationType>(){}[0]
+    final val notificationsChatUrl // stapel.notifications.push/NotificationPushData.notificationsChatUrl|{}notificationsChatUrl[0]
+        final fun <get-notificationsChatUrl>(): kotlin/String? // stapel.notifications.push/NotificationPushData.notificationsChatUrl.<get-notificationsChatUrl>|<get-notificationsChatUrl>(){}[0]
+    final val url // stapel.notifications.push/NotificationPushData.url|{}url[0]
+        final fun <get-url>(): kotlin/String? // stapel.notifications.push/NotificationPushData.url.<get-url>|<get-url>(){}[0]
+    final val v // stapel.notifications.push/NotificationPushData.v|{}v[0]
+        final fun <get-v>(): kotlin/String // stapel.notifications.push/NotificationPushData.v.<get-v>|<get-v>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.notifications.push/NotificationPushData.component1|component1(){}[0]
+    final fun component10(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.notifications.push/NotificationPushData.component10|component10(){}[0]
+    final fun component2(): kotlin/String // stapel.notifications.push/NotificationPushData.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.notifications.push/NotificationPushData.component3|component3(){}[0]
+    final fun component4(): stapel.notifications.push/NotificationPushGroup // stapel.notifications.push/NotificationPushData.component4|component4(){}[0]
+    final fun component5(): kotlin/String? // stapel.notifications.push/NotificationPushData.component5|component5(){}[0]
+    final fun component6(): kotlin/String // stapel.notifications.push/NotificationPushData.component6|component6(){}[0]
+    final fun component7(): kotlin/String? // stapel.notifications.push/NotificationPushData.component7|component7(){}[0]
+    final fun component8(): kotlin/String? // stapel.notifications.push/NotificationPushData.component8|component8(){}[0]
+    final fun component9(): kotlin/String? // stapel.notifications.push/NotificationPushData.component9|component9(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., stapel.notifications.push/NotificationPushGroup = ..., kotlin/String? = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...): stapel.notifications.push/NotificationPushData // stapel.notifications.push/NotificationPushData.copy|copy(kotlin.String;kotlin.String;kotlin.String;stapel.notifications.push.NotificationPushGroup;kotlin.String?;kotlin.String;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.push/NotificationPushData.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.push/NotificationPushData.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.push/NotificationPushData.toString|toString(){}[0]
+
+    final object Companion { // stapel.notifications.push/NotificationPushData.Companion|null[0]
+        final val KNOWN_KEYS // stapel.notifications.push/NotificationPushData.Companion.KNOWN_KEYS|{}KNOWN_KEYS[0]
+            final fun <get-KNOWN_KEYS>(): kotlin.collections/Set<kotlin/String> // stapel.notifications.push/NotificationPushData.Companion.KNOWN_KEYS.<get-KNOWN_KEYS>|<get-KNOWN_KEYS>(){}[0]
+
+        final fun parse(kotlin.collections/Map<kotlin/String, kotlin/String>): stapel.notifications.push/NotificationPushData? // stapel.notifications.push/NotificationPushData.Companion.parse|parse(kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    }
+}
+
+final class stapel.notifications.push/NotificationPushMessage { // stapel.notifications.push/NotificationPushMessage|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>, stapel.notifications.push/NotificationPushMessage.Android, stapel.notifications.push/NotificationPushMessage.Apns) // stapel.notifications.push/NotificationPushMessage.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>;stapel.notifications.push.NotificationPushMessage.Android;stapel.notifications.push.NotificationPushMessage.Apns){}[0]
+
+    final val android // stapel.notifications.push/NotificationPushMessage.android|{}android[0]
+        final fun <get-android>(): stapel.notifications.push/NotificationPushMessage.Android // stapel.notifications.push/NotificationPushMessage.android.<get-android>|<get-android>(){}[0]
+    final val apns // stapel.notifications.push/NotificationPushMessage.apns|{}apns[0]
+        final fun <get-apns>(): stapel.notifications.push/NotificationPushMessage.Apns // stapel.notifications.push/NotificationPushMessage.apns.<get-apns>|<get-apns>(){}[0]
+    final val body // stapel.notifications.push/NotificationPushMessage.body|{}body[0]
+        final fun <get-body>(): kotlin/String // stapel.notifications.push/NotificationPushMessage.body.<get-body>|<get-body>(){}[0]
+    final val data // stapel.notifications.push/NotificationPushMessage.data|{}data[0]
+        final fun <get-data>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.notifications.push/NotificationPushMessage.data.<get-data>|<get-data>(){}[0]
+    final val payload // stapel.notifications.push/NotificationPushMessage.payload|{}payload[0]
+        final fun <get-payload>(): stapel.notifications.push/NotificationPushData? // stapel.notifications.push/NotificationPushMessage.payload.<get-payload>|<get-payload>(){}[0]
+    final val title // stapel.notifications.push/NotificationPushMessage.title|{}title[0]
+        final fun <get-title>(): kotlin/String // stapel.notifications.push/NotificationPushMessage.title.<get-title>|<get-title>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.notifications.push/NotificationPushMessage.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.notifications.push/NotificationPushMessage.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.notifications.push/NotificationPushMessage.component3|component3(){}[0]
+    final fun component4(): stapel.notifications.push/NotificationPushMessage.Android // stapel.notifications.push/NotificationPushMessage.component4|component4(){}[0]
+    final fun component5(): stapel.notifications.push/NotificationPushMessage.Apns // stapel.notifications.push/NotificationPushMessage.component5|component5(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., stapel.notifications.push/NotificationPushMessage.Android = ..., stapel.notifications.push/NotificationPushMessage.Apns = ...): stapel.notifications.push/NotificationPushMessage // stapel.notifications.push/NotificationPushMessage.copy|copy(kotlin.String;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>;stapel.notifications.push.NotificationPushMessage.Android;stapel.notifications.push.NotificationPushMessage.Apns){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.push/NotificationPushMessage.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.notifications.push/NotificationPushMessage.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.notifications.push/NotificationPushMessage.toString|toString(){}[0]
+
+    final class Android { // stapel.notifications.push/NotificationPushMessage.Android|null[0]
+        constructor <init>(kotlin/String) // stapel.notifications.push/NotificationPushMessage.Android.<init>|<init>(kotlin.String){}[0]
+
+        final val channelId // stapel.notifications.push/NotificationPushMessage.Android.channelId|{}channelId[0]
+            final fun <get-channelId>(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Android.channelId.<get-channelId>|<get-channelId>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Android.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.notifications.push/NotificationPushMessage.Android // stapel.notifications.push/NotificationPushMessage.Android.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.push/NotificationPushMessage.Android.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.push/NotificationPushMessage.Android.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Android.toString|toString(){}[0]
+
+        final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.push/NotificationPushMessage.Android> { // stapel.notifications.push/NotificationPushMessage.Android.$serializer|null[0]
+            final val descriptor // stapel.notifications.push/NotificationPushMessage.Android.$serializer.descriptor|{}descriptor[0]
+                final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.push/NotificationPushMessage.Android.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+            final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.push/NotificationPushMessage.Android.$serializer.childSerializers|childSerializers(){}[0]
+            final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.push/NotificationPushMessage.Android // stapel.notifications.push/NotificationPushMessage.Android.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+            final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.push/NotificationPushMessage.Android) // stapel.notifications.push/NotificationPushMessage.Android.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.push.NotificationPushMessage.Android){}[0]
+        }
+
+        final object Companion { // stapel.notifications.push/NotificationPushMessage.Android.Companion|null[0]
+            final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.push/NotificationPushMessage.Android> // stapel.notifications.push/NotificationPushMessage.Android.Companion.serializer|serializer(){}[0]
+        }
+    }
+
+    final class Apns { // stapel.notifications.push/NotificationPushMessage.Apns|null[0]
+        constructor <init>(kotlin/Long, kotlin/String, kotlin/String) // stapel.notifications.push/NotificationPushMessage.Apns.<init>|<init>(kotlin.Long;kotlin.String;kotlin.String){}[0]
+
+        final val badge // stapel.notifications.push/NotificationPushMessage.Apns.badge|{}badge[0]
+            final fun <get-badge>(): kotlin/Long // stapel.notifications.push/NotificationPushMessage.Apns.badge.<get-badge>|<get-badge>(){}[0]
+        final val sound // stapel.notifications.push/NotificationPushMessage.Apns.sound|{}sound[0]
+            final fun <get-sound>(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Apns.sound.<get-sound>|<get-sound>(){}[0]
+        final val threadId // stapel.notifications.push/NotificationPushMessage.Apns.threadId|{}threadId[0]
+            final fun <get-threadId>(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Apns.threadId.<get-threadId>|<get-threadId>(){}[0]
+
+        final fun component1(): kotlin/Long // stapel.notifications.push/NotificationPushMessage.Apns.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Apns.component2|component2(){}[0]
+        final fun component3(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Apns.component3|component3(){}[0]
+        final fun copy(kotlin/Long = ..., kotlin/String = ..., kotlin/String = ...): stapel.notifications.push/NotificationPushMessage.Apns // stapel.notifications.push/NotificationPushMessage.Apns.copy|copy(kotlin.Long;kotlin.String;kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.notifications.push/NotificationPushMessage.Apns.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.notifications.push/NotificationPushMessage.Apns.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.notifications.push/NotificationPushMessage.Apns.toString|toString(){}[0]
+
+        final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.push/NotificationPushMessage.Apns> { // stapel.notifications.push/NotificationPushMessage.Apns.$serializer|null[0]
+            final val descriptor // stapel.notifications.push/NotificationPushMessage.Apns.$serializer.descriptor|{}descriptor[0]
+                final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.push/NotificationPushMessage.Apns.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+            final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.push/NotificationPushMessage.Apns.$serializer.childSerializers|childSerializers(){}[0]
+            final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.push/NotificationPushMessage.Apns // stapel.notifications.push/NotificationPushMessage.Apns.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+            final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.push/NotificationPushMessage.Apns) // stapel.notifications.push/NotificationPushMessage.Apns.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.push.NotificationPushMessage.Apns){}[0]
+        }
+
+        final object Companion { // stapel.notifications.push/NotificationPushMessage.Apns.Companion|null[0]
+            final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.push/NotificationPushMessage.Apns> // stapel.notifications.push/NotificationPushMessage.Apns.Companion.serializer|serializer(){}[0]
+        }
+    }
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.notifications.push/NotificationPushMessage> { // stapel.notifications.push/NotificationPushMessage.$serializer|null[0]
+        final val descriptor // stapel.notifications.push/NotificationPushMessage.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.notifications.push/NotificationPushMessage.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.notifications.push/NotificationPushMessage.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.notifications.push/NotificationPushMessage // stapel.notifications.push/NotificationPushMessage.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.notifications.push/NotificationPushMessage) // stapel.notifications.push/NotificationPushMessage.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.notifications.push.NotificationPushMessage){}[0]
+    }
+
+    final object Companion { // stapel.notifications.push/NotificationPushMessage.Companion|null[0]
+        final val $childSerializers // stapel.notifications.push/NotificationPushMessage.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.notifications.push/NotificationPushMessage> // stapel.notifications.push/NotificationPushMessage.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.notifications.push/NotificationsPushRegistry : stapel.push/PushDeviceRegistry { // stapel.notifications.push/NotificationsPushRegistry|null[0]
+    constructor <init>(stapel.notifications.api/NotificationsApi) // stapel.notifications.push/NotificationsPushRegistry.<init>|<init>(stapel.notifications.api.NotificationsApi){}[0]
+
+    final suspend fun register(stapel.push/PushDevice): stapel.result/StapelResult<kotlin/Unit, stapel.push/RegistryError> // stapel.notifications.push/NotificationsPushRegistry.register|register(stapel.push.PushDevice){}[0]
+    final suspend fun status(stapel.push/PushToken): stapel.result/StapelResult<stapel.push/DeviceStatus, stapel.push/RegistryError> // stapel.notifications.push/NotificationsPushRegistry.status|status(stapel.push.PushToken){}[0]
+    final suspend fun unregister(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.push/RegistryError> // stapel.notifications.push/NotificationsPushRegistry.unregister|unregister(kotlin.String){}[0]
+}
+
+final object stapel.notifications.push/NotificationPushContract { // stapel.notifications.push/NotificationPushContract|null[0]
+    final const val ID // stapel.notifications.push/NotificationPushContract.ID|{}ID[0]
+        final fun <get-ID>(): kotlin/String // stapel.notifications.push/NotificationPushContract.ID.<get-ID>|<get-ID>(){}[0]
+    final const val SHA256 // stapel.notifications.push/NotificationPushContract.SHA256|{}SHA256[0]
+        final fun <get-SHA256>(): kotlin/String // stapel.notifications.push/NotificationPushContract.SHA256.<get-SHA256>|<get-SHA256>(){}[0]
+    final const val VERSION // stapel.notifications.push/NotificationPushContract.VERSION|{}VERSION[0]
+        final fun <get-VERSION>(): kotlin/String // stapel.notifications.push/NotificationPushContract.VERSION.<get-VERSION>|<get-VERSION>(){}[0]
+}
+
+final fun stapel.notifications.push.di/notificationsPushModule(): org.koin.core.module/Module // stapel.notifications.push.di/notificationsPushModule|notificationsPushModule(){}[0]
+final fun stapel.notifications.push/defaultChannelName(stapel.notifications.push/NotificationPushGroup): kotlin/String // stapel.notifications.push/defaultChannelName|defaultChannelName(stapel.notifications.push.NotificationPushGroup){}[0]
+final fun stapel.notifications.push/notificationsPushRouting(kotlin/String? = ..., kotlin/Function1<stapel.notifications.push/NotificationPushGroup, kotlin/String> = ...): stapel.push/PushRouting // stapel.notifications.push/notificationsPushRouting|notificationsPushRouting(kotlin.String?;kotlin.Function1<stapel.notifications.push.NotificationPushGroup,kotlin.String>){}[0]

@@ -1,0 +1,177 @@
+public final class stapel/notifications/push/MarkReadOnOpen : stapel/push/PushOpenListener {
+	public fun <init> (Lstapel/notifications/api/NotificationsApi;Lstapel/runtime/StapelLogger;)V
+	public synthetic fun <init> (Lstapel/notifications/api/NotificationsApi;Lstapel/runtime/StapelLogger;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun onOpened (Lstapel/push/PushMessage;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/notifications/push/NotificationPushContract {
+	public static final field ID Ljava/lang/String;
+	public static final field INSTANCE Lstapel/notifications/push/NotificationPushContract;
+	public static final field SHA256 Ljava/lang/String;
+	public static final field VERSION Ljava/lang/String;
+}
+
+public final class stapel/notifications/push/NotificationPushData {
+	public static final field Companion Lstapel/notifications/push/NotificationPushData$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/notifications/push/NotificationPushGroup;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/notifications/push/NotificationPushGroup;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/util/Map;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lstapel/notifications/push/NotificationPushGroup;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/notifications/push/NotificationPushGroup;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Lstapel/notifications/push/NotificationPushData;
+	public static synthetic fun copy$default (Lstapel/notifications/push/NotificationPushData;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/notifications/push/NotificationPushGroup;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lstapel/notifications/push/NotificationPushData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBadge ()Ljava/lang/String;
+	public final fun getChatUrl ()Ljava/lang/String;
+	public final fun getExtras ()Ljava/util/Map;
+	public final fun getGroup ()Lstapel/notifications/push/NotificationPushGroup;
+	public final fun getListingUrl ()Ljava/lang/String;
+	public final fun getNotificationId ()Ljava/lang/String;
+	public final fun getNotificationType ()Ljava/lang/String;
+	public final fun getNotificationsChatUrl ()Ljava/lang/String;
+	public final fun getUrl ()Ljava/lang/String;
+	public final fun getV ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/notifications/push/NotificationPushData$Companion {
+	public final fun getKNOWN_KEYS ()Ljava/util/Set;
+	public final fun parse (Ljava/util/Map;)Lstapel/notifications/push/NotificationPushData;
+}
+
+public final class stapel/notifications/push/NotificationPushGroup : java/lang/Enum {
+	public static final field Auth Lstapel/notifications/push/NotificationPushGroup;
+	public static final field Billing Lstapel/notifications/push/NotificationPushGroup;
+	public static final field Companion Lstapel/notifications/push/NotificationPushGroup$Companion;
+	public static final field Messages Lstapel/notifications/push/NotificationPushGroup;
+	public static final field System Lstapel/notifications/push/NotificationPushGroup;
+	public static final field Unknown Lstapel/notifications/push/NotificationPushGroup;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getWire ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/notifications/push/NotificationPushGroup;
+	public static fun values ()[Lstapel/notifications/push/NotificationPushGroup;
+}
+
+public final class stapel/notifications/push/NotificationPushGroup$Companion {
+	public final fun of (Ljava/lang/String;)Lstapel/notifications/push/NotificationPushGroup;
+}
+
+public final class stapel/notifications/push/NotificationPushMessage {
+	public static final field Companion Lstapel/notifications/push/NotificationPushMessage$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Lstapel/notifications/push/NotificationPushMessage$Android;Lstapel/notifications/push/NotificationPushMessage$Apns;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/Map;
+	public final fun component4 ()Lstapel/notifications/push/NotificationPushMessage$Android;
+	public final fun component5 ()Lstapel/notifications/push/NotificationPushMessage$Apns;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Lstapel/notifications/push/NotificationPushMessage$Android;Lstapel/notifications/push/NotificationPushMessage$Apns;)Lstapel/notifications/push/NotificationPushMessage;
+	public static synthetic fun copy$default (Lstapel/notifications/push/NotificationPushMessage;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Lstapel/notifications/push/NotificationPushMessage$Android;Lstapel/notifications/push/NotificationPushMessage$Apns;ILjava/lang/Object;)Lstapel/notifications/push/NotificationPushMessage;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAndroid ()Lstapel/notifications/push/NotificationPushMessage$Android;
+	public final fun getApns ()Lstapel/notifications/push/NotificationPushMessage$Apns;
+	public final fun getBody ()Ljava/lang/String;
+	public final fun getData ()Ljava/util/Map;
+	public final fun getPayload ()Lstapel/notifications/push/NotificationPushData;
+	public final fun getTitle ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/push/NotificationPushMessage$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/push/NotificationPushMessage$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/push/NotificationPushMessage;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/push/NotificationPushMessage;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/push/NotificationPushMessage$Android {
+	public static final field Companion Lstapel/notifications/push/NotificationPushMessage$Android$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/notifications/push/NotificationPushMessage$Android;
+	public static synthetic fun copy$default (Lstapel/notifications/push/NotificationPushMessage$Android;Ljava/lang/String;ILjava/lang/Object;)Lstapel/notifications/push/NotificationPushMessage$Android;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChannelId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/push/NotificationPushMessage$Android$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/push/NotificationPushMessage$Android$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/push/NotificationPushMessage$Android;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/push/NotificationPushMessage$Android;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/push/NotificationPushMessage$Android$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/push/NotificationPushMessage$Apns {
+	public static final field Companion Lstapel/notifications/push/NotificationPushMessage$Apns$Companion;
+	public fun <init> (JLjava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()J
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (JLjava/lang/String;Ljava/lang/String;)Lstapel/notifications/push/NotificationPushMessage$Apns;
+	public static synthetic fun copy$default (Lstapel/notifications/push/NotificationPushMessage$Apns;JLjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/notifications/push/NotificationPushMessage$Apns;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBadge ()J
+	public final fun getSound ()Ljava/lang/String;
+	public final fun getThreadId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/notifications/push/NotificationPushMessage$Apns$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/notifications/push/NotificationPushMessage$Apns$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/notifications/push/NotificationPushMessage$Apns;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/notifications/push/NotificationPushMessage$Apns;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/push/NotificationPushMessage$Apns$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/push/NotificationPushMessage$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/notifications/push/NotificationsPushRegistry : stapel/push/PushDeviceRegistry {
+	public fun <init> (Lstapel/notifications/api/NotificationsApi;)V
+	public fun register (Lstapel/push/PushDevice;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun status (Lstapel/push/PushToken;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun unregister (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/notifications/push/NotificationsPushRoutingKt {
+	public static final fun defaultChannelName (Lstapel/notifications/push/NotificationPushGroup;)Ljava/lang/String;
+	public static final fun notificationsPushRouting (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lstapel/push/PushRouting;
+	public static synthetic fun notificationsPushRouting$default (Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lstapel/push/PushRouting;
+}
+
+public final class stapel/notifications/push/di/NotificationsPushModuleKt {
+	public static final fun notificationsPushModule ()Lorg/koin/core/module/Module;
+}
+

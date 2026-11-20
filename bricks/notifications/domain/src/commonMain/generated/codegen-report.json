@@ -1,0 +1,45 @@
+{
+    "brick": "notifications",
+    "contract": {
+        "module": "stapel-notifications",
+        "profile": 2,
+        "ref": "c7f60bd9831ee1b27b39140694867744815dd105",
+        "schema_sha256": "a90f1a58a30e9300f764cd0e6df2787d00043ca66d5888d59123877977cc3ec3",
+        "version": "0.31.1"
+    },
+    "counts": {
+        "W-BODY-UNDECLARED": 1,
+        "W-DOC-PARAM": 2,
+        "W-DOC-PROPERTY": 1,
+        "W-DOC-TYPE": 1
+    },
+    "diagnostics": [
+        {
+            "code": "W-BODY-UNDECLARED",
+            "message": "untyped object body",
+            "pointer": "#/paths/~1notifications~1api~1v1~1notification-keys~1/get"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter device_id of unregister_device has no description",
+            "pointer": "#/paths/~1notifications~1api~1v1~1devices~1by-id~1{device_id}~1/delete/parameters/device_id"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter token of unregister_device_token has no description",
+            "pointer": "#/paths/~1notifications~1api~1v1~1devices~1{token}~1/delete/parameters/token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PaginatedFeedItemResponseList.items has no description",
+            "pointer": "#/components/schemas/PaginatedFeedItemResponseList/properties/items"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type GetNotificationFeedDirection has no description",
+            "pointer": "#/paths/~1notifications~1api~1v1~1feed~1/get/parameters/direction"
+        }
+    ],
+    "operations": 8,
+    "types": 9
+}

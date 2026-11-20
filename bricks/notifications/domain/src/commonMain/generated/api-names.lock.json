@@ -1,0 +1,23 @@
+{
+    "operations": {
+        "get_notification_feed": "getNotificationFeed",
+        "get_notification_keys": "getNotificationKeys",
+        "list_device_tokens": "listDeviceTokens",
+        "mark_notification_feed_read": "markNotificationFeedRead",
+        "register_device_token": "registerDeviceToken",
+        "unregister_device": "unregisterDevice",
+        "unregister_device_token": "unregisterDeviceToken",
+        "unregister_push_device": "unregisterPushDevice"
+    },
+    "types": {
+        "#/paths/~1notifications~1api~1v1~1feed~1/get/parameters/direction": "GetNotificationFeedDirection",
+        "DeviceListItemResponse": "DeviceListItemResponse",
+        "DeviceTokenRequest": "DeviceTokenRequest",
+        "DeviceTokenResponse": "DeviceTokenResponse",
+        "DeviceUnregisterRequest": "DeviceUnregisterRequest",
+        "FeedItemResponse": "FeedItemResponse",
+        "FeedReadRequest": "FeedReadRequest",
+        "FeedReadResponse": "FeedReadResponse",
+        "PaginatedFeedItemResponseList": "PaginatedFeedItemResponseList"
+    }
+}
