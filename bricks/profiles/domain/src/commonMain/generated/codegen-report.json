@@ -1,0 +1,236 @@
+{
+    "brick": "profiles",
+    "contract": {
+        "module": "stapel-profiles",
+        "profile": 2,
+        "ref": "14a98f2ebffa3ad1bf058c462b2824da142dda61",
+        "schema_sha256": "2c53e42b18f500ef65bc66cc195091757e0fc6a9c78f5173c28ba3403d09ad29",
+        "version": "0.23.1"
+    },
+    "counts": {
+        "W-BODY-UNDECLARED": 1,
+        "W-DOC-PARAM": 2,
+        "W-DOC-PROPERTY": 31,
+        "W-DOC-TYPE": 1,
+        "W-ERR-STATUS-UNBOUND": 8
+    },
+    "diagnostics": [
+        {
+            "code": "W-BODY-UNDECLARED",
+            "message": "untyped object body",
+            "pointer": "#/paths/~1profiles~1api~1v1~1notifications~1unsubscribe/post"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter code of get_language has no description",
+            "pointer": "#/paths/~1profiles~1api~1v1~1languages~1{code}~1/get/parameters/code"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter token of unsubscribe_notifications has no description",
+            "pointer": "#/paths/~1profiles~1api~1v1~1notifications~1unsubscribe/post/parameters/token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ProfilePublic.avatar_image has no description",
+            "pointer": "#/components/schemas/ProfilePublic/properties/avatar_image"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ProfilePublic.contacts has no description",
+            "pointer": "#/components/schemas/ProfilePublic/properties/contacts"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ProfilePublic.created_at has no description",
+            "pointer": "#/components/schemas/ProfilePublic/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.aspect has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/aspect"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.height has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.mime has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/mime"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.preview_b64 has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/preview_b64"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.source has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/source"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.square has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/square"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.url has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.variants has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/variants"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImage.width has no description",
+            "pointer": "#/components/schemas/StapelImage/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.aspect has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/aspect"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.height has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.mime has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/mime"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.preview_b64 has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/preview_b64"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.source has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/source"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.square has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/square"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.url has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.variants has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/variants"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property StapelImageDTO.width has no description",
+            "pointer": "#/components/schemas/StapelImageDTO/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMeta.branch has no description",
+            "pointer": "#/components/schemas/VariantMeta/properties/branch"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMeta.height has no description",
+            "pointer": "#/components/schemas/VariantMeta/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMeta.tier has no description",
+            "pointer": "#/components/schemas/VariantMeta/properties/tier"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMeta.url has no description",
+            "pointer": "#/components/schemas/VariantMeta/properties/url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMeta.width has no description",
+            "pointer": "#/components/schemas/VariantMeta/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMetaDTO.branch has no description",
+            "pointer": "#/components/schemas/VariantMetaDTO/properties/branch"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMetaDTO.height has no description",
+            "pointer": "#/components/schemas/VariantMetaDTO/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMetaDTO.tier has no description",
+            "pointer": "#/components/schemas/VariantMetaDTO/properties/tier"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMetaDTO.url has no description",
+            "pointer": "#/components/schemas/VariantMetaDTO/properties/url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VariantMetaDTO.width has no description",
+            "pointer": "#/components/schemas/VariantMetaDTO/properties/width"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type AvatarSource has no description",
+            "pointer": "#/components/schemas/AvatarSourceEnum"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts/post/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 400 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts~1reveal/post/responses/400"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts~1reveal/post/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts~1{contact_id}/delete/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts~1{contact_id}/patch/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts~1{contact_id}~1reveals~1summary/get/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts~1{contact_id}~1verify~1confirm/post/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1profiles~1api~1v1~1contacts~1{contact_id}~1verify~1request/post/responses/403"
+        }
+    ],
+    "operations": 24,
+    "types": 29
+}

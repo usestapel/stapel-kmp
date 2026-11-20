@@ -147,6 +147,11 @@
       "family": "substrate",
       "released": false
     },
+    "stapel-profiles": {
+      "version": "0.0.1",
+      "family": "brick-domain",
+      "released": false
+    },
     "stapel-result": {
       "version": "0.0.1",
       "family": "substrate",

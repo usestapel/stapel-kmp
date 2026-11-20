@@ -1,0 +1,98 @@
+{
+    "module": "profiles",
+    "note": "Seeded from stapel-react packages/profiles-react at origin/main (manifest.json hooks: queryKey / invalidates; model/queryKeys.ts, model/mutations.ts and headless/Contacts.ts for the invalidations the manifest does not list), joined to operationIds; namespace \"profiles\" is implicit. Own profile: cache-first and always revalidated (web staleTime 0). Contacts and reveal summaries hold phone numbers: memory only, never on disk. Read-only POSTs (batch, reveal, verification request, unsubscribe) invalidate nothing; relationship actions move both parties' counters and every list.",
+    "operations": {
+        "add_my_contact": {
+            "invalidates": [["contacts"], ["me"]]
+        },
+        "batch_profiles": {
+            "invalidates": []
+        },
+        "block_user": {
+            "invalidates": [["relationship"], ["profile"], ["following"], ["followers"], ["blocked"], ["me"]]
+        },
+        "confirm_contact_verification": {
+            "invalidates": [["contacts"], ["me"]]
+        },
+        "delete_my_contact": {
+            "invalidates": [["contacts"], ["me"]]
+        },
+        "follow_user": {
+            "invalidates": [["relationship"], ["profile"], ["following"], ["followers"], ["blocked"], ["me"]]
+        },
+        "get_contact_reveal_summary": {
+            "key": ["contacts", "revealSummary", "{contact_id}"],
+            "persistence": "memory_only",
+            "policy": "stale_while_revalidate",
+            "sensitive": true
+        },
+        "get_field_manifest": {
+            "key": ["fieldManifest"],
+            "policy": "cache_first",
+            "scope": "app"
+        },
+        "get_language": {
+            "key": ["languages", "{code}"],
+            "policy": "cache_first",
+            "scope": "app"
+        },
+        "get_my_blocked": {
+            "key": ["blocked"],
+            "policy": "stale_while_revalidate"
+        },
+        "get_my_followers": {
+            "key": ["followers"],
+            "policy": "stale_while_revalidate"
+        },
+        "get_my_following": {
+            "key": ["following"],
+            "policy": "stale_while_revalidate"
+        },
+        "get_my_profile": {
+            "key": ["me"],
+            "policy": "stale_while_revalidate"
+        },
+        "get_profile": {
+            "key": ["profile", "{user_id}"],
+            "policy": "stale_while_revalidate"
+        },
+        "get_relationship": {
+            "key": ["relationship", "{user_id}"],
+            "policy": "network_first"
+        },
+        "list_languages": {
+            "key": ["languages"],
+            "policy": "cache_first",
+            "scope": "app"
+        },
+        "list_my_contacts": {
+            "key": ["contacts"],
+            "persistence": "memory_only",
+            "policy": "stale_while_revalidate",
+            "sensitive": true
+        },
+        "request_contact_verification": {
+            "invalidates": []
+        },
+        "reveal_contacts": {
+            "invalidates": [],
+            "persistence": "never",
+            "sensitive": true
+        },
+        "unblock_user": {
+            "invalidates": [["relationship"], ["profile"], ["following"], ["followers"], ["blocked"], ["me"]]
+        },
+        "unfollow_user": {
+            "invalidates": [["relationship"], ["profile"], ["following"], ["followers"], ["blocked"], ["me"]]
+        },
+        "unsubscribe_notifications": {
+            "invalidates": []
+        },
+        "update_my_contact": {
+            "invalidates": [["contacts"], ["me"]]
+        },
+        "update_my_profile": {
+            "invalidates": [["me"]]
+        }
+    }
+}
