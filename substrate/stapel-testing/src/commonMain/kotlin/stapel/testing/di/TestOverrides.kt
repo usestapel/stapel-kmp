@@ -8,6 +8,8 @@ import stapel.network.HttpTransport
 import stapel.runtime.AppLifecycle
 import stapel.runtime.Connectivity
 import stapel.runtime.IdGenerator
+import stapel.runtime.InMemoryLocalePreferenceStorage
+import stapel.runtime.LocalePreferenceStorage
 import stapel.runtime.LocaleProvider
 import stapel.runtime.StapelDispatchers
 import stapel.runtime.StapelLogger
@@ -31,6 +33,8 @@ import kotlin.time.Clock
  *   [stapel.testing.FakeTransport] to run the real pipeline against scripted answers).
  * @param vault when given, replaces the platform [TokenVault] of `sessionModule`
  *   (`InMemoryTokenVault`).
+ * @param localeChoice the device's stored signed-out language (`LocalePreference`), in memory: a test
+ *   never reads or writes the platform's storage.
  */
 public fun testOverridesModule(
     appScope: CoroutineScope,
@@ -44,6 +48,7 @@ public fun testOverridesModule(
     lifecycle: AppLifecycle = FakeAppLifecycle(),
     transport: HttpTransport? = null,
     vault: TokenVault? = null,
+    localeChoice: LocalePreferenceStorage = InMemoryLocalePreferenceStorage(),
 ): Module = module {
     if (transport != null) single<HttpTransport> { transport }
     if (vault != null) single<TokenVault> { vault }
@@ -54,6 +59,7 @@ public fun testOverridesModule(
     single<CoroutineScope>(StapelQualifiers.AppScope) { appScope }
     single<Connectivity> { connectivity }
     single<LocaleProvider> { locale }
+    single<LocalePreferenceStorage> { localeChoice }
     single<TimeZoneProvider> { timeZone }
     single<AppLifecycle> { lifecycle }
 }

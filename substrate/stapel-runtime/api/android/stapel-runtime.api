@@ -74,6 +74,32 @@ public abstract interface class stapel/runtime/IdGenerator {
 	public abstract fun uuid ()Ljava/lang/String;
 }
 
+public final class stapel/runtime/InMemoryLocalePreferenceStorage : stapel/runtime/LocalePreferenceStorage {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun read ()Ljava/lang/String;
+	public fun write (Ljava/lang/String;)V
+}
+
+public abstract interface class stapel/runtime/LocalePreference {
+	public abstract fun choose-knluWF4 (Ljava/lang/String;)V
+	public abstract fun getChosen ()Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public final class stapel/runtime/LocalePreferenceKt {
+	public static final fun storedLocaleTag (Lstapel/runtime/LocalePreferenceStorage;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/runtime/LocalePreferenceStorage {
+	public abstract fun read ()Ljava/lang/String;
+	public abstract fun write (Ljava/lang/String;)V
+}
+
+public final class stapel/runtime/LocalePreference_androidKt {
+	public static final fun platformLocalePreferenceStorage (Lstapel/runtime/PlatformContext;)Lstapel/runtime/LocalePreferenceStorage;
+}
+
 public abstract interface class stapel/runtime/LocaleProvider {
 	public abstract fun getLocale ()Lkotlinx/coroutines/flow/StateFlow;
 	public abstract fun setAppLocale-knluWF4 (Ljava/lang/String;)V
@@ -201,6 +227,12 @@ public final class stapel/runtime/StapelTelemetry$DefaultImpls {
 	public static synthetic fun breadcrumb$default (Lstapel/runtime/StapelTelemetry;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
 	public static fun httpCall (Lstapel/runtime/StapelTelemetry;Lstapel/runtime/HttpCallEvent;)V
 	public static fun sessionEvent (Lstapel/runtime/StapelTelemetry;Lstapel/runtime/SessionTelemetryEvent;)V
+}
+
+public final class stapel/runtime/StoredLocalePreference : stapel/runtime/LocalePreference {
+	public fun <init> (Lstapel/runtime/LocalePreferenceStorage;Lstapel/runtime/LocaleProvider;)V
+	public fun choose-knluWF4 (Ljava/lang/String;)V
+	public fun getChosen ()Lkotlinx/coroutines/flow/StateFlow;
 }
 
 public abstract interface class stapel/runtime/TimeZoneProvider {

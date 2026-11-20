@@ -17,7 +17,10 @@ import stapel.profiles.presentation.ContactsPresenter
 import stapel.profiles.presentation.LanguageCataloguePresenter
 import stapel.profiles.presentation.ProfileSettingsPresenter
 import stapel.profiles.presentation.PublicProfilePresenter
+import stapel.runtime.LocalePreference
 import stapel.runtime.LocaleProvider
+import stapel.runtime.NoopLogger
+import stapel.runtime.StapelLogger
 import stapel.session.SessionManager
 import stapel.session.SessionState
 import stapel.wire.ApiTransport
@@ -43,7 +46,9 @@ public enum class AvatarUpload {
  *
  * Starts with the app: the app's locale follows the signed-in person's app language
  * (`LocaleProvider.setAppLocale`; "follow the device" hands it back), so a choice in the language
- * screen switches the app's strings and layout direction at once and survives a restart.
+ * screen switches the app's strings and layout direction at once and survives a restart. A language
+ * chosen on the device while signed out (`LocalePreference`) seeds a profile that has none; a profile
+ * language wins while signed in; signed out again, the device's choice applies.
  *
  * Never binds the cache to the session: the app (or the auth brick) does that once.
  * Needs `runtimeModule()`, `networkModule()`, `sessionModule()` and a [ManagedStapelCache] binding.
@@ -67,7 +72,10 @@ public fun profilesModule(avatarUpload: AvatarUpload = AvatarUpload.Media): Modu
     }
     // The app follows the person's app language (and back to the device): from app start, eagerly.
     single(createdAtStart = true) {
-        AppLanguageSync(get<StapelProfiles>().me, get<SessionManager>().state, get<LocaleProvider>(), get(StapelQualifiers.AppScope))
+        AppLanguageSync(
+            get<StapelProfiles>().me, get<SessionManager>().state, get<LocaleProvider>(), getOrNull<LocalePreference>(),
+            get(StapelQualifiers.AppScope), getOrNull<StapelLogger>() ?: NoopLogger,
+        )
     }
     factory { (ctx: PresenterContext) -> ProfileSettingsPresenter(get(), ctx) }
     factory { (ctx: PresenterContext) -> LanguageCataloguePresenter(get(), ctx) }

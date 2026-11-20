@@ -77,6 +77,18 @@ abstract interface stapel.runtime/Connectivity { // stapel.runtime/Connectivity|
     abstract fun reportUnreachable() // stapel.runtime/Connectivity.reportUnreachable|reportUnreachable(){}[0]
 }
 
+abstract interface stapel.runtime/LocalePreference { // stapel.runtime/LocalePreference|null[0]
+    abstract val chosen // stapel.runtime/LocalePreference.chosen|{}chosen[0]
+        abstract fun <get-chosen>(): kotlinx.coroutines.flow/StateFlow<stapel.result.text/LocaleTag?> // stapel.runtime/LocalePreference.chosen.<get-chosen>|<get-chosen>(){}[0]
+
+    abstract fun choose(stapel.result.text/LocaleTag?) // stapel.runtime/LocalePreference.choose|choose(stapel.result.text.LocaleTag?){}[0]
+}
+
+abstract interface stapel.runtime/LocalePreferenceStorage { // stapel.runtime/LocalePreferenceStorage|null[0]
+    abstract fun read(): kotlin/String? // stapel.runtime/LocalePreferenceStorage.read|read(){}[0]
+    abstract fun write(kotlin/String?) // stapel.runtime/LocalePreferenceStorage.write|write(kotlin.String?){}[0]
+}
+
 abstract interface stapel.runtime/LocaleProvider { // stapel.runtime/LocaleProvider|null[0]
     abstract val locale // stapel.runtime/LocaleProvider.locale|{}locale[0]
         abstract fun <get-locale>(): kotlinx.coroutines.flow/StateFlow<stapel.result.text/LocaleTag> // stapel.runtime/LocaleProvider.locale.<get-locale>|<get-locale>(){}[0]
@@ -171,6 +183,13 @@ final class stapel.runtime/HttpCallEvent { // stapel.runtime/HttpCallEvent|null[
     final fun toString(): kotlin/String // stapel.runtime/HttpCallEvent.toString|toString(){}[0]
 }
 
+final class stapel.runtime/InMemoryLocalePreferenceStorage : stapel.runtime/LocalePreferenceStorage { // stapel.runtime/InMemoryLocalePreferenceStorage|null[0]
+    constructor <init>(kotlin/String? = ...) // stapel.runtime/InMemoryLocalePreferenceStorage.<init>|<init>(kotlin.String?){}[0]
+
+    final fun read(): kotlin/String? // stapel.runtime/InMemoryLocalePreferenceStorage.read|read(){}[0]
+    final fun write(kotlin/String?) // stapel.runtime/InMemoryLocalePreferenceStorage.write|write(kotlin.String?){}[0]
+}
+
 final class stapel.runtime/SessionTelemetryEvent { // stapel.runtime/SessionTelemetryEvent|null[0]
     constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // stapel.runtime/SessionTelemetryEvent.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
 
@@ -187,6 +206,15 @@ final class stapel.runtime/SessionTelemetryEvent { // stapel.runtime/SessionTele
     final fun toString(): kotlin/String // stapel.runtime/SessionTelemetryEvent.toString|toString(){}[0]
 }
 
+final class stapel.runtime/StoredLocalePreference : stapel.runtime/LocalePreference { // stapel.runtime/StoredLocalePreference|null[0]
+    constructor <init>(stapel.runtime/LocalePreferenceStorage, stapel.runtime/LocaleProvider) // stapel.runtime/StoredLocalePreference.<init>|<init>(stapel.runtime.LocalePreferenceStorage;stapel.runtime.LocaleProvider){}[0]
+
+    final val chosen // stapel.runtime/StoredLocalePreference.chosen|{}chosen[0]
+        final fun <get-chosen>(): kotlinx.coroutines.flow/StateFlow<stapel.result.text/LocaleTag?> // stapel.runtime/StoredLocalePreference.chosen.<get-chosen>|<get-chosen>(){}[0]
+
+    final fun choose(stapel.result.text/LocaleTag?) // stapel.runtime/StoredLocalePreference.choose|choose(stapel.result.text.LocaleTag?){}[0]
+}
+
 final object stapel.runtime/NoopLogger : stapel.runtime/StapelLogger { // stapel.runtime/NoopLogger|null[0]
     final fun isEnabled(stapel.runtime/LogLevel, kotlin/String): kotlin/Boolean // stapel.runtime/NoopLogger.isEnabled|isEnabled(stapel.runtime.LogLevel;kotlin.String){}[0]
     final fun log(stapel.runtime/LogLevel, kotlin/String, kotlin/String, kotlin/Throwable?, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.runtime/NoopLogger.log|log(stapel.runtime.LogLevel;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
@@ -199,10 +227,12 @@ final fun stapel.runtime/PlatformContext(): stapel.runtime/PlatformContext // st
 final fun stapel.runtime/defaultDispatchers(): stapel.runtime/StapelDispatchers // stapel.runtime/defaultDispatchers|defaultDispatchers(){}[0]
 final fun stapel.runtime/platformAppLifecycle(stapel.runtime/PlatformContext, kotlinx.coroutines/CoroutineScope): stapel.runtime/AppLifecycle // stapel.runtime/platformAppLifecycle|platformAppLifecycle(stapel.runtime.PlatformContext;kotlinx.coroutines.CoroutineScope){}[0]
 final fun stapel.runtime/platformConnectivity(stapel.runtime/PlatformContext, kotlinx.coroutines/CoroutineScope): stapel.runtime/Connectivity // stapel.runtime/platformConnectivity|platformConnectivity(stapel.runtime.PlatformContext;kotlinx.coroutines.CoroutineScope){}[0]
+final fun stapel.runtime/platformLocalePreferenceStorage(stapel.runtime/PlatformContext): stapel.runtime/LocalePreferenceStorage // stapel.runtime/platformLocalePreferenceStorage|platformLocalePreferenceStorage(stapel.runtime.PlatformContext){}[0]
 final fun stapel.runtime/platformLocaleProvider(stapel.runtime/PlatformContext): stapel.runtime/LocaleProvider // stapel.runtime/platformLocaleProvider|platformLocaleProvider(stapel.runtime.PlatformContext){}[0]
 final fun stapel.runtime/platformLogger(stapel.runtime/LogLevel): stapel.runtime/StapelLogger // stapel.runtime/platformLogger|platformLogger(stapel.runtime.LogLevel){}[0]
 final fun stapel.runtime/platformTimeZoneProvider(stapel.runtime/PlatformContext): stapel.runtime/TimeZoneProvider // stapel.runtime/platformTimeZoneProvider|platformTimeZoneProvider(stapel.runtime.PlatformContext){}[0]
 final fun stapel.runtime/randomIdGenerator(): stapel.runtime/IdGenerator // stapel.runtime/randomIdGenerator|randomIdGenerator(){}[0]
+final fun stapel.runtime/storedLocaleTag(stapel.runtime/LocalePreferenceStorage): stapel.result.text/LocaleTag? // stapel.runtime/storedLocaleTag|storedLocaleTag(stapel.runtime.LocalePreferenceStorage){}[0]
 final fun stapel.runtime/systemClock(): kotlin.time/Clock // stapel.runtime/systemClock|systemClock(){}[0]
 final inline fun (stapel.runtime/StapelLogger).stapel.runtime/debug(kotlin/String, kotlin/Function0<kotlin/String>) // stapel.runtime/debug|debug@stapel.runtime.StapelLogger(kotlin.String;kotlin.Function0<kotlin.String>){}[0]
 final inline fun (stapel.runtime/StapelLogger).stapel.runtime/error(kotlin/String, kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // stapel.runtime/error|error@stapel.runtime.StapelLogger(kotlin.String;kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]

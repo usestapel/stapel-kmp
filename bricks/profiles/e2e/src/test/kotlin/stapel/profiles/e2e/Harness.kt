@@ -69,7 +69,12 @@ object Stand {
  * One app installation wired the way a generated app is: `stapelApp { bricks(AuthBrick(), ProfilesBrick()); modules(cdnModule()) }`
  * against the stand, with an in-memory vault the test can read.
  */
-class Device(val name: String, val vault: InMemoryTokenVault = InMemoryTokenVault()) : AutoCloseable {
+class Device(
+    val name: String,
+    val vault: InMemoryTokenVault = InMemoryTokenVault(),
+    /** The device's signed-out language choice; share one between Devices to model a relaunch. */
+    val localeStorage: stapel.runtime.LocalePreferenceStorage = stapel.runtime.InMemoryLocalePreferenceStorage(),
+) : AutoCloseable {
     val app: StapelApp = stapelApp(PlatformContext()) {
         environment(
             StapelEnvironment.single(
@@ -82,6 +87,7 @@ class Device(val name: String, val vault: InMemoryTokenVault = InMemoryTokenVaul
         overrides(
             module {
                 single<TokenVault> { vault }
+                single<stapel.runtime.LocalePreferenceStorage> { localeStorage }
                 // One installation per Device (the JVM platform id is one file shared by every test).
                 val id = "e2e-$name-" + UUID.randomUUID()
                 single<stapel.session.InstallationIdentity> { object : stapel.session.InstallationIdentity { override suspend fun deviceId() = id } }
