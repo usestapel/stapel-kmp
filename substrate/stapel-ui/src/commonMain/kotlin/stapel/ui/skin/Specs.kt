@@ -168,7 +168,8 @@ public class TextFieldSpec(
 /**
  * A fixed-length numeric code (OTP). Accepts digits only, up to [length]; calls [onComplete] once full.
  * A caller's [inputTransformation] runs before the skin's digit filter (it may fold non-ASCII digits or
- * pull the code out of a pasted message before the filter drops what is not an ASCII digit).
+ * pull the code out of a pasted message before the filter drops what is not an ASCII digit). The
+ * digit cells read left to right in every layout direction (a code is a number).
  */
 @Immutable
 public class CodeFieldSpec(

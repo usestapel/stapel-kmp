@@ -196,9 +196,11 @@ public abstract interface class stapel/showcase/StoryScope {
 public final class stapel/showcase/StoryState {
 	public static final field $stable I
 	public static final field Companion Lstapel/showcase/StoryState$Companion;
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZLjava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ZLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getId ()Ljava/lang/String;
+	public final fun getLocale ()Ljava/lang/String;
+	public final fun getRtl ()Z
 	public final fun getTitle ()Ljava/lang/String;
 	public final fun getValues ()Ljava/util/Map;
 }

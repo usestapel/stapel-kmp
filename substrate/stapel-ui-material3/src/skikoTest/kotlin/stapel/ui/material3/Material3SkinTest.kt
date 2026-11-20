@@ -12,6 +12,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.v2.runComposeUiTest
 import stapel.showcase.contract.SkinContractTheme
 import stapel.showcase.contract.assertSkinContract
+import stapel.showcase.contract.assertSlotsMirrorInRtl
 import stapel.showcase.contract.assertTopBarSurvivesLargeText
 import stapel.showcase.contract.assertSlotsSurviveLargeText
 import stapel.showcase.contract.assertSkeletonRespectsReduceMotion
@@ -92,4 +93,10 @@ class Material3SkinTest {
         assertEquals(1, back)
         assertEquals(stapel.tokens.StapelDefaultTokens.light.brand.toColor(), scheme!!.primary)
     }
+}
+
+@OptIn(ExperimentalTestApi::class)
+class Material3RtlTest {
+    @Test
+    fun theSlotsMirrorInRtl() = runComposeUiTest { assertSlotsMirrorInRtl(Material3Skin, theme = MaterialContractTheme) }
 }

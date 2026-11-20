@@ -2,7 +2,10 @@ package stapel.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.VectorGroup
+import androidx.compose.ui.graphics.vector.VectorPath
 import org.jetbrains.compose.resources.vectorResource
 import stapel.ui.generated.resources.Res
 import stapel.ui.generated.resources.allDrawableResources
@@ -172,3 +175,49 @@ public val StapelIcons: StapelIconSet = object : StapelIconSet {
 
 /** The ids the default set draws (for coverage tests). */
 public val StapelIconIdsDrawn: Set<String> get() = DRAWN.toSet()
+
+/**
+ * The vector [StapelTheme.icons] draws for [icon] (the default set's glyph for an id the theme's set
+ * does not draw, the unknown square for an id no set draws). A directional [StapelIcon.autoMirror] icon
+ * is always mirrored in right-to-left layouts, also when the set's vector does not say so itself.
+ */
+@Composable
+public fun stapelIconVector(icon: StapelIcon): ImageVector {
+    val set = StapelTheme.icons
+    val vector = set.resolve(icon.id) ?: StapelIcons.resolve(icon.id) ?: StapelIcons.resolve(StapelIconIds.Unknown.id)!!
+    return if (icon.autoMirror && !vector.autoMirror) remember(vector) { vector.autoMirrored() } else vector
+}
+
+/** A copy of this vector that mirrors itself in right-to-left layouts. */
+internal fun ImageVector.autoMirrored(): ImageVector {
+    val builder = ImageVector.Builder(
+        name = name, defaultWidth = defaultWidth, defaultHeight = defaultHeight,
+        viewportWidth = viewportWidth, viewportHeight = viewportHeight,
+        tintColor = tintColor, tintBlendMode = tintBlendMode, autoMirror = true,
+    )
+    copyChildren(root, builder)
+    return builder.build()
+}
+
+private fun copyChildren(group: VectorGroup, builder: ImageVector.Builder) {
+    for (node in group) {
+        when (node) {
+            is VectorPath -> builder.addPath(
+                pathData = node.pathData, pathFillType = node.pathFillType, name = node.name,
+                fill = node.fill, fillAlpha = node.fillAlpha, stroke = node.stroke, strokeAlpha = node.strokeAlpha,
+                strokeLineWidth = node.strokeLineWidth, strokeLineCap = node.strokeLineCap, strokeLineJoin = node.strokeLineJoin,
+                strokeLineMiter = node.strokeLineMiter, trimPathStart = node.trimPathStart, trimPathEnd = node.trimPathEnd,
+                trimPathOffset = node.trimPathOffset,
+            )
+            is VectorGroup -> {
+                builder.addGroup(
+                    name = node.name, rotate = node.rotation, pivotX = node.pivotX, pivotY = node.pivotY,
+                    scaleX = node.scaleX, scaleY = node.scaleY, translationX = node.translationX, translationY = node.translationY,
+                    clipPathData = node.clipPathData,
+                )
+                copyChildren(node, builder)
+                builder.clearGroup()
+            }
+        }
+    }
+}

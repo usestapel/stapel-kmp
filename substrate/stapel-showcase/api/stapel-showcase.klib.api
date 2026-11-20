@@ -157,10 +157,14 @@ final class stapel.showcase/StoryHit { // stapel.showcase/StoryHit|null[0]
 }
 
 final class stapel.showcase/StoryState { // stapel.showcase/StoryState|null[0]
-    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Any?> = ...) // stapel.showcase/StoryState.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Any?>){}[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/Any?> = ..., kotlin/Boolean = ..., kotlin/String? = ...) // stapel.showcase/StoryState.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.Any?>;kotlin.Boolean;kotlin.String?){}[0]
 
     final val id // stapel.showcase/StoryState.id|{}id[0]
         final fun <get-id>(): kotlin/String // stapel.showcase/StoryState.id.<get-id>|<get-id>(){}[0]
+    final val locale // stapel.showcase/StoryState.locale|{}locale[0]
+        final fun <get-locale>(): kotlin/String? // stapel.showcase/StoryState.locale.<get-locale>|<get-locale>(){}[0]
+    final val rtl // stapel.showcase/StoryState.rtl|{}rtl[0]
+        final fun <get-rtl>(): kotlin/Boolean // stapel.showcase/StoryState.rtl.<get-rtl>|<get-rtl>(){}[0]
     final val title // stapel.showcase/StoryState.title|{}title[0]
         final fun <get-title>(): kotlin/String // stapel.showcase/StoryState.title.<get-title>|<get-title>(){}[0]
     final val values // stapel.showcase/StoryState.values|{}values[0]

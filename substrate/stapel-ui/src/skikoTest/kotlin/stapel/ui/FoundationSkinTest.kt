@@ -24,6 +24,7 @@ import stapel.result.ServerRefusal
 import stapel.result.state.Freshness
 import stapel.result.state.Resource
 import stapel.showcase.contract.assertSkinContract
+import stapel.showcase.contract.assertSlotsMirrorInRtl
 import stapel.showcase.contract.assertTopBarSurvivesLargeText
 import stapel.tokens.StapelDefaultTokens
 import stapel.tokens.ThemeMode
@@ -39,6 +40,8 @@ import stapel.showcase.contract.assertSkeletonRespectsReduceMotion
 import stapel.ui.skin.AvatarSpec
 import stapel.ui.skin.PagerIndicatorSpec
 import stapel.ui.skin.ChipGroupSpec
+import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.graphics.toPixelMap
 import stapel.ui.skin.MenuSpec
 import stapel.ui.skin.StepperSpec
 import stapel.ui.skin.canDecrement
@@ -522,4 +525,49 @@ class FoundationSkinTest {
 private fun assertDutyBroken(name: String, block: () -> Unit) {
     val e = assertFails(block)
     assertTrue(e.message.orEmpty().startsWith("skin contract duty $name"), e.message)
+}
+
+@OptIn(ExperimentalTestApi::class)
+class FoundationRtlTest {
+    @Test
+    fun theSlotsMirrorInRtl() = runComposeUiTest { assertSlotsMirrorInRtl(FoundationSkin) }
+}
+
+/** A project icon set whose back arrow does not declare itself auto-mirrored. */
+private object PlainArrowIcons : StapelIconSet {
+    private val arrow = androidx.compose.ui.graphics.vector.ImageVector.Builder("plain-arrow", 24.dp, 24.dp, 24f, 24f)
+        .addPath(androidx.compose.ui.graphics.vector.PathParser().parsePathString("M4 12 L20 4 L20 20 Z").toNodes(), fill = androidx.compose.ui.graphics.SolidColor(androidx.compose.ui.graphics.Color.Black))
+        .build()
+
+    @Composable
+    override fun resolve(id: String): androidx.compose.ui.graphics.vector.ImageVector? = if (id == StapelIconIds.ArrowBack.id) arrow else null
+}
+
+@OptIn(ExperimentalTestApi::class)
+class IconMirrorTest {
+    @Test
+    fun aDirectionalIconMirrorsInRtlWhateverTheSetSays() = runComposeUiTest {
+        setContent {
+            StapelTheme(skin = FoundationSkin, mode = ThemeMode.Light, icons = PlainArrowIcons) {
+                androidx.compose.foundation.layout.Row {
+                    StapelIconView(StapelIconIds.ArrowBack, null, Modifier.testTag("ltr"), size = 24.dp)
+                    CompositionLocalProvider(androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Rtl) {
+                        StapelIconView(StapelIconIds.ArrowBack, null, Modifier.testTag("rtl"), size = 24.dp)
+                        StapelIconView(StapelIcon(StapelIconIds.ArrowBack.id), null, Modifier.testTag("plain"), size = 24.dp)
+                    }
+                }
+            }
+        }
+        val ltr = onNodeWithTag("ltr").captureToImage().toPixelMap()
+        val rtl = onNodeWithTag("rtl").captureToImage().toPixelMap()
+        val plain = onNodeWithTag("plain").captureToImage().toPixelMap()
+        var mirrored = 0
+        var same = 0
+        for (x in 0 until ltr.width) for (y in 0 until ltr.height) {
+            if (ltr[x, y] != rtl[ltr.width - 1 - x, y]) mirrored++
+            if (ltr[x, y] != plain[x, y]) same++
+        }
+        assertEquals(0, mirrored, "the auto-mirrored id draws the set's glyph flipped in RTL")
+        assertEquals(0, same, "an icon that is not directional is never flipped")
+    }
 }

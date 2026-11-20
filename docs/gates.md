@@ -58,7 +58,12 @@ the gallery, the screenshot baselines and the docs export.
   (macOS) renders every story × state × skin × mode at the pinned policy
   (phone frame 390 dp, density 1, `en`, UTC, reduced motion, default preset,
   fixed frame time, the platform's system font) into `<module>/snapshots/`;
-  unchanged pixels keep their file, stale files are removed.
+  unchanged pixels keep their file, stale files are removed. A state declared
+  `StoryState(…, rtl = true, locale = "ar")` is recorded right to left in that
+  locale (the RTL baselines: top bar, list item, search field, code field,
+  banner, chip, stepper, menu, navigation bar; auth sign-in, code entry,
+  sessions). A story whose content opens a popup declares
+  `CanvasOptions(height = …)`: an overlay cannot be measured.
 - `verifyScreenshots` compares pixel for pixel. Baselines are recorded and
   verified on macOS only: measured, a macOS CI runner and a local Mac render
   identical pixels, Linux differs in ~4.6 % of pixels (text rasterisation).

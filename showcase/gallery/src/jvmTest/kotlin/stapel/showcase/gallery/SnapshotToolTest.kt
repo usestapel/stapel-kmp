@@ -66,6 +66,30 @@ class SnapshotToolTest {
     }
 
     @Test
+    fun anRtlStateIsRecordedRightToLeftAndAFixedCanvasKeepsItsHeight() {
+        val story = Story(
+            "dir", "Direction", "Probe",
+            states = listOf(stapel.showcase.StoryState("default", "LTR"), stapel.showcase.StoryState("rtl", "RTL", rtl = true, locale = "ar")),
+            canvas = stapel.showcase.CanvasOptions(padding = 0.dp, height = 60.dp),
+        ) {
+            androidx.compose.foundation.layout.Row {
+                Box(Modifier.size(40.dp).background(StapelTheme.colors[ColorRole.Brand]))
+                Box(Modifier.size(40.dp).background(StapelTheme.colors[ColorRole.Error]))
+            }
+        }
+        val entry = DiscoveredCatalog(":probe", "probe", StoryCatalog("probe", "Probe", listOf(story)))
+        val controls = GalleryControls(reduceMotion = true)
+        fun png(state: Int) = stapel.showcase.gallery.tools.decode(
+            stapel.showcase.gallery.tools.renderPng(entry, story, story.states[state], controls, stapel.tokens.ThemeMode.Light),
+        )
+        val ltr = png(0)
+        val rtl = png(1)
+        assertEquals(60, ltr.height, "a fixed canvas height is the image height")
+        assertEquals(ltr.getRGB(20, 20), rtl.getRGB(ltr.width - 21, 20), "the first box is leftmost LTR and rightmost RTL")
+        assertTrue(ltr.getRGB(20, 20) != rtl.getRGB(20, 20), "the RTL state is not the LTR picture")
+    }
+
+    @Test
     fun screensRenderInTheViewportAndAreNotBlank() {
         val auth = discoveredCatalogs.first { it.catalog.id == "auth" }
         val story = auth.catalog.story("code.error")!!

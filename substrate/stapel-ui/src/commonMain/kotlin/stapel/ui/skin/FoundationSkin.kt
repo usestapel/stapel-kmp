@@ -34,6 +34,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.text.style.TextOverflow
@@ -378,7 +379,9 @@ public object FoundationSkin : StapelSkin {
                 textStyle = StapelTheme.type.body.copy(color = Color.Transparent),
                 cursorBrush = SolidColor(Color.Transparent),
                 decorator = { inner ->
+                    // A code is a number: its cells read left to right in every layout direction.
                     Box {
+                      CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
                         Row(horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s2)) {
                             val text = spec.state.text
                             repeat(spec.length) { i ->
@@ -402,6 +405,7 @@ public object FoundationSkin : StapelSkin {
                                 }
                             }
                         }
+                      }
                         Box(Modifier.size(1.dp).alpha(0f)) { inner() }
                     }
                 },

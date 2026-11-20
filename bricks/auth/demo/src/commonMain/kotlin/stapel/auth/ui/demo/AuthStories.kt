@@ -35,6 +35,7 @@ import stapel.showcase.StoryCatalog
 import stapel.showcase.StoryEnvironment
 import stapel.showcase.StoryKind
 import stapel.showcase.StoryScope
+import stapel.showcase.StoryState
 import stapel.showcase.StoryTarget
 import stapel.ui.LocalStapelErrorText
 import stapel.auth.ui.AuthUiBundle
@@ -45,8 +46,24 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
 
 /** One auth screen in one state: a [Story] of kind Screen whose content reports the screen's events. */
+private fun auth(
+    id: String,
+    title: String,
+    group: String,
+    screens: List<String>,
+    states: List<StoryState>,
+    content: @Composable StoryScope.() -> Unit,
+): Story = Story(id, title, group, StoryKind.Screen, states = states, covers = screens.map { StoryTarget.Screen(it) }.toSet(), content = content)
+
+/** One auth screen in its default state only. */
 private fun auth(id: String, title: String, group: String, screens: List<String>, content: @Composable StoryScope.() -> Unit): Story =
-    Story(id, title, group, StoryKind.Screen, covers = screens.map { StoryTarget.Screen(it) }.toSet(), content = content)
+    auth(id, title, group, screens, emptyList(), content)
+
+/**
+ * The default state and its right-to-left twin (`ar`): the layout mirrors; the copy is English because
+ * no Arabic bundle ships (a locale without a bundle falls back to the default locale).
+ */
+private val withRtl = listOf(StoryState.Default, StoryState("rtl", "Right to left (ar)", rtl = true, locale = "ar"))
 
 private fun refusal(code: String, status: Int, vararg params: Pair<String, String>) =
     ServerRefusal(ErrorEnvelope(ErrorCode(code), status, ErrorParams(params.toMap())))
@@ -62,7 +79,7 @@ private val authStories: List<Story> = listOf(
     auth("sign_in.loading", "Sign-in, capabilities loading", "Sign-in", listOf("SignIn"), signIn(SignInState(three, loading = true))),
     auth("sign_in.load_failed", "Sign-in, capabilities failed", "Sign-in", listOf("SignIn"), signIn(SignInState(three, loadError = refusal("error.500.internal", 500)))),
     auth("sign_in.no_methods", "Sign-in, no method this app can complete", "Sign-in", listOf("SignIn"), signIn(SignInState(MethodZones(emptyList())))),
-    auth("sign_in.email", "Method chooser, e-mail", "Sign-in", listOf("SignIn"), signIn(SignInState(three, guest = GuestEntry(), canRegister = true))),
+    auth("sign_in.email", "Method chooser, e-mail", "Sign-in", listOf("SignIn"), withRtl, signIn(SignInState(three, guest = GuestEntry(), canRegister = true))),
     auth("sign_in.phone", "Method chooser, phone", "Sign-in", listOf("SignIn"), signIn(SignInState(three, selected = SignInMethod.Phone))),
     auth("sign_in.password", "Password sign-in", "Sign-in", listOf("SignIn"), signIn(SignInState(three, selected = SignInMethod.Password))),
     auth("sign_in.password.refused", "Password sign-in, wrong password", "Sign-in", listOf("SignIn"),
@@ -78,7 +95,7 @@ private val authStories: List<Story> = listOf(
     auth("sign_in.notice.revoked", "Signed out on another device", "Sign-in", listOf("SignIn"), signIn(SignInState(three, notice = AuthNotice.SignedOutElsewhere))),
     auth("sign_in.notice.expired", "Session expired", "Sign-in", listOf("SignIn"), signIn(SignInState(three, notice = AuthNotice.SessionExpired))),
     auth("sign_in.guest.creating", "Guest being created", "Sign-in", listOf("SignIn"), signIn(SignInState(three, guest = GuestEntry(creating = true)))),
-    auth("code.sent", "Code sent (prototype, cooldown)", "Sign-in/Steps", listOf("SignIn", "OtpCode"), signIn(SignInState(three, step = SignInStep.Code(code)))),
+    auth("code.sent", "Code sent (prototype, cooldown)", "Sign-in/Steps", listOf("SignIn", "OtpCode"), withRtl, signIn(SignInState(three, step = SignInStep.Code(code)))),
     auth("code.verifying", "Code being checked", "Sign-in/Steps", listOf("SignIn", "OtpCode"), signIn(SignInState(three, step = SignInStep.Code(code.copy(verifying = true))))),
     auth("code.error", "Wrong code, attempts left", "Sign-in/Steps", listOf("SignIn", "OtpCode"),
         signIn(SignInState(three, step = SignInStep.Code(code.copy(resendIn = 0.seconds, error = refusal("error.400.invalid_code_attempts", 400, "attempts_remaining" to "2"))))),
@@ -96,7 +113,7 @@ private val authStories: List<Story> = listOf(
         signIn(SignInState(three, step = SignInStep.Locked(LockedState(refusal("error.422.blocked", 422))))),
     ),
     auth("guest_wall", "Guest wall", "Guest", listOf("GuestUpgrade")) { GuestUpgradeScreen(GuestUpgradeState(), { event(it.toString()) }) },
-    auth("sessions", "Sessions and devices", "Account/Sessions", listOf("Sessions")) { SessionsScreen(SessionsState(Resource.Ready(sessions, Freshness.network(0)), now), { event(it.toString()) }) },
+    auth("sessions", "Sessions and devices", "Account/Sessions", listOf("Sessions"), withRtl) { SessionsScreen(SessionsState(Resource.Ready(sessions, Freshness.network(0)), now), { event(it.toString()) }) },
     auth("sessions.confirm", "Revoke confirmation", "Account/Sessions", listOf("Sessions")) {
         SessionsScreen(SessionsState(Resource.Ready(sessions, Freshness.network(0)), now, confirmRevoke = "s3"), { event(it.toString()) })
     },

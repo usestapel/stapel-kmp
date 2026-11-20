@@ -51,8 +51,9 @@ fun StoryFrame(
     showAnatomy: Boolean = false,
 ) {
     val tokens = StapelPresetTokens.all[controls.preset] ?: StapelDefaultTokens
-    val strings = remember(controls.locale, environment) {
-        StapelStrings { initialLocale = controls.locale; register(CoreUiBundle); environment.bundles.forEach { register(it) } }
+    val locale = state.locale ?: controls.locale
+    val strings = remember(locale, environment) {
+        StapelStrings { initialLocale = locale; register(CoreUiBundle); environment.bundles.forEach { register(it) } }
     }
     val width = controls.size.width
     val layout = stapelLayout(
@@ -63,7 +64,7 @@ fun StoryFrame(
     val density = LocalDensity.current
     CompositionLocalProvider(
         LocalDensity provides Density(density.density, controls.textScale / 100f),
-        LocalLayoutDirection provides if (controls.rtl) LayoutDirection.Rtl else LayoutDirection.Ltr,
+        LocalLayoutDirection provides if (controls.rtl || state.rtl) LayoutDirection.Rtl else LayoutDirection.Ltr,
     ) {
         val body: @Composable () -> Unit = {
             CompositionLocalProvider(LocalStapelReduceMotion provides controls.reduceMotion) {

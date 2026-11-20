@@ -142,6 +142,7 @@ private val textField = Story(
         StoryState("error", "Error", mapOf("kind" to TextFieldKind.Phone, "value" to "12", "error" to "Enter the full number", "supporting" to null)),
         StoryState("password", "Password", mapOf("kind" to TextFieldKind.Password, "value" to "secret", "supporting" to null)),
         StoryState("search", "Search, loading", mapOf("kind" to TextFieldKind.Search, "value" to "running shoes", "loading" to true, "supporting" to null)),
+        StoryState("rtl", "Search, right to left", mapOf("kind" to TextFieldKind.Search, "value" to "أحذية جري", "supporting" to null), rtl = true, locale = "ar"),
     ),
     covers = slot("TextField"),
     anatomy = listOf(AnatomyPart("field", "Field", "label, value, supporting text or error")),
@@ -161,7 +162,11 @@ private val codeField = Story(
     "code-field", "Code field", "Slots/Inputs",
     description = "A fixed-length one-time code: one editable node, cells drawn per digit.",
     knobs = listOf(codeLength, codeValue, error, enabled),
-    states = listOf(StoryState("default", "Typing"), StoryState("error", "Wrong code", mapOf("value" to "123456", "error" to "Wrong code, 2 attempts left"))),
+    states = listOf(
+        StoryState("default", "Typing"),
+        StoryState("error", "Wrong code", mapOf("value" to "123456", "error" to "Wrong code, 2 attempts left")),
+        StoryState("rtl", "Right to left: the digits still read left to right", mapOf("value" to "1234"), rtl = true, locale = "ar"),
+    ),
     covers = slot("CodeField"),
 ) {
     val typed = value(codeValue) ?: ""
@@ -200,6 +205,7 @@ private val banner = Story(
         StoryState("default", "Info"),
         StoryState("error", "Error with detail", mapOf("tone" to StapelTone.Error, "detail" to "HTTP 503")),
         StoryState("success", "Success", mapOf("tone" to StapelTone.Success, "dismissible" to true)),
+        StoryState("rtl", "Error, right to left", mapOf("tone" to StapelTone.Error, "detail" to "HTTP 503", "dismissible" to true), rtl = true, locale = "ar"),
     ),
     covers = slot("Banner"),
 ) {
@@ -256,6 +262,7 @@ private val listItem = Story(
     "list-item", "List item", "Slots/Containment",
     description = "Leading media, headline and supporting text, trailing value, and an accessory (chevron, toggle, badge).",
     knobs = listOf(enabled),
+    states = listOf(StoryState.Default, StoryState("rtl", "Right to left", rtl = true, locale = "ar")),
     covers = slot("ListItem"),
     anatomy = listOf(
         AnatomyPart("media", "Leading media", "ListItemSpec.media"),
@@ -285,7 +292,11 @@ private val topBar = Story(
     "top-bar", "Top bar", "Slots/Navigation",
     description = "Title (single line, truncates), optional subtitle, navigation and actions.",
     knobs = listOf(barTitle, barSubtitle, back, actions),
-    states = listOf(StoryState("default", "Back and actions"), StoryState("subtitle", "With subtitle", mapOf("title" to "Inbox", "subtitle" to "12 unread", "actions" to false))),
+    states = listOf(
+        StoryState("default", "Back and actions"),
+        StoryState("subtitle", "With subtitle", mapOf("title" to "Inbox", "subtitle" to "12 unread", "actions" to false)),
+        StoryState("rtl", "Right to left", mapOf("title" to "الأمان", "subtitle" to "جلستان نشطتان"), rtl = true, locale = "ar"),
+    ),
     covers = slot("TopBar"),
 ) {
     StapelTopBar(
@@ -370,6 +381,7 @@ private val chip = Story(
     states = listOf(
         StoryState("default", "Choice, selected"),
         StoryState("input", "Input, removable", mapOf("kind" to ChipKind.Input, "removable" to true, "selected" to false)),
+        StoryState("rtl", "Input, removable, right to left", mapOf("kind" to ChipKind.Input, "removable" to true, "selected" to false), rtl = true, locale = "ar"),
     ),
     covers = slot("Chip"),
 ) {
@@ -431,6 +443,7 @@ private val navItems = listOf(
 private val navigationBar = Story(
     "navigation-bar", "Navigation bar", "Slots/Navigation",
     description = "The phone's primary navigation (the shell draws it).",
+    states = listOf(StoryState.Default, StoryState("rtl", "Right to left", rtl = true, locale = "ar")),
     covers = slot("NavigationBar"),
 ) {
     var current by remember { mutableStateOf("home") }
@@ -497,7 +510,7 @@ private val menu = Story(
     "menu", "Menu", "Slots/Actions",
     description = "An action menu at its anchor (an overflow button); destructive actions in the error role, disabled ones shown but inert. Choosing a value is a Select, never a menu.",
     knobs = listOf(menuOpen),
-    states = listOf(StoryState("default", "Open"), StoryState("closed", "Closed", mapOf("open" to false))),
+    states = listOf(StoryState("default", "Open"), StoryState("closed", "Closed", mapOf("open" to false)), StoryState("rtl", "Open, right to left", rtl = true, locale = "ar")),
     covers = slot("Menu"),
     canvas = CanvasOptions(height = 300.dp),
     snippet = "StapelOverflowMenu(listOf(MenuItemSpec(\"Reply\", reply), MenuItemSpec(\"Delete\", delete, destructive = true)), label = \"Message actions\")",
@@ -531,6 +544,7 @@ private val stepper = Story(
         StoryState("default", "Two"),
         StoryState("min", "At the minimum", mapOf("value" to 0)),
         StoryState("max", "At the maximum", mapOf("value" to 3, "max" to 3)),
+        StoryState("rtl", "Right to left", rtl = true, locale = "ar"),
     ),
     covers = slot("Stepper"),
     snippet = "StapelStepper(qty, { qty = it }, label = \"Quantity\", decrementLabel = \"Remove one\", incrementLabel = \"Add one\", min = 1, max = stock)",

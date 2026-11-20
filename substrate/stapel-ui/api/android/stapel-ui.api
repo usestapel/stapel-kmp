@@ -84,6 +84,7 @@ public final class stapel/ui/IconsKt {
 	public static final fun getStapelIconIdsDrawn ()Ljava/util/Set;
 	public static final fun getStapelIcons ()Lstapel/ui/StapelIconSet;
 	public static final fun orElse (Lstapel/ui/StapelIconSet;Lstapel/ui/StapelIconSet;)Lstapel/ui/StapelIconSet;
+	public static final fun stapelIconVector (Lstapel/ui/StapelIcon;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/vector/ImageVector;
 }
 
 public final class stapel/ui/ImagesKt {

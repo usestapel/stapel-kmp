@@ -59,11 +59,17 @@ public sealed class StoryTarget(public val key: String) {
  * @property id stable within its story (`default`, `error`, `loading`); part of snapshot file names.
  * @property title what the state shows.
  * @property values knob key → value; a knob not named here keeps its default.
+ * @property rtl lay the state out right to left whatever the viewer's direction control says (the
+ *   snapshot runner records it so: an RTL baseline is a state of its own).
+ * @property locale the strings locale of this state (`ar`), whatever the viewer's locale control says;
+ *   null: the control's. A locale no bundle ships falls back to the default locale's copy.
  */
 public class StoryState(
     public val id: String,
     public val title: String,
     public val values: Map<String, Any?> = emptyMap(),
+    public val rtl: Boolean = false,
+    public val locale: String? = null,
 ) {
     init {
         require(ID.matches(id)) { "state id '$id' must match ${ID.pattern}" }

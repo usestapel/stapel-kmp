@@ -142,7 +142,7 @@ import stapel.i18n.CoreUiStrings
 import stapel.ui.DialogSurface
 import stapel.ui.StapelIcon
 import stapel.ui.StapelIconIds
-import stapel.ui.StapelIcons
+import stapel.ui.stapelIconVector
 import stapel.ui.StapelTheme
 import stapel.ui.StapelTone
 import stapel.ui.skin.BannerSpec
@@ -178,10 +178,7 @@ import androidx.compose.material3.Snackbar as M3Snackbar
 import androidx.compose.material3.Surface as M3Surface
 
 @Composable
-private fun vector(icon: StapelIcon): ImageVector {
-    val set = StapelTheme.icons
-    return set.resolve(icon.id) ?: StapelIcons.resolve(icon.id) ?: StapelIcons.resolve(StapelIconIds.Unknown.id)!!
-}
+private fun vector(icon: StapelIcon): ImageVector = stapelIconVector(icon)
 
 /**
  * The default skin: Material 3 components, coloured from the §68 roles explicitly (a card is

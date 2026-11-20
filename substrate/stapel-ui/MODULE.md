@@ -67,6 +67,10 @@
 - **Stepper** (quantity) clamps through `stepperValue` (no overflow at `Int.MAX_VALUE`), disables the
   button at each bound, and takes its button names from the caller. **ChipGroup** draws every chip
   through `StapelTheme.skin.Chip`, so a project chip applies inside groups too; wrap or scroll.
+- **Right to left:** `assertSlotsMirrorInRtl` (skin contract) holds every skin to mirrored placement
+  (top bar, row value, banner dismiss, chip remove, tabs, navigation, pager, stepper, field actions);
+  a code field's digit cells stay left to right; an `autoMirror` icon is mirrored whatever its set's
+  vector says (`stapelIconVector`). RTL baselines are story states with `rtl = true, locale = "ar"`.
 - **Composites** (no slot of their own, built from slots): `StatusPage` (three `StatusSize`s;
   `EmptyState` is its compact form), `SectionHeader` (five sizes, one `SectionHeaderAction`),
   `AdaptiveGrid` (`adaptiveColumns`, the `GridCells.Adaptive` rule), `PickerSheet`.
@@ -78,4 +82,5 @@
   `TextFieldSpec.keyboardOptions()` lets a transformation's keyboard type win over the kind's. The code
   field's own filter keeps ASCII digits only and runs after the caller's transformation.
 - Not yet here: `StapelSvg`/images loader (`stapel-image-compose`; `LocalStapelImages` is the seam),
-  RTL snapshot pass, Inter font artifact, a lazy paged `LoadList`.
+  Inter font artifact, a lazy paged `LoadList`; layout direction follows the platform, not the in-app
+  strings locale (an app that switches to an RTL language in-app provides `LocalLayoutDirection` itself).

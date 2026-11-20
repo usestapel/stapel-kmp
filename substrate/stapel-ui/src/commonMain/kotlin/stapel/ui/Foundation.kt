@@ -72,8 +72,7 @@ public fun StapelIconView(
     size: Dp = 24.dp,
     tint: Color = LocalStapelContentColor.current,
 ) {
-    val set = StapelTheme.icons
-    val vector = set.resolve(icon.id) ?: set.resolve(StapelIconIds.Unknown.id) ?: StapelIcons.resolve(StapelIconIds.Unknown.id)!!
+    val vector = stapelIconVector(icon)
     val resolved = if (tint == Color.Unspecified) StapelTheme.colors.text else tint
     Image(
         painter = rememberVectorPainter(vector),

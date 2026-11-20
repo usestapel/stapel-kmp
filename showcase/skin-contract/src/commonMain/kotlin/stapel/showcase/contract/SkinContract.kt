@@ -1,6 +1,7 @@
 package stapel.showcase.contract
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -1108,5 +1109,123 @@ private fun ComposeUiTest.tapForReal(node: androidx.compose.ui.test.SemanticsNod
         waitForIdle()
     } finally {
         mainClock.autoAdvance = false
+    }
+}
+/** Centre x of a node (unclipped, in root coordinates). */
+@OptIn(ExperimentalTestApi::class)
+private fun ComposeUiTest.centerX(matcher: SemanticsMatcher): Float {
+    val b = onNode(matcher, useUnmergedTree = true).getUnclippedBoundsInRoot()
+    return ((b.left + b.right) / 2).value
+}
+
+/**
+ * The slots lay out right to left: under `LayoutDirection.Rtl` on a 360 dp phone, start and end swap
+ * in every slot where order or placement carries meaning — the top bar's navigation sits right of the
+ * title and its actions left; a row's value block and chevron sit left of the headline; a banner's
+ * dismiss and a removable chip's remove button sit left of their text; the first tab, navigation item,
+ * pager dot and a stepper's decrement are rightmost; a field's trailing action sits on the left; a directional
+ * glyph (`autoMirror`) is drawn mirrored, also when the icon set's vector does not say so. Digits of a
+ * code field stay left to right (a number is read left to right in every script). One `setContent`
+ * per test: call it from its own test.
+ */
+@OptIn(ExperimentalTestApi::class)
+public fun ComposeUiTest.assertSlotsMirrorInRtl(
+    skin: StapelSkin,
+    tokens: StapelTokens = StapelDefaultTokens,
+    theme: SkinContractTheme = PlainContractTheme,
+) {
+    val code = TextFieldState()
+    val label = TextFieldState("shoes")
+    setContent {
+        val layout = stapelLayout(tokens, 360.dp, input = StapelInput.Touch)
+        androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Rtl) {
+            theme.Wrap(skin, tokens, ThemeMode.Light, layout) {
+                val s = StapelTheme.skin
+                Column(Modifier.size(width = 360.dp, height = 2000.dp)) {
+                    s.TopBar(
+                        TopBarSpec(
+                            "Inbox", navigation = IconButtonSpec(StapelIconIds.ArrowBack, "Go back", {}),
+                            actions = listOf(IconButtonSpec(StapelIconIds.Settings, "Bar settings", {})), testTag = "r.topbar",
+                        ),
+                        Modifier,
+                    )
+                    s.ListItem(
+                        ListItemSpec("Coffee beans", onClick = {}, value = ListItemValue("-12.50"), accessory = ListItemAccessory.Chevron, testTag = "r.row"),
+                        Modifier.fillMaxWidth(),
+                    )
+                    s.Banner(BannerSpec(StapelTone.Info, "Banner text", onDismiss = {}, dismissLabel = "Dismiss banner", testTag = "r.banner"), Modifier)
+                    s.Chip(ChipSpec("Ada", ChipKind.Input, onClick = {}, onRemove = {}, removeLabel = "Remove Ada", testTag = "r.chip"), Modifier)
+                    s.Tabs(TabsSpec(listOf("First", "Second"), 0, {}, testTag = "r.tabs"), Modifier.fillMaxWidth())
+                    s.NavigationBar(
+                        NavigationSpec(listOf(NavigationItemSpec("a", "Alpha", StapelIconIds.Home), NavigationItemSpec("b", "Beta", StapelIconIds.User)), "a", {}),
+                        Modifier.testTag("r.nav"),
+                    )
+                    s.Stepper(StepperSpec(2, {}, "Quantity", "Remove one", "Add one", testTag = "r.stepper"), Modifier)
+                    s.PagerIndicator(PagerIndicatorSpec(3, 0, "Page 1 of 3", onSelect = {}, dotLabel = { "Dot ${it + 1}" }, testTag = "r.pager"), Modifier)
+                    androidx.compose.foundation.layout.Box(Modifier.fillMaxWidth().testTag("r.fieldbox")) {
+                        s.TextField(TextFieldSpec(label, "Search products", TextFieldKind.Search, clearLabel = "Clear the search", testTag = "r.field"), Modifier.fillMaxWidth())
+                    }
+                    s.CodeField(CodeFieldSpec(code, 4, "Code", testTag = "r.code"), Modifier)
+                    Row {
+                        androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Ltr) {
+                            s.IconButton(IconButtonSpec(StapelIconIds.ArrowBack, "Back ltr", {}, testTag = "r.icon.ltr"), Modifier)
+                        }
+                        s.IconButton(IconButtonSpec(StapelIconIds.ArrowBack, "Back rtl", {}, testTag = "r.icon.rtl"), Modifier)
+                    }
+                }
+            }
+        }
+    }
+    waitForIdle()
+    duty("TopBar.rtl") {
+        val title = centerX(hasText("Inbox") and hasAnyAncestorTag("r.topbar"))
+        check(centerX(hasContentDescription("Go back")) > title) { "TopBar: in RTL the navigation sits right of the title" }
+        check(centerX(hasContentDescription("Bar settings")) < title) { "TopBar: in RTL the actions sit left of the title" }
+    }
+    duty("ListItem.rtl") {
+        check(centerX(hasText("-12.50") and hasAnyAncestorTag("r.row")) < centerX(hasText("Coffee beans") and hasAnyAncestorTag("r.row"))) {
+            "ListItem: in RTL the value block sits left of the headline"
+        }
+    }
+    duty("Banner.rtl") {
+        check(centerX(hasContentDescription("Dismiss banner")) < centerX(hasText("Banner text"))) { "Banner: in RTL dismiss sits left of the message" }
+    }
+    duty("Chip.rtl") {
+        check(centerX(hasContentDescription("Remove Ada")) < centerX(hasText("Ada") and hasAnyAncestorTag("r.chip"))) { "Chip: in RTL the remove button sits left of the label" }
+    }
+    duty("Tabs.rtl") {
+        check(centerX(hasText("First") and hasAnyAncestorTag("r.tabs")) > centerX(hasText("Second") and hasAnyAncestorTag("r.tabs"))) { "Tabs: in RTL the first tab is rightmost" }
+    }
+    duty("NavigationBar.rtl") {
+        check(centerX(hasText("Alpha") and hasAnyAncestorTag("r.nav")) > centerX(hasText("Beta") and hasAnyAncestorTag("r.nav"))) { "NavigationBar: in RTL the first item is rightmost" }
+    }
+    duty("Stepper.rtl") {
+        check(centerX(hasContentDescription("Remove one")) > centerX(hasContentDescription("Add one"))) { "Stepper: in RTL the decrement (start) is rightmost" }
+    }
+    duty("PagerIndicator.rtl") {
+        check(centerX(hasContentDescription("Dot 1")) > centerX(hasContentDescription("Dot 3"))) { "PagerIndicator: in RTL the first page's dot is rightmost" }
+    }
+    duty("TextField.rtl") {
+        val box = onNodeWithTag("r.fieldbox", useUnmergedTree = true).getUnclippedBoundsInRoot()
+        check(centerX(hasContentDescription("Clear the search")) < ((box.left + box.right) / 2).value) { "TextField: in RTL the trailing clear action sits on the left" }
+    }
+    duty("CodeField.digitsLeftToRight") {
+        onNodeWithTag("r.code").performTextInput("1234")
+        waitForIdle()
+        check(centerX(hasText("1") and hasAnyAncestorTag("r.code")) < centerX(hasText("4") and hasAnyAncestorTag("r.code"))) {
+            "CodeField: digits of a code read left to right in RTL too"
+        }
+    }
+    duty("Icon.mirror") {
+        val ltr = onNodeWithTag("r.icon.ltr").captureToImage().toPixelMap()
+        val rtl = onNodeWithTag("r.icon.rtl").captureToImage().toPixelMap()
+        check(ltr.width == rtl.width && ltr.height == rtl.height) { "Icon: sizes differ" }
+        var differ = 0
+        var mirrored = 0
+        for (x in 0 until ltr.width) for (y in 0 until ltr.height) {
+            if (ltr[x, y] != rtl[x, y]) differ++
+            if (ltr[x, y] != rtl[ltr.width - 1 - x, y]) mirrored++
+        }
+        check(differ > 0 && mirrored * 10 < differ) { "Icon: a directional glyph is drawn mirrored in RTL (differ $differ, unmirrored $mirrored)" }
     }
 }

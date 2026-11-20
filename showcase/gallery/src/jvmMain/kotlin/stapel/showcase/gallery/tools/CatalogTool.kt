@@ -118,6 +118,8 @@ fun indexJson(entries: List<DiscoveredCatalog>, images: (DiscoveredCatalog, Stri
                                                 buildJsonObject {
                                                     put("id", st.id)
                                                     put("title", st.title)
+                                                    if (st.rtl) put("direction", "rtl")
+                                                    st.locale?.let { put("locale", it) }
                                                     val imgs = images(e, s.id, st.id)
                                                     if (imgs.isNotEmpty()) put("images", JsonArray(imgs.map(::JsonPrimitive)))
                                                 },
