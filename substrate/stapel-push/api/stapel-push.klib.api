@@ -1,0 +1,568 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-push>
+final enum class stapel.push/AskPolicy : kotlin/Enum<stapel.push/AskPolicy> { // stapel.push/AskPolicy|null[0]
+    enum entry AfterSignIn // stapel.push/AskPolicy.AfterSignIn|null[0]
+    enum entry OnDemand // stapel.push/AskPolicy.OnDemand|null[0]
+
+    final val entries // stapel.push/AskPolicy.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/AskPolicy> // stapel.push/AskPolicy.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/AskPolicy // stapel.push/AskPolicy.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/AskPolicy> // stapel.push/AskPolicy.values|values#static(){}[0]
+}
+
+final enum class stapel.push/DevicePlatform : kotlin/Enum<stapel.push/DevicePlatform> { // stapel.push/DevicePlatform|null[0]
+    enum entry Android // stapel.push/DevicePlatform.Android|null[0]
+    enum entry Ios // stapel.push/DevicePlatform.Ios|null[0]
+
+    final val entries // stapel.push/DevicePlatform.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/DevicePlatform> // stapel.push/DevicePlatform.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wire // stapel.push/DevicePlatform.wire|{}wire[0]
+        final fun <get-wire>(): kotlin/String // stapel.push/DevicePlatform.wire.<get-wire>|<get-wire>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/DevicePlatform // stapel.push/DevicePlatform.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/DevicePlatform> // stapel.push/DevicePlatform.values|values#static(){}[0]
+}
+
+final enum class stapel.push/DeviceStatus : kotlin/Enum<stapel.push/DeviceStatus> { // stapel.push/DeviceStatus|null[0]
+    enum entry Absent // stapel.push/DeviceStatus.Absent|null[0]
+    enum entry Inactive // stapel.push/DeviceStatus.Inactive|null[0]
+    enum entry Registered // stapel.push/DeviceStatus.Registered|null[0]
+
+    final val entries // stapel.push/DeviceStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/DeviceStatus> // stapel.push/DeviceStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/DeviceStatus // stapel.push/DeviceStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/DeviceStatus> // stapel.push/DeviceStatus.values|values#static(){}[0]
+}
+
+final enum class stapel.push/ForegroundPresentation : kotlin/Enum<stapel.push/ForegroundPresentation> { // stapel.push/ForegroundPresentation|null[0]
+    enum entry InApp // stapel.push/ForegroundPresentation.InApp|null[0]
+    enum entry Silent // stapel.push/ForegroundPresentation.Silent|null[0]
+    enum entry System // stapel.push/ForegroundPresentation.System|null[0]
+
+    final val entries // stapel.push/ForegroundPresentation.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/ForegroundPresentation> // stapel.push/ForegroundPresentation.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/ForegroundPresentation // stapel.push/ForegroundPresentation.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/ForegroundPresentation> // stapel.push/ForegroundPresentation.values|values#static(){}[0]
+}
+
+final enum class stapel.push/Importance : kotlin/Enum<stapel.push/Importance> { // stapel.push/Importance|null[0]
+    enum entry Default // stapel.push/Importance.Default|null[0]
+    enum entry High // stapel.push/Importance.High|null[0]
+    enum entry Low // stapel.push/Importance.Low|null[0]
+
+    final val entries // stapel.push/Importance.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/Importance> // stapel.push/Importance.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/Importance // stapel.push/Importance.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/Importance> // stapel.push/Importance.values|values#static(){}[0]
+}
+
+final enum class stapel.push/PushPermission : kotlin/Enum<stapel.push/PushPermission> { // stapel.push/PushPermission|null[0]
+    enum entry Denied // stapel.push/PushPermission.Denied|null[0]
+    enum entry Granted // stapel.push/PushPermission.Granted|null[0]
+    enum entry NotDetermined // stapel.push/PushPermission.NotDetermined|null[0]
+    enum entry Provisional // stapel.push/PushPermission.Provisional|null[0]
+    enum entry Unsupported // stapel.push/PushPermission.Unsupported|null[0]
+
+    final val entries // stapel.push/PushPermission.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/PushPermission> // stapel.push/PushPermission.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/PushPermission // stapel.push/PushPermission.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/PushPermission> // stapel.push/PushPermission.values|values#static(){}[0]
+}
+
+final enum class stapel.push/Registration : kotlin/Enum<stapel.push/Registration> { // stapel.push/Registration|null[0]
+    enum entry Blocked // stapel.push/Registration.Blocked|null[0]
+    enum entry Failed // stapel.push/Registration.Failed|null[0]
+    enum entry Off // stapel.push/Registration.Off|null[0]
+    enum entry Registered // stapel.push/Registration.Registered|null[0]
+    enum entry Registering // stapel.push/Registration.Registering|null[0]
+
+    final val entries // stapel.push/Registration.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/Registration> // stapel.push/Registration.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/Registration // stapel.push/Registration.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/Registration> // stapel.push/Registration.values|values#static(){}[0]
+}
+
+final enum class stapel.push/TokenKind : kotlin/Enum<stapel.push/TokenKind> { // stapel.push/TokenKind|null[0]
+    enum entry Apns // stapel.push/TokenKind.Apns|null[0]
+    enum entry Fcm // stapel.push/TokenKind.Fcm|null[0]
+
+    final val entries // stapel.push/TokenKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.push/TokenKind> // stapel.push/TokenKind.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wire // stapel.push/TokenKind.wire|{}wire[0]
+        final fun <get-wire>(): kotlin/String // stapel.push/TokenKind.wire.<get-wire>|<get-wire>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.push/TokenKind // stapel.push/TokenKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.push/TokenKind> // stapel.push/TokenKind.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.push/PushLinkOpener { // stapel.push/PushLinkOpener|null[0]
+    abstract fun open(kotlin/String): kotlin/Boolean // stapel.push/PushLinkOpener.open|open(kotlin.String){}[0]
+}
+
+abstract fun interface stapel.push/PushOpenListener { // stapel.push/PushOpenListener|null[0]
+    abstract suspend fun onOpened(stapel.push/PushMessage) // stapel.push/PushOpenListener.onOpened|onOpened(stapel.push.PushMessage){}[0]
+}
+
+abstract fun interface stapel.push/PushRationale { // stapel.push/PushRationale|null[0]
+    abstract suspend fun explain(): kotlin/Boolean // stapel.push/PushRationale.explain|explain(){}[0]
+}
+
+abstract interface stapel.push/PushController { // stapel.push/PushController|null[0]
+    abstract val events // stapel.push/PushController.events|{}events[0]
+        abstract fun <get-events>(): kotlinx.coroutines.flow/Flow<stapel.push/PushEvent> // stapel.push/PushController.events.<get-events>|<get-events>(){}[0]
+    abstract val state // stapel.push/PushController.state|{}state[0]
+        abstract fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.push/PushState> // stapel.push/PushController.state.<get-state>|<get-state>(){}[0]
+
+    abstract fun attach(stapel.push/PushLinkOpener): kotlin/AutoCloseable // stapel.push/PushController.attach|attach(stapel.push.PushLinkOpener){}[0]
+    abstract suspend fun disable(): stapel.push/PushState // stapel.push/PushController.disable|disable(){}[0]
+    abstract suspend fun enable(): stapel.push/PushState // stapel.push/PushController.enable|enable(){}[0]
+}
+
+abstract interface stapel.push/PushDeviceRegistry { // stapel.push/PushDeviceRegistry|null[0]
+    abstract suspend fun register(stapel.push/PushDevice): stapel.result/StapelResult<kotlin/Unit, stapel.push/RegistryError> // stapel.push/PushDeviceRegistry.register|register(stapel.push.PushDevice){}[0]
+    abstract suspend fun status(stapel.push/PushToken): stapel.result/StapelResult<stapel.push/DeviceStatus, stapel.push/RegistryError> // stapel.push/PushDeviceRegistry.status|status(stapel.push.PushToken){}[0]
+    abstract suspend fun unregister(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.push/RegistryError> // stapel.push/PushDeviceRegistry.unregister|unregister(kotlin.String){}[0]
+}
+
+abstract interface stapel.push/PushProvider { // stapel.push/PushProvider|null[0]
+    abstract val availability // stapel.push/PushProvider.availability|{}availability[0]
+        abstract fun <get-availability>(): stapel.push/ProviderAvailability // stapel.push/PushProvider.availability.<get-availability>|<get-availability>(){}[0]
+    abstract val events // stapel.push/PushProvider.events|{}events[0]
+        abstract fun <get-events>(): kotlinx.coroutines.flow/Flow<stapel.push/PushEvent> // stapel.push/PushProvider.events.<get-events>|<get-events>(){}[0]
+    abstract val id // stapel.push/PushProvider.id|{}id[0]
+        abstract fun <get-id>(): kotlin/String // stapel.push/PushProvider.id.<get-id>|<get-id>(){}[0]
+    abstract val platform // stapel.push/PushProvider.platform|{}platform[0]
+        abstract fun <get-platform>(): stapel.push/DevicePlatform? // stapel.push/PushProvider.platform.<get-platform>|<get-platform>(){}[0]
+    abstract val tokens // stapel.push/PushProvider.tokens|{}tokens[0]
+        abstract fun <get-tokens>(): kotlinx.coroutines.flow/Flow<stapel.push/PushToken> // stapel.push/PushProvider.tokens.<get-tokens>|<get-tokens>(){}[0]
+    abstract val transactional // stapel.push/PushProvider.transactional|{}transactional[0]
+        abstract fun <get-transactional>(): kotlin/Boolean // stapel.push/PushProvider.transactional.<get-transactional>|<get-transactional>(){}[0]
+
+    abstract fun ensureChannels(kotlin.collections/List<stapel.push/PushChannelSpec>) // stapel.push/PushProvider.ensureChannels|ensureChannels(kotlin.collections.List<stapel.push.PushChannelSpec>){}[0]
+    abstract fun setForegroundPresentation(stapel.push/ForegroundPresentation) // stapel.push/PushProvider.setForegroundPresentation|setForegroundPresentation(stapel.push.ForegroundPresentation){}[0]
+    abstract suspend fun deleteToken(): stapel.result/StapelResult<kotlin/Unit, stapel.push/PushError> // stapel.push/PushProvider.deleteToken|deleteToken(){}[0]
+    abstract suspend fun permission(): stapel.push/PushPermission // stapel.push/PushProvider.permission|permission(){}[0]
+    abstract suspend fun requestPermission(kotlin/Boolean = ...): stapel.push/PushPermission // stapel.push/PushProvider.requestPermission|requestPermission(kotlin.Boolean){}[0]
+    abstract suspend fun token(): stapel.result/StapelResult<stapel.push/PushToken, stapel.push/PushError> // stapel.push/PushProvider.token|token(){}[0]
+}
+
+abstract interface stapel.push/PushStore { // stapel.push/PushStore|null[0]
+    abstract suspend fun load(): stapel.push/PushRecord // stapel.push/PushStore.load|load(){}[0]
+    abstract suspend fun save(stapel.push/PushRecord) // stapel.push/PushStore.save|save(stapel.push.PushRecord){}[0]
+}
+
+sealed interface stapel.push/ProviderAvailability { // stapel.push/ProviderAvailability|null[0]
+    final class Unconfigured : stapel.push/ProviderAvailability { // stapel.push/ProviderAvailability.Unconfigured|null[0]
+        constructor <init>(kotlin/String) // stapel.push/ProviderAvailability.Unconfigured.<init>|<init>(kotlin.String){}[0]
+
+        final val reason // stapel.push/ProviderAvailability.Unconfigured.reason|{}reason[0]
+            final fun <get-reason>(): kotlin/String // stapel.push/ProviderAvailability.Unconfigured.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.push/ProviderAvailability.Unconfigured.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.push/ProviderAvailability.Unconfigured // stapel.push/ProviderAvailability.Unconfigured.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/ProviderAvailability.Unconfigured.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/ProviderAvailability.Unconfigured.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/ProviderAvailability.Unconfigured.toString|toString(){}[0]
+    }
+
+    final class Unsupported : stapel.push/ProviderAvailability { // stapel.push/ProviderAvailability.Unsupported|null[0]
+        constructor <init>(kotlin/String) // stapel.push/ProviderAvailability.Unsupported.<init>|<init>(kotlin.String){}[0]
+
+        final val reason // stapel.push/ProviderAvailability.Unsupported.reason|{}reason[0]
+            final fun <get-reason>(): kotlin/String // stapel.push/ProviderAvailability.Unsupported.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.push/ProviderAvailability.Unsupported.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.push/ProviderAvailability.Unsupported // stapel.push/ProviderAvailability.Unsupported.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/ProviderAvailability.Unsupported.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/ProviderAvailability.Unsupported.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/ProviderAvailability.Unsupported.toString|toString(){}[0]
+    }
+
+    final object Ready : stapel.push/ProviderAvailability { // stapel.push/ProviderAvailability.Ready|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/ProviderAvailability.Ready.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/ProviderAvailability.Ready.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/ProviderAvailability.Ready.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.push/PushError : stapel.result/StapelError { // stapel.push/PushError|null[0]
+    open val envelope // stapel.push/PushError.envelope|{}envelope[0]
+        open fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.push/PushError.envelope.<get-envelope>|<get-envelope>(){}[0]
+    open val params // stapel.push/PushError.params|{}params[0]
+        open fun <get-params>(): stapel.result/ErrorParams // stapel.push/PushError.params.<get-params>|<get-params>(){}[0]
+    open val status // stapel.push/PushError.status|{}status[0]
+        open fun <get-status>(): kotlin/Int? // stapel.push/PushError.status.<get-status>|<get-status>(){}[0]
+
+    final class Transient : stapel.push/PushError { // stapel.push/PushError.Transient|null[0]
+        constructor <init>(kotlin/String?) // stapel.push/PushError.Transient.<init>|<init>(kotlin.String?){}[0]
+
+        final val code // stapel.push/PushError.Transient.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.push/PushError.Transient.code.<get-code>|<get-code>(){}[0]
+        final val detail // stapel.push/PushError.Transient.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String? // stapel.push/PushError.Transient.detail.<get-detail>|<get-detail>(){}[0]
+        final val remediation // stapel.push/PushError.Transient.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.push/PushError.Transient.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.push/PushError.Transient.component1|component1(){}[0]
+        final fun copy(kotlin/String? = ...): stapel.push/PushError.Transient // stapel.push/PushError.Transient.copy|copy(kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushError.Transient.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/PushError.Transient.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/PushError.Transient.toString|toString(){}[0]
+    }
+
+    final class Unavailable : stapel.push/PushError { // stapel.push/PushError.Unavailable|null[0]
+        constructor <init>(stapel.push/ProviderAvailability) // stapel.push/PushError.Unavailable.<init>|<init>(stapel.push.ProviderAvailability){}[0]
+
+        final val availability // stapel.push/PushError.Unavailable.availability|{}availability[0]
+            final fun <get-availability>(): stapel.push/ProviderAvailability // stapel.push/PushError.Unavailable.availability.<get-availability>|<get-availability>(){}[0]
+        final val code // stapel.push/PushError.Unavailable.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.push/PushError.Unavailable.code.<get-code>|<get-code>(){}[0]
+        final val remediation // stapel.push/PushError.Unavailable.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.push/PushError.Unavailable.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun component1(): stapel.push/ProviderAvailability // stapel.push/PushError.Unavailable.component1|component1(){}[0]
+        final fun copy(stapel.push/ProviderAvailability = ...): stapel.push/PushError.Unavailable // stapel.push/PushError.Unavailable.copy|copy(stapel.push.ProviderAvailability){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushError.Unavailable.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/PushError.Unavailable.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/PushError.Unavailable.toString|toString(){}[0]
+    }
+
+    final object PermissionDenied : stapel.push/PushError { // stapel.push/PushError.PermissionDenied|null[0]
+        final val code // stapel.push/PushError.PermissionDenied.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.push/PushError.PermissionDenied.code.<get-code>|<get-code>(){}[0]
+        final val remediation // stapel.push/PushError.PermissionDenied.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.push/PushError.PermissionDenied.remediation.<get-remediation>|<get-remediation>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushError.PermissionDenied.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/PushError.PermissionDenied.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/PushError.PermissionDenied.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.push/PushEvent { // stapel.push/PushEvent|null[0]
+    abstract val message // stapel.push/PushEvent.message|{}message[0]
+        abstract fun <get-message>(): stapel.push/PushMessage // stapel.push/PushEvent.message.<get-message>|<get-message>(){}[0]
+
+    final class Opened : stapel.push/PushEvent { // stapel.push/PushEvent.Opened|null[0]
+        constructor <init>(stapel.push/PushMessage, kotlin/String? = ...) // stapel.push/PushEvent.Opened.<init>|<init>(stapel.push.PushMessage;kotlin.String?){}[0]
+
+        final val actionId // stapel.push/PushEvent.Opened.actionId|{}actionId[0]
+            final fun <get-actionId>(): kotlin/String? // stapel.push/PushEvent.Opened.actionId.<get-actionId>|<get-actionId>(){}[0]
+        final val message // stapel.push/PushEvent.Opened.message|{}message[0]
+            final fun <get-message>(): stapel.push/PushMessage // stapel.push/PushEvent.Opened.message.<get-message>|<get-message>(){}[0]
+
+        final fun component1(): stapel.push/PushMessage // stapel.push/PushEvent.Opened.component1|component1(){}[0]
+        final fun component2(): kotlin/String? // stapel.push/PushEvent.Opened.component2|component2(){}[0]
+        final fun copy(stapel.push/PushMessage = ..., kotlin/String? = ...): stapel.push/PushEvent.Opened // stapel.push/PushEvent.Opened.copy|copy(stapel.push.PushMessage;kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushEvent.Opened.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/PushEvent.Opened.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/PushEvent.Opened.toString|toString(){}[0]
+    }
+
+    final class Received : stapel.push/PushEvent { // stapel.push/PushEvent.Received|null[0]
+        constructor <init>(stapel.push/PushMessage, kotlin/Boolean) // stapel.push/PushEvent.Received.<init>|<init>(stapel.push.PushMessage;kotlin.Boolean){}[0]
+
+        final val foreground // stapel.push/PushEvent.Received.foreground|{}foreground[0]
+            final fun <get-foreground>(): kotlin/Boolean // stapel.push/PushEvent.Received.foreground.<get-foreground>|<get-foreground>(){}[0]
+        final val message // stapel.push/PushEvent.Received.message|{}message[0]
+            final fun <get-message>(): stapel.push/PushMessage // stapel.push/PushEvent.Received.message.<get-message>|<get-message>(){}[0]
+
+        final fun component1(): stapel.push/PushMessage // stapel.push/PushEvent.Received.component1|component1(){}[0]
+        final fun component2(): kotlin/Boolean // stapel.push/PushEvent.Received.component2|component2(){}[0]
+        final fun copy(stapel.push/PushMessage = ..., kotlin/Boolean = ...): stapel.push/PushEvent.Received // stapel.push/PushEvent.Received.copy|copy(stapel.push.PushMessage;kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushEvent.Received.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/PushEvent.Received.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/PushEvent.Received.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.push/RegistryError : stapel.result/StapelError { // stapel.push/RegistryError|null[0]
+    abstract val cause // stapel.push/RegistryError.cause|{}cause[0]
+        abstract fun <get-cause>(): stapel.result/StapelError // stapel.push/RegistryError.cause.<get-cause>|<get-cause>(){}[0]
+
+    final class Failed : stapel.push/RegistryError, stapel.result/StapelError { // stapel.push/RegistryError.Failed|null[0]
+        constructor <init>(stapel.result/StapelError) // stapel.push/RegistryError.Failed.<init>|<init>(stapel.result.StapelError){}[0]
+
+        final val cause // stapel.push/RegistryError.Failed.cause|{}cause[0]
+            final fun <get-cause>(): stapel.result/StapelError // stapel.push/RegistryError.Failed.cause.<get-cause>|<get-cause>(){}[0]
+        final val code // stapel.push/RegistryError.Failed.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.push/RegistryError.Failed.code.<get-code>|<get-code>(){}[0]
+        final val envelope // stapel.push/RegistryError.Failed.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.push/RegistryError.Failed.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val params // stapel.push/RegistryError.Failed.params|{}params[0]
+            final fun <get-params>(): stapel.result/ErrorParams // stapel.push/RegistryError.Failed.params.<get-params>|<get-params>(){}[0]
+        final val remediation // stapel.push/RegistryError.Failed.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.push/RegistryError.Failed.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val status // stapel.push/RegistryError.Failed.status|{}status[0]
+            final fun <get-status>(): kotlin/Int? // stapel.push/RegistryError.Failed.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): stapel.result/StapelError // stapel.push/RegistryError.Failed.component1|component1(){}[0]
+        final fun copy(stapel.result/StapelError = ...): stapel.push/RegistryError.Failed // stapel.push/RegistryError.Failed.copy|copy(stapel.result.StapelError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/RegistryError.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/RegistryError.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/RegistryError.Failed.toString|toString(){}[0]
+    }
+
+    final class HeldByAnotherAccount : stapel.push/RegistryError, stapel.result/StapelError { // stapel.push/RegistryError.HeldByAnotherAccount|null[0]
+        constructor <init>(stapel.result/StapelError) // stapel.push/RegistryError.HeldByAnotherAccount.<init>|<init>(stapel.result.StapelError){}[0]
+
+        final val cause // stapel.push/RegistryError.HeldByAnotherAccount.cause|{}cause[0]
+            final fun <get-cause>(): stapel.result/StapelError // stapel.push/RegistryError.HeldByAnotherAccount.cause.<get-cause>|<get-cause>(){}[0]
+        final val code // stapel.push/RegistryError.HeldByAnotherAccount.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.push/RegistryError.HeldByAnotherAccount.code.<get-code>|<get-code>(){}[0]
+        final val envelope // stapel.push/RegistryError.HeldByAnotherAccount.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.push/RegistryError.HeldByAnotherAccount.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val params // stapel.push/RegistryError.HeldByAnotherAccount.params|{}params[0]
+            final fun <get-params>(): stapel.result/ErrorParams // stapel.push/RegistryError.HeldByAnotherAccount.params.<get-params>|<get-params>(){}[0]
+        final val remediation // stapel.push/RegistryError.HeldByAnotherAccount.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.push/RegistryError.HeldByAnotherAccount.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val status // stapel.push/RegistryError.HeldByAnotherAccount.status|{}status[0]
+            final fun <get-status>(): kotlin/Int? // stapel.push/RegistryError.HeldByAnotherAccount.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): stapel.result/StapelError // stapel.push/RegistryError.HeldByAnotherAccount.component1|component1(){}[0]
+        final fun copy(stapel.result/StapelError = ...): stapel.push/RegistryError.HeldByAnotherAccount // stapel.push/RegistryError.HeldByAnotherAccount.copy|copy(stapel.result.StapelError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/RegistryError.HeldByAnotherAccount.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/RegistryError.HeldByAnotherAccount.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/RegistryError.HeldByAnotherAccount.toString|toString(){}[0]
+    }
+
+    final class NotAllowed : stapel.push/RegistryError, stapel.result/StapelError { // stapel.push/RegistryError.NotAllowed|null[0]
+        constructor <init>(stapel.result/StapelError) // stapel.push/RegistryError.NotAllowed.<init>|<init>(stapel.result.StapelError){}[0]
+
+        final val cause // stapel.push/RegistryError.NotAllowed.cause|{}cause[0]
+            final fun <get-cause>(): stapel.result/StapelError // stapel.push/RegistryError.NotAllowed.cause.<get-cause>|<get-cause>(){}[0]
+        final val code // stapel.push/RegistryError.NotAllowed.code|{}code[0]
+            final fun <get-code>(): stapel.result/ErrorCode // stapel.push/RegistryError.NotAllowed.code.<get-code>|<get-code>(){}[0]
+        final val envelope // stapel.push/RegistryError.NotAllowed.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope? // stapel.push/RegistryError.NotAllowed.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val params // stapel.push/RegistryError.NotAllowed.params|{}params[0]
+            final fun <get-params>(): stapel.result/ErrorParams // stapel.push/RegistryError.NotAllowed.params.<get-params>|<get-params>(){}[0]
+        final val remediation // stapel.push/RegistryError.NotAllowed.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.push/RegistryError.NotAllowed.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val status // stapel.push/RegistryError.NotAllowed.status|{}status[0]
+            final fun <get-status>(): kotlin/Int? // stapel.push/RegistryError.NotAllowed.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): stapel.result/StapelError // stapel.push/RegistryError.NotAllowed.component1|component1(){}[0]
+        final fun copy(stapel.result/StapelError = ...): stapel.push/RegistryError.NotAllowed // stapel.push/RegistryError.NotAllowed.copy|copy(stapel.result.StapelError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/RegistryError.NotAllowed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push/RegistryError.NotAllowed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push/RegistryError.NotAllowed.toString|toString(){}[0]
+    }
+}
+
+final class stapel.push/InMemoryPushStore : stapel.push/PushStore { // stapel.push/InMemoryPushStore|null[0]
+    constructor <init>(stapel.push/PushRecord = ...) // stapel.push/InMemoryPushStore.<init>|<init>(stapel.push.PushRecord){}[0]
+
+    final var record // stapel.push/InMemoryPushStore.record|{}record[0]
+        final fun <get-record>(): stapel.push/PushRecord // stapel.push/InMemoryPushStore.record.<get-record>|<get-record>(){}[0]
+
+    final suspend fun load(): stapel.push/PushRecord // stapel.push/InMemoryPushStore.load|load(){}[0]
+    final suspend fun save(stapel.push/PushRecord) // stapel.push/InMemoryPushStore.save|save(stapel.push.PushRecord){}[0]
+}
+
+final class stapel.push/PushChannelSpec { // stapel.push/PushChannelSpec|null[0]
+    constructor <init>(kotlin/String, kotlin/String, stapel.push/Importance = ...) // stapel.push/PushChannelSpec.<init>|<init>(kotlin.String;kotlin.String;stapel.push.Importance){}[0]
+
+    final val id // stapel.push/PushChannelSpec.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.push/PushChannelSpec.id.<get-id>|<get-id>(){}[0]
+    final val importance // stapel.push/PushChannelSpec.importance|{}importance[0]
+        final fun <get-importance>(): stapel.push/Importance // stapel.push/PushChannelSpec.importance.<get-importance>|<get-importance>(){}[0]
+    final val name // stapel.push/PushChannelSpec.name|{}name[0]
+        final fun <get-name>(): kotlin/String // stapel.push/PushChannelSpec.name.<get-name>|<get-name>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.push/PushChannelSpec.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.push/PushChannelSpec.component2|component2(){}[0]
+    final fun component3(): stapel.push/Importance // stapel.push/PushChannelSpec.component3|component3(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., stapel.push/Importance = ...): stapel.push/PushChannelSpec // stapel.push/PushChannelSpec.copy|copy(kotlin.String;kotlin.String;stapel.push.Importance){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushChannelSpec.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.push/PushChannelSpec.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.push/PushChannelSpec.toString|toString(){}[0]
+}
+
+final class stapel.push/PushDependencies { // stapel.push/PushDependencies|null[0]
+    constructor <init>(stapel.push/PushProvider?, stapel.push/PushDeviceRegistry?, stapel.session/SessionManager, stapel.session/InstallationIdentity, stapel.push/PushStore, kotlinx.coroutines/CoroutineScope, stapel.runtime/AppLifecycle? = ..., stapel.push/PushRationale? = ..., kotlin.collections/List<stapel.push/PushOpenListener> = ..., stapel.runtime/StapelLogger = ...) // stapel.push/PushDependencies.<init>|<init>(stapel.push.PushProvider?;stapel.push.PushDeviceRegistry?;stapel.session.SessionManager;stapel.session.InstallationIdentity;stapel.push.PushStore;kotlinx.coroutines.CoroutineScope;stapel.runtime.AppLifecycle?;stapel.push.PushRationale?;kotlin.collections.List<stapel.push.PushOpenListener>;stapel.runtime.StapelLogger){}[0]
+
+    final val identity // stapel.push/PushDependencies.identity|{}identity[0]
+        final fun <get-identity>(): stapel.session/InstallationIdentity // stapel.push/PushDependencies.identity.<get-identity>|<get-identity>(){}[0]
+    final val lifecycle // stapel.push/PushDependencies.lifecycle|{}lifecycle[0]
+        final fun <get-lifecycle>(): stapel.runtime/AppLifecycle? // stapel.push/PushDependencies.lifecycle.<get-lifecycle>|<get-lifecycle>(){}[0]
+    final val logger // stapel.push/PushDependencies.logger|{}logger[0]
+        final fun <get-logger>(): stapel.runtime/StapelLogger // stapel.push/PushDependencies.logger.<get-logger>|<get-logger>(){}[0]
+    final val openListeners // stapel.push/PushDependencies.openListeners|{}openListeners[0]
+        final fun <get-openListeners>(): kotlin.collections/List<stapel.push/PushOpenListener> // stapel.push/PushDependencies.openListeners.<get-openListeners>|<get-openListeners>(){}[0]
+    final val provider // stapel.push/PushDependencies.provider|{}provider[0]
+        final fun <get-provider>(): stapel.push/PushProvider? // stapel.push/PushDependencies.provider.<get-provider>|<get-provider>(){}[0]
+    final val rationale // stapel.push/PushDependencies.rationale|{}rationale[0]
+        final fun <get-rationale>(): stapel.push/PushRationale? // stapel.push/PushDependencies.rationale.<get-rationale>|<get-rationale>(){}[0]
+    final val registry // stapel.push/PushDependencies.registry|{}registry[0]
+        final fun <get-registry>(): stapel.push/PushDeviceRegistry? // stapel.push/PushDependencies.registry.<get-registry>|<get-registry>(){}[0]
+    final val scope // stapel.push/PushDependencies.scope|{}scope[0]
+        final fun <get-scope>(): kotlinx.coroutines/CoroutineScope // stapel.push/PushDependencies.scope.<get-scope>|<get-scope>(){}[0]
+    final val sessions // stapel.push/PushDependencies.sessions|{}sessions[0]
+        final fun <get-sessions>(): stapel.session/SessionManager // stapel.push/PushDependencies.sessions.<get-sessions>|<get-sessions>(){}[0]
+    final val store // stapel.push/PushDependencies.store|{}store[0]
+        final fun <get-store>(): stapel.push/PushStore // stapel.push/PushDependencies.store.<get-store>|<get-store>(){}[0]
+}
+
+final class stapel.push/PushDevice { // stapel.push/PushDevice|null[0]
+    constructor <init>(stapel.push/PushToken, stapel.push/DevicePlatform, kotlin/String) // stapel.push/PushDevice.<init>|<init>(stapel.push.PushToken;stapel.push.DevicePlatform;kotlin.String){}[0]
+
+    final val installationId // stapel.push/PushDevice.installationId|{}installationId[0]
+        final fun <get-installationId>(): kotlin/String // stapel.push/PushDevice.installationId.<get-installationId>|<get-installationId>(){}[0]
+    final val platform // stapel.push/PushDevice.platform|{}platform[0]
+        final fun <get-platform>(): stapel.push/DevicePlatform // stapel.push/PushDevice.platform.<get-platform>|<get-platform>(){}[0]
+    final val token // stapel.push/PushDevice.token|{}token[0]
+        final fun <get-token>(): stapel.push/PushToken // stapel.push/PushDevice.token.<get-token>|<get-token>(){}[0]
+
+    final fun component1(): stapel.push/PushToken // stapel.push/PushDevice.component1|component1(){}[0]
+    final fun component2(): stapel.push/DevicePlatform // stapel.push/PushDevice.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.push/PushDevice.component3|component3(){}[0]
+    final fun copy(stapel.push/PushToken = ..., stapel.push/DevicePlatform = ..., kotlin/String = ...): stapel.push/PushDevice // stapel.push/PushDevice.copy|copy(stapel.push.PushToken;stapel.push.DevicePlatform;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushDevice.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.push/PushDevice.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.push/PushDevice.toString|toString(){}[0]
+}
+
+final class stapel.push/PushMessage { // stapel.push/PushMessage|null[0]
+    constructor <init>(kotlin/String?, kotlin/String?, kotlin/String?, kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin/String, kotlin.time/Instant? = ...) // stapel.push/PushMessage.<init>|<init>(kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.String;kotlin.time.Instant?){}[0]
+
+    final val body // stapel.push/PushMessage.body|{}body[0]
+        final fun <get-body>(): kotlin/String? // stapel.push/PushMessage.body.<get-body>|<get-body>(){}[0]
+    final val data // stapel.push/PushMessage.data|{}data[0]
+        final fun <get-data>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.push/PushMessage.data.<get-data>|<get-data>(){}[0]
+    final val id // stapel.push/PushMessage.id|{}id[0]
+        final fun <get-id>(): kotlin/String? // stapel.push/PushMessage.id.<get-id>|<get-id>(){}[0]
+    final val provider // stapel.push/PushMessage.provider|{}provider[0]
+        final fun <get-provider>(): kotlin/String // stapel.push/PushMessage.provider.<get-provider>|<get-provider>(){}[0]
+    final val sentAt // stapel.push/PushMessage.sentAt|{}sentAt[0]
+        final fun <get-sentAt>(): kotlin.time/Instant? // stapel.push/PushMessage.sentAt.<get-sentAt>|<get-sentAt>(){}[0]
+    final val title // stapel.push/PushMessage.title|{}title[0]
+        final fun <get-title>(): kotlin/String? // stapel.push/PushMessage.title.<get-title>|<get-title>(){}[0]
+    final val type // stapel.push/PushMessage.type|{}type[0]
+        final fun <get-type>(): kotlin/String // stapel.push/PushMessage.type.<get-type>|<get-type>(){}[0]
+
+    final fun component1(): kotlin/String? // stapel.push/PushMessage.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // stapel.push/PushMessage.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.push/PushMessage.component3|component3(){}[0]
+    final fun component4(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.push/PushMessage.component4|component4(){}[0]
+    final fun component5(): kotlin/String // stapel.push/PushMessage.component5|component5(){}[0]
+    final fun component6(): kotlin.time/Instant? // stapel.push/PushMessage.component6|component6(){}[0]
+    final fun copy(kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/String = ..., kotlin.time/Instant? = ...): stapel.push/PushMessage // stapel.push/PushMessage.copy|copy(kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.String;kotlin.time.Instant?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushMessage.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.push/PushMessage.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.push/PushMessage.toString|toString(){}[0]
+}
+
+final class stapel.push/PushOptions { // stapel.push/PushOptions|null[0]
+    constructor <init>(stapel.push/AskPolicy = ..., stapel.push/ForegroundPresentation = ..., stapel.push/PushRouting = ...) // stapel.push/PushOptions.<init>|<init>(stapel.push.AskPolicy;stapel.push.ForegroundPresentation;stapel.push.PushRouting){}[0]
+
+    final val ask // stapel.push/PushOptions.ask|{}ask[0]
+        final fun <get-ask>(): stapel.push/AskPolicy // stapel.push/PushOptions.ask.<get-ask>|<get-ask>(){}[0]
+    final val foreground // stapel.push/PushOptions.foreground|{}foreground[0]
+        final fun <get-foreground>(): stapel.push/ForegroundPresentation // stapel.push/PushOptions.foreground.<get-foreground>|<get-foreground>(){}[0]
+    final val routing // stapel.push/PushOptions.routing|{}routing[0]
+        final fun <get-routing>(): stapel.push/PushRouting // stapel.push/PushOptions.routing.<get-routing>|<get-routing>(){}[0]
+}
+
+final class stapel.push/PushRecord { // stapel.push/PushRecord|null[0]
+    constructor <init>(kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String? = ...) // stapel.push/PushRecord.<init>|<init>(kotlin.Boolean;kotlin.Boolean;kotlin.String?;kotlin.String?){}[0]
+
+    final val enabled // stapel.push/PushRecord.enabled|{}enabled[0]
+        final fun <get-enabled>(): kotlin/Boolean // stapel.push/PushRecord.enabled.<get-enabled>|<get-enabled>(){}[0]
+    final val optedOut // stapel.push/PushRecord.optedOut|{}optedOut[0]
+        final fun <get-optedOut>(): kotlin/Boolean // stapel.push/PushRecord.optedOut.<get-optedOut>|<get-optedOut>(){}[0]
+    final val registeredAccount // stapel.push/PushRecord.registeredAccount|{}registeredAccount[0]
+        final fun <get-registeredAccount>(): kotlin/String? // stapel.push/PushRecord.registeredAccount.<get-registeredAccount>|<get-registeredAccount>(){}[0]
+    final val registeredFingerprint // stapel.push/PushRecord.registeredFingerprint|{}registeredFingerprint[0]
+        final fun <get-registeredFingerprint>(): kotlin/String? // stapel.push/PushRecord.registeredFingerprint.<get-registeredFingerprint>|<get-registeredFingerprint>(){}[0]
+
+    final fun component1(): kotlin/Boolean // stapel.push/PushRecord.component1|component1(){}[0]
+    final fun component2(): kotlin/Boolean // stapel.push/PushRecord.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.push/PushRecord.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // stapel.push/PushRecord.component4|component4(){}[0]
+    final fun copy(kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.push/PushRecord // stapel.push/PushRecord.copy|copy(kotlin.Boolean;kotlin.Boolean;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushRecord.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.push/PushRecord.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.push/PushRecord.toString|toString(){}[0]
+}
+
+final class stapel.push/PushRouting { // stapel.push/PushRouting|null[0]
+    constructor <init>(kotlin.collections/List<kotlin/String> = ..., kotlin/String? = ..., kotlin.collections/List<stapel.push/PushChannelSpec> = ...) // stapel.push/PushRouting.<init>|<init>(kotlin.collections.List<kotlin.String>;kotlin.String?;kotlin.collections.List<stapel.push.PushChannelSpec>){}[0]
+
+    final val channels // stapel.push/PushRouting.channels|{}channels[0]
+        final fun <get-channels>(): kotlin.collections/List<stapel.push/PushChannelSpec> // stapel.push/PushRouting.channels.<get-channels>|<get-channels>(){}[0]
+    final val fallbackUri // stapel.push/PushRouting.fallbackUri|{}fallbackUri[0]
+        final fun <get-fallbackUri>(): kotlin/String? // stapel.push/PushRouting.fallbackUri.<get-fallbackUri>|<get-fallbackUri>(){}[0]
+    final val linkKeys // stapel.push/PushRouting.linkKeys|{}linkKeys[0]
+        final fun <get-linkKeys>(): kotlin.collections/List<kotlin/String> // stapel.push/PushRouting.linkKeys.<get-linkKeys>|<get-linkKeys>(){}[0]
+}
+
+final class stapel.push/PushState { // stapel.push/PushState|null[0]
+    constructor <init>(stapel.push/ProviderAvailability, stapel.push/PushPermission, stapel.push/Registration, kotlin/Boolean) // stapel.push/PushState.<init>|<init>(stapel.push.ProviderAvailability;stapel.push.PushPermission;stapel.push.Registration;kotlin.Boolean){}[0]
+
+    final val availability // stapel.push/PushState.availability|{}availability[0]
+        final fun <get-availability>(): stapel.push/ProviderAvailability // stapel.push/PushState.availability.<get-availability>|<get-availability>(){}[0]
+    final val enabled // stapel.push/PushState.enabled|{}enabled[0]
+        final fun <get-enabled>(): kotlin/Boolean // stapel.push/PushState.enabled.<get-enabled>|<get-enabled>(){}[0]
+    final val permission // stapel.push/PushState.permission|{}permission[0]
+        final fun <get-permission>(): stapel.push/PushPermission // stapel.push/PushState.permission.<get-permission>|<get-permission>(){}[0]
+    final val registration // stapel.push/PushState.registration|{}registration[0]
+        final fun <get-registration>(): stapel.push/Registration // stapel.push/PushState.registration.<get-registration>|<get-registration>(){}[0]
+
+    final fun component1(): stapel.push/ProviderAvailability // stapel.push/PushState.component1|component1(){}[0]
+    final fun component2(): stapel.push/PushPermission // stapel.push/PushState.component2|component2(){}[0]
+    final fun component3(): stapel.push/Registration // stapel.push/PushState.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // stapel.push/PushState.component4|component4(){}[0]
+    final fun copy(stapel.push/ProviderAvailability = ..., stapel.push/PushPermission = ..., stapel.push/Registration = ..., kotlin/Boolean = ...): stapel.push/PushState // stapel.push/PushState.copy|copy(stapel.push.ProviderAvailability;stapel.push.PushPermission;stapel.push.Registration;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushState.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.push/PushState.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.push/PushState.toString|toString(){}[0]
+}
+
+final class stapel.push/PushToken { // stapel.push/PushToken|null[0]
+    constructor <init>(kotlin/String, stapel.push/TokenKind, kotlin/String) // stapel.push/PushToken.<init>|<init>(kotlin.String;stapel.push.TokenKind;kotlin.String){}[0]
+
+    final val fingerprint // stapel.push/PushToken.fingerprint|{}fingerprint[0]
+        final fun <get-fingerprint>(): kotlin/String // stapel.push/PushToken.fingerprint.<get-fingerprint>|<get-fingerprint>(){}[0]
+    final val kind // stapel.push/PushToken.kind|{}kind[0]
+        final fun <get-kind>(): stapel.push/TokenKind // stapel.push/PushToken.kind.<get-kind>|<get-kind>(){}[0]
+    final val provider // stapel.push/PushToken.provider|{}provider[0]
+        final fun <get-provider>(): kotlin/String // stapel.push/PushToken.provider.<get-provider>|<get-provider>(){}[0]
+    final val value // stapel.push/PushToken.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.push/PushToken.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push/PushToken.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.push/PushToken.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.push/PushToken.toString|toString(){}[0]
+}
+
+final object stapel.push/PushErrorCodes { // stapel.push/PushErrorCodes|null[0]
+    final val PermissionDenied // stapel.push/PushErrorCodes.PermissionDenied|{}PermissionDenied[0]
+        final fun <get-PermissionDenied>(): stapel.result/ErrorCode // stapel.push/PushErrorCodes.PermissionDenied.<get-PermissionDenied>|<get-PermissionDenied>(){}[0]
+    final val Transient // stapel.push/PushErrorCodes.Transient|{}Transient[0]
+        final fun <get-Transient>(): stapel.result/ErrorCode // stapel.push/PushErrorCodes.Transient.<get-Transient>|<get-Transient>(){}[0]
+    final val Unavailable // stapel.push/PushErrorCodes.Unavailable|{}Unavailable[0]
+        final fun <get-Unavailable>(): stapel.result/ErrorCode // stapel.push/PushErrorCodes.Unavailable.<get-Unavailable>|<get-Unavailable>(){}[0]
+}
+
+final const val stapel.push/PUSH_LOG_TAG // stapel.push/PUSH_LOG_TAG|{}PUSH_LOG_TAG[0]
+    final fun <get-PUSH_LOG_TAG>(): kotlin/String // stapel.push/PUSH_LOG_TAG.<get-PUSH_LOG_TAG>|<get-PUSH_LOG_TAG>(){}[0]
+
+final val stapel.push/allowsDelivery // stapel.push/allowsDelivery|@stapel.push.PushPermission{}allowsDelivery[0]
+    final fun (stapel.push/PushPermission).<get-allowsDelivery>(): kotlin/Boolean // stapel.push/allowsDelivery.<get-allowsDelivery>|<get-allowsDelivery>@stapel.push.PushPermission(){}[0]
+
+final fun stapel.push.di/pushModule(stapel.push/PushOptions = ...): org.koin.core.module/Module // stapel.push.di/pushModule|pushModule(stapel.push.PushOptions){}[0]
+final fun stapel.push/PushController(stapel.push/PushDependencies, stapel.push/PushOptions = ...): stapel.push/PushController // stapel.push/PushController|PushController(stapel.push.PushDependencies;stapel.push.PushOptions){}[0]
+final fun stapel.push/platformPushStore(stapel.runtime/PlatformContext, stapel.runtime/StapelDispatchers): stapel.push/PushStore // stapel.push/platformPushStore|platformPushStore(stapel.runtime.PlatformContext;stapel.runtime.StapelDispatchers){}[0]

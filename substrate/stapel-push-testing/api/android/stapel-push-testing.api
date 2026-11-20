@@ -1,0 +1,86 @@
+public final class stapel/push/testing/FakeDeviceRegistry : stapel/push/PushDeviceRegistry {
+	public fun <init> (Lkotlin/jvm/functions/Function0;Ljava/util/List;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function0;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun deactivate (Lstapel/push/PushToken;)V
+	public final fun getAccount ()Lkotlin/jvm/functions/Function0;
+	public final fun getFailure ()Lstapel/result/StapelResult$Err;
+	public final fun getLog ()Ljava/util/List;
+	public final fun getRows ()Ljava/util/List;
+	public fun register (Lstapel/push/PushDevice;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun setAccount (Lkotlin/jvm/functions/Function0;)V
+	public final fun setFailure (Lstapel/result/StapelResult$Err;)V
+	public fun status (Lstapel/push/PushToken;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun unregister (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/push/testing/FakeDeviceRegistry$Row {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Z
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)Lstapel/push/testing/FakeDeviceRegistry$Row;
+	public static synthetic fun copy$default (Lstapel/push/testing/FakeDeviceRegistry$Row;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lstapel/push/testing/FakeDeviceRegistry$Row;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccount ()Ljava/lang/String;
+	public final fun getActive ()Z
+	public final fun getFingerprint ()Ljava/lang/String;
+	public final fun getInstallationId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/push/testing/FakePushProvider : stapel/push/PushProvider {
+	public fun <init> ()V
+	public fun <init> (Lstapel/push/ProviderAvailability;Lstapel/push/DevicePlatform;Ljava/lang/String;ZLjava/util/List;)V
+	public synthetic fun <init> (Lstapel/push/ProviderAvailability;Lstapel/push/DevicePlatform;Ljava/lang/String;ZLjava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun deleteToken (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun ensureChannels (Ljava/util/List;)V
+	public fun getAvailability ()Lstapel/push/ProviderAvailability;
+	public final fun getChannels ()Ljava/util/List;
+	public final fun getCurrentToken ()Lstapel/push/PushToken;
+	public fun getEvents ()Lkotlinx/coroutines/flow/Flow;
+	public final fun getForeground ()Lstapel/push/ForegroundPresentation;
+	public fun getId ()Ljava/lang/String;
+	public final fun getLog ()Ljava/util/List;
+	public final fun getOsAnswer ()Lstapel/push/PushPermission;
+	public final fun getOsPermission ()Lstapel/push/PushPermission;
+	public fun getPlatform ()Lstapel/push/DevicePlatform;
+	public final fun getPrompts ()I
+	public final fun getTokenFailure ()Lstapel/push/PushError;
+	public fun getTokens ()Lkotlinx/coroutines/flow/Flow;
+	public fun getTransactional ()Z
+	public final fun open (Lstapel/push/PushMessage;Ljava/lang/String;)V
+	public static synthetic fun open$default (Lstapel/push/testing/FakePushProvider;Lstapel/push/PushMessage;Ljava/lang/String;ILjava/lang/Object;)V
+	public fun permission (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun receive (Lstapel/push/PushMessage;Z)V
+	public fun requestPermission (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun rotate ()Lstapel/push/PushToken;
+	public fun setForegroundPresentation (Lstapel/push/ForegroundPresentation;)V
+	public final fun setOsAnswer (Lstapel/push/PushPermission;)V
+	public final fun setOsPermission (Lstapel/push/PushPermission;)V
+	public final fun setTokenFailure (Lstapel/push/PushError;)V
+	public fun token (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/push/testing/FakesKt {
+	public static final fun pushMessage (Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/push/PushMessage;
+	public static synthetic fun pushMessage$default (Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/push/PushMessage;
+}
+
+public final class stapel/push/testing/PushProviderContract {
+	public static final field INSTANCE Lstapel/push/testing/PushProviderContract;
+	public final fun getCaseNames ()Ljava/util/List;
+	public final fun verify (Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun verifyUnavailable (Lstapel/push/PushProvider;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/push/testing/PushProviderHarness {
+	public abstract fun deliver (Lstapel/push/PushMessage;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getProvider ()Lstapel/push/PushProvider;
+	public abstract fun grant (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun rotate (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun tap (Lstapel/push/PushMessage;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

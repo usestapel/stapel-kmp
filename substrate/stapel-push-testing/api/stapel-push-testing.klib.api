@@ -1,0 +1,117 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-push-testing>
+abstract interface stapel.push.testing/PushProviderHarness { // stapel.push.testing/PushProviderHarness|null[0]
+    abstract val provider // stapel.push.testing/PushProviderHarness.provider|{}provider[0]
+        abstract fun <get-provider>(): stapel.push/PushProvider // stapel.push.testing/PushProviderHarness.provider.<get-provider>|<get-provider>(){}[0]
+
+    abstract suspend fun deliver(stapel.push/PushMessage, kotlin/Boolean) // stapel.push.testing/PushProviderHarness.deliver|deliver(stapel.push.PushMessage;kotlin.Boolean){}[0]
+    abstract suspend fun grant() // stapel.push.testing/PushProviderHarness.grant|grant(){}[0]
+    abstract suspend fun rotate() // stapel.push.testing/PushProviderHarness.rotate|rotate(){}[0]
+    abstract suspend fun tap(stapel.push/PushMessage) // stapel.push.testing/PushProviderHarness.tap|tap(stapel.push.PushMessage){}[0]
+}
+
+final class stapel.push.testing/FakeDeviceRegistry : stapel.push/PushDeviceRegistry { // stapel.push.testing/FakeDeviceRegistry|null[0]
+    constructor <init>(kotlin/Function0<kotlin/String?>, kotlin.collections/MutableList<kotlin/String> = ...) // stapel.push.testing/FakeDeviceRegistry.<init>|<init>(kotlin.Function0<kotlin.String?>;kotlin.collections.MutableList<kotlin.String>){}[0]
+
+    final val log // stapel.push.testing/FakeDeviceRegistry.log|{}log[0]
+        final fun <get-log>(): kotlin.collections/MutableList<kotlin/String> // stapel.push.testing/FakeDeviceRegistry.log.<get-log>|<get-log>(){}[0]
+    final val rows // stapel.push.testing/FakeDeviceRegistry.rows|{}rows[0]
+        final fun <get-rows>(): kotlin.collections/MutableList<stapel.push.testing/FakeDeviceRegistry.Row> // stapel.push.testing/FakeDeviceRegistry.rows.<get-rows>|<get-rows>(){}[0]
+
+    final var account // stapel.push.testing/FakeDeviceRegistry.account|{}account[0]
+        final fun <get-account>(): kotlin/Function0<kotlin/String?> // stapel.push.testing/FakeDeviceRegistry.account.<get-account>|<get-account>(){}[0]
+        final fun <set-account>(kotlin/Function0<kotlin/String?>) // stapel.push.testing/FakeDeviceRegistry.account.<set-account>|<set-account>(kotlin.Function0<kotlin.String?>){}[0]
+    final var failure // stapel.push.testing/FakeDeviceRegistry.failure|{}failure[0]
+        final fun <get-failure>(): stapel.result/StapelResult.Err<stapel.push/RegistryError>? // stapel.push.testing/FakeDeviceRegistry.failure.<get-failure>|<get-failure>(){}[0]
+        final fun <set-failure>(stapel.result/StapelResult.Err<stapel.push/RegistryError>?) // stapel.push.testing/FakeDeviceRegistry.failure.<set-failure>|<set-failure>(stapel.result.StapelResult.Err<stapel.push.RegistryError>?){}[0]
+
+    final fun deactivate(stapel.push/PushToken) // stapel.push.testing/FakeDeviceRegistry.deactivate|deactivate(stapel.push.PushToken){}[0]
+    final suspend fun register(stapel.push/PushDevice): stapel.result/StapelResult<kotlin/Unit, stapel.push/RegistryError> // stapel.push.testing/FakeDeviceRegistry.register|register(stapel.push.PushDevice){}[0]
+    final suspend fun status(stapel.push/PushToken): stapel.result/StapelResult<stapel.push/DeviceStatus, stapel.push/RegistryError> // stapel.push.testing/FakeDeviceRegistry.status|status(stapel.push.PushToken){}[0]
+    final suspend fun unregister(kotlin/String): stapel.result/StapelResult<kotlin/Unit, stapel.push/RegistryError> // stapel.push.testing/FakeDeviceRegistry.unregister|unregister(kotlin.String){}[0]
+
+    final class Row { // stapel.push.testing/FakeDeviceRegistry.Row|null[0]
+        constructor <init>(kotlin/String, kotlin/String, kotlin/String, kotlin/Boolean = ...) // stapel.push.testing/FakeDeviceRegistry.Row.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;kotlin.Boolean){}[0]
+
+        final val account // stapel.push.testing/FakeDeviceRegistry.Row.account|{}account[0]
+            final fun <get-account>(): kotlin/String // stapel.push.testing/FakeDeviceRegistry.Row.account.<get-account>|<get-account>(){}[0]
+        final val active // stapel.push.testing/FakeDeviceRegistry.Row.active|{}active[0]
+            final fun <get-active>(): kotlin/Boolean // stapel.push.testing/FakeDeviceRegistry.Row.active.<get-active>|<get-active>(){}[0]
+        final val fingerprint // stapel.push.testing/FakeDeviceRegistry.Row.fingerprint|{}fingerprint[0]
+            final fun <get-fingerprint>(): kotlin/String // stapel.push.testing/FakeDeviceRegistry.Row.fingerprint.<get-fingerprint>|<get-fingerprint>(){}[0]
+        final val installationId // stapel.push.testing/FakeDeviceRegistry.Row.installationId|{}installationId[0]
+            final fun <get-installationId>(): kotlin/String // stapel.push.testing/FakeDeviceRegistry.Row.installationId.<get-installationId>|<get-installationId>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.push.testing/FakeDeviceRegistry.Row.component1|component1(){}[0]
+        final fun component2(): kotlin/String // stapel.push.testing/FakeDeviceRegistry.Row.component2|component2(){}[0]
+        final fun component3(): kotlin/String // stapel.push.testing/FakeDeviceRegistry.Row.component3|component3(){}[0]
+        final fun component4(): kotlin/Boolean // stapel.push.testing/FakeDeviceRegistry.Row.component4|component4(){}[0]
+        final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., kotlin/Boolean = ...): stapel.push.testing/FakeDeviceRegistry.Row // stapel.push.testing/FakeDeviceRegistry.Row.copy|copy(kotlin.String;kotlin.String;kotlin.String;kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.push.testing/FakeDeviceRegistry.Row.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.push.testing/FakeDeviceRegistry.Row.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.push.testing/FakeDeviceRegistry.Row.toString|toString(){}[0]
+    }
+}
+
+final class stapel.push.testing/FakePushProvider : stapel.push/PushProvider { // stapel.push.testing/FakePushProvider|null[0]
+    constructor <init>(stapel.push/ProviderAvailability = ..., stapel.push/DevicePlatform? = ..., kotlin/String = ..., kotlin/Boolean = ..., kotlin.collections/MutableList<kotlin/String> = ...) // stapel.push.testing/FakePushProvider.<init>|<init>(stapel.push.ProviderAvailability;stapel.push.DevicePlatform?;kotlin.String;kotlin.Boolean;kotlin.collections.MutableList<kotlin.String>){}[0]
+
+    final val availability // stapel.push.testing/FakePushProvider.availability|{}availability[0]
+        final fun <get-availability>(): stapel.push/ProviderAvailability // stapel.push.testing/FakePushProvider.availability.<get-availability>|<get-availability>(){}[0]
+    final val currentToken // stapel.push.testing/FakePushProvider.currentToken|{}currentToken[0]
+        final fun <get-currentToken>(): stapel.push/PushToken? // stapel.push.testing/FakePushProvider.currentToken.<get-currentToken>|<get-currentToken>(){}[0]
+    final val events // stapel.push.testing/FakePushProvider.events|{}events[0]
+        final fun <get-events>(): kotlinx.coroutines.flow/Flow<stapel.push/PushEvent> // stapel.push.testing/FakePushProvider.events.<get-events>|<get-events>(){}[0]
+    final val id // stapel.push.testing/FakePushProvider.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.push.testing/FakePushProvider.id.<get-id>|<get-id>(){}[0]
+    final val log // stapel.push.testing/FakePushProvider.log|{}log[0]
+        final fun <get-log>(): kotlin.collections/MutableList<kotlin/String> // stapel.push.testing/FakePushProvider.log.<get-log>|<get-log>(){}[0]
+    final val platform // stapel.push.testing/FakePushProvider.platform|{}platform[0]
+        final fun <get-platform>(): stapel.push/DevicePlatform? // stapel.push.testing/FakePushProvider.platform.<get-platform>|<get-platform>(){}[0]
+    final val tokens // stapel.push.testing/FakePushProvider.tokens|{}tokens[0]
+        final fun <get-tokens>(): kotlinx.coroutines.flow/Flow<stapel.push/PushToken> // stapel.push.testing/FakePushProvider.tokens.<get-tokens>|<get-tokens>(){}[0]
+    final val transactional // stapel.push.testing/FakePushProvider.transactional|{}transactional[0]
+        final fun <get-transactional>(): kotlin/Boolean // stapel.push.testing/FakePushProvider.transactional.<get-transactional>|<get-transactional>(){}[0]
+
+    final var channels // stapel.push.testing/FakePushProvider.channels|{}channels[0]
+        final fun <get-channels>(): kotlin.collections/List<stapel.push/PushChannelSpec> // stapel.push.testing/FakePushProvider.channels.<get-channels>|<get-channels>(){}[0]
+    final var foreground // stapel.push.testing/FakePushProvider.foreground|{}foreground[0]
+        final fun <get-foreground>(): stapel.push/ForegroundPresentation? // stapel.push.testing/FakePushProvider.foreground.<get-foreground>|<get-foreground>(){}[0]
+    final var osAnswer // stapel.push.testing/FakePushProvider.osAnswer|{}osAnswer[0]
+        final fun <get-osAnswer>(): stapel.push/PushPermission // stapel.push.testing/FakePushProvider.osAnswer.<get-osAnswer>|<get-osAnswer>(){}[0]
+        final fun <set-osAnswer>(stapel.push/PushPermission) // stapel.push.testing/FakePushProvider.osAnswer.<set-osAnswer>|<set-osAnswer>(stapel.push.PushPermission){}[0]
+    final var osPermission // stapel.push.testing/FakePushProvider.osPermission|{}osPermission[0]
+        final fun <get-osPermission>(): stapel.push/PushPermission // stapel.push.testing/FakePushProvider.osPermission.<get-osPermission>|<get-osPermission>(){}[0]
+        final fun <set-osPermission>(stapel.push/PushPermission) // stapel.push.testing/FakePushProvider.osPermission.<set-osPermission>|<set-osPermission>(stapel.push.PushPermission){}[0]
+    final var prompts // stapel.push.testing/FakePushProvider.prompts|{}prompts[0]
+        final fun <get-prompts>(): kotlin/Int // stapel.push.testing/FakePushProvider.prompts.<get-prompts>|<get-prompts>(){}[0]
+    final var tokenFailure // stapel.push.testing/FakePushProvider.tokenFailure|{}tokenFailure[0]
+        final fun <get-tokenFailure>(): stapel.push/PushError? // stapel.push.testing/FakePushProvider.tokenFailure.<get-tokenFailure>|<get-tokenFailure>(){}[0]
+        final fun <set-tokenFailure>(stapel.push/PushError?) // stapel.push.testing/FakePushProvider.tokenFailure.<set-tokenFailure>|<set-tokenFailure>(stapel.push.PushError?){}[0]
+
+    final fun ensureChannels(kotlin.collections/List<stapel.push/PushChannelSpec>) // stapel.push.testing/FakePushProvider.ensureChannels|ensureChannels(kotlin.collections.List<stapel.push.PushChannelSpec>){}[0]
+    final fun open(stapel.push/PushMessage, kotlin/String? = ...) // stapel.push.testing/FakePushProvider.open|open(stapel.push.PushMessage;kotlin.String?){}[0]
+    final fun receive(stapel.push/PushMessage, kotlin/Boolean) // stapel.push.testing/FakePushProvider.receive|receive(stapel.push.PushMessage;kotlin.Boolean){}[0]
+    final fun rotate(): stapel.push/PushToken // stapel.push.testing/FakePushProvider.rotate|rotate(){}[0]
+    final fun setForegroundPresentation(stapel.push/ForegroundPresentation) // stapel.push.testing/FakePushProvider.setForegroundPresentation|setForegroundPresentation(stapel.push.ForegroundPresentation){}[0]
+    final suspend fun deleteToken(): stapel.result/StapelResult<kotlin/Unit, stapel.push/PushError> // stapel.push.testing/FakePushProvider.deleteToken|deleteToken(){}[0]
+    final suspend fun permission(): stapel.push/PushPermission // stapel.push.testing/FakePushProvider.permission|permission(){}[0]
+    final suspend fun requestPermission(kotlin/Boolean): stapel.push/PushPermission // stapel.push.testing/FakePushProvider.requestPermission|requestPermission(kotlin.Boolean){}[0]
+    final suspend fun token(): stapel.result/StapelResult<stapel.push/PushToken, stapel.push/PushError> // stapel.push.testing/FakePushProvider.token|token(){}[0]
+}
+
+final object stapel.push.testing/PushProviderContract { // stapel.push.testing/PushProviderContract|null[0]
+    final val caseNames // stapel.push.testing/PushProviderContract.caseNames|{}caseNames[0]
+        final fun <get-caseNames>(): kotlin.collections/List<kotlin/String> // stapel.push.testing/PushProviderContract.caseNames.<get-caseNames>|<get-caseNames>(){}[0]
+
+    final suspend fun verify(kotlin.coroutines/SuspendFunction0<stapel.push.testing/PushProviderHarness>): kotlin/Int // stapel.push.testing/PushProviderContract.verify|verify(kotlin.coroutines.SuspendFunction0<stapel.push.testing.PushProviderHarness>){}[0]
+    final suspend fun verifyUnavailable(stapel.push/PushProvider) // stapel.push.testing/PushProviderContract.verifyUnavailable|verifyUnavailable(stapel.push.PushProvider){}[0]
+}
+
+final fun stapel.push.testing/pushMessage(kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String = ...): stapel.push/PushMessage // stapel.push.testing/pushMessage|pushMessage(kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.String?;kotlin.String?;kotlin.String){}[0]
