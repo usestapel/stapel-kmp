@@ -182,6 +182,11 @@
       "family": "substrate",
       "released": false
     },
+    "stapel-push-firebase": {
+      "version": "0.0.1",
+      "family": "capability",
+      "released": false
+    },
     "stapel-push-testing": {
       "version": "0.0.1",
       "family": "substrate",
