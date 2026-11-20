@@ -1,0 +1,36 @@
+public final class stapel/push/firebase/DesktopFirebasePushKt {
+	public static final fun desktopFirebasePushProvider (Lstapel/runtime/StapelDispatchers;Lstapel/runtime/StapelLogger;)Lstapel/push/PushProvider;
+	public static synthetic fun desktopFirebasePushProvider$default (Lstapel/runtime/StapelDispatchers;Lstapel/runtime/StapelLogger;ILjava/lang/Object;)Lstapel/push/PushProvider;
+}
+
+public abstract interface class stapel/push/firebase/FirebasePushBridge {
+	public abstract fun configured ()Z
+	public abstract fun deleteToken (Lkotlin/jvm/functions/Function1;)V
+	public abstract fun ensureChannel (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public abstract fun permission (Lkotlin/jvm/functions/Function1;)V
+	public abstract fun requestPermission (ZLkotlin/jvm/functions/Function1;)V
+	public abstract fun setForegroundPresentation (Ljava/lang/String;)V
+	public abstract fun setListener (Lstapel/push/firebase/FirebasePushListener;)V
+	public abstract fun token (Lkotlin/jvm/functions/Function2;)V
+}
+
+public final class stapel/push/firebase/FirebasePushBridgeKt {
+	public static final field FIREBASE_PUSH_BRIDGE_ABI I
+	public static final field FIREBASE_PUSH_PROVIDER_ID Ljava/lang/String;
+}
+
+public abstract interface class stapel/push/firebase/FirebasePushListener {
+	public abstract fun onMessage (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Z)V
+	public abstract fun onOpened (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;)V
+	public abstract fun onToken (Ljava/lang/String;)V
+}
+
+public final class stapel/push/firebase/FirebasePushProviderKt {
+	public static final fun firebasePushProvider (Lstapel/push/firebase/FirebasePushBridge;Lstapel/push/DevicePlatform;Lstapel/runtime/StapelDispatchers;Lstapel/runtime/StapelLogger;)Lstapel/push/PushProvider;
+	public static synthetic fun firebasePushProvider$default (Lstapel/push/firebase/FirebasePushBridge;Lstapel/push/DevicePlatform;Lstapel/runtime/StapelDispatchers;Lstapel/runtime/StapelLogger;ILjava/lang/Object;)Lstapel/push/PushProvider;
+}
+
+public final class stapel/push/firebase/di/FirebasePushModuleKt {
+	public static final fun firebasePushModule ()Lorg/koin/core/module/Module;
+}
+

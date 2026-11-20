@@ -1,0 +1,32 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-push-firebase>
+abstract interface stapel.push.firebase/FirebasePushBridge { // stapel.push.firebase/FirebasePushBridge|null[0]
+    abstract fun configured(): kotlin/Boolean // stapel.push.firebase/FirebasePushBridge.configured|configured(){}[0]
+    abstract fun deleteToken(kotlin/Function1<kotlin/String?, kotlin/Unit>) // stapel.push.firebase/FirebasePushBridge.deleteToken|deleteToken(kotlin.Function1<kotlin.String?,kotlin.Unit>){}[0]
+    abstract fun ensureChannel(kotlin/String, kotlin/String, kotlin/String) // stapel.push.firebase/FirebasePushBridge.ensureChannel|ensureChannel(kotlin.String;kotlin.String;kotlin.String){}[0]
+    abstract fun permission(kotlin/Function1<kotlin/String, kotlin/Unit>) // stapel.push.firebase/FirebasePushBridge.permission|permission(kotlin.Function1<kotlin.String,kotlin.Unit>){}[0]
+    abstract fun requestPermission(kotlin/Boolean, kotlin/Function1<kotlin/String, kotlin/Unit>) // stapel.push.firebase/FirebasePushBridge.requestPermission|requestPermission(kotlin.Boolean;kotlin.Function1<kotlin.String,kotlin.Unit>){}[0]
+    abstract fun setForegroundPresentation(kotlin/String) // stapel.push.firebase/FirebasePushBridge.setForegroundPresentation|setForegroundPresentation(kotlin.String){}[0]
+    abstract fun setListener(stapel.push.firebase/FirebasePushListener?) // stapel.push.firebase/FirebasePushBridge.setListener|setListener(stapel.push.firebase.FirebasePushListener?){}[0]
+    abstract fun token(kotlin/Function2<kotlin/String?, kotlin/String?, kotlin/Unit>) // stapel.push.firebase/FirebasePushBridge.token|token(kotlin.Function2<kotlin.String?,kotlin.String?,kotlin.Unit>){}[0]
+}
+
+abstract interface stapel.push.firebase/FirebasePushListener { // stapel.push.firebase/FirebasePushListener|null[0]
+    abstract fun onMessage(kotlin/String?, kotlin/String?, kotlin/String?, kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin/Boolean) // stapel.push.firebase/FirebasePushListener.onMessage|onMessage(kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Boolean){}[0]
+    abstract fun onOpened(kotlin/String?, kotlin/String?, kotlin/String?, kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin/String?) // stapel.push.firebase/FirebasePushListener.onOpened|onOpened(kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.String?){}[0]
+    abstract fun onToken(kotlin/String) // stapel.push.firebase/FirebasePushListener.onToken|onToken(kotlin.String){}[0]
+}
+
+final const val stapel.push.firebase/FIREBASE_PUSH_BRIDGE_ABI // stapel.push.firebase/FIREBASE_PUSH_BRIDGE_ABI|{}FIREBASE_PUSH_BRIDGE_ABI[0]
+    final fun <get-FIREBASE_PUSH_BRIDGE_ABI>(): kotlin/Int // stapel.push.firebase/FIREBASE_PUSH_BRIDGE_ABI.<get-FIREBASE_PUSH_BRIDGE_ABI>|<get-FIREBASE_PUSH_BRIDGE_ABI>(){}[0]
+final const val stapel.push.firebase/FIREBASE_PUSH_PROVIDER_ID // stapel.push.firebase/FIREBASE_PUSH_PROVIDER_ID|{}FIREBASE_PUSH_PROVIDER_ID[0]
+    final fun <get-FIREBASE_PUSH_PROVIDER_ID>(): kotlin/String // stapel.push.firebase/FIREBASE_PUSH_PROVIDER_ID.<get-FIREBASE_PUSH_PROVIDER_ID>|<get-FIREBASE_PUSH_PROVIDER_ID>(){}[0]
+
+final fun stapel.push.firebase.di/firebasePushModule(stapel.push.firebase/FirebasePushBridge?): org.koin.core.module/Module // stapel.push.firebase.di/firebasePushModule|firebasePushModule(stapel.push.firebase.FirebasePushBridge?){}[0]
+final fun stapel.push.firebase/firebasePushProvider(stapel.push.firebase/FirebasePushBridge?, stapel.push/DevicePlatform, stapel.runtime/StapelDispatchers, stapel.runtime/StapelLogger = ...): stapel.push/PushProvider // stapel.push.firebase/firebasePushProvider|firebasePushProvider(stapel.push.firebase.FirebasePushBridge?;stapel.push.DevicePlatform;stapel.runtime.StapelDispatchers;stapel.runtime.StapelLogger){}[0]
