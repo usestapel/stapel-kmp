@@ -93,6 +93,24 @@ class GatesFunctionalTest {
     }
 
     @Test
+    fun `an Xcode project or app build above the iOS floor fails checkIosFloor`() {
+        val fx = FixtureBuild("ios-floor")
+            .module("substrate/stapel-result", substrate())
+            .file("samples/app/iosApp/iosApp.xcodeproj/project.pbxproj", "IPHONEOS_DEPLOYMENT_TARGET = 15.0;")
+            .file(
+                "samples/app/shared/build.gradle.kts",
+                "val IOS_FLOOR = \"15.0\"\nkotlin { iosArm64 { binaries.framework { } } }\n" +
+                    "// \"-Xoverride-konan-properties=osVersionMin.ios_arm64=\$IOS_FLOOR;osVersionMin.ios_simulator_arm64=\$IOS_FLOOR\"",
+            )
+        fx.succeeds("checkIosFloor")
+        fx.file("samples/app/iosApp/iosApp.xcodeproj/project.pbxproj", "IPHONEOS_DEPLOYMENT_TARGET = 18.2;")
+            .file("samples/app/shared/build.gradle.kts", "kotlin { iosArm64 { binaries.framework { } } }")
+        val r = fx.fails("stapelCheckFast")
+        assertContains(r.output, "samples/app/iosApp/iosApp.xcodeproj/project.pbxproj: IPHONEOS_DEPLOYMENT_TARGET = 18.2 (must be 15.0)")
+        assertContains(r.output, "samples/app/shared/build.gradle.kts links an Apple binary but does not pin osVersionMin.ios_arm64")
+    }
+
+    @Test
     fun `a consumer listed in the BOM fails checkBomMembers`() {
         val r = FixtureBuild("bom-consumer")
             .module("substrate/stapel-result", substrate())

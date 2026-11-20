@@ -89,6 +89,7 @@ internal fun Project.applyStapelKmp(ext: StapelExtension, explicitApi: Boolean =
     }
     kmp.iosArm64()
     kmp.iosSimulatorArm64()
+    applyIosFloor(kmp)
 
     kmp.extensions.configure(KotlinMultiplatformAndroidLibraryTarget::class.java) {
         namespace = moduleNamespace(names)
