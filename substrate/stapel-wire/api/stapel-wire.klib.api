@@ -79,6 +79,10 @@ final enum class stapel.wire/ResponseKind : kotlin/Enum<stapel.wire/ResponseKind
     final fun values(): kotlin/Array<stapel.wire/ResponseKind> // stapel.wire/ResponseKind.values|values#static(){}[0]
 }
 
+abstract fun interface stapel.wire/MediaUploader { // stapel.wire/MediaUploader|null[0]
+    abstract suspend fun upload(stapel.wire/MediaPurpose, stapel.wire/FilePart, kotlin/Function2<kotlin/Long, kotlin/Long?, kotlin/Unit>?): stapel.result/StapelResult<stapel.wire/StoredMedia, stapel.result/StapelError> // stapel.wire/MediaUploader.upload|upload(stapel.wire.MediaPurpose;stapel.wire.FilePart;kotlin.Function2<kotlin.Long,kotlin.Long?,kotlin.Unit>?){}[0]
+}
+
 abstract interface <#A: out kotlin/Any?> stapel.wire/Page { // stapel.wire/Page|null[0]
     abstract val items // stapel.wire/Page.items|{}items[0]
         abstract fun <get-items>(): kotlin.collections/List<#A> // stapel.wire/Page.items.<get-items>|<get-items>(){}[0]
@@ -362,6 +366,22 @@ final class stapel.wire/KeyPattern { // stapel.wire/KeyPattern|null[0]
     }
 }
 
+final class stapel.wire/StoredMedia { // stapel.wire/StoredMedia|null[0]
+    constructor <init>(kotlin/String, kotlin/String) // stapel.wire/StoredMedia.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val ref // stapel.wire/StoredMedia.ref|{}ref[0]
+        final fun <get-ref>(): kotlin/String // stapel.wire/StoredMedia.ref.<get-ref>|<get-ref>(){}[0]
+    final val source // stapel.wire/StoredMedia.source|{}source[0]
+        final fun <get-source>(): kotlin/String // stapel.wire/StoredMedia.source.<get-source>|<get-source>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.wire/StoredMedia.component1|component1(){}[0]
+    final fun component2(): kotlin/String // stapel.wire/StoredMedia.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ...): stapel.wire/StoredMedia // stapel.wire/StoredMedia.copy|copy(kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/StoredMedia.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.wire/StoredMedia.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.wire/StoredMedia.toString|toString(){}[0]
+}
+
 final value class stapel.wire/Decimal { // stapel.wire/Decimal|null[0]
     constructor <init>(kotlin/String) // stapel.wire/Decimal.<init>|<init>(kotlin.String){}[0]
 
@@ -374,6 +394,22 @@ final value class stapel.wire/Decimal { // stapel.wire/Decimal|null[0]
 
     final object Companion { // stapel.wire/Decimal.Companion|null[0]
         final fun serializer(): kotlinx.serialization/KSerializer<stapel.wire/Decimal> // stapel.wire/Decimal.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final value class stapel.wire/MediaPurpose { // stapel.wire/MediaPurpose|null[0]
+    constructor <init>(kotlin/String) // stapel.wire/MediaPurpose.<init>|<init>(kotlin.String){}[0]
+
+    final val value // stapel.wire/MediaPurpose.value|{}value[0]
+        final fun <get-value>(): kotlin/String // stapel.wire/MediaPurpose.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.wire/MediaPurpose.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.wire/MediaPurpose.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.wire/MediaPurpose.toString|toString(){}[0]
+
+    final object Companion { // stapel.wire/MediaPurpose.Companion|null[0]
+        final val Avatar // stapel.wire/MediaPurpose.Companion.Avatar|{}Avatar[0]
+            final fun <get-Avatar>(): stapel.wire/MediaPurpose // stapel.wire/MediaPurpose.Companion.Avatar.<get-Avatar>|<get-Avatar>(){}[0]
     }
 }
 

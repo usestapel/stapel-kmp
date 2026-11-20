@@ -77,6 +77,30 @@ class EngineWireTest {
     }
 
     @Test
+    fun aMultipartUploadReportsItsProgressUpToTheWholeBody() = runTest(timeout = 60.seconds) {
+        withServer { server ->
+            val file = ByteArray(256 * 1024) { it.toByte() }
+            val progress = mutableListOf<Pair<Long, Long?>>()
+            platformTestTransport().use { transport ->
+                val outcome = transport.send(
+                    WireRequest(
+                        "POST", "${server.base}/echo", emptyList(),
+                        WireBody.Multipart(listOf(WirePart.Field("kind", "avatar"), WirePart.File("file", "a.bin", null, file))),
+                        onUpload = { sent, total -> progress += sent to total },
+                    ),
+                )
+                assertIs<WireOutcome.Response>(outcome)
+                assertEquals(200, outcome.status)
+            }
+            assertTrue(progress.isNotEmpty(), "$engineName reported no upload progress")
+            val (sent, total) = progress.last()
+            assertTrue(sent > file.size, "the whole multipart body was reported sent: $sent")
+            assertTrue(total == null || total == sent, "the last report covers the whole body: $sent of $total")
+            assertEquals(progress.map { it.first }.sorted(), progress.map { it.first }, "progress only grows")
+        }
+    }
+
+    @Test
     fun redirectsAreNotFollowed() = runTest(timeout = 60.seconds) {
         withServer { server ->
             val outcome = platformTestTransport().use { it.send(get("${server.base}/redirect", "Authorization" to "Bearer t")) }

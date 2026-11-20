@@ -19,6 +19,9 @@
 - **Engine retries and redirects are off.** OkHttp's `retryOnConnectionFailure` is forced off (Ktor's
   engine default turns it on; the stale keep-alive test shows the default re-sends a POST). A 3xx is
   returned, never followed (it would carry the bearer elsewhere).
+- **Upload progress reaches the caller.** `OperationCall.onProgress` travels as `WireRequest.onUpload`
+  to Ktor's body progress; a multipart upload reports up to the whole body (`EngineWireTest`, per
+  engine) and the pipeline hands the listener over (`PipelineTest`).
 - **Recover once.** Per logical call each recovery fires at most once: refresh on a 401 that
   carried a token, step-up on a 403 with a `verification.challenge_id`, each plug-in. A second 401
   is `Unauthenticated`. A refresh without verdict fails the call as `ConnectionFailed` (transient),

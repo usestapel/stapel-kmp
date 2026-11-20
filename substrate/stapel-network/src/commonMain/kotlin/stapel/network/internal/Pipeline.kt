@@ -140,7 +140,7 @@ internal class Pipeline(
     private suspend fun run(spec: OperationSpec<*, *, *>, call: OperationCall<*>): Final {
         val callId = env.ids.uuid()
         val started = env.clock.now()
-        val context = CallContext(spec, callId, url(spec, call), call.headers, encodeBody(spec, call))
+        val context = CallContext(spec, callId, url(spec, call), call.headers, encodeBody(spec, call), call.onProgress)
         val used = mutableSetOf<String>()
         var transportAttempts = 0
         var final: Final
@@ -380,6 +380,7 @@ internal class Pipeline(
         override val url: String,
         private val callHeaders: List<Pair<String, String?>>,
         var body: BodyState,
+        private val onUpload: ((sent: Long, total: Long?) -> Unit)?,
     ) : RequestContext {
         override var attempt: Int = 0
         private val headers = linkedMapOf<String, Pair<String, String>>()
@@ -430,7 +431,7 @@ internal class Pipeline(
             add(REQUEST_ID_HEADER, callId)
             for ((name, value) in defaults) add(name, value)
             for ((name, value) in callHeaders) value?.let { add(name, it) }
-            return WireRequest(operation.method.uppercase(), url, lines, body.toWire(json), config.timeouts)
+            return WireRequest(operation.method.uppercase(), url, lines, body.toWire(json), config.timeouts, onUpload)
         }
     }
 }

@@ -194,6 +194,29 @@ public final class stapel/wire/MaybeSerializer : kotlinx/serialization/KSerializ
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/wire/Maybe;)V
 }
 
+public final class stapel/wire/MediaPurpose {
+	public static final field Companion Lstapel/wire/MediaPurpose$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lstapel/wire/MediaPurpose;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class stapel/wire/MediaPurpose$Companion {
+	public final fun getAvatar-dWhtUrE ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/wire/MediaUploader {
+	public abstract fun upload-Q_qTOqE (Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class stapel/wire/OperationCall {
 	public fun <init> ()V
 	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Lkotlin/jvm/functions/Function2;)V
@@ -290,6 +313,19 @@ public final class stapel/wire/ResponseKind : java/lang/Enum {
 public final class stapel/wire/RuntimeKt {
 	public static final field CODEGEN_RUNTIME_ABI I
 	public static final fun getWireJson ()Lkotlinx/serialization/json/Json;
+}
+
+public final class stapel/wire/StoredMedia {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lstapel/wire/StoredMedia;
+	public static synthetic fun copy$default (Lstapel/wire/StoredMedia;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/wire/StoredMedia;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getSource ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract class stapel/wire/UnionSerializer : kotlinx/serialization/KSerializer {

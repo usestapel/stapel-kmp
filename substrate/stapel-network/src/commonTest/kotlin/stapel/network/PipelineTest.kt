@@ -13,6 +13,7 @@ import stapel.wire.OperationCall
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.seconds
@@ -71,6 +72,26 @@ class PipelineTest {
         val error = (transport().execute(getMe, OperationCall()) as StapelResult.Err).error.failure()
         assertIs<TransportFailure.ContractViolation>(error)
         assertEquals("auth_me", error.operationId)
+    }
+
+    @Test
+    fun aMultipartCallHandsItsProgressListenerToTheWire() = runTest {
+        wire.enqueue(200, """{"id":"u1"}""")
+        val upload = spec<Unit, Me>(
+            id = "upload", method = "POST", path = "/cdn/api/v1/upload/", bodyEncoding = stapel.wire.BodyEncoding.Multipart,
+            success = mapOf(200 to Me.serializer()),
+        )
+        val seen = mutableListOf<Pair<Long, Long?>>()
+        val file = stapel.wire.FilePart("a.png", "image/png", 3) { kotlinx.io.Buffer().apply { write(byteArrayOf(1, 2, 3)) } }
+        val call = OperationCall<Unit>(parts = listOf(stapel.wire.FormPart.File("file", file)), onProgress = { sent, total -> seen += sent to total })
+        assertIs<StapelResult.Ok<Me>>(transport().execute(upload, call))
+        val listener = assertNotNull(wire.requests.single().onUpload, "the call's onProgress must reach the transport")
+        listener(3L, 3L)
+        assertEquals(listOf<Pair<Long, Long?>>(3L to 3L), seen)
+        // A call without a listener sends none.
+        wire.enqueue(200, """{"id":"u1"}""")
+        transport().execute(upload, OperationCall<Unit>(parts = listOf(stapel.wire.FormPart.File("file", file))))
+        assertNull(wire.requests.last().onUpload)
     }
 
     // Refresh (recover once) -----------------------------------------------------------------

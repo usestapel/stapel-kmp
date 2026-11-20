@@ -320,11 +320,12 @@ public final class stapel/network/WirePart$File : stapel/network/WirePart {
 }
 
 public final class stapel/network/WireRequest {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/network/WireBody;Lstapel/network/TimeoutPolicy;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/network/WireBody;Lstapel/network/TimeoutPolicy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/network/WireBody;Lstapel/network/TimeoutPolicy;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/network/WireBody;Lstapel/network/TimeoutPolicy;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getBody ()Lstapel/network/WireBody;
 	public final fun getHeaders ()Ljava/util/List;
 	public final fun getMethod ()Ljava/lang/String;
+	public final fun getOnUpload ()Lkotlin/jvm/functions/Function2;
 	public final fun getTimeouts ()Lstapel/network/TimeoutPolicy;
 	public final fun getUrl ()Ljava/lang/String;
 	public final fun header (Ljava/lang/String;)Ljava/lang/String;

@@ -26,6 +26,11 @@ public class WireRequest(
     public val body: WireBody = WireBody.Empty,
     /** Time limits for this exchange. */
     public val timeouts: TimeoutPolicy = TimeoutPolicy(),
+    /**
+     * Upload progress of the body, `(sent, total)` in bytes as the transport writes it (`total` null
+     * when unknown); null = nobody listens. The pipeline passes the call's `OperationCall.onProgress`.
+     */
+    public val onUpload: ((sent: Long, total: Long?) -> Unit)? = null,
 ) {
     /** First value of header [name] (case-insensitive), or null. */
     public fun header(name: String): String? = headers.firstOrNull { it.first.equals(name, ignoreCase = true) }?.second

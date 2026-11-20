@@ -7,6 +7,8 @@
     through `OperationSpec.errors` (`ErrorDecoder.domain` for an envelope, `.transport` for a
     `TransportFailure`), resolves 401 refresh and step-up before returning, and lets
     `CancellationException` propagate.
+  - `MediaUploader` (`MediaPurpose`, `StoredMedia`) — the seam between a brick that stores a file
+    reference (profiles: the avatar) and the media library that stores the file (stapel-cdn binds it).
   - `CacheKey` / `KeyPattern` / `CacheHint` — consumed by `stapel-cache`; produced only by generated
     `<Brick>Keys` / `<Brick>Invalidation`.
 - **Invariants:**

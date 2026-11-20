@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.onUpload
 import io.ktor.client.plugins.timeout
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
@@ -53,6 +54,7 @@ internal class KtorTransport(
                         if (!name.equals(HttpHeaders.ContentType, ignoreCase = true)) append(name, value)
                     }
                 }
+                request.onUpload?.let { listener -> onUpload { sent, total -> listener(sent, total) } }
                 when (val body = request.body) {
                     WireBody.Empty -> Unit
                     is WireBody.Bytes -> setBody(ByteArrayContent(body.bytes, ContentType.parse(body.contentType)))

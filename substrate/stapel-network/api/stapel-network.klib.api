@@ -368,7 +368,7 @@ final class stapel.network/TimeoutPolicy { // stapel.network/TimeoutPolicy|null[
 }
 
 final class stapel.network/WireRequest { // stapel.network/WireRequest|null[0]
-    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>>, stapel.network/WireBody = ..., stapel.network/TimeoutPolicy = ...) // stapel.network/WireRequest.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>;stapel.network.WireBody;stapel.network.TimeoutPolicy){}[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>>, stapel.network/WireBody = ..., stapel.network/TimeoutPolicy = ..., kotlin/Function2<kotlin/Long, kotlin/Long?, kotlin/Unit>? = ...) // stapel.network/WireRequest.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>;stapel.network.WireBody;stapel.network.TimeoutPolicy;kotlin.Function2<kotlin.Long,kotlin.Long?,kotlin.Unit>?){}[0]
 
     final val body // stapel.network/WireRequest.body|{}body[0]
         final fun <get-body>(): stapel.network/WireBody // stapel.network/WireRequest.body.<get-body>|<get-body>(){}[0]
@@ -376,6 +376,8 @@ final class stapel.network/WireRequest { // stapel.network/WireRequest|null[0]
         final fun <get-headers>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> // stapel.network/WireRequest.headers.<get-headers>|<get-headers>(){}[0]
     final val method // stapel.network/WireRequest.method|{}method[0]
         final fun <get-method>(): kotlin/String // stapel.network/WireRequest.method.<get-method>|<get-method>(){}[0]
+    final val onUpload // stapel.network/WireRequest.onUpload|{}onUpload[0]
+        final fun <get-onUpload>(): kotlin/Function2<kotlin/Long, kotlin/Long?, kotlin/Unit>? // stapel.network/WireRequest.onUpload.<get-onUpload>|<get-onUpload>(){}[0]
     final val timeouts // stapel.network/WireRequest.timeouts|{}timeouts[0]
         final fun <get-timeouts>(): stapel.network/TimeoutPolicy // stapel.network/WireRequest.timeouts.<get-timeouts>|<get-timeouts>(){}[0]
     final val url // stapel.network/WireRequest.url|{}url[0]
