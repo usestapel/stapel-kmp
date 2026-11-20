@@ -14,8 +14,18 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.io.Buffer
+import coil3.ImageLoader
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
+import kotlinx.coroutines.delay
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import org.koin.dsl.module
-import stapel.app.di.StapelAppContent
+import stapel.auth.StapelAuth
 import stapel.auth.testing.AuthTags
 import stapel.auth.testing.awaitTag
 import stapel.auth.testing.signInWithMockOtp
@@ -40,7 +50,9 @@ import kotlin.test.fail
  * The generated app with the profiles brick, walked like a person against a scaffolded stand with auth,
  * profiles and cdn (prototype posture) at PROFILES_WALK_BASE_URL: sign in with the mock code, open the
  * settings, rename, reach the auth security screen from inside the settings, choose a language, and
- * change the avatar through a picker (uploaded to stapel-cdn, stored, decoded with its variant ladder). Compiled in only with `-Pstapel.walk.profilesBaseUrl=<url>`;
+ * change the avatar through a picker (uploaded to stapel-cdn, stored, decoded with its variant ladder), see it
+ * drawn through the app's image loader (fetched from the app's host with the bearer), and sign out (the
+ * loader's caches emptied). Compiled in only with `-Pstapel.walk.profilesBaseUrl=<url>`;
  * runs on the JVM and on the iOS simulator.
  */
 @OptIn(ExperimentalTestApi::class)
@@ -57,7 +69,7 @@ class ProfilesWalkTest {
             global(false)
         }
         try {
-            setContent { StapelAppContent(app) }
+            setContent { ShopApp(app) }
             signInWithMockOtp("walk+${Random.nextLong(1_000_000_000L)}@example.com")
             awaitTag("shop.home")
 
@@ -82,15 +94,47 @@ class ProfilesWalkTest {
             // the answer decodes with its variant ladder and the profile carries the image.
             val watcher = CoroutineScope(Dispatchers.Default)
             val avatarSeen = MutableStateFlow(false)
+            val lastAvatarRef = MutableStateFlow<String?>(null)
             watcher.launch {
-                app.koin.get<StapelProfiles>().me.me().collect { if ((it as? Resource.Ready)?.data?.avatar != null) avatarSeen.value = true }
+                app.koin.get<StapelProfiles>().me.me().collect {
+                    val profile = (it as? Resource.Ready)?.data ?: return@collect
+                    if (profile.avatar != null) {
+                        lastAvatarRef.value = profile.avatarRef?.ref
+                        avatarSeen.value = true
+                    }
+                }
             }
+            // The stand's media log before this walk's picture (the same bytes hash to the same file every run).
+            val seenBefore = MutableStateFlow(-1)
+            watcher.launch { seenBefore.value = HttpClient().use { mediaSeen(it).size } }
             try {
+                waitUntil(timeoutMillis = 20_000) { seenBefore.value >= 0 }
                 onNode(hasTestTag(ProfilesTags.AVATAR_CHANGE)).performScrollTo().performClick()
                 waitUntil(timeoutMillis = 30_000) { avatarSeen.value || onAllNodes(hasTestTag(ProfilesTags.ERROR)).fetchSemanticsNodes().isNotEmpty() }
                 if (!avatarSeen.value) fail("the avatar change ended in an error on screen instead of a stored, decoded avatar")
                 waitUntil(timeoutMillis = 20_000) { onAllNodes(hasTestTag(ProfilesTags.AVATAR_CHANGE) and isEnabled()).fetchSemanticsNodes().isNotEmpty() }
                 assertTrue(onAllNodes(hasTestTag(ProfilesTags.ERROR)).fetchSemanticsNodes().isEmpty(), "no error after the avatar change")
+
+                // The settings avatar is drawn through the app's image loader (stapel-image-compose): the stand
+                // saw the picture fetched from the app's host with the session's bearer, and it is in memory.
+                val ref = checkNotNull(lastAvatarRef.value) { "no avatar reference" }
+                val fetched = MutableStateFlow(false)
+                watcher.launch {
+                    HttpClient().use { http ->
+                        while (!fetched.value) {
+                            val seen = mediaSeen(http).drop(seenBefore.value)
+                            fetched.value = seen.any { it.getValue("path").jsonPrimitive.content.startsWith("/$ref/") && it.getValue("authorized").jsonPrimitive.boolean }
+                            if (!fetched.value) delay(200)
+                        }
+                    }
+                }
+                waitUntil(timeoutMillis = 20_000) { fetched.value }
+                val images = app.koin.get<ImageLoader>()
+                waitUntil(timeoutMillis = 20_000) { (images.memoryCache?.size ?: 0L) > 0L }
+
+                // Sign-out: the session-end hook empties the loader's caches.
+                watcher.launch { app.koin.get<StapelAuth>().session.logout() }
+                waitUntil(timeoutMillis = 20_000) { images.memoryCache?.size == 0L }
             } finally {
                 watcher.cancel()
             }
@@ -98,6 +142,11 @@ class ProfilesWalkTest {
             app.close()
         }
     }
+
+    /** What the stand's media route has served so far (`stand/e2e_urls.py`): path and whether a bearer came with it. */
+    private suspend fun mediaSeen(http: HttpClient) =
+        Json.parseToJsonElement(http.get(PROFILES_WALK_BASE_URL.trimEnd('/') + "/e2e/media/seen/").bodyAsText())
+            .jsonObject.getValue("seen").jsonArray.map { it.jsonObject }
 
     private companion object {
         /** A 16 x 16 RGB PNG (the CDN decodes and resizes it). */

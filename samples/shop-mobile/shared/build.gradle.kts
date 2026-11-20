@@ -108,6 +108,7 @@ kotlin {
                 implementation(libs.stapel.auth.ui)
                 implementation(libs.stapel.profiles.ui)
                 implementation(libs.stapel.cdn)
+                implementation(libs.stapel.image.compose)
                 implementation(libs.stapel.ui.material3)
                 implementation(libs.stapel.wire)
                 implementation(libs.stapel.push)

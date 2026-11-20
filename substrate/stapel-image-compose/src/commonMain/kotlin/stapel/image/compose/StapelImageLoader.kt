@@ -11,6 +11,8 @@ import coil3.PlatformContext
 import coil3.Uri
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
+import coil3.intercept.Interceptor
+import coil3.request.ImageResult
 import coil3.network.HttpException
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.crossfade
@@ -34,6 +36,9 @@ import stapel.ui.StapelImages
  * [ImageLoader.clearCachesOnSessionEnd] so that a sign-out clears them. Service-loaded Coil components
  * are off, so no default client is created behind the app's back.
  *
+ * @param baseUrl the app's backend (`StapelEnvironment.baseUrl`): a host-relative image URL
+ *   (`/avatar/<hash>/120.webp`, what stapel-cdn renders) is resolved against it, so it is fetched from —
+ *   and authorized for — the app's own host. Null leaves relative URLs as they are (they fail).
  * @param configure further Coil settings (cache sizes, a logger, a decoder).
  */
 @OptIn(coil3.annotation.ExperimentalCoilApi::class)
@@ -41,6 +46,7 @@ public fun stapelImageLoader(
     context: PlatformContext,
     httpClient: HttpClient,
     auth: ImageAuth? = null,
+    baseUrl: String? = null,
     configure: ImageLoader.Builder.() -> Unit = {},
 ): ImageLoader {
     val bare = KtorNetworkFetcherFactory(httpClient)
@@ -48,6 +54,8 @@ public fun stapelImageLoader(
         .serviceLoaderEnabled(false)
         .crossfade(true)
         .components {
+            // First: the host decisions below (bearer, routing) see the absolute URL.
+            if (baseUrl != null) add(HostRelativeUrls(baseUrl))
             if (auth != null) {
                 val authenticated = KtorNetworkFetcherFactory(httpClient.config { followRedirects = false })
                 add(BearerInterceptor(auth))
@@ -58,6 +66,25 @@ public fun stapelImageLoader(
         }
         .apply(configure)
         .build()
+}
+
+/** Resolves a host-relative URL (`/path`, not `//host/path`) against the app's [baseUrl]; anything else passes. */
+internal class HostRelativeUrls(baseUrl: String) : Interceptor {
+    private val origin: String = originOf(baseUrl)
+
+    override suspend fun intercept(chain: Interceptor.Chain): ImageResult {
+        val data = chain.request.data as? String
+        if (data == null || !data.startsWith("/") || data.startsWith("//")) return chain.proceed()
+        return chain.withRequest(chain.request.newBuilder().data(origin + data).build()).proceed()
+    }
+}
+
+/** `scheme://host[:port]` of [url]. */
+internal fun originOf(url: String): String {
+    val scheme = url.substringBefore("://", missingDelimiterValue = "")
+    require(scheme.isNotEmpty()) { "baseUrl must be absolute: $url" }
+    val rest = url.substringAfter("://")
+    return "$scheme://" + rest.substringBefore('/').substringBefore('?').substringBefore('#')
 }
 
 /** Clears the loader's memory and disk caches (after a logout or an account wipe). */

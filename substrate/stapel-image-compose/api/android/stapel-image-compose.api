@@ -18,7 +18,7 @@ public final class stapel/image/compose/StapelImageLoaderKt {
 	public static final fun ProvideStapelImages (Lcoil3/ImageLoader;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public static final fun clearCachesOnSessionEnd (Lcoil3/ImageLoader;Lstapel/session/SessionManager;)Ljava/lang/AutoCloseable;
 	public static final fun clearStapelCaches (Lcoil3/ImageLoader;)V
-	public static final fun stapelImageLoader (Landroid/content/Context;Lio/ktor/client/HttpClient;Lstapel/image/compose/ImageAuth;Lkotlin/jvm/functions/Function1;)Lcoil3/ImageLoader;
-	public static synthetic fun stapelImageLoader$default (Landroid/content/Context;Lio/ktor/client/HttpClient;Lstapel/image/compose/ImageAuth;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcoil3/ImageLoader;
+	public static final fun stapelImageLoader (Landroid/content/Context;Lio/ktor/client/HttpClient;Lstapel/image/compose/ImageAuth;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcoil3/ImageLoader;
+	public static synthetic fun stapelImageLoader$default (Landroid/content/Context;Lio/ktor/client/HttpClient;Lstapel/image/compose/ImageAuth;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcoil3/ImageLoader;
 }
 

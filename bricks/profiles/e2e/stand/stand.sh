@@ -13,9 +13,9 @@ set -euo pipefail
 TOOLS_VERSION="0.86.0"
 # The backends the suite proves: the pinned contracts' versions (contracts/*/pin.json) and their core.
 PROFILES_VERSION="0.23.3"
-AUTH_VERSION="0.54.0"
-CDN_VERSION="0.31.2"
-CORE_VERSION="0.99.4"
+AUTH_VERSION="0.54.1"
+CDN_VERSION="0.31.3"
+CORE_VERSION="0.99.5"
 PYTHON="${K15_PYTHON:-python3.12}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 STAND="$(cd "$HERE/.." && pwd)/build/stand"
@@ -52,7 +52,7 @@ scaffold() {
         "$PYTHON" -m venv "$PROJECT/.venv"
         "$PROJECT/.venv/bin/pip" install -q -r "$PROJECT/requirements.txt" >"$STAND/pip.log" 2>&1
     fi
-    cp "$HERE/e2e_settings.py" "$PROJECT/"
+    cp "$HERE/e2e_settings.py" "$HERE/e2e_urls.py" "$PROJECT/"
 }
 
 pidfile() { echo "$STAND/profiles.pid"; }

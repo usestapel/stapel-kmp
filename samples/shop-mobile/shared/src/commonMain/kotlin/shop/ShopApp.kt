@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
+import coil3.ImageLoader
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import shop.generated.APP_BASE_URLS
@@ -31,6 +32,7 @@ import stapel.profiles.ui.di.ProfilesBrick
 import stapel.config.StapelEnvironment
 import stapel.config.platformClientInfo
 import stapel.i18n.I18nBundle
+import stapel.image.compose.ProvideStapelImages
 import stapel.navigation.DeepLinkConfig
 import stapel.navigation.DestinationId
 import stapel.navigation.NavIcons
@@ -110,6 +112,8 @@ fun createShopApp(
         modules(pushModule(PushOptions(routing = notificationsPushRouting())), notificationsPushModule(), pushProvider)
     }
     modules(*shopAnalyticsModules().toTypedArray())
+    // Images: one Coil loader through stapel-image-compose, bearer only for the app's host, caches go with the session.
+    modules(shopImagesModule(platform))
     navigation(
         home = DestinationId("shop.home"),
         deepLinks = DeepLinkConfig(schemes = setOf("shopmobile"), hosts = setOf("shop.example.com")),
@@ -125,10 +129,10 @@ fun createShopApp(
 /** The home screen's title. */
 const val SHOP_HOME_TITLE: String = "Shop"
 
-/** The app UI. */
+/** The app UI, with the app's image loader behind every `StapelAvatar` / `StapelAsyncImage`. */
 @Composable
 fun ShopApp(app: StapelApp) {
-    StapelAppContent(app)
+    ProvideStapelImages(app.koin.get<ImageLoader>()) { StapelAppContent(app) }
 }
 
 /** The shop's own destinations, with the web ids and paths the composition plans. */

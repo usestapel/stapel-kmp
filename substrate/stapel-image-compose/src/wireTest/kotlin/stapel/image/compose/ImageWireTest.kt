@@ -28,6 +28,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.seconds
 
 /** A 1×1 PNG. */
@@ -102,7 +103,7 @@ class ImageWireTest {
         }
     }
 
-    private fun loader(auth: ImageAuth?) = stapelImageLoader(PlatformContext.INSTANCE, testHttpClient(), auth) {
+    private fun loader(auth: ImageAuth?, baseUrl: String? = null) = stapelImageLoader(PlatformContext.INSTANCE, testHttpClient(), auth, baseUrl) {
         memoryCachePolicy(CachePolicy.DISABLED)
         diskCachePolicy(CachePolicy.DISABLED)
     }
@@ -170,6 +171,25 @@ class ImageWireTest {
             assertIs<SuccessResult>(images.execute(request("${server.api}/private.png")))
             assertEquals(listOf("Bearer stale", "Bearer fresh"), server.seen().map { it.authorization })
             assertEquals(1, session.refreshes)
+        }
+    }
+
+    @Test
+    fun aHostRelativeUrlIsFetchedFromTheAppsHostWithTheToken() = runTest(timeout = 60.seconds) {
+        withServer { server ->
+            val images = loader(ImageAuth(Session("t1"), setOf("localhost")), baseUrl = "${server.api}/api/")
+            assertIs<SuccessResult>(images.execute(request("/img.png")))
+            val seen = server.seen().single()
+            assertEquals("localhost" to "/img.png", seen.host to seen.path, engineName)
+            assertEquals("Bearer t1", seen.authorization)
+        }
+    }
+
+    @Test
+    fun withoutABaseUrlAHostRelativeUrlFails() = runTest(timeout = 60.seconds) {
+        withServer { server ->
+            assertIs<ErrorResult>(loader(ImageAuth(Session("t1"), setOf("localhost"))).execute(request("/img.png")))
+            assertTrue(server.seen().isEmpty())
         }
     }
 }
