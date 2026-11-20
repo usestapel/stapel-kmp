@@ -19,7 +19,7 @@ class GeneratedContractTest {
     @Test
     fun generatedCodeTargetsThisRuntimeAndThePin() {
         assertEquals(CODEGEN_RUNTIME_ABI, CdnContract.RUNTIME_ABI)
-        assertEquals("0.31.2", CdnContract.VERSION)
+        assertEquals("0.31.3", CdnContract.VERSION)
         assertEquals(2, CdnContract.PROFILE)
     }
 

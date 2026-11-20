@@ -12,8 +12,11 @@ import stapel.wire.MediaUploader
  * The media library's Koin module: [CdnApi] on the app's authenticated [ApiTransport] and stapel-cdn
  * as the app's [MediaUploader] (what the profiles brick stores avatars through). Install it with
  * `stapelApp { modules(cdnModule()) }`. Needs `networkModule()`.
+ *
+ * @param imageType the asset type [stapel.wire.MediaPurpose.Image] uploads are stored as (null = the
+ *   deployment's default upload type).
  */
-public fun cdnModule(): Module = module {
+public fun cdnModule(imageType: String? = null): Module = module {
     single<CdnApi> { CdnApiClient(get<ApiTransport>()) }
-    single<MediaUploader> { CdnMediaUploader(get()) }
+    single<MediaUploader> { CdnMediaUploader(get(), imageType) }
 }

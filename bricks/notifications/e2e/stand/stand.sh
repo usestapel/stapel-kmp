@@ -12,10 +12,10 @@ set -euo pipefail
 
 TOOLS_VERSION="0.86.0"
 # The backends the suite proves: the pinned contract's version (contracts/notifications/pin.json) and its
-# siblings (auth 0.54.0 mints the session claim the device rows are bound by).
+# siblings (auth 0.54.1 mints the session claim the device rows are bound by).
 NOTIFICATIONS_VERSION="0.31.1"
-AUTH_VERSION="0.54.0"
-CORE_VERSION="0.99.4"
+AUTH_VERSION="0.54.1"
+CORE_VERSION="0.99.5"
 PYTHON="${KP_PYTHON:-python3.12}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 STAND="$(cd "$HERE/.." && pwd)/build/stand"

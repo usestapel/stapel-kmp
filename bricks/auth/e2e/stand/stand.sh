@@ -17,8 +17,8 @@ set -euo pipefail
 
 TOOLS_VERSION="0.86.0"
 # The backend the suite proves: the pinned contract's version (contracts/auth/pin.json) and its core.
-AUTH_VERSION="0.54.0"
-CORE_VERSION="0.99.4"
+AUTH_VERSION="0.54.1"
+CORE_VERSION="0.99.5"
 PYTHON="${K7_PYTHON:-python3.12}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 STAND="$(cd "$HERE/.." && pwd)/build/stand"

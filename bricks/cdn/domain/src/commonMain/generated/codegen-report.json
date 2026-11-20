@@ -3,13 +3,13 @@
     "contract": {
         "module": "stapel-cdn",
         "profile": 2,
-        "ref": "4b63570efccc49f017833bd374813b32d79dfe1d",
-        "schema_sha256": "7f0f0386cbec61ecf083692eab182b8562db3b77741dbf773a0d24e88bc33a5b",
-        "version": "0.31.2"
+        "ref": "f5fd8d92f468c57957df4b154b50f81ff3bcbff2",
+        "schema_sha256": "6d7a3ce5886a7b8c3100f951557905954f689a3319a1851aa07eb2aab70fe07b",
+        "version": "0.31.3"
     },
     "counts": {
         "W-DOC-PARAM": 5,
-        "W-DOC-PROPERTY": 106,
+        "W-DOC-PROPERTY": 105,
         "W-DOC-TYPE": 13,
         "W-ERR-STATUS-UNBOUND": 12,
         "W-UNTYPED-UNION": 1
@@ -409,11 +409,6 @@
             "code": "W-DOC-PROPERTY",
             "message": "property ImageVariantsMetaItem.height has no description",
             "pointer": "#/components/schemas/Image/properties/variants_meta/items/properties/height"
-        },
-        {
-            "code": "W-DOC-PROPERTY",
-            "message": "property ImageVariantsMetaItem.tier has no description",
-            "pointer": "#/components/schemas/Image/properties/variants_meta/items/properties/tier"
         },
         {
             "code": "W-DOC-PROPERTY",

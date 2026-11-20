@@ -410,6 +410,8 @@ final value class stapel.wire/MediaPurpose { // stapel.wire/MediaPurpose|null[0]
     final object Companion { // stapel.wire/MediaPurpose.Companion|null[0]
         final val Avatar // stapel.wire/MediaPurpose.Companion.Avatar|{}Avatar[0]
             final fun <get-Avatar>(): stapel.wire/MediaPurpose // stapel.wire/MediaPurpose.Companion.Avatar.<get-Avatar>|<get-Avatar>(){}[0]
+        final val Image // stapel.wire/MediaPurpose.Companion.Image|{}Image[0]
+            final fun <get-Image>(): stapel.wire/MediaPurpose // stapel.wire/MediaPurpose.Companion.Image.<get-Image>|<get-Image>(){}[0]
     }
 }
 

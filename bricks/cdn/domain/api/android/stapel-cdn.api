@@ -12,8 +12,8 @@ public abstract interface class stapel/cdn/api/CdnApi {
 	public static synthetic fun uploadAvatar$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public abstract fun uploadFile (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun uploadFile$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public abstract fun uploadImage (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun uploadImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun uploadImage (Lstapel/wire/FilePart;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun uploadImage$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public abstract fun uploadTypedImage (Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun uploadTypedImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public abstract fun uploadVideo (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -24,7 +24,7 @@ public final class stapel/cdn/api/CdnApi$DefaultImpls {
 	public static synthetic fun uploadAudio$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun uploadAvatar$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun uploadFile$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public static synthetic fun uploadImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun uploadImage$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun uploadTypedImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun uploadVideo$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
@@ -41,7 +41,7 @@ public final class stapel/cdn/api/CdnApiClient : stapel/cdn/api/CdnApi {
 	public fun uploadAudio (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun uploadAvatar (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun uploadFile (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun uploadImage (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun uploadImage (Lstapel/wire/FilePart;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun uploadTypedImage (Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun uploadVideo (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
@@ -2495,13 +2495,15 @@ public final class stapel/cdn/api/model/VideoUploadResponse$Companion {
 }
 
 public final class stapel/cdn/di/CdnModuleKt {
-	public static final fun cdnModule ()Lorg/koin/core/module/Module;
+	public static final fun cdnModule (Ljava/lang/String;)Lorg/koin/core/module/Module;
+	public static synthetic fun cdnModule$default (Ljava/lang/String;ILjava/lang/Object;)Lorg/koin/core/module/Module;
 }
 
 public final class stapel/cdn/media/CdnMediaUploader : stapel/wire/MediaUploader {
 	public static final field Companion Lstapel/cdn/media/CdnMediaUploader$Companion;
 	public static final field SOURCE Ljava/lang/String;
-	public fun <init> (Lstapel/cdn/api/CdnApi;)V
+	public fun <init> (Lstapel/cdn/api/CdnApi;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/cdn/api/CdnApi;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun upload-Q_qTOqE (Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 

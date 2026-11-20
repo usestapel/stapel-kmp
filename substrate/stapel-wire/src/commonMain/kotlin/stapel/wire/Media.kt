@@ -35,6 +35,9 @@ public value class MediaPurpose(
     public companion object {
         /** A person's avatar (square crops, the avatar variant ladder). */
         public val Avatar: MediaPurpose = MediaPurpose("avatar")
+
+        /** A picture that is not an avatar (a product photo, a post image): the media service's general image upload. */
+        public val Image: MediaPurpose = MediaPurpose("image")
     }
 }
 

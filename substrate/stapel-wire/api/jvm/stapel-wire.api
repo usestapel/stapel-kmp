@@ -211,6 +211,7 @@ public final class stapel/wire/MediaPurpose {
 
 public final class stapel/wire/MediaPurpose$Companion {
 	public final fun getAvatar-dWhtUrE ()Ljava/lang/String;
+	public final fun getImage-dWhtUrE ()Ljava/lang/String;
 }
 
 public abstract interface class stapel/wire/MediaUploader {
