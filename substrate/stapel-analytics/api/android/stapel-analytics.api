@@ -1,0 +1,279 @@
+public abstract interface class stapel/analytics/AnalyticsAnonymousId {
+	public abstract fun get (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class stapel/analytics/AnalyticsControl {
+	public abstract fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getConsent ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun getSinks ()Lkotlinx/coroutines/flow/StateFlow;
+	public abstract fun setConsent (Lstapel/analytics/Consent;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun setUserProperty (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class stapel/analytics/AnalyticsEvent {
+	public fun <init> (Ljava/lang/String;Lstapel/analytics/EventKind;Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnonId ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getKind ()Lstapel/analytics/EventKind;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getProps ()Ljava/util/Map;
+	public final fun getSessionId ()Ljava/lang/String;
+	public final fun getTimestamp ()Lkotlin/time/Instant;
+	public final fun getUserHash ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/AnalyticsHub : stapel/analytics/AnalyticsControl, stapel/runtime/Analytics {
+	public fun <init> (Ljava/util/List;Lstapel/analytics/AnalyticsStorage;Lstapel/analytics/AnalyticsOptions;Lstapel/runtime/AppLifecycle;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelLogger;Lstapel/analytics/AnalyticsAnonymousId;)V
+	public synthetic fun <init> (Ljava/util/List;Lstapel/analytics/AnalyticsStorage;Lstapel/analytics/AnalyticsOptions;Lstapel/runtime/AppLifecycle;Lkotlin/time/Clock;Lstapel/runtime/IdGenerator;Lkotlinx/coroutines/CoroutineScope;Lstapel/runtime/StapelLogger;Lstapel/analytics/AnalyticsAnonymousId;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConsent ()Lkotlinx/coroutines/flow/StateFlow;
+	public fun getSinks ()Lkotlinx/coroutines/flow/StateFlow;
+	public fun identify (Ljava/lang/String;)V
+	public fun page (Ljava/lang/String;Ljava/util/Map;)V
+	public fun setConsent (Lstapel/analytics/Consent;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setUserProperty (Ljava/lang/String;Ljava/lang/String;)V
+	public fun track (Ljava/lang/String;Ljava/util/Map;)V
+}
+
+public final class stapel/analytics/AnalyticsHubKt {
+	public static final field ANALYTICS_LOG_TAG Ljava/lang/String;
+}
+
+public final class stapel/analytics/AnalyticsOptions {
+	public fun <init> ()V
+	public synthetic fun <init> (Lstapel/analytics/ConsentDefault;Lstapel/analytics/PiiGuard;Ljava/util/Set;Lstapel/analytics/Unregistered;Lstapel/analytics/BatchOptions;IJLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lstapel/analytics/ConsentDefault;Lstapel/analytics/PiiGuard;Ljava/util/Set;Lstapel/analytics/Unregistered;Lstapel/analytics/BatchOptions;IJLjava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBatch ()Lstapel/analytics/BatchOptions;
+	public final fun getConsentDefault ()Lstapel/analytics/ConsentDefault;
+	public final fun getPendingBufferLimit ()I
+	public final fun getPiiGuard ()Lstapel/analytics/PiiGuard;
+	public final fun getRegistry ()Ljava/util/Set;
+	public final fun getSessionTimeout-UwyO8pc ()J
+	public final fun getStorageNamespace ()Ljava/lang/String;
+	public final fun getUnregistered ()Lstapel/analytics/Unregistered;
+}
+
+public abstract interface class stapel/analytics/AnalyticsSink {
+	public abstract fun deliver (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getAvailability ()Lstapel/analytics/SinkAvailability;
+	public abstract fun getId ()Ljava/lang/String;
+	public abstract fun getPurposes ()Ljava/util/Set;
+	public abstract fun reset ()V
+	public abstract fun setCollectionEnabled (Z)V
+	public abstract fun setUserProperty (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public abstract interface class stapel/analytics/AnalyticsStorage {
+	public abstract fun read (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun write (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/analytics/BatchOptions {
+	public fun <init> ()V
+	public synthetic fun <init> (IJIJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (IJIJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun backoff-5sfh64U (I)J
+	public final fun getBackoffBase-UwyO8pc ()J
+	public final fun getFlushInterval-UwyO8pc ()J
+	public final fun getMaxAttempts ()I
+	public final fun getMaxSize ()I
+}
+
+public final class stapel/analytics/Consent {
+	public fun <init> (Lstapel/analytics/ConsentState;Lstapel/analytics/ConsentState;)V
+	public synthetic fun <init> (Lstapel/analytics/ConsentState;Lstapel/analytics/ConsentState;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/analytics/ConsentState;
+	public final fun component2 ()Lstapel/analytics/ConsentState;
+	public final fun copy (Lstapel/analytics/ConsentState;Lstapel/analytics/ConsentState;)Lstapel/analytics/Consent;
+	public static synthetic fun copy$default (Lstapel/analytics/Consent;Lstapel/analytics/ConsentState;Lstapel/analytics/ConsentState;ILjava/lang/Object;)Lstapel/analytics/Consent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAdvertising ()Lstapel/analytics/ConsentState;
+	public final fun getAnalytics ()Lstapel/analytics/ConsentState;
+	public final fun grants (Ljava/util/Set;)Z
+	public fun hashCode ()I
+	public final fun stateOf (Lstapel/analytics/ConsentPurpose;)Lstapel/analytics/ConsentState;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/ConsentDefault : java/lang/Enum {
+	public static final field OptIn Lstapel/analytics/ConsentDefault;
+	public static final field OptOut Lstapel/analytics/ConsentDefault;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/analytics/ConsentDefault;
+	public static fun values ()[Lstapel/analytics/ConsentDefault;
+}
+
+public final class stapel/analytics/ConsentPurpose : java/lang/Enum {
+	public static final field Advertising Lstapel/analytics/ConsentPurpose;
+	public static final field Analytics Lstapel/analytics/ConsentPurpose;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/analytics/ConsentPurpose;
+	public static fun values ()[Lstapel/analytics/ConsentPurpose;
+}
+
+public final class stapel/analytics/ConsentState : java/lang/Enum {
+	public static final field Denied Lstapel/analytics/ConsentState;
+	public static final field Granted Lstapel/analytics/ConsentState;
+	public static final field Pending Lstapel/analytics/ConsentState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getWire ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/analytics/ConsentState;
+	public static fun values ()[Lstapel/analytics/ConsentState;
+}
+
+public final class stapel/analytics/EventKind : java/lang/Enum {
+	public static final field Identify Lstapel/analytics/EventKind;
+	public static final field Page Lstapel/analytics/EventKind;
+	public static final field Track Lstapel/analytics/EventKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getWire ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/analytics/EventKind;
+	public static fun values ()[Lstapel/analytics/EventKind;
+}
+
+public final class stapel/analytics/FileAnalyticsStorage : stapel/analytics/AnalyticsStorage {
+	public fun <init> (Ljava/lang/String;Lkotlin/coroutines/CoroutineContext;)V
+	public fun read (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun write (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/analytics/InMemoryAnalyticsStorage : stapel/analytics/AnalyticsStorage {
+	public fun <init> ()V
+	public fun read (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun snapshot (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun write (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/analytics/LogSink : stapel/analytics/AnalyticsSink {
+	public fun <init> (Lstapel/runtime/StapelLogger;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/runtime/StapelLogger;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun deliver (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getAvailability ()Lstapel/analytics/SinkAvailability;
+	public fun getId ()Ljava/lang/String;
+	public fun getPurposes ()Ljava/util/Set;
+	public fun reset ()V
+	public fun setCollectionEnabled (Z)V
+	public fun setUserProperty (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class stapel/analytics/PiiGuard : java/lang/Enum {
+	public static final field Off Lstapel/analytics/PiiGuard;
+	public static final field Reject Lstapel/analytics/PiiGuard;
+	public static final field Strip Lstapel/analytics/PiiGuard;
+	public static final field Warn Lstapel/analytics/PiiGuard;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/analytics/PiiGuard;
+	public static fun values ()[Lstapel/analytics/PiiGuard;
+}
+
+public final class stapel/analytics/PiiKt {
+	public static final field PII_REDACTED Ljava/lang/String;
+	public static final fun looksLikePii (Ljava/lang/String;)Z
+}
+
+public final class stapel/analytics/Sha256Kt {
+	public static final fun sha256Hex (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/analytics/SinkAvailability {
+}
+
+public final class stapel/analytics/SinkAvailability$Ready : stapel/analytics/SinkAvailability {
+	public static final field INSTANCE Lstapel/analytics/SinkAvailability$Ready;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/SinkAvailability$Unconfigured : stapel/analytics/SinkAvailability {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/analytics/SinkAvailability$Unconfigured;
+	public static synthetic fun copy$default (Lstapel/analytics/SinkAvailability$Unconfigured;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/SinkAvailability$Unconfigured;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/SinkAvailability$Unsupported : stapel/analytics/SinkAvailability {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/analytics/SinkAvailability$Unsupported;
+	public static synthetic fun copy$default (Lstapel/analytics/SinkAvailability$Unsupported;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/SinkAvailability$Unsupported;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/analytics/SinkReceipt {
+}
+
+public final class stapel/analytics/SinkReceipt$Accepted : stapel/analytics/SinkReceipt {
+	public static final field INSTANCE Lstapel/analytics/SinkReceipt$Accepted;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/SinkReceipt$Partial : stapel/analytics/SinkReceipt {
+	public fun <init> (Ljava/util/Map;)V
+	public final fun component1 ()Ljava/util/Map;
+	public final fun copy (Ljava/util/Map;)Lstapel/analytics/SinkReceipt$Partial;
+	public static synthetic fun copy$default (Lstapel/analytics/SinkReceipt$Partial;Ljava/util/Map;ILjava/lang/Object;)Lstapel/analytics/SinkReceipt$Partial;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRejected ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/SinkReceipt$Retry : stapel/analytics/SinkReceipt {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/analytics/SinkReceipt$Retry;
+	public static synthetic fun copy$default (Lstapel/analytics/SinkReceipt$Retry;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/SinkReceipt$Retry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDetail ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/SinkStatus {
+	public fun <init> (Ljava/lang/String;Lstapel/analytics/SinkAvailability;Ljava/lang/String;I)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/analytics/SinkAvailability;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()I
+	public final fun copy (Ljava/lang/String;Lstapel/analytics/SinkAvailability;Ljava/lang/String;I)Lstapel/analytics/SinkStatus;
+	public static synthetic fun copy$default (Lstapel/analytics/SinkStatus;Ljava/lang/String;Lstapel/analytics/SinkAvailability;Ljava/lang/String;IILjava/lang/Object;)Lstapel/analytics/SinkStatus;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAvailability ()Lstapel/analytics/SinkAvailability;
+	public final fun getDelivered ()I
+	public final fun getId ()Ljava/lang/String;
+	public final fun getLastError ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/Storage_androidKt {
+	public static final fun platformAnalyticsStorage (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Ljava/lang/String;)Lstapel/analytics/AnalyticsStorage;
+	public static synthetic fun platformAnalyticsStorage$default (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/AnalyticsStorage;
+}
+
+public final class stapel/analytics/Unregistered : java/lang/Enum {
+	public static final field Drop Lstapel/analytics/Unregistered;
+	public static final field Warn Lstapel/analytics/Unregistered;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/analytics/Unregistered;
+	public static fun values ()[Lstapel/analytics/Unregistered;
+}
+
+public final class stapel/analytics/di/AnalyticsModuleKt {
+	public static final fun analyticsModule (Lstapel/analytics/AnalyticsOptions;)Lorg/koin/core/module/Module;
+	public static synthetic fun analyticsModule$default (Lstapel/analytics/AnalyticsOptions;ILjava/lang/Object;)Lorg/koin/core/module/Module;
+}
+

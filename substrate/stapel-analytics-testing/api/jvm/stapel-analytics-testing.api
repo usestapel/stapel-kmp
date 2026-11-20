@@ -1,0 +1,135 @@
+public abstract class stapel/analytics/testing/AnalyticsSinkConformance {
+	public fun <init> ()V
+	protected abstract fun configured ()Lstapel/analytics/testing/SinkUnderTest;
+	public final fun getCaseNames ()Ljava/util/List;
+	protected abstract fun unconfigured ()Lstapel/analytics/testing/SinkUnderTest;
+	protected fun vendorEventName (Ljava/lang/String;)Ljava/lang/String;
+	protected fun vendorPage (Ljava/lang/String;)Lstapel/analytics/testing/VendorCall;
+	protected fun vendorPropertyName (Ljava/lang/String;)Ljava/lang/String;
+	public final fun verify (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/analytics/testing/FakeAnalyticsSink : stapel/analytics/AnalyticsSink, stapel/analytics/testing/VendorProbe {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Lstapel/analytics/SinkAvailability;Ljava/util/Set;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/analytics/SinkAvailability;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun deliver (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun failNext ()V
+	public fun getAvailability ()Lstapel/analytics/SinkAvailability;
+	public final fun getBatches ()Ljava/util/List;
+	public fun getCalls ()Ljava/util/List;
+	public final fun getEvents ()Ljava/util/List;
+	public fun getId ()Ljava/lang/String;
+	public fun getPurposes ()Ljava/util/Set;
+	public final fun getReceipts ()Lkotlin/collections/ArrayDeque;
+	public final fun getReported ()Lstapel/analytics/SinkAvailability;
+	public fun reset ()V
+	public fun setCollectionEnabled (Z)V
+	public final fun setReported (Lstapel/analytics/SinkAvailability;)V
+	public fun setUserProperty (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class stapel/analytics/testing/RecordingAnalytics : stapel/runtime/Analytics {
+	public fun <init> ()V
+	public final fun getCalls ()Ljava/util/List;
+	public final fun getTracked ()Ljava/util/List;
+	public fun identify (Ljava/lang/String;)V
+	public fun page (Ljava/lang/String;Ljava/util/Map;)V
+	public fun track (Ljava/lang/String;Ljava/util/Map;)V
+}
+
+public final class stapel/analytics/testing/RecordingAnalytics$Call {
+	public fun <init> (Lstapel/analytics/EventKind;Ljava/lang/String;Ljava/util/Map;)V
+	public final fun component1 ()Lstapel/analytics/EventKind;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/Map;
+	public final fun copy (Lstapel/analytics/EventKind;Ljava/lang/String;Ljava/util/Map;)Lstapel/analytics/testing/RecordingAnalytics$Call;
+	public static synthetic fun copy$default (Lstapel/analytics/testing/RecordingAnalytics$Call;Lstapel/analytics/EventKind;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lstapel/analytics/testing/RecordingAnalytics$Call;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKind ()Lstapel/analytics/EventKind;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getProps ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/testing/SinkUnderTest {
+	public fun <init> (Lstapel/analytics/AnalyticsSink;Lstapel/analytics/testing/VendorProbe;)V
+	public final fun getProbe ()Lstapel/analytics/testing/VendorProbe;
+	public final fun getSink ()Lstapel/analytics/AnalyticsSink;
+}
+
+public abstract interface class stapel/analytics/testing/VendorCall {
+}
+
+public final class stapel/analytics/testing/VendorCall$Collection : stapel/analytics/testing/VendorCall {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lstapel/analytics/testing/VendorCall$Collection;
+	public static synthetic fun copy$default (Lstapel/analytics/testing/VendorCall$Collection;ZILjava/lang/Object;)Lstapel/analytics/testing/VendorCall$Collection;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEnabled ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/testing/VendorCall$Event : stapel/analytics/testing/VendorCall {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lstapel/analytics/testing/VendorCall$Event;
+	public static synthetic fun copy$default (Lstapel/analytics/testing/VendorCall$Event;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lstapel/analytics/testing/VendorCall$Event;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getParams ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/testing/VendorCall$Reset : stapel/analytics/testing/VendorCall {
+	public static final field INSTANCE Lstapel/analytics/testing/VendorCall$Reset;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/testing/VendorCall$Screen : stapel/analytics/testing/VendorCall {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/analytics/testing/VendorCall$Screen;
+	public static synthetic fun copy$default (Lstapel/analytics/testing/VendorCall$Screen;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/testing/VendorCall$Screen;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/testing/VendorCall$UserId : stapel/analytics/testing/VendorCall {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/analytics/testing/VendorCall$UserId;
+	public static synthetic fun copy$default (Lstapel/analytics/testing/VendorCall$UserId;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/testing/VendorCall$UserId;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/testing/VendorCall$UserProperty : stapel/analytics/testing/VendorCall {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lstapel/analytics/testing/VendorCall$UserProperty;
+	public static synthetic fun copy$default (Lstapel/analytics/testing/VendorCall$UserProperty;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/testing/VendorCall$UserProperty;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/analytics/testing/VendorProbe {
+	public abstract fun failNext ()V
+	public abstract fun getCalls ()Ljava/util/List;
+}
+

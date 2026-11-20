@@ -1,0 +1,234 @@
+{
+  "$comment": "PII guard vectors shared by @stapel/analytics (pii.ts) and stapel-kmp's stapel-analytics (Pii.kt). Each value is one string prop value; pii = whether the guard treats it as an e-mail address or a phone number. Verdicts produced by the web implementation; both sides must agree on every case.",
+  "redacted": "[redacted]",
+  "cases": [
+    {
+      "value": "ada@example.com",
+      "pii": true
+    },
+    {
+      "value": "bob@corp.io",
+      "pii": true
+    },
+    {
+      "value": "second@example.com",
+      "pii": true
+    },
+    {
+      "value": "u@x.io",
+      "pii": true
+    },
+    {
+      "value": "contact me at ada@example.com please",
+      "pii": true
+    },
+    {
+      "value": "ada@example",
+      "pii": false
+    },
+    {
+      "value": "ada@example.c",
+      "pii": false
+    },
+    {
+      "value": "@example.com",
+      "pii": false
+    },
+    {
+      "value": "ada@.com",
+      "pii": false
+    },
+    {
+      "value": "a@b.co",
+      "pii": true
+    },
+    {
+      "value": "ADA@EXAMPLE.ORG",
+      "pii": true
+    },
+    {
+      "value": "ada@ex ample.com",
+      "pii": false
+    },
+    {
+      "value": "ada@@example.com",
+      "pii": false
+    },
+    {
+      "value": "ada@example.com1",
+      "pii": true
+    },
+    {
+      "value": "ada@example.1com",
+      "pii": false
+    },
+    {
+      "value": "ada @example.com",
+      "pii": false
+    },
+    {
+      "value": "ada@exa mple.com",
+      "pii": false
+    },
+    {
+      "value": "+7 (999) 123-45-67",
+      "pii": true
+    },
+    {
+      "value": "+1 202 555 0143",
+      "pii": true
+    },
+    {
+      "value": "202-555-0143",
+      "pii": true
+    },
+    {
+      "value": "2025550143",
+      "pii": true
+    },
+    {
+      "value": "1234567",
+      "pii": true
+    },
+    {
+      "value": "123456",
+      "pii": false
+    },
+    {
+      "value": "12-34-56",
+      "pii": false
+    },
+    {
+      "value": "(123) 4567",
+      "pii": true
+    },
+    {
+      "value": "+123456",
+      "pii": false
+    },
+    {
+      "value": "+1234567",
+      "pii": true
+    },
+    {
+      "value": "  1234567  ",
+      "pii": true
+    },
+    {
+      "value": " 1234567 ",
+      "pii": true
+    },
+    {
+      "value": "﻿1234567",
+      "pii": true
+    },
+    {
+      "value": "\u001c1234567",
+      "pii": false
+    },
+    {
+      "value": "1234567 ",
+      "pii": true
+    },
+    {
+      "value": "12 34 56 7",
+      "pii": true
+    },
+    {
+      "value": "12.34.56.7",
+      "pii": true
+    },
+    {
+      "value": "١٢٣٤٥٦٧٨",
+      "pii": false
+    },
+    {
+      "value": "１２３４５６７",
+      "pii": false
+    },
+    {
+      "value": "123-abc-4567",
+      "pii": false
+    },
+    {
+      "value": "1234567x",
+      "pii": false
+    },
+    {
+      "value": "-------",
+      "pii": false
+    },
+    {
+      "value": "((((((()",
+      "pii": false
+    },
+    {
+      "value": "+ 1 2 3",
+      "pii": false
+    },
+    {
+      "value": "1 2 3 4 5 6 7",
+      "pii": true
+    },
+    {
+      "value": "\t1234567\n",
+      "pii": true
+    },
+    {
+      "value": "1234 567",
+      "pii": true
+    },
+    {
+      "value": "hello world",
+      "pii": false
+    },
+    {
+      "value": "",
+      "pii": false
+    },
+    {
+      "value": "pro",
+      "pii": false
+    },
+    {
+      "value": "free",
+      "pii": false
+    },
+    {
+      "value": "order-1234567",
+      "pii": false
+    },
+    {
+      "value": "v1.2.3.4.5.6.7",
+      "pii": false
+    },
+    {
+      "value": "2026-11-20",
+      "pii": true
+    },
+    {
+      "value": "2026-11-20 10:00",
+      "pii": false
+    },
+    {
+      "value": "flow.auth.login",
+      "pii": false
+    },
+    {
+      "value": "https://example.com/a@b.cd",
+      "pii": true
+    },
+    {
+      "value": "user:pass@host.example",
+      "pii": true
+    },
+    {
+      "value": "café@exemple.fr",
+      "pii": true
+    },
+    {
+      "value": "a@b.c0m",
+      "pii": false
+    }
+  ]
+}

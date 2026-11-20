@@ -1,0 +1,177 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-analytics-testing>
+abstract interface stapel.analytics.testing/VendorProbe { // stapel.analytics.testing/VendorProbe|null[0]
+    abstract val calls // stapel.analytics.testing/VendorProbe.calls|{}calls[0]
+        abstract fun <get-calls>(): kotlin.collections/List<stapel.analytics.testing/VendorCall> // stapel.analytics.testing/VendorProbe.calls.<get-calls>|<get-calls>(){}[0]
+
+    abstract fun failNext() // stapel.analytics.testing/VendorProbe.failNext|failNext(){}[0]
+}
+
+sealed interface stapel.analytics.testing/VendorCall { // stapel.analytics.testing/VendorCall|null[0]
+    final class Collection : stapel.analytics.testing/VendorCall { // stapel.analytics.testing/VendorCall.Collection|null[0]
+        constructor <init>(kotlin/Boolean) // stapel.analytics.testing/VendorCall.Collection.<init>|<init>(kotlin.Boolean){}[0]
+
+        final val enabled // stapel.analytics.testing/VendorCall.Collection.enabled|{}enabled[0]
+            final fun <get-enabled>(): kotlin/Boolean // stapel.analytics.testing/VendorCall.Collection.enabled.<get-enabled>|<get-enabled>(){}[0]
+
+        final fun component1(): kotlin/Boolean // stapel.analytics.testing/VendorCall.Collection.component1|component1(){}[0]
+        final fun copy(kotlin/Boolean = ...): stapel.analytics.testing/VendorCall.Collection // stapel.analytics.testing/VendorCall.Collection.copy|copy(kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics.testing/VendorCall.Collection.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics.testing/VendorCall.Collection.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics.testing/VendorCall.Collection.toString|toString(){}[0]
+    }
+
+    final class Event : stapel.analytics.testing/VendorCall { // stapel.analytics.testing/VendorCall.Event|null[0]
+        constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics.testing/VendorCall.Event.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+        final val name // stapel.analytics.testing/VendorCall.Event.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.analytics.testing/VendorCall.Event.name.<get-name>|<get-name>(){}[0]
+        final val params // stapel.analytics.testing/VendorCall.Event.params|{}params[0]
+            final fun <get-params>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics.testing/VendorCall.Event.params.<get-params>|<get-params>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.analytics.testing/VendorCall.Event.component1|component1(){}[0]
+        final fun component2(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics.testing/VendorCall.Event.component2|component2(){}[0]
+        final fun copy(kotlin/String = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...): stapel.analytics.testing/VendorCall.Event // stapel.analytics.testing/VendorCall.Event.copy|copy(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics.testing/VendorCall.Event.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics.testing/VendorCall.Event.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics.testing/VendorCall.Event.toString|toString(){}[0]
+    }
+
+    final class Screen : stapel.analytics.testing/VendorCall { // stapel.analytics.testing/VendorCall.Screen|null[0]
+        constructor <init>(kotlin/String) // stapel.analytics.testing/VendorCall.Screen.<init>|<init>(kotlin.String){}[0]
+
+        final val name // stapel.analytics.testing/VendorCall.Screen.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.analytics.testing/VendorCall.Screen.name.<get-name>|<get-name>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.analytics.testing/VendorCall.Screen.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.analytics.testing/VendorCall.Screen // stapel.analytics.testing/VendorCall.Screen.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics.testing/VendorCall.Screen.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics.testing/VendorCall.Screen.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics.testing/VendorCall.Screen.toString|toString(){}[0]
+    }
+
+    final class UserId : stapel.analytics.testing/VendorCall { // stapel.analytics.testing/VendorCall.UserId|null[0]
+        constructor <init>(kotlin/String?) // stapel.analytics.testing/VendorCall.UserId.<init>|<init>(kotlin.String?){}[0]
+
+        final val id // stapel.analytics.testing/VendorCall.UserId.id|{}id[0]
+            final fun <get-id>(): kotlin/String? // stapel.analytics.testing/VendorCall.UserId.id.<get-id>|<get-id>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.analytics.testing/VendorCall.UserId.component1|component1(){}[0]
+        final fun copy(kotlin/String? = ...): stapel.analytics.testing/VendorCall.UserId // stapel.analytics.testing/VendorCall.UserId.copy|copy(kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics.testing/VendorCall.UserId.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics.testing/VendorCall.UserId.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics.testing/VendorCall.UserId.toString|toString(){}[0]
+    }
+
+    final class UserProperty : stapel.analytics.testing/VendorCall { // stapel.analytics.testing/VendorCall.UserProperty|null[0]
+        constructor <init>(kotlin/String, kotlin/String?) // stapel.analytics.testing/VendorCall.UserProperty.<init>|<init>(kotlin.String;kotlin.String?){}[0]
+
+        final val name // stapel.analytics.testing/VendorCall.UserProperty.name|{}name[0]
+            final fun <get-name>(): kotlin/String // stapel.analytics.testing/VendorCall.UserProperty.name.<get-name>|<get-name>(){}[0]
+        final val value // stapel.analytics.testing/VendorCall.UserProperty.value|{}value[0]
+            final fun <get-value>(): kotlin/String? // stapel.analytics.testing/VendorCall.UserProperty.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.analytics.testing/VendorCall.UserProperty.component1|component1(){}[0]
+        final fun component2(): kotlin/String? // stapel.analytics.testing/VendorCall.UserProperty.component2|component2(){}[0]
+        final fun copy(kotlin/String = ..., kotlin/String? = ...): stapel.analytics.testing/VendorCall.UserProperty // stapel.analytics.testing/VendorCall.UserProperty.copy|copy(kotlin.String;kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics.testing/VendorCall.UserProperty.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics.testing/VendorCall.UserProperty.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics.testing/VendorCall.UserProperty.toString|toString(){}[0]
+    }
+
+    final object Reset : stapel.analytics.testing/VendorCall { // stapel.analytics.testing/VendorCall.Reset|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics.testing/VendorCall.Reset.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics.testing/VendorCall.Reset.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics.testing/VendorCall.Reset.toString|toString(){}[0]
+    }
+}
+
+abstract class stapel.analytics.testing/AnalyticsSinkConformance { // stapel.analytics.testing/AnalyticsSinkConformance|null[0]
+    constructor <init>() // stapel.analytics.testing/AnalyticsSinkConformance.<init>|<init>(){}[0]
+
+    final val caseNames // stapel.analytics.testing/AnalyticsSinkConformance.caseNames|{}caseNames[0]
+        final fun <get-caseNames>(): kotlin.collections/List<kotlin/String> // stapel.analytics.testing/AnalyticsSinkConformance.caseNames.<get-caseNames>|<get-caseNames>(){}[0]
+
+    abstract fun configured(): stapel.analytics.testing/SinkUnderTest // stapel.analytics.testing/AnalyticsSinkConformance.configured|configured(){}[0]
+    abstract fun unconfigured(): stapel.analytics.testing/SinkUnderTest? // stapel.analytics.testing/AnalyticsSinkConformance.unconfigured|unconfigured(){}[0]
+    final suspend fun verify(): kotlin/Int // stapel.analytics.testing/AnalyticsSinkConformance.verify|verify(){}[0]
+    open fun vendorEventName(kotlin/String): kotlin/String // stapel.analytics.testing/AnalyticsSinkConformance.vendorEventName|vendorEventName(kotlin.String){}[0]
+    open fun vendorPage(kotlin/String): stapel.analytics.testing/VendorCall // stapel.analytics.testing/AnalyticsSinkConformance.vendorPage|vendorPage(kotlin.String){}[0]
+    open fun vendorPropertyName(kotlin/String): kotlin/String // stapel.analytics.testing/AnalyticsSinkConformance.vendorPropertyName|vendorPropertyName(kotlin.String){}[0]
+}
+
+final class stapel.analytics.testing/FakeAnalyticsSink : stapel.analytics.testing/VendorProbe, stapel.analytics/AnalyticsSink { // stapel.analytics.testing/FakeAnalyticsSink|null[0]
+    constructor <init>(kotlin/String = ..., stapel.analytics/SinkAvailability = ..., kotlin.collections/Set<stapel.analytics/ConsentPurpose> = ...) // stapel.analytics.testing/FakeAnalyticsSink.<init>|<init>(kotlin.String;stapel.analytics.SinkAvailability;kotlin.collections.Set<stapel.analytics.ConsentPurpose>){}[0]
+
+    final val availability // stapel.analytics.testing/FakeAnalyticsSink.availability|{}availability[0]
+        final fun <get-availability>(): stapel.analytics/SinkAvailability // stapel.analytics.testing/FakeAnalyticsSink.availability.<get-availability>|<get-availability>(){}[0]
+    final val batches // stapel.analytics.testing/FakeAnalyticsSink.batches|{}batches[0]
+        final fun <get-batches>(): kotlin.collections/List<kotlin.collections/List<stapel.analytics/AnalyticsEvent>> // stapel.analytics.testing/FakeAnalyticsSink.batches.<get-batches>|<get-batches>(){}[0]
+    final val calls // stapel.analytics.testing/FakeAnalyticsSink.calls|{}calls[0]
+        final fun <get-calls>(): kotlin.collections/List<stapel.analytics.testing/VendorCall> // stapel.analytics.testing/FakeAnalyticsSink.calls.<get-calls>|<get-calls>(){}[0]
+    final val events // stapel.analytics.testing/FakeAnalyticsSink.events|{}events[0]
+        final fun <get-events>(): kotlin.collections/List<stapel.analytics/AnalyticsEvent> // stapel.analytics.testing/FakeAnalyticsSink.events.<get-events>|<get-events>(){}[0]
+    final val id // stapel.analytics.testing/FakeAnalyticsSink.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.analytics.testing/FakeAnalyticsSink.id.<get-id>|<get-id>(){}[0]
+    final val purposes // stapel.analytics.testing/FakeAnalyticsSink.purposes|{}purposes[0]
+        final fun <get-purposes>(): kotlin.collections/Set<stapel.analytics/ConsentPurpose> // stapel.analytics.testing/FakeAnalyticsSink.purposes.<get-purposes>|<get-purposes>(){}[0]
+    final val receipts // stapel.analytics.testing/FakeAnalyticsSink.receipts|{}receipts[0]
+        final fun <get-receipts>(): kotlin.collections/ArrayDeque<kotlin/Function1<kotlin.collections/List<stapel.analytics/AnalyticsEvent>, stapel.analytics/SinkReceipt>> // stapel.analytics.testing/FakeAnalyticsSink.receipts.<get-receipts>|<get-receipts>(){}[0]
+
+    final var reported // stapel.analytics.testing/FakeAnalyticsSink.reported|{}reported[0]
+        final fun <get-reported>(): stapel.analytics/SinkAvailability // stapel.analytics.testing/FakeAnalyticsSink.reported.<get-reported>|<get-reported>(){}[0]
+        final fun <set-reported>(stapel.analytics/SinkAvailability) // stapel.analytics.testing/FakeAnalyticsSink.reported.<set-reported>|<set-reported>(stapel.analytics.SinkAvailability){}[0]
+
+    final fun failNext() // stapel.analytics.testing/FakeAnalyticsSink.failNext|failNext(){}[0]
+    final fun reset() // stapel.analytics.testing/FakeAnalyticsSink.reset|reset(){}[0]
+    final fun setCollectionEnabled(kotlin/Boolean) // stapel.analytics.testing/FakeAnalyticsSink.setCollectionEnabled|setCollectionEnabled(kotlin.Boolean){}[0]
+    final fun setUserProperty(kotlin/String, kotlin/String?) // stapel.analytics.testing/FakeAnalyticsSink.setUserProperty|setUserProperty(kotlin.String;kotlin.String?){}[0]
+    final suspend fun deliver(kotlin.collections/List<stapel.analytics/AnalyticsEvent>): stapel.analytics/SinkReceipt // stapel.analytics.testing/FakeAnalyticsSink.deliver|deliver(kotlin.collections.List<stapel.analytics.AnalyticsEvent>){}[0]
+}
+
+final class stapel.analytics.testing/RecordingAnalytics : stapel.runtime/Analytics { // stapel.analytics.testing/RecordingAnalytics|null[0]
+    constructor <init>() // stapel.analytics.testing/RecordingAnalytics.<init>|<init>(){}[0]
+
+    final val calls // stapel.analytics.testing/RecordingAnalytics.calls|{}calls[0]
+        final fun <get-calls>(): kotlin.collections/List<stapel.analytics.testing/RecordingAnalytics.Call> // stapel.analytics.testing/RecordingAnalytics.calls.<get-calls>|<get-calls>(){}[0]
+    final val tracked // stapel.analytics.testing/RecordingAnalytics.tracked|{}tracked[0]
+        final fun <get-tracked>(): kotlin.collections/List<kotlin/String> // stapel.analytics.testing/RecordingAnalytics.tracked.<get-tracked>|<get-tracked>(){}[0]
+
+    final fun identify(kotlin/String?) // stapel.analytics.testing/RecordingAnalytics.identify|identify(kotlin.String?){}[0]
+    final fun page(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics.testing/RecordingAnalytics.page|page(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final fun track(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics.testing/RecordingAnalytics.track|track(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final class Call { // stapel.analytics.testing/RecordingAnalytics.Call|null[0]
+        constructor <init>(stapel.analytics/EventKind, kotlin/String?, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics.testing/RecordingAnalytics.Call.<init>|<init>(stapel.analytics.EventKind;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+        final val kind // stapel.analytics.testing/RecordingAnalytics.Call.kind|{}kind[0]
+            final fun <get-kind>(): stapel.analytics/EventKind // stapel.analytics.testing/RecordingAnalytics.Call.kind.<get-kind>|<get-kind>(){}[0]
+        final val name // stapel.analytics.testing/RecordingAnalytics.Call.name|{}name[0]
+            final fun <get-name>(): kotlin/String? // stapel.analytics.testing/RecordingAnalytics.Call.name.<get-name>|<get-name>(){}[0]
+        final val props // stapel.analytics.testing/RecordingAnalytics.Call.props|{}props[0]
+            final fun <get-props>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics.testing/RecordingAnalytics.Call.props.<get-props>|<get-props>(){}[0]
+
+        final fun component1(): stapel.analytics/EventKind // stapel.analytics.testing/RecordingAnalytics.Call.component1|component1(){}[0]
+        final fun component2(): kotlin/String? // stapel.analytics.testing/RecordingAnalytics.Call.component2|component2(){}[0]
+        final fun component3(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics.testing/RecordingAnalytics.Call.component3|component3(){}[0]
+        final fun copy(stapel.analytics/EventKind = ..., kotlin/String? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...): stapel.analytics.testing/RecordingAnalytics.Call // stapel.analytics.testing/RecordingAnalytics.Call.copy|copy(stapel.analytics.EventKind;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics.testing/RecordingAnalytics.Call.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics.testing/RecordingAnalytics.Call.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics.testing/RecordingAnalytics.Call.toString|toString(){}[0]
+    }
+}
+
+final class stapel.analytics.testing/SinkUnderTest { // stapel.analytics.testing/SinkUnderTest|null[0]
+    constructor <init>(stapel.analytics/AnalyticsSink, stapel.analytics.testing/VendorProbe) // stapel.analytics.testing/SinkUnderTest.<init>|<init>(stapel.analytics.AnalyticsSink;stapel.analytics.testing.VendorProbe){}[0]
+
+    final val probe // stapel.analytics.testing/SinkUnderTest.probe|{}probe[0]
+        final fun <get-probe>(): stapel.analytics.testing/VendorProbe // stapel.analytics.testing/SinkUnderTest.probe.<get-probe>|<get-probe>(){}[0]
+    final val sink // stapel.analytics.testing/SinkUnderTest.sink|{}sink[0]
+        final fun <get-sink>(): stapel.analytics/AnalyticsSink // stapel.analytics.testing/SinkUnderTest.sink.<get-sink>|<get-sink>(){}[0]
+}

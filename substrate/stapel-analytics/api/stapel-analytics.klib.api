@@ -1,0 +1,341 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-analytics>
+final enum class stapel.analytics/ConsentDefault : kotlin/Enum<stapel.analytics/ConsentDefault> { // stapel.analytics/ConsentDefault|null[0]
+    enum entry OptIn // stapel.analytics/ConsentDefault.OptIn|null[0]
+    enum entry OptOut // stapel.analytics/ConsentDefault.OptOut|null[0]
+
+    final val entries // stapel.analytics/ConsentDefault.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.analytics/ConsentDefault> // stapel.analytics/ConsentDefault.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.analytics/ConsentDefault // stapel.analytics/ConsentDefault.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.analytics/ConsentDefault> // stapel.analytics/ConsentDefault.values|values#static(){}[0]
+}
+
+final enum class stapel.analytics/ConsentPurpose : kotlin/Enum<stapel.analytics/ConsentPurpose> { // stapel.analytics/ConsentPurpose|null[0]
+    enum entry Advertising // stapel.analytics/ConsentPurpose.Advertising|null[0]
+    enum entry Analytics // stapel.analytics/ConsentPurpose.Analytics|null[0]
+
+    final val entries // stapel.analytics/ConsentPurpose.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.analytics/ConsentPurpose> // stapel.analytics/ConsentPurpose.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.analytics/ConsentPurpose // stapel.analytics/ConsentPurpose.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.analytics/ConsentPurpose> // stapel.analytics/ConsentPurpose.values|values#static(){}[0]
+}
+
+final enum class stapel.analytics/ConsentState : kotlin/Enum<stapel.analytics/ConsentState> { // stapel.analytics/ConsentState|null[0]
+    enum entry Denied // stapel.analytics/ConsentState.Denied|null[0]
+    enum entry Granted // stapel.analytics/ConsentState.Granted|null[0]
+    enum entry Pending // stapel.analytics/ConsentState.Pending|null[0]
+
+    final val entries // stapel.analytics/ConsentState.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.analytics/ConsentState> // stapel.analytics/ConsentState.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wire // stapel.analytics/ConsentState.wire|{}wire[0]
+        final fun <get-wire>(): kotlin/String // stapel.analytics/ConsentState.wire.<get-wire>|<get-wire>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.analytics/ConsentState // stapel.analytics/ConsentState.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.analytics/ConsentState> // stapel.analytics/ConsentState.values|values#static(){}[0]
+}
+
+final enum class stapel.analytics/EventKind : kotlin/Enum<stapel.analytics/EventKind> { // stapel.analytics/EventKind|null[0]
+    enum entry Identify // stapel.analytics/EventKind.Identify|null[0]
+    enum entry Page // stapel.analytics/EventKind.Page|null[0]
+    enum entry Track // stapel.analytics/EventKind.Track|null[0]
+
+    final val entries // stapel.analytics/EventKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.analytics/EventKind> // stapel.analytics/EventKind.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wire // stapel.analytics/EventKind.wire|{}wire[0]
+        final fun <get-wire>(): kotlin/String // stapel.analytics/EventKind.wire.<get-wire>|<get-wire>(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.analytics/EventKind // stapel.analytics/EventKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.analytics/EventKind> // stapel.analytics/EventKind.values|values#static(){}[0]
+}
+
+final enum class stapel.analytics/PiiGuard : kotlin/Enum<stapel.analytics/PiiGuard> { // stapel.analytics/PiiGuard|null[0]
+    enum entry Off // stapel.analytics/PiiGuard.Off|null[0]
+    enum entry Reject // stapel.analytics/PiiGuard.Reject|null[0]
+    enum entry Strip // stapel.analytics/PiiGuard.Strip|null[0]
+    enum entry Warn // stapel.analytics/PiiGuard.Warn|null[0]
+
+    final val entries // stapel.analytics/PiiGuard.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.analytics/PiiGuard> // stapel.analytics/PiiGuard.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.analytics/PiiGuard // stapel.analytics/PiiGuard.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.analytics/PiiGuard> // stapel.analytics/PiiGuard.values|values#static(){}[0]
+}
+
+final enum class stapel.analytics/Unregistered : kotlin/Enum<stapel.analytics/Unregistered> { // stapel.analytics/Unregistered|null[0]
+    enum entry Drop // stapel.analytics/Unregistered.Drop|null[0]
+    enum entry Warn // stapel.analytics/Unregistered.Warn|null[0]
+
+    final val entries // stapel.analytics/Unregistered.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.analytics/Unregistered> // stapel.analytics/Unregistered.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.analytics/Unregistered // stapel.analytics/Unregistered.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.analytics/Unregistered> // stapel.analytics/Unregistered.values|values#static(){}[0]
+}
+
+abstract fun interface stapel.analytics/AnalyticsAnonymousId { // stapel.analytics/AnalyticsAnonymousId|null[0]
+    abstract suspend fun get(): kotlin/String // stapel.analytics/AnalyticsAnonymousId.get|get(){}[0]
+}
+
+abstract interface stapel.analytics/AnalyticsControl { // stapel.analytics/AnalyticsControl|null[0]
+    abstract val consent // stapel.analytics/AnalyticsControl.consent|{}consent[0]
+        abstract fun <get-consent>(): kotlinx.coroutines.flow/StateFlow<stapel.analytics/Consent> // stapel.analytics/AnalyticsControl.consent.<get-consent>|<get-consent>(){}[0]
+    abstract val sinks // stapel.analytics/AnalyticsControl.sinks|{}sinks[0]
+        abstract fun <get-sinks>(): kotlinx.coroutines.flow/StateFlow<kotlin.collections/List<stapel.analytics/SinkStatus>> // stapel.analytics/AnalyticsControl.sinks.<get-sinks>|<get-sinks>(){}[0]
+
+    abstract fun setUserProperty(kotlin/String, kotlin/String?) // stapel.analytics/AnalyticsControl.setUserProperty|setUserProperty(kotlin.String;kotlin.String?){}[0]
+    abstract suspend fun flush() // stapel.analytics/AnalyticsControl.flush|flush(){}[0]
+    abstract suspend fun setConsent(stapel.analytics/Consent) // stapel.analytics/AnalyticsControl.setConsent|setConsent(stapel.analytics.Consent){}[0]
+}
+
+abstract interface stapel.analytics/AnalyticsSink { // stapel.analytics/AnalyticsSink|null[0]
+    abstract val availability // stapel.analytics/AnalyticsSink.availability|{}availability[0]
+        abstract fun <get-availability>(): stapel.analytics/SinkAvailability // stapel.analytics/AnalyticsSink.availability.<get-availability>|<get-availability>(){}[0]
+    abstract val id // stapel.analytics/AnalyticsSink.id|{}id[0]
+        abstract fun <get-id>(): kotlin/String // stapel.analytics/AnalyticsSink.id.<get-id>|<get-id>(){}[0]
+    abstract val purposes // stapel.analytics/AnalyticsSink.purposes|{}purposes[0]
+        abstract fun <get-purposes>(): kotlin.collections/Set<stapel.analytics/ConsentPurpose> // stapel.analytics/AnalyticsSink.purposes.<get-purposes>|<get-purposes>(){}[0]
+
+    abstract fun reset() // stapel.analytics/AnalyticsSink.reset|reset(){}[0]
+    abstract fun setCollectionEnabled(kotlin/Boolean) // stapel.analytics/AnalyticsSink.setCollectionEnabled|setCollectionEnabled(kotlin.Boolean){}[0]
+    abstract fun setUserProperty(kotlin/String, kotlin/String?) // stapel.analytics/AnalyticsSink.setUserProperty|setUserProperty(kotlin.String;kotlin.String?){}[0]
+    abstract suspend fun deliver(kotlin.collections/List<stapel.analytics/AnalyticsEvent>): stapel.analytics/SinkReceipt // stapel.analytics/AnalyticsSink.deliver|deliver(kotlin.collections.List<stapel.analytics.AnalyticsEvent>){}[0]
+}
+
+abstract interface stapel.analytics/AnalyticsStorage { // stapel.analytics/AnalyticsStorage|null[0]
+    abstract suspend fun read(kotlin/String): kotlin/String? // stapel.analytics/AnalyticsStorage.read|read(kotlin.String){}[0]
+    abstract suspend fun write(kotlin/String, kotlin/String?) // stapel.analytics/AnalyticsStorage.write|write(kotlin.String;kotlin.String?){}[0]
+}
+
+sealed interface stapel.analytics/SinkAvailability { // stapel.analytics/SinkAvailability|null[0]
+    final class Unconfigured : stapel.analytics/SinkAvailability { // stapel.analytics/SinkAvailability.Unconfigured|null[0]
+        constructor <init>(kotlin/String) // stapel.analytics/SinkAvailability.Unconfigured.<init>|<init>(kotlin.String){}[0]
+
+        final val reason // stapel.analytics/SinkAvailability.Unconfigured.reason|{}reason[0]
+            final fun <get-reason>(): kotlin/String // stapel.analytics/SinkAvailability.Unconfigured.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.analytics/SinkAvailability.Unconfigured.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.analytics/SinkAvailability.Unconfigured // stapel.analytics/SinkAvailability.Unconfigured.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/SinkAvailability.Unconfigured.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics/SinkAvailability.Unconfigured.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics/SinkAvailability.Unconfigured.toString|toString(){}[0]
+    }
+
+    final class Unsupported : stapel.analytics/SinkAvailability { // stapel.analytics/SinkAvailability.Unsupported|null[0]
+        constructor <init>(kotlin/String) // stapel.analytics/SinkAvailability.Unsupported.<init>|<init>(kotlin.String){}[0]
+
+        final val reason // stapel.analytics/SinkAvailability.Unsupported.reason|{}reason[0]
+            final fun <get-reason>(): kotlin/String // stapel.analytics/SinkAvailability.Unsupported.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.analytics/SinkAvailability.Unsupported.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.analytics/SinkAvailability.Unsupported // stapel.analytics/SinkAvailability.Unsupported.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/SinkAvailability.Unsupported.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics/SinkAvailability.Unsupported.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics/SinkAvailability.Unsupported.toString|toString(){}[0]
+    }
+
+    final object Ready : stapel.analytics/SinkAvailability { // stapel.analytics/SinkAvailability.Ready|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/SinkAvailability.Ready.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics/SinkAvailability.Ready.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics/SinkAvailability.Ready.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.analytics/SinkReceipt { // stapel.analytics/SinkReceipt|null[0]
+    final class Partial : stapel.analytics/SinkReceipt { // stapel.analytics/SinkReceipt.Partial|null[0]
+        constructor <init>(kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics/SinkReceipt.Partial.<init>|<init>(kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+        final val rejected // stapel.analytics/SinkReceipt.Partial.rejected|{}rejected[0]
+            final fun <get-rejected>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics/SinkReceipt.Partial.rejected.<get-rejected>|<get-rejected>(){}[0]
+
+        final fun component1(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics/SinkReceipt.Partial.component1|component1(){}[0]
+        final fun copy(kotlin.collections/Map<kotlin/String, kotlin/String> = ...): stapel.analytics/SinkReceipt.Partial // stapel.analytics/SinkReceipt.Partial.copy|copy(kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/SinkReceipt.Partial.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics/SinkReceipt.Partial.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics/SinkReceipt.Partial.toString|toString(){}[0]
+    }
+
+    final class Retry : stapel.analytics/SinkReceipt { // stapel.analytics/SinkReceipt.Retry|null[0]
+        constructor <init>(kotlin/String?) // stapel.analytics/SinkReceipt.Retry.<init>|<init>(kotlin.String?){}[0]
+
+        final val detail // stapel.analytics/SinkReceipt.Retry.detail|{}detail[0]
+            final fun <get-detail>(): kotlin/String? // stapel.analytics/SinkReceipt.Retry.detail.<get-detail>|<get-detail>(){}[0]
+
+        final fun component1(): kotlin/String? // stapel.analytics/SinkReceipt.Retry.component1|component1(){}[0]
+        final fun copy(kotlin/String? = ...): stapel.analytics/SinkReceipt.Retry // stapel.analytics/SinkReceipt.Retry.copy|copy(kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/SinkReceipt.Retry.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics/SinkReceipt.Retry.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics/SinkReceipt.Retry.toString|toString(){}[0]
+    }
+
+    final object Accepted : stapel.analytics/SinkReceipt { // stapel.analytics/SinkReceipt.Accepted|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/SinkReceipt.Accepted.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.analytics/SinkReceipt.Accepted.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.analytics/SinkReceipt.Accepted.toString|toString(){}[0]
+    }
+}
+
+final class stapel.analytics/AnalyticsEvent { // stapel.analytics/AnalyticsEvent|null[0]
+    constructor <init>(kotlin/String, stapel.analytics/EventKind, kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin/String?, kotlin/String, kotlin/String, kotlin.time/Instant) // stapel.analytics/AnalyticsEvent.<init>|<init>(kotlin.String;stapel.analytics.EventKind;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.String?;kotlin.String;kotlin.String;kotlin.time.Instant){}[0]
+
+    final val anonId // stapel.analytics/AnalyticsEvent.anonId|{}anonId[0]
+        final fun <get-anonId>(): kotlin/String // stapel.analytics/AnalyticsEvent.anonId.<get-anonId>|<get-anonId>(){}[0]
+    final val id // stapel.analytics/AnalyticsEvent.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.analytics/AnalyticsEvent.id.<get-id>|<get-id>(){}[0]
+    final val kind // stapel.analytics/AnalyticsEvent.kind|{}kind[0]
+        final fun <get-kind>(): stapel.analytics/EventKind // stapel.analytics/AnalyticsEvent.kind.<get-kind>|<get-kind>(){}[0]
+    final val name // stapel.analytics/AnalyticsEvent.name|{}name[0]
+        final fun <get-name>(): kotlin/String // stapel.analytics/AnalyticsEvent.name.<get-name>|<get-name>(){}[0]
+    final val props // stapel.analytics/AnalyticsEvent.props|{}props[0]
+        final fun <get-props>(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics/AnalyticsEvent.props.<get-props>|<get-props>(){}[0]
+    final val sessionId // stapel.analytics/AnalyticsEvent.sessionId|{}sessionId[0]
+        final fun <get-sessionId>(): kotlin/String // stapel.analytics/AnalyticsEvent.sessionId.<get-sessionId>|<get-sessionId>(){}[0]
+    final val timestamp // stapel.analytics/AnalyticsEvent.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlin.time/Instant // stapel.analytics/AnalyticsEvent.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+    final val userHash // stapel.analytics/AnalyticsEvent.userHash|{}userHash[0]
+        final fun <get-userHash>(): kotlin/String? // stapel.analytics/AnalyticsEvent.userHash.<get-userHash>|<get-userHash>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/AnalyticsEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.analytics/AnalyticsEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.analytics/AnalyticsEvent.toString|toString(){}[0]
+}
+
+final class stapel.analytics/AnalyticsHub : stapel.analytics/AnalyticsControl, stapel.runtime/Analytics { // stapel.analytics/AnalyticsHub|null[0]
+    constructor <init>(kotlin.collections/List<stapel.analytics/AnalyticsSink>, stapel.analytics/AnalyticsStorage, stapel.analytics/AnalyticsOptions, stapel.runtime/AppLifecycle?, kotlin.time/Clock, stapel.runtime/IdGenerator, kotlinx.coroutines/CoroutineScope, stapel.runtime/StapelLogger, stapel.analytics/AnalyticsAnonymousId? = ...) // stapel.analytics/AnalyticsHub.<init>|<init>(kotlin.collections.List<stapel.analytics.AnalyticsSink>;stapel.analytics.AnalyticsStorage;stapel.analytics.AnalyticsOptions;stapel.runtime.AppLifecycle?;kotlin.time.Clock;stapel.runtime.IdGenerator;kotlinx.coroutines.CoroutineScope;stapel.runtime.StapelLogger;stapel.analytics.AnalyticsAnonymousId?){}[0]
+
+    final val consent // stapel.analytics/AnalyticsHub.consent|{}consent[0]
+        final fun <get-consent>(): kotlinx.coroutines.flow/StateFlow<stapel.analytics/Consent> // stapel.analytics/AnalyticsHub.consent.<get-consent>|<get-consent>(){}[0]
+    final val sinks // stapel.analytics/AnalyticsHub.sinks|{}sinks[0]
+        final fun <get-sinks>(): kotlinx.coroutines.flow/StateFlow<kotlin.collections/List<stapel.analytics/SinkStatus>> // stapel.analytics/AnalyticsHub.sinks.<get-sinks>|<get-sinks>(){}[0]
+
+    final fun identify(kotlin/String?) // stapel.analytics/AnalyticsHub.identify|identify(kotlin.String?){}[0]
+    final fun page(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics/AnalyticsHub.page|page(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final fun setUserProperty(kotlin/String, kotlin/String?) // stapel.analytics/AnalyticsHub.setUserProperty|setUserProperty(kotlin.String;kotlin.String?){}[0]
+    final fun track(kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String>) // stapel.analytics/AnalyticsHub.track|track(kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final suspend fun flush() // stapel.analytics/AnalyticsHub.flush|flush(){}[0]
+    final suspend fun setConsent(stapel.analytics/Consent) // stapel.analytics/AnalyticsHub.setConsent|setConsent(stapel.analytics.Consent){}[0]
+}
+
+final class stapel.analytics/AnalyticsOptions { // stapel.analytics/AnalyticsOptions|null[0]
+    constructor <init>(stapel.analytics/ConsentDefault = ..., stapel.analytics/PiiGuard = ..., kotlin.collections/Set<kotlin/String>? = ..., stapel.analytics/Unregistered = ..., stapel.analytics/BatchOptions = ..., kotlin/Int = ..., kotlin.time/Duration = ..., kotlin/String = ...) // stapel.analytics/AnalyticsOptions.<init>|<init>(stapel.analytics.ConsentDefault;stapel.analytics.PiiGuard;kotlin.collections.Set<kotlin.String>?;stapel.analytics.Unregistered;stapel.analytics.BatchOptions;kotlin.Int;kotlin.time.Duration;kotlin.String){}[0]
+
+    final val batch // stapel.analytics/AnalyticsOptions.batch|{}batch[0]
+        final fun <get-batch>(): stapel.analytics/BatchOptions // stapel.analytics/AnalyticsOptions.batch.<get-batch>|<get-batch>(){}[0]
+    final val consentDefault // stapel.analytics/AnalyticsOptions.consentDefault|{}consentDefault[0]
+        final fun <get-consentDefault>(): stapel.analytics/ConsentDefault // stapel.analytics/AnalyticsOptions.consentDefault.<get-consentDefault>|<get-consentDefault>(){}[0]
+    final val pendingBufferLimit // stapel.analytics/AnalyticsOptions.pendingBufferLimit|{}pendingBufferLimit[0]
+        final fun <get-pendingBufferLimit>(): kotlin/Int // stapel.analytics/AnalyticsOptions.pendingBufferLimit.<get-pendingBufferLimit>|<get-pendingBufferLimit>(){}[0]
+    final val piiGuard // stapel.analytics/AnalyticsOptions.piiGuard|{}piiGuard[0]
+        final fun <get-piiGuard>(): stapel.analytics/PiiGuard // stapel.analytics/AnalyticsOptions.piiGuard.<get-piiGuard>|<get-piiGuard>(){}[0]
+    final val registry // stapel.analytics/AnalyticsOptions.registry|{}registry[0]
+        final fun <get-registry>(): kotlin.collections/Set<kotlin/String>? // stapel.analytics/AnalyticsOptions.registry.<get-registry>|<get-registry>(){}[0]
+    final val sessionTimeout // stapel.analytics/AnalyticsOptions.sessionTimeout|{}sessionTimeout[0]
+        final fun <get-sessionTimeout>(): kotlin.time/Duration // stapel.analytics/AnalyticsOptions.sessionTimeout.<get-sessionTimeout>|<get-sessionTimeout>(){}[0]
+    final val storageNamespace // stapel.analytics/AnalyticsOptions.storageNamespace|{}storageNamespace[0]
+        final fun <get-storageNamespace>(): kotlin/String // stapel.analytics/AnalyticsOptions.storageNamespace.<get-storageNamespace>|<get-storageNamespace>(){}[0]
+    final val unregistered // stapel.analytics/AnalyticsOptions.unregistered|{}unregistered[0]
+        final fun <get-unregistered>(): stapel.analytics/Unregistered // stapel.analytics/AnalyticsOptions.unregistered.<get-unregistered>|<get-unregistered>(){}[0]
+}
+
+final class stapel.analytics/BatchOptions { // stapel.analytics/BatchOptions|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin.time/Duration = ..., kotlin/Int = ..., kotlin.time/Duration = ...) // stapel.analytics/BatchOptions.<init>|<init>(kotlin.Int;kotlin.time.Duration;kotlin.Int;kotlin.time.Duration){}[0]
+
+    final val backoffBase // stapel.analytics/BatchOptions.backoffBase|{}backoffBase[0]
+        final fun <get-backoffBase>(): kotlin.time/Duration // stapel.analytics/BatchOptions.backoffBase.<get-backoffBase>|<get-backoffBase>(){}[0]
+    final val flushInterval // stapel.analytics/BatchOptions.flushInterval|{}flushInterval[0]
+        final fun <get-flushInterval>(): kotlin.time/Duration // stapel.analytics/BatchOptions.flushInterval.<get-flushInterval>|<get-flushInterval>(){}[0]
+    final val maxAttempts // stapel.analytics/BatchOptions.maxAttempts|{}maxAttempts[0]
+        final fun <get-maxAttempts>(): kotlin/Int // stapel.analytics/BatchOptions.maxAttempts.<get-maxAttempts>|<get-maxAttempts>(){}[0]
+    final val maxSize // stapel.analytics/BatchOptions.maxSize|{}maxSize[0]
+        final fun <get-maxSize>(): kotlin/Int // stapel.analytics/BatchOptions.maxSize.<get-maxSize>|<get-maxSize>(){}[0]
+
+    final fun backoff(kotlin/Int): kotlin.time/Duration // stapel.analytics/BatchOptions.backoff|backoff(kotlin.Int){}[0]
+}
+
+final class stapel.analytics/Consent { // stapel.analytics/Consent|null[0]
+    constructor <init>(stapel.analytics/ConsentState, stapel.analytics/ConsentState = ...) // stapel.analytics/Consent.<init>|<init>(stapel.analytics.ConsentState;stapel.analytics.ConsentState){}[0]
+
+    final val advertising // stapel.analytics/Consent.advertising|{}advertising[0]
+        final fun <get-advertising>(): stapel.analytics/ConsentState // stapel.analytics/Consent.advertising.<get-advertising>|<get-advertising>(){}[0]
+    final val analytics // stapel.analytics/Consent.analytics|{}analytics[0]
+        final fun <get-analytics>(): stapel.analytics/ConsentState // stapel.analytics/Consent.analytics.<get-analytics>|<get-analytics>(){}[0]
+
+    final fun component1(): stapel.analytics/ConsentState // stapel.analytics/Consent.component1|component1(){}[0]
+    final fun component2(): stapel.analytics/ConsentState // stapel.analytics/Consent.component2|component2(){}[0]
+    final fun copy(stapel.analytics/ConsentState = ..., stapel.analytics/ConsentState = ...): stapel.analytics/Consent // stapel.analytics/Consent.copy|copy(stapel.analytics.ConsentState;stapel.analytics.ConsentState){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/Consent.equals|equals(kotlin.Any?){}[0]
+    final fun grants(kotlin.collections/Set<stapel.analytics/ConsentPurpose>): kotlin/Boolean // stapel.analytics/Consent.grants|grants(kotlin.collections.Set<stapel.analytics.ConsentPurpose>){}[0]
+    final fun hashCode(): kotlin/Int // stapel.analytics/Consent.hashCode|hashCode(){}[0]
+    final fun stateOf(stapel.analytics/ConsentPurpose): stapel.analytics/ConsentState // stapel.analytics/Consent.stateOf|stateOf(stapel.analytics.ConsentPurpose){}[0]
+    final fun toString(): kotlin/String // stapel.analytics/Consent.toString|toString(){}[0]
+}
+
+final class stapel.analytics/FileAnalyticsStorage : stapel.analytics/AnalyticsStorage { // stapel.analytics/FileAnalyticsStorage|null[0]
+    constructor <init>(kotlin/String, kotlin.coroutines/CoroutineContext) // stapel.analytics/FileAnalyticsStorage.<init>|<init>(kotlin.String;kotlin.coroutines.CoroutineContext){}[0]
+
+    final suspend fun read(kotlin/String): kotlin/String? // stapel.analytics/FileAnalyticsStorage.read|read(kotlin.String){}[0]
+    final suspend fun write(kotlin/String, kotlin/String?) // stapel.analytics/FileAnalyticsStorage.write|write(kotlin.String;kotlin.String?){}[0]
+}
+
+final class stapel.analytics/InMemoryAnalyticsStorage : stapel.analytics/AnalyticsStorage { // stapel.analytics/InMemoryAnalyticsStorage|null[0]
+    constructor <init>() // stapel.analytics/InMemoryAnalyticsStorage.<init>|<init>(){}[0]
+
+    final suspend fun read(kotlin/String): kotlin/String? // stapel.analytics/InMemoryAnalyticsStorage.read|read(kotlin.String){}[0]
+    final suspend fun snapshot(): kotlin.collections/Map<kotlin/String, kotlin/String> // stapel.analytics/InMemoryAnalyticsStorage.snapshot|snapshot(){}[0]
+    final suspend fun write(kotlin/String, kotlin/String?) // stapel.analytics/InMemoryAnalyticsStorage.write|write(kotlin.String;kotlin.String?){}[0]
+}
+
+final class stapel.analytics/LogSink : stapel.analytics/AnalyticsSink { // stapel.analytics/LogSink|null[0]
+    constructor <init>(stapel.runtime/StapelLogger, kotlin/String = ...) // stapel.analytics/LogSink.<init>|<init>(stapel.runtime.StapelLogger;kotlin.String){}[0]
+
+    final val availability // stapel.analytics/LogSink.availability|{}availability[0]
+        final fun <get-availability>(): stapel.analytics/SinkAvailability // stapel.analytics/LogSink.availability.<get-availability>|<get-availability>(){}[0]
+    final val id // stapel.analytics/LogSink.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.analytics/LogSink.id.<get-id>|<get-id>(){}[0]
+    final val purposes // stapel.analytics/LogSink.purposes|{}purposes[0]
+        final fun <get-purposes>(): kotlin.collections/Set<stapel.analytics/ConsentPurpose> // stapel.analytics/LogSink.purposes.<get-purposes>|<get-purposes>(){}[0]
+
+    final fun reset() // stapel.analytics/LogSink.reset|reset(){}[0]
+    final fun setCollectionEnabled(kotlin/Boolean) // stapel.analytics/LogSink.setCollectionEnabled|setCollectionEnabled(kotlin.Boolean){}[0]
+    final fun setUserProperty(kotlin/String, kotlin/String?) // stapel.analytics/LogSink.setUserProperty|setUserProperty(kotlin.String;kotlin.String?){}[0]
+    final suspend fun deliver(kotlin.collections/List<stapel.analytics/AnalyticsEvent>): stapel.analytics/SinkReceipt // stapel.analytics/LogSink.deliver|deliver(kotlin.collections.List<stapel.analytics.AnalyticsEvent>){}[0]
+}
+
+final class stapel.analytics/SinkStatus { // stapel.analytics/SinkStatus|null[0]
+    constructor <init>(kotlin/String, stapel.analytics/SinkAvailability, kotlin/String?, kotlin/Int) // stapel.analytics/SinkStatus.<init>|<init>(kotlin.String;stapel.analytics.SinkAvailability;kotlin.String?;kotlin.Int){}[0]
+
+    final val availability // stapel.analytics/SinkStatus.availability|{}availability[0]
+        final fun <get-availability>(): stapel.analytics/SinkAvailability // stapel.analytics/SinkStatus.availability.<get-availability>|<get-availability>(){}[0]
+    final val delivered // stapel.analytics/SinkStatus.delivered|{}delivered[0]
+        final fun <get-delivered>(): kotlin/Int // stapel.analytics/SinkStatus.delivered.<get-delivered>|<get-delivered>(){}[0]
+    final val id // stapel.analytics/SinkStatus.id|{}id[0]
+        final fun <get-id>(): kotlin/String // stapel.analytics/SinkStatus.id.<get-id>|<get-id>(){}[0]
+    final val lastError // stapel.analytics/SinkStatus.lastError|{}lastError[0]
+        final fun <get-lastError>(): kotlin/String? // stapel.analytics/SinkStatus.lastError.<get-lastError>|<get-lastError>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.analytics/SinkStatus.component1|component1(){}[0]
+    final fun component2(): stapel.analytics/SinkAvailability // stapel.analytics/SinkStatus.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.analytics/SinkStatus.component3|component3(){}[0]
+    final fun component4(): kotlin/Int // stapel.analytics/SinkStatus.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., stapel.analytics/SinkAvailability = ..., kotlin/String? = ..., kotlin/Int = ...): stapel.analytics/SinkStatus // stapel.analytics/SinkStatus.copy|copy(kotlin.String;stapel.analytics.SinkAvailability;kotlin.String?;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.analytics/SinkStatus.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.analytics/SinkStatus.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.analytics/SinkStatus.toString|toString(){}[0]
+}
+
+final const val stapel.analytics/ANALYTICS_LOG_TAG // stapel.analytics/ANALYTICS_LOG_TAG|{}ANALYTICS_LOG_TAG[0]
+    final fun <get-ANALYTICS_LOG_TAG>(): kotlin/String // stapel.analytics/ANALYTICS_LOG_TAG.<get-ANALYTICS_LOG_TAG>|<get-ANALYTICS_LOG_TAG>(){}[0]
+final const val stapel.analytics/PII_REDACTED // stapel.analytics/PII_REDACTED|{}PII_REDACTED[0]
+    final fun <get-PII_REDACTED>(): kotlin/String // stapel.analytics/PII_REDACTED.<get-PII_REDACTED>|<get-PII_REDACTED>(){}[0]
+
+final fun stapel.analytics.di/analyticsModule(stapel.analytics/AnalyticsOptions = ...): org.koin.core.module/Module // stapel.analytics.di/analyticsModule|analyticsModule(stapel.analytics.AnalyticsOptions){}[0]
+final fun stapel.analytics/looksLikePii(kotlin/String): kotlin/Boolean // stapel.analytics/looksLikePii|looksLikePii(kotlin.String){}[0]
+final fun stapel.analytics/platformAnalyticsStorage(stapel.runtime/PlatformContext, stapel.runtime/StapelDispatchers, kotlin/String = ...): stapel.analytics/AnalyticsStorage // stapel.analytics/platformAnalyticsStorage|platformAnalyticsStorage(stapel.runtime.PlatformContext;stapel.runtime.StapelDispatchers;kotlin.String){}[0]
+final fun stapel.analytics/sha256Hex(kotlin/String): kotlin/String // stapel.analytics/sha256Hex|sha256Hex(kotlin.String){}[0]
