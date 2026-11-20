@@ -58,6 +58,19 @@ class GatesTest {
     }
 
     @Test
+    fun aRateBoundedToZeroOneIsARatioNotMoney() {
+        fun contract(bounds: String) = Fixtures.contract(
+            components = """{"S":{"type":"object","description":"S.","properties":{"rate_from_first":{"type":"number","format":"double",$bounds"description":"Ratio."}},"required":["rate_from_first"]}}""",
+            paths = "{" + Fixtures.get("demo_api_v1_s_retrieve", "s", """{"${'$'}ref":"#/components/schemas/S"}""") + "}",
+        )
+        assertTrue(Fixtures.generate("demo", contract(""""minimum":0,"maximum":1,""")).files.isNotEmpty())
+        failsWith("E-MONEY-AS-DOUBLE", contract(""))
+        failsWith("E-MONEY-AS-DOUBLE", contract(""""minimum":0,"maximum":100,"""))
+        failsWith("E-MONEY-AS-DOUBLE", contract(""""minimum":0,"""))
+        failsWith("E-MONEY-AS-DOUBLE", contract(""""minimum":-1,"maximum":1,"""))
+    }
+
+    @Test
     fun foldedComponentNamesCollide() {
         val dir = Fixtures.contract(components = """{"_Org":$obj,"Org":$obj}""", paths = "{" + Fixtures.get("demo_api_v1_o_retrieve", "o", """{"${'$'}ref":"#/components/schemas/Org"}""") + "}")
         failsWith("E-NAME-COLLISION", dir)
