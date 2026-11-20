@@ -3,11 +3,16 @@
   "shell": {"template": "AdaptiveTabs", "slots": {"topbar.end": ["auth.account_menu"]}, "overrides": {}, "dropped": []},
   "auth": {"model": "public", "gated": true},
   "theme": "ocean",
-  "modules": ["auth", "orders"],
-  "installed": ["auth"],
+  "modules": ["auth", "profiles", "orders"],
+  "installed": ["auth", "profiles"],
   "custom": ["orders"],
   "pending": [],
   "offline": false,
   "signIn": "auth.login",
-  "routes": {"auth.login": "/login", "shop.home": "/app/home", "shop.order": "/app/orders/:orderId"}
+  "routes": {
+    "auth.login": "/login", "auth.security": "/app/settings/security", "profiles.connections": "/app/connections",
+    "profiles.contacts": "/app/settings/contacts", "profiles.language": "/app/settings/language",
+    "profiles.notifications": "/app/settings/notifications", "profiles.public": "/u/:userId", "profiles.settings": "/app/settings",
+    "shop.home": "/app/home", "shop.order": "/app/orders/:orderId"
+  }
 }

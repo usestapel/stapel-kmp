@@ -23,6 +23,8 @@ import stapel.app.di.StapelAppBuilder
 import stapel.app.di.StapelAppContent
 import stapel.app.di.stapelApp
 import stapel.auth.ui.di.AuthBrick
+import stapel.profiles.ui.AvatarPicker
+import stapel.profiles.ui.di.ProfilesBrick
 import stapel.config.StapelEnvironment
 import stapel.config.platformClientInfo
 import stapel.i18n.I18nBundle
@@ -66,16 +68,19 @@ private val ShopStrings = I18nBundle(
 )
 
 /**
- * The whole app, assembled once per process: the substrate, the auth brick, the app's own screens and
- * its own `orders` backend client, the theme from `stapel.theme.json`.
+ * The whole app, assembled once per process: the substrate, the auth and profiles bricks, the app's
+ * own screens and its own `orders` backend client, the theme from `stapel.theme.json`.
  *
  * @param target `android` | `ios` | `desktop`: picks the base URL of the environment.
  * @param baseUrl overrides the environment's base URL (tests, a stand on another port).
+ * @param avatarPicker the platform's picture picker for the profile avatar (the one wiring point of the
+ *   upload); null = the settings screen offers no avatar change.
  */
 fun createShopApp(
     platform: PlatformContext,
     target: String,
     baseUrl: String? = null,
+    avatarPicker: AvatarPicker? = null,
     configure: StapelAppBuilder.() -> Unit = {},
 ): StapelApp = stapelApp(platform) {
     environment(
@@ -86,7 +91,7 @@ fun createShopApp(
             client = platformClientInfo(appId = "io.github.usestapel.sample.shop", appVersion = "0.1.0", build = "1"),
         ),
     )
-    bricks(AuthBrick())
+    bricks(AuthBrick(), ProfilesBrick(picker = avatarPicker))
     screens(::shopScreens)
     modules(module { single<OrdersApi> { OrdersApiClient(get<ApiTransport>()) } })
     navigation(

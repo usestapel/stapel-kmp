@@ -7,7 +7,7 @@
 #   bricks/profiles/e2e/stand/stand.sh down     # stop only the process this script started (pid file)
 #   bricks/profiles/e2e/stand/stand.sh purge    # down + delete the stand directory this script created
 #
-# Then: ./gradlew :stapel-profiles-e2e:test -Pstapel.e2e.baseUrl=http://127.0.0.1:18741/
+# Then: ./gradlew :stapel-profiles-e2e:test -Pstapel.e2e.baseUrl=http://127.0.0.1:18761/
 set -euo pipefail
 
 TOOLS_VERSION="0.84.0"
@@ -19,7 +19,7 @@ PYTHON="${K15_PYTHON:-python3.12}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 STAND="$(cd "$HERE/.." && pwd)/build/stand"
 PROJECT="$STAND/e2eprofiles"
-PORT="${PROFILES_STAND_PORT:-18741}"
+PORT="${PROFILES_STAND_PORT:-18761}"
 
 log() { printf '[profiles-stand] %s\n' "$*" >&2; }
 

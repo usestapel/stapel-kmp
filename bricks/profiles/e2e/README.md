@@ -3,12 +3,12 @@
 The profiles brick against a real backend: `stand/stand.sh up` scaffolds a project with stapel-tools
 0.84.0 (`--type minimal --modules auth profiles cdn --posture prototype`), pins stapel-profiles 0.23.1,
 stapel-auth 0.53.1 and stapel-core 0.99.0 (the pinned contracts), migrates, fills the language
-catalogue (`manage.py sync_languages`; a fresh deployment has none) and serves on 127.0.0.1:18741.
+catalogue (`manage.py sync_languages`; a fresh deployment has none) and serves on 127.0.0.1:18761.
 The suite wires the app the way a generated app does: `stapelApp { bricks(AuthBrick(), ProfilesBrick()) }`.
 
 ```sh
 bricks/profiles/e2e/stand/stand.sh up
-./gradlew :stapel-profiles-e2e:test -Pstapel.e2e.baseUrl=http://127.0.0.1:18741/
+./gradlew :stapel-profiles-e2e:test -Pstapel.e2e.baseUrl=http://127.0.0.1:18761/
 bricks/profiles/e2e/stand/stand.sh down
 ```
 
