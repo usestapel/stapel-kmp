@@ -32,3 +32,30 @@ SHOP_STAND_URL=http://127.0.0.1:18731/ scripts/ios-smoke.sh --push     # + the p
 ```
 
 `-Pstapel.repo=local` resolves from mavenLocal instead of the staging repository.
+
+## Analytics and Firebase
+
+The app wires the `stapel-analytics` hub with opt-in consent (`ShopAnalytics.kt`): nothing leaves the
+device until the consent sheet on the home screen says "Allow"; the log sink writes
+`stapel.analytics event <kind> <name>` markers; screens are recorded as `page` events by `stapel-app`;
+the signed-in account is identified as `sha256Hex(accountId)`.
+
+Google Analytics for Firebase on Android, locally:
+
+```sh
+cp /path/to/your/google-services.json androidApp/google-services.json   # gitignored; package io.github.usestapel.sample.shop
+./gradlew :androidApp:assembleDebug -Pshop.firebase=true
+```
+
+Without the file the debug app runs and logs `stapel.analytics unavailable firebase unconfigured
+google-services.json`; `assembleRelease -Pshop.firebase=true` refuses by name. The provider's manifest
+keeps Firebase's own collection off (`firebase_analytics_collection_enabled=false`, no `AD_ID`) until
+consent; check a build with `scripts/check-consent-manifest.sh`. `androidApp/fixtures/google-services.json`
+is a fake for CI builds, never a real project.
+
+iOS (by hand until the scaffold emits it): add `firebase-ios-sdk` 13.2.0 (exact) with the products
+`FirebaseCore` and `FirebaseAnalyticsCore` to `iosApp`, copy `ios-bridges/firebase/StapelFirebase.swift`
+and `StapelFirebaseAnalytics.swift` (repository root) into `iosApp/iosApp/`, put
+`GoogleService-Info.plist` (gitignored) next to them, set `FIREBASE_ANALYTICS_COLLECTION_ENABLED = NO`
+in `Info.plist`, export `stapel-analytics-firebase` from the `Shared` framework and pass
+`firebaseAnalyticsModule(StapelFirebaseAnalytics.shared)` from Swift.
