@@ -1,5 +1,6 @@
 package stapel.push.firebase
 
+import android.content.Intent
 import stapel.push.DevicePlatform
 import stapel.push.PushProvider
 import stapel.runtime.NoopLogger
@@ -23,3 +24,9 @@ public fun androidFirebasePushProvider(
     dispatchers,
     logger,
 )
+
+/**
+ * Hands a tapped notification to the provider: call it from the activity's `onNewIntent` (a tap
+ * while the app runs). The launch intent is read on its own. Returns whether [intent] was a tap.
+ */
+public fun handleFirebasePushIntent(intent: Intent?): Boolean = FirebasePushRelay.bridge?.handleIntent(intent) ?: false

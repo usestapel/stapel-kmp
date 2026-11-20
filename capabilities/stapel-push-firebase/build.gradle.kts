@@ -26,3 +26,12 @@ kotlin {
         }
     }
 }
+
+// Dokka analyses the Android source set with the inherited members of StapelFirebaseMessagingService
+// (FirebaseMessagingService), whose types (play-services cloud messaging) firebase-messaging keeps off
+// the compile classpath: unresolved-link warnings fail the docs gate. The Android source set is not
+// rendered; its public API (androidFirebasePushProvider, firebasePushModule, handleFirebasePushIntent)
+// is KDoc'd in source and listed in MODULE.md.
+extensions.configure<org.jetbrains.dokka.gradle.DokkaExtension> {
+    dokkaSourceSets.matching { it.name == "androidMain" }.configureEach { suppress.set(true) }
+}

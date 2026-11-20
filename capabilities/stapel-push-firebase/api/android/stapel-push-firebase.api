@@ -1,10 +1,7 @@
-public final class stapel/push/firebase/AndroidComponentsKt {
-	public static final fun handleFirebasePushIntent (Landroid/content/Intent;)Z
-}
-
 public final class stapel/push/firebase/AndroidFirebasePushKt {
 	public static final fun androidFirebasePushProvider (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Lstapel/runtime/StapelLogger;)Lstapel/push/PushProvider;
 	public static synthetic fun androidFirebasePushProvider$default (Lstapel/runtime/PlatformContext;Lstapel/runtime/StapelDispatchers;Lstapel/runtime/StapelLogger;ILjava/lang/Object;)Lstapel/push/PushProvider;
+	public static final fun handleFirebasePushIntent (Landroid/content/Intent;)Z
 }
 
 public abstract interface class stapel/push/firebase/FirebasePushBridge {

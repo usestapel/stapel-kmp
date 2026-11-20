@@ -1,7 +1,6 @@
 package stapel.push.firebase
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -55,9 +54,3 @@ internal class StapelPushPermissionActivity : Activity() {
         const val REQUEST = 0x5350
     }
 }
-
-/**
- * Hands a tapped notification to the provider: call it from the activity's `onNewIntent` (a tap
- * while the app runs). The launch intent is read on its own. Returns whether [intent] was a tap.
- */
-public fun handleFirebasePushIntent(intent: Intent?): Boolean = FirebasePushRelay.bridge?.handleIntent(intent) ?: false
