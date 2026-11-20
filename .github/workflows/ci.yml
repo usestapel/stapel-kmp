@@ -230,6 +230,17 @@ jobs:
         run: >
           ./gradlew "$MAC_HEAP" checkIosBinaries
           -Pstapel.ios.binaries=samples/shop-mobile/shared/build/xcode-frameworks,samples/shop-mobile/build/ios-smoke/derived/Build/Products/Debug-iphonesimulator/ShopMobile.app
+      - name: Consent gate in the built Android app (Firebase provider, fake config) and the release refusal without config
+        working-directory: samples/shop-mobile
+        run: |
+          mkdir -p build
+          if ./gradlew :androidApp:assembleRelease -Pshop.firebase=true > build/firebase-release-refusal.log 2>&1; then
+            echo "a release build without androidApp/google-services.json was not refused"; exit 1
+          fi
+          grep -q "a release build without androidApp/google-services.json" build/firebase-release-refusal.log
+          cp androidApp/fixtures/google-services.json androidApp/google-services.json
+          ./gradlew :androidApp:assembleDebug -Pshop.firebase=true
+          scripts/check-consent-manifest.sh
       - name: Auth and profiles stands down
         if: always()
         run: |
@@ -330,13 +341,51 @@ jobs:
             bricks/auth/e2e/build/stand/*.log
           retention-days: 14
 
+  ios-bridges:
+    name: ios-bridges (Swift bridges compiled against the pinned vendor packages)
+    needs: [publish-smoke]
+    runs-on: macos-26
+    # macOS runners are the bottleneck: a newer commit's job supersedes this job while it is still
+    # QUEUED (GitHub keeps one pending job per group); a running job is never cancelled. ci-ok reports
+    # a superseded commit as superseded, never as green. Rule tested by build-logic CiWorkflowTest.
+    concurrency:
+      group: macos-ios-bridges-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    timeout-minutes: 45
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: stapel-kmp-repo-${{ github.sha }}
+          path: build/staging-repo
+      - name: The Kotlin framework Shared exporting the bridge protocols, from the staging repo
+        run: ./gradlew "$MAC_HEAP" -p ios-bridges/check :shared:assembleSharedReleaseXCFramework
+      - name: Every bridge compiles against its vendor's Swift package at the pinned exact version
+        working-directory: ios-bridges
+        run: >
+          xcodebuild -scheme StapelBridges -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath build/derived build
+
   # The ONE required check for branch protection. Green only when every job succeeded; a commit whose
   # macOS job was superseded while queued is reported SUPERSEDED (red, never green); anything else red
   # is FAILED. Verdict rules: scripts/ci-verdict.sh, tested by build-logic CiWorkflowTest.
   ci-ok:
     name: ci-ok
     if: always()
-    needs: [build-logic, fast, ios, docs, publish-smoke, sample, sample-oldest-ios]
+    needs: [build-logic, fast, ios, docs, publish-smoke, sample, sample-oldest-ios, ios-bridges]
     runs-on: ubuntu-latest
     permissions:
       contents: read
