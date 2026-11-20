@@ -2,12 +2,16 @@
 
 - **Provides:** `RoomCacheStoreFactory` (a `stapel.cache.CacheStoreFactory`), `RoomCacheOptions`;
   platform entry points `RoomCacheStoreFactory(context, options)` (Android) and `RoomCacheStoreFactory(options)` (iOS);
+  `desktopDataDirectory(appId)` (JVM: macOS Application Support, Windows `%LOCALAPPDATA%`, XDG data home),
+  the directory `cacheRoomModule()` uses on desktop, named by the bound `StapelEnvironment.client.appId`;
   `RoomCacheOptions.ioContext` is required (the app's IO dispatcher; no ambient default, gate G-R1).
 - **Seams:** `RoomCacheOptions.driver` (plug an encrypting/system `SQLiteDriver`; default bundled),
   `ioContext`, `onDiscarded` (metric hook for destructive recreation).
 - **Invariants:**
   - every Room type (`CacheDatabase`, `EntryDao`, rows) is `internal`; the public surface is the factory;
   - one database file set per partition; no `WHERE account =` filtering anywhere;
+  - JVM: `stapel-cache/` and partition directories are `rwx------` on POSIX (tightened when found
+    wider), asserted in `jvmTest`; Windows relies on the profile ACL; mobile on the app sandbox;
   - wipe = close + delete the partition directory (`.db`, `-wal`, `-shm`, `-journal`), asserted on the
     file system in tests;
   - `cache.db` has no migrations: version bump or format bump = drop; a foreign identity hash (same

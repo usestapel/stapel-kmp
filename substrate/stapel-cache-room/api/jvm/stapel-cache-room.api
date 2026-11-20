@@ -1,3 +1,7 @@
+public final class stapel/cache/room/DesktopDataDirectoryKt {
+	public static final fun desktopDataDirectory (Ljava/lang/String;)Ljava/lang/String;
+}
+
 public final class stapel/cache/room/RoomCacheOptions {
 	public fun <init> (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;)V
 	public synthetic fun <init> (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V

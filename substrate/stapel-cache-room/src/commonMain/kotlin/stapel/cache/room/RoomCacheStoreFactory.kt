@@ -47,7 +47,10 @@ public class RoomCacheOptions(
  *
  * Platform entry points pick the directory: `RoomCacheStoreFactory(context, options)` on Android
  * (`noBackupFilesDir`), `RoomCacheStoreFactory(options)` on iOS (Application Support, excluded from
- * backup); on the JVM the app passes its data directory to this constructor.
+ * backup); on the JVM the app passes a directory to this constructor, by default
+ * `desktopDataDirectory(appId)`. On the JVM `stapel-cache/` and each partition directory are made
+ * owner-only (`rwx------`, also when found wider) on POSIX file systems; the mobile directories are
+ * inside the app's sandbox already.
  *
  * @param directory absolute path of the directory that will hold `stapel-cache/`.
  */
@@ -105,7 +108,8 @@ public class RoomCacheStoreFactory(
 
     private suspend fun openHandle(partition: PartitionId): Handle = withContext(options.ioContext) {
         val dir = partitionDir(partition)
-        SystemFileSystem.createDirectories(dir)
+        createOwnerOnlyDirectories(root)
+        createOwnerOnlyDirectories(dir)
         val first = build(dir)
         try {
             verify(first)

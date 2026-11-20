@@ -12,6 +12,7 @@ kotlin {
         commonMain.dependencies {
             api(projects.stapelCache)
             implementation(projects.stapelDi)
+            implementation(projects.stapelConfig)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.io.core)
         }
