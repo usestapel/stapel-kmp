@@ -24,5 +24,24 @@ Rules for a bridge:
 - The bridge's protocol version is the provider artifact's `*_BRIDGE_ABI` constant; a change to the
   Kotlin interface bumps it and changes the Swift file in the same commit.
 
-Compiled on every CI run by the reference app (`samples/shop-mobile/iosApp`), against the vendor's
-Swift package at the exact version the scaffold registry pins.
+| Directory | Kotlin protocol (artifact, ABI) | Vendor package (exact) | Products |
+|---|---|---|---|
+| `firebase/` | `FirebasePushBridge` (`stapel-push-firebase`, 1), `FirebaseAnalyticsBridge` (`stapel-analytics-firebase`, 1) | `firebase-ios-sdk` 13.2.0 | `FirebaseCore`, `FirebaseMessaging`, `FirebaseAnalyticsCore` (no IDFA) |
+| `appmetrica/` | `AppMetricaAnalyticsBridge` (`stapel-analytics-appmetrica`, 1) | `appmetrica-sdk-ios` 7.0.0 | `AppMetricaCore` (no `AppMetricaAdSupport`) |
+
+## The compile check (run by hand; CI job `ios-bridges` proposed, not wired yet)
+
+`check/` is a separate Gradle build that makes the Kotlin framework `Shared` (static, iOS 15.0,
+exporting the provider artifacts) from the staging repository, the way a scaffolded app's `shared`
+module does; `Package.swift` compiles `core/`, `firebase/` and `appmetrica/` together against it and
+the vendor packages at the pinned exact versions. A protocol change fails there with the missing
+member named.
+
+```sh
+./gradlew publishAllPublicationsToStagingRepository                      # repository root
+./gradlew -p ios-bridges/check :shared:assembleSharedReleaseXCFramework  # -Pstapel.repo=local for mavenLocal
+cd ios-bridges && xcodebuild -scheme StapelBridges -destination 'generic/platform=iOS Simulator' build
+```
+
+A new bridge adds its directory to `sources` (if new) and its vendor products to `Package.swift`, and
+its artifact to `bridged` in `check/shared/build.gradle.kts`.
