@@ -31,7 +31,9 @@ class GalleryUiTest {
 
     @Test
     fun theRegistryHoldsEveryCatalogueModule() {
-        assertEquals(setOf("ui", "auth"), catalogs.map { it.id }.toSet())
+        // One catalogue per discovered module, whatever bricks have demos.
+        assertTrue(catalogs.map { it.id }.toSet().containsAll(setOf("ui", "auth", "profiles")))
+        assertEquals(discoveredCatalogs.size, catalogs.size)
         assertTrue(discoveredCatalogs.any { it.dir == "bricks/auth/demo" && it.module == ":stapel-auth-ui-demo" })
     }
 
