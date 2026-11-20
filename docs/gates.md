@@ -209,11 +209,13 @@ iOS ≤ 12 API; none needs a guard) and executed by the `sample-oldest-ios` job.
 and later. No iOS 15 or 16 simulator runtime can be installed with the
 toolchains in use: Xcode 27.2's `xcodebuild -downloadPlatform iOS -buildVersion`
 offers 26.0 and later only (15.x–18.x: "not available for download"), and the
-GitHub-hosted images ship 26.2–26.5 (`macos-26`), 18.5–26.2 (`macos-15`) and
-17.0–18.2 (`macos-14`). So: `checkIosFloor` + `checkIosBinaries` prove the
-build targets 15.0, and `sample-oldest-ios` (macos-14, Xcode 16.2) runs the
-sample's launch smoke, deep link, the sign-in walk and the XCUITest suite on
-the oldest hosted runtime, iOS 17.0. Execution on iOS 15/16 is not proven by
+GitHub-hosted images ship 26.2–26.5 (`macos-26`) and 18.5–26.2 (`macos-15`);
+`macos-14` (iOS 17.0–18.2) is listed but refused by GitHub ("the configuration
+'macos-14-arm64-us-default' is not supported", measured 2026-11-20). So:
+`checkIosFloor` + `checkIosBinaries` prove the build targets 15.0, and
+`sample-oldest-ios` (macos-15, Xcode 26.3) runs the sample's launch smoke, deep
+link, the sign-in walk and the XCUITest suite on the oldest hosted runtime,
+iOS 18.5. Execution on iOS 15/16 is not proven by
 CI; it needs a device (or an iOS 15 runtime image) on that version.
 
 Known note: Skiko's ICU data object (`libicu.icudtl_dat.o`, a 6 MB table, no

@@ -207,13 +207,14 @@ jobs:
           retention-days: 14
 
   # The iOS floor (15.0) executed: the same app, walk and XCUITest suite on the OLDEST iOS simulator
-  # runtime a GitHub-hosted runner has (macos-14: iOS 17.0, with Xcode 16.2). No hosted image and no
-  # current Xcode can install an iOS 15 or 16 simulator runtime; what this job proves is "built for 15.0,
-  # runs on the oldest runtime available", see docs/gates.md.
+  # runtime a supported GitHub-hosted runner has (macos-15: iOS 18.5, with Xcode 26.3; the macos-14 image
+  # with iOS 17 is refused as "not supported"). No hosted image and no current Xcode can install an iOS 15
+  # or 16 simulator runtime; what this job proves is "built for 15.0, runs on the oldest runtime
+  # available", see docs/gates.md.
   sample-oldest-ios:
     name: sample-oldest-ios (shop-mobile on the oldest hosted iOS runtime)
     needs: [publish-smoke]
-    runs-on: macos-14
+    runs-on: macos-15
     # macOS runners are the bottleneck: a newer commit's job supersedes this job while it is still
     # QUEUED (GitHub keeps one pending job per group); a running job is never cancelled. ci-ok reports
     # a superseded commit as superseded, never as green. Rule tested by build-logic CiWorkflowTest.
@@ -222,7 +223,7 @@ jobs:
       cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     timeout-minutes: 60
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
       IOS_SMOKE_RUNTIME: oldest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

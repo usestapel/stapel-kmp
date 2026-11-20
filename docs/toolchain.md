@@ -33,8 +33,9 @@ CI uses `macos-26` with `DEVELOPER_DIR=/Applications/Xcode_26.4.app/Contents/Dev
 
 The minimum iOS is 15.0 (`IOS_FLOOR`, see [gates.md](gates.md#the-ios-floor)).
 Compose Multiplatform 1.12.2 supports iOS 14+. Simulator runtimes: Xcode 27.2
-downloads iOS 26.0 and later only; `macos-14` runners carry iOS 17.0–18.2 with
-Xcode 15.0.1–16.2, which is the oldest runtime CI executes (`sample-oldest-ios`).
+downloads iOS 26.0 and later only; `macos-15` runners carry iOS 18.5 (with
+Xcode 26.3), the oldest runtime CI executes (`sample-oldest-ios`); `macos-14`
+(iOS 17) is refused by GitHub as unsupported.
 
 ## Environment
 
