@@ -1,0 +1,29 @@
+{
+    "files": {
+        "capabilities.json": {
+            "sha256": "42c9352bd209842026936ecccf2308bc552f5bd95bb5b1fa94f63bb6a40a0079",
+            "source": "docs/capabilities.json"
+        },
+        "errors.json": {
+            "sha256": "2e0bfd1321532b9ab087b88b4ab392ce52c8c4025f4ce10097d085911787cc0b",
+            "source": "docs/errors.json"
+        },
+        "flows.json": {
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "source": "docs/flows.json"
+        },
+        "push.json": {
+            "sha256": "7577b8716fdbe815f54d9ed0c92747cd2ca968851bb9cd18289dc315427ddbfe",
+            "source": "docs/push.json"
+        },
+        "schema.json": {
+            "sha256": "a90f1a58a30e9300f764cd0e6df2787d00043ca66d5888d59123877977cc3ec3",
+            "source": "docs/schema.v2.json"
+        }
+    },
+    "module": "stapel-notifications",
+    "ref": "c7f60bd9831ee1b27b39140694867744815dd105",
+    "repo": "https://github.com/usestapel/stapel-notifications",
+    "tag": "v0.31.1",
+    "version": "0.31.1"
+}

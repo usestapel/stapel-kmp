@@ -19,6 +19,7 @@ import stapel.auth.presentation.OtpSignInPresenter
 import stapel.auth.presentation.OtpSignInState
 import stapel.auth.session.AuthState
 import stapel.auth.ui.di.AuthBrick
+import stapel.cdn.di.cdnModule
 import stapel.config.ClientInfo
 import stapel.config.ClientPlatform
 import stapel.config.Posture
@@ -65,11 +66,10 @@ object Stand {
 }
 
 /**
- * One app installation wired the way a generated app is: `stapelApp { bricks(AuthBrick(), ProfilesBrick()) }`
+ * One app installation wired the way a generated app is: `stapelApp { bricks(AuthBrick(), ProfilesBrick()); modules(cdnModule()) }`
  * against the stand, with an in-memory vault the test can read.
  */
-class Device(val name: String) : AutoCloseable {
-    private val vault = InMemoryTokenVault()
+class Device(val name: String, val vault: InMemoryTokenVault = InMemoryTokenVault()) : AutoCloseable {
     val app: StapelApp = stapelApp(PlatformContext()) {
         environment(
             StapelEnvironment.single(
@@ -78,6 +78,7 @@ class Device(val name: String) : AutoCloseable {
             ),
         )
         bricks(AuthBrick(), ProfilesBrick())
+        modules(cdnModule())
         overrides(
             module {
                 single<TokenVault> { vault }

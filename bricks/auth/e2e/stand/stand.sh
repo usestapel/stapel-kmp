@@ -15,10 +15,10 @@
 #                                       -Pstapel.e2e.captchaBaseUrl=http://127.0.0.1:18732/
 set -euo pipefail
 
-TOOLS_VERSION="0.84.0"
+TOOLS_VERSION="0.86.0"
 # The backend the suite proves: the pinned contract's version (contracts/auth/pin.json) and its core.
-AUTH_VERSION="0.53.1"
-CORE_VERSION="0.99.0"
+AUTH_VERSION="0.54.0"
+CORE_VERSION="0.99.4"
 PYTHON="${K7_PYTHON:-python3.12}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 STAND="$(cd "$HERE/.." && pwd)/build/stand"

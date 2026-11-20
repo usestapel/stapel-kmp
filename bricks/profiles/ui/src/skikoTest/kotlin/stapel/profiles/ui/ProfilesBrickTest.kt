@@ -3,6 +3,7 @@ package stapel.profiles.ui
 import org.koin.dsl.module
 import stapel.app.di.stapelApp
 import stapel.cache.session.CacheSessionBinding
+import stapel.cdn.di.cdnModule
 import stapel.navigation.DestinationId
 import stapel.navigation.NavIcons
 import stapel.navigation.PathCodec
@@ -12,7 +13,7 @@ import stapel.navigation.compose.navContribution
 import stapel.navigation.resolveNav
 import stapel.profiles.StapelProfiles
 import stapel.profiles.avatar.AvatarUploader
-import stapel.profiles.avatar.CdnAvatarUploader
+import stapel.profiles.avatar.MediaAvatarUploader
 import stapel.profiles.di.AvatarUpload
 import stapel.profiles.ui.di.ProfilesBrick
 import stapel.runtime.PlatformContext
@@ -33,9 +34,10 @@ private data object Security : Route
 
 /** `ProfilesBrick()` is the whole profiles wiring of an app. */
 class ProfilesBrickTest {
-    private fun app(brick: ProfilesBrick = ProfilesBrick()) = stapelApp(PlatformContext()) {
+    private fun app(brick: ProfilesBrick = ProfilesBrick(), media: Boolean = true) = stapelApp(PlatformContext()) {
         environment(testEnvironment())
         bricks(brick)
+        if (media) modules(cdnModule())
         overrides(module {
             single<TokenVault> { InMemoryTokenVault() }
             single<ApiTransport> { FakeApiTransport() }
@@ -49,7 +51,7 @@ class ProfilesBrickTest {
     fun theDescriptorAloneWiresTheDomainNavigationStringsAndErrorTexts() {
         app().use { app ->
             assertNotNull(app.koin.getOrNull<StapelProfiles>())
-            assertIs<CdnAvatarUploader>(app.koin.get<AvatarUploader>())
+            assertIs<MediaAvatarUploader>(app.koin.get<AvatarUploader>())
             assertNotNull(app.koin.getOrNull<CacheSessionBinding>(), "exactly one cache-session binding (the builder's)")
             assertEquals(listOf(PROFILES_UI_ARTIFACT), app.contributions.map { it.manifest.artifact })
             assertEquals(
@@ -62,6 +64,9 @@ class ProfilesBrickTest {
         app(ProfilesBrick(avatarUpload = AvatarUpload.Off)).use { app ->
             assertSame(AvatarUploader.None, app.koin.get<AvatarUploader>())
             assertTrue(!app.koin.get<StapelProfiles>().canUploadAvatar)
+        }
+        app(media = false).use { app ->
+            assertSame(AvatarUploader.None, app.koin.get<AvatarUploader>(), "no media library installed: no upload offered")
         }
     }
 

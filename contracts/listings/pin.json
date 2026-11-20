@@ -1,11 +1,11 @@
 {
     "files": {
         "capabilities.json": {
-            "sha256": "34addafc820c788799380c2b9245f5ce8b4073e1ba35554498e2baff727c5320",
+            "sha256": "7ea03616e08ed6c0764b8762d26ec5c392fc26cb0d214e70227c00deb51507c6",
             "source": "docs/capabilities.json"
         },
         "errors.json": {
-            "sha256": "04ac7b5389d61566a7e8ff44a8a7418a81c287bb43ef8871f7453fe2e634c134",
+            "sha256": "b74ee2668b239707cffb8b7e057336a3e333441b2241cf73fc71eb729cd9eb22",
             "source": "docs/errors.json"
         },
         "flows.json": {
@@ -13,13 +13,13 @@
             "source": "docs/flows.json"
         },
         "schema.json": {
-            "sha256": "a39904738be670214cc73995cf88dd0f2378423ba68fdab8f0d4500e4658fcb2",
+            "sha256": "8baf5b76cfcfa6fc8185fb73f7edf0883f11ae8d1fa1111c26e1d772372c67bc",
             "source": "docs/schema.v2.json"
         }
     },
     "module": "stapel-listings",
-    "ref": "2173a65e546060732b30dadfac9c8de092851588",
+    "ref": "82fae21b788e236a5379b9839bbe8b55fddbd96f",
     "repo": "https://github.com/usestapel/stapel-listings",
-    "tag": "v0.30.1",
-    "version": "0.30.1"
+    "tag": "v0.30.3",
+    "version": "0.30.3"
 }

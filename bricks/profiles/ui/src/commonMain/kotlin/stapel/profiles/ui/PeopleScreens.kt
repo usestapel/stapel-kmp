@@ -69,7 +69,7 @@ public fun PublicProfileScreen(
                         StapelAvatar(contentDescription = name, image = profile.avatar, size = AvatarSize.XLarge)
                         Column(verticalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s1)) {
                             StapelScreenTitle(name)
-                            if (profile.location.isNotBlank()) StapelText(profile.location, color = StapelTheme.colors.textMuted)
+                            profile.location.valueOrNull()?.let { StapelText(it, color = StapelTheme.colors.textMuted) }
                         }
                     }
                     StapelText(
@@ -172,7 +172,7 @@ private fun PersonRow(person: Person, state: ConnectionsState, onIntent: (Connec
     }
     StapelListItem(
         headline = name,
-        supporting = profile?.location?.ifBlank { null },
+        supporting = profile?.location?.valueOrNull(),
         leading = { StapelAvatar(contentDescription = name, image = profile?.avatar, size = AvatarSize.Medium) },
         trailing = action?.let { a ->
             {

@@ -126,6 +126,9 @@ public abstract interface class stapel/profiles/api/error/FollowUserError : stap
 public abstract interface class stapel/profiles/api/error/GetContactRevealSummaryError : stapel/profiles/api/error/ProfilesApiError {
 }
 
+public abstract interface class stapel/profiles/api/error/GetLanguageError : stapel/profiles/api/error/ProfilesApiError {
+}
+
 public abstract interface class stapel/profiles/api/error/GetProfileError : stapel/profiles/api/error/ProfilesApiError {
 }
 
@@ -892,7 +895,7 @@ public final class stapel/profiles/api/error/ProfilesApiError$NotAcceptable : st
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class stapel/profiles/api/error/ProfilesApiError$NotFound : stapel/profiles/api/error/ProfilesApiError, stapel/result/DomainError {
+public final class stapel/profiles/api/error/ProfilesApiError$NotFound : stapel/profiles/api/error/GetLanguageError, stapel/profiles/api/error/ProfilesApiError, stapel/result/DomainError {
 	public fun <init> (Lstapel/result/ErrorEnvelope;)V
 	public final fun component1 ()Lstapel/result/ErrorEnvelope;
 	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/profiles/api/error/ProfilesApiError$NotFound;
@@ -993,10 +996,10 @@ public final class stapel/profiles/api/error/ProfilesApiError$TooManyIds : stape
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getCode-KSB7eyA ()Ljava/lang/String;
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
-	public final fun getLimit ()Ljava/lang/String;
+	public final fun getLimit ()Ljava/lang/Integer;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
-	public final fun getRequested ()Ljava/lang/String;
+	public final fun getRequested ()Ljava/lang/Integer;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -1017,7 +1020,7 @@ public final class stapel/profiles/api/error/ProfilesApiError$TooManyRequests : 
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class stapel/profiles/api/error/ProfilesApiError$Transport : stapel/profiles/api/error/AddMyContactError, stapel/profiles/api/error/BatchProfilesError, stapel/profiles/api/error/BlockUserError, stapel/profiles/api/error/ConfirmContactVerificationError, stapel/profiles/api/error/DeleteMyContactError, stapel/profiles/api/error/FollowUserError, stapel/profiles/api/error/GetContactRevealSummaryError, stapel/profiles/api/error/GetProfileError, stapel/profiles/api/error/ProfilesApiError, stapel/profiles/api/error/RequestContactVerificationError, stapel/profiles/api/error/RevealContactsError, stapel/profiles/api/error/UpdateMyContactError, stapel/profiles/api/error/UpdateMyProfileError, stapel/result/TransportCarrier {
+public final class stapel/profiles/api/error/ProfilesApiError$Transport : stapel/profiles/api/error/AddMyContactError, stapel/profiles/api/error/BatchProfilesError, stapel/profiles/api/error/BlockUserError, stapel/profiles/api/error/ConfirmContactVerificationError, stapel/profiles/api/error/DeleteMyContactError, stapel/profiles/api/error/FollowUserError, stapel/profiles/api/error/GetContactRevealSummaryError, stapel/profiles/api/error/GetLanguageError, stapel/profiles/api/error/GetProfileError, stapel/profiles/api/error/ProfilesApiError, stapel/profiles/api/error/RequestContactVerificationError, stapel/profiles/api/error/RevealContactsError, stapel/profiles/api/error/UpdateMyContactError, stapel/profiles/api/error/UpdateMyProfileError, stapel/result/TransportCarrier {
 	public fun <init> (Lstapel/result/TransportFailure;)V
 	public final fun component1 ()Lstapel/result/TransportFailure;
 	public final fun copy (Lstapel/result/TransportFailure;)Lstapel/profiles/api/error/ProfilesApiError$Transport;
@@ -1048,7 +1051,7 @@ public final class stapel/profiles/api/error/ProfilesApiError$Unauthorized : sta
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class stapel/profiles/api/error/ProfilesApiError$Unknown : stapel/profiles/api/error/AddMyContactError, stapel/profiles/api/error/BatchProfilesError, stapel/profiles/api/error/BlockUserError, stapel/profiles/api/error/ConfirmContactVerificationError, stapel/profiles/api/error/DeleteMyContactError, stapel/profiles/api/error/FollowUserError, stapel/profiles/api/error/GetContactRevealSummaryError, stapel/profiles/api/error/GetProfileError, stapel/profiles/api/error/ProfilesApiError, stapel/profiles/api/error/RequestContactVerificationError, stapel/profiles/api/error/RevealContactsError, stapel/profiles/api/error/UpdateMyContactError, stapel/profiles/api/error/UpdateMyProfileError, stapel/result/DomainError {
+public final class stapel/profiles/api/error/ProfilesApiError$Unknown : stapel/profiles/api/error/AddMyContactError, stapel/profiles/api/error/BatchProfilesError, stapel/profiles/api/error/BlockUserError, stapel/profiles/api/error/ConfirmContactVerificationError, stapel/profiles/api/error/DeleteMyContactError, stapel/profiles/api/error/FollowUserError, stapel/profiles/api/error/GetContactRevealSummaryError, stapel/profiles/api/error/GetLanguageError, stapel/profiles/api/error/GetProfileError, stapel/profiles/api/error/ProfilesApiError, stapel/profiles/api/error/RequestContactVerificationError, stapel/profiles/api/error/RevealContactsError, stapel/profiles/api/error/UpdateMyContactError, stapel/profiles/api/error/UpdateMyProfileError, stapel/result/DomainError {
 	public fun <init> (Lstapel/result/ErrorEnvelope;)V
 	public final fun component1 ()Lstapel/result/ErrorEnvelope;
 	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/profiles/api/error/ProfilesApiError$Unknown;
@@ -2286,21 +2289,13 @@ public final class stapel/profiles/avatar/AvatarUploader$None : stapel/profiles/
 	public fun upload (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public final class stapel/profiles/avatar/CdnAvatarUploader : stapel/profiles/avatar/AvatarUploader {
-	public static final field Companion Lstapel/profiles/avatar/CdnAvatarUploader$Companion;
-	public static final field DEFAULT_PATH Ljava/lang/String;
-	public static final field FIELD Ljava/lang/String;
-	public static final field OPERATION_ID Ljava/lang/String;
-	public fun <init> (Lstapel/wire/ApiTransport;Ljava/lang/String;)V
-	public synthetic fun <init> (Lstapel/wire/ApiTransport;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+public final class stapel/profiles/avatar/MediaAvatarUploader : stapel/profiles/avatar/AvatarUploader {
+	public fun <init> (Lstapel/wire/MediaUploader;)V
 	public fun upload (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public final class stapel/profiles/avatar/CdnAvatarUploader$Companion {
-}
-
 public final class stapel/profiles/di/AvatarUpload : java/lang/Enum {
-	public static final field Cdn Lstapel/profiles/di/AvatarUpload;
+	public static final field Media Lstapel/profiles/di/AvatarUpload;
 	public static final field Off Lstapel/profiles/di/AvatarUpload;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lstapel/profiles/di/AvatarUpload;
@@ -2438,6 +2433,49 @@ public final class stapel/profiles/model/Contacts {
 	public fun toString ()Ljava/lang/String;
 }
 
+public abstract interface class stapel/profiles/model/Disclosed {
+	public static final field Companion Lstapel/profiles/model/Disclosed$Companion;
+	public fun valueOrNull ()Ljava/lang/Object;
+}
+
+public final class stapel/profiles/model/Disclosed$Companion {
+	public final fun text (Ljava/lang/String;)Lstapel/profiles/model/Disclosed;
+}
+
+public final class stapel/profiles/model/Disclosed$DefaultImpls {
+	public static fun valueOrNull (Lstapel/profiles/model/Disclosed;)Ljava/lang/Object;
+}
+
+public final class stapel/profiles/model/Disclosed$NotSet : stapel/profiles/model/Disclosed {
+	public static final field INSTANCE Lstapel/profiles/model/Disclosed$NotSet;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public synthetic fun valueOrNull ()Ljava/lang/Object;
+	public fun valueOrNull ()Ljava/lang/Void;
+}
+
+public final class stapel/profiles/model/Disclosed$Shown : stapel/profiles/model/Disclosed {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lstapel/profiles/model/Disclosed$Shown;
+	public static synthetic fun copy$default (Lstapel/profiles/model/Disclosed$Shown;Ljava/lang/Object;ILjava/lang/Object;)Lstapel/profiles/model/Disclosed$Shown;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun valueOrNull ()Ljava/lang/Object;
+}
+
+public final class stapel/profiles/model/Disclosed$Withheld : stapel/profiles/model/Disclosed {
+	public static final field INSTANCE Lstapel/profiles/model/Disclosed$Withheld;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public synthetic fun valueOrNull ()Ljava/lang/Object;
+	public fun valueOrNull ()Ljava/lang/Void;
+}
+
 public final class stapel/profiles/model/Language {
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -2573,19 +2611,19 @@ public final class stapel/profiles/model/ProfileUpdate {
 }
 
 public final class stapel/profiles/model/PublicProfile {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lstapel/image/StapelImage;Ljava/lang/String;IILstapel/profiles/model/RelationshipStatus;Ljava/lang/String;Ljava/lang/String;Z)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lstapel/image/StapelImage;Lstapel/profiles/model/Disclosed;IILstapel/profiles/model/RelationshipStatus;Ljava/lang/String;Ljava/lang/String;Z)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component10 ()Z
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Lstapel/image/StapelImage;
-	public final fun component4 ()Ljava/lang/String;
+	public final fun component4 ()Lstapel/profiles/model/Disclosed;
 	public final fun component5 ()I
 	public final fun component6 ()I
 	public final fun component7 ()Lstapel/profiles/model/RelationshipStatus;
 	public final fun component8 ()Ljava/lang/String;
 	public final fun component9 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lstapel/image/StapelImage;Ljava/lang/String;IILstapel/profiles/model/RelationshipStatus;Ljava/lang/String;Ljava/lang/String;Z)Lstapel/profiles/model/PublicProfile;
-	public static synthetic fun copy$default (Lstapel/profiles/model/PublicProfile;Ljava/lang/String;Ljava/lang/String;Lstapel/image/StapelImage;Ljava/lang/String;IILstapel/profiles/model/RelationshipStatus;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lstapel/profiles/model/PublicProfile;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lstapel/image/StapelImage;Lstapel/profiles/model/Disclosed;IILstapel/profiles/model/RelationshipStatus;Ljava/lang/String;Ljava/lang/String;Z)Lstapel/profiles/model/PublicProfile;
+	public static synthetic fun copy$default (Lstapel/profiles/model/PublicProfile;Ljava/lang/String;Ljava/lang/String;Lstapel/image/StapelImage;Lstapel/profiles/model/Disclosed;IILstapel/profiles/model/RelationshipStatus;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lstapel/profiles/model/PublicProfile;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAvatar ()Lstapel/image/StapelImage;
 	public final fun getCreatedAt ()Ljava/lang/String;
@@ -2593,7 +2631,7 @@ public final class stapel/profiles/model/PublicProfile {
 	public final fun getFollowersCount ()I
 	public final fun getFollowingCount ()I
 	public final fun getHasPhone ()Z
-	public final fun getLocation ()Ljava/lang/String;
+	public final fun getLocation ()Lstapel/profiles/model/Disclosed;
 	public final fun getRelationship ()Lstapel/profiles/model/RelationshipStatus;
 	public final fun getSellerType ()Ljava/lang/String;
 	public final fun getUserId ()Ljava/lang/String;
@@ -2647,6 +2685,14 @@ public final class stapel/profiles/model/RelationshipStatus$Unknown : stapel/pro
 	public final fun component1 ()Ljava/lang/String;
 	public final fun copy (Ljava/lang/String;)Lstapel/profiles/model/RelationshipStatus$Unknown;
 	public static synthetic fun copy$default (Lstapel/profiles/model/RelationshipStatus$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/profiles/model/RelationshipStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/profiles/model/RelationshipStatus$Withheld : stapel/profiles/model/RelationshipStatus {
+	public static final field INSTANCE Lstapel/profiles/model/RelationshipStatus$Withheld;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getWire ()Ljava/lang/String;
 	public fun hashCode ()I

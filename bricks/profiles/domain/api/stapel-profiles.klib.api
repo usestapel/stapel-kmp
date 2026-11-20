@@ -7,7 +7,7 @@
 
 // Library unique name: <io.github.usestapel:stapel-profiles>
 final enum class stapel.profiles.di/AvatarUpload : kotlin/Enum<stapel.profiles.di/AvatarUpload> { // stapel.profiles.di/AvatarUpload|null[0]
-    enum entry Cdn // stapel.profiles.di/AvatarUpload.Cdn|null[0]
+    enum entry Media // stapel.profiles.di/AvatarUpload.Media|null[0]
     enum entry Off // stapel.profiles.di/AvatarUpload.Off|null[0]
 
     final val entries // stapel.profiles.di/AvatarUpload.entries|#static{}entries[0]
@@ -122,7 +122,7 @@ abstract interface stapel.profiles.api/ProfilesApi { // stapel.profiles.api/Prof
     abstract suspend fun followUser(kotlin/String): stapel.result/StapelResult<stapel.profiles.api.model/RelationshipActionResponse, stapel.profiles.api.error/FollowUserError> // stapel.profiles.api/ProfilesApi.followUser|followUser(kotlin.String){}[0]
     abstract suspend fun getContactRevealSummary(kotlin/Int): stapel.result/StapelResult<stapel.profiles.api.model/ContactRevealSummaryResponse, stapel.profiles.api.error/GetContactRevealSummaryError> // stapel.profiles.api/ProfilesApi.getContactRevealSummary|getContactRevealSummary(kotlin.Int){}[0]
     abstract suspend fun getFieldManifest(): stapel.result/StapelResult<kotlin.collections/List<stapel.profiles.api.model/ProfileFieldManifestEntry>, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApi.getFieldManifest|getFieldManifest(){}[0]
-    abstract suspend fun getLanguage(kotlin/String): stapel.result/StapelResult<stapel.profiles.api.model/LanguageResponse, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApi.getLanguage|getLanguage(kotlin.String){}[0]
+    abstract suspend fun getLanguage(kotlin/String): stapel.result/StapelResult<stapel.profiles.api.model/LanguageResponse, stapel.profiles.api.error/GetLanguageError> // stapel.profiles.api/ProfilesApi.getLanguage|getLanguage(kotlin.String){}[0]
     abstract suspend fun getMyBlocked(): stapel.result/StapelResult<kotlin.collections/List<stapel.profiles.api.model/ProfilePublic>, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApi.getMyBlocked|getMyBlocked(){}[0]
     abstract suspend fun getMyFollowers(): stapel.result/StapelResult<stapel.profiles.api.model/FollowersResponse, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApi.getMyFollowers|getMyFollowers(){}[0]
     abstract suspend fun getMyFollowing(): stapel.result/StapelResult<stapel.profiles.api.model/FollowingResponse, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApi.getMyFollowing|getMyFollowing(){}[0]
@@ -140,6 +140,39 @@ abstract interface stapel.profiles.api/ProfilesApi { // stapel.profiles.api/Prof
     abstract suspend fun updateMyProfile(stapel.profiles.api.model/PatchedProfileUpdateRequest? = ...): stapel.result/StapelResult<stapel.profiles.api.model/ProfileResponse, stapel.profiles.api.error/UpdateMyProfileError> // stapel.profiles.api/ProfilesApi.updateMyProfile|updateMyProfile(stapel.profiles.api.model.PatchedProfileUpdateRequest?){}[0]
 }
 
+sealed interface <#A: out kotlin/Any> stapel.profiles.model/Disclosed { // stapel.profiles.model/Disclosed|null[0]
+    open fun valueOrNull(): #A? // stapel.profiles.model/Disclosed.valueOrNull|valueOrNull(){}[0]
+
+    final class <#A1: out kotlin/Any> Shown : stapel.profiles.model/Disclosed<#A1> { // stapel.profiles.model/Disclosed.Shown|null[0]
+        constructor <init>(#A1) // stapel.profiles.model/Disclosed.Shown.<init>|<init>(1:0){}[0]
+
+        final val value // stapel.profiles.model/Disclosed.Shown.value|{}value[0]
+            final fun <get-value>(): #A1 // stapel.profiles.model/Disclosed.Shown.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): #A1 // stapel.profiles.model/Disclosed.Shown.component1|component1(){}[0]
+        final fun copy(#A1 = ...): stapel.profiles.model/Disclosed.Shown<#A1> // stapel.profiles.model/Disclosed.Shown.copy|copy(1:0){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.profiles.model/Disclosed.Shown.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.profiles.model/Disclosed.Shown.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.profiles.model/Disclosed.Shown.toString|toString(){}[0]
+    }
+
+    final object Companion { // stapel.profiles.model/Disclosed.Companion|null[0]
+        final fun text(kotlin/String?): stapel.profiles.model/Disclosed<kotlin/String> // stapel.profiles.model/Disclosed.Companion.text|text(kotlin.String?){}[0]
+    }
+
+    final object NotSet : stapel.profiles.model/Disclosed<kotlin/Nothing> { // stapel.profiles.model/Disclosed.NotSet|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.profiles.model/Disclosed.NotSet.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.profiles.model/Disclosed.NotSet.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.profiles.model/Disclosed.NotSet.toString|toString(){}[0]
+    }
+
+    final object Withheld : stapel.profiles.model/Disclosed<kotlin/Nothing> { // stapel.profiles.model/Disclosed.Withheld|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.profiles.model/Disclosed.Withheld.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.profiles.model/Disclosed.Withheld.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.profiles.model/Disclosed.Withheld.toString|toString(){}[0]
+    }
+}
+
 sealed interface stapel.profiles.api.error/AddMyContactError : stapel.profiles.api.error/ProfilesApiError // stapel.profiles.api.error/AddMyContactError|null[0]
 
 sealed interface stapel.profiles.api.error/BatchProfilesError : stapel.profiles.api.error/ProfilesApiError // stapel.profiles.api.error/BatchProfilesError|null[0]
@@ -153,6 +186,8 @@ sealed interface stapel.profiles.api.error/DeleteMyContactError : stapel.profile
 sealed interface stapel.profiles.api.error/FollowUserError : stapel.profiles.api.error/ProfilesApiError // stapel.profiles.api.error/FollowUserError|null[0]
 
 sealed interface stapel.profiles.api.error/GetContactRevealSummaryError : stapel.profiles.api.error/ProfilesApiError // stapel.profiles.api.error/GetContactRevealSummaryError|null[0]
+
+sealed interface stapel.profiles.api.error/GetLanguageError : stapel.profiles.api.error/ProfilesApiError // stapel.profiles.api.error/GetLanguageError|null[0]
 
 sealed interface stapel.profiles.api.error/GetProfileError : stapel.profiles.api.error/ProfilesApiError // stapel.profiles.api.error/GetProfileError|null[0]
 
@@ -932,7 +967,7 @@ sealed interface stapel.profiles.api.error/ProfilesApiError : stapel.result/Stap
         final fun toString(): kotlin/String // stapel.profiles.api.error/ProfilesApiError.NotAcceptable.toString|toString(){}[0]
     }
 
-    final class NotFound : stapel.profiles.api.error/ProfilesApiError, stapel.result/DomainError { // stapel.profiles.api.error/ProfilesApiError.NotFound|null[0]
+    final class NotFound : stapel.profiles.api.error/GetLanguageError, stapel.profiles.api.error/ProfilesApiError, stapel.result/DomainError { // stapel.profiles.api.error/ProfilesApiError.NotFound|null[0]
         constructor <init>(stapel.result/ErrorEnvelope) // stapel.profiles.api.error/ProfilesApiError.NotFound.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
 
         final val envelope // stapel.profiles.api.error/ProfilesApiError.NotFound.envelope|{}envelope[0]
@@ -1034,11 +1069,11 @@ sealed interface stapel.profiles.api.error/ProfilesApiError : stapel.result/Stap
         final val envelope // stapel.profiles.api.error/ProfilesApiError.TooManyIds.envelope|{}envelope[0]
             final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.profiles.api.error/ProfilesApiError.TooManyIds.envelope.<get-envelope>|<get-envelope>(){}[0]
         final val limit // stapel.profiles.api.error/ProfilesApiError.TooManyIds.limit|{}limit[0]
-            final fun <get-limit>(): kotlin/String? // stapel.profiles.api.error/ProfilesApiError.TooManyIds.limit.<get-limit>|<get-limit>(){}[0]
+            final fun <get-limit>(): kotlin/Int? // stapel.profiles.api.error/ProfilesApiError.TooManyIds.limit.<get-limit>|<get-limit>(){}[0]
         final val remediation // stapel.profiles.api.error/ProfilesApiError.TooManyIds.remediation|{}remediation[0]
             final fun <get-remediation>(): stapel.result/Remediation // stapel.profiles.api.error/ProfilesApiError.TooManyIds.remediation.<get-remediation>|<get-remediation>(){}[0]
         final val requested // stapel.profiles.api.error/ProfilesApiError.TooManyIds.requested|{}requested[0]
-            final fun <get-requested>(): kotlin/String? // stapel.profiles.api.error/ProfilesApiError.TooManyIds.requested.<get-requested>|<get-requested>(){}[0]
+            final fun <get-requested>(): kotlin/Int? // stapel.profiles.api.error/ProfilesApiError.TooManyIds.requested.<get-requested>|<get-requested>(){}[0]
 
         final fun component1(): stapel.result/ErrorEnvelope // stapel.profiles.api.error/ProfilesApiError.TooManyIds.component1|component1(){}[0]
         final fun copy(stapel.result/ErrorEnvelope = ...): stapel.profiles.api.error/ProfilesApiError.TooManyIds // stapel.profiles.api.error/ProfilesApiError.TooManyIds.copy|copy(stapel.result.ErrorEnvelope){}[0]
@@ -1062,7 +1097,7 @@ sealed interface stapel.profiles.api.error/ProfilesApiError : stapel.result/Stap
         final fun toString(): kotlin/String // stapel.profiles.api.error/ProfilesApiError.TooManyRequests.toString|toString(){}[0]
     }
 
-    final class Transport : stapel.profiles.api.error/AddMyContactError, stapel.profiles.api.error/BatchProfilesError, stapel.profiles.api.error/BlockUserError, stapel.profiles.api.error/ConfirmContactVerificationError, stapel.profiles.api.error/DeleteMyContactError, stapel.profiles.api.error/FollowUserError, stapel.profiles.api.error/GetContactRevealSummaryError, stapel.profiles.api.error/GetProfileError, stapel.profiles.api.error/ProfilesApiError, stapel.profiles.api.error/RequestContactVerificationError, stapel.profiles.api.error/RevealContactsError, stapel.profiles.api.error/UpdateMyContactError, stapel.profiles.api.error/UpdateMyProfileError, stapel.result/TransportCarrier { // stapel.profiles.api.error/ProfilesApiError.Transport|null[0]
+    final class Transport : stapel.profiles.api.error/AddMyContactError, stapel.profiles.api.error/BatchProfilesError, stapel.profiles.api.error/BlockUserError, stapel.profiles.api.error/ConfirmContactVerificationError, stapel.profiles.api.error/DeleteMyContactError, stapel.profiles.api.error/FollowUserError, stapel.profiles.api.error/GetContactRevealSummaryError, stapel.profiles.api.error/GetLanguageError, stapel.profiles.api.error/GetProfileError, stapel.profiles.api.error/ProfilesApiError, stapel.profiles.api.error/RequestContactVerificationError, stapel.profiles.api.error/RevealContactsError, stapel.profiles.api.error/UpdateMyContactError, stapel.profiles.api.error/UpdateMyProfileError, stapel.result/TransportCarrier { // stapel.profiles.api.error/ProfilesApiError.Transport|null[0]
         constructor <init>(stapel.result/TransportFailure) // stapel.profiles.api.error/ProfilesApiError.Transport.<init>|<init>(stapel.result.TransportFailure){}[0]
 
         final val failure // stapel.profiles.api.error/ProfilesApiError.Transport.failure|{}failure[0]
@@ -1090,7 +1125,7 @@ sealed interface stapel.profiles.api.error/ProfilesApiError : stapel.result/Stap
         final fun toString(): kotlin/String // stapel.profiles.api.error/ProfilesApiError.Unauthorized.toString|toString(){}[0]
     }
 
-    final class Unknown : stapel.profiles.api.error/AddMyContactError, stapel.profiles.api.error/BatchProfilesError, stapel.profiles.api.error/BlockUserError, stapel.profiles.api.error/ConfirmContactVerificationError, stapel.profiles.api.error/DeleteMyContactError, stapel.profiles.api.error/FollowUserError, stapel.profiles.api.error/GetContactRevealSummaryError, stapel.profiles.api.error/GetProfileError, stapel.profiles.api.error/ProfilesApiError, stapel.profiles.api.error/RequestContactVerificationError, stapel.profiles.api.error/RevealContactsError, stapel.profiles.api.error/UpdateMyContactError, stapel.profiles.api.error/UpdateMyProfileError, stapel.result/DomainError { // stapel.profiles.api.error/ProfilesApiError.Unknown|null[0]
+    final class Unknown : stapel.profiles.api.error/AddMyContactError, stapel.profiles.api.error/BatchProfilesError, stapel.profiles.api.error/BlockUserError, stapel.profiles.api.error/ConfirmContactVerificationError, stapel.profiles.api.error/DeleteMyContactError, stapel.profiles.api.error/FollowUserError, stapel.profiles.api.error/GetContactRevealSummaryError, stapel.profiles.api.error/GetLanguageError, stapel.profiles.api.error/GetProfileError, stapel.profiles.api.error/ProfilesApiError, stapel.profiles.api.error/RequestContactVerificationError, stapel.profiles.api.error/RevealContactsError, stapel.profiles.api.error/UpdateMyContactError, stapel.profiles.api.error/UpdateMyProfileError, stapel.result/DomainError { // stapel.profiles.api.error/ProfilesApiError.Unknown|null[0]
         constructor <init>(stapel.result/ErrorEnvelope) // stapel.profiles.api.error/ProfilesApiError.Unknown.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
 
         final val envelope // stapel.profiles.api.error/ProfilesApiError.Unknown.envelope|{}envelope[0]
@@ -1368,6 +1403,15 @@ sealed interface stapel.profiles.model/RelationshipStatus { // stapel.profiles.m
         final fun equals(kotlin/Any?): kotlin/Boolean // stapel.profiles.model/RelationshipStatus.Self.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // stapel.profiles.model/RelationshipStatus.Self.hashCode|hashCode(){}[0]
         final fun toString(): kotlin/String // stapel.profiles.model/RelationshipStatus.Self.toString|toString(){}[0]
+    }
+
+    final object Withheld : stapel.profiles.model/RelationshipStatus { // stapel.profiles.model/RelationshipStatus.Withheld|null[0]
+        final val wire // stapel.profiles.model/RelationshipStatus.Withheld.wire|{}wire[0]
+            final fun <get-wire>(): kotlin/String? // stapel.profiles.model/RelationshipStatus.Withheld.wire.<get-wire>|<get-wire>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.profiles.model/RelationshipStatus.Withheld.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.profiles.model/RelationshipStatus.Withheld.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.profiles.model/RelationshipStatus.Withheld.toString|toString(){}[0]
     }
 }
 
@@ -2366,7 +2410,7 @@ final class stapel.profiles.api.model/ProfilePublic { // stapel.profiles.api.mod
 }
 
 final class stapel.profiles.api.model/ProfilePublicResponse { // stapel.profiles.api.model/ProfilePublicResponse|null[0]
-    constructor <init>(kotlin/String, kotlin/String, kotlin/String, kotlin/String?, stapel.profiles.api.model/StapelImageDTO?, kotlin/Int?, kotlin/String, kotlin/String, kotlin/Int, kotlin/Int, kotlin/String?, kotlin/String?, kotlin/String?, stapel.profiles.api.model/ProfileContactFlags) // stapel.profiles.api.model/ProfilePublicResponse.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;kotlin.String?;stapel.profiles.api.model.StapelImageDTO?;kotlin.Int?;kotlin.String;kotlin.String;kotlin.Int;kotlin.Int;kotlin.String?;kotlin.String?;kotlin.String?;stapel.profiles.api.model.ProfileContactFlags){}[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String, kotlin/String?, stapel.profiles.api.model/StapelImageDTO?, kotlin/Int?, kotlin/String?, kotlin/String?, kotlin/Int, kotlin/Int, kotlin/String?, kotlin/String?, kotlin/String?, stapel.profiles.api.model/ProfileContactFlags) // stapel.profiles.api.model/ProfilePublicResponse.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;kotlin.String?;stapel.profiles.api.model.StapelImageDTO?;kotlin.Int?;kotlin.String?;kotlin.String?;kotlin.Int;kotlin.Int;kotlin.String?;kotlin.String?;kotlin.String?;stapel.profiles.api.model.ProfileContactFlags){}[0]
 
     final val avatar // stapel.profiles.api.model/ProfilePublicResponse.avatar|{}avatar[0]
         final fun <get-avatar>(): kotlin/String? // stapel.profiles.api.model/ProfilePublicResponse.avatar.<get-avatar>|<get-avatar>(){}[0]
@@ -2385,9 +2429,9 @@ final class stapel.profiles.api.model/ProfilePublicResponse { // stapel.profiles
     final val followingCount // stapel.profiles.api.model/ProfilePublicResponse.followingCount|{}followingCount[0]
         final fun <get-followingCount>(): kotlin/Int // stapel.profiles.api.model/ProfilePublicResponse.followingCount.<get-followingCount>|<get-followingCount>(){}[0]
     final val locationDisplayNameBroad // stapel.profiles.api.model/ProfilePublicResponse.locationDisplayNameBroad|{}locationDisplayNameBroad[0]
-        final fun <get-locationDisplayNameBroad>(): kotlin/String // stapel.profiles.api.model/ProfilePublicResponse.locationDisplayNameBroad.<get-locationDisplayNameBroad>|<get-locationDisplayNameBroad>(){}[0]
+        final fun <get-locationDisplayNameBroad>(): kotlin/String? // stapel.profiles.api.model/ProfilePublicResponse.locationDisplayNameBroad.<get-locationDisplayNameBroad>|<get-locationDisplayNameBroad>(){}[0]
     final val locationDisplayNameNarrow // stapel.profiles.api.model/ProfilePublicResponse.locationDisplayNameNarrow|{}locationDisplayNameNarrow[0]
-        final fun <get-locationDisplayNameNarrow>(): kotlin/String // stapel.profiles.api.model/ProfilePublicResponse.locationDisplayNameNarrow.<get-locationDisplayNameNarrow>|<get-locationDisplayNameNarrow>(){}[0]
+        final fun <get-locationDisplayNameNarrow>(): kotlin/String? // stapel.profiles.api.model/ProfilePublicResponse.locationDisplayNameNarrow.<get-locationDisplayNameNarrow>|<get-locationDisplayNameNarrow>(){}[0]
     final val locationId // stapel.profiles.api.model/ProfilePublicResponse.locationId|{}locationId[0]
         final fun <get-locationId>(): kotlin/Int? // stapel.profiles.api.model/ProfilePublicResponse.locationId.<get-locationId>|<get-locationId>(){}[0]
     final val relationshipStatus // stapel.profiles.api.model/ProfilePublicResponse.relationshipStatus|{}relationshipStatus[0]
@@ -2408,10 +2452,10 @@ final class stapel.profiles.api.model/ProfilePublicResponse { // stapel.profiles
     final fun component4(): kotlin/String? // stapel.profiles.api.model/ProfilePublicResponse.component4|component4(){}[0]
     final fun component5(): stapel.profiles.api.model/StapelImageDTO? // stapel.profiles.api.model/ProfilePublicResponse.component5|component5(){}[0]
     final fun component6(): kotlin/Int? // stapel.profiles.api.model/ProfilePublicResponse.component6|component6(){}[0]
-    final fun component7(): kotlin/String // stapel.profiles.api.model/ProfilePublicResponse.component7|component7(){}[0]
-    final fun component8(): kotlin/String // stapel.profiles.api.model/ProfilePublicResponse.component8|component8(){}[0]
+    final fun component7(): kotlin/String? // stapel.profiles.api.model/ProfilePublicResponse.component7|component7(){}[0]
+    final fun component8(): kotlin/String? // stapel.profiles.api.model/ProfilePublicResponse.component8|component8(){}[0]
     final fun component9(): kotlin/Int // stapel.profiles.api.model/ProfilePublicResponse.component9|component9(){}[0]
-    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., stapel.profiles.api.model/StapelImageDTO? = ..., kotlin/Int? = ..., kotlin/String = ..., kotlin/String = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., stapel.profiles.api.model/ProfileContactFlags = ...): stapel.profiles.api.model/ProfilePublicResponse // stapel.profiles.api.model/ProfilePublicResponse.copy|copy(kotlin.String;kotlin.String;kotlin.String;kotlin.String?;stapel.profiles.api.model.StapelImageDTO?;kotlin.Int?;kotlin.String;kotlin.String;kotlin.Int;kotlin.Int;kotlin.String?;kotlin.String?;kotlin.String?;stapel.profiles.api.model.ProfileContactFlags){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., stapel.profiles.api.model/StapelImageDTO? = ..., kotlin/Int? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., stapel.profiles.api.model/ProfileContactFlags = ...): stapel.profiles.api.model/ProfilePublicResponse // stapel.profiles.api.model/ProfilePublicResponse.copy|copy(kotlin.String;kotlin.String;kotlin.String;kotlin.String?;stapel.profiles.api.model.StapelImageDTO?;kotlin.Int?;kotlin.String?;kotlin.String?;kotlin.Int;kotlin.Int;kotlin.String?;kotlin.String?;kotlin.String?;stapel.profiles.api.model.ProfileContactFlags){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // stapel.profiles.api.model/ProfilePublicResponse.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // stapel.profiles.api.model/ProfilePublicResponse.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // stapel.profiles.api.model/ProfilePublicResponse.toString|toString(){}[0]
@@ -2805,7 +2849,7 @@ final class stapel.profiles.api/ProfilesApiClient : stapel.profiles.api/Profiles
     final suspend fun followUser(kotlin/String): stapel.result/StapelResult<stapel.profiles.api.model/RelationshipActionResponse, stapel.profiles.api.error/FollowUserError> // stapel.profiles.api/ProfilesApiClient.followUser|followUser(kotlin.String){}[0]
     final suspend fun getContactRevealSummary(kotlin/Int): stapel.result/StapelResult<stapel.profiles.api.model/ContactRevealSummaryResponse, stapel.profiles.api.error/GetContactRevealSummaryError> // stapel.profiles.api/ProfilesApiClient.getContactRevealSummary|getContactRevealSummary(kotlin.Int){}[0]
     final suspend fun getFieldManifest(): stapel.result/StapelResult<kotlin.collections/List<stapel.profiles.api.model/ProfileFieldManifestEntry>, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApiClient.getFieldManifest|getFieldManifest(){}[0]
-    final suspend fun getLanguage(kotlin/String): stapel.result/StapelResult<stapel.profiles.api.model/LanguageResponse, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApiClient.getLanguage|getLanguage(kotlin.String){}[0]
+    final suspend fun getLanguage(kotlin/String): stapel.result/StapelResult<stapel.profiles.api.model/LanguageResponse, stapel.profiles.api.error/GetLanguageError> // stapel.profiles.api/ProfilesApiClient.getLanguage|getLanguage(kotlin.String){}[0]
     final suspend fun getMyBlocked(): stapel.result/StapelResult<kotlin.collections/List<stapel.profiles.api.model/ProfilePublic>, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApiClient.getMyBlocked|getMyBlocked(){}[0]
     final suspend fun getMyFollowers(): stapel.result/StapelResult<stapel.profiles.api.model/FollowersResponse, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApiClient.getMyFollowers|getMyFollowers(){}[0]
     final suspend fun getMyFollowing(): stapel.result/StapelResult<stapel.profiles.api.model/FollowingResponse, stapel.profiles.api.error/ProfilesApiError> // stapel.profiles.api/ProfilesApiClient.getMyFollowing|getMyFollowing(){}[0]
@@ -2823,19 +2867,10 @@ final class stapel.profiles.api/ProfilesApiClient : stapel.profiles.api/Profiles
     final suspend fun updateMyProfile(stapel.profiles.api.model/PatchedProfileUpdateRequest?): stapel.result/StapelResult<stapel.profiles.api.model/ProfileResponse, stapel.profiles.api.error/UpdateMyProfileError> // stapel.profiles.api/ProfilesApiClient.updateMyProfile|updateMyProfile(stapel.profiles.api.model.PatchedProfileUpdateRequest?){}[0]
 }
 
-final class stapel.profiles.avatar/CdnAvatarUploader : stapel.profiles.avatar/AvatarUploader { // stapel.profiles.avatar/CdnAvatarUploader|null[0]
-    constructor <init>(stapel.wire/ApiTransport, kotlin/String = ...) // stapel.profiles.avatar/CdnAvatarUploader.<init>|<init>(stapel.wire.ApiTransport;kotlin.String){}[0]
+final class stapel.profiles.avatar/MediaAvatarUploader : stapel.profiles.avatar/AvatarUploader { // stapel.profiles.avatar/MediaAvatarUploader|null[0]
+    constructor <init>(stapel.wire/MediaUploader) // stapel.profiles.avatar/MediaAvatarUploader.<init>|<init>(stapel.wire.MediaUploader){}[0]
 
-    final suspend fun upload(stapel.wire/FilePart, kotlin/Function2<kotlin/Long, kotlin/Long?, kotlin/Unit>?): stapel.result/StapelResult<stapel.profiles.model/AvatarRef, stapel.profiles.error/ProfilesError> // stapel.profiles.avatar/CdnAvatarUploader.upload|upload(stapel.wire.FilePart;kotlin.Function2<kotlin.Long,kotlin.Long?,kotlin.Unit>?){}[0]
-
-    final object Companion { // stapel.profiles.avatar/CdnAvatarUploader.Companion|null[0]
-        final const val DEFAULT_PATH // stapel.profiles.avatar/CdnAvatarUploader.Companion.DEFAULT_PATH|{}DEFAULT_PATH[0]
-            final fun <get-DEFAULT_PATH>(): kotlin/String // stapel.profiles.avatar/CdnAvatarUploader.Companion.DEFAULT_PATH.<get-DEFAULT_PATH>|<get-DEFAULT_PATH>(){}[0]
-        final const val FIELD // stapel.profiles.avatar/CdnAvatarUploader.Companion.FIELD|{}FIELD[0]
-            final fun <get-FIELD>(): kotlin/String // stapel.profiles.avatar/CdnAvatarUploader.Companion.FIELD.<get-FIELD>|<get-FIELD>(){}[0]
-        final const val OPERATION_ID // stapel.profiles.avatar/CdnAvatarUploader.Companion.OPERATION_ID|{}OPERATION_ID[0]
-            final fun <get-OPERATION_ID>(): kotlin/String // stapel.profiles.avatar/CdnAvatarUploader.Companion.OPERATION_ID.<get-OPERATION_ID>|<get-OPERATION_ID>(){}[0]
-    }
+    final suspend fun upload(stapel.wire/FilePart, kotlin/Function2<kotlin/Long, kotlin/Long?, kotlin/Unit>?): stapel.result/StapelResult<stapel.profiles.model/AvatarRef, stapel.profiles.error/ProfilesError> // stapel.profiles.avatar/MediaAvatarUploader.upload|upload(stapel.wire.FilePart;kotlin.Function2<kotlin.Long,kotlin.Long?,kotlin.Unit>?){}[0]
 }
 
 final class stapel.profiles.error/ProfilesError : stapel.result/StapelError { // stapel.profiles.error/ProfilesError|null[0]
@@ -3095,7 +3130,7 @@ final class stapel.profiles.model/ProfileUpdate { // stapel.profiles.model/Profi
 }
 
 final class stapel.profiles.model/PublicProfile { // stapel.profiles.model/PublicProfile|null[0]
-    constructor <init>(kotlin/String, kotlin/String, stapel.image/StapelImage?, kotlin/String, kotlin/Int, kotlin/Int, stapel.profiles.model/RelationshipStatus, kotlin/String?, kotlin/String?, kotlin/Boolean) // stapel.profiles.model/PublicProfile.<init>|<init>(kotlin.String;kotlin.String;stapel.image.StapelImage?;kotlin.String;kotlin.Int;kotlin.Int;stapel.profiles.model.RelationshipStatus;kotlin.String?;kotlin.String?;kotlin.Boolean){}[0]
+    constructor <init>(kotlin/String, kotlin/String, stapel.image/StapelImage?, stapel.profiles.model/Disclosed<kotlin/String>, kotlin/Int, kotlin/Int, stapel.profiles.model/RelationshipStatus, kotlin/String?, kotlin/String?, kotlin/Boolean) // stapel.profiles.model/PublicProfile.<init>|<init>(kotlin.String;kotlin.String;stapel.image.StapelImage?;stapel.profiles.model.Disclosed<kotlin.String>;kotlin.Int;kotlin.Int;stapel.profiles.model.RelationshipStatus;kotlin.String?;kotlin.String?;kotlin.Boolean){}[0]
 
     final val avatar // stapel.profiles.model/PublicProfile.avatar|{}avatar[0]
         final fun <get-avatar>(): stapel.image/StapelImage? // stapel.profiles.model/PublicProfile.avatar.<get-avatar>|<get-avatar>(){}[0]
@@ -3110,7 +3145,7 @@ final class stapel.profiles.model/PublicProfile { // stapel.profiles.model/Publi
     final val hasPhone // stapel.profiles.model/PublicProfile.hasPhone|{}hasPhone[0]
         final fun <get-hasPhone>(): kotlin/Boolean // stapel.profiles.model/PublicProfile.hasPhone.<get-hasPhone>|<get-hasPhone>(){}[0]
     final val location // stapel.profiles.model/PublicProfile.location|{}location[0]
-        final fun <get-location>(): kotlin/String // stapel.profiles.model/PublicProfile.location.<get-location>|<get-location>(){}[0]
+        final fun <get-location>(): stapel.profiles.model/Disclosed<kotlin/String> // stapel.profiles.model/PublicProfile.location.<get-location>|<get-location>(){}[0]
     final val relationship // stapel.profiles.model/PublicProfile.relationship|{}relationship[0]
         final fun <get-relationship>(): stapel.profiles.model/RelationshipStatus // stapel.profiles.model/PublicProfile.relationship.<get-relationship>|<get-relationship>(){}[0]
     final val sellerType // stapel.profiles.model/PublicProfile.sellerType|{}sellerType[0]
@@ -3122,13 +3157,13 @@ final class stapel.profiles.model/PublicProfile { // stapel.profiles.model/Publi
     final fun component10(): kotlin/Boolean // stapel.profiles.model/PublicProfile.component10|component10(){}[0]
     final fun component2(): kotlin/String // stapel.profiles.model/PublicProfile.component2|component2(){}[0]
     final fun component3(): stapel.image/StapelImage? // stapel.profiles.model/PublicProfile.component3|component3(){}[0]
-    final fun component4(): kotlin/String // stapel.profiles.model/PublicProfile.component4|component4(){}[0]
+    final fun component4(): stapel.profiles.model/Disclosed<kotlin/String> // stapel.profiles.model/PublicProfile.component4|component4(){}[0]
     final fun component5(): kotlin/Int // stapel.profiles.model/PublicProfile.component5|component5(){}[0]
     final fun component6(): kotlin/Int // stapel.profiles.model/PublicProfile.component6|component6(){}[0]
     final fun component7(): stapel.profiles.model/RelationshipStatus // stapel.profiles.model/PublicProfile.component7|component7(){}[0]
     final fun component8(): kotlin/String? // stapel.profiles.model/PublicProfile.component8|component8(){}[0]
     final fun component9(): kotlin/String? // stapel.profiles.model/PublicProfile.component9|component9(){}[0]
-    final fun copy(kotlin/String = ..., kotlin/String = ..., stapel.image/StapelImage? = ..., kotlin/String = ..., kotlin/Int = ..., kotlin/Int = ..., stapel.profiles.model/RelationshipStatus = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Boolean = ...): stapel.profiles.model/PublicProfile // stapel.profiles.model/PublicProfile.copy|copy(kotlin.String;kotlin.String;stapel.image.StapelImage?;kotlin.String;kotlin.Int;kotlin.Int;stapel.profiles.model.RelationshipStatus;kotlin.String?;kotlin.String?;kotlin.Boolean){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., stapel.image/StapelImage? = ..., stapel.profiles.model/Disclosed<kotlin/String> = ..., kotlin/Int = ..., kotlin/Int = ..., stapel.profiles.model/RelationshipStatus = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/Boolean = ...): stapel.profiles.model/PublicProfile // stapel.profiles.model/PublicProfile.copy|copy(kotlin.String;kotlin.String;stapel.image.StapelImage?;stapel.profiles.model.Disclosed<kotlin.String>;kotlin.Int;kotlin.Int;stapel.profiles.model.RelationshipStatus;kotlin.String?;kotlin.String?;kotlin.Boolean){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // stapel.profiles.model/PublicProfile.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // stapel.profiles.model/PublicProfile.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // stapel.profiles.model/PublicProfile.toString|toString(){}[0]

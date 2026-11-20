@@ -3,6 +3,7 @@ package stapel.profiles.testing
 import stapel.profiles.model.Contact
 import stapel.profiles.model.ContactPolicy
 import stapel.profiles.model.Contacts
+import stapel.profiles.model.Disclosed
 import stapel.profiles.model.Language
 import stapel.profiles.model.MyProfile
 import stapel.profiles.model.NotificationPreferences
@@ -49,7 +50,7 @@ public object ProfilesSamples {
         userId = userId,
         displayName = name,
         avatar = null,
-        location = "Arlington",
+        location = Disclosed.Shown("Arlington"),
         followersCount = 120,
         followingCount = 30,
         relationship = relationship,

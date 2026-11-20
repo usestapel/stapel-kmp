@@ -2,13 +2,16 @@ package stapel.profiles.e2e
 
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import androidx.compose.ui.unit.LayoutDirection
 import org.junit.jupiter.api.Test
 import stapel.navigation.DestinationId
 import stapel.navigation.resolveNav
 import stapel.profiles.model.ConnectionKind
 import stapel.profiles.model.ContactPolicy
+import stapel.profiles.model.Disclosed
 import stapel.profiles.model.NotificationCategory
 import stapel.profiles.model.NotificationChannel
 import stapel.profiles.model.ProfileUpdate
@@ -17,10 +20,11 @@ import stapel.profiles.model.ThemePreference
 import stapel.profiles.presentation.ProfileSettingsIntent
 import stapel.profiles.presentation.ProfileSettingsPresenter
 import stapel.profiles.ui.ProfilesNavIds
+import stapel.profiles.ui.ProfilesStrings
 import stapel.profiles.ui.settingsSections
 import stapel.result.StapelResult
-import stapel.result.transportFailureOrNull
 import stapel.result.state.Resource
+import stapel.ui.layoutDirectionOf
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
@@ -64,6 +68,36 @@ class ProfileScenariosTest {
     }
 
     @Test
+    fun `P-7 the chosen app language switches the app's strings and direction at once and survives a restart`(): Unit = runBlocking {
+        val vault = stapel.session.vault.InMemoryTokenVault()
+        val device = Device("p7", vault).use { d ->
+            d.signIn()
+            val deviceLocale = d.app.strings.locale.value
+            val presenter = ProfileSettingsPresenter(d.profiles, d.context())
+            presenter.state.await { it.profile != null }
+            presenter.dispatch(ProfileSettingsIntent.SetLanguage("ar"))
+            d.app.strings.locale.await { it == "ar" }
+            assertEquals(LayoutDirection.Rtl, layoutDirectionOf(d.app.strings.locale.value), "Arabic mirrors the app")
+            deviceLocale
+        }
+        // A restart: a new app over the same stored session puts the app back in Arabic, with no choice made.
+        Device("p7-restart", vault).use { d ->
+            d.app.koin.get<stapel.session.SessionManager>().restore()
+            d.app.strings.locale.await { it == "ar" }
+            assertEquals(LayoutDirection.Rtl, layoutDirectionOf(d.app.strings.locale.value))
+            val presenter = ProfileSettingsPresenter(d.profiles, d.context())
+            presenter.state.await { it.profile != null }
+            val english = d.app.strings.t(ProfilesStrings.SettingsTitle)
+            presenter.dispatch(ProfileSettingsIntent.SetLanguage("ru"))
+            d.app.strings.locale.await { it == "ru" }
+            assertTrue(d.app.strings.t(ProfilesStrings.SettingsTitle) != english, "the app's own strings are Russian now")
+            assertEquals(LayoutDirection.Ltr, layoutDirectionOf(d.app.strings.locale.value))
+            presenter.dispatch(ProfileSettingsIntent.SetLanguage(null))
+            d.app.strings.locale.await { it == device }
+        }
+    }
+
+    @Test
     fun `P-3 two notification switches flipped at once both reach the server`(): Unit = runBlocking {
         Device("p3").use { d ->
             d.signIn()
@@ -99,22 +133,21 @@ class ProfileScenariosTest {
                 assertEquals("Followed One", following.single().profile?.displayName)
                 b.profiles.people.block(a.userId)
                 assertEquals(listOf(a.userId), (b.profiles.connections.load(ConnectionKind.Blocked) as StapelResult.Ok).value.map { it.userId })
-                // No session at all: the operation is security-optional and the server answers 200, but
-                // with a reduced body that omits fields the contract marks required (location_*, the
-                // counters, relationship_status) — a backend defect of stapel-profiles 0.23.1, pinned
-                // here: when fixed, this fails and is flipped to expect the profile.
+                // A member who never set a location: "not set", not "withheld".
+                assertEquals(Disclosed.NotSet, seen.location)
+                // No session at all: the operation is security-optional; stapel-profiles (0.23.3) answers
+                // the declared shape with the withheld fields null (location, relationship_status) and
+                // the counters present. The domain tells "withheld" from "not set".
                 Device("p4-anon").use { anon ->
                     anon.app.koin.get<stapel.session.SessionManager>().restore()
-                    when (val seenByAnyone = anon.profiles.people.get(a.userId)) {
-                        is StapelResult.Ok -> kotlin.test.fail("anonymous profile now decodes (${seenByAnyone.value}): the backend defect is fixed — expect Ok")
-                        is StapelResult.Err -> {
-                            val violation = assertIs<stapel.result.TransportFailure.ContractViolation>(seenByAnyone.error.cause?.transportFailureOrNull())
-                            assertTrue("followers_count" in violation.detail && "relationship_status" in violation.detail, violation.detail)
-                        }
-                    }
                     val raw = Stand.get("/profiles/api/v1/${a.userId}")
-                    assertEquals("Followed One", raw["display_name"]!!.jsonPrimitive.content)
-                    assertTrue("followers_count" !in raw, "the reduced anonymous body")
+                    val byAnyone = (anon.profiles.people.get(a.userId) as StapelResult.Ok).value
+                    assertEquals("Followed One", byAnyone.displayName)
+                    assertEquals(Disclosed.Withheld, byAnyone.location)
+                    assertEquals(RelationshipStatus.Withheld, byAnyone.relationship)
+                    assertEquals(raw["followers_count"]!!.jsonPrimitive.int, byAnyone.followersCount)
+                    assertEquals(raw["following_count"]!!.jsonPrimitive.int, byAnyone.followingCount)
+                    assertEquals(kotlinx.serialization.json.JsonNull, raw["location_display_name_broad"], "withheld is null on the wire, the key kept")
                 }
             }
         }

@@ -1,11 +1,11 @@
 {
     "files": {
         "capabilities.json": {
-            "sha256": "73fe494737f81d498a38ea07f8d772bc8e396fed445feb1257ee791028fd743a",
+            "sha256": "7bde33acb2cc7d2ffc788688b175e0d2ec00ccbf429e296874a2496da61f1848",
             "source": "docs/capabilities.json"
         },
         "errors.json": {
-            "sha256": "85c27e9e3c31a994f72b9b8b6da302b5a90503ecbb8a9edef01b443e4e4fb7ad",
+            "sha256": "917091259b5bf91f752f6d3e5f555919ea8e75a9d9b0b902d15722bc1326bd4b",
             "source": "docs/errors.json"
         },
         "flows.json": {
@@ -13,13 +13,13 @@
             "source": "docs/flows.json"
         },
         "schema.json": {
-            "sha256": "8ace0564f26db133622be0a6b227c5c49b7fd4faf60f42f2871ef07d783083fc",
+            "sha256": "b9945007f6676bd46173b58a3a2f3bdbbd23b93d803d8b970766a145bf823ee2",
             "source": "docs/schema.v2.json"
         }
     },
     "module": "stapel-categories",
-    "ref": "a2c9ac64439478e648513b97cc726a88870f4e19",
+    "ref": "420eb05967fb16f7c468f79f8cce2d573006836f",
     "repo": "https://github.com/usestapel/stapel-categories",
-    "tag": "v0.25.1",
-    "version": "0.25.1"
+    "tag": "v0.25.3",
+    "version": "0.25.3"
 }

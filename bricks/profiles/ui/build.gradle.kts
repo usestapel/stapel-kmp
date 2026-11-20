@@ -22,6 +22,8 @@ kotlin {
             // Tests render every screen with both shipped skins; test classpaths are not dependency edges.
             implementation(projects.stapelUiMaterial3)
             implementation(projects.stapelTesting)
+            // The media library an app installs next to profiles (avatar upload wiring).
+            implementation(projects.stapelCdn)
         }
         jvmTest.dependencies {
             implementation(libs.kotlinx.coroutines.swing)

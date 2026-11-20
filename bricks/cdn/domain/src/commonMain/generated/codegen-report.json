@@ -1,0 +1,706 @@
+{
+    "brick": "cdn",
+    "contract": {
+        "module": "stapel-cdn",
+        "profile": 2,
+        "ref": "4b63570efccc49f017833bd374813b32d79dfe1d",
+        "schema_sha256": "7f0f0386cbec61ecf083692eab182b8562db3b77741dbf773a0d24e88bc33a5b",
+        "version": "0.31.2"
+    },
+    "counts": {
+        "W-DOC-PARAM": 5,
+        "W-DOC-PROPERTY": 106,
+        "W-DOC-TYPE": 13,
+        "W-ERR-STATUS-UNBOUND": 12,
+        "W-UNTYPED-UNION": 1
+    },
+    "diagnostics": [
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter image_type of random_image has no description",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1random~1/get/parameters/image_type"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter image_type of upload_typed_image has no description",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1upload~1/post/parameters/image_type"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter file_hash of cdn_image_original has no description",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1{file_hash}~1original~1/get/parameters/file_hash"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter image_type of cdn_image_original has no description",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1{file_hash}~1original~1/get/parameters/image_type"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter token of cdn_signed_media has no description",
+            "pointer": "#/paths/~1cdn~1api~1v1~1media~1signed~1{token}~1/get/parameters/token"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.created_at has no description",
+            "pointer": "#/components/schemas/Audio/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.file_extension has no description",
+            "pointer": "#/components/schemas/Audio/properties/file_extension"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.id has no description",
+            "pointer": "#/components/schemas/Audio/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.mime_type has no description",
+            "pointer": "#/components/schemas/Audio/properties/mime_type"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.original_filename has no description",
+            "pointer": "#/components/schemas/Audio/properties/original_filename"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.animated has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/animated"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.bytes has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/bytes"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.duration_ms has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/duration_ms"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.height has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.meta_status has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.mime has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/mime"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.poster_url has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/poster_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.preview_kind has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.ref has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/ref"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.square has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/square"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.variants has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/variants"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property AudioRenderMeta.width has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.updated_at has no description",
+            "pointer": "#/components/schemas/Audio/properties/updated_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.uploaded_by has no description",
+            "pointer": "#/components/schemas/Audio/properties/uploaded_by"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Audio.uploaded_by_username has no description",
+            "pointer": "#/components/schemas/Audio/properties/uploaded_by_username"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.animated has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/animated"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.bytes has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/bytes"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.duration_ms has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/duration_ms"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.height has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.meta_status has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.mime has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/mime"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.poster_url has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/poster_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.preview_kind has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.ref has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/ref"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.square has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/square"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.variants has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/variants"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property DescribeManyResponseItemsValue.width has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.created_at has no description",
+            "pointer": "#/components/schemas/FileModel/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.file_extension has no description",
+            "pointer": "#/components/schemas/FileModel/properties/file_extension"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.id has no description",
+            "pointer": "#/components/schemas/FileModel/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.mime_type has no description",
+            "pointer": "#/components/schemas/FileModel/properties/mime_type"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.original_filename has no description",
+            "pointer": "#/components/schemas/FileModel/properties/original_filename"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.animated has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/animated"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.bytes has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/bytes"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.duration_ms has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/duration_ms"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.height has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.meta_status has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.mime has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/mime"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.poster_url has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/poster_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.preview_kind has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.ref has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/ref"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.square has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/square"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.variants has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/variants"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModelRenderMeta.width has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.updated_at has no description",
+            "pointer": "#/components/schemas/FileModel/properties/updated_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.uploaded_by has no description",
+            "pointer": "#/components/schemas/FileModel/properties/uploaded_by"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FileModel.uploaded_by_username has no description",
+            "pointer": "#/components/schemas/FileModel/properties/uploaded_by_username"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.created_at has no description",
+            "pointer": "#/components/schemas/Image/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.file_extension has no description",
+            "pointer": "#/components/schemas/Image/properties/file_extension"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.id has no description",
+            "pointer": "#/components/schemas/Image/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.original_filename has no description",
+            "pointer": "#/components/schemas/Image/properties/original_filename"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.original_height has no description",
+            "pointer": "#/components/schemas/Image/properties/original_height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.original_width has no description",
+            "pointer": "#/components/schemas/Image/properties/original_width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.animated has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/animated"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.bytes has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/bytes"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.duration_ms has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/duration_ms"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.height has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.meta_status has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.mime has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/mime"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.poster_url has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/poster_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.preview_kind has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.ref has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/ref"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.square has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/square"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.variants has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/variants"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageRenderMeta.width has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.updated_at has no description",
+            "pointer": "#/components/schemas/Image/properties/updated_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.uploaded_by has no description",
+            "pointer": "#/components/schemas/Image/properties/uploaded_by"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Image.uploaded_by_username has no description",
+            "pointer": "#/components/schemas/Image/properties/uploaded_by_username"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageVariantsMetaItem.height has no description",
+            "pointer": "#/components/schemas/Image/properties/variants_meta/items/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageVariantsMetaItem.tier has no description",
+            "pointer": "#/components/schemas/Image/properties/variants_meta/items/properties/tier"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageVariantsMetaItem.url has no description",
+            "pointer": "#/components/schemas/Image/properties/variants_meta/items/properties/url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property ImageVariantsMetaItem.width has no description",
+            "pointer": "#/components/schemas/Image/properties/variants_meta/items/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.created_at has no description",
+            "pointer": "#/components/schemas/Video/properties/created_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.file_extension has no description",
+            "pointer": "#/components/schemas/Video/properties/file_extension"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.id has no description",
+            "pointer": "#/components/schemas/Video/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.original_filename has no description",
+            "pointer": "#/components/schemas/Video/properties/original_filename"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.original_height has no description",
+            "pointer": "#/components/schemas/Video/properties/original_height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.original_url has no description",
+            "pointer": "#/components/schemas/Video/properties/original_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.original_width has no description",
+            "pointer": "#/components/schemas/Video/properties/original_width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.animated has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/animated"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.bytes has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/bytes"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.duration_ms has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/duration_ms"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.height has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/height"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.meta_status has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.mime has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/mime"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.poster_url has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/poster_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.preview_kind has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.ref has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/ref"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.square has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/square"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.variants has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/variants"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property VideoRenderMeta.width has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/width"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.updated_at has no description",
+            "pointer": "#/components/schemas/Video/properties/updated_at"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.uploaded_by has no description",
+            "pointer": "#/components/schemas/Video/properties/uploaded_by"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.uploaded_by_username has no description",
+            "pointer": "#/components/schemas/Video/properties/uploaded_by_username"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.variant_1080p_url has no description",
+            "pointer": "#/components/schemas/Video/properties/variant_1080p_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.variant_16p_url has no description",
+            "pointer": "#/components/schemas/Video/properties/variant_16p_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.variant_2160p_url has no description",
+            "pointer": "#/components/schemas/Video/properties/variant_2160p_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.variant_240p_url has no description",
+            "pointer": "#/components/schemas/Video/properties/variant_240p_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.variant_32p_url has no description",
+            "pointer": "#/components/schemas/Video/properties/variant_32p_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.variant_480p_url has no description",
+            "pointer": "#/components/schemas/Video/properties/variant_480p_url"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Video.variant_720p_url has no description",
+            "pointer": "#/components/schemas/Video/properties/variant_720p_url"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type AudioRenderMetaMetaStatus has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type AudioRenderMetaPreviewKind has no description",
+            "pointer": "#/components/schemas/Audio/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type DescribeManyResponseItemsValueMetaStatus has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type DescribeManyResponseItemsValuePreviewKind has no description",
+            "pointer": "#/components/schemas/DescribeManyResponse/properties/items/additionalProperties/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type FileModelRenderMetaMetaStatus has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type FileModelRenderMetaPreviewKind has no description",
+            "pointer": "#/components/schemas/FileModel/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type ImageRenderMetaMetaStatus has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type ImageRenderMetaPreviewKind has no description",
+            "pointer": "#/components/schemas/Image/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type ImageVariantsMetaItem has no description",
+            "pointer": "#/components/schemas/Image/properties/variants_meta/items"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Type has no description",
+            "pointer": "#/components/schemas/TypeEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type VariantsStatus has no description",
+            "pointer": "#/components/schemas/VariantsStatusEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type VideoRenderMetaMetaStatus has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/meta_status"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type VideoRenderMetaPreviewKind has no description",
+            "pointer": "#/components/schemas/Video/properties/render_meta/properties/preview_kind"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1describe~1/post/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1describe~1/post/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 429 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1describe~1/post/responses/429"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1file~1exists~1/get/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1random~1/get/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 403 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1random~1/get/responses/403"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1upload~1/post/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1images~1{image_type}~1{file_hash}~1original~1/get/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1upload~1audio~1/post/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1upload~1avatar~1/post/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1upload~1image~1/post/responses/401"
+        },
+        {
+            "code": "W-ERR-STATUS-UNBOUND",
+            "message": "status 401 has a StapelError body and no bound code",
+            "pointer": "#/paths/~1cdn~1api~1v1~1upload~1video~1/post/responses/401"
+        },
+        {
+            "code": "W-UNTYPED-UNION",
+            "message": "anyOf is mapped to JsonElement",
+            "pointer": "#/components/schemas/FileExistsResponse/properties/file"
+        }
+    ],
+    "operations": 13,
+    "types": 33
+}

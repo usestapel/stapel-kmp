@@ -1,11 +1,11 @@
 {
     "files": {
         "capabilities.json": {
-            "sha256": "0324e1d94611e894e1ff0a64417a2147de77321025ed473e0f7b9168ffd7ba9f",
+            "sha256": "e5fb0134b23acc414f92e45423c2a5eb6dc3170088121b1d3cba39effcd1bc11",
             "source": "docs/capabilities.json"
         },
         "errors.json": {
-            "sha256": "23a215398d9a3de8dbd7090ba16fab33dac36cd596e8e61ce9d719746c3d83e1",
+            "sha256": "896e7393c51946b5cc4c3dbbefde5676768d1cd01c34843348fbffeb925e8df7",
             "source": "docs/errors.json"
         },
         "flows.json": {
@@ -13,13 +13,13 @@
             "source": "docs/flows.json"
         },
         "schema.json": {
-            "sha256": "62dc0b71c103f1dee9681adb3b0dbb58881378c01b580b20d7a28b2ed17b4729",
+            "sha256": "14e5658f4f11e08504e56eb68c1c875e832c6ed2dcee31288ccb8e4cdd9d9189",
             "source": "docs/schema.v2.json"
         }
     },
     "module": "stapel-auth",
-    "ref": "0b6b20d01c330a731013f162c769f20e69c52b92",
+    "ref": "a79d627073d3e3afa6a3f96d1a244e1d87c40b35",
     "repo": "https://github.com/usestapel/stapel-auth",
-    "tag": "v0.53.1",
-    "version": "0.53.1"
+    "tag": "v0.54.0",
+    "version": "0.54.0"
 }

@@ -107,6 +107,11 @@
       "family": "catalog",
       "released": false
     },
+    "stapel-cdn": {
+      "version": "0.0.1",
+      "family": "brick-domain",
+      "released": false
+    },
     "stapel-codegen-gradle-plugin": {
       "version": "0.0.1",
       "family": "gradle-plugin",

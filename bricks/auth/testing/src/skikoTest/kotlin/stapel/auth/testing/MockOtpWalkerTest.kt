@@ -75,4 +75,13 @@ class MockOtpWalkerTest {
         val e = assertFailsWith<AuthWalkException> { signInWithMockOtp("a@example.com", timeoutMillis = 5_000) }
         assertTrue("rejected the code" in e.message.orEmpty(), e.message)
     }
+
+    @Test
+    fun aStepThatNeverHappensIsNamedNotAnUntypedTimeout() = runComposeUiTest {
+        setContent { BasicText("no sign-in here", Modifier.testTag("elsewhere")) }
+        val e = assertFailsWith<AuthWalkException> { signInWithMockOtp("a@example.com", timeoutMillis = 300) }
+        assertTrue("identifier field did not happen" in e.message.orEmpty(), e.message)
+        val tag = assertFailsWith<AuthWalkException> { awaitTag("never.there", 300) }
+        assertTrue("'never.there' appears did not happen" in tag.message.orEmpty(), tag.message)
+    }
 }

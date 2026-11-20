@@ -1618,7 +1618,7 @@ public final class stapel/auth/api/error/AuthApiError$NotAvailable : stapel/auth
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class stapel/auth/api/error/AuthApiError$NotFound : stapel/auth/api/error/AuthApiError, stapel/auth/api/error/CreateStaffRolesError, stapel/auth/api/error/DeleteSessionsBySessionIdError, stapel/auth/api/error/DeleteStaffRolesError, stapel/auth/api/error/GetSecurityRevokeSuspiciousError, stapel/auth/api/error/SessionsConfirmError, stapel/result/DomainError {
+public final class stapel/auth/api/error/AuthApiError$NotFound : stapel/auth/api/error/AuthApiError, stapel/auth/api/error/CreateStaffRolesError, stapel/auth/api/error/DeleteServiceKeysError, stapel/auth/api/error/DeleteSessionsBySessionIdError, stapel/auth/api/error/DeleteStaffRolesError, stapel/auth/api/error/GetSecurityRevokeSuspiciousError, stapel/auth/api/error/GetServiceKeysError, stapel/auth/api/error/PatchServiceKeysError, stapel/auth/api/error/SessionsConfirmError, stapel/auth/api/error/UpdateServiceKeysError, stapel/result/DomainError {
 	public fun <init> (Lstapel/result/ErrorEnvelope;)V
 	public final fun component1 ()Lstapel/result/ErrorEnvelope;
 	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/auth/api/error/AuthApiError$NotFound;
@@ -2291,6 +2291,23 @@ public final class stapel/auth/api/error/AuthApiError$TokenRevoked : stapel/auth
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/auth/api/error/AuthApiError$TooManyIds : stapel/auth/api/error/AuthApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/auth/api/error/AuthApiError$TooManyIds;
+	public static synthetic fun copy$default (Lstapel/auth/api/error/AuthApiError$TooManyIds;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/auth/api/error/AuthApiError$TooManyIds;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getLimit ()Ljava/lang/Integer;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRequested ()Ljava/lang/Integer;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;

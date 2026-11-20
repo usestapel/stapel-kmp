@@ -1,0 +1,528 @@
+{
+  "module": "stapel-notifications",
+  "version": "0.31.1",
+  "provides": "Multi-channel user notifications: routes typed notification requests to email, SMS, push and Telegram with per-user preferences and language, branded email templates, device push-token management (registered devices are listable, so a push toggle can render its own state) and an in-app notification feed, live over the realtime substrate where it is installed; delivery is logged per channel with idempotency.",
+  "axes": [
+    {
+      "key": "EMAIL_PROVIDER",
+      "kind": "enum",
+      "default": "unconfigured",
+      "group": "notifications.providers",
+      "gates": {
+        "operations": [],
+        "co_gates": []
+      },
+      "curated": {
+        "summary": "Which service sends the emails: Resend, SMTP, Mailgun, or any custom provider class supplied by the host project. Defaults to 'unconfigured', which refuses to send until a backend is chosen; 'mock' (log only, no delivery) must be asked for by name.",
+        "business_label": "Email delivery service"
+      }
+    },
+    {
+      "key": "SMS_PROVIDER",
+      "kind": "enum",
+      "default": "unconfigured",
+      "group": "notifications.providers",
+      "gates": {
+        "operations": [],
+        "co_gates": []
+      },
+      "curated": {
+        "summary": "Which service sends the text messages: GatewayAPI, Twilio, or any custom provider class supplied by the host project. Defaults to 'unconfigured', which refuses to send until a backend is chosen; 'mock' (log only, no delivery) must be asked for by name.",
+        "business_label": "SMS delivery service"
+      }
+    },
+    {
+      "key": "PUSH_PROVIDER",
+      "kind": "enum",
+      "default": "fcm",
+      "group": "notifications.providers",
+      "gates": {
+        "operations": [],
+        "co_gates": []
+      },
+      "curated": {
+        "summary": "Which service delivers mobile/web push: Firebase Cloud Messaging (default), 'mock' for log-only development, 'unconfigured' to close the channel outright, or any custom provider class supplied by the host project.",
+        "business_label": "Push notification service"
+      }
+    },
+    {
+      "key": "TELEGRAM_PROVIDER",
+      "kind": "enum",
+      "default": "unconfigured",
+      "group": "notifications.providers",
+      "gates": {
+        "operations": [],
+        "co_gates": []
+      },
+      "curated": {
+        "summary": "Which class writes the Telegram messages. There is no built-in one: a bot token is the deployment's own sending identity, so the client is always a host-project class named by dotted path ('mock' for log-only development). Defaults to 'unconfigured', which keeps the channel shut until the business decides to run a bot.",
+        "business_label": "Telegram delivery bot"
+      }
+    }
+  ],
+  "extension_points": [
+    {
+      "name": "TYPES",
+      "kind": "merge_registry",
+      "summary": "Register new notification types (channels + group + template) or override built-ins entirely from settings — merged over the packaged routing catalog, no fork."
+    },
+    {
+      "name": "CHANNELS",
+      "kind": "merge_registry",
+      "summary": "Register a delivery channel the library does not ship — an in-app feed, a webhook, a chat gateway — or replace/disable a built-in; merged over email/push/sms/telegram, no fork. A registered channel keeps every guarantee email has (preference gate, delivery claim, journal row) and gains a recipient switch in UserNotificationSettings.channel_preferences."
+    },
+    {
+      "name": "EMAIL_TEMPLATES",
+      "kind": "merge_registry",
+      "summary": "Remap any notification type to a host-project email template; merged over the packaged per-type template map."
+    },
+    {
+      "name": "channel_providers",
+      "kind": "dotted_path",
+      "summary": "The EMAIL/SMS/PUSH/TELEGRAM provider settings accept any dotted path to a class with the matching send() signature — add SendGrid, Postmark, APNs, a Telegram bot client etc. as host-project classes, no fork."
+    },
+    {
+      "name": "template_overrides",
+      "kind": "django_templates",
+      "summary": "Packaged email templates live under a namespaced path and follow standard Django template-loader precedence; eject_notification_templates copies them into the host project for structural edits, and LOGO_URL/BRAND_*/COMPANY_* settings rebrand every email without touching a template."
+    },
+    {
+      "name": "serializer_seams",
+      "kind": "class_override",
+      "summary": "Every view declares request/response serializer seams (SerializerSeamMixin) — subclass the view, override the attribute, remount the URL."
+    }
+  ],
+  "surface": [
+    {
+      "name": "get_channels",
+      "kind": "factory",
+      "path": "stapel_notifications.routing.get_channels",
+      "intent": "The channels a type is routed to after host overrides — read this rather than the settings dict when a caller has to know whether a type reaches SMS or push at all (an empty list means the type is unregistered).",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "get_email_template",
+      "kind": "factory",
+      "path": "stapel_notifications.routing.get_email_template",
+      "intent": "The email template a type actually renders with, resolving the whole precedence chain (the routing entry's \"template\" key → the EMAIL_TEMPLATES override → the packaged default). Reach for it instead of hardcoding a template path, which silently ignores the host's remap.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "get_group",
+      "kind": "factory",
+      "path": "stapel_notifications.routing.get_group",
+      "intent": "The preference group of a type, from a CLOSED vocabulary (routing.VALID_GROUPS): \"auth\" is mandatory and carries no unsubscribe, \"messages\" and \"system\" are user-mutable per channel and are the only groups whose mail may carry one. An unknown group is notifications.E001 at boot — the group also names the preference field. Read it before a UI promises an opt-out, and before classifying a new type: marketing mail in the auth group loses List-Unsubscribe compliance.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "get_routing",
+      "kind": "factory",
+      "path": "stapel_notifications.routing.get_routing",
+      "intent": "The effective routing entry ({channels, group, template}) of a type, with STAPEL_NOTIFICATIONS[\"TYPES\"] merged over the packaged catalog — the primitive the other readers sit on. Prefer get_channels/get_group/get_email_template for narrower questions; never merge the settings dict over routing.NOTIFICATION_ROUTING by hand — an override replaces a built-in wholesale.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "is_security",
+      "kind": "predicate",
+      "path": "stapel_notifications.routing.is_security",
+      "intent": "True when a type is account-security class — in the `auth` group or carrying `\"security\": True` in routing. The key is for a security letter that must stay switch-off-able and so cannot live in `auth` (\"a new device signed in\"): it removes the unsubscribe affordance without touching the group.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "is_transactional",
+      "kind": "predicate",
+      "path": "stapel_notifications.routing.is_transactional",
+      "intent": "True when a type is a one-to-one message triggered by a named person (a workspace invitation) rather than bulk mail. Such a letter carries no unsubscribe affordance: the one-click token is minted per (user, GROUP, channel), so one automated POST on a personal invitation would opt the recipient out of every system email. Ask this instead of testing group != \"auth\".",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "may_carry_unsubscribe",
+      "kind": "predicate",
+      "path": "stapel_notifications.routing.may_carry_unsubscribe",
+      "intent": "`unsubscribe_allowed` asked by type name — the reader to call from host code or a UI before promising an opt-out on a given notification type. Never re-derive the answer from get_group(): the group is only one of the three inputs, and reimplementing the rule is how the two copies drift.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "registered_types",
+      "kind": "factory",
+      "path": "stapel_notifications.routing.registered_types",
+      "intent": "Every notification type this deployment knows, built-ins plus the host's TYPES registrations — ask it before requesting a type you are not sure exists, because an unregistered type without content_html/content_text is dropped with a logged error rather than delivered. `manage.py check_notifications` is the CI-time form of the same question over literal call sites.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "unsubscribe_allowed",
+      "kind": "predicate",
+      "path": "stapel_notifications.routing.unsubscribe_allowed",
+      "intent": "THE single decision behind both the unsubscribe footer and the List-Unsubscribe / List-Unsubscribe-Post: One-Click headers, taken over a routing ENTRY (so the raw-content escape hatch is judged by the same rule). It is an allowlist — group in routing.UNSUBSCRIBABLE_GROUPS, not transactional, not security-class — because the old `group != \"auth\"` test let a typo or a wholesale override put a one-click opt-out from all security mail on a passcode.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "default_language",
+      "kind": "factory",
+      "path": "stapel_notifications.services.default_language",
+      "intent": "The project's fallback language — STAPEL_LANGUAGE[\"DEFAULT\"], then Django's LANGUAGE_CODE — and never a hardcoded \"en\": a service built for a non-English market gets every English string as a defect. A module-local alias of stapel_core.language.default_language; outside this package reach for the core one directly.",
+      "instead_of": [
+        "django.conf.settings.LANGUAGE_CODE"
+      ]
+    },
+    {
+      "name": "process_notification",
+      "kind": "factory",
+      "path": "stapel_notifications.services.process_notification",
+      "intent": "THE dispatch entry point: give it a notification_type plus variables and it resolves the recipient's language, contacts and preferences, the translations, the branded template and every configured channel, then writes one NotificationLog row per channel with event_id idempotency. Call it in-process (the notification.requested consumer does); across a service boundary publish through stapel_core.notifications.request_notification instead. Do not assemble an email and a log row yourself — the language chain alone (saved preference → caller's language → remembered → the request's active language → project default) is four fallbacks deep, each added after English OTP codes reached a non-English locale.",
+      "instead_of": [
+        "django.core.mail.send_mail",
+        "django.core.mail.EmailMultiAlternatives"
+      ]
+    },
+    {
+      "name": "valid_pref_fields",
+      "kind": "factory",
+      "path": "stapel_notifications.services.valid_pref_fields",
+      "intent": "Every \"<channel>_<group>\" preference pair a recipient can be asked about, derived from the CHANNELS registry — read it before building a notification-settings UI, since the pairs grow with the host's own channels. A pair missing from it is mail _should_send refuses (notifications.E004 at boot), not mail that goes out unswitchable.",
+      "instead_of": [
+        "django.conf.settings.STAPEL_NOTIFICATIONS"
+      ]
+    },
+    {
+      "name": "notifications/email/_base.html",
+      "kind": "template",
+      "path": "templates/notifications/email/_base.html",
+      "intent": "The shared email shell every packaged letter extends: header/logo, body slot, footer, and the logo_url/brand_*/company_* variables process_notification threads into every render. A host template for a new type should extend this and fill the `content` block (plus `preheader`/`footer`/`head_extra` as needed) rather than start from blank HTML — that is how a product's own letter gets the deployment's branding for free."
+    },
+    {
+      "name": "notifications/email/_footer_unsubscribe.html",
+      "kind": "template",
+      "path": "templates/notifications/email/_footer_unsubscribe.html",
+      "intent": "The unsubscribe / manage-preferences footer that _base.html switches to whenever `unsubscribe_url` is present (granted by routing.unsubscribe_allowed). Do not hand-write an unsubscribe line into a custom template: process_notification produces the URL, its signed token and the matching one-click List-Unsubscribe headers together, and a hand-written link breaks when the token scheme moves."
+    },
+    {
+      "name": "notifications/email/_raw_content.html",
+      "kind": "template",
+      "path": "templates/notifications/email/_raw_content.html",
+      "intent": "The raw-content wrapper that puts a caller-supplied content_html/content_text inside the brand layout — what makes the request_notification(..., content_html=...) escape hatch possible for a type that is deliberately not registered. Reach for the escape hatch, not for this template directly."
+    },
+    {
+      "name": "notifications/email/all_sessions_revoked.html",
+      "kind": "template",
+      "path": "templates/notifications/email/all_sessions_revoked.html",
+      "intent": "The \"all sessions have been revoked\" notice — notification_type `all_sessions_revoked`, auth group, email only. Send it after a global logout so an owner who did not trigger it finds out."
+    },
+    {
+      "name": "notifications/email/auth_change.html",
+      "kind": "template",
+      "path": "templates/notifications/email/auth_change.html",
+      "intent": "One template serving the whole authenticator-change sequence — notification_types `auth_change_requested`, `auth_change_reminder`, `auth_change_urgent` and `auth_change_completed` (auth group; email, SMS and push). Four stages of a single flow share it, so one EMAIL_TEMPLATES remap re-skins all of them."
+    },
+    {
+      "name": "notifications/email/billing_payment_failed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/billing_payment_failed.html",
+      "intent": "\"We could not take your payment\" — `billing.payment_failed`, billing group, email only: a declined card stated as a thing to fix, with the bank's reason in words and a link to the billing page."
+    },
+    {
+      "name": "notifications/email/billing_payment_succeeded.html",
+      "kind": "template",
+      "path": "templates/notifications/email/billing_payment_succeeded.html",
+      "intent": "\"Your payment went through\" — `billing.payment_succeeded`, billing group (mandatory, no unsubscribe), email only: the receipt — amount, what was bought, the period a subscription covers, the invoice link. Never compose payment mail yourself."
+    },
+    {
+      "name": "notifications/email/billing_subscription_ending.html",
+      "kind": "template",
+      "path": "templates/notifications/email/billing_subscription_ending.html",
+      "intent": "\"Your subscription will not renew\" — `billing.subscription_ending`, billing group, email only: the letter a `cancel_at_period_end` subscriber is owed, naming the date access stops."
+    },
+    {
+      "name": "notifications/email/courses_certificate_issued.html",
+      "kind": "template",
+      "path": "templates/notifications/email/courses_certificate_issued.html",
+      "intent": "`courses.certificate_issued` (learner); CTA with `certificate_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/courses_completed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/courses_completed.html",
+      "intent": "`courses.completed` (learner); CTA with `course_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/courses_enrollment_activated.html",
+      "kind": "template",
+      "path": "templates/notifications/email/courses_enrollment_activated.html",
+      "intent": "`courses.enrollment_activated` (learner); CTA with `course_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/delivery_shipment_status_changed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/delivery_shipment_status_changed.html",
+      "intent": "`delivery.shipment_status_changed` (buyer); tracking line/link and CTA (`shipment_url`) only when passed. Registry-only."
+    },
+    {
+      "name": "notifications/email/feed_comment_received.html",
+      "kind": "template",
+      "path": "templates/notifications/email/feed_comment_received.html",
+      "intent": "`feed.comment_received`: someone commented on the recipient's post (messages group, switch-off-able); CTA only with `post_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/gdpr_dsar_opened.html",
+      "kind": "template",
+      "path": "templates/notifications/email/gdpr_dsar_opened.html",
+      "intent": "\"A privacy request arrived\" — notification_type `gdpr.dsar.opened`, auth group, email only: tells the privacy-queue owner a data-subject request is waiting and when it is due."
+    },
+    {
+      "name": "notifications/email/gdpr_dsar_received.html",
+      "kind": "template",
+      "path": "templates/notifications/email/gdpr_dsar_received.html",
+      "intent": "\"We received your privacy request\" — notification_type `gdpr.dsar.received`, auth group, email only: the statutory acknowledgement of a data-subject request, with its answer-by date and reference."
+    },
+    {
+      "name": "notifications/email/gdpr_export_ready.html",
+      "kind": "template",
+      "path": "templates/notifications/email/gdpr_export_ready.html",
+      "intent": "\"Your data export is ready\" — notification_type `gdpr.export_ready`, auth group, email only: the letter a subject-access export has to end with."
+    },
+    {
+      "name": "notifications/email/gdpr_inactivity_closed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/gdpr_inactivity_closed.html",
+      "intent": "\"Your account has been closed\" — notification_type `gdpr.inactivity_closed`, auth group, email only: the terminal notice of a retention closure."
+    },
+    {
+      "name": "notifications/email/gdpr_inactivity_warning.html",
+      "kind": "template",
+      "path": "templates/notifications/email/gdpr_inactivity_warning.html",
+      "intent": "\"Your account will be closed in N days\" — notification_type `gdpr.inactivity_warning`, auth group, email only: the warning a retention-driven closure owes the account before it happens."
+    },
+    {
+      "name": "notifications/email/inventory_stock_low.html",
+      "kind": "template",
+      "path": "templates/notifications/email/inventory_stock_low.html",
+      "intent": "`inventory.stock_low` (staff); CTA with `stock_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/inventory_stock_out.html",
+      "kind": "template",
+      "path": "templates/notifications/email/inventory_stock_out.html",
+      "intent": "`inventory.stock_out` (staff); CTA with `stock_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/listing_blocked.html",
+      "kind": "template",
+      "path": "templates/notifications/email/listing_blocked.html",
+      "intent": "\"Your listing has been blocked\" — notification_type `listing_blocked`, system group, push and email: the moderation-block notice for the owner. Carries an optional statement of reasons (`reason_label`) and appeal link (`appeal_url`) for DSA Art. 17."
+    },
+    {
+      "name": "notifications/email/listing_expiring.html",
+      "kind": "template",
+      "path": "templates/notifications/email/listing_expiring.html",
+      "intent": "\"Your listing is expiring\" — notification_type `listing_expiring`, system group, push and email: the marketplace lifecycle reminder."
+    },
+    {
+      "name": "notifications/email/magic_link_login.html",
+      "kind": "template",
+      "path": "templates/notifications/email/magic_link_login.html",
+      "intent": "The passwordless sign-in link letter — notification_type `magic_link_login`, auth group, email only."
+    },
+    {
+      "name": "notifications/email/moderation_appeal_resolved.html",
+      "kind": "template",
+      "path": "templates/notifications/email/moderation_appeal_resolved.html",
+      "intent": "\"Your appeal has been resolved\" — notification_type `moderation.appeal_resolved`, system group, push and email: the outcome letter for the appellant (DSA Art. 20). No link — this is the one moderation letter with no notifications_chat_url. stapel-moderation upstream — registry-only, no producer in this package yet."
+    },
+    {
+      "name": "notifications/email/moderation_report_received.html",
+      "kind": "template",
+      "path": "templates/notifications/email/moderation_report_received.html",
+      "intent": "\"Your report has been received\" — notification_type `moderation.report_received`, system group, push and email: the receipt for the person who filed a report, before any verdict (DSA Art. 16(4)). stapel-moderation upstream — registry-only, no producer in this package yet."
+    },
+    {
+      "name": "notifications/email/moderation_sanction_issued.html",
+      "kind": "template",
+      "path": "templates/notifications/email/moderation_sanction_issued.html",
+      "intent": "\"Action has been taken on your account\" — notification_type `moderation.sanction_issued`, system group, push and email: the decision letter for a sanctioned account, with its statement of reasons and appeal path (DSA Art. 17). stapel-moderation upstream — registry-only, no producer in this package yet."
+    },
+    {
+      "name": "notifications/email/new_device_login.html",
+      "kind": "template",
+      "path": "templates/notifications/email/new_device_login.html",
+      "intent": "The \"new sign-in to your account\" security notice — notification_type `new_device_login`, auth group, email only: the letter to send when a session appears from a device the account has not used before."
+    },
+    {
+      "name": "notifications/email/new_message.html",
+      "kind": "template",
+      "path": "templates/notifications/email/new_message.html",
+      "intent": "The user-to-user message letter — notification_type `new_message`, messages group (the user can switch it off per channel), routed to push first and email second."
+    },
+    {
+      "name": "notifications/email/orders_placed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/orders_placed.html",
+      "intent": "`orders.placed`: buyer receipt (number, total); CTA only with `order_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/orders_refunded.html",
+      "kind": "template",
+      "path": "templates/notifications/email/orders_refunded.html",
+      "intent": "`orders.refunded`: a paid order refunded in full; CTA only with `order_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/orders_status_changed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/orders_status_changed.html",
+      "intent": "`orders.status_changed`: order moved to a new status; CTA only with `order_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/otp_code.html",
+      "kind": "template",
+      "path": "templates/notifications/email/otp_code.html",
+      "intent": "The one-time-code letter — notification_type `otp_code`, auth group (mandatory, no unsubscribe), routed to email and SMS. Request the type instead of composing a verification-code mail: the code formatting, the branding and the language resolution are already handled."
+    },
+    {
+      "name": "notifications/email/promotions_promotion_exhausted.html",
+      "kind": "template",
+      "path": "templates/notifications/email/promotions_promotion_exhausted.html",
+      "intent": "`promotions.promotion_exhausted` (staff); CTA with `promotion_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/referrals_reward_granted.html",
+      "kind": "template",
+      "path": "templates/notifications/email/referrals_reward_granted.html",
+      "intent": "`referrals.reward_granted`; credits line (`unit` credits) or code line (`grant_ref`). Registry-only."
+    },
+    {
+      "name": "notifications/email/report_reviewed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/report_reviewed.html",
+      "intent": "\"Your report has been reviewed\" — notification_type `report_reviewed`, system group, push and email: the moderation-outcome letter for the person who reported."
+    },
+    {
+      "name": "notifications/email/reservations_booked.html",
+      "kind": "template",
+      "path": "templates/notifications/email/reservations_booked.html",
+      "intent": "`reservations.booked`: customer confirmation of a booked slot (title, local start, number); CTA only with `reservation_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/reservations_new_for_provider.html",
+      "kind": "template",
+      "path": "templates/notifications/email/reservations_new_for_provider.html",
+      "intent": "`reservations.new_for_provider`: the provider's notice of a new booking; CTA only with `reservation_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/reservations_reminder.html",
+      "kind": "template",
+      "path": "templates/notifications/email/reservations_reminder.html",
+      "intent": "`reservations.reminder`: reminder ahead of the slot (REMINDER_MINUTES_BEFORE on the producer side); CTA only with `reservation_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/reservations_status_changed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/reservations_status_changed.html",
+      "intent": "`reservations.status_changed`: a reservation moved to a new status; CTA only with `reservation_url`. Registry-only."
+    },
+    {
+      "name": "notifications/email/suspicious_login.html",
+      "kind": "template",
+      "path": "templates/notifications/email/suspicious_login.html",
+      "intent": "The \"suspicious sign-in detected\" security notice — notification_type `suspicious_login`, auth group, email only. The sharper sibling of new_device_login, for a sign-in the risk logic actually distrusts."
+    },
+    {
+      "name": "notifications/email/workspace_invitation.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_invitation.html",
+      "intent": "The workspace invitation letter for an invitee who already has an account — notification_type `workspace.invitation`, system group, email only. stapel-workspaces requests it from create_invitation; nothing else should be minting invitation mail, because the single-use token and its TTL belong to that flow."
+    },
+    {
+      "name": "notifications/email/workspace_invitation_decline_confirmed.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_invitation_decline_confirmed.html",
+      "intent": "The receipt for the person who refused an invitation — notification_type `workspace.invitation.decline_confirmed`, system group, transactional. Declining rests on the token and creates no account, so the letter carries no link and its whole job is to say the invitation is closed and that nothing was created in order to close it."
+    },
+    {
+      "name": "notifications/email/workspace_invitation_declined.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_invitation_declined.html",
+      "intent": "The answer to the person who sent an invitation — notification_type `workspace.invitation.declined`, system group, transactional. It names the address the inviter themselves typed, the workspace and the outcome, and nothing else about whoever declined."
+    },
+    {
+      "name": "notifications/email/workspace_invitation_new_user.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_invitation_new_user.html",
+      "intent": "The invitation letter for a recipient with no account yet — notification_type `workspace.invitation.new_user`. Its own type rather than an override of `workspace.invitation`, because the link both creates the account and joins the workspace and the copy has to say so."
+    },
+    {
+      "name": "notifications/email/workspace_invitation_reminder.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_invitation_reminder.html",
+      "intent": "The re-delivery of a pending invitation — notification_type `workspace.invitation.reminder`. An admin resend rotates the token and restarts the TTL, so this is \"you are being reminded, here is a fresh link\", a different message from the original invitation rather than a repeat of it."
+    },
+    {
+      "name": "notifications/email/workspace_member_password_reset.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_member_password_reset.html",
+      "intent": "\"Your password was reset\" — notification_type `workspace.member_password_reset`, auth group. It names the workspace and the admin who did it and never carries the new password: a reset performed by somebody other than the account's owner is indistinguishable from a takeover until the owner is told, which is why this one is mandatory."
+    },
+    {
+      "name": "notifications/email/workspace_mfa_restored.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_mfa_restored.html",
+      "intent": "\"Access restored\" — notification_type `workspace.mfa_restored`, auth group: the counterpart sent when the member enrols or the policy is lifted."
+    },
+    {
+      "name": "notifications/email/workspace_mfa_suspension.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_mfa_suspension.html",
+      "intent": "\"Access suspended — two-factor authentication required\" — notification_type `workspace.mfa_suspension`, auth group: sent when a workspace's require_mfa sweep suspends a member who has not enrolled."
+    },
+    {
+      "name": "notifications/email/workspace_provisioned_account.html",
+      "kind": "template",
+      "path": "templates/notifications/email/workspace_provisioned_account.html",
+      "intent": "\"Your account is ready\" for a member an organization provisioned directly — notification_type `workspace.provisioned_account`, auth group: credentials mail is mandatory and carries no unsubscribe, like every other account-credential letter here."
+    }
+  ],
+  "operations_total": 8,
+  "requires": [
+    {
+      "module": "stapel-core",
+      "optional": false,
+      "reason": "comm bus (notification.requested input, translate.resolve calls), JWT authentication, GDPR provider registry, AppSettings config layer"
+    },
+    {
+      "module": "stapel-auth",
+      "optional": true,
+      "reason": "source of the user-contact sync (email/phone/telegram_chat_id projections) and the user.deleted / user.deletion_initiated events this module consumes; decoupled via the comm bus"
+    },
+    {
+      "module": "stapel-profiles",
+      "optional": true,
+      "reason": "source of the notification-preferences and language sync (profile-changed events consumed into UserNotificationSettings); decoupled via the comm bus"
+    },
+    {
+      "module": "stapel-translate",
+      "optional": true,
+      "reason": "notification texts are localized through the translate.resolve comm Function with lazy caching; without it the built-in English defaults are used"
+    },
+    {
+      "module": "stapel-realtime",
+      "optional": true,
+      "reason": "serves the live feed socket (ws/notifications/inbox) delivering the notification.new signal on the notifications:user:<id> stream; emitting the signal needs only stapel-core, so without this extra the feed is simply polled"
+    }
+  ]
+}

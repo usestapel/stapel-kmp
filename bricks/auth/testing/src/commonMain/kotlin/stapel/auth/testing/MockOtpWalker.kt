@@ -76,7 +76,8 @@ private fun ComposeUiTest.step(name: String, timeoutMillis: Long, done: () -> Bo
         waitUntil(timeoutMillis = timeoutMillis, condition = done)
     } catch (e: kotlin.coroutines.cancellation.CancellationException) {
         throw e
-    } catch (e: Exception) {
+    } catch (e: Throwable) {
+        // ComposeTimeoutException is a Throwable, not an Exception: catching Exception let it escape untyped.
         throw AuthWalkException("sign-in walk stopped: $name did not happen within $timeoutMillis ms (${e.message})")
     }
 }

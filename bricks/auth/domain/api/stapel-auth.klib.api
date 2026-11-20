@@ -1581,7 +1581,7 @@ sealed interface stapel.auth.api.error/AuthApiError : stapel.result/StapelError 
         final fun toString(): kotlin/String // stapel.auth.api.error/AuthApiError.NotAvailable.toString|toString(){}[0]
     }
 
-    final class NotFound : stapel.auth.api.error/AuthApiError, stapel.auth.api.error/CreateStaffRolesError, stapel.auth.api.error/DeleteSessionsBySessionIdError, stapel.auth.api.error/DeleteStaffRolesError, stapel.auth.api.error/GetSecurityRevokeSuspiciousError, stapel.auth.api.error/SessionsConfirmError, stapel.result/DomainError { // stapel.auth.api.error/AuthApiError.NotFound|null[0]
+    final class NotFound : stapel.auth.api.error/AuthApiError, stapel.auth.api.error/CreateStaffRolesError, stapel.auth.api.error/DeleteServiceKeysError, stapel.auth.api.error/DeleteSessionsBySessionIdError, stapel.auth.api.error/DeleteStaffRolesError, stapel.auth.api.error/GetSecurityRevokeSuspiciousError, stapel.auth.api.error/GetServiceKeysError, stapel.auth.api.error/PatchServiceKeysError, stapel.auth.api.error/SessionsConfirmError, stapel.auth.api.error/UpdateServiceKeysError, stapel.result/DomainError { // stapel.auth.api.error/AuthApiError.NotFound|null[0]
         constructor <init>(stapel.result/ErrorEnvelope) // stapel.auth.api.error/AuthApiError.NotFound.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
 
         final val envelope // stapel.auth.api.error/AuthApiError.NotFound.envelope|{}envelope[0]
@@ -2260,6 +2260,25 @@ sealed interface stapel.auth.api.error/AuthApiError : stapel.result/StapelError 
         final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.api.error/AuthApiError.TokenRevoked.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // stapel.auth.api.error/AuthApiError.TokenRevoked.hashCode|hashCode(){}[0]
         final fun toString(): kotlin/String // stapel.auth.api.error/AuthApiError.TokenRevoked.toString|toString(){}[0]
+    }
+
+    final class TooManyIds : stapel.auth.api.error/AuthApiError, stapel.result/DomainError { // stapel.auth.api.error/AuthApiError.TooManyIds|null[0]
+        constructor <init>(stapel.result/ErrorEnvelope) // stapel.auth.api.error/AuthApiError.TooManyIds.<init>|<init>(stapel.result.ErrorEnvelope){}[0]
+
+        final val envelope // stapel.auth.api.error/AuthApiError.TooManyIds.envelope|{}envelope[0]
+            final fun <get-envelope>(): stapel.result/ErrorEnvelope // stapel.auth.api.error/AuthApiError.TooManyIds.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val limit // stapel.auth.api.error/AuthApiError.TooManyIds.limit|{}limit[0]
+            final fun <get-limit>(): kotlin/Int? // stapel.auth.api.error/AuthApiError.TooManyIds.limit.<get-limit>|<get-limit>(){}[0]
+        final val remediation // stapel.auth.api.error/AuthApiError.TooManyIds.remediation|{}remediation[0]
+            final fun <get-remediation>(): stapel.result/Remediation // stapel.auth.api.error/AuthApiError.TooManyIds.remediation.<get-remediation>|<get-remediation>(){}[0]
+        final val requested // stapel.auth.api.error/AuthApiError.TooManyIds.requested|{}requested[0]
+            final fun <get-requested>(): kotlin/Int? // stapel.auth.api.error/AuthApiError.TooManyIds.requested.<get-requested>|<get-requested>(){}[0]
+
+        final fun component1(): stapel.result/ErrorEnvelope // stapel.auth.api.error/AuthApiError.TooManyIds.component1|component1(){}[0]
+        final fun copy(stapel.result/ErrorEnvelope = ...): stapel.auth.api.error/AuthApiError.TooManyIds // stapel.auth.api.error/AuthApiError.TooManyIds.copy|copy(stapel.result.ErrorEnvelope){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.auth.api.error/AuthApiError.TooManyIds.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.auth.api.error/AuthApiError.TooManyIds.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.auth.api.error/AuthApiError.TooManyIds.toString|toString(){}[0]
     }
 
     final class TooManyRequests : stapel.auth.api.error/AuthApiError, stapel.result/DomainError { // stapel.auth.api.error/AuthApiError.TooManyRequests|null[0]

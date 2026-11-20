@@ -8,18 +8,25 @@ import androidx.compose.ui.test.isSelected
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.v2.runComposeUiTest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import kotlinx.io.Buffer
 import org.koin.dsl.module
 import stapel.app.di.StapelAppContent
 import stapel.auth.testing.AuthTags
 import stapel.auth.testing.awaitTag
 import stapel.auth.testing.signInWithMockOtp
+import stapel.profiles.StapelProfiles
 import stapel.profiles.testing.ProfilesTags
 import stapel.profiles.testing.chooseLanguage
 import stapel.profiles.testing.openSettingsSection
 import stapel.profiles.testing.renameInSettings
 import stapel.profiles.ui.AvatarPicker
 import stapel.profiles.ui.SettingsRoute
+import stapel.result.state.Resource
 import stapel.session.vault.InMemoryTokenVault
 import stapel.session.vault.TokenVault
 import stapel.wire.FilePart
@@ -33,7 +40,7 @@ import kotlin.test.fail
  * The generated app with the profiles brick, walked like a person against a scaffolded stand with auth,
  * profiles and cdn (prototype posture) at PROFILES_WALK_BASE_URL: sign in with the mock code, open the
  * settings, rename, reach the auth security screen from inside the settings, choose a language, and
- * change the avatar through a picker. Compiled in only with `-Pstapel.walk.profilesBaseUrl=<url>`;
+ * change the avatar through a picker (uploaded to stapel-cdn, stored, decoded with its variant ladder). Compiled in only with `-Pstapel.walk.profilesBaseUrl=<url>`;
  * runs on the JVM and on the iOS simulator.
  */
 @OptIn(ExperimentalTestApi::class)
@@ -71,19 +78,22 @@ class ProfilesWalkTest {
             runOnIdle { checkNotNull(app.navigator.value).back() }
             awaitTag(ProfilesTags.SETTINGS)
 
-            // Last: after an avatar is set, stapel-profiles 0.23.1 answers a profile the contract refuses
-            // (integer variant tiers; see bricks/profiles/e2e/README.md), so the screen shows that error.
-            onNode(hasTestTag(ProfilesTags.AVATAR_CHANGE)).performScrollTo().performClick()
-            // The upload and the PATCH settle; then the refused answer is on screen.
-            val refused = try {
-                waitUntil(timeoutMillis = 30_000) { onAllNodes(hasTestTag(ProfilesTags.ERROR)).fetchSemanticsNodes().isNotEmpty() }
-                true
-            } catch (e: Throwable) {
-                if (e is kotlin.coroutines.cancellation.CancellationException) throw e
-                false
+            // The avatar: picked, uploaded to stapel-cdn (the app installs cdnModule()), stored with one PATCH;
+            // the answer decodes with its variant ladder and the profile carries the image.
+            val watcher = CoroutineScope(Dispatchers.Default)
+            val avatarSeen = MutableStateFlow(false)
+            watcher.launch {
+                app.koin.get<StapelProfiles>().me.me().collect { if ((it as? Resource.Ready)?.data?.avatar != null) avatarSeen.value = true }
             }
-            if (!refused) fail("no error after the avatar change: the backend defect is fixed, assert the avatar image instead")
-            assertTrue(onAllNodes(hasTestTag(ProfilesTags.AVATAR_CHANGE) and isEnabled()).fetchSemanticsNodes().isNotEmpty(), "upload settled")
+            try {
+                onNode(hasTestTag(ProfilesTags.AVATAR_CHANGE)).performScrollTo().performClick()
+                waitUntil(timeoutMillis = 30_000) { avatarSeen.value || onAllNodes(hasTestTag(ProfilesTags.ERROR)).fetchSemanticsNodes().isNotEmpty() }
+                if (!avatarSeen.value) fail("the avatar change ended in an error on screen instead of a stored, decoded avatar")
+                waitUntil(timeoutMillis = 20_000) { onAllNodes(hasTestTag(ProfilesTags.AVATAR_CHANGE) and isEnabled()).fetchSemanticsNodes().isNotEmpty() }
+                assertTrue(onAllNodes(hasTestTag(ProfilesTags.ERROR)).fetchSemanticsNodes().isEmpty(), "no error after the avatar change")
+            } finally {
+                watcher.cancel()
+            }
         } finally {
             app.close()
         }

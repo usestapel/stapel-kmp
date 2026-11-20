@@ -1,0 +1,25 @@
+{
+    "files": {
+        "capabilities.json": {
+            "sha256": "c8ab2be3f3719f19b61d3a002b90bb325f2a5173dff467c9677e18a326caef81",
+            "source": "docs/capabilities.json"
+        },
+        "errors.json": {
+            "sha256": "dcc37dea6d38ae5681360db088d21bccb615417e4d8b2960565e7c19e54419e2",
+            "source": "docs/errors.json"
+        },
+        "flows.json": {
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "source": "docs/flows.json"
+        },
+        "schema.json": {
+            "sha256": "7f0f0386cbec61ecf083692eab182b8562db3b77741dbf773a0d24e88bc33a5b",
+            "source": "docs/schema.v2.json"
+        }
+    },
+    "module": "stapel-cdn",
+    "ref": "4b63570efccc49f017833bd374813b32d79dfe1d",
+    "repo": "https://github.com/usestapel/stapel-cdn",
+    "tag": "v0.31.2",
+    "version": "0.31.2"
+}

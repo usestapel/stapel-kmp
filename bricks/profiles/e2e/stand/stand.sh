@@ -10,11 +10,12 @@
 # Then: ./gradlew :stapel-profiles-e2e:test -Pstapel.e2e.baseUrl=http://127.0.0.1:18761/
 set -euo pipefail
 
-TOOLS_VERSION="0.84.0"
+TOOLS_VERSION="0.86.0"
 # The backends the suite proves: the pinned contracts' versions (contracts/*/pin.json) and their core.
-PROFILES_VERSION="0.23.1"
-AUTH_VERSION="0.53.1"
-CORE_VERSION="0.99.0"
+PROFILES_VERSION="0.23.3"
+AUTH_VERSION="0.54.0"
+CDN_VERSION="0.31.2"
+CORE_VERSION="0.99.4"
 PYTHON="${K15_PYTHON:-python3.12}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 STAND="$(cd "$HERE/.." && pwd)/build/stand"
@@ -39,12 +40,13 @@ scaffold() {
             --posture prototype --no-git --output-dir . >"$STAND/scaffold.log" 2>&1)
     fi
     if [[ ! -x "$PROJECT/.venv/bin/python" ]]; then
-        log "installing (stapel-profiles $PROFILES_VERSION, stapel-auth $AUTH_VERSION, stapel-core $CORE_VERSION)"
+        log "installing (stapel-profiles $PROFILES_VERSION, stapel-auth $AUTH_VERSION, stapel-cdn $CDN_VERSION, stapel-core $CORE_VERSION)"
         # The scaffold's registry may cap a library below the pinned contract: the stand moves the lines
         # it proves to exact versions and changes nothing else.
         sed -E -i '' \
             -e "s/^stapel-profiles(\[[a-z,]+\])?[<>=!~].*/stapel-profiles\1==$PROFILES_VERSION/" \
             -e "s/^stapel-auth(\[[a-z,]+\])?[<>=!~].*/stapel-auth\1==$AUTH_VERSION/" \
+            -e "s/^stapel-cdn(\[[a-z,]+\])?[<>=!~].*/stapel-cdn\1==$CDN_VERSION/" \
             -e "s/^stapel-core(\[[a-z,]+\])?[<>=!~].*/stapel-core\1==$CORE_VERSION/" \
             "$PROJECT/requirements.txt"
         "$PYTHON" -m venv "$PROJECT/.venv"

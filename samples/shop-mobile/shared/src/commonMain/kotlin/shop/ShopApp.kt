@@ -23,6 +23,7 @@ import stapel.app.di.StapelAppBuilder
 import stapel.app.di.StapelAppContent
 import stapel.app.di.stapelApp
 import stapel.auth.ui.di.AuthBrick
+import stapel.cdn.di.cdnModule
 import stapel.profiles.ui.AvatarPicker
 import stapel.profiles.ui.di.ProfilesBrick
 import stapel.config.StapelEnvironment
@@ -93,7 +94,8 @@ fun createShopApp(
     )
     bricks(AuthBrick(), ProfilesBrick(picker = avatarPicker))
     screens(::shopScreens)
-    modules(module { single<OrdersApi> { OrdersApiClient(get<ApiTransport>()) } })
+    // stapel-cdn as the app's media uploader: where the profiles avatar goes.
+    modules(cdnModule(), module { single<OrdersApi> { OrdersApiClient(get<ApiTransport>()) } })
     navigation(
         home = DestinationId("shop.home"),
         deepLinks = DeepLinkConfig(schemes = setOf("shopmobile"), hosts = setOf("shop.example.com")),

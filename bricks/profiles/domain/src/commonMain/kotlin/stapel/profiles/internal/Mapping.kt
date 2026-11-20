@@ -15,6 +15,7 @@ import stapel.profiles.model.AvatarRef
 import stapel.profiles.model.Contact
 import stapel.profiles.model.ContactPolicy
 import stapel.profiles.model.Contacts
+import stapel.profiles.model.Disclosed
 import stapel.profiles.model.Language
 import stapel.profiles.model.MyProfile
 import stapel.profiles.model.NotificationPreferences
@@ -85,7 +86,7 @@ internal fun ProfilePublicResponse.toDomain(viewerId: String?): PublicProfile = 
     userId = userId,
     displayName = displayName,
     avatar = avatarImage?.toImage(),
-    location = locationDisplayNameBroad,
+    location = Disclosed.text(locationDisplayNameBroad),
     followersCount = followersCount,
     followingCount = followingCount,
     relationship = if (viewerId != null && viewerId == userId) RelationshipStatus.Self else RelationshipStatus.of(relationshipStatus),
@@ -98,7 +99,7 @@ internal fun ProfilePublic.toDomain(viewerId: String?): PublicProfile = PublicPr
     userId = userId,
     displayName = displayName.orEmpty(),
     avatar = avatarImage?.toImage(),
-    location = locationDisplayNameBroad.orEmpty(),
+    location = Disclosed.text(locationDisplayNameBroad),
     followersCount = followersCount,
     followingCount = followingCount,
     relationship = if (viewerId != null && viewerId == userId) RelationshipStatus.Self else RelationshipStatus.of(relationshipStatus),

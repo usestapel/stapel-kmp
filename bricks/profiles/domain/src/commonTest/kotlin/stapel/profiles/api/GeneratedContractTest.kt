@@ -8,7 +8,11 @@ import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import stapel.profiles.api.error.ProfilesApiError
 import stapel.profiles.api.error.RequestContactVerificationError
+import stapel.profiles.api.model.ProfilePublicResponse
 import stapel.profiles.api.model.ProfileResponse
+import stapel.profiles.internal.toDomain
+import stapel.profiles.model.Disclosed
+import stapel.profiles.model.RelationshipStatus
 import stapel.result.ErrorCode
 import stapel.result.ErrorEnvelope
 import stapel.result.ErrorParams
@@ -21,12 +25,12 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
-/** Proves the generated profiles client against its pinned contract (stapel-profiles 0.23.1, profile 2). */
+/** Proves the generated profiles client against its pinned contract (stapel-profiles 0.23.3, profile 2). */
 class GeneratedContractTest {
     @Test
     fun generatedCodeTargetsThisRuntimeAndThePin() {
         assertEquals(CODEGEN_RUNTIME_ABI, ProfilesContract.RUNTIME_ABI)
-        assertEquals("0.23.1", ProfilesContract.VERSION)
+        assertEquals("0.23.3", ProfilesContract.VERSION)
         assertEquals(2, ProfilesContract.PROFILE)
     }
 
@@ -75,15 +79,41 @@ class GeneratedContractTest {
 
     @Test
     fun avatarVariantTiersAreStringsOnTheWireAsTheContractDeclares() {
-        // stapel-profiles 0.23.1 declares VariantMetaDTO.tier a string ("320" / "original") and the
-        // client holds it to that. Its /me serializer emits the avatar ladder with integer tiers (a
-        // backend defect, reported upstream): such an answer is refused, not coerced.
+        // VariantMetaDTO.tier is a string ("320" / "original"), and stapel-profiles serves it so since
+        // 0.23.3 (0.23.1 sent integers). The client holds the wire to the contract: an integer tier is
+        // refused, not coerced.
         val withString = ME.replace("TIER", "\"120\"")
         assertEquals("120", WireJson.decodeFromString(ProfileResponse.serializer(), withString).avatarImage?.variants?.single()?.tier)
         assertFailsWith<SerializationException> { WireJson.decodeFromString(ProfileResponse.serializer(), ME.replace("TIER", "120")) }
     }
 
+    @Test
+    fun aViewerWithoutAnAccountGetsTheDeclaredShapeAndTheDomainTellsWithheldFromNotSet() {
+        // stapel-profiles 0.23.3: a withheld field is answered null, never dropped; counters ride along.
+        val anonymous = WireJson.decodeFromString(ProfilePublicResponse.serializer(), PUBLIC.replace("LOC", "null").replace("REL", "null"))
+        val seen = anonymous.toDomain(viewerId = null)
+        assertEquals(Disclosed.Withheld, seen.location)
+        assertEquals(RelationshipStatus.Withheld, seen.relationship)
+        assertEquals(3, seen.followersCount)
+        assertEquals(1, seen.followingCount)
+
+        val unset = WireJson.decodeFromString(ProfilePublicResponse.serializer(), PUBLIC.replace("LOC", "\"\"").replace("REL", "\"neutral\""))
+            .toDomain(viewerId = "viewer")
+        assertEquals(Disclosed.NotSet, unset.location)
+        assertEquals(RelationshipStatus.Neutral, unset.relationship)
+
+        val shown = WireJson.decodeFromString(ProfilePublicResponse.serializer(), PUBLIC.replace("LOC", "\"Mamer\"").replace("REL", "\"self\""))
+            .toDomain(viewerId = "someone-else")
+        assertEquals(Disclosed.Shown("Mamer"), shown.location)
+        assertEquals(RelationshipStatus.Self, shown.relationship, "the server's own 'self' is understood")
+    }
+
     private companion object {
+        const val PUBLIC = """{"user_id":"u2","display_name":"Grace","avatar_source":"","avatar":"","avatar_image":null,
+            "location_id":null,"location_display_name_narrow":LOC,"location_display_name_broad":LOC,"followers_count":3,
+            "following_count":1,"relationship_status":REL,"seller_type":null,"created_at":"2026-01-02T03:04:05Z","contacts":{"phone":false}}"""
+
+
         const val ME = """{"user_id":"u1","display_name":"Ada","theme":"system","avatar_source":"cdn","avatar":"avatar/x",
             "avatar_image":{"source":"cdn","url":"/avatar/x/a.png","mime":"image/png","width":128,"height":128,"aspect":1.0,"square":true,
             "preview_b64":null,"variants":[{"tier":TIER,"branch":null,"url":"/avatar/x/120.webp","width":120,"height":120}]},

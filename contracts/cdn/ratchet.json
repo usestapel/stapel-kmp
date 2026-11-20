@@ -1,0 +1,10 @@
+{
+    "diagnostics": {
+        "W-DOC-PARAM": 5,
+        "W-DOC-PROPERTY": 106,
+        "W-DOC-TYPE": 13,
+        "W-ERR-STATUS-UNBOUND": 12,
+        "W-UNTYPED-UNION": 1
+    },
+    "overlay_entries": 0
+}

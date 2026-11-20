@@ -23,6 +23,7 @@ import stapel.navigation.NavIcons
 import stapel.profiles.model.Contact
 import stapel.profiles.model.ContactPolicy
 import stapel.profiles.model.Contacts
+import stapel.profiles.model.Disclosed
 import stapel.profiles.model.Language
 import stapel.profiles.model.MyProfile
 import stapel.profiles.model.NotificationPreferences
@@ -103,7 +104,7 @@ val ada = MyProfile(
 val languages = listOf(Language("en", "English", null), Language("ru", "Russian", null))
 
 fun grace(relationship: RelationshipStatus = RelationshipStatus.Neutral) = PublicProfile(
-    userId = "u2", displayName = "Grace", avatar = null, location = "Paris", followersCount = 1, followingCount = 1,
+    userId = "u2", displayName = "Grace", avatar = null, location = Disclosed.Shown("Paris"), followersCount = 1, followingCount = 1,
     relationship = relationship, sellerType = null, createdAt = null, hasPhone = false,
 )
 

@@ -195,17 +195,59 @@ public sealed interface RelationshipStatus {
         override val wire: String? = null
     }
 
-    /** The server sent nothing (anonymous viewer) or a value this client does not know. */
+    /**
+     * The server withheld it (`null` on the wire): the viewer has no account, or the deployment's
+     * visibility policy does not show it to this viewer.
+     */
+    public data object Withheld : RelationshipStatus {
+        override val wire: String? = null
+    }
+
+    /** A value this client does not know. */
     public data class Unknown(override val wire: String?) : RelationshipStatus
 
     /** Parsing. */
     public companion object {
-        /** [wire] as a status. */
+        /** [wire] as a status; `null` is [Withheld]. */
         public fun of(wire: String?): RelationshipStatus = when (wire) {
+            null -> Withheld
             "neutral" -> Neutral
             "following" -> Following
             "blocked" -> Blocked
+            "self" -> Self
             else -> Unknown(wire)
+        }
+    }
+}
+
+/**
+ * A field of another person's profile as this viewer may see it: [Shown], [NotSet] by the person, or
+ * [Withheld] from this viewer by the deployment's visibility policy (a viewer without an account sees
+ * no location by default). The server answers a withheld field as `null` and an unset one as empty.
+ */
+public sealed interface Disclosed<out T : Any> {
+    /** The value, shown to this viewer. */
+    public data class Shown<out T : Any>(
+        /** The value. */
+        val value: T,
+    ) : Disclosed<T>
+
+    /** The person has not set it. */
+    public data object NotSet : Disclosed<Nothing>
+
+    /** Not shown to this viewer. */
+    public data object Withheld : Disclosed<Nothing>
+
+    /** The shown value, or null when [NotSet] or [Withheld]. */
+    public fun valueOrNull(): T? = (this as? Shown<T>)?.value
+
+    /** Parsing. */
+    public companion object {
+        /** A text field: `null` is [Withheld], blank is [NotSet]. */
+        public fun text(wire: String?): Disclosed<String> = when {
+            wire == null -> Withheld
+            wire.isBlank() -> NotSet
+            else -> Shown(wire)
         }
     }
 }
@@ -216,7 +258,8 @@ public sealed interface RelationshipStatus {
  * @property userId account id.
  * @property displayName the name; empty when not set.
  * @property avatar the renderable avatar, or null.
- * @property location the coarse location; empty when not set.
+ * @property location the coarse location: shown, not set, or withheld from this viewer (a viewer
+ *   without an account, by default).
  * @property followersCount followers.
  * @property followingCount people followed.
  * @property relationship the viewer's relationship to this person.
@@ -228,7 +271,7 @@ public data class PublicProfile(
     val userId: String,
     val displayName: String,
     val avatar: StapelImage?,
-    val location: String,
+    val location: Disclosed<String>,
     val followersCount: Int,
     val followingCount: Int,
     val relationship: RelationshipStatus,

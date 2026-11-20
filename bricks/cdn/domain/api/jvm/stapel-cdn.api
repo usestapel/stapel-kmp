@@ -1,0 +1,2510 @@
+public abstract interface class stapel/cdn/api/CdnApi {
+	public abstract fun cdnImageOriginal (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun cdnSignedMedia (Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun checkFileExistsGet (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun checkFileExistsPost (Lstapel/cdn/api/model/FileExists;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun describeMedia (Lstapel/cdn/api/model/DescribeManyRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun randomImage (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun syncRefs (Lstapel/cdn/api/model/RefSyncRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun uploadAudio (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun uploadAudio$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun uploadAvatar (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun uploadAvatar$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun uploadFile (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun uploadFile$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun uploadImage (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun uploadImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun uploadTypedImage (Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun uploadTypedImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun uploadVideo (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun uploadVideo$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class stapel/cdn/api/CdnApi$DefaultImpls {
+	public static synthetic fun uploadAudio$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun uploadAvatar$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun uploadFile$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun uploadImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun uploadTypedImage$default (Lstapel/cdn/api/CdnApi;Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun uploadVideo$default (Lstapel/cdn/api/CdnApi;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class stapel/cdn/api/CdnApiClient : stapel/cdn/api/CdnApi {
+	public fun <init> (Lstapel/wire/ApiTransport;)V
+	public fun cdnImageOriginal (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun cdnSignedMedia (Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun checkFileExistsGet (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun checkFileExistsPost (Lstapel/cdn/api/model/FileExists;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun describeMedia (Lstapel/cdn/api/model/DescribeManyRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun randomImage (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun syncRefs (Lstapel/cdn/api/model/RefSyncRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun uploadAudio (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun uploadAvatar (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun uploadFile (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun uploadImage (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun uploadTypedImage (Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun uploadVideo (Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cdn/api/CdnContract {
+	public static final field INSTANCE Lstapel/cdn/api/CdnContract;
+	public static final field MODULE Ljava/lang/String;
+	public static final field PROFILE I
+	public static final field REF Ljava/lang/String;
+	public static final field RUNTIME_ABI I
+	public static final field SCHEMA_SHA256 Ljava/lang/String;
+	public static final field VERSION Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/CdnInvalidation {
+	public static final field INSTANCE Lstapel/cdn/api/CdnInvalidation;
+	public final fun after (Ljava/lang/String;)Ljava/util/List;
+	public final fun getTable ()Ljava/util/Map;
+}
+
+public final class stapel/cdn/api/CdnKeys {
+	public static final field INSTANCE Lstapel/cdn/api/CdnKeys;
+	public final fun cdnImageOriginal (Ljava/lang/String;Ljava/lang/String;)Lstapel/wire/CacheKey;
+	public final fun cdnSignedMedia (Ljava/lang/String;)Lstapel/wire/CacheKey;
+	public final fun checkFileExistsGet (Ljava/lang/String;)Lstapel/wire/CacheKey;
+	public final fun getAll ()Lstapel/wire/KeyPattern;
+	public final fun getHints ()Ljava/util/Map;
+	public final fun randomImage (Ljava/lang/String;)Lstapel/wire/CacheKey;
+}
+
+public abstract interface class stapel/cdn/api/error/CdnApiError : stapel/result/StapelError {
+	public static final field Companion Lstapel/cdn/api/error/CdnApiError$Companion;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$AdNotFound : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$AdNotFound;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$AdNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$AdNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$BadRequest : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$BadRequest;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$BadRequest;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$BadRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$CaptchaInvalid : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$CaptchaInvalid;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$CaptchaInvalid;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$CaptchaInvalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$CaptchaRequired : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$CaptchaRequired;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$CaptchaRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$CaptchaRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Companion {
+	public final fun decode (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Conflict : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$Conflict;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Conflict;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Conflict;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$ExpectedList : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$ExpectedList;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$ExpectedList;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$ExpectedList;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldBlank : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldBlank;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldBlank;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldBlank;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldDoesNotExist : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldDoesNotExist;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldDoesNotExist;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldDoesNotExist;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldInvalid : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldInvalid;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldInvalid;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldInvalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldInvalidChoice : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldInvalidChoice;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldInvalidChoice;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldInvalidChoice;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldMaxLength : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldMaxLength;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldMaxLength;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldMaxLength;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMaxLength ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldMaxValue : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldMaxValue;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldMaxValue;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldMaxValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMaxValue ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldMinLength : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldMinLength;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldMinLength;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldMinLength;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMinLength ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldMinValue : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldMinValue;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldMinValue;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldMinValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMinValue ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldNull : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldNull;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldNull;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldNull;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldRequired : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldRequired;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FieldUnique : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FieldUnique;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FieldUnique;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FieldUnique;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FileHashRequired : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/CheckFileExistsGetError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FileHashRequired;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FileHashRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FileHashRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FileTooLarge : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadAudioError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/cdn/api/error/UploadVideoError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FileTooLarge;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FileTooLarge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FileTooLarge;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$FileTypeNotAllowed : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadAudioError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadFileError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/cdn/api/error/UploadVideoError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$FileTypeNotAllowed;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$FileTypeNotAllowed;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$FileTypeNotAllowed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Forbidden : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$Forbidden;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Forbidden;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Forbidden;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Gone : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$Gone;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Gone;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Gone;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$ImageDecoderUnavailable : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$ImageDecoderUnavailable;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$ImageDecoderUnavailable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$ImageDecoderUnavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getExtension ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$ImageTypeRequired : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadImageError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$ImageTypeRequired;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$ImageTypeRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$ImageTypeRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Internal : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadAudioError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadFileError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/cdn/api/error/UploadVideoError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$Internal;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Internal;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Internal;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$InvalidAdId : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$InvalidAdId;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$InvalidAdId;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$InvalidAdId;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$InvalidFormat : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadAudioError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadFileError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/cdn/api/error/UploadVideoError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$InvalidFormat;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$InvalidFormat;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$InvalidFormat;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$InvalidHash : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$InvalidHash;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$InvalidHash;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$InvalidHash;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$InvalidImageType : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/RandomImageError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$InvalidImageType;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$InvalidImageType;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$InvalidImageType;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Locked : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$Locked;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Locked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Locked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$MandateUnavailable : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$MandateUnavailable;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$MandateUnavailable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$MandateUnavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$MediaNotFound : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/CdnImageOriginalError, stapel/cdn/api/error/CdnSignedMediaError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$MediaNotFound;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$MediaNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$MediaNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$MethodNotAllowed : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$MethodNotAllowed;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$MethodNotAllowed;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$MethodNotAllowed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$MissingFields : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/SyncRefsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$MissingFields;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$MissingFields;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$MissingFields;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$NetworkBlocked : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$NetworkBlocked;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$NetworkBlocked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$NetworkBlocked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$NoFile : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadFileError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$NoFile;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$NoFile;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$NoFile;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$NoImages : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/RandomImageError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$NoImages;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$NoImages;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$NoImages;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$NotAcceptable : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$NotAcceptable;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$NotAcceptable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$NotAcceptable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$NotFound : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$NotFound;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$NotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$NotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$PayloadTooLarge : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$PayloadTooLarge;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$PayloadTooLarge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$PayloadTooLarge;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$PaymentRequired : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$PaymentRequired;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$PaymentRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$PaymentRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$RateLimit : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$RateLimit;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$RateLimit;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$RateLimit;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter ()Ljava/lang/Integer;
+	public final fun getRetryAfterDisplay ()Ljava/lang/String;
+	public final fun getRetryAfterMinutes ()Ljava/lang/Integer;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$RequestTimeout : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$RequestTimeout;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$RequestTimeout;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$RequestTimeout;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$StorageQuotaExceeded : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/UploadAudioError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadFileError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/cdn/api/error/UploadVideoError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$StorageQuotaExceeded;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$StorageQuotaExceeded;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$StorageQuotaExceeded;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$TooManyIds : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$TooManyIds;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$TooManyIds;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$TooManyIds;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getLimit ()Ljava/lang/Integer;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRequested ()Ljava/lang/Integer;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$TooManyRefs : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/DescribeMediaError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$TooManyRefs;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$TooManyRefs;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$TooManyRefs;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public final fun getCount ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getMax ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$TooManyRequests : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$TooManyRequests;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$TooManyRequests;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$TooManyRequests;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Transport : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/CdnImageOriginalError, stapel/cdn/api/error/CdnSignedMediaError, stapel/cdn/api/error/CheckFileExistsGetError, stapel/cdn/api/error/DescribeMediaError, stapel/cdn/api/error/RandomImageError, stapel/cdn/api/error/SyncRefsError, stapel/cdn/api/error/UploadAudioError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadFileError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/cdn/api/error/UploadVideoError, stapel/result/TransportCarrier {
+	public fun <init> (Lstapel/result/TransportFailure;)V
+	public final fun component1 ()Lstapel/result/TransportFailure;
+	public final fun copy (Lstapel/result/TransportFailure;)Lstapel/cdn/api/error/CdnApiError$Transport;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Transport;Lstapel/result/TransportFailure;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Transport;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getFailure ()Lstapel/result/TransportFailure;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Unauthorized : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$Unauthorized;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Unauthorized;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Unauthorized;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$Unknown : stapel/cdn/api/error/CdnApiError, stapel/cdn/api/error/CdnImageOriginalError, stapel/cdn/api/error/CdnSignedMediaError, stapel/cdn/api/error/CheckFileExistsGetError, stapel/cdn/api/error/DescribeMediaError, stapel/cdn/api/error/RandomImageError, stapel/cdn/api/error/SyncRefsError, stapel/cdn/api/error/UploadAudioError, stapel/cdn/api/error/UploadAvatarError, stapel/cdn/api/error/UploadFileError, stapel/cdn/api/error/UploadImageError, stapel/cdn/api/error/UploadTypedImageError, stapel/cdn/api/error/UploadVideoError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$Unknown;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$UnprocessableEntity : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$UnprocessableEntity;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$UnprocessableEntity;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$UnprocessableEntity;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$UnsupportedMediaType : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$UnsupportedMediaType;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$UnsupportedMediaType;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$UnsupportedMediaType;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$ValidationError : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$ValidationError;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$ValidationError;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$ValidationError;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$VerificationChallengeNotFound : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$VerificationChallengeNotFound;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$VerificationChallengeNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$VerificationChallengeNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$VerificationEnrollmentRequired : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$VerificationEnrollmentRequired;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$VerificationEnrollmentRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$VerificationEnrollmentRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$VerificationFailed : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$VerificationFailed;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$VerificationFailed;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$VerificationFailed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$VerificationInvalidFactor : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$VerificationInvalidFactor;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$VerificationInvalidFactor;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$VerificationInvalidFactor;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$VerificationLocked : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$VerificationLocked;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$VerificationLocked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$VerificationLocked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnApiError$VerificationRequired : stapel/cdn/api/error/CdnApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/cdn/api/error/CdnApiError$VerificationRequired;
+	public static synthetic fun copy$default (Lstapel/cdn/api/error/CdnApiError$VerificationRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/cdn/api/error/CdnApiError$VerificationRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/error/CdnErrorCatalog : stapel/result/text/ErrorCatalog {
+	public static final field INSTANCE Lstapel/cdn/api/error/CdnErrorCatalog;
+	public fun getOwner ()Ljava/lang/String;
+	public fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/cdn/api/error/CdnImageOriginalError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/CdnSignedMediaError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/CheckFileExistsGetError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/DescribeMediaError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/RandomImageError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/SyncRefsError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/UploadAudioError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/UploadAvatarError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/UploadFileError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/UploadImageError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/UploadTypedImageError : stapel/cdn/api/error/CdnApiError {
+}
+
+public abstract interface class stapel/cdn/api/error/UploadVideoError : stapel/cdn/api/error/CdnApiError {
+}
+
+public final class stapel/cdn/api/model/Audio {
+	public static final field Companion Lstapel/cdn/api/model/Audio$Companion;
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Double;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMeta;Ljava/util/List;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Double;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMeta;Ljava/util/List;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Lstapel/cdn/api/model/AudioRenderMeta;
+	public final fun component12 ()Ljava/util/List;
+	public final fun component13 ()Z
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component16 ()Lkotlin/time/Instant;
+	public final fun component17 ()Lkotlin/time/Instant;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()I
+	public final fun component8 ()Ljava/lang/Double;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Double;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMeta;Ljava/util/List;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lstapel/cdn/api/model/Audio;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/Audio;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Double;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMeta;Ljava/util/List;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lstapel/cdn/api/model/Audio;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getDuration ()Ljava/lang/Double;
+	public final fun getFileExtension ()Ljava/lang/String;
+	public final fun getFileHash ()Ljava/lang/String;
+	public final fun getId ()I
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getOriginalFilename ()Ljava/lang/String;
+	public final fun getOriginalSize ()I
+	public final fun getOriginalUrl ()Ljava/lang/String;
+	public final fun getPreviewB64 ()Ljava/lang/String;
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getRefs ()Ljava/util/List;
+	public final fun getRenderMeta ()Lstapel/cdn/api/model/AudioRenderMeta;
+	public final fun getUpdatedAt ()Lkotlin/time/Instant;
+	public final fun getUploadedBy ()Ljava/lang/String;
+	public final fun getUploadedByUsername ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isCompressed ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/Audio$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/Audio$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/Audio;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/Audio;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/Audio$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMeta {
+	public static final field Companion Lstapel/cdn/api/model/AudioRenderMeta$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/Boolean;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Lstapel/cdn/api/model/AudioRenderMetaPreviewKind;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Lstapel/cdn/api/model/AudioRenderMetaMetaStatus;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()I
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()Ljava/lang/Integer;
+	public final fun component8 ()Ljava/lang/Double;
+	public final fun component9 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)Lstapel/cdn/api/model/AudioRenderMeta;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/AudioRenderMeta;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/AudioRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/AudioRenderMeta;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnimated ()Ljava/lang/Boolean;
+	public final fun getAspect ()Ljava/lang/Double;
+	public final fun getBytes ()I
+	public final fun getDurationMs ()Ljava/lang/Integer;
+	public final fun getExt ()Ljava/lang/String;
+	public final fun getHeight ()Ljava/lang/Integer;
+	public final fun getKind ()Ljava/lang/String;
+	public final fun getMetaReason ()Ljava/lang/String;
+	public final fun getMetaStatus ()Lstapel/cdn/api/model/AudioRenderMetaMetaStatus;
+	public final fun getMime ()Ljava/lang/String;
+	public final fun getPosterUrl ()Ljava/lang/String;
+	public final fun getPreviewB64 ()Ljava/lang/String;
+	public final fun getPreviewKind ()Lstapel/cdn/api/model/AudioRenderMetaPreviewKind;
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getSquare ()Ljava/lang/Boolean;
+	public final fun getVariants ()Ljava/util/List;
+	public final fun getWidth ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/AudioRenderMeta$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioRenderMeta$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/AudioRenderMeta;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/AudioRenderMeta;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMeta$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/cdn/api/model/AudioRenderMetaMetaStatus : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/AudioRenderMetaMetaStatus$Companion;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaMetaStatus$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/AudioRenderMetaMetaStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaMetaStatus$Missing : stapel/cdn/api/model/AudioRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioRenderMetaMetaStatus$Missing;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaMetaStatus$Ok : stapel/cdn/api/model/AudioRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioRenderMetaMetaStatus$Ok;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaMetaStatus$Partial : stapel/cdn/api/model/AudioRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioRenderMetaMetaStatus$Partial;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaMetaStatus$Unknown : stapel/cdn/api/model/AudioRenderMetaMetaStatus {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/AudioRenderMetaMetaStatus$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/AudioRenderMetaMetaStatus$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/AudioRenderMetaMetaStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cdn/api/model/AudioRenderMetaPreviewKind : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/AudioRenderMetaPreviewKind$Companion;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaPreviewKind$Blur : stapel/cdn/api/model/AudioRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioRenderMetaPreviewKind$Blur;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaPreviewKind$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/AudioRenderMetaPreviewKind;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaPreviewKind$Poster : stapel/cdn/api/model/AudioRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioRenderMetaPreviewKind$Poster;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaPreviewKind$Unknown : stapel/cdn/api/model/AudioRenderMetaPreviewKind {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/AudioRenderMetaPreviewKind$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/AudioRenderMetaPreviewKind$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/AudioRenderMetaPreviewKind$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/AudioRenderMetaPreviewKind$Waveform : stapel/cdn/api/model/AudioRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioRenderMetaPreviewKind$Waveform;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/AudioUploadResponse {
+	public static final field Companion Lstapel/cdn/api/model/AudioUploadResponse$Companion;
+	public fun <init> (Lstapel/cdn/api/model/Audio;Ljava/lang/String;)V
+	public final fun component1 ()Lstapel/cdn/api/model/Audio;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/cdn/api/model/Audio;Ljava/lang/String;)Lstapel/cdn/api/model/AudioUploadResponse;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/AudioUploadResponse;Lstapel/cdn/api/model/Audio;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/AudioUploadResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAudio ()Lstapel/cdn/api/model/Audio;
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/AudioUploadResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/AudioUploadResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/AudioUploadResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/AudioUploadResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/AudioUploadResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyRequest {
+	public static final field Companion Lstapel/cdn/api/model/DescribeManyRequest$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lstapel/cdn/api/model/DescribeManyRequest;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/DescribeManyRequest;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/DescribeManyRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRefs ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/DescribeManyRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/DescribeManyRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/DescribeManyRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponse {
+	public static final field Companion Lstapel/cdn/api/model/DescribeManyResponse$Companion;
+	public fun <init> (Ljava/util/Map;Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/Map;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/util/Map;Ljava/util/List;)Lstapel/cdn/api/model/DescribeManyResponse;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/DescribeManyResponse;Ljava/util/Map;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/DescribeManyResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getItems ()Ljava/util/Map;
+	public final fun getMissing ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/DescribeManyResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/DescribeManyResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/DescribeManyResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValue {
+	public static final field Companion Lstapel/cdn/api/model/DescribeManyResponseItemsValue$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus;Ljava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/Boolean;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()I
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()Ljava/lang/Integer;
+	public final fun component8 ()Ljava/lang/Double;
+	public final fun component9 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus;Ljava/lang/String;Ljava/util/List;)Lstapel/cdn/api/model/DescribeManyResponseItemsValue;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/DescribeManyResponseItemsValue;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/DescribeManyResponseItemsValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnimated ()Ljava/lang/Boolean;
+	public final fun getAspect ()Ljava/lang/Double;
+	public final fun getBytes ()I
+	public final fun getDurationMs ()Ljava/lang/Integer;
+	public final fun getExt ()Ljava/lang/String;
+	public final fun getHeight ()Ljava/lang/Integer;
+	public final fun getKind ()Ljava/lang/String;
+	public final fun getMetaReason ()Ljava/lang/String;
+	public final fun getMetaStatus ()Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus;
+	public final fun getMime ()Ljava/lang/String;
+	public final fun getPosterUrl ()Ljava/lang/String;
+	public final fun getPreviewB64 ()Ljava/lang/String;
+	public final fun getPreviewKind ()Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind;
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getSquare ()Ljava/lang/Boolean;
+	public final fun getVariants ()Ljava/util/List;
+	public final fun getWidth ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/DescribeManyResponseItemsValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponseItemsValue$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/DescribeManyResponseItemsValue;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/DescribeManyResponseItemsValue;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValue$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Companion;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Missing : stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Missing;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Ok : stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Ok;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Partial : stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Partial;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Unknown : stapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/DescribeManyResponseItemsValueMetaStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Companion;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Blur : stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Blur;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Poster : stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Poster;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Unknown : stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Waveform : stapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/DescribeManyResponseItemsValuePreviewKind$Waveform;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileExists {
+	public static final field Companion Lstapel/cdn/api/model/FileExists$Companion;
+	public static final field FILE_HASH_MAX_LENGTH I
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/FileExists;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/FileExists;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/FileExists;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFileHash ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/FileExists$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileExists$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/FileExists;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/FileExists;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileExists$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileExistsResponse {
+	public static final field Companion Lstapel/cdn/api/model/FileExistsResponse$Companion;
+	public fun <init> (Lkotlinx/serialization/json/JsonElement;ZLjava/lang/String;)V
+	public final fun component1 ()Lkotlinx/serialization/json/JsonElement;
+	public final fun component2 ()Z
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Lkotlinx/serialization/json/JsonElement;ZLjava/lang/String;)Lstapel/cdn/api/model/FileExistsResponse;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/FileExistsResponse;Lkotlinx/serialization/json/JsonElement;ZLjava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/FileExistsResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExists ()Z
+	public final fun getFile ()Lkotlinx/serialization/json/JsonElement;
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/FileExistsResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileExistsResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/FileExistsResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/FileExistsResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileExistsResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileModel {
+	public static final field Companion Lstapel/cdn/api/model/FileModel$Companion;
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMeta;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMeta;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Lkotlin/time/Instant;
+	public final fun component14 ()Lkotlin/time/Instant;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()I
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Lstapel/cdn/api/model/FileModelRenderMeta;
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMeta;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lstapel/cdn/api/model/FileModel;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/FileModel;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMeta;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lstapel/cdn/api/model/FileModel;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getFileExtension ()Ljava/lang/String;
+	public final fun getFileHash ()Ljava/lang/String;
+	public final fun getId ()I
+	public final fun getMimeType ()Ljava/lang/String;
+	public final fun getOriginalFilename ()Ljava/lang/String;
+	public final fun getOriginalSize ()I
+	public final fun getOriginalUrl ()Ljava/lang/String;
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getRefs ()Ljava/util/List;
+	public final fun getRenderMeta ()Lstapel/cdn/api/model/FileModelRenderMeta;
+	public final fun getUpdatedAt ()Lkotlin/time/Instant;
+	public final fun getUploadedBy ()Ljava/lang/String;
+	public final fun getUploadedByUsername ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/FileModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModel$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/FileModel;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/FileModel;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileModel$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMeta {
+	public static final field Companion Lstapel/cdn/api/model/FileModelRenderMeta$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/Boolean;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()I
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()Ljava/lang/Integer;
+	public final fun component8 ()Ljava/lang/Double;
+	public final fun component9 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)Lstapel/cdn/api/model/FileModelRenderMeta;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/FileModelRenderMeta;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/FileModelRenderMeta;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnimated ()Ljava/lang/Boolean;
+	public final fun getAspect ()Ljava/lang/Double;
+	public final fun getBytes ()I
+	public final fun getDurationMs ()Ljava/lang/Integer;
+	public final fun getExt ()Ljava/lang/String;
+	public final fun getHeight ()Ljava/lang/Integer;
+	public final fun getKind ()Ljava/lang/String;
+	public final fun getMetaReason ()Ljava/lang/String;
+	public final fun getMetaStatus ()Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus;
+	public final fun getMime ()Ljava/lang/String;
+	public final fun getPosterUrl ()Ljava/lang/String;
+	public final fun getPreviewB64 ()Ljava/lang/String;
+	public final fun getPreviewKind ()Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind;
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getSquare ()Ljava/lang/Boolean;
+	public final fun getVariants ()Ljava/util/List;
+	public final fun getWidth ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/FileModelRenderMeta$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModelRenderMeta$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/FileModelRenderMeta;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/FileModelRenderMeta;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMeta$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/cdn/api/model/FileModelRenderMetaMetaStatus : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus$Companion;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaMetaStatus$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaMetaStatus$Missing : stapel/cdn/api/model/FileModelRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus$Missing;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaMetaStatus$Ok : stapel/cdn/api/model/FileModelRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus$Ok;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaMetaStatus$Partial : stapel/cdn/api/model/FileModelRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus$Partial;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaMetaStatus$Unknown : stapel/cdn/api/model/FileModelRenderMetaMetaStatus {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/FileModelRenderMetaMetaStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cdn/api/model/FileModelRenderMetaPreviewKind : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind$Companion;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaPreviewKind$Blur : stapel/cdn/api/model/FileModelRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind$Blur;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaPreviewKind$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaPreviewKind$Poster : stapel/cdn/api/model/FileModelRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind$Poster;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaPreviewKind$Unknown : stapel/cdn/api/model/FileModelRenderMetaPreviewKind {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileModelRenderMetaPreviewKind$Waveform : stapel/cdn/api/model/FileModelRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileModelRenderMetaPreviewKind$Waveform;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/FileUploadResponse {
+	public static final field Companion Lstapel/cdn/api/model/FileUploadResponse$Companion;
+	public fun <init> (Lstapel/cdn/api/model/FileModel;Ljava/lang/String;)V
+	public final fun component1 ()Lstapel/cdn/api/model/FileModel;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/cdn/api/model/FileModel;Ljava/lang/String;)Lstapel/cdn/api/model/FileUploadResponse;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/FileUploadResponse;Lstapel/cdn/api/model/FileModel;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/FileUploadResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFile ()Lstapel/cdn/api/model/FileModel;
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/FileUploadResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/FileUploadResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/FileUploadResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/FileUploadResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/FileUploadResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/Image {
+	public static final field Companion Lstapel/cdn/api/model/Image$Companion;
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/Type;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/cdn/api/model/VariantsStatus;Lkotlin/time/Instant;Lstapel/cdn/api/model/ImageRenderMeta;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Ljava/lang/String;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/lang/String;
+	public final fun component18 ()Ljava/lang/String;
+	public final fun component19 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component20 ()Ljava/lang/String;
+	public final fun component21 ()Ljava/lang/String;
+	public final fun component22 ()Ljava/lang/String;
+	public final fun component23 ()Ljava/util/List;
+	public final fun component24 ()Lstapel/cdn/api/model/VariantsStatus;
+	public final fun component25 ()Lkotlin/time/Instant;
+	public final fun component26 ()Lstapel/cdn/api/model/ImageRenderMeta;
+	public final fun component27 ()Z
+	public final fun component28 ()Ljava/lang/String;
+	public final fun component29 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component30 ()Lkotlin/time/Instant;
+	public final fun component31 ()Lkotlin/time/Instant;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lstapel/cdn/api/model/Type;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()I
+	public final fun component8 ()I
+	public final fun component9 ()I
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/Type;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/cdn/api/model/VariantsStatus;Lkotlin/time/Instant;Lstapel/cdn/api/model/ImageRenderMeta;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lstapel/cdn/api/model/Image;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/Image;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/Type;Ljava/lang/String;IIILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lstapel/cdn/api/model/VariantsStatus;Lkotlin/time/Instant;Lstapel/cdn/api/model/ImageRenderMeta;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lstapel/cdn/api/model/Image;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getFileExtension ()Ljava/lang/String;
+	public final fun getFileHash ()Ljava/lang/String;
+	public final fun getId ()I
+	public final fun getOriginalFilename ()Ljava/lang/String;
+	public final fun getOriginalHeight ()I
+	public final fun getOriginalSize ()I
+	public final fun getOriginalUrl ()Ljava/lang/String;
+	public final fun getOriginalWidth ()I
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getRenderMeta ()Lstapel/cdn/api/model/ImageRenderMeta;
+	public final fun getType ()Lstapel/cdn/api/model/Type;
+	public final fun getUpdatedAt ()Lkotlin/time/Instant;
+	public final fun getUploadedBy ()Ljava/lang/String;
+	public final fun getUploadedByUsername ()Ljava/lang/String;
+	public final fun getVariant1080Url ()Ljava/lang/String;
+	public final fun getVariant120Url ()Ljava/lang/String;
+	public final fun getVariant1440Url ()Ljava/lang/String;
+	public final fun getVariant160Url ()Ljava/lang/String;
+	public final fun getVariant16Url ()Ljava/lang/String;
+	public final fun getVariant2160Url ()Ljava/lang/String;
+	public final fun getVariant240Url ()Ljava/lang/String;
+	public final fun getVariant32Url ()Ljava/lang/String;
+	public final fun getVariant480Url ()Ljava/lang/String;
+	public final fun getVariant560Url ()Ljava/lang/String;
+	public final fun getVariant64Url ()Ljava/lang/String;
+	public final fun getVariant720Url ()Ljava/lang/String;
+	public final fun getVariantsMeta ()Ljava/util/List;
+	public final fun getVariantsReadyAt ()Lkotlin/time/Instant;
+	public final fun getVariantsStatus ()Lstapel/cdn/api/model/VariantsStatus;
+	public fun hashCode ()I
+	public final fun isProcessed ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/Image$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/Image$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/Image;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/Image;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/Image$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMeta {
+	public static final field Companion Lstapel/cdn/api/model/ImageRenderMeta$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/Boolean;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Lstapel/cdn/api/model/ImageRenderMetaPreviewKind;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Lstapel/cdn/api/model/ImageRenderMetaMetaStatus;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()I
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()Ljava/lang/Integer;
+	public final fun component8 ()Ljava/lang/Double;
+	public final fun component9 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)Lstapel/cdn/api/model/ImageRenderMeta;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/ImageRenderMeta;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/ImageRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/ImageRenderMeta;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnimated ()Ljava/lang/Boolean;
+	public final fun getAspect ()Ljava/lang/Double;
+	public final fun getBytes ()I
+	public final fun getDurationMs ()Ljava/lang/Integer;
+	public final fun getExt ()Ljava/lang/String;
+	public final fun getHeight ()Ljava/lang/Integer;
+	public final fun getKind ()Ljava/lang/String;
+	public final fun getMetaReason ()Ljava/lang/String;
+	public final fun getMetaStatus ()Lstapel/cdn/api/model/ImageRenderMetaMetaStatus;
+	public final fun getMime ()Ljava/lang/String;
+	public final fun getPosterUrl ()Ljava/lang/String;
+	public final fun getPreviewB64 ()Ljava/lang/String;
+	public final fun getPreviewKind ()Lstapel/cdn/api/model/ImageRenderMetaPreviewKind;
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getSquare ()Ljava/lang/Boolean;
+	public final fun getVariants ()Ljava/util/List;
+	public final fun getWidth ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/ImageRenderMeta$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageRenderMeta$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/ImageRenderMeta;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/ImageRenderMeta;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMeta$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/cdn/api/model/ImageRenderMetaMetaStatus : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/ImageRenderMetaMetaStatus$Companion;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaMetaStatus$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/ImageRenderMetaMetaStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaMetaStatus$Missing : stapel/cdn/api/model/ImageRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageRenderMetaMetaStatus$Missing;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaMetaStatus$Ok : stapel/cdn/api/model/ImageRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageRenderMetaMetaStatus$Ok;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaMetaStatus$Partial : stapel/cdn/api/model/ImageRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageRenderMetaMetaStatus$Partial;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaMetaStatus$Unknown : stapel/cdn/api/model/ImageRenderMetaMetaStatus {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/ImageRenderMetaMetaStatus$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/ImageRenderMetaMetaStatus$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/ImageRenderMetaMetaStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cdn/api/model/ImageRenderMetaPreviewKind : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/ImageRenderMetaPreviewKind$Companion;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaPreviewKind$Blur : stapel/cdn/api/model/ImageRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageRenderMetaPreviewKind$Blur;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaPreviewKind$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/ImageRenderMetaPreviewKind;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaPreviewKind$Poster : stapel/cdn/api/model/ImageRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageRenderMetaPreviewKind$Poster;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaPreviewKind$Unknown : stapel/cdn/api/model/ImageRenderMetaPreviewKind {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/ImageRenderMetaPreviewKind$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/ImageRenderMetaPreviewKind$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/ImageRenderMetaPreviewKind$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageRenderMetaPreviewKind$Waveform : stapel/cdn/api/model/ImageRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageRenderMetaPreviewKind$Waveform;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageUploadResponse {
+	public static final field Companion Lstapel/cdn/api/model/ImageUploadResponse$Companion;
+	public fun <init> (Lstapel/cdn/api/model/Image;Ljava/lang/String;)V
+	public final fun component1 ()Lstapel/cdn/api/model/Image;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/cdn/api/model/Image;Ljava/lang/String;)Lstapel/cdn/api/model/ImageUploadResponse;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/ImageUploadResponse;Lstapel/cdn/api/model/Image;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/ImageUploadResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getImage ()Lstapel/cdn/api/model/Image;
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/ImageUploadResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageUploadResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/ImageUploadResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/ImageUploadResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageUploadResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageVariantsMetaItem {
+	public static final field Companion Lstapel/cdn/api/model/ImageVariantsMetaItem$Companion;
+	public fun <init> (ILstapel/cdn/api/model/ImageVariantsMetaItemBranch;Ljava/lang/String;IILjava/lang/Boolean;Ljava/lang/String;)V
+	public synthetic fun <init> (ILstapel/cdn/api/model/ImageVariantsMetaItemBranch;Ljava/lang/String;IILjava/lang/Boolean;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lstapel/cdn/api/model/ImageVariantsMetaItemBranch;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()Ljava/lang/Boolean;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun copy (ILstapel/cdn/api/model/ImageVariantsMetaItemBranch;Ljava/lang/String;IILjava/lang/Boolean;Ljava/lang/String;)Lstapel/cdn/api/model/ImageVariantsMetaItem;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/ImageVariantsMetaItem;ILstapel/cdn/api/model/ImageVariantsMetaItemBranch;Ljava/lang/String;IILjava/lang/Boolean;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/ImageVariantsMetaItem;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBranch ()Lstapel/cdn/api/model/ImageVariantsMetaItemBranch;
+	public final fun getCleanUrl ()Ljava/lang/String;
+	public final fun getHeight ()I
+	public final fun getTier ()I
+	public final fun getUrl ()Ljava/lang/String;
+	public final fun getWatermarked ()Ljava/lang/Boolean;
+	public final fun getWidth ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/ImageVariantsMetaItem$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageVariantsMetaItem$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/ImageVariantsMetaItem;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/ImageVariantsMetaItem;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageVariantsMetaItem$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/cdn/api/model/ImageVariantsMetaItemBranch : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/ImageVariantsMetaItemBranch$Companion;
+}
+
+public final class stapel/cdn/api/model/ImageVariantsMetaItemBranch$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/ImageVariantsMetaItemBranch;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/ImageVariantsMetaItemBranch$H : stapel/cdn/api/model/ImageVariantsMetaItemBranch {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageVariantsMetaItemBranch$H;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageVariantsMetaItemBranch$Unknown : stapel/cdn/api/model/ImageVariantsMetaItemBranch {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/ImageVariantsMetaItemBranch$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/ImageVariantsMetaItemBranch$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/ImageVariantsMetaItemBranch$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/ImageVariantsMetaItemBranch$W : stapel/cdn/api/model/ImageVariantsMetaItemBranch {
+	public static final field INSTANCE Lstapel/cdn/api/model/ImageVariantsMetaItemBranch$W;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/RefSyncRequest {
+	public static final field Companion Lstapel/cdn/api/model/RefSyncRequest$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;)Lstapel/cdn/api/model/RefSyncRequest;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/RefSyncRequest;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/RefSyncRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEntityId ()Ljava/lang/String;
+	public final fun getEntityType ()Ljava/lang/String;
+	public final fun getNewHashes ()Ljava/util/List;
+	public final fun getOldHashes ()Ljava/util/List;
+	public final fun getService ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/RefSyncRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/RefSyncRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/RefSyncRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/RefSyncRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/RefSyncRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/RefSyncResponse {
+	public static final field Companion Lstapel/cdn/api/model/RefSyncResponse$Companion;
+	public fun <init> (IILjava/util/List;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/util/List;
+	public final fun copy (IILjava/util/List;)Lstapel/cdn/api/model/RefSyncResponse;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/RefSyncResponse;IILjava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/RefSyncResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAdded ()I
+	public final fun getErrors ()Ljava/util/List;
+	public final fun getRemoved ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/RefSyncResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/RefSyncResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/RefSyncResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/RefSyncResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/RefSyncResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/cdn/api/model/Type : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/Type$Companion;
+}
+
+public final class stapel/cdn/api/model/Type$Avatar : stapel/cdn/api/model/Type {
+	public static final field INSTANCE Lstapel/cdn/api/model/Type$Avatar;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/Type$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/Type;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/Type$Unknown : stapel/cdn/api/model/Type {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/Type$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/Type$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/Type$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cdn/api/model/VariantsStatus : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/VariantsStatus$Companion;
+}
+
+public final class stapel/cdn/api/model/VariantsStatus$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/VariantsStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/VariantsStatus$Pending : stapel/cdn/api/model/VariantsStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/VariantsStatus$Pending;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VariantsStatus$Ready : stapel/cdn/api/model/VariantsStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/VariantsStatus$Ready;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VariantsStatus$Unknown : stapel/cdn/api/model/VariantsStatus {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/VariantsStatus$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/VariantsStatus$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/VariantsStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/Video {
+	public static final field Companion Lstapel/cdn/api/model/Video$Companion;
+	public fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Double;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMeta;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)V
+	public final fun component1 ()I
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Ljava/lang/String;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/lang/String;
+	public final fun component18 ()Lstapel/cdn/api/model/VideoRenderMeta;
+	public final fun component19 ()Z
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component20 ()Ljava/lang/String;
+	public final fun component21 ()Ljava/lang/String;
+	public final fun component22 ()Lkotlin/time/Instant;
+	public final fun component23 ()Lkotlin/time/Instant;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/Integer;
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()I
+	public final fun component8 ()Ljava/lang/Double;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Double;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMeta;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lstapel/cdn/api/model/Video;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/Video;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Double;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMeta;ZLjava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lstapel/cdn/api/model/Video;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getDuration ()Ljava/lang/Double;
+	public final fun getFileExtension ()Ljava/lang/String;
+	public final fun getFileHash ()Ljava/lang/String;
+	public final fun getId ()I
+	public final fun getOriginalFilename ()Ljava/lang/String;
+	public final fun getOriginalHeight ()Ljava/lang/Integer;
+	public final fun getOriginalSize ()I
+	public final fun getOriginalUrl ()Ljava/lang/String;
+	public final fun getOriginalWidth ()Ljava/lang/Integer;
+	public final fun getPosterUrl ()Ljava/lang/String;
+	public final fun getRenderMeta ()Lstapel/cdn/api/model/VideoRenderMeta;
+	public final fun getUpdatedAt ()Lkotlin/time/Instant;
+	public final fun getUploadedBy ()Ljava/lang/String;
+	public final fun getUploadedByUsername ()Ljava/lang/String;
+	public final fun getVariant1080pUrl ()Ljava/lang/String;
+	public final fun getVariant16pUrl ()Ljava/lang/String;
+	public final fun getVariant2160pUrl ()Ljava/lang/String;
+	public final fun getVariant240pUrl ()Ljava/lang/String;
+	public final fun getVariant32pUrl ()Ljava/lang/String;
+	public final fun getVariant480pUrl ()Ljava/lang/String;
+	public final fun getVariant720pUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isProcessed ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/Video$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/Video$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/Video;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/Video;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/Video$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMeta {
+	public static final field Companion Lstapel/cdn/api/model/VideoRenderMeta$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/Boolean;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Lstapel/cdn/api/model/VideoRenderMetaPreviewKind;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Lstapel/cdn/api/model/VideoRenderMetaMetaStatus;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()I
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()Ljava/lang/Integer;
+	public final fun component8 ()Ljava/lang/Double;
+	public final fun component9 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;)Lstapel/cdn/api/model/VideoRenderMeta;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/VideoRenderMeta;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaPreviewKind;Ljava/lang/String;Lstapel/cdn/api/model/VideoRenderMetaMetaStatus;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lstapel/cdn/api/model/VideoRenderMeta;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnimated ()Ljava/lang/Boolean;
+	public final fun getAspect ()Ljava/lang/Double;
+	public final fun getBytes ()I
+	public final fun getDurationMs ()Ljava/lang/Integer;
+	public final fun getExt ()Ljava/lang/String;
+	public final fun getHeight ()Ljava/lang/Integer;
+	public final fun getKind ()Ljava/lang/String;
+	public final fun getMetaReason ()Ljava/lang/String;
+	public final fun getMetaStatus ()Lstapel/cdn/api/model/VideoRenderMetaMetaStatus;
+	public final fun getMime ()Ljava/lang/String;
+	public final fun getPosterUrl ()Ljava/lang/String;
+	public final fun getPreviewB64 ()Ljava/lang/String;
+	public final fun getPreviewKind ()Lstapel/cdn/api/model/VideoRenderMetaPreviewKind;
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getSquare ()Ljava/lang/Boolean;
+	public final fun getVariants ()Ljava/util/List;
+	public final fun getWidth ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/VideoRenderMeta$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoRenderMeta$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/VideoRenderMeta;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/VideoRenderMeta;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMeta$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/cdn/api/model/VideoRenderMetaMetaStatus : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/VideoRenderMetaMetaStatus$Companion;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaMetaStatus$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/VideoRenderMetaMetaStatus;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaMetaStatus$Missing : stapel/cdn/api/model/VideoRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoRenderMetaMetaStatus$Missing;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaMetaStatus$Ok : stapel/cdn/api/model/VideoRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoRenderMetaMetaStatus$Ok;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaMetaStatus$Partial : stapel/cdn/api/model/VideoRenderMetaMetaStatus {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoRenderMetaMetaStatus$Partial;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaMetaStatus$Unknown : stapel/cdn/api/model/VideoRenderMetaMetaStatus {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/VideoRenderMetaMetaStatus$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/VideoRenderMetaMetaStatus$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/VideoRenderMetaMetaStatus$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/cdn/api/model/VideoRenderMetaPreviewKind : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/cdn/api/model/VideoRenderMetaPreviewKind$Companion;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaPreviewKind$Blur : stapel/cdn/api/model/VideoRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoRenderMetaPreviewKind$Blur;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaPreviewKind$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/cdn/api/model/VideoRenderMetaPreviewKind;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaPreviewKind$Poster : stapel/cdn/api/model/VideoRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoRenderMetaPreviewKind$Poster;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaPreviewKind$Unknown : stapel/cdn/api/model/VideoRenderMetaPreviewKind {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/cdn/api/model/VideoRenderMetaPreviewKind$Unknown;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/VideoRenderMetaPreviewKind$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/VideoRenderMetaPreviewKind$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VideoRenderMetaPreviewKind$Waveform : stapel/cdn/api/model/VideoRenderMetaPreviewKind {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoRenderMetaPreviewKind$Waveform;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/cdn/api/model/VideoUploadResponse {
+	public static final field Companion Lstapel/cdn/api/model/VideoUploadResponse$Companion;
+	public fun <init> (Lstapel/cdn/api/model/Video;Ljava/lang/String;)V
+	public final fun component1 ()Lstapel/cdn/api/model/Video;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lstapel/cdn/api/model/Video;Ljava/lang/String;)Lstapel/cdn/api/model/VideoUploadResponse;
+	public static synthetic fun copy$default (Lstapel/cdn/api/model/VideoUploadResponse;Lstapel/cdn/api/model/Video;Ljava/lang/String;ILjava/lang/Object;)Lstapel/cdn/api/model/VideoUploadResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getVideo ()Lstapel/cdn/api/model/Video;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/cdn/api/model/VideoUploadResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/cdn/api/model/VideoUploadResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/cdn/api/model/VideoUploadResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/cdn/api/model/VideoUploadResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/api/model/VideoUploadResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/cdn/di/CdnModuleKt {
+	public static final fun cdnModule ()Lorg/koin/core/module/Module;
+}
+
+public final class stapel/cdn/media/CdnMediaUploader : stapel/wire/MediaUploader {
+	public static final field Companion Lstapel/cdn/media/CdnMediaUploader$Companion;
+	public static final field SOURCE Ljava/lang/String;
+	public fun <init> (Lstapel/cdn/api/CdnApi;)V
+	public fun upload-Q_qTOqE (Ljava/lang/String;Lstapel/wire/FilePart;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/cdn/media/CdnMediaUploader$Companion {
+}
+

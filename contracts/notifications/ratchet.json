@@ -1,0 +1,9 @@
+{
+    "diagnostics": {
+        "W-BODY-UNDECLARED": 1,
+        "W-DOC-PARAM": 2,
+        "W-DOC-PROPERTY": 1,
+        "W-DOC-TYPE": 1
+    },
+    "overlay_entries": 0
+}

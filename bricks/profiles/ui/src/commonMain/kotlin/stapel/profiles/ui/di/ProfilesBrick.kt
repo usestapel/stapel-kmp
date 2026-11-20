@@ -36,13 +36,14 @@ import stapel.result.text.ErrorCatalog
  * texts, and the profiles presenters. Needs no capability from the app. It owns no session: install
  * it with a sign-in owner (the auth brick), which binds the session's token refresher.
  *
- * @param avatarUpload which uploader the domain binds (stapel-cdn's by default).
+ * @param avatarUpload which uploader the domain binds: by default the app's `MediaUploader` (install
+ *   stapel-cdn's with `modules(cdnModule())`); without one, no avatar change is offered.
  * @param picker the app's picture picker — the one wiring point for avatar upload; null = no avatar
  *   change is offered.
  * @param screens the screen table (replace single screens by delegation to [DefaultProfilesScreens]).
  */
 public class ProfilesBrick(
-    private val avatarUpload: AvatarUpload = AvatarUpload.Cdn,
+    private val avatarUpload: AvatarUpload = AvatarUpload.Media,
     private val picker: AvatarPicker? = null,
     private val screens: ProfilesScreens = DefaultProfilesScreens,
 ) : StapelBrick {

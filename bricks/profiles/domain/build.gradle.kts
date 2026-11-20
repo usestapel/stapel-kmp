@@ -26,6 +26,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
+            // The media library the app installs next to profiles (a test edge, not a brick-to-brick one).
+            implementation(projects.stapelCdn)
             implementation(projects.stapelTesting)
             implementation(projects.stapelConfig)
             implementation(projects.stapelNetwork)

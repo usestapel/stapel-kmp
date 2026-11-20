@@ -3,9 +3,9 @@
     "contract": {
         "module": "stapel-auth",
         "profile": 2,
-        "ref": "0b6b20d01c330a731013f162c769f20e69c52b92",
-        "schema_sha256": "62dc0b71c103f1dee9681adb3b0dbb58881378c01b580b20d7a28b2ed17b4729",
-        "version": "0.53.1"
+        "ref": "a79d627073d3e3afa6a3f96d1a244e1d87c40b35",
+        "schema_sha256": "14e5658f4f11e08504e56eb68c1c875e832c6ed2dcee31288ccb8e4cdd9d9189",
+        "version": "0.54.0"
     },
     "counts": {
         "W-BODY-UNDECLARED": 1,
