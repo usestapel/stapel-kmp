@@ -1,0 +1,25 @@
+{
+    "files": {
+        "capabilities.json": {
+            "sha256": "0454c3b579405c65c36a7c73df96f7f5f00cfaca8162df4c6c748a25ffe15228",
+            "source": "docs/capabilities.json"
+        },
+        "errors.json": {
+            "sha256": "6dcf62f95d971f0266b0205b31a91f9b7a27540ba892a63cc51d71aab5b65ab6",
+            "source": "docs/errors.json"
+        },
+        "flows.json": {
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "source": "docs/flows.json"
+        },
+        "schema.json": {
+            "sha256": "9efb712df3c47376e6ef63ee7e7dadfd6551554756cd9b6956c7cd59fdb7b1d3",
+            "source": "docs/schema.v2.json"
+        }
+    },
+    "module": "stapel-analytics",
+    "ref": "d111c0383dba69939c5e59ae08969826b4f4fe48",
+    "repo": "https://github.com/usestapel/stapel-analytics",
+    "tag": "v0.8.3",
+    "version": "0.8.3"
+}

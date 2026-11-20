@@ -1,0 +1,11 @@
+{
+    "module": "stapel-analytics",
+    "for_ref": "d111c0383dba69939c5e59ae08969826b4f4fe48",
+    "operations": {
+        "analytics_api_v1_funnels_report_retrieve": {
+            "exclude": true,
+            "fixes": "FunnelStep.rate_from_first / rate_from_previous are conversion ratios, not money; the generator's money heuristic (E-MONEY-AS-DOUBLE) needs them typed at the source (format: double with a non-money description, or a ratio extension). Staff report; mobile admin screens are out of v0 (R15), so the client does not need it.",
+            "source": "stapel-analytics docs/schema.v2.json #/components/schemas/FunnelStep"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "diagnostics": {
+        "W-DOC-PARAM": 4,
+        "W-DOC-PROPERTY": 49,
+        "W-DOC-TYPE": 3
+    },
+    "overlay_entries": 1
+}
