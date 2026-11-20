@@ -37,7 +37,7 @@ public interface AppMetricaAnalyticsBridge {
 /** Version of [AppMetricaAnalyticsBridge]'s shape (see `FIREBASE_ANALYTICS_BRIDGE_ABI`). */
 public const val APPMETRICA_ANALYTICS_BRIDGE_ABI: Int = 1
 
-/** What a page event becomes in AppMetrica, which has no screen API: this event with [SCREEN_PARAM]. */
+/** What a page event becomes in AppMetrica, which has no screen API: this event with [APPMETRICA_SCREEN_PARAM]. */
 public const val APPMETRICA_SCREEN_EVENT: String = "screen_view"
 
 /** The parameter of [APPMETRICA_SCREEN_EVENT] carrying the destination id. */
