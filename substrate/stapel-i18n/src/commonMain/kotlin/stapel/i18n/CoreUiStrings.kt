@@ -53,6 +53,18 @@ public object CoreUiStrings {
     /** "Remove": the remove action of an input chip. */
     public val Remove: StringKey = StringKey("stapel.ui.remove")
 
+    /** "Loading more…": a paged list is loading its next page. */
+    public val LoadingMore: StringKey = StringKey("stapel.ui.loading_more")
+
+    /** "Couldn't load more": the next page of a paged list failed. */
+    public val LoadMoreFailed: StringKey = StringKey("stapel.ui.load_more_failed")
+
+    /** "That's everything": a paged list reached its end. */
+    public val EndOfList: StringKey = StringKey("stapel.ui.end_of_list")
+
+    /** "Showing saved data": a list shows held rows that are stale or failed to refresh. */
+    public val ShowingSavedData: StringKey = StringKey("stapel.ui.showing_saved_data")
+
     /** "{count} characters left" — a plural family. */
     public val CharactersLeft: PluralKey = PluralKey("stapel.ui.characters_left")
 }
@@ -80,6 +92,10 @@ public val CoreUiBundle: I18nBundle = I18nBundle(
                 "stapel.ui.no_matches" to "No matches",
                 "stapel.ui.refresh" to "Refresh",
                 "stapel.ui.remove" to "Remove",
+                "stapel.ui.loading_more" to "Loading more…",
+                "stapel.ui.load_more_failed" to "Couldn't load more",
+                "stapel.ui.end_of_list" to "That's everything",
+                "stapel.ui.showing_saved_data" to "Showing saved data",
                 "stapel.ui.characters_left.one" to "{count} character left",
                 "stapel.ui.characters_left.other" to "{count} characters left",
             )
@@ -103,6 +119,10 @@ public val CoreUiBundle: I18nBundle = I18nBundle(
                 "stapel.ui.no_matches" to "Ничего не найдено",
                 "stapel.ui.refresh" to "Обновить",
                 "stapel.ui.remove" to "Удалить",
+                "stapel.ui.loading_more" to "Загружаем ещё…",
+                "stapel.ui.load_more_failed" to "Не удалось загрузить ещё",
+                "stapel.ui.end_of_list" to "Это всё",
+                "stapel.ui.showing_saved_data" to "Показаны сохранённые данные",
                 "stapel.ui.characters_left.one" to "Остался {count} символ",
                 "stapel.ui.characters_left.few" to "Осталось {count} символа",
                 "stapel.ui.characters_left.many" to "Осталось {count} символов",
@@ -128,6 +148,10 @@ public val CoreUiBundle: I18nBundle = I18nBundle(
                 "stapel.ui.no_matches" to "Sin resultados",
                 "stapel.ui.refresh" to "Actualizar",
                 "stapel.ui.remove" to "Quitar",
+                "stapel.ui.loading_more" to "Cargando más…",
+                "stapel.ui.load_more_failed" to "No se pudo cargar más",
+                "stapel.ui.end_of_list" to "Eso es todo",
+                "stapel.ui.showing_saved_data" to "Mostrando datos guardados",
                 "stapel.ui.characters_left.one" to "Queda {count} carácter",
                 "stapel.ui.characters_left.many" to "Quedan {count} de caracteres",
                 "stapel.ui.characters_left.other" to "Quedan {count} caracteres",

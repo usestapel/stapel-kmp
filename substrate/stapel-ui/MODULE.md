@@ -2,7 +2,7 @@
 
 - **No Material here, ever** (R9, `checkDependencyDirection`): Material 3 lives in `stapel-ui-material3`.
   A brick UI library sees only this module, so it cannot bypass the skin.
-- **Skin seam:** `StapelSkin` has twenty-five slots (`StapelSkinSlots`). The first twelve (Button … Snackbar, what the auth
+- **Skin seam:** `StapelSkin` has twenty-six slots (`StapelSkinSlots`). The first twelve (Button … Snackbar, what the auth
   screens need) are abstract; the later ones (Toggle, Tabs, Chip, Avatar, Badge, NavigationBar,
   NavigationRail, PullToRefresh, and every slot added since) default to `FoundationSkin`, so a new
   slot never breaks a skin. Slot duties are KDoc on each spec and are tested by the skin contract
@@ -71,6 +71,17 @@
   (top bar, row value, banner dismiss, chip remove, tabs, navigation, pager, stepper, field actions);
   a code field's digit cells stay left to right; an `autoMirror` icon is mirrored whatever its set's
   vector says (`stapelIconVector`). RTL baselines are story states with `rtl = true, locale = "ar"`.
+- **Paged lists:** `LoadList(state: PagingState, onLoadMore, onRetry, empty, onRefresh, key)` is the lazy
+  paged list over `stapel-mvi`'s `PagingMachine` state (the eager `LoadList(Resource<List<T>>)` stays for
+  short lists inside a scrolling page). Arms: first load (progress), first load failed (`ErrorState` +
+  retry), empty only after a successful load, rows; the last row is the `ListStatus` slot (appending /
+  append failed with retry / end), the first row says when held rows are stale or failed to refresh;
+  the skin's `PullToRefresh` wraps it when `onRefresh` is given. `onLoadMore` fires when the last
+  visible row is within `prefetchDistance` of the end and `PagingState.canLoadMore` holds (a short
+  first page asks at once; an in-flight, failed or finished append never asks again by scrolling).
+  `ListStatus` duties are in the contract (`ListStatus.width/appending/failed/end/stale`, each with an
+  inversion skin in `FoundationSkinTest`); `LoadListTest` drives the composite with and without a real
+  `PagingMachine`.
 - **Composites** (no slot of their own, built from slots): `StatusPage` (three `StatusSize`s;
   `EmptyState` is its compact form), `SectionHeader` (five sizes, one `SectionHeaderAction`),
   `AdaptiveGrid` (`adaptiveColumns`, the `GridCells.Adaptive` rule), `PickerSheet`.

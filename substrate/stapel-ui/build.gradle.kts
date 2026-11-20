@@ -16,6 +16,7 @@ kotlin {
             api(projects.stapelTokens)
             api(projects.stapelI18n)
             api(projects.stapelResult)
+            api(projects.stapelMvi)
             implementation(libs.kotlinx.coroutines.core)
         }
         getByName("skikoTest").dependencies {

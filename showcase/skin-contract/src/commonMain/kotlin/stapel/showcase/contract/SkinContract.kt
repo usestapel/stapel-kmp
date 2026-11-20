@@ -40,6 +40,8 @@ import stapel.ui.skin.ChipGroupSpec
 import stapel.ui.skin.MenuItemSpec
 import stapel.ui.skin.MenuSpec
 import stapel.ui.skin.StepperSpec
+import stapel.ui.skin.ListStatusKind
+import stapel.ui.skin.ListStatusSpec
 import androidx.compose.foundation.layout.width
 import stapel.ui.skin.SelectSpec
 import stapel.ui.skin.SkeletonShape
@@ -334,6 +336,16 @@ private fun ContractScreen(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMo
                     Modifier,
                 )
             }
+            hits.values["liststatus.min"] = StapelTheme.layout.controlHeight
+            androidx.compose.foundation.layout.Box(Modifier.width(300.dp).testTag("c.liststatus.box")) {
+                Column {
+                    s.ListStatus(ListStatusSpec(ListStatusKind.Appending, "Loading more rows", "Ignored", { hits.hit("ls.appending") }, testTag = "c.ls.appending"), Modifier)
+                    s.ListStatus(ListStatusSpec(ListStatusKind.AppendFailed, "Rows failed to load", "Retry rows", { hits.hit("ls.retry") }, testTag = "c.ls.failed"), Modifier)
+                    s.ListStatus(ListStatusSpec(ListStatusKind.End, "No more rows", "Ignored end", { hits.hit("ls.end") }, testTag = "c.ls.end"), Modifier)
+                    s.ListStatus(ListStatusSpec(ListStatusKind.Stale, "Showing saved rows", "Refresh rows", { hits.hit("ls.stale") }, testTag = "c.ls.stale"), Modifier)
+                    s.ListStatus(ListStatusSpec(ListStatusKind.Stale, "Saved rows, no action", testTag = "c.ls.stale.bare"), Modifier)
+                }
+            }
         }
       }
     }
@@ -363,6 +375,7 @@ public val SKIN_CONTRACT_TAGS: List<String> = listOf(
     "c.button", "c.iconbutton", "c.textfield", "c.codefield", "c.banner", "c.progress", "c.surface", "c.listitem",
     "c.topbar", "c.divider", "c.snackbar", "c.toggle", "c.tabs", "c.chip", "c.avatar", "c.badge", "c.navbar", "c.navrail", "c.ptr",
     "c.select", "c.pager", "c.stepper", "c.chipgroup.wrap", "c.chipgroup.scroll",
+    "c.ls.appending", "c.ls.failed", "c.ls.end", "c.ls.stale",
 )
 
 /**
@@ -513,6 +526,7 @@ public fun ComposeUiTest.assertSkinContract(
     assertLaterSlotDepth(hits, fields)
     assertAddedSlots(hits, fields)
     assertStepperAndChipGroup(hits, fields)
+    assertListStatus(hits)
 
     // Menu phase
     phase = Phase.Menu
@@ -1053,6 +1067,56 @@ private fun ComposeUiTest.assertStepperAndChipGroup(hits: Hits, fields: Fields) 
         last.tap()
         settle()
         assertEquals(GROUP_CHIPS.lastIndex, hits.values["chipgroup.scroll"], "ChipGroup: the last chip of a scrolling row is reachable")
+    }
+}
+
+/** The duties of the ListStatus slot (the status rows of a paged list). */
+@OptIn(ExperimentalTestApi::class)
+private fun ComposeUiTest.assertListStatus(hits: Hits) {
+    fun under(tag: String) = hasTestTag(tag) or hasAnyAncestorTag(tag)
+    fun progressUnder(tag: String) = onAllNodes(SemanticsMatcher.keyIsDefined(SemanticsProperties.ProgressBarRangeInfo) and under(tag), useUnmergedTree = true)
+        .fetchSemanticsNodes()
+    fun actionsUnder(tag: String) = onAllNodes(androidx.compose.ui.test.hasClickAction() and under(tag), useUnmergedTree = true).fetchSemanticsNodes()
+    duty("ListStatus.width") {
+        val box = onNodeWithTag("c.liststatus.box").getUnclippedBoundsInRoot()
+        val min = hits.values["liststatus.min"] as androidx.compose.ui.unit.Dp
+        for (tag in listOf("c.ls.appending", "c.ls.failed", "c.ls.end", "c.ls.stale", "c.ls.stale.bare")) {
+            val b = onNodeWithTag(tag, useUnmergedTree = true).getUnclippedBoundsInRoot()
+            check(b.left <= box.left + 0.5.dp && b.right >= box.right - 0.5.dp) { "ListStatus: $tag ($b) does not fill the list's width ($box)" }
+            check(b.bottom - b.top >= min - 0.5.dp) { "ListStatus: $tag is ${b.bottom - b.top} tall, under the control height $min" }
+        }
+    }
+    duty("ListStatus.appending") {
+        onNode(hasText("Loading more rows") and under("c.ls.appending"), useUnmergedTree = true).assertExists()
+        val progress = progressUnder("c.ls.appending")
+        check(progress.isNotEmpty()) { "ListStatus: appending shows a progress node" }
+        check(progress.any { it.config.getOrElseNullable(SemanticsProperties.ContentDescription) { null }?.contains("Loading more rows") == true }) {
+            "ListStatus: the appending progress is named by the message"
+        }
+        check(actionsUnder("c.ls.appending").isEmpty()) { "ListStatus: appending offers no action" }
+    }
+    duty("ListStatus.failed") {
+        onNode(hasText("Rows failed to load") and under("c.ls.failed"), useUnmergedTree = true).assertExists()
+        check(onAllNodes(SemanticsMatcher.keyIsDefined(SemanticsProperties.LiveRegion) and under("c.ls.failed"), useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()) {
+            "ListStatus: a failed page is announced (a polite live region)"
+        }
+        onNode(hasText("Retry rows") and hasAnyAncestorTag("c.ls.failed") or (hasContentDescription("Retry rows") and hasAnyAncestorTag("c.ls.failed")))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button)).tap()
+        settle()
+        assertEquals(1, hits["ls.retry"], "ListStatus: the retry reaches its callback once")
+    }
+    duty("ListStatus.end") {
+        onNode(hasText("No more rows") and under("c.ls.end"), useUnmergedTree = true).assertExists()
+        check(progressUnder("c.ls.end").isEmpty()) { "ListStatus: the end shows no progress" }
+        check(actionsUnder("c.ls.end").isEmpty()) { "ListStatus: the end offers no action" }
+    }
+    duty("ListStatus.stale") {
+        onNode(hasText("Showing saved rows") and under("c.ls.stale"), useUnmergedTree = true).assertExists()
+        onNode(hasText("Refresh rows") and hasAnyAncestorTag("c.ls.stale")).tap()
+        settle()
+        assertEquals(1, hits["ls.stale"], "ListStatus: the stale row's action reaches its callback")
+        check(actionsUnder("c.ls.stale.bare").isEmpty()) { "ListStatus: a stale row without an action shows no button" }
+        assertEquals(0, hits["ls.appending"] + hits["ls.end"], "ListStatus: appending and end never run an action")
     }
 }
 

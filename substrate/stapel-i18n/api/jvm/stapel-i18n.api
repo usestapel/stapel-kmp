@@ -10,14 +10,18 @@ public final class stapel/i18n/CoreUiStrings {
 	public final fun getDismiss-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getDone-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getEmptyTitle-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getEndOfList-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getHidePassword-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLoadMoreFailed-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getLoading-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getLoadingMore-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getNoMatches-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getRefresh-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getRemove-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getRetry-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getSearch-GpgQ0-4 ()Ljava/lang/String;
 	public final fun getShowPassword-GpgQ0-4 ()Ljava/lang/String;
+	public final fun getShowingSavedData-GpgQ0-4 ()Ljava/lang/String;
 }
 
 public final class stapel/i18n/CoreUiStringsKt {

@@ -44,6 +44,8 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.graphics.toPixelMap
 import stapel.ui.skin.MenuSpec
 import stapel.ui.skin.StepperSpec
+import stapel.ui.skin.ListStatusKind
+import stapel.ui.skin.ListStatusSpec
 import stapel.ui.skin.canDecrement
 import stapel.ui.skin.menuPosition
 import stapel.ui.skin.stepperValue
@@ -265,6 +267,41 @@ private object UnboundedStepperSkin : StapelSkin by FoundationSkin {
     }
 }
 
+/** Breaks the end row: it offers the action (drawn as a failed row). */
+private object ActionAtTheEndSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun ListStatus(spec: ListStatusSpec, modifier: Modifier) {
+        val kind = if (spec.kind == ListStatusKind.End) ListStatusKind.AppendFailed else spec.kind
+        FoundationSkin.ListStatus(ListStatusSpec(kind, spec.message, spec.actionLabel, spec.onAction, spec.testTag), modifier)
+    }
+}
+
+/** Breaks appending: no progress (drawn as an end row). */
+private object SpinnerlessListStatusSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun ListStatus(spec: ListStatusSpec, modifier: Modifier) {
+        val kind = if (spec.kind == ListStatusKind.Appending) ListStatusKind.End else spec.kind
+        FoundationSkin.ListStatus(ListStatusSpec(kind, spec.message, spec.actionLabel, spec.onAction, spec.testTag), modifier)
+    }
+}
+
+/** Breaks the failed row: not announced (drawn as a stale row). */
+private object SilentFailureListStatusSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun ListStatus(spec: ListStatusSpec, modifier: Modifier) {
+        val kind = if (spec.kind == ListStatusKind.AppendFailed) ListStatusKind.Stale else spec.kind
+        FoundationSkin.ListStatus(ListStatusSpec(kind, spec.message, spec.actionLabel, spec.onAction, spec.testTag), modifier)
+    }
+}
+
+/** Breaks the width: a status row narrower than its list. */
+private object NarrowListStatusSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun ListStatus(spec: ListStatusSpec, modifier: Modifier) {
+        androidx.compose.foundation.layout.Box(modifier.width(120.dp)) { FoundationSkin.ListStatus(spec, Modifier) }
+    }
+}
+
 /** Breaks the wrap: every group is one row that neither wraps nor scrolls. */
 private object OneRowChipGroupSkin : StapelSkin by FoundationSkin {
     @Composable
@@ -400,6 +437,18 @@ class FoundationSkinTest {
 
     @Test
     fun aChipGroupThatDoesNotWrapIsCaught() = runComposeUiTest { assertDutyBroken("ChipGroup.wrap") { assertSkinContract(OneRowChipGroupSkin) } }
+
+    @Test
+    fun anEndRowWithAnActionIsCaught() = runComposeUiTest { assertDutyBroken("ListStatus.end") { assertSkinContract(ActionAtTheEndSkin) } }
+
+    @Test
+    fun anAppendingRowWithoutProgressIsCaught() = runComposeUiTest { assertDutyBroken("ListStatus.appending") { assertSkinContract(SpinnerlessListStatusSkin) } }
+
+    @Test
+    fun aSilentFailedRowIsCaught() = runComposeUiTest { assertDutyBroken("ListStatus.failed") { assertSkinContract(SilentFailureListStatusSkin) } }
+
+    @Test
+    fun aNarrowStatusRowIsCaught() = runComposeUiTest { assertDutyBroken("ListStatus.width") { assertSkinContract(NarrowListStatusSkin) } }
 
     @Test
     fun theChipGroupDrawsTheProjectsChip() = runComposeUiTest {

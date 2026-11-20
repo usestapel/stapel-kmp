@@ -11,6 +11,8 @@ import stapel.ui.skin.SelectSpec
 import stapel.ui.skin.ChipGroupSpec
 import stapel.ui.skin.MenuSpec
 import stapel.ui.skin.StepperSpec
+import stapel.ui.skin.ListStatusKind
+import stapel.ui.skin.ListStatusSpec
 import stapel.ui.skin.canDecrement
 import stapel.ui.skin.canIncrement
 import stapel.ui.skin.shownValue
@@ -921,6 +923,55 @@ public object Material3Skin : StapelSkin {
             modifier = Modifier.stapelTouchTarget().semantics { contentDescription = label },
             border = BorderStroke(1.dp, if (enabled) c.border else c.borderSubtle),
         ) { Icon(vector(icon), null, tint = if (enabled) c.text else c.textSubtle) }
+    }
+
+    /**
+     * Material 3 has no list-status component: a full-width row with a Material `CircularProgressIndicator`
+     * (appending), the message, and a Material `TextButton` (retry / refresh); stale rows sit on a tonal
+     * `Surface`.
+     */
+    @Composable
+    override fun ListStatus(spec: ListStatusSpec, modifier: Modifier) {
+        val c = StapelTheme.colors
+        val action = spec.action
+        val stale = spec.kind == ListStatusKind.Stale
+        M3Surface(
+            modifier
+                .fillMaxWidth()
+                .then(if (spec.kind == ListStatusKind.AppendFailed) Modifier.semantics { liveRegion = LiveRegionMode.Polite } else Modifier)
+                .optionalTestTag(spec.testTag),
+            color = if (stale) MaterialTheme.colorScheme.surfaceContainerHigh else MaterialTheme.colorScheme.surface,
+            shape = if (stale) MaterialTheme.shapes.medium else androidx.compose.ui.graphics.RectangleShape,
+        ) {
+            Row(
+                Modifier
+                    .heightIn(min = maxOf(StapelTheme.layout.controlHeight, StapelTheme.layout.minTouchTarget))
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp, if (action == null) Alignment.CenterHorizontally else Alignment.Start),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                if (spec.kind == ListStatusKind.Appending) {
+                    CircularProgressIndicator(
+                        Modifier.size(20.dp).semantics {
+                            progressBarRangeInfo = ProgressBarRangeInfo.Indeterminate
+                            contentDescription = spec.message
+                        },
+                        strokeWidth = 2.dp,
+                    )
+                }
+                Text(
+                    spec.message,
+                    modifier = (if (action != null) Modifier.weight(1f) else Modifier)
+                        .then(if (spec.kind == ListStatusKind.Appending) Modifier.semantics { hideFromAccessibility() } else Modifier),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (spec.kind == ListStatusKind.AppendFailed) c.error else c.textMuted,
+                    textAlign = if (action == null) TextAlign.Center else null,
+                )
+                if (action != null) {
+                    TextButton(onClick = action, modifier = Modifier.stapelTouchTarget()) { Text(spec.actionLabel.orEmpty()) }
+                }
+            }
+        }
     }
 
     /** Material 3 has no chip-group component: the foundation arrangement, drawing each chip with the Material chip. */

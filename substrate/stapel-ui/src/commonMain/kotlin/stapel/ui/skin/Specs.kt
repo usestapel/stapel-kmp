@@ -894,6 +894,51 @@ public class PullToRefreshSpec(
     public val testTag: String? = null,
 )
 
+/** What a [ListStatusSpec] row says about a paged list. */
+public enum class ListStatusKind {
+    /** The next page is loading (the list's last row). */
+    Appending,
+
+    /** The next page failed; the rows stay (the list's last row, with a retry). */
+    AppendFailed,
+
+    /** The last page is on screen (the list's last row). */
+    End,
+
+    /** The rows shown are older than wanted or failed to refresh (the list's first row, optionally with a retry). */
+    Stale,
+}
+
+/**
+ * The status row of a paged list (`LoadList`). Duties: the row fills the list's width and is at least
+ * the touch target tall; [message] is drawn as text (never clipped: it wraps with large text) and is
+ * the row's accessible name; [ListStatusKind.Appending] shows an indeterminate progress node named
+ * [message] and no action; [ListStatusKind.AppendFailed] is a polite live region and shows a
+ * `Role.Button` named [actionLabel] that calls [onAction] once per tap; [ListStatusKind.End] shows no
+ * progress and no action; [ListStatusKind.Stale] shows the button only when [onAction] is given.
+ */
+@Immutable
+public class ListStatusSpec(
+    /** What the row says. */
+    public val kind: ListStatusKind,
+    /** The sentence ("Loading more…", "Couldn't load more", "That's everything", "Showing saved data"). */
+    public val message: String,
+    /** The action's name ("Try again"); required with [onAction]. */
+    public val actionLabel: String? = null,
+    /** The action (retry the page, refresh); ignored for [ListStatusKind.Appending] and [ListStatusKind.End]. */
+    public val onAction: (() -> Unit)? = null,
+    /** Test tag of the row. */
+    public val testTag: String? = null,
+) {
+    init {
+        require(onAction == null || actionLabel != null) { "ListStatusSpec: an action needs an actionLabel" }
+    }
+
+    /** The action the row offers, or null (none for Appending and End). */
+    public val action: (() -> Unit)?
+        get() = if (kind == ListStatusKind.Appending || kind == ListStatusKind.End) null else onAction
+}
+
 /**
  * A brick-local widget's key (a QR canvas, a waveform): the brick ships [default]; a skin may return
  * its own value from [StapelSkin.extension].

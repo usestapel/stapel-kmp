@@ -832,6 +832,39 @@ public object FoundationSkin : StapelSkin {
     }
 
     @Composable
+    override fun ListStatus(spec: ListStatusSpec, modifier: Modifier) {
+        val colors = StapelTheme.colors
+        val action = spec.action
+        val stale = spec.kind == ListStatusKind.Stale
+        Row(
+            modifier
+                .fillMaxWidth()
+                .optionalTestTag(spec.testTag)
+                .then(if (spec.kind == ListStatusKind.AppendFailed) Modifier.semantics { liveRegion = LiveRegionMode.Polite } else Modifier)
+                .heightIn(min = maxOf(StapelTheme.layout.controlHeight, StapelTheme.layout.minTouchTarget))
+                .then(if (stale) Modifier.background(colors.surfaceSunken, StapelTheme.shapes.md) else Modifier)
+                .padding(horizontal = StapelTheme.spacing.s4, vertical = StapelTheme.spacing.s1),
+            horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s3, if (action == null) Alignment.CenterHorizontally else Alignment.Start),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (spec.kind == ListStatusKind.Appending) {
+                Progress(ProgressSpec(ProgressKind.Spinner, label = spec.message), Modifier)
+            }
+            StapelText(
+                spec.message,
+                modifier = (if (action != null) Modifier.weight(1f) else Modifier)
+                    .then(if (spec.kind == ListStatusKind.Appending) Modifier.semantics { hideFromAccessibility() } else Modifier),
+                style = StapelTheme.type.bodySmall,
+                color = if (spec.kind == ListStatusKind.AppendFailed) colors.error else colors.textMuted,
+                textAlign = if (action == null) TextAlign.Center else null,
+            )
+            if (action != null) {
+                Button(ButtonSpec(spec.actionLabel.orEmpty(), action, variant = ButtonVariant.Text, size = ControlSize.Small), Modifier)
+            }
+        }
+    }
+
+    @Composable
     override fun ChipGroup(spec: ChipGroupSpec, modifier: Modifier) {
         val skin = StapelTheme.skin
         val gap = StapelTheme.spacing.s2

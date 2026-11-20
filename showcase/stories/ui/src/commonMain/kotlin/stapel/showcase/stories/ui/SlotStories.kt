@@ -43,6 +43,8 @@ import stapel.ui.StapelPagerIndicator
 import stapel.ui.StapelMenu
 import stapel.ui.StapelStepper
 import stapel.ui.StapelChipGroup
+import stapel.ui.StapelListStatus
+import stapel.ui.skin.ListStatusKind
 import stapel.ui.skin.ChipGroupLayout
 import stapel.ui.skin.ChipSpec
 import stapel.ui.skin.MenuItemSpec
@@ -578,8 +580,35 @@ private val chipGroup = Story(
     )
 }
 
+private val listStatusKind = Knob.enumOf("kind", "Kind", ListStatusKind.AppendFailed)
+
+private val listStatus = Story(
+    "list-status", "List status", "Slots/Feedback",
+    description = "The status row of a paged list: the next page loading, failed (with a retry, announced), the end, or held rows that are stale.",
+    knobs = listOf(listStatusKind),
+    states = listOf(
+        StoryState("default", "Next page failed"),
+        StoryState("appending", "Loading more", mapOf("kind" to ListStatusKind.Appending)),
+        StoryState("end", "The end", mapOf("kind" to ListStatusKind.End)),
+        StoryState("stale", "Stale rows", mapOf("kind" to ListStatusKind.Stale)),
+        StoryState("rtl", "Failed, right to left", rtl = true, locale = "ar"),
+    ),
+    covers = slot("ListStatus"),
+    snippet = "StapelListStatus(ListStatusKind.AppendFailed, \"Couldn't load more\", actionLabel = \"Try again\", onAction = retry)",
+) {
+    val kind = value(listStatusKind)
+    val (message, action) = when (kind) {
+        ListStatusKind.Appending -> "Loading more…" to null
+        ListStatusKind.AppendFailed -> "Couldn't load more" to "Try again"
+        ListStatusKind.End -> "That's everything" to null
+        ListStatusKind.Stale -> "Showing saved data" to "Refresh"
+    }
+    StapelListStatus(kind, message, actionLabel = action, onAction = action?.let { { event(it) } })
+}
+
 /** The slot stories, one per `StapelSkin` slot, in slot-table order. */
 internal val slotStories: List<Story> = listOf(
     button, iconButton, textField, codeField, dialog, banner, progress, surface, listItem, topBar, divider, snackbar,
     toggle, tabs, chip, avatar, badge, navigationBar, navigationRail, pullToRefresh, select, pagerIndicator, menu, stepper, chipGroup,
+    listStatus,
 )

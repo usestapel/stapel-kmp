@@ -68,3 +68,68 @@ public abstract interface class stapel/mvi/Store {
 	public abstract fun getState ()Lkotlinx/coroutines/flow/StateFlow;
 }
 
+public abstract interface class stapel/mvi/paging/AppendStatus {
+}
+
+public final class stapel/mvi/paging/AppendStatus$EndReached : stapel/mvi/paging/AppendStatus {
+	public static final field INSTANCE Lstapel/mvi/paging/AppendStatus$EndReached;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/mvi/paging/AppendStatus$Failed : stapel/mvi/paging/AppendStatus {
+	public fun <init> (Lstapel/result/StapelError;)V
+	public final fun component1 ()Lstapel/result/StapelError;
+	public final fun copy (Lstapel/result/StapelError;)Lstapel/mvi/paging/AppendStatus$Failed;
+	public static synthetic fun copy$default (Lstapel/mvi/paging/AppendStatus$Failed;Lstapel/result/StapelError;ILjava/lang/Object;)Lstapel/mvi/paging/AppendStatus$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/result/StapelError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/mvi/paging/AppendStatus$Idle : stapel/mvi/paging/AppendStatus {
+	public static final field INSTANCE Lstapel/mvi/paging/AppendStatus$Idle;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/mvi/paging/AppendStatus$Loading : stapel/mvi/paging/AppendStatus {
+	public static final field INSTANCE Lstapel/mvi/paging/AppendStatus$Loading;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/mvi/paging/PagingMachine {
+	public fun <init> (Lkotlinx/coroutines/CoroutineScope;Lkotlin/time/Clock;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)V
+	public final fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun loadMore ()V
+	public final fun refresh ()V
+	public final fun retry ()V
+	public final fun start (Lstapel/result/state/Resource$Ready;)V
+	public static synthetic fun start$default (Lstapel/mvi/paging/PagingMachine;Lstapel/result/state/Resource$Ready;ILjava/lang/Object;)V
+}
+
+public final class stapel/mvi/paging/PagingState {
+	public fun <init> ()V
+	public fun <init> (Lstapel/result/state/Resource;Lstapel/mvi/paging/AppendStatus;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Lstapel/result/state/Resource;Lstapel/mvi/paging/AppendStatus;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/result/state/Resource;
+	public final fun component2 ()Lstapel/mvi/paging/AppendStatus;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun copy (Lstapel/result/state/Resource;Lstapel/mvi/paging/AppendStatus;Ljava/lang/Integer;)Lstapel/mvi/paging/PagingState;
+	public static synthetic fun copy$default (Lstapel/mvi/paging/PagingState;Lstapel/result/state/Resource;Lstapel/mvi/paging/AppendStatus;Ljava/lang/Integer;ILjava/lang/Object;)Lstapel/mvi/paging/PagingState;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAppend ()Lstapel/mvi/paging/AppendStatus;
+	public final fun getCanLoadMore ()Z
+	public final fun getContent ()Lstapel/result/state/Resource;
+	public final fun getItems ()Ljava/util/List;
+	public final fun getTotal ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public final fun isEmpty ()Z
+	public fun toString ()Ljava/lang/String;
+}
+

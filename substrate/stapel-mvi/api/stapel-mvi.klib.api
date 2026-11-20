@@ -41,6 +41,39 @@ abstract interface stapel.mvi/StateSaver { // stapel.mvi/StateSaver|null[0]
     }
 }
 
+sealed interface stapel.mvi.paging/AppendStatus { // stapel.mvi.paging/AppendStatus|null[0]
+    final class Failed : stapel.mvi.paging/AppendStatus { // stapel.mvi.paging/AppendStatus.Failed|null[0]
+        constructor <init>(stapel.result/StapelError) // stapel.mvi.paging/AppendStatus.Failed.<init>|<init>(stapel.result.StapelError){}[0]
+
+        final val error // stapel.mvi.paging/AppendStatus.Failed.error|{}error[0]
+            final fun <get-error>(): stapel.result/StapelError // stapel.mvi.paging/AppendStatus.Failed.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): stapel.result/StapelError // stapel.mvi.paging/AppendStatus.Failed.component1|component1(){}[0]
+        final fun copy(stapel.result/StapelError = ...): stapel.mvi.paging/AppendStatus.Failed // stapel.mvi.paging/AppendStatus.Failed.copy|copy(stapel.result.StapelError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.mvi.paging/AppendStatus.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.mvi.paging/AppendStatus.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.mvi.paging/AppendStatus.Failed.toString|toString(){}[0]
+    }
+
+    final object EndReached : stapel.mvi.paging/AppendStatus { // stapel.mvi.paging/AppendStatus.EndReached|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.mvi.paging/AppendStatus.EndReached.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.mvi.paging/AppendStatus.EndReached.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.mvi.paging/AppendStatus.EndReached.toString|toString(){}[0]
+    }
+
+    final object Idle : stapel.mvi.paging/AppendStatus { // stapel.mvi.paging/AppendStatus.Idle|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.mvi.paging/AppendStatus.Idle.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.mvi.paging/AppendStatus.Idle.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.mvi.paging/AppendStatus.Idle.toString|toString(){}[0]
+    }
+
+    final object Loading : stapel.mvi.paging/AppendStatus { // stapel.mvi.paging/AppendStatus.Loading|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.mvi.paging/AppendStatus.Loading.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.mvi.paging/AppendStatus.Loading.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.mvi.paging/AppendStatus.Loading.toString|toString(){}[0]
+    }
+}
+
 abstract class <#A: kotlin/Any, #B: kotlin/Any, #C: kotlin/Any> stapel.mvi/Presenter : stapel.mvi/Store<#A, #B, #C> { // stapel.mvi/Presenter|null[0]
     constructor <init>(#A, stapel.mvi/PresenterContext) // stapel.mvi/Presenter.<init>|<init>(1:0;stapel.mvi.PresenterContext){}[0]
 
@@ -79,6 +112,43 @@ final class <#A: kotlin/Any> stapel.mvi/FlowMachine { // stapel.mvi/FlowMachine|
     final fun <#A1: kotlin/Any?> run(#A, kotlin.coroutines/SuspendFunction0<#A1>, kotlin/Function1<#A1, #A>, kotlin/Function1<kotlin/Throwable, #A>): kotlinx.coroutines/Job // stapel.mvi/FlowMachine.run|run(1:0;kotlin.coroutines.SuspendFunction0<0:0>;kotlin.Function1<0:0,1:0>;kotlin.Function1<kotlin.Throwable,1:0>){0§<kotlin.Any?>}[0]
     final fun cancel() // stapel.mvi/FlowMachine.cancel|cancel(){}[0]
     final fun to(#A) // stapel.mvi/FlowMachine.to|to(1:0){}[0]
+}
+
+final class <#A: kotlin/Any?, #B: stapel.result/StapelError> stapel.mvi.paging/PagingMachine { // stapel.mvi.paging/PagingMachine|null[0]
+    constructor <init>(kotlinx.coroutines/CoroutineScope, kotlin.time/Clock, kotlin/Function1<#A, kotlin/Any>, kotlin.coroutines/SuspendFunction1<stapel.wire/PageCursor?, stapel.result/StapelResult<stapel.wire/Page<#A>, #B>>) // stapel.mvi.paging/PagingMachine.<init>|<init>(kotlinx.coroutines.CoroutineScope;kotlin.time.Clock;kotlin.Function1<1:0,kotlin.Any>;kotlin.coroutines.SuspendFunction1<stapel.wire.PageCursor?,stapel.result.StapelResult<stapel.wire.Page<1:0>,1:1>>){}[0]
+
+    final val state // stapel.mvi.paging/PagingMachine.state|{}state[0]
+        final fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.mvi.paging/PagingState<#A>> // stapel.mvi.paging/PagingMachine.state.<get-state>|<get-state>(){}[0]
+
+    final fun loadMore() // stapel.mvi.paging/PagingMachine.loadMore|loadMore(){}[0]
+    final fun refresh() // stapel.mvi.paging/PagingMachine.refresh|refresh(){}[0]
+    final fun retry() // stapel.mvi.paging/PagingMachine.retry|retry(){}[0]
+    final fun start(stapel.result.state/Resource.Ready<kotlin.collections/List<#A>>? = ...) // stapel.mvi.paging/PagingMachine.start|start(stapel.result.state.Resource.Ready<kotlin.collections.List<1:0>>?){}[0]
+}
+
+final class <#A: out kotlin/Any?> stapel.mvi.paging/PagingState { // stapel.mvi.paging/PagingState|null[0]
+    constructor <init>(stapel.result.state/Resource<kotlin.collections/List<#A>> = ..., stapel.mvi.paging/AppendStatus = ..., kotlin/Int? = ...) // stapel.mvi.paging/PagingState.<init>|<init>(stapel.result.state.Resource<kotlin.collections.List<1:0>>;stapel.mvi.paging.AppendStatus;kotlin.Int?){}[0]
+
+    final val append // stapel.mvi.paging/PagingState.append|{}append[0]
+        final fun <get-append>(): stapel.mvi.paging/AppendStatus // stapel.mvi.paging/PagingState.append.<get-append>|<get-append>(){}[0]
+    final val canLoadMore // stapel.mvi.paging/PagingState.canLoadMore|{}canLoadMore[0]
+        final fun <get-canLoadMore>(): kotlin/Boolean // stapel.mvi.paging/PagingState.canLoadMore.<get-canLoadMore>|<get-canLoadMore>(){}[0]
+    final val content // stapel.mvi.paging/PagingState.content|{}content[0]
+        final fun <get-content>(): stapel.result.state/Resource<kotlin.collections/List<#A>> // stapel.mvi.paging/PagingState.content.<get-content>|<get-content>(){}[0]
+    final val isEmpty // stapel.mvi.paging/PagingState.isEmpty|{}isEmpty[0]
+        final fun <get-isEmpty>(): kotlin/Boolean // stapel.mvi.paging/PagingState.isEmpty.<get-isEmpty>|<get-isEmpty>(){}[0]
+    final val items // stapel.mvi.paging/PagingState.items|{}items[0]
+        final fun <get-items>(): kotlin.collections/List<#A> // stapel.mvi.paging/PagingState.items.<get-items>|<get-items>(){}[0]
+    final val total // stapel.mvi.paging/PagingState.total|{}total[0]
+        final fun <get-total>(): kotlin/Int? // stapel.mvi.paging/PagingState.total.<get-total>|<get-total>(){}[0]
+
+    final fun component1(): stapel.result.state/Resource<kotlin.collections/List<#A>> // stapel.mvi.paging/PagingState.component1|component1(){}[0]
+    final fun component2(): stapel.mvi.paging/AppendStatus // stapel.mvi.paging/PagingState.component2|component2(){}[0]
+    final fun component3(): kotlin/Int? // stapel.mvi.paging/PagingState.component3|component3(){}[0]
+    final fun copy(stapel.result.state/Resource<kotlin.collections/List<#A>> = ..., stapel.mvi.paging/AppendStatus = ..., kotlin/Int? = ...): stapel.mvi.paging/PagingState<#A> // stapel.mvi.paging/PagingState.copy|copy(stapel.result.state.Resource<kotlin.collections.List<1:0>>;stapel.mvi.paging.AppendStatus;kotlin.Int?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.mvi.paging/PagingState.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.mvi.paging/PagingState.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.mvi.paging/PagingState.toString|toString(){}[0]
 }
 
 final class stapel.mvi/PresenterContext { // stapel.mvi/PresenterContext|null[0]

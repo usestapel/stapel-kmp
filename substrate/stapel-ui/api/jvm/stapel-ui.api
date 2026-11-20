@@ -108,6 +108,13 @@ public final class stapel/ui/LayoutKt {
 	public static synthetic fun stapelLayout-vfC735M$default (Lstapel/tokens/StapelTokens;FLstapel/ui/StapelInput;FILjava/lang/Object;)Lstapel/ui/StapelLayout;
 }
 
+public final class stapel/ui/PagedListKt {
+	public static final field LOAD_LIST_APPEND_TAG Ljava/lang/String;
+	public static final field LOAD_LIST_STALE_TAG Ljava/lang/String;
+	public static final fun LoadList (Lstapel/mvi/paging/PagingState;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Landroidx/compose/foundation/lazy/LazyListState;ILandroidx/compose/foundation/layout/PaddingValues;ZLjava/lang/String;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;III)V
+	public static final fun StapelListStatus (Lstapel/ui/skin/ListStatusKind;Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+}
+
 public final class stapel/ui/PaneMeasure : java/lang/Enum {
 	public static final field Full Lstapel/ui/PaneMeasure;
 	public static final field Narrow Lstapel/ui/PaneMeasure;
@@ -684,6 +691,7 @@ public final class stapel/ui/skin/FoundationSkin : stapel/ui/skin/StapelSkin {
 	public fun Divider (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun IconButton (Lstapel/ui/skin/IconButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun ListItem (Lstapel/ui/skin/ListItemSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun ListStatus (Lstapel/ui/skin/ListStatusSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Menu (Lstapel/ui/skin/MenuSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationBar (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationRail (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
@@ -796,6 +804,28 @@ public final class stapel/ui/skin/ListItemValue {
 	public final fun getSupporting ()Ljava/lang/String;
 	public final fun getText ()Ljava/lang/String;
 	public final fun getTone ()Lstapel/ui/StapelTone;
+}
+
+public final class stapel/ui/skin/ListStatusKind : java/lang/Enum {
+	public static final field AppendFailed Lstapel/ui/skin/ListStatusKind;
+	public static final field Appending Lstapel/ui/skin/ListStatusKind;
+	public static final field End Lstapel/ui/skin/ListStatusKind;
+	public static final field Stale Lstapel/ui/skin/ListStatusKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/ui/skin/ListStatusKind;
+	public static fun values ()[Lstapel/ui/skin/ListStatusKind;
+}
+
+public final class stapel/ui/skin/ListStatusSpec {
+	public static final field $stable I
+	public fun <init> (Lstapel/ui/skin/ListStatusKind;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Ljava/lang/String;)V
+	public synthetic fun <init> (Lstapel/ui/skin/ListStatusKind;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAction ()Lkotlin/jvm/functions/Function0;
+	public final fun getActionLabel ()Ljava/lang/String;
+	public final fun getKind ()Lstapel/ui/skin/ListStatusKind;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getOnAction ()Lkotlin/jvm/functions/Function0;
+	public final fun getTestTag ()Ljava/lang/String;
 }
 
 public final class stapel/ui/skin/MenuItemSpec {
@@ -968,6 +998,7 @@ public abstract interface class stapel/ui/skin/StapelSkin {
 	public abstract fun Divider (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun IconButton (Lstapel/ui/skin/IconButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun ListItem (Lstapel/ui/skin/ListItemSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun ListStatus (Lstapel/ui/skin/ListStatusSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Menu (Lstapel/ui/skin/MenuSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationBar (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationRail (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
@@ -990,6 +1021,7 @@ public final class stapel/ui/skin/StapelSkin$DefaultImpls {
 	public static fun Badge (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/BadgeSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public static fun Chip (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/ChipSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public static fun ChipGroup (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/ChipGroupSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public static fun ListStatus (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/ListStatusSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public static fun Menu (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/MenuSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public static fun NavigationBar (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public static fun NavigationRail (Lstapel/ui/skin/StapelSkin;Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V

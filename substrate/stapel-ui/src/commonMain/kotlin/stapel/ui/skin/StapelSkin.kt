@@ -150,6 +150,12 @@ public interface StapelSkin {
         FoundationSkin.ChipGroup(spec, modifier)
     }
 
+    /** The status row of a paged list: appending, append failed, end, stale ([ListStatusSpec] lists the duties). */
+    @Composable
+    public fun ListStatus(spec: ListStatusSpec, modifier: Modifier) {
+        FoundationSkin.ListStatus(spec, modifier)
+    }
+
     /** A brick-local widget: the skin's own value for [key], or the brick's default. */
     public fun <T : Any> extension(key: SkinExtensionKey<T>): T = key.default
 }
@@ -158,5 +164,5 @@ public interface StapelSkin {
 public val StapelSkinSlots: List<String> = listOf(
     "Button", "IconButton", "TextField", "CodeField", "Dialog", "Banner", "Progress", "Surface", "ListItem", "TopBar",
     "Divider", "Snackbar", "Toggle", "Tabs", "Chip", "Avatar", "Badge", "NavigationBar", "NavigationRail", "PullToRefresh",
-    "Select", "PagerIndicator", "Menu", "Stepper", "ChipGroup",
+    "Select", "PagerIndicator", "Menu", "Stepper", "ChipGroup", "ListStatus",
 )
