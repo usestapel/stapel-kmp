@@ -34,6 +34,8 @@ covers all modules.
 | `checkLibraryLines` (KMP modules) | one library line | a JetBrains module and its androidx twin resolve on one classpath: on klib/metadata classpaths always (duplicate `unique_name` breaks intermediate source sets), on jar classpaths unless the JetBrains artifact is a redirect | `REDIRECT_SHIMS` in build-logic, catalog `androidx-*` versions |
 | `checkDependencyDirection` sensor 1 | D6 | a declared main project edge breaks the layer table, the same-brick rule or the substrate rank order | `gradle/substrate-ranks.properties` |
 | `checkDependencyDirection` sensor 2 | D6/D9/R9/R1 | a resolved main compile/runtime classpath (any target) holds Compose / koin-compose / navigation in a pure module, Room/SQLite outside `*-room`, Material outside the skin, Coil on a brick-UI compile classpath, or a pre-release coordinate not on the allow-list in a published module | `gradle/material-allowed.txt`, `gradle/prerelease-allowlist.txt` |
+| `checkIosFloor` (root) | iOS floor | an Xcode project (any target or configuration), an xcconfig or an Info.plist `MinimumOSVersion` declares an iOS other than `IOS_FLOOR` (15.0); a Gradle build that links an Apple framework or executable does not pin `osVersionMin` of both iOS konan targets to the floor, or pins another value | `**/*.pbxproj`, `**/*.xcconfig`, `**/Info.plist`, `**/*.gradle.kts` outside build-logic |
+| `checkIosBinaries` (root, after the iOS binaries exist; CI `ios`, `publish-smoke`, `sample`) | iOS floor | a Mach-O object that holds instructions or imports a symbol (test executables, the sample's framework and app, objects bundled in a klib) has an `LC_BUILD_VERSION` / `LC_VERSION_MIN_IPHONEOS` minimum above the floor, or a klib manifest carries a newer `-m…-version-min` option. A data-only object above the floor (no instructions, no imports) is a note, not a failure | `build/staging-repo/**/*.klib`, `*/build/bin/ios*/**/*.kexe`, or `-Pstapel.ios.binaries=<paths>` |
 | `checkCatalog` (root) | R1 | a catalog version is a range/`+`/pre-release not on the allow-list; a depcheck exception expired | `gradle/libs.versions.toml`, allow-list, `gradle/depcheck-exceptions.toml` |
 | `checkKotlinAbi` | D12 | the public ABI differs from the committed dump | `api/` dumps in the module |
 | verifyTestsRan (inside every test task) | D12 | a test task of a module with `commonTest` sources executed 0 tests | JUnit XML |
@@ -173,10 +175,57 @@ first, so the sign-in walk (`SignInWalkTest`, compiled in with
 in an `always()` step. Uploads: screenshots, `markers.log`, `diagnose.log`, `uitest.log`, `uitest.xcresult`,
 the stand's logs.
 
+## The iOS floor
+
+The minimum iOS of everything iOS-facing is **15.0**: `IOS_FLOOR` in
+`build-logic/convention/src/main/kotlin/stapel/conventions/IosFloor.kt` (owner
+ruling 2026-11-20). Where it is applied:
+
+- every iOS target of every library: each binary (test executables) is linked
+  with `-Xoverride-konan-properties=osVersionMin.ios_arm64=15.0;osVersionMin.ios_simulator_arm64=15.0`.
+  Kotlin 2.4 has no Gradle DSL for the minimum OS (the `swiftPMDependencies`
+  deployment targets cover SwiftPM import only); the konan property override is
+  the route. Kotlin 2.4.21's own default is 15.0 too — the pin keeps a compiler
+  update from moving the floor silently. Published klibs are IR and carry no
+  minimum; `checkIosBinaries` still reads their manifests and bundled objects;
+- `samples/shop-mobile`: `IPHONEOS_DEPLOYMENT_TARGET = 15.0` at project level
+  (app and XCUITest targets) and the same override in `shared/build.gradle.kts`;
+  `ios-smoke.sh` fails when the built app's minimum is not the project's;
+- the scaffold's KMP emitter (stapel-tools `composition/kmp/templates`), kept
+  equal to the sample by stapel-tools' parity test.
+
+**Availability rule.** API newer than the floor is called only behind an
+availability check with a working iOS 15 path: Swift `if #available(iOS N, *)` /
+`@available`, Kotlin/Native an OS version check
+(`NSProcessInfo.processInfo.isOperatingSystemAtLeastVersion`) or
+`respondsToSelector` with a fallback. Swift enforces it at compile time against
+the deployment target (an unguarded newer API is an error). Kotlin/Native does
+not: the platform klibs carry no `introduced` versions, so an unguarded call
+compiles and fails at run time on an older iOS. Reviewed by hand (audit
+2026-11-20: every platform call in `iosMain` and the sample's Swift shell is
+iOS ≤ 12 API; none needs a guard) and executed by the `sample-oldest-ios` job.
+
+**What is proven where.** Compose Multiplatform 1.12.2 itself supports iOS 14
+and later. No iOS 15 or 16 simulator runtime can be installed with the
+toolchains in use: Xcode 27.2's `xcodebuild -downloadPlatform iOS -buildVersion`
+offers 26.0 and later only (15.x–18.x: "not available for download"), and the
+GitHub-hosted images ship 26.2–26.5 (`macos-26`), 18.5–26.2 (`macos-15`) and
+17.0–18.2 (`macos-14`). So: `checkIosFloor` + `checkIosBinaries` prove the
+build targets 15.0, and `sample-oldest-ios` (macos-14, Xcode 16.2) runs the
+sample's launch smoke, deep link, the sign-in walk and the XCUITest suite on
+the oldest hosted runtime, iOS 17.0. Execution on iOS 15/16 is not proven by
+CI; it needs a device (or an iOS 15 runtime image) on that version.
+
+Known note: Skiko's ICU data object (`libicu.icudtl_dat.o`, a 6 MB table, no
+instructions, no imports) is tagged minimum iOS 18.5; the app link prints
+`ld: warning: object file … was built for newer 'iOS-simulator' version (18.5)
+than being linked (15.0)`. It cannot call an API, so `checkIosBinaries`
+reports it as a note.
+
 ## CI capacity and the `ci-ok` verdict
 
 Linux jobs (`build-logic`, `fast`) run for every commit. Each macOS job (`ios`,
-`publish-smoke`, `sample`) has a job-level concurrency group shared by every
+`publish-smoke`, `sample`, `sample-oldest-ios`) has a job-level concurrency group shared by every
 push to `main`: a newer commit's job replaces an older one that is still
 waiting for the group (GitHub keeps one pending job per group); a job that has
 the group (running, or queued for a runner) is never cancelled. `ci-ok` runs

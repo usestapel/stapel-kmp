@@ -29,6 +29,13 @@ compatibility table lists the new AGP/Gradle pair.
 CI uses `macos-26` with `DEVELOPER_DIR=/Applications/Xcode_26.4.app/Contents/Developer`
 (the tested Xcode); local runs use whatever `scripts/env.sh` selects.
 
+## iOS floor and simulator runtimes (measured 2026-11-20)
+
+The minimum iOS is 15.0 (`IOS_FLOOR`, see [gates.md](gates.md#the-ios-floor)).
+Compose Multiplatform 1.12.2 supports iOS 14+. Simulator runtimes: Xcode 27.2
+downloads iOS 26.0 and later only; `macos-14` runners carry iOS 17.0–18.2 with
+Xcode 15.0.1–16.2, which is the oldest runtime CI executes (`sample-oldest-ios`).
+
 ## Environment
 
 `source scripts/env.sh` sets, for the current shell only:

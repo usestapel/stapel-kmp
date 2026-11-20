@@ -16,7 +16,14 @@ Thanks for helping. The short version:
    (see [.changes/README.md](.changes/README.md)).
 6. Dependencies come only from `gradle/libs.versions.toml`; ask in the pull
    request if you need a new one.
-7. Releases are cut by maintainers only; the first Maven Central publish is a
+7. The minimum iOS is **15.0** (`IOS_FLOOR` in `build-logic`, see
+   [docs/gates.md](docs/gates.md#the-ios-floor)). Never raise a deployment
+   target to reach a newer API: Swift calls it under `if #available(iOS N, *)`
+   (or `@available`) with an iOS 15 path, Kotlin in `iosMain` behind an OS
+   version check (`NSProcessInfo.processInfo.isOperatingSystemAtLeastVersion`)
+   or `respondsToSelector` with a fallback, and the pull request names the
+   guarded call.
+8. Releases are cut by maintainers only; the first Maven Central publish is a
    maintainer bootstrap ([docs/release.md](docs/release.md)).
 
 Code style: Kotlin official style (`.editorconfig`), English everywhere, KDoc on
