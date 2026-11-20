@@ -283,6 +283,35 @@ fun navParityErrors(registry: Map<String, Any?>, brick: String, manifest: Map<St
             if (e[field] != n[field]) errors += "embed '$id': $field = ${e[field]} (KMP) != ${n[field]} (registry)"
         }
     }
+    errors += kmpPlatformErrors(entry, manifest)
+    return errors
+}
+
+/**
+ * The registry's `platforms.kmp` block is what the scaffold's KMP emitter mounts: its artifact, entries
+ * and embeds must be exactly what the library exports, or a generated app references a destination the
+ * library lacks (or silently leaves one out). A brick without the block has no KMP pair yet.
+ */
+@Suppress("UNCHECKED_CAST")
+internal fun kmpPlatformErrors(entry: Map<String, Any?>, manifest: Map<String, Any?>): List<String> {
+    val kmp = (entry["platforms"] as Map<String, Any?>?)?.get("kmp") as Map<String, Any?>? ?: return emptyList()
+    val errors = mutableListOf<String>()
+    val artifactId = (manifest["artifact"] as String).substringAfterLast(':')
+    if (kmp["ui"] != artifactId) errors += "platforms.kmp.ui = ${kmp["ui"]} (registry) != $artifactId (KMP manifest artifact)"
+    fun compare(what: String, registryIds: Set<String>, libraryIds: Set<String>) {
+        (registryIds - libraryIds).sorted().forEach { errors += "platforms.kmp.$what lists '$it', which the library does not export" }
+        (libraryIds - registryIds).sorted().forEach { errors += "'$it' is exported but missing from the registry's platforms.kmp.$what" }
+    }
+    compare(
+        "entries",
+        (kmp["entries"] as List<String>).toSet(),
+        (manifest["destinations"] as List<Map<String, Any?>>).map { it["id"] as String }.toSet(),
+    )
+    compare(
+        "embeds",
+        (kmp["embeds"] as List<String>).toSet(),
+        (manifest["embeds"] as List<Map<String, Any?>>).map { it["id"] as String }.toSet(),
+    )
     return errors
 }
 
