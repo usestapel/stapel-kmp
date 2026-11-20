@@ -222,6 +222,10 @@ jobs:
         env:
           SHOP_STAND_URL: http://127.0.0.1:18731/
         run: samples/shop-mobile/scripts/ios-smoke.sh --uitest
+      - name: iOS push walk (simctl push in the background, the banner tapped, the deep-linked order)
+        env:
+          SHOP_STAND_URL: http://127.0.0.1:18731/
+        run: samples/shop-mobile/scripts/ios-smoke.sh --push
       - name: The iOS floor on the built app and the Kotlin framework it embeds
         run: >
           ./gradlew "$MAC_HEAP" checkIosBinaries
@@ -240,6 +244,7 @@ jobs:
             samples/shop-mobile/build/ios-smoke/*.log
             samples/shop-mobile/build/ios-smoke/*.txt
             samples/shop-mobile/build/ios-smoke/uitest.xcresult
+            samples/shop-mobile/build/ios-smoke/push.xcresult
             bricks/auth/e2e/build/stand/*.log
             bricks/profiles/e2e/build/stand/*.log
           retention-days: 14
