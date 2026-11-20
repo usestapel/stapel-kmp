@@ -27,6 +27,16 @@
     }
   },
   "artifacts": {
+    "stapel-analytics": {
+      "version": "0.0.1",
+      "family": "substrate",
+      "released": false
+    },
+    "stapel-analytics-testing": {
+      "version": "0.0.1",
+      "family": "substrate",
+      "released": false
+    },
     "stapel-app": {
       "version": "0.0.1",
       "family": "substrate",
