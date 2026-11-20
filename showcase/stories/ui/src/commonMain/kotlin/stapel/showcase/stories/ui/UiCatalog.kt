@@ -164,6 +164,6 @@ private val rows = Story(
 val storyCatalog: StoryCatalog = StoryCatalog(
     id = "ui",
     title = "Stapel UI",
-    stories = listOf(colorRoles, typeScale, spacing, gutter) + slotStories + listOf(sectionHeader, statusPage, emptyState, adaptiveGrid, rows, loadList),
+    stories = listOf(colorRoles, typeScale, spacing, gutter) + slotStories + listOf(sectionHeader, statusPage, emptyState, adaptiveGrid, rows, loadList, imagesStory),
     environment = StoryEnvironment(locales = listOf("en", "ru", "es")),
 )

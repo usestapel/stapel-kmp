@@ -1,3 +1,10 @@
+public final class stapel/ui/AsyncImageKt {
+	public static final field ASYNC_IMAGE_ERROR_TAG Ljava/lang/String;
+	public static final field ASYNC_IMAGE_PLACEHOLDER_TAG Ljava/lang/String;
+	public static final fun StapelAsyncImage (Lstapel/image/StapelImage;Ljava/lang/String;Landroidx/compose/ui/Modifier;Lstapel/image/Fit;Ljava/lang/Float;Ljava/lang/String;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun StapelAvatar (Ljava/lang/String;Lstapel/image/StapelImage;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lstapel/ui/skin/AvatarSize;Lstapel/ui/StapelIcon;Lstapel/ui/skin/BadgeSpec;Lstapel/ui/skin/BadgePlacement;Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+}
+
 public final class stapel/ui/ComponentColors {
 	public static final field $stable I
 	public static final field INSTANCE Lstapel/ui/ComponentColors;
@@ -106,6 +113,13 @@ public final class stapel/ui/LayoutKt {
 	public static final fun rememberStapelLayout-rAjV9yQ (Lstapel/tokens/StapelTokens;FLandroidx/compose/runtime/Composer;II)Lstapel/ui/StapelLayout;
 	public static final fun stapelLayout-vfC735M (Lstapel/tokens/StapelTokens;FLstapel/ui/StapelInput;F)Lstapel/ui/StapelLayout;
 	public static synthetic fun stapelLayout-vfC735M$default (Lstapel/tokens/StapelTokens;FLstapel/ui/StapelInput;FILjava/lang/Object;)Lstapel/ui/StapelLayout;
+}
+
+public final class stapel/ui/NoStapelImages : stapel/ui/StapelImages {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/ui/NoStapelImages;
+	public fun load (Lstapel/image/ImageRequest;Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelImageState;
+	public fun painter (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
 }
 
 public final class stapel/ui/PagedListKt {
@@ -312,8 +326,42 @@ public abstract interface class stapel/ui/StapelIconSet {
 	public abstract fun resolve (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/vector/ImageVector;
 }
 
+public abstract interface class stapel/ui/StapelImageState {
+}
+
+public final class stapel/ui/StapelImageState$Failed : stapel/ui/StapelImageState {
+	public static final field $stable I
+	public fun <init> (Lstapel/image/ImageError;)V
+	public final fun component1 ()Lstapel/image/ImageError;
+	public final fun copy (Lstapel/image/ImageError;)Lstapel/ui/StapelImageState$Failed;
+	public static synthetic fun copy$default (Lstapel/ui/StapelImageState$Failed;Lstapel/image/ImageError;ILjava/lang/Object;)Lstapel/ui/StapelImageState$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lstapel/image/ImageError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/ui/StapelImageState$Loading : stapel/ui/StapelImageState {
+	public static final field $stable I
+	public static final field INSTANCE Lstapel/ui/StapelImageState$Loading;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/ui/StapelImageState$Ready : stapel/ui/StapelImageState {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/ui/graphics/painter/Painter;)V
+	public final fun getPainter ()Landroidx/compose/ui/graphics/painter/Painter;
+}
+
 public abstract interface class stapel/ui/StapelImages {
+	public fun load (Lstapel/image/ImageRequest;Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelImageState;
 	public abstract fun painter (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/painter/Painter;
+}
+
+public final class stapel/ui/StapelImages$DefaultImpls {
+	public static fun load (Lstapel/ui/StapelImages;Lstapel/image/ImageRequest;Landroidx/compose/runtime/Composer;I)Lstapel/ui/StapelImageState;
 }
 
 public final class stapel/ui/StapelInput : java/lang/Enum {

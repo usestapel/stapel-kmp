@@ -1,0 +1,284 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-image>
+final enum class stapel.image/Branch : kotlin/Enum<stapel.image/Branch> { // stapel.image/Branch|null[0]
+    enum entry H // stapel.image/Branch.H|null[0]
+    enum entry W // stapel.image/Branch.W|null[0]
+
+    final val entries // stapel.image/Branch.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.image/Branch> // stapel.image/Branch.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.image/Branch // stapel.image/Branch.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.image/Branch> // stapel.image/Branch.values|values#static(){}[0]
+
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // stapel.image/Branch.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.image/Branch> // stapel.image/Branch.Companion.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // stapel.image/Branch.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+}
+
+final enum class stapel.image/Fit : kotlin/Enum<stapel.image/Fit> { // stapel.image/Fit|null[0]
+    enum entry Contain // stapel.image/Fit.Contain|null[0]
+    enum entry Cover // stapel.image/Fit.Cover|null[0]
+
+    final val entries // stapel.image/Fit.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.image/Fit> // stapel.image/Fit.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.image/Fit // stapel.image/Fit.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.image/Fit> // stapel.image/Fit.values|values#static(){}[0]
+}
+
+final enum class stapel.image/PreviewKind : kotlin/Enum<stapel.image/PreviewKind> { // stapel.image/PreviewKind|null[0]
+    enum entry Blur // stapel.image/PreviewKind.Blur|null[0]
+    enum entry Poster // stapel.image/PreviewKind.Poster|null[0]
+    enum entry Waveform // stapel.image/PreviewKind.Waveform|null[0]
+
+    final val entries // stapel.image/PreviewKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<stapel.image/PreviewKind> // stapel.image/PreviewKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): stapel.image/PreviewKind // stapel.image/PreviewKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<stapel.image/PreviewKind> // stapel.image/PreviewKind.values|values#static(){}[0]
+
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // stapel.image/PreviewKind.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.image/PreviewKind> // stapel.image/PreviewKind.Companion.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // stapel.image/PreviewKind.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+}
+
+sealed interface stapel.image/ImageError { // stapel.image/ImageError|null[0]
+    final class Http : stapel.image/ImageError { // stapel.image/ImageError.Http|null[0]
+        constructor <init>(kotlin/Int) // stapel.image/ImageError.Http.<init>|<init>(kotlin.Int){}[0]
+
+        final val status // stapel.image/ImageError.Http.status|{}status[0]
+            final fun <get-status>(): kotlin/Int // stapel.image/ImageError.Http.status.<get-status>|<get-status>(){}[0]
+
+        final fun component1(): kotlin/Int // stapel.image/ImageError.Http.component1|component1(){}[0]
+        final fun copy(kotlin/Int = ...): stapel.image/ImageError.Http // stapel.image/ImageError.Http.copy|copy(kotlin.Int){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImageError.Http.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.image/ImageError.Http.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.image/ImageError.Http.toString|toString(){}[0]
+    }
+
+    final class Network : stapel.image/ImageError { // stapel.image/ImageError.Network|null[0]
+        constructor <init>(kotlin/String) // stapel.image/ImageError.Network.<init>|<init>(kotlin.String){}[0]
+
+        final val message // stapel.image/ImageError.Network.message|{}message[0]
+            final fun <get-message>(): kotlin/String // stapel.image/ImageError.Network.message.<get-message>|<get-message>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.image/ImageError.Network.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.image/ImageError.Network // stapel.image/ImageError.Network.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImageError.Network.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.image/ImageError.Network.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.image/ImageError.Network.toString|toString(){}[0]
+    }
+
+    final class Refused : stapel.image/ImageError { // stapel.image/ImageError.Refused|null[0]
+        constructor <init>(kotlin/String) // stapel.image/ImageError.Refused.<init>|<init>(kotlin.String){}[0]
+
+        final val reason // stapel.image/ImageError.Refused.reason|{}reason[0]
+            final fun <get-reason>(): kotlin/String // stapel.image/ImageError.Refused.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun component1(): kotlin/String // stapel.image/ImageError.Refused.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): stapel.image/ImageError.Refused // stapel.image/ImageError.Refused.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImageError.Refused.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.image/ImageError.Refused.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.image/ImageError.Refused.toString|toString(){}[0]
+    }
+
+    final object Decode : stapel.image/ImageError { // stapel.image/ImageError.Decode|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImageError.Decode.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.image/ImageError.Decode.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.image/ImageError.Decode.toString|toString(){}[0]
+    }
+
+    final object NoLoader : stapel.image/ImageError { // stapel.image/ImageError.NoLoader|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImageError.NoLoader.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.image/ImageError.NoLoader.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.image/ImageError.NoLoader.toString|toString(){}[0]
+    }
+}
+
+sealed interface stapel.image/ImagePlaceholder { // stapel.image/ImagePlaceholder|null[0]
+    final class Preview : stapel.image/ImagePlaceholder { // stapel.image/ImagePlaceholder.Preview|null[0]
+        constructor <init>(kotlin/ByteArray, kotlin/String, stapel.image/PreviewKind) // stapel.image/ImagePlaceholder.Preview.<init>|<init>(kotlin.ByteArray;kotlin.String;stapel.image.PreviewKind){}[0]
+
+        final val bytes // stapel.image/ImagePlaceholder.Preview.bytes|{}bytes[0]
+            final fun <get-bytes>(): kotlin/ByteArray // stapel.image/ImagePlaceholder.Preview.bytes.<get-bytes>|<get-bytes>(){}[0]
+        final val kind // stapel.image/ImagePlaceholder.Preview.kind|{}kind[0]
+            final fun <get-kind>(): stapel.image/PreviewKind // stapel.image/ImagePlaceholder.Preview.kind.<get-kind>|<get-kind>(){}[0]
+        final val mime // stapel.image/ImagePlaceholder.Preview.mime|{}mime[0]
+            final fun <get-mime>(): kotlin/String // stapel.image/ImagePlaceholder.Preview.mime.<get-mime>|<get-mime>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImagePlaceholder.Preview.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.image/ImagePlaceholder.Preview.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.image/ImagePlaceholder.Preview.toString|toString(){}[0]
+    }
+
+    final object None : stapel.image/ImagePlaceholder { // stapel.image/ImagePlaceholder.None|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImagePlaceholder.None.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.image/ImagePlaceholder.None.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.image/ImagePlaceholder.None.toString|toString(){}[0]
+    }
+}
+
+final class stapel.image/ImageRequest { // stapel.image/ImageRequest|null[0]
+    constructor <init>(kotlin/String, kotlin/Int? = ..., kotlin/Int? = ..., stapel.image/ImagePlaceholder = ..., stapel.image/VariantMeta? = ...) // stapel.image/ImageRequest.<init>|<init>(kotlin.String;kotlin.Int?;kotlin.Int?;stapel.image.ImagePlaceholder;stapel.image.VariantMeta?){}[0]
+
+    final val heightPx // stapel.image/ImageRequest.heightPx|{}heightPx[0]
+        final fun <get-heightPx>(): kotlin/Int? // stapel.image/ImageRequest.heightPx.<get-heightPx>|<get-heightPx>(){}[0]
+    final val placeholder // stapel.image/ImageRequest.placeholder|{}placeholder[0]
+        final fun <get-placeholder>(): stapel.image/ImagePlaceholder // stapel.image/ImageRequest.placeholder.<get-placeholder>|<get-placeholder>(){}[0]
+    final val url // stapel.image/ImageRequest.url|{}url[0]
+        final fun <get-url>(): kotlin/String // stapel.image/ImageRequest.url.<get-url>|<get-url>(){}[0]
+    final val variant // stapel.image/ImageRequest.variant|{}variant[0]
+        final fun <get-variant>(): stapel.image/VariantMeta? // stapel.image/ImageRequest.variant.<get-variant>|<get-variant>(){}[0]
+    final val widthPx // stapel.image/ImageRequest.widthPx|{}widthPx[0]
+        final fun <get-widthPx>(): kotlin/Int? // stapel.image/ImageRequest.widthPx.<get-widthPx>|<get-widthPx>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.image/ImageRequest.component1|component1(){}[0]
+    final fun component2(): kotlin/Int? // stapel.image/ImageRequest.component2|component2(){}[0]
+    final fun component3(): kotlin/Int? // stapel.image/ImageRequest.component3|component3(){}[0]
+    final fun component4(): stapel.image/ImagePlaceholder // stapel.image/ImageRequest.component4|component4(){}[0]
+    final fun component5(): stapel.image/VariantMeta? // stapel.image/ImageRequest.component5|component5(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Int? = ..., kotlin/Int? = ..., stapel.image/ImagePlaceholder = ..., stapel.image/VariantMeta? = ...): stapel.image/ImageRequest // stapel.image/ImageRequest.copy|copy(kotlin.String;kotlin.Int?;kotlin.Int?;stapel.image.ImagePlaceholder;stapel.image.VariantMeta?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/ImageRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.image/ImageRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.image/ImageRequest.toString|toString(){}[0]
+}
+
+final class stapel.image/StapelImage { // stapel.image/StapelImage|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String? = ..., kotlin/Int? = ..., kotlin/Int? = ..., kotlin/Double? = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin.collections/List<stapel.image/VariantMeta> = ..., kotlin/String? = ..., stapel.image/PreviewKind? = ..., kotlin/Long? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...) // stapel.image/StapelImage.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?;kotlin.Int?;kotlin.Int?;kotlin.Double?;kotlin.Boolean;kotlin.String?;kotlin.collections.List<stapel.image.VariantMeta>;kotlin.String?;stapel.image.PreviewKind?;kotlin.Long?;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+
+    final val aspect // stapel.image/StapelImage.aspect|{}aspect[0]
+        final fun <get-aspect>(): kotlin/Double? // stapel.image/StapelImage.aspect.<get-aspect>|<get-aspect>(){}[0]
+    final val durationMs // stapel.image/StapelImage.durationMs|{}durationMs[0]
+        final fun <get-durationMs>(): kotlin/Long? // stapel.image/StapelImage.durationMs.<get-durationMs>|<get-durationMs>(){}[0]
+    final val height // stapel.image/StapelImage.height|{}height[0]
+        final fun <get-height>(): kotlin/Int? // stapel.image/StapelImage.height.<get-height>|<get-height>(){}[0]
+    final val isPicture // stapel.image/StapelImage.isPicture|{}isPicture[0]
+        final fun <get-isPicture>(): kotlin/Boolean // stapel.image/StapelImage.isPicture.<get-isPicture>|<get-isPicture>(){}[0]
+    final val kind // stapel.image/StapelImage.kind|{}kind[0]
+        final fun <get-kind>(): kotlin/String? // stapel.image/StapelImage.kind.<get-kind>|<get-kind>(){}[0]
+    final val metaReason // stapel.image/StapelImage.metaReason|{}metaReason[0]
+        final fun <get-metaReason>(): kotlin/String? // stapel.image/StapelImage.metaReason.<get-metaReason>|<get-metaReason>(){}[0]
+    final val metaStatus // stapel.image/StapelImage.metaStatus|{}metaStatus[0]
+        final fun <get-metaStatus>(): kotlin/String? // stapel.image/StapelImage.metaStatus.<get-metaStatus>|<get-metaStatus>(){}[0]
+    final val mime // stapel.image/StapelImage.mime|{}mime[0]
+        final fun <get-mime>(): kotlin/String? // stapel.image/StapelImage.mime.<get-mime>|<get-mime>(){}[0]
+    final val posterUrl // stapel.image/StapelImage.posterUrl|{}posterUrl[0]
+        final fun <get-posterUrl>(): kotlin/String? // stapel.image/StapelImage.posterUrl.<get-posterUrl>|<get-posterUrl>(){}[0]
+    final val previewB64 // stapel.image/StapelImage.previewB64|{}previewB64[0]
+        final fun <get-previewB64>(): kotlin/String? // stapel.image/StapelImage.previewB64.<get-previewB64>|<get-previewB64>(){}[0]
+    final val previewKind // stapel.image/StapelImage.previewKind|{}previewKind[0]
+        final fun <get-previewKind>(): stapel.image/PreviewKind? // stapel.image/StapelImage.previewKind.<get-previewKind>|<get-previewKind>(){}[0]
+    final val reservedAspect // stapel.image/StapelImage.reservedAspect|{}reservedAspect[0]
+        final fun <get-reservedAspect>(): kotlin/Double? // stapel.image/StapelImage.reservedAspect.<get-reservedAspect>|<get-reservedAspect>(){}[0]
+    final val source // stapel.image/StapelImage.source|{}source[0]
+        final fun <get-source>(): kotlin/String // stapel.image/StapelImage.source.<get-source>|<get-source>(){}[0]
+    final val square // stapel.image/StapelImage.square|{}square[0]
+        final fun <get-square>(): kotlin/Boolean // stapel.image/StapelImage.square.<get-square>|<get-square>(){}[0]
+    final val url // stapel.image/StapelImage.url|{}url[0]
+        final fun <get-url>(): kotlin/String // stapel.image/StapelImage.url.<get-url>|<get-url>(){}[0]
+    final val variants // stapel.image/StapelImage.variants|{}variants[0]
+        final fun <get-variants>(): kotlin.collections/List<stapel.image/VariantMeta> // stapel.image/StapelImage.variants.<get-variants>|<get-variants>(){}[0]
+    final val width // stapel.image/StapelImage.width|{}width[0]
+        final fun <get-width>(): kotlin/Int? // stapel.image/StapelImage.width.<get-width>|<get-width>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.image/StapelImage.component1|component1(){}[0]
+    final fun component10(): kotlin/String? // stapel.image/StapelImage.component10|component10(){}[0]
+    final fun component11(): stapel.image/PreviewKind? // stapel.image/StapelImage.component11|component11(){}[0]
+    final fun component12(): kotlin/Long? // stapel.image/StapelImage.component12|component12(){}[0]
+    final fun component13(): kotlin/String? // stapel.image/StapelImage.component13|component13(){}[0]
+    final fun component14(): kotlin/String? // stapel.image/StapelImage.component14|component14(){}[0]
+    final fun component15(): kotlin/String? // stapel.image/StapelImage.component15|component15(){}[0]
+    final fun component2(): kotlin/String // stapel.image/StapelImage.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // stapel.image/StapelImage.component3|component3(){}[0]
+    final fun component4(): kotlin/Int? // stapel.image/StapelImage.component4|component4(){}[0]
+    final fun component5(): kotlin/Int? // stapel.image/StapelImage.component5|component5(){}[0]
+    final fun component6(): kotlin/Double? // stapel.image/StapelImage.component6|component6(){}[0]
+    final fun component7(): kotlin/Boolean // stapel.image/StapelImage.component7|component7(){}[0]
+    final fun component8(): kotlin/String? // stapel.image/StapelImage.component8|component8(){}[0]
+    final fun component9(): kotlin.collections/List<stapel.image/VariantMeta> // stapel.image/StapelImage.component9|component9(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/Int? = ..., kotlin/Int? = ..., kotlin/Double? = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin.collections/List<stapel.image/VariantMeta> = ..., kotlin/String? = ..., stapel.image/PreviewKind? = ..., kotlin/Long? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...): stapel.image/StapelImage // stapel.image/StapelImage.copy|copy(kotlin.String;kotlin.String;kotlin.String?;kotlin.Int?;kotlin.Int?;kotlin.Double?;kotlin.Boolean;kotlin.String?;kotlin.collections.List<stapel.image.VariantMeta>;kotlin.String?;stapel.image.PreviewKind?;kotlin.Long?;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/StapelImage.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.image/StapelImage.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.image/StapelImage.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.image/StapelImage> { // stapel.image/StapelImage.$serializer|null[0]
+        final val descriptor // stapel.image/StapelImage.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.image/StapelImage.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.image/StapelImage.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.image/StapelImage // stapel.image/StapelImage.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.image/StapelImage) // stapel.image/StapelImage.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.image.StapelImage){}[0]
+    }
+
+    final object Companion { // stapel.image/StapelImage.Companion|null[0]
+        final val $childSerializers // stapel.image/StapelImage.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun link(kotlin/String, kotlin/Double? = ...): stapel.image/StapelImage // stapel.image/StapelImage.Companion.link|link(kotlin.String;kotlin.Double?){}[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.image/StapelImage> // stapel.image/StapelImage.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class stapel.image/VariantMeta { // stapel.image/VariantMeta|null[0]
+    constructor <init>(kotlin/String, stapel.image/Branch? = ..., kotlin/String, kotlin/Int? = ..., kotlin/Int? = ...) // stapel.image/VariantMeta.<init>|<init>(kotlin.String;stapel.image.Branch?;kotlin.String;kotlin.Int?;kotlin.Int?){}[0]
+
+    final val branch // stapel.image/VariantMeta.branch|{}branch[0]
+        final fun <get-branch>(): stapel.image/Branch? // stapel.image/VariantMeta.branch.<get-branch>|<get-branch>(){}[0]
+    final val height // stapel.image/VariantMeta.height|{}height[0]
+        final fun <get-height>(): kotlin/Int? // stapel.image/VariantMeta.height.<get-height>|<get-height>(){}[0]
+    final val numericTier // stapel.image/VariantMeta.numericTier|{}numericTier[0]
+        final fun <get-numericTier>(): kotlin/Int? // stapel.image/VariantMeta.numericTier.<get-numericTier>|<get-numericTier>(){}[0]
+    final val tier // stapel.image/VariantMeta.tier|{}tier[0]
+        final fun <get-tier>(): kotlin/String // stapel.image/VariantMeta.tier.<get-tier>|<get-tier>(){}[0]
+    final val url // stapel.image/VariantMeta.url|{}url[0]
+        final fun <get-url>(): kotlin/String // stapel.image/VariantMeta.url.<get-url>|<get-url>(){}[0]
+    final val width // stapel.image/VariantMeta.width|{}width[0]
+        final fun <get-width>(): kotlin/Int? // stapel.image/VariantMeta.width.<get-width>|<get-width>(){}[0]
+
+    final fun component1(): kotlin/String // stapel.image/VariantMeta.component1|component1(){}[0]
+    final fun component2(): stapel.image/Branch? // stapel.image/VariantMeta.component2|component2(){}[0]
+    final fun component3(): kotlin/String // stapel.image/VariantMeta.component3|component3(){}[0]
+    final fun component4(): kotlin/Int? // stapel.image/VariantMeta.component4|component4(){}[0]
+    final fun component5(): kotlin/Int? // stapel.image/VariantMeta.component5|component5(){}[0]
+    final fun copy(kotlin/String = ..., stapel.image/Branch? = ..., kotlin/String = ..., kotlin/Int? = ..., kotlin/Int? = ...): stapel.image/VariantMeta // stapel.image/VariantMeta.copy|copy(kotlin.String;stapel.image.Branch?;kotlin.String;kotlin.Int?;kotlin.Int?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // stapel.image/VariantMeta.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // stapel.image/VariantMeta.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // stapel.image/VariantMeta.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<stapel.image/VariantMeta> { // stapel.image/VariantMeta.$serializer|null[0]
+        final val descriptor // stapel.image/VariantMeta.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // stapel.image/VariantMeta.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // stapel.image/VariantMeta.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): stapel.image/VariantMeta // stapel.image/VariantMeta.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, stapel.image/VariantMeta) // stapel.image/VariantMeta.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;stapel.image.VariantMeta){}[0]
+    }
+
+    final object Companion { // stapel.image/VariantMeta.Companion|null[0]
+        final val $childSerializers // stapel.image/VariantMeta.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<stapel.image/VariantMeta> // stapel.image/VariantMeta.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final const val stapel.image/ORIGINAL_TIER // stapel.image/ORIGINAL_TIER|{}ORIGINAL_TIER[0]
+    final fun <get-ORIGINAL_TIER>(): kotlin/String // stapel.image/ORIGINAL_TIER.<get-ORIGINAL_TIER>|<get-ORIGINAL_TIER>(){}[0]
+
+final val stapel.image/rank // stapel.image/rank|@stapel.image.VariantMeta{}rank[0]
+    final fun (stapel.image/VariantMeta).<get-rank>(): kotlin/Int // stapel.image/rank.<get-rank>|<get-rank>@stapel.image.VariantMeta(){}[0]
+
+final fun (stapel.image/PreviewKind).stapel.image/defaultAspect(): kotlin/Double? // stapel.image/defaultAspect|defaultAspect@stapel.image.PreviewKind(){}[0]
+final fun (stapel.image/StapelImage).stapel.image/placeholder(): stapel.image/ImagePlaceholder // stapel.image/placeholder|placeholder@stapel.image.StapelImage(){}[0]
+final fun (stapel.image/StapelImage).stapel.image/requestFor(kotlin/Float, kotlin/Float, kotlin/Float, stapel.image/Fit): stapel.image/ImageRequest? // stapel.image/requestFor|requestFor@stapel.image.StapelImage(kotlin.Float;kotlin.Float;kotlin.Float;stapel.image.Fit){}[0]
+final fun stapel.image/chooseVariant(kotlin/Float, kotlin/Float, kotlin/Float, kotlin/Double, stapel.image/Fit, stapel.image/StapelImage): stapel.image/VariantMeta? // stapel.image/chooseVariant|chooseVariant(kotlin.Float;kotlin.Float;kotlin.Float;kotlin.Double;stapel.image.Fit;stapel.image.StapelImage){}[0]
+final fun stapel.image/decodePreview(kotlin/String, stapel.image/PreviewKind = ...): stapel.image/ImagePlaceholder.Preview? // stapel.image/decodePreview|decodePreview(kotlin.String;stapel.image.PreviewKind){}[0]
+final fun stapel.image/limitingAxis(kotlin/Double, kotlin/Double, stapel.image/Fit): stapel.image/Branch // stapel.image/limitingAxis|limitingAxis(kotlin.Double;kotlin.Double;stapel.image.Fit){}[0]
+final fun stapel.image/pickTier(kotlin/Double, kotlin.collections/Collection<kotlin/Int>): kotlin/Int // stapel.image/pickTier|pickTier(kotlin.Double;kotlin.collections.Collection<kotlin.Int>){}[0]
+final fun stapel.image/upgradeOnly(stapel.image/ImageRequest?, stapel.image/ImageRequest?): stapel.image/ImageRequest? // stapel.image/upgradeOnly|upgradeOnly(stapel.image.ImageRequest?;stapel.image.ImageRequest?){}[0]

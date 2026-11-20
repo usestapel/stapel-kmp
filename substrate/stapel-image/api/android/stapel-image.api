@@ -1,0 +1,242 @@
+public final class stapel/image/Branch : java/lang/Enum {
+	public static final field Companion Lstapel/image/Branch$Companion;
+	public static final field H Lstapel/image/Branch;
+	public static final field W Lstapel/image/Branch;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/image/Branch;
+	public static fun values ()[Lstapel/image/Branch;
+}
+
+public final class stapel/image/Branch$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/image/Fit : java/lang/Enum {
+	public static final field Contain Lstapel/image/Fit;
+	public static final field Cover Lstapel/image/Fit;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/image/Fit;
+	public static fun values ()[Lstapel/image/Fit;
+}
+
+public abstract interface class stapel/image/ImageError {
+}
+
+public final class stapel/image/ImageError$Decode : stapel/image/ImageError {
+	public static final field INSTANCE Lstapel/image/ImageError$Decode;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/image/ImageError$Http : stapel/image/ImageError {
+	public fun <init> (I)V
+	public final fun component1 ()I
+	public final fun copy (I)Lstapel/image/ImageError$Http;
+	public static synthetic fun copy$default (Lstapel/image/ImageError$Http;IILjava/lang/Object;)Lstapel/image/ImageError$Http;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getStatus ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/image/ImageError$Network : stapel/image/ImageError {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/image/ImageError$Network;
+	public static synthetic fun copy$default (Lstapel/image/ImageError$Network;Ljava/lang/String;ILjava/lang/Object;)Lstapel/image/ImageError$Network;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/image/ImageError$NoLoader : stapel/image/ImageError {
+	public static final field INSTANCE Lstapel/image/ImageError$NoLoader;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/image/ImageError$Refused : stapel/image/ImageError {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/image/ImageError$Refused;
+	public static synthetic fun copy$default (Lstapel/image/ImageError$Refused;Ljava/lang/String;ILjava/lang/Object;)Lstapel/image/ImageError$Refused;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/image/ImagePlaceholder {
+}
+
+public final class stapel/image/ImagePlaceholder$None : stapel/image/ImagePlaceholder {
+	public static final field INSTANCE Lstapel/image/ImagePlaceholder$None;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/image/ImagePlaceholder$Preview : stapel/image/ImagePlaceholder {
+	public fun <init> ([BLjava/lang/String;Lstapel/image/PreviewKind;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBytes ()[B
+	public final fun getKind ()Lstapel/image/PreviewKind;
+	public final fun getMime ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/image/ImageRequest {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Lstapel/image/ImagePlaceholder;Lstapel/image/VariantMeta;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Lstapel/image/ImagePlaceholder;Lstapel/image/VariantMeta;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Lstapel/image/ImagePlaceholder;
+	public final fun component5 ()Lstapel/image/VariantMeta;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Lstapel/image/ImagePlaceholder;Lstapel/image/VariantMeta;)Lstapel/image/ImageRequest;
+	public static synthetic fun copy$default (Lstapel/image/ImageRequest;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Lstapel/image/ImagePlaceholder;Lstapel/image/VariantMeta;ILjava/lang/Object;)Lstapel/image/ImageRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHeightPx ()Ljava/lang/Integer;
+	public final fun getPlaceholder ()Lstapel/image/ImagePlaceholder;
+	public final fun getUrl ()Ljava/lang/String;
+	public final fun getVariant ()Lstapel/image/VariantMeta;
+	public final fun getWidthPx ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/image/ImageRequestKt {
+	public static final fun decodePreview (Ljava/lang/String;Lstapel/image/PreviewKind;)Lstapel/image/ImagePlaceholder$Preview;
+	public static synthetic fun decodePreview$default (Ljava/lang/String;Lstapel/image/PreviewKind;ILjava/lang/Object;)Lstapel/image/ImagePlaceholder$Preview;
+	public static final fun placeholder (Lstapel/image/StapelImage;)Lstapel/image/ImagePlaceholder;
+	public static final fun requestFor (Lstapel/image/StapelImage;FFFLstapel/image/Fit;)Lstapel/image/ImageRequest;
+	public static final fun upgradeOnly (Lstapel/image/ImageRequest;Lstapel/image/ImageRequest;)Lstapel/image/ImageRequest;
+}
+
+public final class stapel/image/PreviewKind : java/lang/Enum {
+	public static final field Blur Lstapel/image/PreviewKind;
+	public static final field Companion Lstapel/image/PreviewKind$Companion;
+	public static final field Poster Lstapel/image/PreviewKind;
+	public static final field Waveform Lstapel/image/PreviewKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lstapel/image/PreviewKind;
+	public static fun values ()[Lstapel/image/PreviewKind;
+}
+
+public final class stapel/image/PreviewKind$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/image/StapelImage {
+	public static final field Companion Lstapel/image/StapelImage$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;ZLjava/lang/String;Ljava/util/List;Ljava/lang/String;Lstapel/image/PreviewKind;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;ZLjava/lang/String;Ljava/util/List;Ljava/lang/String;Lstapel/image/PreviewKind;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Lstapel/image/PreviewKind;
+	public final fun component12 ()Ljava/lang/Long;
+	public final fun component13 ()Ljava/lang/String;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun component5 ()Ljava/lang/Integer;
+	public final fun component6 ()Ljava/lang/Double;
+	public final fun component7 ()Z
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;ZLjava/lang/String;Ljava/util/List;Ljava/lang/String;Lstapel/image/PreviewKind;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/image/StapelImage;
+	public static synthetic fun copy$default (Lstapel/image/StapelImage;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Double;ZLjava/lang/String;Ljava/util/List;Ljava/lang/String;Lstapel/image/PreviewKind;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/image/StapelImage;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAspect ()Ljava/lang/Double;
+	public final fun getDurationMs ()Ljava/lang/Long;
+	public final fun getHeight ()Ljava/lang/Integer;
+	public final fun getKind ()Ljava/lang/String;
+	public final fun getMetaReason ()Ljava/lang/String;
+	public final fun getMetaStatus ()Ljava/lang/String;
+	public final fun getMime ()Ljava/lang/String;
+	public final fun getPosterUrl ()Ljava/lang/String;
+	public final fun getPreviewB64 ()Ljava/lang/String;
+	public final fun getPreviewKind ()Lstapel/image/PreviewKind;
+	public final fun getReservedAspect ()Ljava/lang/Double;
+	public final fun getSource ()Ljava/lang/String;
+	public final fun getSquare ()Z
+	public final fun getUrl ()Ljava/lang/String;
+	public final fun getVariants ()Ljava/util/List;
+	public final fun getWidth ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public final fun isPicture ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/image/StapelImage$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/image/StapelImage$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/image/StapelImage;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/image/StapelImage;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/image/StapelImage$Companion {
+	public final fun link (Ljava/lang/String;Ljava/lang/Double;)Lstapel/image/StapelImage;
+	public static synthetic fun link$default (Lstapel/image/StapelImage$Companion;Ljava/lang/String;Ljava/lang/Double;ILjava/lang/Object;)Lstapel/image/StapelImage;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/image/StapelImageKt {
+	public static final field ORIGINAL_TIER Ljava/lang/String;
+	public static final fun defaultAspect (Lstapel/image/PreviewKind;)Ljava/lang/Double;
+}
+
+public final class stapel/image/TiersKt {
+	public static final fun chooseVariant (FFFDLstapel/image/Fit;Lstapel/image/StapelImage;)Lstapel/image/VariantMeta;
+	public static final fun getRank (Lstapel/image/VariantMeta;)I
+	public static final fun limitingAxis (DDLstapel/image/Fit;)Lstapel/image/Branch;
+	public static final fun pickTier (DLjava/util/Collection;)I
+}
+
+public final class stapel/image/VariantMeta {
+	public static final field Companion Lstapel/image/VariantMeta$Companion;
+	public fun <init> (Ljava/lang/String;Lstapel/image/Branch;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/image/Branch;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/image/Branch;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun component5 ()Ljava/lang/Integer;
+	public final fun copy (Ljava/lang/String;Lstapel/image/Branch;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)Lstapel/image/VariantMeta;
+	public static synthetic fun copy$default (Lstapel/image/VariantMeta;Ljava/lang/String;Lstapel/image/Branch;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Object;)Lstapel/image/VariantMeta;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBranch ()Lstapel/image/Branch;
+	public final fun getHeight ()Ljava/lang/Integer;
+	public final fun getNumericTier ()Ljava/lang/Integer;
+	public final fun getTier ()Ljava/lang/String;
+	public final fun getUrl ()Ljava/lang/String;
+	public final fun getWidth ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/image/VariantMeta$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/image/VariantMeta$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/image/VariantMeta;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/image/VariantMeta;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/image/VariantMeta$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+

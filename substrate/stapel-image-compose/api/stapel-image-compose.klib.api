@@ -1,0 +1,35 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.usestapel:stapel-image-compose>
+final class stapel.image.compose/CoilStapelImages : stapel.ui/StapelImages { // stapel.image.compose/CoilStapelImages|null[0]
+    constructor <init>(coil3/ImageLoader) // stapel.image.compose/CoilStapelImages.<init>|<init>(coil3.ImageLoader){}[0]
+
+    final fun load(stapel.image/ImageRequest, androidx.compose.runtime/Composer?, kotlin/Int): stapel.ui/StapelImageState // stapel.image.compose/CoilStapelImages.load|load(stapel.image.ImageRequest;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun painter(kotlin/String, androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui.graphics.painter/Painter? // stapel.image.compose/CoilStapelImages.painter|painter(kotlin.String;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+final class stapel.image.compose/ImageAuth { // stapel.image.compose/ImageAuth|null[0]
+    constructor <init>(stapel.network/RequestAuthenticator, kotlin.collections/Set<kotlin/String>) // stapel.image.compose/ImageAuth.<init>|<init>(stapel.network.RequestAuthenticator;kotlin.collections.Set<kotlin.String>){}[0]
+
+    final val authenticator // stapel.image.compose/ImageAuth.authenticator|{}authenticator[0]
+        final fun <get-authenticator>(): stapel.network/RequestAuthenticator // stapel.image.compose/ImageAuth.authenticator.<get-authenticator>|<get-authenticator>(){}[0]
+    final val hosts // stapel.image.compose/ImageAuth.hosts|{}hosts[0]
+        final fun <get-hosts>(): kotlin.collections/Set<kotlin/String> // stapel.image.compose/ImageAuth.hosts.<get-hosts>|<get-hosts>(){}[0]
+
+    final fun authorizes(kotlin/String): kotlin/Boolean // stapel.image.compose/ImageAuth.authorizes|authorizes(kotlin.String){}[0]
+    final fun toString(): kotlin/String // stapel.image.compose/ImageAuth.toString|toString(){}[0]
+}
+
+final val stapel.image.compose/stapel_image_compose_CoilStapelImages$stableprop // stapel.image.compose/stapel_image_compose_CoilStapelImages$stableprop|#static{}stapel_image_compose_CoilStapelImages$stableprop[0]
+final val stapel.image.compose/stapel_image_compose_ImageAuth$stableprop // stapel.image.compose/stapel_image_compose_ImageAuth$stableprop|#static{}stapel_image_compose_ImageAuth$stableprop[0]
+
+final fun (coil3/ImageLoader).stapel.image.compose/clearStapelCaches() // stapel.image.compose/clearStapelCaches|clearStapelCaches@coil3.ImageLoader(){}[0]
+final fun stapel.image.compose/ProvideStapelImages(coil3/ImageLoader, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int) // stapel.image.compose/ProvideStapelImages|ProvideStapelImages(coil3.ImageLoader;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+final fun stapel.image.compose/stapelImageLoader(coil3/PlatformContext, io.ktor.client/HttpClient, stapel.image.compose/ImageAuth? = ..., kotlin/Function1<coil3/ImageLoader.Builder, kotlin/Unit> = ...): coil3/ImageLoader // stapel.image.compose/stapelImageLoader|stapelImageLoader(coil3.PlatformContext;io.ktor.client.HttpClient;stapel.image.compose.ImageAuth?;kotlin.Function1<coil3.ImageLoader.Builder,kotlin.Unit>){}[0]
+final fun stapel.image.compose/stapel_image_compose_CoilStapelImages$stableprop_getter(): kotlin/Int // stapel.image.compose/stapel_image_compose_CoilStapelImages$stableprop_getter|stapel_image_compose_CoilStapelImages$stableprop_getter(){}[0]
+final fun stapel.image.compose/stapel_image_compose_ImageAuth$stableprop_getter(): kotlin/Int // stapel.image.compose/stapel_image_compose_ImageAuth$stableprop_getter|stapel_image_compose_ImageAuth$stableprop_getter(){}[0]

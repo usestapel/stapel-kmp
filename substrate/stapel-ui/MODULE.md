@@ -18,8 +18,14 @@
   initials, `stapelToggle` interaction, `refreshAction`, the list value-block width) and
   `ComponentColors` (badge / chip / avatar colours derived from the roles), so two skins cannot drift.
 - **Images:** `stapel-ui` loads nothing. `LocalStapelImages` (`StapelImages`) turns a source string into
-  a painter; while it answers null every slot draws its fallback (the avatar ladder: image → initials →
-  glyph → person glyph).
+  a painter and an `ImageRequest` (`stapel-image`) into a `StapelImageState` (Loading / Ready / Failed);
+  while it is not ready every slot draws its fallback (the avatar ladder: image → initials → glyph →
+  person glyph). The default, `NoStapelImages`, loads nothing (`ImageError.NoLoader`): an app without
+  `stapel-image-compose` still renders every slot. `StapelAsyncImage(image: StapelImage, …)` measures
+  its slot, picks the ladder variant (upgrade-only), draws the inline preview while loading (blurred for
+  a photo, sharp for a poster, whole for a waveform) and an error arm on failure; `StapelAvatar(name,
+  image: StapelImage?)` hands the avatar-sized variant to the Avatar slot. No Coil type is on this
+  classpath (the loader is the app's, provided once).
 - **Wrappers carry defaults**, skin methods take none. Every slot has a wrapper (`StapelToggle`,
   `StapelChip`, `StapelAvatar`, `StapelBadge`, `StapelPullToRefresh`, `StapelNavigationBar`,
   `StapelNavigationRail`, …). Bricks call `StapelButton(…)`, never `StapelTheme.skin.Button(…)`.
@@ -99,5 +105,4 @@
   ignored. `StapelTheme(layoutDirection = …)` (also on `StapelMaterialTheme`) is the explicit override;
   nested themes that pass none inherit it. Proven by `LayoutDirectionTest`; the skin contract's RTL pass
   reaches RTL through an Arabic strings locale.
-- Not yet here: `StapelSvg`/images loader (`stapel-image-compose`; `LocalStapelImages` is the seam),
-  Inter font artifact.
+- Not yet here: `StapelSvg` (backend-sent SVG), Inter font artifact.

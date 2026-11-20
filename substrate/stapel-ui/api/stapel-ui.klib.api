@@ -318,6 +318,7 @@ abstract fun interface stapel.ui/StapelIconSet { // stapel.ui/StapelIconSet|null
 
 abstract fun interface stapel.ui/StapelImages { // stapel.ui/StapelImages|null[0]
     abstract fun painter(kotlin/String, androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui.graphics.painter/Painter? // stapel.ui/StapelImages.painter|painter(kotlin.String;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    open fun load(stapel.image/ImageRequest, androidx.compose.runtime/Composer?, kotlin/Int): stapel.ui/StapelImageState // stapel.ui/StapelImages.load|load(stapel.image.ImageRequest;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 }
 
 abstract interface stapel.ui.skin/StapelSkin { // stapel.ui.skin/StapelSkin|null[0]
@@ -441,6 +442,34 @@ sealed interface stapel.ui/SectionHeaderAction { // stapel.ui/SectionHeaderActio
             final fun <get-label>(): kotlin/String // stapel.ui/SectionHeaderAction.Link.label.<get-label>|<get-label>(){}[0]
         final val onClick // stapel.ui/SectionHeaderAction.Link.onClick|{}onClick[0]
             final fun <get-onClick>(): kotlin/Function0<kotlin/Unit> // stapel.ui/SectionHeaderAction.Link.onClick.<get-onClick>|<get-onClick>(){}[0]
+    }
+}
+
+sealed interface stapel.ui/StapelImageState { // stapel.ui/StapelImageState|null[0]
+    final class Failed : stapel.ui/StapelImageState { // stapel.ui/StapelImageState.Failed|null[0]
+        constructor <init>(stapel.image/ImageError) // stapel.ui/StapelImageState.Failed.<init>|<init>(stapel.image.ImageError){}[0]
+
+        final val error // stapel.ui/StapelImageState.Failed.error|{}error[0]
+            final fun <get-error>(): stapel.image/ImageError // stapel.ui/StapelImageState.Failed.error.<get-error>|<get-error>(){}[0]
+
+        final fun component1(): stapel.image/ImageError // stapel.ui/StapelImageState.Failed.component1|component1(){}[0]
+        final fun copy(stapel.image/ImageError = ...): stapel.ui/StapelImageState.Failed // stapel.ui/StapelImageState.Failed.copy|copy(stapel.image.ImageError){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.ui/StapelImageState.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.ui/StapelImageState.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.ui/StapelImageState.Failed.toString|toString(){}[0]
+    }
+
+    final class Ready : stapel.ui/StapelImageState { // stapel.ui/StapelImageState.Ready|null[0]
+        constructor <init>(androidx.compose.ui.graphics.painter/Painter) // stapel.ui/StapelImageState.Ready.<init>|<init>(androidx.compose.ui.graphics.painter.Painter){}[0]
+
+        final val painter // stapel.ui/StapelImageState.Ready.painter|{}painter[0]
+            final fun <get-painter>(): androidx.compose.ui.graphics.painter/Painter // stapel.ui/StapelImageState.Ready.painter.<get-painter>|<get-painter>(){}[0]
+    }
+
+    final object Loading : stapel.ui/StapelImageState { // stapel.ui/StapelImageState.Loading|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // stapel.ui/StapelImageState.Loading.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // stapel.ui/StapelImageState.Loading.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // stapel.ui/StapelImageState.Loading.toString|toString(){}[0]
     }
 }
 
@@ -1308,6 +1337,11 @@ final object stapel.ui/ComponentColors { // stapel.ui/ComponentColors|null[0]
     final fun chip(stapel.ui/StapelColors, kotlin/Boolean, stapel.ui/StapelTone?, kotlin/Boolean): stapel.ui/ContainerColors // stapel.ui/ComponentColors.chip|chip(stapel.ui.StapelColors;kotlin.Boolean;stapel.ui.StapelTone?;kotlin.Boolean){}[0]
 }
 
+final object stapel.ui/NoStapelImages : stapel.ui/StapelImages { // stapel.ui/NoStapelImages|null[0]
+    final fun load(stapel.image/ImageRequest, androidx.compose.runtime/Composer?, kotlin/Int): stapel.ui/StapelImageState // stapel.ui/NoStapelImages.load|load(stapel.image.ImageRequest;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun painter(kotlin/String, androidx.compose.runtime/Composer?, kotlin/Int): androidx.compose.ui.graphics.painter/Painter? // stapel.ui/NoStapelImages.painter|painter(kotlin.String;androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
 final object stapel.ui/StapelIconIds { // stapel.ui/StapelIconIds|null[0]
     final val AlertCircle // stapel.ui/StapelIconIds.AlertCircle|{}AlertCircle[0]
         final fun <get-AlertCircle>(): stapel.ui/StapelIcon // stapel.ui/StapelIconIds.AlertCircle.<get-AlertCircle>|<get-AlertCircle>(){}[0]
@@ -1406,6 +1440,10 @@ final const val stapel.ui.skin/SHIMMER_PERIOD_MS // stapel.ui.skin/SHIMMER_PERIO
     final fun <get-SHIMMER_PERIOD_MS>(): kotlin/Int // stapel.ui.skin/SHIMMER_PERIOD_MS.<get-SHIMMER_PERIOD_MS>|<get-SHIMMER_PERIOD_MS>(){}[0]
 final const val stapel.ui.skin/TOP_BAR_TITLE_MAX_LINES // stapel.ui.skin/TOP_BAR_TITLE_MAX_LINES|{}TOP_BAR_TITLE_MAX_LINES[0]
     final fun <get-TOP_BAR_TITLE_MAX_LINES>(): kotlin/Int // stapel.ui.skin/TOP_BAR_TITLE_MAX_LINES.<get-TOP_BAR_TITLE_MAX_LINES>|<get-TOP_BAR_TITLE_MAX_LINES>(){}[0]
+final const val stapel.ui/ASYNC_IMAGE_ERROR_TAG // stapel.ui/ASYNC_IMAGE_ERROR_TAG|{}ASYNC_IMAGE_ERROR_TAG[0]
+    final fun <get-ASYNC_IMAGE_ERROR_TAG>(): kotlin/String // stapel.ui/ASYNC_IMAGE_ERROR_TAG.<get-ASYNC_IMAGE_ERROR_TAG>|<get-ASYNC_IMAGE_ERROR_TAG>(){}[0]
+final const val stapel.ui/ASYNC_IMAGE_PLACEHOLDER_TAG // stapel.ui/ASYNC_IMAGE_PLACEHOLDER_TAG|{}ASYNC_IMAGE_PLACEHOLDER_TAG[0]
+    final fun <get-ASYNC_IMAGE_PLACEHOLDER_TAG>(): kotlin/String // stapel.ui/ASYNC_IMAGE_PLACEHOLDER_TAG.<get-ASYNC_IMAGE_PLACEHOLDER_TAG>|<get-ASYNC_IMAGE_PLACEHOLDER_TAG>(){}[0]
 final const val stapel.ui/LOAD_LIST_APPEND_TAG // stapel.ui/LOAD_LIST_APPEND_TAG|{}LOAD_LIST_APPEND_TAG[0]
     final fun <get-LOAD_LIST_APPEND_TAG>(): kotlin/String // stapel.ui/LOAD_LIST_APPEND_TAG.<get-LOAD_LIST_APPEND_TAG>|<get-LOAD_LIST_APPEND_TAG>(){}[0]
 final const val stapel.ui/LOAD_LIST_STALE_TAG // stapel.ui/LOAD_LIST_STALE_TAG|{}LOAD_LIST_STALE_TAG[0]
@@ -1501,6 +1539,7 @@ final val stapel.ui/TYPE_STEP_NAMES // stapel.ui/TYPE_STEP_NAMES|{}TYPE_STEP_NAM
 final val stapel.ui/stapel_ui_ComponentColors$stableprop // stapel.ui/stapel_ui_ComponentColors$stableprop|#static{}stapel_ui_ComponentColors$stableprop[0]
 final val stapel.ui/stapel_ui_ContainerColors$stableprop // stapel.ui/stapel_ui_ContainerColors$stableprop|#static{}stapel_ui_ContainerColors$stableprop[0]
 final val stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop // stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop|#static{}stapel_ui_InMemoryThemePreferenceStore$stableprop[0]
+final val stapel.ui/stapel_ui_NoStapelImages$stableprop // stapel.ui/stapel_ui_NoStapelImages$stableprop|#static{}stapel_ui_NoStapelImages$stableprop[0]
 final val stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop|#static{}stapel_ui_SectionHeaderAction_Avatar$stableprop[0]
 final val stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop|#static{}stapel_ui_SectionHeaderAction_Badge$stableprop[0]
 final val stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop // stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop|#static{}stapel_ui_SectionHeaderAction_Chip$stableprop[0]
@@ -1512,6 +1551,9 @@ final val stapel.ui/stapel_ui_StapelElevations$stableprop // stapel.ui/stapel_ui
 final val stapel.ui/stapel_ui_StapelFonts$stableprop // stapel.ui/stapel_ui_StapelFonts$stableprop|#static{}stapel_ui_StapelFonts$stableprop[0]
 final val stapel.ui/stapel_ui_StapelIcon$stableprop // stapel.ui/stapel_ui_StapelIcon$stableprop|#static{}stapel_ui_StapelIcon$stableprop[0]
 final val stapel.ui/stapel_ui_StapelIconIds$stableprop // stapel.ui/stapel_ui_StapelIconIds$stableprop|#static{}stapel_ui_StapelIconIds$stableprop[0]
+final val stapel.ui/stapel_ui_StapelImageState_Failed$stableprop // stapel.ui/stapel_ui_StapelImageState_Failed$stableprop|#static{}stapel_ui_StapelImageState_Failed$stableprop[0]
+final val stapel.ui/stapel_ui_StapelImageState_Loading$stableprop // stapel.ui/stapel_ui_StapelImageState_Loading$stableprop|#static{}stapel_ui_StapelImageState_Loading$stableprop[0]
+final val stapel.ui/stapel_ui_StapelImageState_Ready$stableprop // stapel.ui/stapel_ui_StapelImageState_Ready$stableprop|#static{}stapel_ui_StapelImageState_Ready$stableprop[0]
 final val stapel.ui/stapel_ui_StapelLayout$stableprop // stapel.ui/stapel_ui_StapelLayout$stableprop|#static{}stapel_ui_StapelLayout$stableprop[0]
 final val stapel.ui/stapel_ui_StapelShapes$stableprop // stapel.ui/stapel_ui_StapelShapes$stableprop|#static{}stapel_ui_StapelShapes$stableprop[0]
 final val stapel.ui/stapel_ui_StapelSnackbarHostState$stableprop // stapel.ui/stapel_ui_StapelSnackbarHostState$stableprop|#static{}stapel_ui_StapelSnackbarHostState$stableprop[0]
@@ -1582,7 +1624,9 @@ final fun stapel.ui/ConfirmDialog(kotlin/String, kotlin/String?, kotlin/String?,
 final fun stapel.ui/EmptyState(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, stapel.ui/StapelIcon?, stapel.ui.skin/ButtonSpec?, kotlin/String?, stapel.ui.skin/ButtonSpec?, stapel.ui/StatusSize?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/EmptyState|EmptyState(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;stapel.ui.StapelIcon?;stapel.ui.skin.ButtonSpec?;kotlin.String?;stapel.ui.skin.ButtonSpec?;stapel.ui.StatusSize?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/ErrorState(stapel.result/StapelError, androidx.compose.ui/Modifier?, kotlin/Function0<kotlin/Unit>?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/ErrorState|ErrorState(stapel.result.StapelError;androidx.compose.ui.Modifier?;kotlin.Function0<kotlin.Unit>?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/SectionHeader(kotlin/String, androidx.compose.ui/Modifier?, stapel.ui/SectionHeaderSize?, kotlin/String?, kotlin/String?, stapel.ui/SectionHeaderAction?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/SectionHeader|SectionHeader(kotlin.String;androidx.compose.ui.Modifier?;stapel.ui.SectionHeaderSize?;kotlin.String?;kotlin.String?;stapel.ui.SectionHeaderAction?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelAsyncImage(stapel.image/StapelImage, kotlin/String?, androidx.compose.ui/Modifier?, stapel.image/Fit?, kotlin/Float?, kotlin/String?, kotlin/Function3<stapel.image/ImageError, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelAsyncImage|StapelAsyncImage(stapel.image.StapelImage;kotlin.String?;androidx.compose.ui.Modifier?;stapel.image.Fit?;kotlin.Float?;kotlin.String?;kotlin.Function3<stapel.image.ImageError,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelAvatar(kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, stapel.ui.skin/AvatarSize?, stapel.ui/StapelIcon?, kotlin/String?, stapel.ui.skin/BadgeSpec?, stapel.ui.skin/BadgePlacement?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelAvatar|StapelAvatar(kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;stapel.ui.skin.AvatarSize?;stapel.ui.StapelIcon?;kotlin.String?;stapel.ui.skin.BadgeSpec?;stapel.ui.skin.BadgePlacement?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun stapel.ui/StapelAvatar(kotlin/String, stapel.image/StapelImage?, androidx.compose.ui/Modifier?, kotlin/String?, stapel.ui.skin/AvatarSize?, stapel.ui/StapelIcon?, stapel.ui.skin/BadgeSpec?, stapel.ui.skin/BadgePlacement?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelAvatar|StapelAvatar(kotlin.String;stapel.image.StapelImage?;androidx.compose.ui.Modifier?;kotlin.String?;stapel.ui.skin.AvatarSize?;stapel.ui.StapelIcon?;stapel.ui.skin.BadgeSpec?;stapel.ui.skin.BadgePlacement?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelBadge(androidx.compose.ui/Modifier?, kotlin/Int?, kotlin/String?, stapel.ui/StapelTone?, stapel.ui.skin/BadgeSize?, stapel.ui.skin/BadgeEmphasis?, kotlin/Int, stapel.ui/StapelIcon?, kotlin/String?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelBadge|StapelBadge(androidx.compose.ui.Modifier?;kotlin.Int?;kotlin.String?;stapel.ui.StapelTone?;stapel.ui.skin.BadgeSize?;stapel.ui.skin.BadgeEmphasis?;kotlin.Int;stapel.ui.StapelIcon?;kotlin.String?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelBanner(stapel.ui/StapelTone, kotlin/String, androidx.compose.ui/Modifier?, kotlin/String?, kotlin/String?, stapel.ui.skin/ButtonSpec?, kotlin/Function0<kotlin/Unit>?, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // stapel.ui/StapelBanner|StapelBanner(stapel.ui.StapelTone;kotlin.String;androidx.compose.ui.Modifier?;kotlin.String?;kotlin.String?;stapel.ui.skin.ButtonSpec?;kotlin.Function0<kotlin.Unit>?;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
 final fun stapel.ui/StapelButton(kotlin/String, kotlin/Function0<kotlin/Unit>, androidx.compose.ui/Modifier?, stapel.ui.skin/ButtonVariant?, stapel.ui.skin/ControlSize?, kotlin/Boolean, kotlin/Boolean, kotlin/String?, stapel.ui/StapelIcon?, kotlin/Boolean, kotlin/String?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // stapel.ui/StapelButton|StapelButton(kotlin.String;kotlin.Function0<kotlin.Unit>;androidx.compose.ui.Modifier?;stapel.ui.skin.ButtonVariant?;stapel.ui.skin.ControlSize?;kotlin.Boolean;kotlin.Boolean;kotlin.String?;stapel.ui.StapelIcon?;kotlin.Boolean;kotlin.String?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
@@ -1632,6 +1676,7 @@ final fun stapel.ui/stapelString(stapel.i18n/StringKey, kotlin/Array<out kotlin/
 final fun stapel.ui/stapel_ui_ComponentColors$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_ComponentColors$stableprop_getter|stapel_ui_ComponentColors$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_ContainerColors$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_ContainerColors$stableprop_getter|stapel_ui_ContainerColors$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_InMemoryThemePreferenceStore$stableprop_getter|stapel_ui_InMemoryThemePreferenceStore$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_NoStapelImages$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_NoStapelImages$stableprop_getter|stapel_ui_NoStapelImages$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Avatar$stableprop_getter|stapel_ui_SectionHeaderAction_Avatar$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Badge$stableprop_getter|stapel_ui_SectionHeaderAction_Badge$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_SectionHeaderAction_Chip$stableprop_getter|stapel_ui_SectionHeaderAction_Chip$stableprop_getter(){}[0]
@@ -1643,6 +1688,9 @@ final fun stapel.ui/stapel_ui_StapelElevations$stableprop_getter(): kotlin/Int /
 final fun stapel.ui/stapel_ui_StapelFonts$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelFonts$stableprop_getter|stapel_ui_StapelFonts$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelIcon$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelIcon$stableprop_getter|stapel_ui_StapelIcon$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelIconIds$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelIconIds$stableprop_getter|stapel_ui_StapelIconIds$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_StapelImageState_Failed$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelImageState_Failed$stableprop_getter|stapel_ui_StapelImageState_Failed$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_StapelImageState_Loading$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelImageState_Loading$stableprop_getter|stapel_ui_StapelImageState_Loading$stableprop_getter(){}[0]
+final fun stapel.ui/stapel_ui_StapelImageState_Ready$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelImageState_Ready$stableprop_getter|stapel_ui_StapelImageState_Ready$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelLayout$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelLayout$stableprop_getter|stapel_ui_StapelLayout$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelShapes$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelShapes$stableprop_getter|stapel_ui_StapelShapes$stableprop_getter(){}[0]
 final fun stapel.ui/stapel_ui_StapelSnackbarHostState$stableprop_getter(): kotlin/Int // stapel.ui/stapel_ui_StapelSnackbarHostState$stableprop_getter|stapel_ui_StapelSnackbarHostState$stableprop_getter(){}[0]

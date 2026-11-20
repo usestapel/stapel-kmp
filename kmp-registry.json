@@ -102,6 +102,16 @@
       "family": "substrate",
       "released": false
     },
+    "stapel-image": {
+      "version": "0.0.1",
+      "family": "substrate",
+      "released": false
+    },
+    "stapel-image-compose": {
+      "version": "0.0.1",
+      "family": "substrate",
+      "released": false
+    },
     "stapel-input": {
       "version": "0.0.1",
       "family": "substrate",
