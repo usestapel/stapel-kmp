@@ -11003,6 +11003,22 @@ final object stapel.auth.api/AuthContract { // stapel.auth.api/AuthContract|null
         final fun <get-VERSION>(): kotlin/String // stapel.auth.api/AuthContract.VERSION.<get-VERSION>|<get-VERSION>(){}[0]
 }
 
+final object stapel.auth.api/AuthEvents { // stapel.auth.api/AuthEvents|null[0]
+    final const val FIRST_LOGIN // stapel.auth.api/AuthEvents.FIRST_LOGIN|{}FIRST_LOGIN[0]
+        final fun <get-FIRST_LOGIN>(): kotlin/String // stapel.auth.api/AuthEvents.FIRST_LOGIN.<get-FIRST_LOGIN>|<get-FIRST_LOGIN>(){}[0]
+    final const val PASSWORDLESS_LOGIN // stapel.auth.api/AuthEvents.PASSWORDLESS_LOGIN|{}PASSWORDLESS_LOGIN[0]
+        final fun <get-PASSWORDLESS_LOGIN>(): kotlin/String // stapel.auth.api/AuthEvents.PASSWORDLESS_LOGIN.<get-PASSWORDLESS_LOGIN>|<get-PASSWORDLESS_LOGIN>(){}[0]
+    final const val PASSWORD_LOGIN // stapel.auth.api/AuthEvents.PASSWORD_LOGIN|{}PASSWORD_LOGIN[0]
+        final fun <get-PASSWORD_LOGIN>(): kotlin/String // stapel.auth.api/AuthEvents.PASSWORD_LOGIN.<get-PASSWORD_LOGIN>|<get-PASSWORD_LOGIN>(){}[0]
+    final const val STEP_UP_VERIFICATION // stapel.auth.api/AuthEvents.STEP_UP_VERIFICATION|{}STEP_UP_VERIFICATION[0]
+        final fun <get-STEP_UP_VERIFICATION>(): kotlin/String // stapel.auth.api/AuthEvents.STEP_UP_VERIFICATION.<get-STEP_UP_VERIFICATION>|<get-STEP_UP_VERIFICATION>(){}[0]
+
+    final val flows // stapel.auth.api/AuthEvents.flows|{}flows[0]
+        final fun <get-flows>(): kotlin.collections/List<kotlin/String> // stapel.auth.api/AuthEvents.flows.<get-flows>|<get-flows>(){}[0]
+    final val registry // stapel.auth.api/AuthEvents.registry|{}registry[0]
+        final fun <get-registry>(): kotlin.collections/Set<kotlin/String> // stapel.auth.api/AuthEvents.registry.<get-registry>|<get-registry>(){}[0]
+}
+
 final object stapel.auth.api/AuthInvalidation { // stapel.auth.api/AuthInvalidation|null[0]
     final val table // stapel.auth.api/AuthInvalidation.table|{}table[0]
         final fun <get-table>(): kotlin.collections/Map<kotlin/String, kotlin.collections/List<stapel.wire/KeyPattern>> // stapel.auth.api/AuthInvalidation.table.<get-table>|<get-table>(){}[0]

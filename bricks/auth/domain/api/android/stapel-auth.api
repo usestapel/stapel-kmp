@@ -317,6 +317,16 @@ public final class stapel/auth/api/AuthContract {
 	public static final field VERSION Ljava/lang/String;
 }
 
+public final class stapel/auth/api/AuthEvents {
+	public static final field FIRST_LOGIN Ljava/lang/String;
+	public static final field INSTANCE Lstapel/auth/api/AuthEvents;
+	public static final field PASSWORDLESS_LOGIN Ljava/lang/String;
+	public static final field PASSWORD_LOGIN Ljava/lang/String;
+	public static final field STEP_UP_VERIFICATION Ljava/lang/String;
+	public final fun getFlows ()Ljava/util/List;
+	public final fun getRegistry ()Ljava/util/Set;
+}
+
 public final class stapel/auth/api/AuthInvalidation {
 	public static final field INSTANCE Lstapel/auth/api/AuthInvalidation;
 	public final fun after (Ljava/lang/String;)Ljava/util/List;

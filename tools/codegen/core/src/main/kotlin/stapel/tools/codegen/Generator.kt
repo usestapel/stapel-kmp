@@ -74,6 +74,8 @@ class Generator(
         type(apiPkg, api.keys())
         type(apiPkg, api.invalidation())
         type(apiPkg, api.contractObject())
+        FlowEvents.typeSpec(brick, set.flows)?.let { type(apiPkg, it) }
+        FlowEvents.registryJson(model.stamp.module, model.stamp.version, set.flows)?.let { files[FlowEvents.FILE] = it }
         val pagers = api.pagers()
         if (pagers.isNotEmpty()) put(apiPkg, Names.pascal(brick) + "Pagers") { pagers.forEach { addFunction(it) } }
         type("$apiPkg.error", api.brickErrors())
