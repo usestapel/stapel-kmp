@@ -92,10 +92,17 @@ final class ShopUITests: XCTestCase {
         let prompt = safari.descendants(matching: .any).matching(identifier: "SFDialogView").firstMatch
         XCTAssertTrue(prompt.waitForExistence(timeout: 10), "the system's open-in-app prompt")
         // Confirm with the prompt's last button ("Open"), whatever the simulator's language, tapped where it
-        // is on screen. (Whether the prompt closed is not asked of Safari: once the app is in front, Safari
-        // is suspended and its last snapshot still lists the prompt.)
+        // is on screen. On a fresh simulator Safari may show its first-run tip ("View Bookmarks, Share Menu,
+        // and Open Tabs") over the page at the same moment: the prompt is dimmed and the first tap only
+        // dismisses the tip (seen in the CI screen recording of 491f707, iOS 26.5). So: while the app has
+        // not come to the front and Safari, still in front, still shows the prompt, tap Open again
+        // (bounded). A suspended Safari is never asked: its last snapshot still lists the prompt.
         let open = prompt.buttons.element(boundBy: prompt.buttons.count - 1)
-        tapAtFrame(of: open, in: safari, "the prompt's Open button has an on-screen frame")
+        for _ in 1...3 {
+            tapAtFrame(of: open, in: safari, "the prompt's Open button has an on-screen frame")
+            if app.wait(for: .runningForeground, timeout: 10) { break }
+            guard safari.state == .runningForeground, prompt.exists else { break }
+        }
         let order = waitFor(app, "shop.order", "the deep link opened the order")
         XCTAssertTrue(app.staticTexts["Order 42"].waitForExistence(timeout: timeout), "the order id from the link")
         // Edge swipe from the left edge: the system back gesture on a pushed screen.
