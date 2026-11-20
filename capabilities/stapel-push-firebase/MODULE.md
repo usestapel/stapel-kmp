@@ -17,9 +17,23 @@
   an unknown permission word reads as denied.
 - The launch notification tapped before Kotlin started reaches the first collector once.
 
-## What is not proven here (on zip-ties until a device run)
-- `AndroidFirebasePushBridge` (FCM calls, the permission activity, foreground posting, tray-tap
-  intents): compiled and wired, exercised only on a device (no emulator image, R15).
+## Android bridge on the JVM (`AndroidFirebasePushBridgeTest`, Robolectric, API 34 and 32)
+- A tray-tap intent becomes one `PushMessage` with only the app's data keys (`google.*`, `gcm.*`,
+  `from`, `collapse_key` dropped) and opens its link through a real `PushController`; the same intent
+  never opens twice; an intent without a message id is not a tap.
+- Channels are created with their name and importance (`low` / `default` / `high`).
+- A notification arriving while an activity is started is posted on its `group` channel with title
+  and body, and its `PendingIntent` round-trips back to an `Opened` message; in the background nothing
+  is posted by the app; `Silent` posts nothing.
+- The prompt activity is started from the resumed activity only, asks `POST_NOTIFICATIONS` once, and
+  maps the answer (`granted` / `denied`); after one answer no second prompt; without a resumed activity
+  the request answers `notDetermined` at once; below Android 13 no prompt and enabled reads `granted`.
+
+## What is not proven here (device only)
+- Real FCM: token minting and rotation, delivery by Google Play services, the system's own tray
+  rendering of a background notification and its launch intent, the prompt's UI, notification
+  settings changed by the person; `FirebaseApp` configured from a real `google-services.json`. No
+  emulator image on the build host (R15): "not run".
 - The Swift bridge: compiled by the reference app against the pinned `firebase-ios-sdk`; the
   simulator walk proves taps and foreground delivery, not a real APNs/FCM token.
 

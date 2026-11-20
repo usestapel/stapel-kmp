@@ -24,6 +24,12 @@ kotlin {
             implementation(projects.stapelPushTesting)
             implementation(projects.stapelTesting)
         }
+        // The Android bridge on the JVM (Robolectric): intents, channels, foreground posting, the prompt activity.
+        getByName("androidHostTest").dependencies {
+            implementation(libs.robolectric)
+            implementation(libs.androidx.test.core)
+            implementation(projects.stapelSession)
+        }
     }
 }
 
