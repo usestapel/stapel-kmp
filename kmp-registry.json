@@ -172,6 +172,16 @@
       "family": "brick-ui",
       "released": false
     },
+    "stapel-push": {
+      "version": "0.0.1",
+      "family": "substrate",
+      "released": false
+    },
+    "stapel-push-testing": {
+      "version": "0.0.1",
+      "family": "substrate",
+      "released": false
+    },
     "stapel-result": {
       "version": "0.0.1",
       "family": "substrate",
