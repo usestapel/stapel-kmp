@@ -74,6 +74,9 @@ play-services-auth-api-phone = "18.3.1"
 # AppMetrica 8.6.0 (2026-09-30, Maven Central); its build constants say minSdk 21.
 firebase-analytics = "24.0.0"
 appmetrica-analytics = "8.6.0"
+# Push vendor SDK: Android only, inside stapel-push-firebase. firebase-messaging 26.0.2 is what Firebase
+# Android BoM 35.2.0 maps; minSdk 24.
+firebase-messaging = "26.0.2"
 
 # --- build tooling -----------------------------------------------------------
 dokka = "2.3.0"
@@ -200,6 +203,7 @@ androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "a
 play-services-auth-api-phone = { module = "com.google.android.gms:play-services-auth-api-phone", version.ref = "play-services-auth-api-phone" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-analytics" }
 appmetrica-analytics = { module = "io.appmetrica.analytics:analytics", version.ref = "appmetrica-analytics" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging" }
 
 # --- JVM tools (tools/codegen, tools/tokens-gen) --------------------------------
 kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
