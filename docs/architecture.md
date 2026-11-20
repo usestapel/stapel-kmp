@@ -80,20 +80,28 @@ and on the resolved classpaths of every target.
 - **`stapel-cache`** — read policies (network-only, network-first,
   cache-first, stale-while-revalidate), `Resource` flows, partitions per
   account, invalidation by key pattern, refetch on foreground and on
-  reconnect. Storage is a seam: memory by default, **`stapel-cache-room`**
+  reconnect, revision-synced collections (lists + a revision cursor). Storage
+  is a seam (entries and lists): memory by default, **`stapel-cache-room`**
   (Room 3, one database per partition) when the app opts in, chosen
   explicitly and never discovered from the classpath.
   **`stapel-cache-session`** keeps the cache's partition on the session's
   account and wipes it when the session ends.
 - **`stapel-di`** — Koin conventions: a strict composition root
   (`stapelKoin`), contributions, the session scope.
-- **`stapel-mvi`** / **`stapel-navigation`** — headless presenters and flow
-  machines; a pure navigation model (route plan, back stack, guards, deep
-  links).
+- **`stapel-mvi`** / **`stapel-navigation`** — headless presenters, flow
+  machines and the paging state machine (`PagingMachine` over the wire
+  pagination types); a pure navigation model (route plan, back stack, guards,
+  deep links).
 - **`stapel-i18n`**, **`stapel-tokens`** — UI strings with plural rules and a
-  runtime locale; design tokens as a Kotlin value.
+  runtime locale (which also sets the UI's layout direction); design tokens as
+  a Kotlin value.
+- **`stapel-image`** — the image model brick UI compiles against: the media
+  DTO, the variant-ladder tier math shared with the web, load requests,
+  placeholders and errors.
 - Compose: **`stapel-ui`** (theme from tokens, layout, the skin seam, the
-  Material-free foundation skin), **`stapel-ui-material3`** (the default skin),
+  Material-free foundation skin, the image seam and the lazy paged `LoadList`),
+  **`stapel-ui-material3`** (the default skin), **`stapel-image-compose`**
+  (the Coil 3 loader behind the image seam, wired by the app),
   **`stapel-mvi-compose`** (presenter retention and saved state),
   **`stapel-navigation-compose`** (a navigation host over a hidden
   Navigation 3 engine), **`stapel-shell`** (adaptive app chrome).
