@@ -80,6 +80,39 @@ class PresenterTest {
     }
 
     @Test
+    fun aRevalidationBetweenTwoSwitchesUndoesNeither() = runTest {
+        // Found by the end-to-end run: the observed /me re-emitted the server's older answer while the
+        // first switch's PATCH was in flight, and the second PATCH was built on it, sending the first
+        // switch back.
+        val f = signedIn()
+        val bodies = mutableListOf<String>()
+        f.transport.on(Ops.ME) { FakeAnswer.Value(profile()) }
+        f.transport.on(Ops.UPDATE) { bodies += f.patchBody(); FakeAnswer.Value(profile(emailMessages = false, pushSystem = false)) }
+        val gate = kotlinx.coroutines.CompletableDeferred<Unit>()
+        val real = stapel.profiles.api.ProfilesApiClient(f.transport)
+        val slowPatch = object : stapel.profiles.api.ProfilesApi by real {
+            override suspend fun updateMyProfile(body: stapel.profiles.api.model.PatchedProfileUpdateRequest?) =
+                gate.await().let { real.updateMyProfile(body) }
+        }
+        val profiles = StapelProfiles(slowPatch, f.cache, f.uploader, viewer = { "u1" })
+        val p = ProfileSettingsPresenter(profiles, f.context)
+        runCurrent()
+        p.dispatch(ProfileSettingsIntent.SetNotification(NotificationCategory.Messages, NotificationChannel.Email, false))
+        runCurrent()
+        // A revalidation lands with the old server state while the first PATCH is in flight.
+        val spec = stapel.cache.QuerySpec(stapel.profiles.api.ProfilesKeys.getMyProfile(), stapel.profiles.api.model.ProfileResponse.serializer(), stapel.profiles.api.ProfilesContract.SCHEMA_SHA256)
+        f.cache.write(spec, profile(name = "Ada (revalidated)"))
+        runCurrent()
+        assertEquals(false, p.state.value.profile?.notifications?.emailMessages, "the pending switch stays on screen")
+        p.dispatch(ProfileSettingsIntent.SetNotification(NotificationCategory.System, NotificationChannel.Push, false))
+        runCurrent()
+        gate.complete(Unit)
+        runCurrent()
+        assertEquals(2, bodies.size)
+        assertTrue("\"email_messages\":false" in bodies[1] && "\"push_system\":false" in bodies[1], bodies[1])
+    }
+
+    @Test
     fun theAvatarIsUploadedAndShown() = runTest {
         val f = signedIn()
         f.transport.on(Ops.ME) { FakeAnswer.Value(profile()) }

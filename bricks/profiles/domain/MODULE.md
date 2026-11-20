@@ -29,8 +29,9 @@
   `avatar` + `avatar_source` in ONE `PATCH`; a failed upload stores nothing.
 - A `PATCH /me` sends only the fields it sets (notification switches as all four), and its answer is
   written to the cache: observers see it with no re-read.
-- Two notification switches flipped before the first answer both reach the server; a refused
-  change goes back to what the server holds.
+- Saves run one at a time in intent order; two notification switches flipped before the first answer
+  both reach the server, even when a revalidation lands in between; a refused change goes back to
+  what the server holds.
 - Phone numbers are memory-only (never on disk); the own profile is durable and revalidated; the
   language catalogue is app-wide and cache-first; relationships are network-first.
 - A relationship action invalidates the profile, the three lists and the own counters.
@@ -51,4 +52,6 @@
 - stapel-profiles 0.23.1 serves the avatar's variant ladder with integer `tier`s while its schema
   says string; a profile with an avatar does not decode until that is fixed upstream (the client is
   not loosened; see `bricks/profiles/e2e/README.md`).
+- A signed-out viewer's `GET /{user_id}` omits fields the schema marks required (location, counters,
+  `relationship_status`): the public profile does not decode without a session.
 - The language catalogue of a fresh deployment is empty until `manage.py sync_languages` runs.

@@ -1,12 +1,14 @@
 package stapel.profiles.presentation
 
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.channels.Channel
 import stapel.profiles.StapelProfiles
 import stapel.profiles.error.ProfilesError
 import stapel.profiles.model.Language
 import stapel.profiles.model.MyProfile
 import stapel.profiles.model.NotificationCategory
 import stapel.profiles.model.NotificationChannel
+import stapel.profiles.model.NotificationPreferences
 import stapel.profiles.model.ProfileUpdate
 import stapel.profiles.model.ThemePreference
 import stapel.mvi.Presenter
@@ -104,17 +106,31 @@ public class ProfileSettingsPresenter(private val profiles: StapelProfiles, cont
         context,
     ) {
 
+    // Switches flipped but not yet confirmed by the server: a revalidation that lands in between must not
+    // undo them on screen, and the next switch is built on them, not on the server's older answer.
+    @kotlin.concurrent.Volatile
+    private var pendingNotifications: NotificationPreferences? = null
+
+    // One PATCH at a time, in intent order: two requests in flight could reach the server swapped.
+    private val saves = Channel<ProfileUpdate>(Channel.UNLIMITED)
+
+    @kotlin.concurrent.Volatile
+    private var queued = 0
+
     init {
+        launch(SAVES) { for (update in saves) store(update) }
         launch(OBSERVE) {
             profiles.me.me().collectLatest { r ->
                 when (r) {
                     is Resource.Loading -> Unit
-                    is Resource.Ready -> reduce { copy(profile = r.data, loading = false, loadError = null) }
+                    is Resource.Ready -> reduce { copy(profile = r.data.withPending(), loading = false, loadError = null) }
                     is Resource.Failed -> reduce { copy(loading = false, loadError = ProfilesError.of(r.error)) }
                 }
             }
         }
     }
+
+    private fun MyProfile.withPending(): MyProfile = pendingNotifications?.let { copy(notifications = it) } ?: this
 
     override suspend fun handle(intent: ProfileSettingsIntent) {
         when (intent) {
@@ -137,9 +153,9 @@ public class ProfileSettingsPresenter(private val profiles: StapelProfiles, cont
             )
             is ProfileSettingsIntent.SetAutoTranslate -> save(ProfileUpdate(autoTranslateContent = intent.on))
             is ProfileSettingsIntent.SetNotification -> {
-                val current = state.value.profile?.notifications ?: return
+                val current = pendingNotifications ?: state.value.profile?.notifications ?: return
                 val next = current.with(intent.category, intent.channel, intent.on)
-                // Shown at once, so a second switch flipped before the first answer builds on this one.
+                pendingNotifications = next
                 reduce { copy(profile = profile?.copy(notifications = next)) }
                 save(ProfileUpdate(notifications = next))
             }
@@ -159,26 +175,34 @@ public class ProfileSettingsPresenter(private val profiles: StapelProfiles, cont
         }
     }
 
-    // Saves are not keyed: a second change never cancels the first one's request.
+    // A second change never cancels the first: saves queue and run one after another.
     private fun save(update: ProfileUpdate) {
-        launch {
-            reduce { copy(saving = true, saveError = null) }
-            when (val r = profiles.me.update(update)) {
-                is StapelResult.Ok -> {
-                    reduce { copy(profile = r.value, saving = false) }
-                    emit(ProfilesEffect.Saved)
-                }
-                is StapelResult.Err -> {
-                    reduce { copy(saving = false, saveError = r.error) }
-                    // Back to what the server holds (an optimistic switch is undone).
-                    (profiles.me.get() as? StapelResult.Ok)?.let { ok -> reduce { copy(profile = ok.value) } }
-                }
+        queued++
+        saves.trySend(update)
+    }
+
+    private suspend fun store(update: ProfileUpdate) {
+        reduce { copy(saving = true, saveError = null) }
+        val r = profiles.me.update(update)
+        queued--
+        if (update.notifications != null && update.notifications == pendingNotifications) pendingNotifications = null
+        when (r) {
+            is StapelResult.Ok -> {
+                reduce { copy(profile = r.value.withPending(), saving = queued > 0) }
+                emit(ProfilesEffect.Saved)
+            }
+            is StapelResult.Err -> {
+                pendingNotifications = null
+                reduce { copy(saving = queued > 0, saveError = r.error) }
+                // Back to what the server holds (an optimistic switch is undone).
+                (profiles.me.get() as? StapelResult.Ok)?.let { ok -> reduce { copy(profile = ok.value) } }
             }
         }
     }
 
     private companion object {
         const val OBSERVE = "me"
+        const val SAVES = "saves"
         const val REFRESH = "refresh"
         const val AVATAR = "avatar"
     }
