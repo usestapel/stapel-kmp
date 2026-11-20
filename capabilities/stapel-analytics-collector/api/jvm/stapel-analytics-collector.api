@@ -1,0 +1,1682 @@
+public final class stapel/analytics/collector/CollectorOptions {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getLocale ()Lkotlin/jvm/functions/Function0;
+	public final fun getOsVersion ()Ljava/lang/String;
+	public final fun getSource ()Ljava/lang/String;
+	public final fun getWriteKey ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/CollectorSink : stapel/analytics/AnalyticsSink {
+	public fun <init> (Lstapel/wire/ApiTransport;Lstapel/analytics/collector/CollectorOptions;)V
+	public fun deliver (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getAvailability ()Lstapel/analytics/SinkAvailability;
+	public fun getId ()Ljava/lang/String;
+	public fun getPurposes ()Ljava/util/Set;
+	public fun reset ()V
+	public fun setCollectionEnabled (Z)V
+	public fun setUserProperty (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public abstract interface class stapel/analytics/collector/api/AnalyticsApi {
+	public abstract fun analyticsApiEvents (Lstapel/analytics/collector/api/model/Ingest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun createFunnels (Lstapel/analytics/collector/api/model/FunnelCreate;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun deleteFunnels (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun events (Lstapel/analytics/collector/api/model/Ingest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getConversionsGoogleAdsCsv (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getConversionsGoogleAdsCsv$default (Lstapel/analytics/collector/api/AnalyticsApi;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getEventRegistry (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getFunnels (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getReportsEvents (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun listFunnels (Ljava/lang/Boolean;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun listFunnels$default (Lstapel/analytics/collector/api/AnalyticsApi;Ljava/lang/Boolean;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun patchFunnels (Ljava/lang/String;Lstapel/analytics/collector/api/model/PatchedFunnelPatch;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun patchFunnels$default (Lstapel/analytics/collector/api/AnalyticsApi;Ljava/lang/String;Lstapel/analytics/collector/api/model/PatchedFunnelPatch;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class stapel/analytics/collector/api/AnalyticsApi$DefaultImpls {
+	public static synthetic fun getConversionsGoogleAdsCsv$default (Lstapel/analytics/collector/api/AnalyticsApi;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun listFunnels$default (Lstapel/analytics/collector/api/AnalyticsApi;Ljava/lang/Boolean;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun patchFunnels$default (Lstapel/analytics/collector/api/AnalyticsApi;Ljava/lang/String;Lstapel/analytics/collector/api/model/PatchedFunnelPatch;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class stapel/analytics/collector/api/AnalyticsApiClient : stapel/analytics/collector/api/AnalyticsApi {
+	public fun <init> (Lstapel/wire/ApiTransport;)V
+	public fun analyticsApiEvents (Lstapel/analytics/collector/api/model/Ingest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createFunnels (Lstapel/analytics/collector/api/model/FunnelCreate;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun deleteFunnels (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun events (Lstapel/analytics/collector/api/model/Ingest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConversionsGoogleAdsCsv (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getEventRegistry (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getFunnels (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getReportsEvents (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listFunnels (Ljava/lang/Boolean;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun patchFunnels (Ljava/lang/String;Lstapel/analytics/collector/api/model/PatchedFunnelPatch;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class stapel/analytics/collector/api/AnalyticsContract {
+	public static final field INSTANCE Lstapel/analytics/collector/api/AnalyticsContract;
+	public static final field MODULE Ljava/lang/String;
+	public static final field PROFILE I
+	public static final field REF Ljava/lang/String;
+	public static final field RUNTIME_ABI I
+	public static final field SCHEMA_SHA256 Ljava/lang/String;
+	public static final field VERSION Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/AnalyticsInvalidation {
+	public static final field INSTANCE Lstapel/analytics/collector/api/AnalyticsInvalidation;
+	public final fun after (Ljava/lang/String;)Ljava/util/List;
+	public final fun getTable ()Ljava/util/Map;
+}
+
+public final class stapel/analytics/collector/api/AnalyticsKeys {
+	public static final field INSTANCE Lstapel/analytics/collector/api/AnalyticsKeys;
+	public final fun getAll ()Lstapel/wire/KeyPattern;
+	public final fun getConversionsGoogleAdsCsv (Ljava/lang/String;)Lstapel/wire/CacheKey;
+	public static synthetic fun getConversionsGoogleAdsCsv$default (Lstapel/analytics/collector/api/AnalyticsKeys;Ljava/lang/String;ILjava/lang/Object;)Lstapel/wire/CacheKey;
+	public final fun getEventRegistry ()Lstapel/wire/CacheKey;
+	public final fun getFunnels (Ljava/lang/String;)Lstapel/wire/CacheKey;
+	public final fun getHints ()Ljava/util/Map;
+	public final fun getReportsEvents ()Lstapel/wire/CacheKey;
+	public final fun listFunnels (Ljava/lang/Boolean;)Lstapel/wire/CacheKey;
+	public static synthetic fun listFunnels$default (Lstapel/analytics/collector/api/AnalyticsKeys;Ljava/lang/Boolean;ILjava/lang/Object;)Lstapel/wire/CacheKey;
+}
+
+public abstract interface class stapel/analytics/collector/api/error/AnalyticsApiError : stapel/result/StapelError {
+	public static final field Companion Lstapel/analytics/collector/api/error/AnalyticsApiError$Companion;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AdNotFound : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AdNotFound;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AdNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AdNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchShape : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/AnalyticsApiEventsError, stapel/analytics/collector/api/error/EventsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchShape;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchShape;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchShape;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchTooLarge : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/AnalyticsApiEventsError, stapel/analytics/collector/api/error/EventsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchTooLarge;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchTooLarge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBatchTooLarge;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getGot ()Ljava/lang/String;
+	public final fun getMax ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBodyTooLarge : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/AnalyticsApiEventsError, stapel/analytics/collector/api/error/EventsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBodyTooLarge;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBodyTooLarge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsBodyTooLarge;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getMax ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventInvalidTs : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventInvalidTs;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventInvalidTs;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventInvalidTs;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventMissingName : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventMissingName;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventMissingName;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventMissingName;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventNameTooLong : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventNameTooLong;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventNameTooLong;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventNameTooLong;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPii : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPii;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPii;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPii;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsShape : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsShape;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsShape;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsShape;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsTooLarge : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsTooLarge;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsTooLarge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventPropsTooLarge;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventShape : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventShape;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventShape;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventShape;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventTooOld : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventTooOld;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventTooOld;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventTooOld;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnknownKind : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnknownKind;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnknownKind;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnknownKind;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnregistered : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnregistered;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnregistered;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsEventUnregistered;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFeedToken : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/GetConversionsGoogleAdsCsvError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFeedToken;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFeedToken;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFeedToken;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsForbidden : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/DeleteFunnelsError, stapel/analytics/collector/api/error/GetFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsForbidden;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsForbidden;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsForbidden;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelCap : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelCap;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelCap;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelCap;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelDeclared : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/DeleteFunnelsError, stapel/analytics/collector/api/error/GetFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelDeclared;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelDeclared;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelDeclared;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelNotFound : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/DeleteFunnelsError, stapel/analytics/collector/api/error/GetFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelNotFound;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSlugTaken : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSlugTaken;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSlugTaken;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSlugTaken;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getSlug ()Ljava/lang/String;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelStepUnknown : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelStepUnknown;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelStepUnknown;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelStepUnknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public final fun getStep ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSteps : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSteps;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSteps;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsFunnelSteps;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getMax ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsReportPeriod : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/GetReportsEventsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsReportPeriod;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsReportPeriod;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsReportPeriod;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsWriteKey : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/AnalyticsApiEventsError, stapel/analytics/collector/api/error/EventsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsWriteKey;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsWriteKey;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$AnalyticsWriteKey;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$BadRequest : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$BadRequest;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$BadRequest;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$BadRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$CaptchaInvalid : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$CaptchaInvalid;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$CaptchaInvalid;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$CaptchaInvalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$CaptchaRequired : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$CaptchaRequired;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$CaptchaRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$CaptchaRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Companion {
+	public final fun decode (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Conflict : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Conflict;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Conflict;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Conflict;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$ExpectedList : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$ExpectedList;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$ExpectedList;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$ExpectedList;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldBlank : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldBlank;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldBlank;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldBlank;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldDoesNotExist : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldDoesNotExist;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldDoesNotExist;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldDoesNotExist;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalid : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalid;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalid;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalidChoice : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalidChoice;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalidChoice;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldInvalidChoice;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxLength : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxLength;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxLength;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxLength;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMaxLength ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxValue : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxValue;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxValue;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMaxValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMaxValue ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldMinLength : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMinLength;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMinLength;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMinLength;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMinLength ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldMinValue : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMinValue;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMinValue;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldMinValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public final fun getMinValue ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldNull : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldNull;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldNull;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldNull;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldRequired : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldRequired;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$FieldUnique : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldUnique;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldUnique;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$FieldUnique;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getField ()Ljava/lang/String;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Forbidden : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Forbidden;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Forbidden;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Forbidden;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Gone : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Gone;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Gone;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Gone;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Internal : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Internal;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Internal;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Internal;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$InvalidAdId : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$InvalidAdId;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$InvalidAdId;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$InvalidAdId;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Locked : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Locked;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Locked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Locked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$MandateUnavailable : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/DeleteFunnelsError, stapel/analytics/collector/api/error/GetEventRegistryError, stapel/analytics/collector/api/error/GetFunnelsError, stapel/analytics/collector/api/error/ListFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$MandateUnavailable;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$MandateUnavailable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$MandateUnavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$MethodNotAllowed : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$MethodNotAllowed;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$MethodNotAllowed;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$MethodNotAllowed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$NetworkBlocked : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$NetworkBlocked;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$NetworkBlocked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$NetworkBlocked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$NotAcceptable : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$NotAcceptable;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$NotAcceptable;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$NotAcceptable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$NotFound : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/GetConversionsGoogleAdsCsvError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$NotFound;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$NotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$NotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$PayloadTooLarge : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$PayloadTooLarge;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$PayloadTooLarge;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$PayloadTooLarge;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$PaymentRequired : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$PaymentRequired;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$PaymentRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$PaymentRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$RateLimit : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$RateLimit;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$RateLimit;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$RateLimit;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRetryAfter ()Ljava/lang/Integer;
+	public final fun getRetryAfterDisplay ()Ljava/lang/String;
+	public final fun getRetryAfterMinutes ()Ljava/lang/Integer;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$RequestTimeout : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$RequestTimeout;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$RequestTimeout;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$RequestTimeout;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$TooManyIds : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$TooManyIds;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$TooManyIds;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$TooManyIds;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public final fun getLimit ()Ljava/lang/Integer;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public final fun getRequested ()Ljava/lang/Integer;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$TooManyRequests : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$TooManyRequests;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$TooManyRequests;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$TooManyRequests;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Transport : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/AnalyticsApiEventsError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/DeleteFunnelsError, stapel/analytics/collector/api/error/EventsError, stapel/analytics/collector/api/error/GetConversionsGoogleAdsCsvError, stapel/analytics/collector/api/error/GetEventRegistryError, stapel/analytics/collector/api/error/GetFunnelsError, stapel/analytics/collector/api/error/GetReportsEventsError, stapel/analytics/collector/api/error/ListFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/TransportCarrier {
+	public fun <init> (Lstapel/result/TransportFailure;)V
+	public final fun component1 ()Lstapel/result/TransportFailure;
+	public final fun copy (Lstapel/result/TransportFailure;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Transport;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Transport;Lstapel/result/TransportFailure;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Transport;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getFailure ()Lstapel/result/TransportFailure;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Unauthorized : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Unauthorized;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Unauthorized;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Unauthorized;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$Unknown : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/analytics/collector/api/error/AnalyticsApiEventsError, stapel/analytics/collector/api/error/CreateFunnelsError, stapel/analytics/collector/api/error/DeleteFunnelsError, stapel/analytics/collector/api/error/EventsError, stapel/analytics/collector/api/error/GetConversionsGoogleAdsCsvError, stapel/analytics/collector/api/error/GetEventRegistryError, stapel/analytics/collector/api/error/GetFunnelsError, stapel/analytics/collector/api/error/GetReportsEventsError, stapel/analytics/collector/api/error/ListFunnelsError, stapel/analytics/collector/api/error/PatchFunnelsError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Unknown;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$Unknown;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$UnprocessableEntity : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$UnprocessableEntity;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$UnprocessableEntity;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$UnprocessableEntity;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$UnsupportedMediaType : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$UnsupportedMediaType;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$UnsupportedMediaType;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$UnsupportedMediaType;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$ValidationError : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$ValidationError;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$ValidationError;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$ValidationError;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$VerificationChallengeNotFound : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationChallengeNotFound;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationChallengeNotFound;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationChallengeNotFound;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$VerificationEnrollmentRequired : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationEnrollmentRequired;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationEnrollmentRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationEnrollmentRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$VerificationFailed : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationFailed;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationFailed;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationFailed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$VerificationInvalidFactor : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationInvalidFactor;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationInvalidFactor;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationInvalidFactor;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$VerificationLocked : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationLocked;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationLocked;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationLocked;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsApiError$VerificationRequired : stapel/analytics/collector/api/error/AnalyticsApiError, stapel/result/DomainError {
+	public fun <init> (Lstapel/result/ErrorEnvelope;)V
+	public final fun component1 ()Lstapel/result/ErrorEnvelope;
+	public final fun copy (Lstapel/result/ErrorEnvelope;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationRequired;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationRequired;Lstapel/result/ErrorEnvelope;ILjava/lang/Object;)Lstapel/analytics/collector/api/error/AnalyticsApiError$VerificationRequired;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode-KSB7eyA ()Ljava/lang/String;
+	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
+	public fun getParams ()Lstapel/result/ErrorParams;
+	public fun getRemediation ()Lstapel/result/Remediation;
+	public fun getStatus ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class stapel/analytics/collector/api/error/AnalyticsApiEventsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public final class stapel/analytics/collector/api/error/AnalyticsErrorCatalog : stapel/result/text/ErrorCatalog {
+	public static final field INSTANCE Lstapel/analytics/collector/api/error/AnalyticsErrorCatalog;
+	public fun getOwner ()Ljava/lang/String;
+	public fun spec-6fQUc9g (Ljava/lang/String;)Lstapel/result/text/ErrorSpec;
+	public fun template-qYLAU7c (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class stapel/analytics/collector/api/error/CreateFunnelsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/DeleteFunnelsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/EventsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/GetConversionsGoogleAdsCsvError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/GetEventRegistryError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/GetFunnelsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/GetReportsEventsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/ListFunnelsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public abstract interface class stapel/analytics/collector/api/error/PatchFunnelsError : stapel/analytics/collector/api/error/AnalyticsApiError {
+}
+
+public final class stapel/analytics/collector/api/model/EventDefinition {
+	public static final field Companion Lstapel/analytics/collector/api/model/EventDefinition$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Boolean;)Lstapel/analytics/collector/api/model/EventDefinition;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/EventDefinition;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Boolean;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/EventDefinition;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBuiltin ()Ljava/lang/Boolean;
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getFlow ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getProps ()Lkotlinx/serialization/json/JsonObject;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/EventDefinition$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/EventDefinition$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/EventDefinition;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/EventDefinition;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/EventDefinition$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/EventRegistry {
+	public static final field Companion Lstapel/analytics/collector/api/model/EventRegistry$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;)Lstapel/analytics/collector/api/model/EventRegistry;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/EventRegistry;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/EventRegistry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAdapters ()Ljava/util/List;
+	public final fun getBridgedActions ()Ljava/util/List;
+	public final fun getEvents ()Ljava/util/List;
+	public final fun getMode ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/EventRegistry$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/EventRegistry$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/EventRegistry;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/EventRegistry;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/EventRegistry$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/EventsReport {
+	public static final field Companion Lstapel/analytics/collector/api/model/EventsReport$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/util/List;Lkotlin/time/Instant;Lkotlin/time/Instant;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/util/List;Lkotlin/time/Instant;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Lkotlin/time/Instant;
+	public final fun component5 ()Lkotlin/time/Instant;
+	public final fun copy (Ljava/util/List;Ljava/lang/Integer;Ljava/util/List;Lkotlin/time/Instant;Lkotlin/time/Instant;)Lstapel/analytics/collector/api/model/EventsReport;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/EventsReport;Ljava/util/List;Ljava/lang/Integer;Ljava/util/List;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/EventsReport;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBuckets ()Ljava/util/List;
+	public final fun getEnd ()Lkotlin/time/Instant;
+	public final fun getGroupBy ()Ljava/util/List;
+	public final fun getStart ()Lkotlin/time/Instant;
+	public final fun getTotal ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/EventsReport$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/EventsReport$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/EventsReport;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/EventsReport;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/EventsReport$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/FunnelCreate {
+	public static final field Companion Lstapel/analytics/collector/api/model/FunnelCreate$Companion;
+	public static final field SLUG_MAX_LENGTH I
+	public static final field SLUG_PATTERN Ljava/lang/String;
+	public static final field TITLE_MAX_LENGTH I
+	public static final field WINDOW_SECONDS_MINIMUM J
+	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/Integer;
+	public final fun component6 ()Ljava/lang/Boolean;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;)Lstapel/analytics/collector/api/model/FunnelCreate;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/FunnelCreate;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/FunnelCreate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getSlug ()Ljava/lang/String;
+	public final fun getSteps ()Ljava/util/List;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun getWindowSeconds ()Ljava/lang/Integer;
+	public final fun getWorkspaceId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isActive ()Ljava/lang/Boolean;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/FunnelCreate$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/FunnelCreate$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/FunnelCreate;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/FunnelCreate;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/FunnelCreate$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/FunnelDefinition {
+	public static final field Companion Lstapel/analytics/collector/api/model/FunnelDefinition$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/Boolean;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;)Lstapel/analytics/collector/api/model/FunnelDefinition;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/FunnelDefinition;Ljava/lang/String;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/FunnelDefinition;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getSlug ()Ljava/lang/String;
+	public final fun getSource ()Ljava/lang/String;
+	public final fun getSteps ()Ljava/util/List;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun getWindowSeconds ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public final fun isActive ()Ljava/lang/Boolean;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/FunnelDefinition$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/FunnelDefinition$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/FunnelDefinition;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/FunnelDefinition;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/FunnelDefinition$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/FunnelPresenterDTO {
+	public static final field Companion Lstapel/analytics/collector/api/model/FunnelPresenterDTO$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IZLjava/lang/String;Ljava/util/List;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()I
+	public final fun component5 ()Z
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IZLjava/lang/String;Ljava/util/List;Ljava/lang/String;)Lstapel/analytics/collector/api/model/FunnelPresenterDTO;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/FunnelPresenterDTO;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IZLjava/lang/String;Ljava/util/List;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/FunnelPresenterDTO;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getSlug ()Ljava/lang/String;
+	public final fun getSource ()Ljava/lang/String;
+	public final fun getSteps ()Ljava/util/List;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun getWindowSeconds ()I
+	public fun hashCode ()I
+	public final fun isActive ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/FunnelPresenterDTO$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/FunnelPresenterDTO$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/FunnelPresenterDTO;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/FunnelPresenterDTO;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/FunnelPresenterDTO$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/Ingest {
+	public static final field Companion Lstapel/analytics/collector/api/model/Ingest$Companion;
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/analytics/collector/api/model/IngestContext;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/analytics/collector/api/model/IngestContext;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lstapel/analytics/collector/api/model/IngestContext;
+	public final fun copy (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/analytics/collector/api/model/IngestContext;)Lstapel/analytics/collector/api/model/Ingest;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/Ingest;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lstapel/analytics/collector/api/model/IngestContext;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/Ingest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnonId ()Ljava/lang/String;
+	public final fun getContext ()Lstapel/analytics/collector/api/model/IngestContext;
+	public final fun getEvents ()Ljava/util/List;
+	public final fun getSessionId ()Ljava/lang/String;
+	public final fun getWriteKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/Ingest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/Ingest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/Ingest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/Ingest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/Ingest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/IngestContext {
+	public static final field Companion Lstapel/analytics/collector/api/model/IngestContext$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/analytics/collector/api/model/IngestContext;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/IngestContext;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/IngestContext;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAppVersion ()Ljava/lang/String;
+	public final fun getLocale ()Ljava/lang/String;
+	public final fun getOsVersion ()Ljava/lang/String;
+	public final fun getPlatform ()Ljava/lang/String;
+	public final fun getSdk ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/IngestContext$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/IngestContext$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/IngestContext;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/IngestContext;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/IngestContext$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/IngestEvent {
+	public static final field Companion Lstapel/analytics/collector/api/model/IngestEvent$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Lstapel/analytics/collector/api/model/Kind;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lstapel/analytics/collector/api/model/Kind;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lstapel/analytics/collector/api/model/Kind;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/Integer;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lstapel/analytics/collector/api/model/Kind;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lstapel/analytics/collector/api/model/IngestEvent;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/IngestEvent;Ljava/lang/String;Lstapel/analytics/collector/api/model/Kind;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/IngestEvent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnonId ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getKind ()Lstapel/analytics/collector/api/model/Kind;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getProps ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getSessionId ()Ljava/lang/String;
+	public final fun getSource ()Ljava/lang/String;
+	public final fun getTs ()Ljava/lang/Integer;
+	public final fun getUserHash ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/IngestEvent$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/IngestEvent$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/IngestEvent;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/IngestEvent;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/IngestEvent$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/IngestReceipt {
+	public static final field Companion Lstapel/analytics/collector/api/model/IngestReceipt$Companion;
+	public fun <init> (ILjava/util/List;Ljava/util/List;Ljava/lang/String;)V
+	public synthetic fun <init> (ILjava/util/List;Ljava/util/List;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (ILjava/util/List;Ljava/util/List;Ljava/lang/String;)Lstapel/analytics/collector/api/model/IngestReceipt;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/IngestReceipt;ILjava/util/List;Ljava/util/List;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/IngestReceipt;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccepted ()I
+	public final fun getRejected ()Ljava/util/List;
+	public final fun getSource ()Ljava/lang/String;
+	public final fun getUnregistered ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/IngestReceipt$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/IngestReceipt$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/IngestReceipt;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/IngestReceipt;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/IngestReceipt$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class stapel/analytics/collector/api/model/Kind : stapel/wire/WireEnum {
+	public static final field Companion Lstapel/analytics/collector/api/model/Kind$Companion;
+}
+
+public final class stapel/analytics/collector/api/model/Kind$Companion {
+	public final fun getKnown ()Ljava/util/List;
+	public final fun of (Ljava/lang/String;)Lstapel/analytics/collector/api/model/Kind;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/Kind$Identify : stapel/analytics/collector/api/model/Kind {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/Kind$Identify;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/model/Kind$Page : stapel/analytics/collector/api/model/Kind {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/Kind$Page;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/model/Kind$Track : stapel/analytics/collector/api/model/Kind {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/Kind$Track;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/model/Kind$Unknown : stapel/analytics/collector/api/model/Kind {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lstapel/analytics/collector/api/model/Kind$Unknown;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/Kind$Unknown;Ljava/lang/String;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/Kind$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getWire ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class stapel/analytics/collector/api/model/PatchedFunnelPatch {
+	public static final field Companion Lstapel/analytics/collector/api/model/PatchedFunnelPatch$Companion;
+	public static final field TITLE_MAX_LENGTH I
+	public static final field WINDOW_SECONDS_MINIMUM J
+	public fun <init> ()V
+	public fun <init> (Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;)V
+	public synthetic fun <init> (Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lstapel/wire/Maybe;
+	public final fun component2 ()Lstapel/wire/Maybe;
+	public final fun component3 ()Lstapel/wire/Maybe;
+	public final fun component4 ()Lstapel/wire/Maybe;
+	public final fun component5 ()Lstapel/wire/Maybe;
+	public final fun copy (Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;)Lstapel/analytics/collector/api/model/PatchedFunnelPatch;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/PatchedFunnelPatch;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;Lstapel/wire/Maybe;ILjava/lang/Object;)Lstapel/analytics/collector/api/model/PatchedFunnelPatch;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Lstapel/wire/Maybe;
+	public final fun getSteps ()Lstapel/wire/Maybe;
+	public final fun getTitle ()Lstapel/wire/Maybe;
+	public final fun getWindowSeconds ()Lstapel/wire/Maybe;
+	public fun hashCode ()I
+	public final fun isActive ()Lstapel/wire/Maybe;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/PatchedFunnelPatch$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/PatchedFunnelPatch$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/PatchedFunnelPatch;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/PatchedFunnelPatch;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/PatchedFunnelPatch$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/RollupBucket {
+	public static final field Companion Lstapel/analytics/collector/api/model/RollupBucket$Companion;
+	public fun <init> (Lkotlinx/serialization/json/JsonObject;I)V
+	public final fun component1 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component2 ()I
+	public final fun copy (Lkotlinx/serialization/json/JsonObject;I)Lstapel/analytics/collector/api/model/RollupBucket;
+	public static synthetic fun copy$default (Lstapel/analytics/collector/api/model/RollupBucket;Lkotlinx/serialization/json/JsonObject;IILjava/lang/Object;)Lstapel/analytics/collector/api/model/RollupBucket;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCount ()I
+	public final fun getGroup ()Lkotlinx/serialization/json/JsonObject;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class stapel/analytics/collector/api/model/RollupBucket$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lstapel/analytics/collector/api/model/RollupBucket$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lstapel/analytics/collector/api/model/RollupBucket;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lstapel/analytics/collector/api/model/RollupBucket;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/api/model/RollupBucket$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class stapel/analytics/collector/di/AnalyticsCollectorModuleKt {
+	public static final fun analyticsCollectorModule (Lstapel/analytics/collector/CollectorOptions;)Lorg/koin/core/module/Module;
+}
+

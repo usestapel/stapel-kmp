@@ -1,0 +1,299 @@
+{
+    "brick": "analytics",
+    "contract": {
+        "module": "stapel-analytics",
+        "profile": 2,
+        "ref": "d111c0383dba69939c5e59ae08969826b4f4fe48",
+        "schema_sha256": "9efb712df3c47376e6ef63ee7e7dadfd6551554756cd9b6956c7cd59fdb7b1d3",
+        "version": "0.8.3"
+    },
+    "counts": {
+        "W-DOC-PARAM": 4,
+        "W-DOC-PROPERTY": 49,
+        "W-DOC-TYPE": 3
+    },
+    "diagnostics": [
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter mine of analytics_api_v1_funnels_list has no description",
+            "pointer": "#/paths/~1analytics~1api~1v1~1funnels/get/parameters/mine"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of analytics_api_v1_funnels_destroy has no description",
+            "pointer": "#/paths/~1analytics~1api~1v1~1funnels~1{slug}/delete/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of analytics_api_v1_funnels_retrieve has no description",
+            "pointer": "#/paths/~1analytics~1api~1v1~1funnels~1{slug}/get/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PARAM",
+            "message": "parameter slug of analytics_api_v1_funnels_partial_update has no description",
+            "pointer": "#/paths/~1analytics~1api~1v1~1funnels~1{slug}/patch/parameters/slug"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventDefinition.builtin has no description",
+            "pointer": "#/components/schemas/EventDefinition/properties/builtin"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventDefinition.description has no description",
+            "pointer": "#/components/schemas/EventDefinition/properties/description"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventDefinition.flow has no description",
+            "pointer": "#/components/schemas/EventDefinition/properties/flow"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventDefinition.name has no description",
+            "pointer": "#/components/schemas/EventDefinition/properties/name"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventDefinition.props has no description",
+            "pointer": "#/components/schemas/EventDefinition/properties/props"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventRegistry.adapters has no description",
+            "pointer": "#/components/schemas/EventRegistry/properties/adapters"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventRegistry.bridged_actions has no description",
+            "pointer": "#/components/schemas/EventRegistry/properties/bridged_actions"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventRegistry.events has no description",
+            "pointer": "#/components/schemas/EventRegistry/properties/events"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventRegistry.mode has no description",
+            "pointer": "#/components/schemas/EventRegistry/properties/mode"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventsReport.buckets has no description",
+            "pointer": "#/components/schemas/EventsReport/properties/buckets"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventsReport.end has no description",
+            "pointer": "#/components/schemas/EventsReport/properties/end"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventsReport.group_by has no description",
+            "pointer": "#/components/schemas/EventsReport/properties/group_by"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventsReport.start has no description",
+            "pointer": "#/components/schemas/EventsReport/properties/start"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property EventsReport.total has no description",
+            "pointer": "#/components/schemas/EventsReport/properties/total"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelCreate.description has no description",
+            "pointer": "#/components/schemas/FunnelCreate/properties/description"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelCreate.is_active has no description",
+            "pointer": "#/components/schemas/FunnelCreate/properties/is_active"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelCreate.slug has no description",
+            "pointer": "#/components/schemas/FunnelCreate/properties/slug"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelCreate.steps has no description",
+            "pointer": "#/components/schemas/FunnelCreate/properties/steps"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelCreate.title has no description",
+            "pointer": "#/components/schemas/FunnelCreate/properties/title"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelCreate.window_seconds has no description",
+            "pointer": "#/components/schemas/FunnelCreate/properties/window_seconds"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelCreate.workspace_id has no description",
+            "pointer": "#/components/schemas/FunnelCreate/properties/workspace_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.description has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/description"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.id has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.is_active has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/is_active"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.slug has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/slug"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.source has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/source"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.steps has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/steps"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.title has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/title"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelDefinition.window_seconds has no description",
+            "pointer": "#/components/schemas/FunnelDefinition/properties/window_seconds"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property FunnelPresenterDTO.id has no description",
+            "pointer": "#/components/schemas/FunnelPresenterDTO/properties/id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Ingest.anon_id has no description",
+            "pointer": "#/components/schemas/Ingest/properties/anon_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Ingest.context has no description",
+            "pointer": "#/components/schemas/Ingest/properties/context"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Ingest.events has no description",
+            "pointer": "#/components/schemas/Ingest/properties/events"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Ingest.session_id has no description",
+            "pointer": "#/components/schemas/Ingest/properties/session_id"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property Ingest.write_key has no description",
+            "pointer": "#/components/schemas/Ingest/properties/write_key"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property IngestContext.app_version has no description",
+            "pointer": "#/components/schemas/IngestContext/properties/app_version"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property IngestContext.os_version has no description",
+            "pointer": "#/components/schemas/IngestContext/properties/os_version"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property IngestEvent.kind has no description",
+            "pointer": "#/components/schemas/IngestEvent/properties/kind"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property IngestReceipt.accepted has no description",
+            "pointer": "#/components/schemas/IngestReceipt/properties/accepted"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property IngestReceipt.rejected has no description",
+            "pointer": "#/components/schemas/IngestReceipt/properties/rejected"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property IngestReceipt.source has no description",
+            "pointer": "#/components/schemas/IngestReceipt/properties/source"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property IngestReceipt.unregistered has no description",
+            "pointer": "#/components/schemas/IngestReceipt/properties/unregistered"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedFunnelPatch.description has no description",
+            "pointer": "#/components/schemas/PatchedFunnelPatch/properties/description"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedFunnelPatch.is_active has no description",
+            "pointer": "#/components/schemas/PatchedFunnelPatch/properties/is_active"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedFunnelPatch.steps has no description",
+            "pointer": "#/components/schemas/PatchedFunnelPatch/properties/steps"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedFunnelPatch.title has no description",
+            "pointer": "#/components/schemas/PatchedFunnelPatch/properties/title"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property PatchedFunnelPatch.window_seconds has no description",
+            "pointer": "#/components/schemas/PatchedFunnelPatch/properties/window_seconds"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property RollupBucket.count has no description",
+            "pointer": "#/components/schemas/RollupBucket/properties/count"
+        },
+        {
+            "code": "W-DOC-PROPERTY",
+            "message": "property RollupBucket.group has no description",
+            "pointer": "#/components/schemas/RollupBucket/properties/group"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type FunnelCreate has no description",
+            "pointer": "#/components/schemas/FunnelCreate"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type Kind has no description",
+            "pointer": "#/components/schemas/KindEnum"
+        },
+        {
+            "code": "W-DOC-TYPE",
+            "message": "type PatchedFunnelPatch has no description",
+            "pointer": "#/components/schemas/PatchedFunnelPatch"
+        }
+    ],
+    "operations": 10,
+    "types": 13
+}

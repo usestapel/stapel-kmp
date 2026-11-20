@@ -1,0 +1,29 @@
+{
+    "operations": {
+        "analytics_api_events_create": "analyticsApiEvents",
+        "analytics_api_v1_conversions_google_ads_csv_retrieve": "getConversionsGoogleAdsCsv",
+        "analytics_api_v1_event_registry_retrieve": "getEventRegistry",
+        "analytics_api_v1_events_create": "events",
+        "analytics_api_v1_funnels_create": "createFunnels",
+        "analytics_api_v1_funnels_destroy": "deleteFunnels",
+        "analytics_api_v1_funnels_list": "listFunnels",
+        "analytics_api_v1_funnels_partial_update": "patchFunnels",
+        "analytics_api_v1_funnels_retrieve": "getFunnels",
+        "analytics_api_v1_reports_events_retrieve": "getReportsEvents"
+    },
+    "types": {
+        "EventDefinition": "EventDefinition",
+        "EventRegistry": "EventRegistry",
+        "EventsReport": "EventsReport",
+        "FunnelCreate": "FunnelCreate",
+        "FunnelDefinition": "FunnelDefinition",
+        "FunnelPresenterDTO": "FunnelPresenterDTO",
+        "Ingest": "Ingest",
+        "IngestContext": "IngestContext",
+        "IngestEvent": "IngestEvent",
+        "IngestReceipt": "IngestReceipt",
+        "KindEnum": "Kind",
+        "PatchedFunnelPatch": "PatchedFunnelPatch",
+        "RollupBucket": "RollupBucket"
+    }
+}
