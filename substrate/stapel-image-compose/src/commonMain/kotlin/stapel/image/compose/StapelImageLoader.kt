@@ -66,9 +66,11 @@ public fun ImageLoader.clearStapelCaches() {
 
 /** [StapelImages] over a Coil [loader]: what `LocalStapelImages` holds in an app that wired images. */
 public class CoilStapelImages(private val loader: ImageLoader) : StapelImages {
+    /** The loaded painter for [source], or null while it loads or after it failed. */
     @Composable
     override fun painter(source: String): Painter? = (load(ImageRequest(source)) as? StapelImageState.Ready)?.painter
 
+    /** Coil's painter state for [request] (sized to the request's pixels) as a [StapelImageState]. */
     @Composable
     override fun load(request: ImageRequest): StapelImageState {
         val platform = coil3.compose.LocalPlatformContext.current
