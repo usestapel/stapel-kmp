@@ -17,9 +17,10 @@ public final class stapel/showcase/CanvasKt {
 public final class stapel/showcase/CanvasOptions {
 	public static final field $stable I
 	public fun <init> ()V
-	public synthetic fun <init> (ZFLandroidx/compose/ui/unit/Dp;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (ZFLandroidx/compose/ui/unit/Dp;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (ZFLandroidx/compose/ui/unit/Dp;Landroidx/compose/ui/unit/Dp;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (ZFLandroidx/compose/ui/unit/Dp;Landroidx/compose/ui/unit/Dp;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getCheckerboard ()Z
+	public final fun getHeight-lTKBWiU ()Landroidx/compose/ui/unit/Dp;
 	public final fun getMaxWidth-lTKBWiU ()Landroidx/compose/ui/unit/Dp;
 	public final fun getPadding-D9Ej5fM ()F
 }

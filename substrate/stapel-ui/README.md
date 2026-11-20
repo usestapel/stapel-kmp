@@ -2,7 +2,7 @@
 
 The paradigm-neutral UI substrate of Stapel clients (Compose Multiplatform, no Material): the theme
 built from `stapel-tokens`, layout verdicts (size classes from the token breakpoints, THE page gutter,
-touch targets, sheet-vs-modal), the `StapelSkin` slot seam (22 slots) with a Material-free `FoundationSkin`,
+touch targets, sheet-vs-modal), the `StapelSkin` slot seam (25 slots) with a Material-free `FoundationSkin`,
 the `Stapel*` wrappers bricks call, and the composites that state UI rules once (`ErrorState`,
 `EmptyState`, `LoadBoundary`, `LoadList`, `ConfirmDialog`, `StapelSnackbarHost`, `StapelPage`, `PickerSheet` /
 `StapelSelect`, `StatusPage`, `SectionHeader`, `AdaptiveGrid`).

@@ -38,6 +38,13 @@ import androidx.compose.runtime.CompositionLocalProvider
 import stapel.showcase.contract.assertSkeletonRespectsReduceMotion
 import stapel.ui.skin.AvatarSpec
 import stapel.ui.skin.PagerIndicatorSpec
+import stapel.ui.skin.ChipGroupSpec
+import stapel.ui.skin.MenuSpec
+import stapel.ui.skin.StepperSpec
+import stapel.ui.skin.canDecrement
+import stapel.ui.skin.menuPosition
+import stapel.ui.skin.stepperValue
+import androidx.compose.ui.semantics.contentDescription
 import stapel.ui.skin.ProgressSpec
 import stapel.ui.skin.SelectSpec
 import stapel.ui.skin.TextFieldSpec
@@ -236,6 +243,43 @@ private object RestlessSkeletonSkin : StapelSkin by FoundationSkin {
     }
 }
 
+/** Breaks the menu: picking an item leaves it open. */
+private object StickyMenuSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun Menu(spec: MenuSpec, modifier: Modifier, anchor: @Composable () -> Unit) {
+        FoundationSkin.Menu(MenuSpec(spec.expanded, {}, spec.items, spec.label, spec.testTag), modifier, anchor)
+    }
+}
+
+/** Breaks the stepper bounds: no minimum. */
+private object UnboundedStepperSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun Stepper(spec: StepperSpec, modifier: Modifier) {
+        FoundationSkin.Stepper(
+            StepperSpec(spec.value, spec.onValueChange, spec.label, spec.decrementLabel, spec.incrementLabel, Int.MIN_VALUE, spec.max, spec.step, spec.valueText, spec.enabled, spec.testTag),
+            modifier,
+        )
+    }
+}
+
+/** Breaks the wrap: every group is one row that neither wraps nor scrolls. */
+private object OneRowChipGroupSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun ChipGroup(spec: ChipGroupSpec, modifier: Modifier) {
+        androidx.compose.foundation.layout.Row(
+            modifier.semantics { contentDescription = spec.label }.optionalTag(spec.testTag),
+        ) { spec.chips.forEach { Chip(it, Modifier) } }
+    }
+}
+
+/** A project chip: the chip group must draw it. */
+private object MarkedChipSkin : StapelSkin by FoundationSkin {
+    @Composable
+    override fun Chip(spec: ChipSpec, modifier: Modifier) {
+        Box(modifier.testTag("marked.chip.${spec.label}")) { StapelText(spec.label) }
+    }
+}
+
 private fun Modifier.optionalTag(tag: String?): Modifier = if (tag == null) this else testTag(tag)
 
 /** A project skin replacing exactly one slot by interface delegation. */
@@ -344,6 +388,48 @@ class FoundationSkinTest {
 
     @Test
     fun aSecondHeadingInALargeBarIsCaught() = runComposeUiTest { assertDutyBroken("TopBar.large") { assertSkinContract(TwoHeadingBarSkin) } }
+
+    @Test
+    fun aMenuThatStaysOpenIsCaught() = runComposeUiTest { assertDutyBroken("Menu.select") { assertSkinContract(StickyMenuSkin) } }
+
+    @Test
+    fun aStepperPastItsMinimumIsCaught() = runComposeUiTest { assertDutyBroken("Stepper.bounds") { assertSkinContract(UnboundedStepperSkin) } }
+
+    @Test
+    fun aChipGroupThatDoesNotWrapIsCaught() = runComposeUiTest { assertDutyBroken("ChipGroup.wrap") { assertSkinContract(OneRowChipGroupSkin) } }
+
+    @Test
+    fun theChipGroupDrawsTheProjectsChip() = runComposeUiTest {
+        setContent {
+            StapelTheme(skin = MarkedChipSkin, mode = ThemeMode.Light) {
+                StapelChipGroup(listOf(ChipSpec("Fresh"), ChipSpec("Local")), "Filters")
+            }
+        }
+        onNodeWithTag("marked.chip.Fresh").assertExists()
+        onNodeWithTag("marked.chip.Local").assertExists()
+    }
+
+    @Test
+    fun aStepperClampsAndNeverOverflows() {
+        val spec = StepperSpec(Int.MAX_VALUE - 1, {}, "q", "-", "+", min = 0, max = Int.MAX_VALUE, step = 5)
+        assertEquals(Int.MAX_VALUE, spec.stepperValue(1))
+        assertEquals(Int.MAX_VALUE - 6, spec.stepperValue(-1))
+        assertEquals(0, StepperSpec(3, {}, "q", "-", "+", min = 0, step = 5).stepperValue(-1))
+        assertTrue(!StepperSpec(0, {}, "q", "-", "+").canDecrement)
+    }
+
+    @Test
+    fun theMenuStaysInsideTheWindowAndFollowsTheDirection() {
+        val window = androidx.compose.ui.unit.IntSize(400, 800)
+        val popup = androidx.compose.ui.unit.IntSize(200, 150)
+        val anchor = androidx.compose.ui.unit.IntRect(352, 10, 400, 58)
+        val ltr = menuPosition(anchor, window, androidx.compose.ui.unit.LayoutDirection.Ltr, popup)
+        assertEquals(androidx.compose.ui.unit.IntOffset(200, 58), ltr, "end edges meet, below the anchor")
+        val rtl = menuPosition(androidx.compose.ui.unit.IntRect(0, 10, 48, 58), window, androidx.compose.ui.unit.LayoutDirection.Rtl, popup)
+        assertEquals(androidx.compose.ui.unit.IntOffset(0, 58), rtl, "right-to-left: the left edges meet")
+        val clamped = menuPosition(androidx.compose.ui.unit.IntRect(352, 700, 400, 748), window, androidx.compose.ui.unit.LayoutDirection.Rtl, popup)
+        assertEquals(androidx.compose.ui.unit.IntOffset(200, 550), clamped, "inside the window, above when no room below")
+    }
 
     @Test
     fun theSkeletonRespectsReduceMotion() = runComposeUiTest { assertSkeletonRespectsReduceMotion(FoundationSkin) }

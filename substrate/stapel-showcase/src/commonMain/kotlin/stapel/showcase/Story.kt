@@ -92,11 +92,15 @@ public class AnatomyPart(public val id: String, public val label: String, public
  * @property checkerboard draw a checkerboard behind the story so padding and translucent fills show.
  * @property padding space around the story inside the canvas.
  * @property maxWidth the story's width cap inside the frame (null: the frame's width).
+ * @property height a fixed canvas height, padding included (null: the content's height). A story that
+ *   opens a popup layer (an open menu) declares it: a popup is a layer of its own that the snapshot
+ *   runner cannot measure, so the canvas reserves the room the overlay needs.
  */
 public class CanvasOptions(
     public val checkerboard: Boolean = false,
     public val padding: Dp = 16.dp,
     public val maxWidth: Dp? = null,
+    public val height: Dp? = null,
 )
 
 /**

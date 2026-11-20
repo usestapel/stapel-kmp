@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
  * }
  * ```
  *
- * The first twelve slots (Button … Snackbar) are abstract. The later slots (Toggle … PagerIndicator)
+ * The first twelve slots (Button … Snackbar) are abstract. The later slots (Toggle … ChipGroup)
  * have a [FoundationSkin] body, so adding one never breaks an existing skin. Methods take no default
  * arguments on purpose; the wrappers carry the defaults.
  */
@@ -129,6 +129,27 @@ public interface StapelSkin {
         FoundationSkin.PagerIndicator(spec, modifier)
     }
 
+    /**
+     * An action menu anchored to [anchor] (drawn first, e.g. a "more" icon button); [MenuSpec] lists
+     * the duties.
+     */
+    @Composable
+    public fun Menu(spec: MenuSpec, modifier: Modifier, anchor: @Composable () -> Unit) {
+        FoundationSkin.Menu(spec, modifier, anchor)
+    }
+
+    /** A quantity stepper ([StepperSpec] lists the duties). */
+    @Composable
+    public fun Stepper(spec: StepperSpec, modifier: Modifier) {
+        FoundationSkin.Stepper(spec, modifier)
+    }
+
+    /** A group of chips, wrapped or scrolling ([ChipGroupSpec] lists the duties). */
+    @Composable
+    public fun ChipGroup(spec: ChipGroupSpec, modifier: Modifier) {
+        FoundationSkin.ChipGroup(spec, modifier)
+    }
+
     /** A brick-local widget: the skin's own value for [key], or the brick's default. */
     public fun <T : Any> extension(key: SkinExtensionKey<T>): T = key.default
 }
@@ -137,5 +158,5 @@ public interface StapelSkin {
 public val StapelSkinSlots: List<String> = listOf(
     "Button", "IconButton", "TextField", "CodeField", "Dialog", "Banner", "Progress", "Surface", "ListItem", "TopBar",
     "Divider", "Snackbar", "Toggle", "Tabs", "Chip", "Avatar", "Badge", "NavigationBar", "NavigationRail", "PullToRefresh",
-    "Select", "PagerIndicator",
+    "Select", "PagerIndicator", "Menu", "Stepper", "ChipGroup",
 )

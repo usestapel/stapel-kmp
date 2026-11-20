@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
@@ -60,6 +61,11 @@ import stapel.ui.skin.ToggleSpec
 import stapel.ui.skin.ButtonSpec
 import stapel.ui.skin.ButtonVariant
 import stapel.ui.skin.CodeFieldSpec
+import stapel.ui.skin.ChipGroupLayout
+import stapel.ui.skin.ChipGroupSpec
+import stapel.ui.skin.MenuItemSpec
+import stapel.ui.skin.MenuSpec
+import stapel.ui.skin.StepperSpec
 import stapel.ui.skin.ControlSize
 import stapel.ui.skin.DialogSpec
 import stapel.ui.skin.ElevationStep
@@ -422,6 +428,74 @@ public fun StapelPagerIndicator(
     testTag: String? = null,
 ) {
     StapelTheme.skin.PagerIndicator(PagerIndicatorSpec(count, current, description, onSelect, dotLabel, maxDots, testTag), modifier)
+}
+
+/**
+ * An action menu through the skin, anchored to [anchor] ([MenuSpec] lists the duties); the caller
+ * owns [expanded]. [StapelOverflowMenu] is the common "more" button with its own state.
+ */
+@Composable
+public fun StapelMenu(
+    expanded: Boolean,
+    onDismiss: () -> Unit,
+    items: List<MenuItemSpec>,
+    label: String,
+    modifier: Modifier = Modifier,
+    testTag: String? = null,
+    anchor: @Composable () -> Unit,
+) {
+    StapelTheme.skin.Menu(MenuSpec(expanded, onDismiss, items, label, testTag), modifier, anchor)
+}
+
+/**
+ * A "more" icon button named [label] that opens a [StapelMenu] of [items] (titled [label] too).
+ *
+ * @param buttonTestTag test tag of the icon button; the menu pane gets [testTag].
+ */
+@Composable
+public fun StapelOverflowMenu(
+    items: List<MenuItemSpec>,
+    label: String,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    testTag: String? = null,
+    buttonTestTag: String? = null,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    StapelMenu(expanded, { expanded = false }, items, label, modifier, testTag) {
+        StapelTheme.skin.IconButton(IconButtonSpec(StapelIconIds.More, label, { expanded = true }, enabled = enabled, testTag = buttonTestTag), Modifier)
+    }
+}
+
+/** A quantity stepper through the skin ([StepperSpec] lists the duties); the button names are the caller's copy. */
+@Composable
+public fun StapelStepper(
+    value: Int,
+    onValueChange: (Int) -> Unit,
+    label: String,
+    decrementLabel: String,
+    incrementLabel: String,
+    modifier: Modifier = Modifier,
+    min: Int = 0,
+    max: Int = Int.MAX_VALUE,
+    step: Int = 1,
+    valueText: String? = null,
+    enabled: Boolean = true,
+    testTag: String? = null,
+) {
+    StapelTheme.skin.Stepper(StepperSpec(value, onValueChange, label, decrementLabel, incrementLabel, min, max, step, valueText, enabled, testTag), modifier)
+}
+
+/** A group of chips through the skin ([ChipGroupSpec] lists the duties). */
+@Composable
+public fun StapelChipGroup(
+    chips: List<ChipSpec>,
+    label: String,
+    modifier: Modifier = Modifier,
+    layout: ChipGroupLayout = ChipGroupLayout.Wrap,
+    testTag: String? = null,
+) {
+    StapelTheme.skin.ChipGroup(ChipGroupSpec(chips, label, layout, testTag), modifier)
 }
 
 /** A divider through the skin. */

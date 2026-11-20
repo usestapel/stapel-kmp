@@ -7,6 +7,7 @@ import androidx.compose.ui.ImageComposeScene
 import androidx.compose.ui.unit.Density
 import org.jetbrains.skia.EncodedImageFormat
 import stapel.showcase.Story
+import stapel.showcase.StoryKind
 import stapel.showcase.StoryState
 import stapel.showcase.gallery.GalleryControls
 import stapel.showcase.gallery.GallerySkin
@@ -44,12 +45,18 @@ fun snapshotName(story: Story, state: StoryState, variant: Variant): String = "$
 fun renderPng(entry: DiscoveredCatalog, story: Story, state: StoryState, controls: GalleryControls, mode: ThemeMode, density: Float = 1f): ByteArray {
     val widthPx = (controls.size.width.value * density).roundToInt()
     val content: @Composable () -> Unit = { StoryFrame(story, entry.catalog.environment, controls, mode, state = state) }
-    val probe = ImageComposeScene(widthPx, MAX_HEIGHT, Density(density), content = content)
-    val height = try {
-        probe.render(0)
-        probe.calculateContentSize().height.coerceIn(1, MAX_HEIGHT)
-    } finally {
-        probe.close()
+    val fixed = story.canvas.height
+    val height = if (fixed != null && story.kind != StoryKind.Screen && story.kind != StoryKind.Flow) {
+        // A fixed canvas (a story with a popup layer): the overlay cannot be measured, the canvas says the height.
+        (fixed.value * density).roundToInt().coerceIn(1, MAX_HEIGHT)
+    } else {
+        val probe = ImageComposeScene(widthPx, MAX_HEIGHT, Density(density), content = content)
+        try {
+            probe.render(0)
+            probe.calculateContentSize().height.coerceIn(1, MAX_HEIGHT)
+        } finally {
+            probe.close()
+        }
     }
     val scene = ImageComposeScene(widthPx, height, Density(density), content = content)
     try {

@@ -34,6 +34,12 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.graphics.toPixelMap
 import stapel.ui.LocalStapelReduceMotion
 import stapel.ui.skin.PagerIndicatorSpec
+import stapel.ui.skin.ChipGroupLayout
+import stapel.ui.skin.ChipGroupSpec
+import stapel.ui.skin.MenuItemSpec
+import stapel.ui.skin.MenuSpec
+import stapel.ui.skin.StepperSpec
+import androidx.compose.foundation.layout.width
 import stapel.ui.skin.SelectSpec
 import stapel.ui.skin.SkeletonShape
 import androidx.compose.ui.test.swipeDown
@@ -124,8 +130,8 @@ public object PlainContractTheme : SkinContractTheme {
     }
 }
 
-/** The contract's phases: every slot in one column, then the dialogs, then gestures on a screen of their own. */
-private enum class Phase { Slots, Dialogs, Gestures }
+/** The contract's phases: every slot in one column, then the menu, the dialogs, and gestures, each on a screen of its own. */
+private enum class Phase { Slots, Menu, Dialogs, Gestures }
 
 /** Draws [ContractImages.OK] as a solid painter and nothing else (a failing or loading image). */
 private object ContractImages : StapelImages {
@@ -146,6 +152,26 @@ private fun ContractScreen(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMo
             s.PullToRefresh(PullToRefreshSpec(false, { hits.hit("ptr.swipe") }, "Refresh by pull", testTag = "c.ptr.swipe"), Modifier.fillMaxWidth()) {
                 Column(Modifier.fillMaxWidth().height(320.dp).verticalScroll(rememberScrollState()).testTag("c.ptr.swipe.content")) {
                     StapelText("Pull me")
+                }
+            }
+            return@CompositionLocalProvider
+        }
+        if (phase == Phase.Menu) {
+            var open by fields.menuOpen
+            androidx.compose.foundation.layout.Box(Modifier.fillMaxWidth().height(400.dp)) {
+                s.Menu(
+                    MenuSpec(
+                        open, { open = false; hits.hit("menu.dismiss") },
+                        listOf(
+                            MenuItemSpec("Reply", { hits.hit("menu.reply") }, icon = StapelIconIds.ArrowBack, testTag = "c.menu.reply"),
+                            MenuItemSpec("Forward", { hits.hit("menu.forward") }, enabled = false, testTag = "c.menu.forward"),
+                            MenuItemSpec("Delete", { hits.hit("menu.delete") }, destructive = true, testTag = "c.menu.delete"),
+                        ),
+                        "Message actions", testTag = "c.menu",
+                    ),
+                    Modifier.align(androidx.compose.ui.Alignment.TopEnd),
+                ) {
+                    s.IconButton(IconButtonSpec(StapelIconIds.More, "More actions", { open = true }, testTag = "c.menu.anchor"), Modifier)
                 }
             }
             return@CompositionLocalProvider
@@ -284,6 +310,29 @@ private fun ContractScreen(skin: StapelSkin, tokens: StapelTokens, mode: ThemeMo
             )
             s.TopBar(TopBarSpec("Inbox", subtitle = "12 unread", collapsedFraction = 0f, testTag = "c.topbar.large"), Modifier)
             s.TopBar(TopBarSpec("Archive", subtitle = "3 threads", collapsedFraction = 1f, testTag = "c.topbar.collapsed"), Modifier)
+            var qty by fields.quantity
+            s.Stepper(StepperSpec(qty, { qty = it; hits.hit("stepper") }, "Quantity", "Remove one", "Add one", min = 1, max = 5, testTag = "c.stepper"), Modifier)
+            s.Stepper(StepperSpec(1, { hits.hit("stepper.min") }, "At minimum", "Fewer at minimum", "More at minimum", min = 1, max = 5, testTag = "c.stepper.min"), Modifier)
+            s.Stepper(StepperSpec(5, { hits.hit("stepper.max") }, "At maximum", "Fewer at maximum", "More at maximum", min = 1, max = 5, testTag = "c.stepper.max"), Modifier)
+            s.Stepper(StepperSpec(2, { hits.hit("stepper.off") }, "Locked quantity", "Fewer locked", "More locked", enabled = false, testTag = "c.stepper.disabled"), Modifier)
+            androidx.compose.foundation.layout.Box(Modifier.width(220.dp)) {
+                s.ChipGroup(
+                    ChipGroupSpec(
+                        GROUP_CHIPS.mapIndexed { i, label -> ChipSpec(label, ChipKind.Filter, selected = i == 1, onClick = { hits.values["chipgroup.wrap"] = i }, testTag = "c.cg.wrap.$i") },
+                        "Filters", ChipGroupLayout.Wrap, testTag = "c.chipgroup.wrap",
+                    ),
+                    Modifier,
+                )
+            }
+            androidx.compose.foundation.layout.Box(Modifier.width(220.dp)) {
+                s.ChipGroup(
+                    ChipGroupSpec(
+                        GROUP_CHIPS.mapIndexed { i, label -> ChipSpec(label, ChipKind.Choice, selected = i == 0, onClick = { hits.values["chipgroup.scroll"] = i }, testTag = "c.cg.scroll.$i") },
+                        "Categories", ChipGroupLayout.Scroll, testTag = "c.chipgroup.scroll",
+                    ),
+                    Modifier,
+                )
+            }
         }
       }
     }
@@ -301,16 +350,22 @@ private class Fields {
     val masked = TextFieldState()
     val folded = TextFieldState()
     val rowSwitch = mutableStateOf(false)
+    val quantity = mutableIntStateOf(3)
+    val menuOpen = mutableStateOf(false)
 }
 
-/** The tags of the nodes the contract renders, one or more per slot (all twenty slots appear). */
+/** Chip labels of the contract's chip groups: more than fit on one 220 dp row. */
+private val GROUP_CHIPS = listOf("Under 50", "Free delivery", "In stock", "New", "Top rated", "On sale")
+
+/** The tags of the nodes the slot phase renders, one or more per slot (the menu has a phase of its own). */
 public val SKIN_CONTRACT_TAGS: List<String> = listOf(
     "c.button", "c.iconbutton", "c.textfield", "c.codefield", "c.banner", "c.progress", "c.surface", "c.listitem",
     "c.topbar", "c.divider", "c.snackbar", "c.toggle", "c.tabs", "c.chip", "c.avatar", "c.badge", "c.navbar", "c.navrail", "c.ptr",
+    "c.select", "c.pager", "c.stepper", "c.chipgroup.wrap", "c.chipgroup.scroll",
 )
 
 /**
- * The skin conformance test: renders all twenty slots of [skin] and asserts the slot duties on the
+ * The skin conformance test: renders every slot of [skin] and asserts the slot duties on the
  * semantics tree (clicks reach callbacks, disabled/busy/gated buttons refuse them, accessible names,
  * semantic errors, password obfuscation, digits-only codes, live regions, progress info, selection,
  * headings, toggles, dialog pane titles and dismissal rules). Throws on the first broken duty.
@@ -456,6 +511,12 @@ public fun ComposeUiTest.assertSkinContract(
 
     assertLaterSlotDepth(hits, fields)
     assertAddedSlots(hits, fields)
+    assertStepperAndChipGroup(hits, fields)
+
+    // Menu phase
+    phase = Phase.Menu
+    settle()
+    assertMenu(hits, fields)
 
     // Gesture phase
     phase = Phase.Gestures
@@ -713,12 +774,14 @@ private object Large {
     const val TAB_A = "Active"
     const val TAB_B = "Archived"
     const val NAV = "Account"
+    const val STEPPER = "12 pcs"
+    const val GROUP_CHIP = "Pick-up today"
 }
 
 /**
  * The later slots survive large text: at [fontScale] (200 % by default) on a 360 dp phone, the texts
- * of a list row (with a value block), a chip, a toggle with supporting text, tabs and the navigation
- * bar are laid out in full — no ellipsis, no visual overflow — inside their slot's bounds (nothing
+ * of a list row (with a value block), a chip, a toggle with supporting text, tabs, the navigation
+ * bar, a stepper's value and a chip group's chips are laid out in full — no ellipsis, no visual overflow — inside their slot's bounds (nothing
  * clipped by a fixed-height container), and a row's value block does not overlap its headline. One
  * `setContent` per test: call it from its own test.
  */
@@ -752,6 +815,11 @@ public fun ComposeUiTest.assertSlotsSurviveLargeText(
                         ),
                         Modifier.testTag("l.nav"),
                     )
+                    s.Stepper(StepperSpec(12, {}, "Quantity", "Remove one", "Add one", valueText = Large.STEPPER, testTag = "l.stepper"), Modifier)
+                    s.ChipGroup(
+                        ChipGroupSpec(listOf(ChipSpec("New", onClick = {}), ChipSpec(Large.GROUP_CHIP, onClick = {}), ChipSpec("Sale", onClick = {})), "Filters", testTag = "l.chipgroup"),
+                        Modifier.fillMaxWidth(),
+                    )
                 }
             }
         }
@@ -763,6 +831,8 @@ public fun ComposeUiTest.assertSlotsSurviveLargeText(
         "Toggle" to listOf("l.toggle" to Large.TOGGLE, "l.toggle" to Large.TOGGLE_SUPPORTING),
         "Tabs" to listOf("l.tabs" to Large.TAB_A, "l.tabs" to Large.TAB_B),
         "NavigationBar" to listOf("l.nav" to Large.NAV),
+        "Stepper" to listOf("l.stepper" to Large.STEPPER),
+        "ChipGroup" to listOf("l.chipgroup" to Large.GROUP_CHIP),
     )
     for ((slot, texts) in checks) {
         duty("$slot.largeText") {
@@ -921,4 +991,122 @@ private fun samePixels(a: androidx.compose.ui.graphics.PixelMap, b: androidx.com
     if (a.width != b.width || a.height != b.height) return false
     for (x in 0 until a.width step 3) for (y in 0 until a.height step 3) if (a[x, y] != b[x, y]) return false
     return true
+}
+
+/** The duties of Stepper and ChipGroup. */
+@OptIn(ExperimentalTestApi::class)
+private fun ComposeUiTest.assertStepperAndChipGroup(hits: Hits, fields: Fields) {
+    duty("Stepper") {
+        onNodeWithTag("c.stepper").assert(hasContentDescription("Quantity", substring = true))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "3"))
+        onNode(hasText("3") and hasAnyAncestorTag("c.stepper"), useUnmergedTree = true).assertExists()
+        onNode(hasContentDescription("Add one") and hasAnyAncestorTag("c.stepper"))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button)).tap()
+        settle()
+        assertEquals(4, fields.quantity.intValue, "Stepper: increment moves the value by one step")
+        onNode(hasContentDescription("Remove one") and hasAnyAncestorTag("c.stepper")).tap()
+        settle()
+        onNode(hasContentDescription("Remove one") and hasAnyAncestorTag("c.stepper")).tap()
+        settle()
+        assertEquals(2, fields.quantity.intValue, "Stepper: decrement moves the value by one step")
+        assertEquals(3, hits["stepper"], "Stepper: one onValueChange per tap")
+    }
+    duty("Stepper.bounds") {
+        realClick(onNode(hasContentDescription("Fewer at minimum") and hasAnyAncestorTag("c.stepper.min")).assertIsNotEnabled())
+        onNode(hasContentDescription("More at minimum") and hasAnyAncestorTag("c.stepper.min")).assertIsEnabled()
+        realClick(onNode(hasContentDescription("More at maximum") and hasAnyAncestorTag("c.stepper.max")).assertIsNotEnabled())
+        onNode(hasContentDescription("Fewer at maximum") and hasAnyAncestorTag("c.stepper.max")).assertIsEnabled()
+        assertEquals(0, hits["stepper.min"] + hits["stepper.max"], "Stepper: a bound refuses the step past it")
+    }
+    duty("Stepper.disabled") {
+        realClick(onNode(hasContentDescription("More locked") and hasAnyAncestorTag("c.stepper.disabled")).assertIsNotEnabled())
+        onNode(hasContentDescription("Fewer locked") and hasAnyAncestorTag("c.stepper.disabled")).assertIsNotEnabled()
+        assertEquals(0, hits["stepper.off"], "Stepper: disabled refuses both buttons")
+    }
+    duty("ChipGroup.wrap") {
+        onNodeWithTag("c.chipgroup.wrap").assert(hasContentDescription("Filters", substring = true))
+        val group = onNodeWithTag("c.chipgroup.wrap").getUnclippedBoundsInRoot()
+        val chips = GROUP_CHIPS.indices.map { onNodeWithTag("c.cg.wrap.$it").getUnclippedBoundsInRoot() }
+        chips.forEachIndexed { i, b ->
+            check(b.left >= group.left - 0.5.dp && b.right <= group.right + 0.5.dp) { "ChipGroup: wrapped chip $i ($b) leaves the group ($group)" }
+        }
+        check(chips.map { it.top }.distinct().size > 1) { "ChipGroup: six chips on 220 dp wrap onto more than one row" }
+        onNodeWithTag("c.cg.wrap.4").tap()
+        settle()
+        assertEquals(4, hits.values["chipgroup.wrap"], "ChipGroup: a chip's click reaches its callback")
+        onNodeWithTag("c.cg.wrap.1").assertIsSelected()
+    }
+    duty("ChipGroup.scroll") {
+        onNodeWithTag("c.chipgroup.scroll").assert(hasContentDescription("Categories", substring = true))
+            .assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.HorizontalScrollAxisRange))
+        val tops = GROUP_CHIPS.indices.map { onNodeWithTag("c.cg.scroll.$it").getUnclippedBoundsInRoot().top }
+        check(tops.distinct().size == 1) { "ChipGroup: a scrolling group keeps one row (tops $tops)" }
+        val last = onNodeWithTag("c.cg.scroll.${GROUP_CHIPS.lastIndex}")
+        mainClock.autoAdvance = true
+        try {
+            last.performScrollTo()
+            waitForIdle()
+        } finally {
+            mainClock.autoAdvance = false
+        }
+        last.tap()
+        settle()
+        assertEquals(GROUP_CHIPS.lastIndex, hits.values["chipgroup.scroll"], "ChipGroup: the last chip of a scrolling row is reachable")
+    }
+}
+
+/** The duties of the Menu slot (its own phase: an open menu covers the screen). */
+@OptIn(ExperimentalTestApi::class)
+private fun ComposeUiTest.assertMenu(hits: Hits, fields: Fields) {
+    duty("Menu.collapsed") {
+        check(onAllNodesWithText("Reply", useUnmergedTree = true).fetchSemanticsNodes().isEmpty()) { "Menu: a collapsed menu has no item nodes" }
+    }
+    onNodeWithTag("c.menu.anchor").tap()
+    settle()
+    duty("Menu.pane") {
+        onNode(SemanticsMatcher.expectValue(SemanticsProperties.PaneTitle, "Message actions"), useUnmergedTree = true).assertExists()
+        onNodeWithText("Reply").assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button))
+        onNodeWithText("Delete").assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button))
+    }
+    duty("Menu.position") {
+        val anchor = onNodeWithTag("c.menu.anchor").fetchSemanticsNode().boundsInWindow
+        val pane = onNode(SemanticsMatcher.expectValue(SemanticsProperties.PaneTitle, "Message actions"), useUnmergedTree = true).fetchSemanticsNode().boundsInWindow
+        check(pane.left < anchor.right && pane.right > anchor.left) { "Menu: the menu ($pane) is not at its anchor ($anchor) horizontally" }
+        check(pane.top >= anchor.bottom - 1f || pane.bottom <= anchor.top + 1f) { "Menu: the menu ($pane) covers its anchor ($anchor)" }
+        check(pane.left >= -0.5f) { "Menu: the menu ($pane) leaves the window" }
+    }
+    duty("Menu.disabled") {
+        onNodeWithText("Forward").assertIsNotEnabled()
+        tapForReal(onNodeWithText("Forward"))
+        assertEquals(0, hits["menu.forward"], "Menu: a disabled item refuses taps")
+    }
+    duty("Menu.select") {
+        onNodeWithText("Reply").tap()
+        settle()
+        assertEquals(1, hits["menu.reply"], "Menu: a tap runs the item")
+        assertEquals(1, hits["menu.dismiss"], "Menu: a tap closes the menu once")
+        assertEquals(false, fields.menuOpen.value)
+        check(onAllNodesWithText("Reply", useUnmergedTree = true).fetchSemanticsNodes().isEmpty()) { "Menu: a closed menu leaves no item nodes" }
+    }
+    duty("Menu.dismiss") {
+        onNodeWithTag("c.menu.anchor").tap()
+        settle()
+        onNode(SemanticsMatcher.expectValue(SemanticsProperties.PaneTitle, "Message actions"), useUnmergedTree = true)
+            .performSemanticsAction(SemanticsActions.Dismiss)
+        settle()
+        assertEquals(2, hits["menu.dismiss"], "Menu: the pane's dismiss action closes the menu")
+        assertEquals(0, hits["menu.delete"], "Menu: dismissing runs no item")
+    }
+}
+
+/** A real pointer tap on [node] where it is (no scrolling: menu items sit in a popup). */
+@OptIn(ExperimentalTestApi::class)
+private fun ComposeUiTest.tapForReal(node: androidx.compose.ui.test.SemanticsNodeInteraction) {
+    mainClock.autoAdvance = true
+    try {
+        node.performClick()
+        waitForIdle()
+    } finally {
+        mainClock.autoAdvance = false
+    }
 }

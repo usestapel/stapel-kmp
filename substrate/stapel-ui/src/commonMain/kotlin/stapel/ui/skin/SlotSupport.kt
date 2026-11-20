@@ -137,3 +137,18 @@ public fun TextFieldSpec.keyboardOptions(): KeyboardOptions {
         imeAction = if (kind == TextFieldKind.Search && imeAction == ImeAction.Default) ImeAction.Search else imeAction,
     )
 }
+
+/** The value a stepper tap reports: [StepperSpec.value] moved by [direction] steps, clamped to min..max (no overflow). */
+public fun StepperSpec.stepperValue(direction: Int): Int {
+    val moved = value.toLong() + direction.toLong() * step.toLong()
+    return moved.coerceIn(min.toLong(), max.toLong()).toInt()
+}
+
+/** The stepper's shown value: [StepperSpec.valueText], else the number. */
+public val StepperSpec.shownValue: String get() = valueText ?: value.toString()
+
+/** False when the decrement button is disabled (at [StepperSpec.min] or disabled). */
+public val StepperSpec.canDecrement: Boolean get() = enabled && value > min
+
+/** False when the increment button is disabled (at [StepperSpec.max] or disabled). */
+public val StepperSpec.canIncrement: Boolean get() = enabled && value < max

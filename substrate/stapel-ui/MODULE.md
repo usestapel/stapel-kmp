@@ -2,7 +2,7 @@
 
 - **No Material here, ever** (R9, `checkDependencyDirection`): Material 3 lives in `stapel-ui-material3`.
   A brick UI library sees only this module, so it cannot bypass the skin.
-- **Skin seam:** `StapelSkin` has twenty-two slots (`StapelSkinSlots`). The first twelve (Button … Snackbar, what the auth
+- **Skin seam:** `StapelSkin` has twenty-five slots (`StapelSkinSlots`). The first twelve (Button … Snackbar, what the auth
   screens need) are abstract; the later ones (Toggle, Tabs, Chip, Avatar, Badge, NavigationBar,
   NavigationRail, PullToRefresh, and every slot added since) default to `FoundationSkin`, so a new
   slot never breaks a skin. Slot duties are KDoc on each spec and are tested by the skin contract
@@ -61,6 +61,12 @@
   `insets` parameter for tests and special hosts), the gutter, the top bar from `title` (with
   `largeTitle` collapsing on scroll via `TopBarSpec.collapsedFraction`), pull-to-refresh (`refresh`) and
   the snackbar host (`snackbars`) above the bottom bar.
+- **Menu is for actions, never values:** the `Menu` slot is an action menu at its anchor (overflow,
+  row actions; `StapelOverflowMenu` is the "more" button with its own state); picking a value stays
+  `Select` + `PickerSheet`. A tap runs the item and closes the menu; the pane has a dismiss action.
+- **Stepper** (quantity) clamps through `stepperValue` (no overflow at `Int.MAX_VALUE`), disables the
+  button at each bound, and takes its button names from the caller. **ChipGroup** draws every chip
+  through `StapelTheme.skin.Chip`, so a project chip applies inside groups too; wrap or scroll.
 - **Composites** (no slot of their own, built from slots): `StatusPage` (three `StatusSize`s;
   `EmptyState` is its compact form), `SectionHeader` (five sizes, one `SectionHeaderAction`),
   `AdaptiveGrid` (`adaptiveColumns`, the `GridCells.Adaptive` rule), `PickerSheet`.
@@ -72,4 +78,4 @@
   `TextFieldSpec.keyboardOptions()` lets a transformation's keyboard type win over the kind's. The code
   field's own filter keeps ASCII digits only and runs after the caller's transformation.
 - Not yet here: `StapelSvg`/images loader (`stapel-image-compose`; `LocalStapelImages` is the seam),
-  RTL snapshot pass, Inter font artifact, `Menu` and `Stepper` slots, `ChipGroup`, a lazy paged `LoadList`.
+  RTL snapshot pass, Inter font artifact, a lazy paged `LoadList`.

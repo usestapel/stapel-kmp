@@ -10,7 +10,8 @@
 - **Slots:** every slot is a Material 3 component (`Switch` / `TriStateCheckbox` / `RadioButton` in a
   row that owns the interaction, `PrimaryTabRow` / `PrimaryScrollableTabRow` / segmented buttons,
   `FilterChip` / `InputChip`, `Badge`, `NavigationBarItem` / `NavigationRail`, `PullToRefreshBox`) except
-  where Material 3 has none: CodeField and Avatar are the token-styled foundation bodies.
+  where Material 3 has none: CodeField, Avatar and ChipGroup are the token-styled foundation bodies
+  (the group's chips are Material chips); Stepper is built from `OutlinedIconButton`s; Menu is `DropdownMenu`.
 - **Large text:** Material's `NavigationBar` and `TopAppBar` containers have fixed heights; the skin uses
   their items inside a container that grows instead (`assertSlotsSurviveLargeText`,
   `assertTopBarSurvivesLargeText`).

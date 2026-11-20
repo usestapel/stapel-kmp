@@ -40,7 +40,7 @@ class IconsTest {
         }
         waitForIdle()
         assertNull(resolved["no-such-icon"], "an id the set does not draw resolves to null")
-        assertEquals(28, ids.size)
+        assertEquals(29, ids.size)
         for (id in ids) {
             val v = resolved[id]
             assertTrue(v != null && v.viewportWidth == 24f, "'$id' loads from composeResources")

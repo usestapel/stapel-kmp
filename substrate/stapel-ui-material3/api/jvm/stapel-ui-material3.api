@@ -12,11 +12,13 @@ public final class stapel/ui/material3/Material3Skin : stapel/ui/skin/StapelSkin
 	public fun Banner (Lstapel/ui/skin/BannerSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Button (Lstapel/ui/skin/ButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Chip (Lstapel/ui/skin/ChipSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun ChipGroup (Lstapel/ui/skin/ChipGroupSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun CodeField (Lstapel/ui/skin/CodeFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Dialog (Lstapel/ui/skin/DialogSpec;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public fun Divider (Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun IconButton (Lstapel/ui/skin/IconButtonSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun ListItem (Lstapel/ui/skin/ListItemSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Menu (Lstapel/ui/skin/MenuSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationBar (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun NavigationRail (Lstapel/ui/skin/NavigationSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun PagerIndicator (Lstapel/ui/skin/PagerIndicatorSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
@@ -24,6 +26,7 @@ public final class stapel/ui/material3/Material3Skin : stapel/ui/skin/StapelSkin
 	public fun PullToRefresh (Lstapel/ui/skin/PullToRefreshSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public fun Select (Lstapel/ui/skin/SelectSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Snackbar (Lstapel/ui/skin/SnackbarSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public fun Stepper (Lstapel/ui/skin/StepperSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun Surface (Lstapel/ui/skin/SurfaceSpec;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public fun Tabs (Lstapel/ui/skin/TabsSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 	public fun TextField (Lstapel/ui/skin/TextFieldSpec;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V

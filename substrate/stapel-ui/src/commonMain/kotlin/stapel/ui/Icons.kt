@@ -112,6 +112,9 @@ public object StapelIconIds {
     /** Add. */
     public val Plus: StapelIcon = StapelIcon("plus")
 
+    /** Remove one (a stepper's decrement). */
+    public val Minus: StapelIcon = StapelIcon("minus")
+
     /** Security. */
     public val ShieldCheck: StapelIcon = StapelIcon("shield-check")
 
@@ -151,6 +154,7 @@ private val DRAWN: List<String> = listOf(
     "bell",
     "search",
     "plus",
+    "minus",
     "shield-check",
     "device",
     "unknown",

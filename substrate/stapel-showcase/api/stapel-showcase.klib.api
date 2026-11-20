@@ -41,10 +41,12 @@ final class stapel.showcase/AnatomyPart { // stapel.showcase/AnatomyPart|null[0]
 }
 
 final class stapel.showcase/CanvasOptions { // stapel.showcase/CanvasOptions|null[0]
-    constructor <init>(kotlin/Boolean = ..., androidx.compose.ui.unit/Dp = ..., androidx.compose.ui.unit/Dp? = ...) // stapel.showcase/CanvasOptions.<init>|<init>(kotlin.Boolean;androidx.compose.ui.unit.Dp;androidx.compose.ui.unit.Dp?){}[0]
+    constructor <init>(kotlin/Boolean = ..., androidx.compose.ui.unit/Dp = ..., androidx.compose.ui.unit/Dp? = ..., androidx.compose.ui.unit/Dp? = ...) // stapel.showcase/CanvasOptions.<init>|<init>(kotlin.Boolean;androidx.compose.ui.unit.Dp;androidx.compose.ui.unit.Dp?;androidx.compose.ui.unit.Dp?){}[0]
 
     final val checkerboard // stapel.showcase/CanvasOptions.checkerboard|{}checkerboard[0]
         final fun <get-checkerboard>(): kotlin/Boolean // stapel.showcase/CanvasOptions.checkerboard.<get-checkerboard>|<get-checkerboard>(){}[0]
+    final val height // stapel.showcase/CanvasOptions.height|{}height[0]
+        final fun <get-height>(): androidx.compose.ui.unit/Dp? // stapel.showcase/CanvasOptions.height.<get-height>|<get-height>(){}[0]
     final val maxWidth // stapel.showcase/CanvasOptions.maxWidth|{}maxWidth[0]
         final fun <get-maxWidth>(): androidx.compose.ui.unit/Dp? // stapel.showcase/CanvasOptions.maxWidth.<get-maxWidth>|<get-maxWidth>(){}[0]
     final val padding // stapel.showcase/CanvasOptions.padding|{}padding[0]

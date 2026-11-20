@@ -1,6 +1,14 @@
 package stapel.ui.skin
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntRect
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupPositionProvider
+import androidx.compose.ui.window.PopupProperties
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -730,6 +738,118 @@ public object FoundationSkin : StapelSkin {
     }
 
     @Composable
+    override fun Menu(spec: MenuSpec, modifier: Modifier, anchor: @Composable () -> Unit) {
+        val colors = StapelTheme.colors
+        val shape = StapelTheme.shapes.md
+        Box(modifier) {
+            anchor()
+            if (spec.expanded) {
+                Popup(
+                    popupPositionProvider = MenuPositionProvider,
+                    onDismissRequest = spec.onDismiss,
+                    // Focusable: back (Android), Escape (desktop) and an outside tap call onDismissRequest.
+                    properties = PopupProperties(focusable = true),
+                ) {
+                    Column(
+                        Modifier
+                            .widthIn(min = 160.dp, max = 320.dp)
+                            .stapelShadow(StapelTheme.elevation.high, shape)
+                            .background(colors.surfaceOverlay, shape)
+                            .clip(shape)
+                            .semantics {
+                                paneTitle = spec.label
+                                dismiss { spec.onDismiss(); true }
+                            }
+                            .optionalTestTag(spec.testTag)
+                            .padding(vertical = StapelTheme.spacing.s1),
+                    ) {
+                        spec.items.forEach { item -> MenuRow(item, spec.onDismiss) }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun MenuRow(item: MenuItemSpec, onDismiss: () -> Unit) {
+        val colors = StapelTheme.colors
+        val interaction = remember { MutableInteractionSource() }
+        val tint = when {
+            !item.enabled -> colors.textSubtle
+            item.destructive -> colors.error
+            else -> colors.text
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .stapelTouchTarget()
+                .heightIn(min = 40.dp)
+                .clickable(interactionSource = interaction, indication = null, enabled = item.enabled, role = Role.Button) {
+                    item.onClick()
+                    onDismiss()
+                }
+                .stapelFocusRing(interaction, RectangleShapeOf)
+                .optionalTestTag(item.testTag)
+                .padding(horizontal = StapelTheme.spacing.s4, vertical = StapelTheme.spacing.s2),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s3),
+        ) {
+            item.icon?.let { StapelIconView(it, null, size = 20.dp, tint = tint) }
+            StapelText(item.label, color = tint)
+        }
+    }
+
+    @Composable
+    override fun Stepper(spec: StepperSpec, modifier: Modifier) {
+        val colors = StapelTheme.colors
+        val shape = StapelTheme.shapes.md
+        val shown = spec.shownValue
+        Row(
+            modifier
+                .clip(shape)
+                .border(1.dp, if (spec.enabled) colors.border else colors.borderSubtle, shape)
+                .semantics {
+                    contentDescription = spec.label
+                    stateDescription = shown
+                }
+                .optionalTestTag(spec.testTag),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            IconButton(IconButtonSpec(StapelIconIds.Minus, spec.decrementLabel, { spec.onValueChange(spec.stepperValue(-1)) }, enabled = spec.canDecrement), Modifier)
+            StapelText(
+                shown,
+                modifier = Modifier.widthIn(min = 32.dp).padding(horizontal = StapelTheme.spacing.s2).semantics { hideFromAccessibility() },
+                style = StapelTheme.type.label,
+                color = if (spec.enabled) colors.text else colors.textSubtle,
+                textAlign = TextAlign.Center,
+            )
+            IconButton(IconButtonSpec(StapelIconIds.Plus, spec.incrementLabel, { spec.onValueChange(spec.stepperValue(1)) }, enabled = spec.canIncrement), Modifier)
+        }
+    }
+
+    @Composable
+    override fun ChipGroup(spec: ChipGroupSpec, modifier: Modifier) {
+        val skin = StapelTheme.skin
+        val gap = StapelTheme.spacing.s2
+        val group = modifier
+            .semantics { contentDescription = spec.label }
+            .selectableGroup()
+            .optionalTestTag(spec.testTag)
+        when (spec.layout) {
+            ChipGroupLayout.Wrap -> FlowRow(
+                group,
+                horizontalArrangement = Arrangement.spacedBy(gap),
+                verticalArrangement = Arrangement.spacedBy(gap),
+            ) { spec.chips.forEach { skin.Chip(it, Modifier) } }
+            ChipGroupLayout.Scroll -> Row(
+                group.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(gap),
+                verticalAlignment = Alignment.CenterVertically,
+            ) { spec.chips.forEach { skin.Chip(it, Modifier) } }
+        }
+    }
+
+    @Composable
     override fun Divider(modifier: Modifier) {
         Box(modifier.fillMaxWidth().height(1.dp).background(StapelTheme.colors.borderSubtle))
     }
@@ -1157,3 +1277,22 @@ public const val TOP_BAR_TITLE_MAX_LINES: Int = 3
 /** The smallest size a top-bar title steps down to when it does not fit in [TOP_BAR_TITLE_MAX_LINES] at its style's size. */
 public val TOP_BAR_TITLE_MIN_SIZE: TextUnit = 12.sp
 
+private val RectangleShapeOf: Shape = androidx.compose.ui.graphics.RectangleShape
+
+/**
+ * Places a menu below its anchor, its end edge on the anchor's end edge (left edges in right-to-left
+ * layouts), above the anchor when there is no room below, and always inside the window.
+ */
+internal object MenuPositionProvider : PopupPositionProvider {
+    override fun calculatePosition(anchorBounds: IntRect, windowSize: IntSize, layoutDirection: LayoutDirection, popupContentSize: IntSize): IntOffset =
+        menuPosition(anchorBounds, windowSize, layoutDirection, popupContentSize)
+}
+
+/** The menu placement rule of [MenuPositionProvider] (shared by tests). */
+internal fun menuPosition(anchor: IntRect, window: IntSize, direction: LayoutDirection, popup: IntSize): IntOffset {
+    val endAligned = if (direction == LayoutDirection.Ltr) anchor.right - popup.width else anchor.left
+    val x = endAligned.coerceIn(0, maxOf(0, window.width - popup.width))
+    val below = anchor.bottom
+    val y = if (below + popup.height <= window.height) below else maxOf(0, anchor.top - popup.height)
+    return IntOffset(x, y)
+}

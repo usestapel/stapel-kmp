@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -71,6 +72,7 @@ public fun StoryCanvas(
     val scope = StoryScopeImpl(state, values, overrides, onEvent, bounds, root)
     val options = story.canvas
     var outer = modifier.testTag(STORY_CANVAS_TAG)
+    options.height?.let { outer = outer.height(it) }
     if (options.checkerboard) outer = outer.checkerboard()
     outer = outer.onGloballyPositioned { root.coordinates = it }
     var inner = Modifier.padding(options.padding)

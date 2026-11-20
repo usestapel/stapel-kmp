@@ -8,6 +8,17 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.input.ImeAction
 import stapel.ui.skin.LARGE_TITLE_TAG_SUFFIX
 import stapel.ui.skin.SelectSpec
+import stapel.ui.skin.ChipGroupSpec
+import stapel.ui.skin.MenuSpec
+import stapel.ui.skin.StepperSpec
+import stapel.ui.skin.canDecrement
+import stapel.ui.skin.canIncrement
+import stapel.ui.skin.shownValue
+import stapel.ui.skin.stepperValue
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MenuDefaults
+import androidx.compose.material3.OutlinedIconButton
 import kotlin.math.roundToInt
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.WindowInsets
@@ -176,7 +187,8 @@ private fun vector(icon: StapelIcon): ImageVector {
  * The default skin: Material 3 components, coloured from the §68 roles explicitly (a card is
  * `surface-raised` because the skin says so), controls at the token height with `radii.md` corners,
  * elevation as the token shadow (no tonal tint). Every slot is a Material component except where
- * Material 3 has none (CodeField, Avatar: the token-styled foundation bodies).
+ * Material 3 has none (CodeField, Avatar, ChipGroup: the token-styled foundation bodies; Stepper is
+ * built from Material icon buttons).
  */
 public object Material3Skin : StapelSkin {
     /** Material `Button` / `OutlinedButton` / `TextButton` by variant, at the token control height. */
@@ -838,6 +850,86 @@ public object Material3Skin : StapelSkin {
                 border = FilterChipDefaults.filterChipBorder(spec.enabled, spec.selected, borderColor = c.border, selectedBorderColor = c.brand, selectedBorderWidth = 1.dp),
             )
         }
+    }
+
+    /** Material `DropdownMenu` on `surface-overlay`, `DropdownMenuItem`s; destructive items in the error role. */
+    @Composable
+    override fun Menu(spec: MenuSpec, modifier: Modifier, anchor: @Composable () -> Unit) {
+        val c = StapelTheme.colors
+        Box(modifier) {
+            anchor()
+            DropdownMenu(
+                expanded = spec.expanded,
+                onDismissRequest = spec.onDismiss,
+                modifier = Modifier.semantics {
+                    paneTitle = spec.label
+                    dismiss { spec.onDismiss(); true }
+                }.optionalTestTag(spec.testTag),
+                shape = StapelTheme.shapes.md,
+                containerColor = c.surfaceOverlay,
+                tonalElevation = 0.dp,
+            ) {
+                spec.items.forEach { item ->
+                    val tint = if (item.destructive) c.error else c.text
+                    DropdownMenuItem(
+                        text = { Text(item.label) },
+                        onClick = {
+                            item.onClick()
+                            spec.onDismiss()
+                        },
+                        modifier = Modifier.stapelTouchTarget().semantics { role = Role.Button }.optionalTestTag(item.testTag),
+                        leadingIcon = item.icon?.let { icon -> { Icon(vector(icon), null) } },
+                        enabled = item.enabled,
+                        colors = MenuDefaults.itemColors(
+                            textColor = tint, leadingIconColor = tint,
+                            disabledTextColor = c.textSubtle, disabledLeadingIconColor = c.textSubtle,
+                        ),
+                    )
+                }
+            }
+        }
+    }
+
+    /** Material `OutlinedIconButton`s around the value (Material 3 has no stepper component). */
+    @Composable
+    override fun Stepper(spec: StepperSpec, modifier: Modifier) {
+        val c = StapelTheme.colors
+        val shown = spec.shownValue
+        Row(
+            modifier.semantics {
+                contentDescription = spec.label
+                stateDescription = shown
+            }.optionalTestTag(spec.testTag),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(StapelTheme.spacing.s2),
+        ) {
+            StepperButton(StapelIconIds.Minus, spec.decrementLabel, spec.canDecrement) { spec.onValueChange(spec.stepperValue(-1)) }
+            Text(
+                shown,
+                modifier = Modifier.widthIn(min = 32.dp).semantics { hideFromAccessibility() },
+                style = MaterialTheme.typography.titleMedium,
+                color = if (spec.enabled) c.text else c.textSubtle,
+                textAlign = TextAlign.Center,
+            )
+            StepperButton(StapelIconIds.Plus, spec.incrementLabel, spec.canIncrement) { spec.onValueChange(spec.stepperValue(1)) }
+        }
+    }
+
+    @Composable
+    private fun StepperButton(icon: StapelIcon, label: String, enabled: Boolean, onClick: () -> Unit) {
+        val c = StapelTheme.colors
+        OutlinedIconButton(
+            onClick = onClick,
+            enabled = enabled,
+            modifier = Modifier.stapelTouchTarget().semantics { contentDescription = label },
+            border = BorderStroke(1.dp, if (enabled) c.border else c.borderSubtle),
+        ) { Icon(vector(icon), null, tint = if (enabled) c.text else c.textSubtle) }
+    }
+
+    /** Material 3 has no chip-group component: the foundation arrangement, drawing each chip with the Material chip. */
+    @Composable
+    override fun ChipGroup(spec: ChipGroupSpec, modifier: Modifier) {
+        FoundationSkin.ChipGroup(spec, modifier)
     }
 
     /** Material 3 has no avatar component: the token-styled foundation avatar is the Material skin's too. */

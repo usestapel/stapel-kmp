@@ -740,6 +740,112 @@ public class PagerIndicatorSpec(
     public val testTag: String? = null,
 )
 
+/** One action of a [MenuSpec]. */
+@Immutable
+public class MenuItemSpec(
+    /** Visible label and accessible name. */
+    public val label: String,
+    /** Runs the action; the menu then closes ([MenuSpec.onDismiss]). */
+    public val onClick: () -> Unit,
+    /** Optional leading glyph. */
+    public val icon: StapelIcon? = null,
+    /** False: shown, but refuses taps. */
+    public val enabled: Boolean = true,
+    /** A destructive action (delete, sign out): drawn in the error role. */
+    public val destructive: Boolean = false,
+    /** Test tag of the item. */
+    public val testTag: String? = null,
+)
+
+/**
+ * An action menu (an overflow "more" menu, a row's actions) anchored to the content the slot draws
+ * first. Not a picker: choosing a value is `Select` + `PickerSheet`. Duties: while [expanded] the menu
+ * is a pane titled [label] with a dismiss action, drawn over the content at the anchor (overlapping
+ * its horizontal extent, below it, above when there is no room below) and inside the window; every
+ * item is a node with `Role.Button` whose text is its label, at least the touch target tall; a tap
+ * runs the item's `onClick` and then [onDismiss] once; a disabled item refuses taps; the dismiss action
+ * (and the platform's outside tap, back, Escape) calls [onDismiss]; collapsed, no item node exists.
+ */
+@Immutable
+public class MenuSpec(
+    /** The menu is open. */
+    public val expanded: Boolean,
+    /** Closes the menu (the caller sets [expanded] to false). */
+    public val onDismiss: () -> Unit,
+    /** The actions, in order. */
+    public val items: List<MenuItemSpec>,
+    /** Accessible title of the menu pane ("Message actions"; i18n copy from the caller). */
+    public val label: String,
+    /** Test tag of the menu pane. */
+    public val testTag: String? = null,
+)
+
+/**
+ * A quantity stepper: a decrement button, the value, an increment button. Duties: the container is
+ * one node named [label] whose state description is the shown value; the buttons are `Role.Button`
+ * nodes named [decrementLabel] / [incrementLabel], at least the touch target; a tap calls
+ * [onValueChange] once with the value moved by [step] and clamped to [min]..[max] (`stepperValue`); at
+ * [min] the decrement is disabled, at [max] the increment; disabled refuses both; the value text is
+ * never clipped (it grows with large text).
+ */
+@Immutable
+public class StepperSpec(
+    /** The current value. */
+    public val value: Int,
+    /** Called with the new value. */
+    public val onValueChange: (Int) -> Unit,
+    /** Accessible name of the stepper ("Quantity"). */
+    public val label: String,
+    /** Accessible name of the decrement button ("Remove one"). */
+    public val decrementLabel: String,
+    /** Accessible name of the increment button ("Add one"). */
+    public val incrementLabel: String,
+    /** Smallest value. */
+    public val min: Int = 0,
+    /** Largest value. */
+    public val max: Int = Int.MAX_VALUE,
+    /** Amount one tap moves the value. */
+    public val step: Int = 1,
+    /** The shown text of the value (a formatted amount); `value.toString()` when null. */
+    public val valueText: String? = null,
+    /** False: disabled. */
+    public val enabled: Boolean = true,
+    /** Test tag of the container. */
+    public val testTag: String? = null,
+) {
+    init {
+        require(min <= max) { "StepperSpec: min $min > max $max" }
+        require(step > 0) { "StepperSpec: step must be positive, was $step" }
+    }
+}
+
+/** How a [ChipGroupSpec] arranges its chips. */
+public enum class ChipGroupLayout {
+    /** Rows that wrap onto new lines (filters above a list). */
+    Wrap,
+
+    /** One row that scrolls horizontally (a category strip). */
+    Scroll,
+}
+
+/**
+ * A group of chips. Duties: the group is one node named [label] (a selectable group); every chip is
+ * drawn through the theme skin's `Chip` slot (so a project's chip applies) with its own duties;
+ * [ChipGroupLayout.Wrap] keeps every chip inside the group's width on as many rows as needed;
+ * [ChipGroupLayout.Scroll] keeps one row that scrolls horizontally, every chip reachable.
+ */
+@Immutable
+public class ChipGroupSpec(
+    /** The chips, in order (selection state lives in each chip). */
+    public val chips: List<ChipSpec>,
+    /** Accessible name of the group ("Filters"). */
+    public val label: String,
+    /** Arrangement. */
+    public val layout: ChipGroupLayout = ChipGroupLayout.Wrap,
+    /** Test tag of the group. */
+    public val testTag: String? = null,
+)
+
 /** One destination of the primary navigation. */
 @Immutable
 public class NavigationItemSpec(

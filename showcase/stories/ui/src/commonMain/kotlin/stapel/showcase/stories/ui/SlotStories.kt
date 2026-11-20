@@ -40,6 +40,13 @@ import stapel.ui.StapelListItem
 import stapel.ui.StapelNavigationBar
 import stapel.ui.StapelNavigationRail
 import stapel.ui.StapelPagerIndicator
+import stapel.ui.StapelMenu
+import stapel.ui.StapelStepper
+import stapel.ui.StapelChipGroup
+import stapel.ui.skin.ChipGroupLayout
+import stapel.ui.skin.ChipSpec
+import stapel.ui.skin.MenuItemSpec
+import androidx.compose.ui.Alignment
 import stapel.ui.StapelProgress
 import stapel.ui.StapelPullToRefresh
 import stapel.ui.StapelSelect
@@ -484,8 +491,81 @@ private val pullToRefresh = Story(
     }
 }
 
+private val menuOpen = Knob.Flag("open", "Open", true)
+
+private val menu = Story(
+    "menu", "Menu", "Slots/Actions",
+    description = "An action menu at its anchor (an overflow button); destructive actions in the error role, disabled ones shown but inert. Choosing a value is a Select, never a menu.",
+    knobs = listOf(menuOpen),
+    states = listOf(StoryState("default", "Open"), StoryState("closed", "Closed", mapOf("open" to false))),
+    covers = slot("Menu"),
+    canvas = CanvasOptions(height = 300.dp),
+    snippet = "StapelOverflowMenu(listOf(MenuItemSpec(\"Reply\", reply), MenuItemSpec(\"Delete\", delete, destructive = true)), label = \"Message actions\")",
+) {
+    var open by remember(value(menuOpen)) { mutableStateOf(value(menuOpen)) }
+    Box(Modifier.fillMaxWidth()) {
+        StapelMenu(
+            open, { open = false; event("dismiss") },
+            listOf(
+                MenuItemSpec("Reply", { event("reply") }, icon = StapelIconIds.ArrowBack),
+                MenuItemSpec("Copy link", { event("copy") }, enabled = false),
+                MenuItemSpec("Settings", { event("settings") }, icon = StapelIconIds.Settings),
+                MenuItemSpec("Delete", { event("delete") }, icon = StapelIconIds.Close, destructive = true),
+            ),
+            "Message actions",
+            Modifier.align(Alignment.TopEnd),
+        ) {
+            StapelIconButton(StapelIconIds.More, "Message actions", { open = true; event("open") })
+        }
+    }
+}
+
+private val quantity = Knob.Number("value", "Value", 0..10, 2)
+private val maxQuantity = Knob.Number("max", "Maximum", 1..10, 10)
+
+private val stepper = Story(
+    "stepper", "Stepper", "Slots/Inputs",
+    description = "A quantity stepper (a cart line): the buttons disable at the bounds, the value never clips.",
+    knobs = listOf(quantity, maxQuantity, enabled),
+    states = listOf(
+        StoryState("default", "Two"),
+        StoryState("min", "At the minimum", mapOf("value" to 0)),
+        StoryState("max", "At the maximum", mapOf("value" to 3, "max" to 3)),
+    ),
+    covers = slot("Stepper"),
+    snippet = "StapelStepper(qty, { qty = it }, label = \"Quantity\", decrementLabel = \"Remove one\", incrementLabel = \"Add one\", min = 1, max = stock)",
+) {
+    val max = value(maxQuantity)
+    var current by remember(value(quantity), max) { mutableIntStateOf(value(quantity).coerceAtMost(max)) }
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        StapelStepper(current, { current = it; event("value $it") }, "Quantity", "Remove one", "Add one", max = max, enabled = value(enabled))
+        StapelStepper(current * 250, { event("weight $it") }, "Weight", "Less", "More", step = 250, valueText = "${current * 250} g", enabled = value(enabled))
+    }
+}
+
+private val groupLayout = Knob.enumOf("layout", "Layout", ChipGroupLayout.Wrap)
+
+private val chipGroup = Story(
+    "chip-group", "Chip group", "Slots/Inputs",
+    description = "Filters that wrap onto rows, or a category strip that scrolls; each chip is the skin's Chip.",
+    knobs = listOf(groupLayout),
+    states = listOf(StoryState("default", "Wrap"), StoryState("scroll", "Scroll", mapOf("layout" to ChipGroupLayout.Scroll))),
+    covers = slot("ChipGroup"),
+    snippet = "StapelChipGroup(filters.map { ChipSpec(it.label, ChipKind.Filter, it.on, { toggle(it) }) }, label = \"Filters\")",
+) {
+    var picked by remember { mutableStateOf(setOf(1)) }
+    val labels = listOf("Under 50", "Free delivery", "In stock", "New", "Top rated", "On sale", "Pick-up today")
+    StapelChipGroup(
+        labels.mapIndexed { i, label ->
+            ChipSpec(label, ChipKind.Filter, selected = i in picked, onClick = { picked = if (i in picked) picked - i else picked + i; event("toggle $label") })
+        },
+        "Filters",
+        layout = value(groupLayout),
+    )
+}
+
 /** The slot stories, one per `StapelSkin` slot, in slot-table order. */
 internal val slotStories: List<Story> = listOf(
     button, iconButton, textField, codeField, dialog, banner, progress, surface, listItem, topBar, divider, snackbar,
-    toggle, tabs, chip, avatar, badge, navigationBar, navigationRail, pullToRefresh, select, pagerIndicator,
+    toggle, tabs, chip, avatar, badge, navigationBar, navigationRail, pullToRefresh, select, pagerIndicator, menu, stepper, chipGroup,
 )
