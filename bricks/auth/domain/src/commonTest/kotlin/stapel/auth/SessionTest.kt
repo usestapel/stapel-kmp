@@ -139,6 +139,27 @@ class SessionTest {
     }
 
     @Test
+    fun farewellHooksRunWithTheBearerValidBeforeTheServerRevokeAndNeverBlockSignOut() = runTest {
+        val f = Fixture(this).start()
+        f.auth.sessionImpl.adopt(session("u1", AuthResponseStatus.LoggedIn))
+        f.transport.on(Ops.LOGOUT) { FakeAnswer.Value(LogoutResponse("ok")) }
+        val seen = mutableListOf<String>()
+        f.sessions.registerFarewellHook {
+            // What a hook's authenticated call would carry, and whether the revoke already went out.
+            seen += "token=${f.sessions.currentTokens()?.accessToken != null} logoutCalls=${f.calls(Ops.LOGOUT)}"
+        }
+        f.sessions.registerFarewellHook { throw IllegalStateException("a failing farewell") }
+        f.sessions.registerFarewellHook { kotlinx.coroutines.awaitCancellation() }
+
+        assertEquals(LogoutResult.RevokedOnServer, f.auth.session.logout())
+        assertEquals(listOf("token=true logoutCalls=0"), seen)
+        assertEquals(1, f.calls(Ops.LOGOUT), "the revoke still went out after a failing and a hanging hook")
+        runCurrent()
+        assertEquals(AuthState.SignedOut(SignOutReason.UserRequested), f.auth.session.state.value)
+        assertNull(f.sessions.currentTokens())
+    }
+
+    @Test
     fun aRejectedRefreshSignsOutWithTheMappedReason() = runTest {
         val f = Fixture(this, refresher = { RefreshOutcome.Rejected(SessionEnd.Revoked, "error.401.refresh_revoked") }).start()
         f.auth.sessionImpl.adopt(session("u1", AuthResponseStatus.LoggedIn))

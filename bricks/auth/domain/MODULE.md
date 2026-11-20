@@ -34,8 +34,11 @@
   even when the server enables it and an adapter is present.
 - Resend is ignored while the cooldown (from capabilities) runs; one request after it.
 - A refused sign-in or a pending challenge writes no tokens; an expired challenge is refused locally.
-- `logout()` refreshes first when the access token is past expiry, sends the current refresh token,
-  and clears locally whatever the server answers.
+- `logout()` refreshes first when the access token is past expiry, then runs the session's farewell
+  hooks (`SessionManager.farewell()`: push unregister, …) while the bearer is valid — the server
+  logout blacklists the access token — bounded by `SessionConfig.farewellTimeout`, a failing or hanging
+  hook never blocking; then sends the current refresh token, and clears locally whatever the server
+  answers (`SessionTest`; on the wire: stapel-notifications-e2e E-1/E-4).
 - No auth mutation is offline-queued; the profile and the sessions list live in the account's cache
   partition, which `CacheSessionBinding` wipes on every session end (e2e D-6).
 

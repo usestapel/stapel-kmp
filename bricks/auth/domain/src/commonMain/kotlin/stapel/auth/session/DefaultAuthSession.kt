@@ -99,9 +99,13 @@ internal class DefaultAuthSession(
     }
 
     override suspend fun logout(): LogoutResult {
-        // Refresh first when the access token is past expiry, so the logout call is authenticated
-        // and carries the refresh token that is current after any rotation.
+        // Refresh first when the access token is past expiry, so the farewell calls and the logout
+        // call are authenticated.
         sessions.accessToken()
+        // Farewell hooks (push unregister, …) while the bearer is valid: the server logout below
+        // blacklists the access token. Bounded by SessionConfig.farewellTimeout; failures are logged.
+        sessions.farewell()
+        // Read after the farewell: a hook's call may have rotated the pair.
         val tokens = sessions.currentTokens()
         val revoked = tokens != null && api.logout(LogoutRequest(refreshToken = tokens.refreshToken)) is StapelResult.Ok
         sessions.logout()

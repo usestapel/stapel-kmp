@@ -116,7 +116,12 @@ public interface AuthSession {
     /** Reads the stored session (idempotent) and, when one exists, re-reads the profile in the background. */
     public suspend fun restore()
 
-    /** Revokes this session server-side when possible, then always clears locally. Never throws. */
+    /**
+     * Signs this device out in three steps: the session's farewell hooks (push unregister, …) while
+     * the bearer is still valid, bounded by `SessionConfig.farewellTimeout`, a failing or slow hook
+     * never blocking the rest; then the server-side revoke when possible; then always the local end.
+     * Never throws.
+     */
     public suspend fun logout(): LogoutResult
 
     /** Revokes every other session (`DELETE /sessions/`), then signs this device out. Never throws. */

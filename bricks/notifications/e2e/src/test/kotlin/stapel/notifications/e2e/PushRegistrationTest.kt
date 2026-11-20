@@ -1,5 +1,6 @@
 package stapel.notifications.e2e
 
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
@@ -9,16 +10,22 @@ import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.junit.jupiter.api.Test
+import stapel.auth.session.AuthState
+import stapel.auth.session.LogoutResult
+import stapel.auth.session.SignOutReason
 import stapel.notifications.api.NotificationsApi
 import stapel.notifications.push.NotificationPushGroup
 import stapel.notifications.push.NotificationPushMessage
 import stapel.push.PushMessage
 import stapel.push.Registration
 import stapel.result.StapelResult
+import stapel.session.SessionManager
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.measureTime
 
 /** Push registration against the stand: the token lifecycle meets the real device registry (G-E1). */
 class PushRegistrationTest {
@@ -53,10 +60,10 @@ class PushRegistrationTest {
                 val firstToken = assertNotNull(d.provider.currentToken)
 
                 val alice = d.userId
-                d.auth.session.logout()
-                waitUntil("alice's row gone") { Stand.devices(alice).isEmpty() }
+                assertEquals(LogoutResult.RevokedOnServer, d.auth.session.logout())
+                d.assertFarewellBeforeRevoke()
+                assertTrue(Stand.devices(alice).isEmpty())
                 assertEquals(null, d.provider.currentToken, "the provider token is deleted when the session ends")
-                println("[e1] client unregister: " + if (d.markers.has("stapel.push unregistered")) "succeeded" else "did not reach the server (server-side cleanup removed the row)")
 
                 d.signIn()
                 d.awaitRegistration(Registration.Registered)
@@ -116,20 +123,37 @@ class PushRegistrationTest {
     }
 
     @Test
-    fun `E-4 with the farewell run before the server revoke, the client's own unregister reaches the server`(): Unit = runBlocking {
-        // What stapel-auth's sign-out must do (follow-up): SessionManager.farewell() before POST logout/,
-        // which blacklists the access token. Today the auth brick revokes first, so the client's unregister
-        // answers 401 (E-1) and the row goes only through the backend's session-revoked cleanup.
-        Device("e4").use { d ->
-            d.signIn()
-            assertEquals(Registration.Registered, d.push.enable().registration)
-            val user = d.userId
-            d.app.koin.get<stapel.session.SessionManager>().farewell()
-            assertTrue(d.markers.has("stapel.push unregistered"), d.markers.lines.toString())
-            assertTrue(Stand.devices(user).isEmpty(), "the client's own call removed the row")
-            d.auth.session.logout()
-            assertTrue(!d.markers.has("unregister failed"), d.markers.lines.toString())
+    fun `E-4 a farewell hook that fails and one that hangs never block the sign-out, and push's own unregister still lands first`(): Unit =
+        runBlocking {
+            Device("e4").use { d ->
+                d.signIn()
+                val sessions = d.app.koin.get<SessionManager>()
+                sessions.registerFarewellHook { throw IllegalStateException("a failing farewell") }
+                sessions.registerFarewellHook { awaitCancellation() }
+                assertEquals(Registration.Registered, d.push.enable().registration)
+                val user = d.userId
+                val took = measureTime { assertEquals(LogoutResult.RevokedOnServer, d.auth.session.logout()) }
+                assertTrue(took < 10.seconds, "the sign-out waited for a hanging hook: $took")
+                d.assertFarewellBeforeRevoke()
+                assertTrue(Stand.devices(user).isEmpty())
+                assertEquals(AuthState.SignedOut(SignOutReason.UserRequested), d.auth.session.state.value)
+            }
         }
+
+    /**
+     * The sign-out order on the wire: push's own `POST devices/unregister/` answered 204 (the row deleted) with the bearer
+     * still valid, before `POST logout/` went out, and when the revoke left the server already held no
+     * row for the account — the client's call removed it, not the backend's session-revoked cleanup.
+     */
+    private fun Device.assertFarewellBeforeRevoke() {
+        val unregister = wire.indexOf(Wire.UNREGISTER_OPERATION)
+        val revoke = wire.indexOf(Wire.LOGOUT_OPERATION)
+        assertTrue(unregister >= 0 && revoke >= 0, "both calls went out: ${wire.attempts}")
+        assertEquals("${Wire.UNREGISTER_OPERATION} 204", wire.attempts[unregister], "the client's unregister deleted the row (204, not 401 and not the 404 of nothing left): ${wire.attempts}")
+        assertTrue(unregister < revoke, "unregister before the revoke: ${wire.attempts}")
+        assertEquals(0, wire.rowsBeforeRevoke, "rows of the account when the revoke left")
+        assertTrue(markers.has("stapel.push unregistered"), markers.lines.toString())
+        assertTrue(!markers.has("unregister failed"), markers.lines.toString())
     }
 
     @Suppress("unused")

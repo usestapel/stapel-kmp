@@ -10,6 +10,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import stapel.app.di.StapelApp
 import stapel.app.di.stapelApp
@@ -25,6 +26,9 @@ import stapel.config.ClientPlatform
 import stapel.config.Posture
 import stapel.config.StapelEnvironment
 import stapel.di.StapelQualifiers
+import stapel.network.CallEvent
+import stapel.network.NetworkPlugin
+import stapel.network.RequestContext
 import stapel.mvi.PresenterContext
 import stapel.notifications.push.di.notificationsPushModule
 import stapel.notifications.push.notificationsPushRouting
@@ -103,11 +107,45 @@ class Markers : StapelLogger {
 }
 
 /**
+ * What this installation put on the wire, in order: every attempt as `<operation id> <status>`, and the
+ * server's device rows of the signed-in account read just before the sign-out's revoke (`POST logout/`)
+ * leaves — the state the client's own farewell left behind, before any server-side cleanup could run.
+ */
+class Wire(private val rowsOf: () -> String) : NetworkPlugin {
+    override val id: String = "e2e.wire"
+    val attempts: MutableList<String> = java.util.Collections.synchronizedList(mutableListOf())
+
+    @Volatile
+    var rowsBeforeRevoke: Int? = null
+        private set
+
+    override suspend fun decorate(context: RequestContext) {
+        if (context.operation.id == LOGOUT_OPERATION) {
+            val user = rowsOf()
+            if (user.isNotEmpty()) rowsBeforeRevoke = Stand.devices(user).size
+        }
+    }
+
+    override fun observe(event: CallEvent) {
+        if (event is CallEvent.Attempt) attempts += "${event.operationId} ${event.status}"
+    }
+
+    /** Index of the first attempt of [operationId], or -1. */
+    fun indexOf(operationId: String): Int = synchronized(attempts) { attempts.indexOfFirst { it.startsWith("$operationId ") } }
+
+    companion object {
+        const val LOGOUT_OPERATION: String = "auth_api_v1_logout_create"
+        const val UNREGISTER_OPERATION: String = "unregister_push_device"
+    }
+}
+
+/**
  * One app installation, wired the way a generated app with `--mobile-push` is, against the stand. The
  * vendor SDK is [provider] (a fake that grants the OS prompt); one installation id for the Device's life.
  */
 class Device(val name: String) : AutoCloseable {
     private val vault = InMemoryTokenVault()
+    val wire = Wire { userId }
     val installation: String = "e2e-$name-" + UUID.randomUUID()
     val markers = Markers()
     val provider = FakePushProvider(platform = DevicePlatform.Ios, id = "fake", tokenPrefix = "e2e-${Stand.run}-$name").apply {
@@ -125,7 +163,10 @@ class Device(val name: String) : AutoCloseable {
         modules(
             pushModule(PushOptions(routing = notificationsPushRouting())),
             notificationsPushModule(),
-            module { single<PushProvider> { provider } },
+            module {
+                single<PushProvider> { provider }
+                single<NetworkPlugin>(named("e2e.wire")) { wire }
+            },
         )
         overrides(
             module {
