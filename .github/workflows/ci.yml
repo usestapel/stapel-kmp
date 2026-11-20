@@ -88,6 +88,8 @@ jobs:
           key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
       - run: xcodebuild -version
       - run: ./gradlew "$MAC_HEAP" iosSimulatorArm64Test dokkaGeneratePublicationHtml --continue
+      # The iOS floor on what was linked: no test executable's code targets an iOS above IOS_FLOOR.
+      - run: ./gradlew "$MAC_HEAP" checkIosBinaries
       # Screenshot baselines are recorded and verified on macOS only (Linux text rasterisation differs).
       - run: ./gradlew "$MAC_HEAP" :showcase:gallery:verifyScreenshots
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -124,6 +126,8 @@ jobs:
           key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
       - run: ./gradlew "$MAC_HEAP" publishAllPublicationsToStagingRepository
       - run: scripts/verify-artifacts.sh
+      # The iOS floor on what is published: no klib carries a newer version-min option or native object.
+      - run: ./gradlew "$MAC_HEAP" checkIosBinaries
       - run: ./gradlew "$MAC_HEAP" -p consumer-smoke check
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -183,6 +187,10 @@ jobs:
         env:
           SHOP_STAND_URL: http://127.0.0.1:18731/
         run: samples/shop-mobile/scripts/ios-smoke.sh --uitest
+      - name: The iOS floor on the built app and the Kotlin framework it embeds
+        run: >
+          ./gradlew "$MAC_HEAP" checkIosBinaries
+          -Pstapel.ios.binaries=samples/shop-mobile/shared/build/xcode-frameworks,samples/shop-mobile/build/ios-smoke/derived/Build/Products/Debug-iphonesimulator/ShopMobile.app
       - name: Auth stand down
         if: always()
         run: bricks/auth/e2e/stand/stand.sh down
@@ -198,13 +206,93 @@ jobs:
             bricks/auth/e2e/build/stand/*.log
           retention-days: 14
 
+  # The iOS floor (15.0) executed: the same app, walk and XCUITest suite on the OLDEST iOS simulator
+  # runtime a GitHub-hosted runner has (macos-14: iOS 17.0, with Xcode 16.2). No hosted image and no
+  # current Xcode can install an iOS 15 or 16 simulator runtime; what this job proves is "built for 15.0,
+  # runs on the oldest runtime available", see docs/gates.md.
+  sample-oldest-ios:
+    name: sample-oldest-ios (shop-mobile on the oldest hosted iOS runtime)
+    needs: [publish-smoke]
+    runs-on: macos-14
+    # macOS runners are the bottleneck: a newer commit's job supersedes this job while it is still
+    # QUEUED (GitHub keeps one pending job per group); a running job is never cancelled. ci-ok reports
+    # a superseded commit as superseded, never as green. Rule tested by build-logic CiWorkflowTest.
+    concurrency:
+      group: macos-sample-oldest-ios-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    timeout-minutes: 60
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+      IOS_SMOKE_RUNTIME: oldest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: stapel-kmp-repo-${{ github.sha }}
+          path: build/staging-repo
+      - name: The oldest iOS runtime and an iPhone on it
+        id: sim
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes
+          udid="$(xcrun simctl list devices available -j | python3 -c '
+          import json,re,sys
+          d=json.load(sys.stdin)["devices"]
+          ver=lambda rt: [int(x) for x in re.findall(r"\d+", rt.rsplit("iOS", 1)[-1])]
+          for rt in sorted((r for r in d if ".iOS-" in r), key=ver):
+              for x in d[rt]:
+                  if x["name"].startswith("iPhone"): print(x["udid"]); sys.exit()')"
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+          xcrun simctl list devices | grep "$udid" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Auth stand up (stapel-tools scaffold, prototype posture, 127.0.0.1:18731)
+        env:
+          K7_PYTHON: python3.12
+        run: bricks/auth/e2e/stand/stand.sh up
+      - name: The sign-in walk on the oldest iOS simulator against the stand
+        working-directory: samples/shop-mobile
+        run: >
+          ./gradlew :shared:iosSimulatorArm64Test -Pstapel.walk.baseUrl=http://127.0.0.1:18731/
+          -Pstapel.ios.simulator=${{ steps.sim.outputs.udid }}
+      - name: iOS app (xcodebuild), launch, deep link and the XCUITest suite on the oldest runtime
+        env:
+          SHOP_STAND_URL: http://127.0.0.1:18731/
+        run: samples/shop-mobile/scripts/ios-smoke.sh --uitest ${{ steps.sim.outputs.udid }}
+      - name: Auth stand down
+        if: always()
+        run: bricks/auth/e2e/stand/stand.sh down
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: shop-mobile-oldest-ios-${{ github.sha }}
+          path: |
+            samples/shop-mobile/build/ios-smoke/*.png
+            samples/shop-mobile/build/ios-smoke/*.log
+            samples/shop-mobile/build/ios-smoke/*.txt
+            samples/shop-mobile/build/ios-smoke/uitest.xcresult
+            bricks/auth/e2e/build/stand/*.log
+          retention-days: 14
+
   # The ONE required check for branch protection. Green only when every job succeeded; a commit whose
   # macOS job was superseded while queued is reported SUPERSEDED (red, never green); anything else red
   # is FAILED. Verdict rules: scripts/ci-verdict.sh, tested by build-logic CiWorkflowTest.
   ci-ok:
     name: ci-ok
     if: always()
-    needs: [build-logic, fast, ios, publish-smoke, sample]
+    needs: [build-logic, fast, ios, publish-smoke, sample, sample-oldest-ios]
     runs-on: ubuntu-latest
     permissions:
       contents: read
