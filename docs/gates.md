@@ -226,7 +226,7 @@ reports it as a note.
 
 ## CI capacity and the `ci-ok` verdict
 
-Linux jobs (`build-logic`, `fast`) run for every commit. Each macOS job (`ios`,
+Linux jobs (`build-logic`, `fast`) run for every commit. Each macOS job (`ios`, `docs`,
 `publish-smoke`, `sample`, `sample-oldest-ios`) has a job-level concurrency group shared by every
 push to `main`: a newer commit's job replaces an older one that is still
 waiting for the group (GitHub keeps one pending job per group); a job that has
