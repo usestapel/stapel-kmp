@@ -27,13 +27,14 @@ import stapel.result.ServerRefusal
 import stapel.result.StapelResult
 
 /**
- * A scriptable [PushProvider]: tokens are `fake-token-<n>`, the OS answers [osAnswer] to a prompt,
+ * A scriptable [PushProvider]: tokens are `fake-token-<n>` (see `tokenPrefix`), the OS answers [osAnswer] to a prompt,
  * and every call is appended to [log] (`permission`, `request:<provisional>`, `token`, `delete`,
  * `channels:<ids>`, `foreground:<mode>`). Passes [PushProviderContract].
  *
  * @param availability what the provider reports; anything but Ready answers every call without throwing.
  * @param platform the platform its tokens are registered for.
  * @param journal where calls are appended; share one list with [FakeDeviceRegistry] to assert the order across both.
+ * @param tokenPrefix tokens are `<prefix>-<n>`; give each run its own against a real registry (tokens are unique there).
  */
 public class FakePushProvider(
     /** What the provider reports. */
@@ -45,6 +46,7 @@ public class FakePushProvider(
     /** Whether the registry takes its tokens. */
     override val transactional: Boolean = true,
     journal: MutableList<String> = mutableListOf(),
+    private val tokenPrefix: String = "fake-token",
 ) : PushProvider {
     /** Every call, in order. */
     public val log: MutableList<String> = journal
@@ -149,7 +151,7 @@ public class FakePushProvider(
         incoming.trySend(PushEvent.Opened(message, actionId))
     }
 
-    private fun mint(): PushToken = PushToken("fake-token-${++serial}", TokenKind.Fcm, id).also { current = it }
+    private fun mint(): PushToken = PushToken("$tokenPrefix-${++serial}", TokenKind.Fcm, id).also { current = it }
 }
 
 /** A message for tests with the given `data`; the type defaults to `test_message`. */

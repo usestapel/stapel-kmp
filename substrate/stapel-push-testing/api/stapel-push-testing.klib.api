@@ -60,7 +60,7 @@ final class stapel.push.testing/FakeDeviceRegistry : stapel.push/PushDeviceRegis
 }
 
 final class stapel.push.testing/FakePushProvider : stapel.push/PushProvider { // stapel.push.testing/FakePushProvider|null[0]
-    constructor <init>(stapel.push/ProviderAvailability = ..., stapel.push/DevicePlatform? = ..., kotlin/String = ..., kotlin/Boolean = ..., kotlin.collections/MutableList<kotlin/String> = ...) // stapel.push.testing/FakePushProvider.<init>|<init>(stapel.push.ProviderAvailability;stapel.push.DevicePlatform?;kotlin.String;kotlin.Boolean;kotlin.collections.MutableList<kotlin.String>){}[0]
+    constructor <init>(stapel.push/ProviderAvailability = ..., stapel.push/DevicePlatform? = ..., kotlin/String = ..., kotlin/Boolean = ..., kotlin.collections/MutableList<kotlin/String> = ..., kotlin/String = ...) // stapel.push.testing/FakePushProvider.<init>|<init>(stapel.push.ProviderAvailability;stapel.push.DevicePlatform?;kotlin.String;kotlin.Boolean;kotlin.collections.MutableList<kotlin.String>;kotlin.String){}[0]
 
     final val availability // stapel.push.testing/FakePushProvider.availability|{}availability[0]
         final fun <get-availability>(): stapel.push/ProviderAvailability // stapel.push.testing/FakePushProvider.availability.<get-availability>|<get-availability>(){}[0]
