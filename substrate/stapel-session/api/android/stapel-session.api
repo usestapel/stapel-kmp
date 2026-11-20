@@ -1,3 +1,7 @@
+public abstract interface class stapel/session/FarewellHook {
+	public abstract fun beforeLogout (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public abstract interface class stapel/session/InstallationIdentity {
 	public abstract fun deviceId (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
@@ -60,13 +64,15 @@ public final class stapel/session/RefreshOutcome$Transient : stapel/session/Refr
 
 public final class stapel/session/SessionConfig {
 	public fun <init> ()V
-	public synthetic fun <init> (JJILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (JJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JJJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-UwyO8pc ()J
 	public final fun component2-UwyO8pc ()J
-	public final fun copy-QTBD994 (JJ)Lstapel/session/SessionConfig;
-	public static synthetic fun copy-QTBD994$default (Lstapel/session/SessionConfig;JJILjava/lang/Object;)Lstapel/session/SessionConfig;
+	public final fun component3-UwyO8pc ()J
+	public final fun copy-WzaCiaA (JJJ)Lstapel/session/SessionConfig;
+	public static synthetic fun copy-WzaCiaA$default (Lstapel/session/SessionConfig;JJJILjava/lang/Object;)Lstapel/session/SessionConfig;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFarewellTimeout-UwyO8pc ()J
 	public final fun getProactiveRefreshWindow-UwyO8pc ()J
 	public final fun getRotationHandoffWindow-UwyO8pc ()J
 	public fun hashCode ()I
@@ -137,12 +143,14 @@ public abstract interface class stapel/session/SessionManager {
 	public abstract fun adopt (Lstapel/session/TokenPair;Lstapel/session/SessionKind;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun awaitReady (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun currentTokens (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun farewell (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getAuthenticator ()Lstapel/network/RequestAuthenticator;
 	public abstract fun getEvents ()Lkotlinx/coroutines/flow/SharedFlow;
 	public abstract fun getState ()Lkotlinx/coroutines/flow/StateFlow;
 	public abstract fun logout (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun refresh (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun refresh$default (Lstapel/session/SessionManager;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun registerFarewellHook (Lstapel/session/FarewellHook;)Ljava/lang/AutoCloseable;
 	public abstract fun registerLogoutHook (Lstapel/session/LogoutHook;)Ljava/lang/AutoCloseable;
 	public abstract fun restore (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun sessionLost (Lstapel/session/SessionEnd;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

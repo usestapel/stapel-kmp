@@ -135,6 +135,18 @@ public sealed interface RefreshOutcome {
     ) : RefreshOutcome
 }
 
+/**
+ * Work that needs the session's bearer on an explicit sign-out: unregistering this device's push
+ * token, telling a server goodbye. Runs before the tokens are dropped (and before [LogoutHook]s), so
+ * an authenticated call still works; see [SessionManager.farewell] for the order and the budget.
+ * Never called when a session ends without a sign-out (expired, revoked, storage lost): the bearer
+ * is already dead then, and server-side cleanup is the backend's.
+ */
+public fun interface FarewellHook {
+    /** Called at most once per session. A throwing or slow hook never blocks the sign-out. */
+    public suspend fun beforeLogout()
+}
+
 /** Local erasure on session end (caches, user files). Runs after the tokens are gone, before state publishes. */
 public fun interface LogoutHook {
     /** Called once per session end. A throwing hook does not stop the others. */

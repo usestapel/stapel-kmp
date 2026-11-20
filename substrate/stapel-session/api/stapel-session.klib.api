@@ -32,6 +32,10 @@ final enum class stapel.session/SessionKind : kotlin/Enum<stapel.session/Session
     final fun values(): kotlin/Array<stapel.session/SessionKind> // stapel.session/SessionKind.values|values#static(){}[0]
 }
 
+abstract fun interface stapel.session/FarewellHook { // stapel.session/FarewellHook|null[0]
+    abstract suspend fun beforeLogout() // stapel.session/FarewellHook.beforeLogout|beforeLogout(){}[0]
+}
+
 abstract fun interface stapel.session/LogoutHook { // stapel.session/LogoutHook|null[0]
     abstract suspend fun onSessionEnd(stapel.session/SessionEnd) // stapel.session/LogoutHook.onSessionEnd|onSessionEnd(stapel.session.SessionEnd){}[0]
 }
@@ -58,11 +62,13 @@ abstract interface stapel.session/SessionManager { // stapel.session/SessionMana
     abstract val state // stapel.session/SessionManager.state|{}state[0]
         abstract fun <get-state>(): kotlinx.coroutines.flow/StateFlow<stapel.session/SessionState> // stapel.session/SessionManager.state.<get-state>|<get-state>(){}[0]
 
+    abstract fun registerFarewellHook(stapel.session/FarewellHook): kotlin/AutoCloseable // stapel.session/SessionManager.registerFarewellHook|registerFarewellHook(stapel.session.FarewellHook){}[0]
     abstract fun registerLogoutHook(stapel.session/LogoutHook): kotlin/AutoCloseable // stapel.session/SessionManager.registerLogoutHook|registerLogoutHook(stapel.session.LogoutHook){}[0]
     abstract suspend fun accessToken(): kotlin/String? // stapel.session/SessionManager.accessToken|accessToken(){}[0]
     abstract suspend fun adopt(stapel.session/TokenPair, stapel.session/SessionKind) // stapel.session/SessionManager.adopt|adopt(stapel.session.TokenPair;stapel.session.SessionKind){}[0]
     abstract suspend fun awaitReady(): stapel.session/SessionState // stapel.session/SessionManager.awaitReady|awaitReady(){}[0]
     abstract suspend fun currentTokens(): stapel.session/TokenPair? // stapel.session/SessionManager.currentTokens|currentTokens(){}[0]
+    abstract suspend fun farewell() // stapel.session/SessionManager.farewell|farewell(){}[0]
     abstract suspend fun logout() // stapel.session/SessionManager.logout|logout(){}[0]
     abstract suspend fun refresh(kotlin/String? = ...): stapel.network/RefreshVerdict // stapel.session/SessionManager.refresh|refresh(kotlin.String?){}[0]
     abstract suspend fun restore() // stapel.session/SessionManager.restore|restore(){}[0]
@@ -253,8 +259,10 @@ final class stapel.session.vault/TokenVaultConfig { // stapel.session.vault/Toke
 }
 
 final class stapel.session/SessionConfig { // stapel.session/SessionConfig|null[0]
-    constructor <init>(kotlin.time/Duration = ..., kotlin.time/Duration = ...) // stapel.session/SessionConfig.<init>|<init>(kotlin.time.Duration;kotlin.time.Duration){}[0]
+    constructor <init>(kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...) // stapel.session/SessionConfig.<init>|<init>(kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
 
+    final val farewellTimeout // stapel.session/SessionConfig.farewellTimeout|{}farewellTimeout[0]
+        final fun <get-farewellTimeout>(): kotlin.time/Duration // stapel.session/SessionConfig.farewellTimeout.<get-farewellTimeout>|<get-farewellTimeout>(){}[0]
     final val proactiveRefreshWindow // stapel.session/SessionConfig.proactiveRefreshWindow|{}proactiveRefreshWindow[0]
         final fun <get-proactiveRefreshWindow>(): kotlin.time/Duration // stapel.session/SessionConfig.proactiveRefreshWindow.<get-proactiveRefreshWindow>|<get-proactiveRefreshWindow>(){}[0]
     final val rotationHandoffWindow // stapel.session/SessionConfig.rotationHandoffWindow|{}rotationHandoffWindow[0]
@@ -262,7 +270,8 @@ final class stapel.session/SessionConfig { // stapel.session/SessionConfig|null[
 
     final fun component1(): kotlin.time/Duration // stapel.session/SessionConfig.component1|component1(){}[0]
     final fun component2(): kotlin.time/Duration // stapel.session/SessionConfig.component2|component2(){}[0]
-    final fun copy(kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.session/SessionConfig // stapel.session/SessionConfig.copy|copy(kotlin.time.Duration;kotlin.time.Duration){}[0]
+    final fun component3(): kotlin.time/Duration // stapel.session/SessionConfig.component3|component3(){}[0]
+    final fun copy(kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...): stapel.session/SessionConfig // stapel.session/SessionConfig.copy|copy(kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // stapel.session/SessionConfig.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // stapel.session/SessionConfig.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // stapel.session/SessionConfig.toString|toString(){}[0]

@@ -7,6 +7,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,9 +17,11 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import stapel.network.RefreshVerdict
 import stapel.network.RequestAuthenticator
 import stapel.runtime.NetworkStatus
@@ -44,13 +47,20 @@ internal class DefaultSessionManager(
     override val events: SharedFlow<SessionEvent> = mutableEvents.asSharedFlow()
 
     private val hooks = MutableStateFlow<List<LogoutHook>>(emptyList())
+    private val farewells = MutableStateFlow<List<FarewellHook>>(emptyList())
 
-    /** Guards [current], [generation], [inflight], [ending]. Never held across a refresh call or a hook. */
+    /** Guards [current], [generation], [inflight], [ending], [leaving], [farewellDone]. Never held across a refresh call or a hook. */
     private val lock = Mutex()
     private var current: StoredSession? = null
     private var generation = 0L
     private var inflight: Deferred<RefreshVerdict>? = null
     private var ending = false
+
+    /** The farewell hooks are running (rule 6a): a rejected refresh or [sessionLost] does not end the session meanwhile. */
+    private var leaving = false
+
+    /** The generation whose farewell already ran. */
+    private var farewellDone = 0L
     private var rotationInterrupted = false
 
     private val restoreLock = Mutex()
@@ -185,7 +195,8 @@ internal class DefaultSessionManager(
                             SessionTelemetryEvent("rotation_interrupted", mapOf("cause" to outcome.cause.name)),
                         )
                     }
-                    teardown(outcome.cause, explicit = false, expected = session)
+                    // Rule 6a: a sign-out is under way; it ends the session as Logout right after.
+                    if (!lock.withLock { leaving }) teardown(outcome.cause, explicit = false, expected = session)
                     RefreshVerdict.SessionEnded
                 }
                 is RefreshOutcome.Transient -> {
@@ -202,11 +213,50 @@ internal class DefaultSessionManager(
 
     override suspend fun logout() {
         awaitReady()
+        farewell()
         teardown(SessionEnd.Logout, explicit = true, expected = null)
+    }
+
+    override suspend fun farewell() {
+        awaitReady()
+        val run = lock.withLock {
+            if (current == null || ending || leaving || farewellDone == generation) {
+                false
+            } else {
+                leaving = true
+                farewellDone = generation
+                true
+            }
+        }
+        if (!run) return
+        try {
+            withContext(NonCancellable) {
+                val all = farewells.value
+                val finished = withTimeoutOrNull(config.farewellTimeout) {
+                    coroutineScope {
+                        for (hook in all) {
+                            launch {
+                                try {
+                                    hook.beforeLogout()
+                                } catch (e: CancellationException) {
+                                    throw e
+                                } catch (e: Exception) {
+                                    deps.logger.warn(TAG, e) { "farewell hook failed" }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (finished == null) deps.logger.warn(TAG) { "farewell hooks cut off after ${config.farewellTimeout}" }
+            }
+        } finally {
+            withContext(NonCancellable) { lock.withLock { leaving = false } }
+        }
     }
 
     override suspend fun sessionLost(cause: SessionEnd): Boolean {
         awaitReady()
+        if (lock.withLock { leaving }) return false
         return teardown(cause, explicit = false, expected = null)
     }
 
@@ -244,6 +294,11 @@ internal class DefaultSessionManager(
         }
         deps.logger.info(TAG) { "session ended: $cause (explicit=$explicit)" }
         return true
+    }
+
+    override fun registerFarewellHook(hook: FarewellHook): AutoCloseable {
+        farewells.update { it + hook }
+        return AutoCloseable { farewells.update { list -> list - hook } }
     }
 
     override fun registerLogoutHook(hook: LogoutHook): AutoCloseable {

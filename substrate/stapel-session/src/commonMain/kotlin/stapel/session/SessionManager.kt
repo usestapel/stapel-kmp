@@ -27,6 +27,9 @@ import kotlin.time.Duration.Companion.seconds
  *    before the refresh call so a process killed mid-rotation is detected on the next start.
  * 6. Teardown: tokens dropped → vault cleared → every logout hook (one throwing does not stop the
  *    rest) → state published → [SessionEvent.Ended]. During an explicit [logout], [sessionLost] is a no-op.
+ * 6a. An explicit [logout] first runs the farewell hooks ([farewell]) while the tokens are still
+ *    current, bounded by [SessionConfig.farewellTimeout]; a refresh rejected meanwhile does not end
+ *    the session under another cause — the sign-out that follows ends it as [SessionEnd.Logout].
  * 7. Proactive refresh on the request path when the access token expires within
  *    [SessionConfig.proactiveRefreshWindow], clamped to a quarter of the token's own lifetime
  *    (`exp − iat`) so a short-lived token is not refreshed before every request; skipped while
@@ -60,10 +63,23 @@ public interface SessionManager {
     public suspend fun refresh(failedToken: String? = null): RefreshVerdict
 
     /**
-     * Explicit sign-out: local teardown (rule 6). The server-side revoke is the caller's, best
-     * effort, and must read [currentTokens] before calling this.
+     * Explicit sign-out: the farewell hooks unless [farewell] already ran for this session (rule
+     * 6a), then local teardown (rule 6). The server-side revoke is the caller's, best effort, and
+     * must read [currentTokens] before calling this.
      */
     public suspend fun logout()
+
+    /**
+     * Runs every [FarewellHook] now, concurrently, while the session's tokens are still valid; all
+     * of them together get [SessionConfig.farewellTimeout], after which they are cancelled. A caller
+     * that revokes the session on the server before [logout] calls this first, so the hooks'
+     * authenticated calls are made with a live bearer. At most once per session: [logout] skips it
+     * when it already ran. Does nothing without a session.
+     */
+    public suspend fun farewell()
+
+    /** Registers [hook] for every later explicit sign-out; close the handle to unregister. */
+    public fun registerFarewellHook(hook: FarewellHook): AutoCloseable
 
     /**
      * A module learned independently that the session is dead. Returns whether it ended the
@@ -109,6 +125,11 @@ public data class SessionConfig(
      * and our write (the backend's grace for the superseded token is 10 s).
      */
     val rotationHandoffWindow: Duration = 3.seconds,
+    /**
+     * The budget all [FarewellHook]s share on an explicit sign-out; a hook still running after it is
+     * cancelled and the sign-out goes on.
+     */
+    val farewellTimeout: Duration = 3.seconds,
 )
 
 /** Creates the session manager. Plain function: usable without a DI container. */

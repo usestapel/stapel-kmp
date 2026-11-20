@@ -13,7 +13,8 @@
 ## Invariants (each has a test; see the KDoc of `SessionManager` for the list)
 Born `Initializing`; single-flight refresh; compare-before-rotate; three outcomes (a transient
 refresh never signs out); rotated pair persisted before any waiter gets it, rotation marker before
-the call; teardown order vault → hooks → state → event, `sessionLost` a no-op during logout;
+the call; explicit sign-out runs the farewell hooks first (once per session, concurrently, one shared budget;
+a refresh rejected meanwhile does not change the cause from `Logout`); teardown order vault → hooks → state → event, `sessionLost` a no-op during logout;
 proactive refresh before `exp` on the request path (none offline); unreadable vault (a record that
 exists but cannot be read) = `StorageLost`, never plaintext; a wiped or never-written vault, and an
 iOS process with no Keychain at all (`errSecMissingEntitlement` / `errSecNotAvailable`: nothing can
