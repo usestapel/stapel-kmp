@@ -7,13 +7,17 @@
 # stapel_tools/data/composition-registry.json and data/route-plans/*.json, and writes pin.json with
 # the version, the tag's commit (`git ls-remote` of the public repository) and every file's sha256.
 # checkNavParity and stapel-app's PinnedRoutePlanTest read only the pinned copy.
+# stapel-tools needs Python >= 3.11: set PYTHON when the default python3 is older.
 set -euo pipefail
 VERSION="${1:?usage: $0 <stapel-tools version>}"
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DEST="$ROOT/gradle/composition"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-python3 -m venv "$TMP/venv"
+PYTHON="${PYTHON:-python3}"
+"$PYTHON" -I -c 'import sys; sys.exit(sys.version_info < (3, 11))' \
+  || { echo "vendor.sh: $PYTHON is older than 3.11; set PYTHON=python3.12 (or newer)" >&2; exit 1; }
+"$PYTHON" -m venv "$TMP/venv"
 "$TMP/venv/bin/pip" install -q "stapel-tools==$VERSION"
 DATA="$("$TMP/venv/bin/python" -I -c 'import os, stapel_tools; print(os.path.join(os.path.dirname(stapel_tools.__file__), "data"))')"
 COMMIT="$(git ls-remote https://github.com/usestapel/stapel-tools.git "refs/tags/v$VERSION^{}" | cut -f1)"

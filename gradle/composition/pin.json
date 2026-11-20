@@ -1,13 +1,13 @@
 {
   "package": "stapel-tools",
-  "version": "0.82.0",
-  "tag": "v0.82.0",
-  "commit": "29f9a1b775bf130630dd35ff54a76d30f379af5e",
-  "how": "copied from the installed stapel-tools==0.82.0 wheel (PyPI); refresh with tools/composition/vendor.sh <version>",
+  "version": "0.83.0",
+  "tag": "v0.83.0",
+  "commit": "1add8315db07533e4a1adee7f422981bcf34d9b3",
+  "how": "copied from the installed stapel-tools==0.83.0 wheel (PyPI); refresh with tools/composition/vendor.sh <version>",
   "files": {
     "composition-registry.json": {
       "source": "stapel_tools/data/composition-registry.json",
-      "sha256": "9d9fdcd42a6247137150ee81ac76ace6931fba202cd0642d2af06fd6d0146840"
+      "sha256": "8ce0e5cdc9a7403eb9c9d30aee8aed94449c244ba0fcaacf4e4811b8d0b92cbe"
     },
     "route-plans/auth-notifications-workspaces.json": {
       "source": "stapel_tools/data/route-plans/auth-notifications-workspaces.json",

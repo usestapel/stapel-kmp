@@ -5,8 +5,9 @@ verbatim by `RoutePlanFixtureTest`, which replays every case through the Kotlin 
 Python planner is the reference: if the two disagree, the Kotlin port is wrong or the planner changed.
 
 - Source: `usestapel/stapel-tools` at the commit recorded in `index.json` and in every case's
-  `source.commit` (2026-11-19: `741df8d74c520c4213676b997611d2df144e500a`, `origin/main`, v0.81.1).
-- How: a read-only clone at `origin/main`, installed into a throwaway Python 3.12 venv, then
+  `source.commit` (2026-11-20: `1add8315db07533e4a1adee7f422981bcf34d9b3` = `v0.83.0^{commit}`, the
+  release `gradle/composition/pin.json` pins).
+- How: a read-only clone at the release tag, installed into a throwaway Python 3.12 venv, then
   `python -I generate.py --tools-commit <sha> --out .` (usage in the script's docstring).
 - Cases: every registry pair alone, all pairs together, auth + profiles + notifications (the
   orphan rule both ways), and synthetic inputs for hoisting, absolute-parent children, grandchildren,

@@ -66,7 +66,7 @@
     "ids": [
       "fx.x"
     ],
-    "message": "nav manifest mirror is not mountable:\n  - fx.x: icon 'NotAnIcon' is not in the shell's registry (AppstoreOutlined, AuditOutlined, BellOutlined, ClockCircleOutlined, FolderOpenOutlined, FolderOutlined, HeartOutlined, HomeOutlined, LoginOutlined, MessageOutlined, OrderedListOutlined, PlusOutlined, ProfileOutlined, QrcodeOutlined, SafetyCertificateOutlined, SearchOutlined, SettingOutlined, ShoppingCartOutlined, TagOutlined, UserOutlined). Add the icon to shell-react/src/default/icons.tsx AND to NAV_ICON_REGISTRY, or pick a registered name \u2014 an unknown name renders a generic glyph with no error."
+    "message": "nav manifest mirror is not mountable:\n  - fx.x: icon 'NotAnIcon' is not in the shell's registry (AppstoreOutlined, AuditOutlined, BellOutlined, ClockCircleOutlined, FolderOpenOutlined, FolderOutlined, HeartOutlined, HomeOutlined, LoginOutlined, MessageOutlined, OrderedListOutlined, PlusOutlined, ProfileOutlined, QrcodeOutlined, SafetyCertificateOutlined, SearchOutlined, SettingOutlined, ShoppingCartOutlined, TagOutlined, UserOutlined). Add the icon to shell-react/src/default/icons.tsx AND to REACT_ICONS, or pick a registered name \u2014 an unknown name renders a generic glyph with no error."
   },
   "icons": [
     "AppstoreOutlined",
@@ -114,7 +114,7 @@
   ],
   "name": "synthetic-error-unknown-icon",
   "source": {
-    "commit": "741df8d74c520c4213676b997611d2df144e500a",
+    "commit": "1add8315db07533e4a1adee7f422981bcf34d9b3",
     "function": "stapel_tools._frontend_templates.build_nav_route_plan",
     "repo": "usestapel/stapel-tools"
   }

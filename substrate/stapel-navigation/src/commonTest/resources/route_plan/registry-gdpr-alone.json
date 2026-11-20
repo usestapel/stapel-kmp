@@ -154,7 +154,7 @@
   ],
   "name": "registry-gdpr-alone",
   "source": {
-    "commit": "741df8d74c520c4213676b997611d2df144e500a",
+    "commit": "1add8315db07533e4a1adee7f422981bcf34d9b3",
     "function": "stapel_tools._frontend_templates.build_nav_route_plan",
     "repo": "usestapel/stapel-tools"
   }
