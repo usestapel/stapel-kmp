@@ -269,6 +269,8 @@ internal fun Project.registerSourceChecks(family: StapelFamily, names: StapelNam
             ambientRule.set(moduleName != "stapel-runtime")
             libraryRules.set(family in LIBRARY_FAMILIES)
             junit5Rules.set(family == StapelFamily.TOOL || family == StapelFamily.E2E)
+            vendorRule.set(family in VENDOR_FREE_FAMILIES)
+            buildFile.from(layout.projectDirectory.file("build.gradle.kts"))
             today.set(java.time.LocalDate.now().toString())
             moduleDir.set(layout.projectDirectory)
             stamp.set(gateDir.map { it.file("checkSourceRules") })

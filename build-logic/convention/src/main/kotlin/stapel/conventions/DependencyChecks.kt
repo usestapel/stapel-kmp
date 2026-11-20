@@ -63,6 +63,9 @@ data class ForbiddenCoordinate(
 
 private val ANY = Regex(".*")
 
+/** The provider artifacts that may link a vendor analytics/push SDK (ARCH-PUSH-ANALYTICS §1, gate G-X2). */
+internal val VENDOR_PROVIDER = Regex("""stapel-(analytics|push)-(firebase|appmetrica)""")
+
 internal fun forbiddenCoordinates(materialAllowed: Set<String>): List<ForbiddenCoordinate> = listOf(
     ForbiddenCoordinate(
         PURE_FAMILIES,
@@ -90,6 +93,20 @@ internal fun forbiddenCoordinates(materialAllowed: Set<String>): List<ForbiddenC
         ANY,
         "R9: Material lives only in the default skin (gradle/material-allowed.txt)",
         unless = { it in materialAllowed },
+    ),
+    ForbiddenCoordinate(
+        FEATURE_FAMILIES,
+        Regex("""com\.google\.firebase|io\.appmetrica(\..*)?"""),
+        ANY,
+        "G-X2: vendor analytics/push SDKs only in their provider artifacts (stapel-{analytics,push}-{firebase,appmetrica})",
+        unless = { VENDOR_PROVIDER.matches(it) },
+    ),
+    ForbiddenCoordinate(
+        FEATURE_FAMILIES,
+        Regex("""com\.google\.android\.gms"""),
+        Regex("""play-services-(measurement|ads).*"""),
+        "G-X2: vendor analytics/push SDKs only in their provider artifacts (stapel-{analytics,push}-{firebase,appmetrica})",
+        unless = { VENDOR_PROVIDER.matches(it) },
     ),
     ForbiddenCoordinate(
         setOf(StapelFamily.BRICK_UI, StapelFamily.CAPABILITY_UI),

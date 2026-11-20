@@ -456,5 +456,38 @@ class GatesFunctionalTest {
         val e2e = fx.fails(":stapel-auth-e2e:checkSourceRules")
         assertContains(e2e.output, "G-T1 test e has an expression body")
     }
-}
 
+    @Test
+    fun `a vendor sdk outside its provider artifact is refused by checkDependencyDirection`() {
+        val vendor = "implementation(\"io.appmetrica.analytics:analytics-proto:8.6.0\")"
+        val fx = FixtureBuild("vendor-coordinate")
+            .module("substrate/stapel-result", substrate(vendor))
+            .module("capabilities/stapel-analytics-appmetrica", substrate(vendor, plugin = "stapel.capability"))
+        val r = fx.fails(":stapel-result:checkDependencyDirection")
+        assertContains(r.output, "io.appmetrica.analytics:analytics-proto")
+        assertContains(r.output, "G-X2: vendor analytics/push SDKs only in their provider artifacts")
+        fx.succeeds(":stapel-analytics-appmetrica:checkDependencyDirection")
+    }
+
+    @Test
+    fun `a vendor identifier in a facade and a native binding in a library fail checkSourceRules`() {
+        val fx = FixtureBuild("vendor-source")
+            .module("substrate/stapel-result", substrate())
+            .file(
+                "substrate/stapel-result/src/commonMain/kotlin/stapel/result/A.kt",
+                "package stapel.result\n/** Talks to Firebase (a comment may say so). */\npublic fun firebaseToken(): String = \"firebase\"\n",
+            )
+            .module("capabilities/stapel-analytics-firebase", substrate(plugin = "stapel.capability") + "\n// kotlin { iosSimulatorArm64 { compilations.getByName(\"main\") { cinterops { } } } }\nval cocoapods = 1\n")
+            .file(
+                "capabilities/stapel-analytics-firebase/src/commonMain/kotlin/stapel/analytics/firebase/F.kt",
+                "package stapel.analytics.firebase\n/** F. */\npublic fun firebaseSink(): Int = 1\n",
+            )
+        val r = fx.fails(":stapel-result:checkSourceRules")
+        assertContains(r.output, "src/commonMain/kotlin/stapel/result/A.kt:3: G-X2 vendor name in an identifier: firebaseToken")
+        kotlin.test.assertFalse(r.output.contains("A.kt:2"), "comments and strings are not identifiers")
+        val p = fx.fails(":stapel-analytics-firebase:checkSourceRules")
+        assertContains(p.output, "build.gradle.kts")
+        assertContains(p.output, "G-X2 cocoapods")
+        kotlin.test.assertFalse(p.output.contains("F.kt"), "a provider may name its vendor")
+    }
+}

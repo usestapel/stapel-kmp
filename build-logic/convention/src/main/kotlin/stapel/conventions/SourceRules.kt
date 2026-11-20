@@ -83,6 +83,30 @@ val AMBIENT_PATTERNS: List<Pair<Regex, String>> = listOf(
         "platform time zone (take a TimeZoneProvider)",
 )
 
+private val VENDOR_IDENTIFIER = Regex("""(?i)[A-Za-z0-9_.]*(firebase|appmetrica)[A-Za-z0-9_]*""")
+
+/**
+ * G-X2 over one main source file of a facade, brick or `stapel-app`: no identifier (import,
+ * package, type, function) names a vendor. Comments and strings are ignored, so documentation may
+ * say "Firebase".
+ */
+fun vendorFindings(text: String): List<SourceFinding> {
+    val code = blankCommentsAndStrings(text)
+    return VENDOR_IDENTIFIER.findAll(code).map {
+        SourceFinding("G-X2", lineOf(code, it.range.first), "vendor name in an identifier: ${it.value.trim()}")
+    }.toList()
+}
+
+private val NATIVE_BINDING = Regex("""\b(cinterops?|swiftPMDependencies|cocoapods)\b""")
+
+/** G-X2 over a module build file: no `cinterop`, `swiftPMDependencies` or `cocoapods` block in any Stapel artifact (ruling K3). */
+fun nativeBindingFindings(text: String): List<SourceFinding> {
+    val code = blankCommentsAndStrings(text)
+    return NATIVE_BINDING.findAll(code).map {
+        SourceFinding("G-X2", lineOf(code, it.range.first), "${it.value}: vendor SDKs reach iOS through an app-shell Swift bridge, never a native binding in a library")
+    }.toList()
+}
+
 /** G-R1 over one file's text. */
 fun ambientFindings(text: String): List<SourceFinding> {
     val code = blankCommentsAndStrings(text)
@@ -262,6 +286,15 @@ abstract class CheckSourceRules : StapelSourceGate() {
     @get:Input
     abstract val junit5Rules: Property<Boolean>
 
+    /** True for facades, bricks and `stapel-app` (substrate and brick families): G-X2 vendor identifiers. */
+    @get:Input
+    abstract val vendorRule: Property<Boolean>
+
+    /** The module's `build.gradle.kts`, for the G-X2 native-binding rule (libraries only). */
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val buildFile: ConfigurableFileCollection
+
     /** Today, for baseline expiry (an input so a new day re-runs the gate). */
     @get:Input
     abstract val today: Property<String>
@@ -277,9 +310,14 @@ abstract class CheckSourceRules : StapelSourceGate() {
         if (libraryRules.get()) {
             sources.files.filter { it.extension == "kt" }.forEach { f ->
                 val text = f.readText()
-                val hits = (if (ambientRule.get()) ambientFindings(text) else emptyList()) + cancellationFindings(text)
+                val hits = (if (ambientRule.get()) ambientFindings(text) else emptyList()) + cancellationFindings(text) +
+                    (if (vendorRule.get()) vendorFindings(text) else emptyList())
                 if (hits.isNotEmpty()) findings[f.relativeTo(dir).invariantSeparatorsPath] = hits
             }
+        }
+        if (libraryRules.get()) buildFile.files.filter { it.isFile }.forEach { f ->
+            val hits = nativeBindingFindings(f.readText())
+            if (hits.isNotEmpty()) findings[f.relativeTo(dir).invariantSeparatorsPath] = hits
         }
         if (junit5Rules.get()) testSources.files.filter { it.extension == "kt" }.forEach { f ->
             val hits = testBodyFindings(f.readText())
@@ -291,7 +329,8 @@ abstract class CheckSourceRules : StapelSourceGate() {
             throw GradleException(
                 "checkSourceRules (${projectPath.get()}): G-R1 time, dispatchers, randomness, locale and time zone " +
                     "come from stapel-runtime seams (injected); G-R2 cancellation is never swallowed; G-T1 tests " +
-                    "with expression bodies declare `: Unit` (docs/gates.md):\n" + errors.joinToString("\n"),
+                    "with expression bodies declare `: Unit`; G-X2 no vendor name in a facade, brick or stapel-app " +
+                    "identifier and no native binding in a library build file (docs/gates.md):\n" + errors.joinToString("\n"),
             )
         }
         pass("ok")

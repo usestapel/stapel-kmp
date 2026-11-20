@@ -76,3 +76,13 @@ internal val LIBRARY_FAMILIES = setOf(
     StapelFamily.BRICK_ADAPTER,
     StapelFamily.BRICK_TESTING,
 )
+
+/** Families that never name a vendor in an identifier (G-X2): facades, bricks, `stapel-app`. */
+internal val VENDOR_FREE_FAMILIES = setOf(
+    StapelFamily.SUBSTRATE,
+    StapelFamily.SUBSTRATE_UI,
+    StapelFamily.BRICK_DOMAIN,
+    StapelFamily.BRICK_UI,
+    StapelFamily.BRICK_ADAPTER,
+    StapelFamily.BRICK_TESTING,
+)
