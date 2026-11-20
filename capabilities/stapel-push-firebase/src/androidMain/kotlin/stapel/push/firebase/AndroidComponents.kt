@@ -7,8 +7,12 @@ import android.os.Bundle
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-/** Declared in this artifact's manifest: FCM delivers tokens and foreground/data messages here. */
-public class StapelFirebaseMessagingService : FirebaseMessagingService() {
+/**
+ * Declared in this artifact's manifest: FCM delivers tokens and foreground/data messages here.
+ * Internal (a public class in bytecode, as the manifest needs): not API, and its vendor supertype's
+ * members are not documented as ours.
+ */
+internal class StapelFirebaseMessagingService : FirebaseMessagingService() {
     /** Forwards a new registration token to the provider (the token path; see AndroidFirebasePushBridge.token). */
     @Suppress("OVERRIDE_DEPRECATION")
     override fun onNewToken(token: String) {
@@ -25,7 +29,7 @@ public class StapelFirebaseMessagingService : FirebaseMessagingService() {
  * A transparent activity that shows the Android 13+ notification prompt and finishes. Started only
  * from `PushController.enable()` (a deliberate act), never at launch.
  */
-public class StapelPushPermissionActivity : Activity() {
+internal class StapelPushPermissionActivity : Activity() {
     /** Asks once; the answer comes to [onRequestPermissionsResult]. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

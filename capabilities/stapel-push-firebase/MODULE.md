@@ -4,8 +4,8 @@
 - common: `FirebasePushBridge` + `FirebasePushListener` (the Objective-C-exportable bridge,
   `FIREBASE_PUSH_BRIDGE_ABI` = 1), `firebasePushProvider(bridge, platform, dispatchers, logger)`.
 - Android: `androidFirebasePushProvider(platform, …)`, `di.firebasePushModule()`,
-  `handleFirebasePushIntent(intent)`, `StapelFirebaseMessagingService`, `StapelPushPermissionActivity`
-  (both declared in this artifact's manifest with `POST_NOTIFICATIONS` and
+  `handleFirebasePushIntent(intent)`; internal `StapelFirebaseMessagingService` and
+  `StapelPushPermissionActivity` (both declared in this artifact's manifest with `POST_NOTIFICATIONS` and
   `firebase_messaging_auto_init_enabled=false`).
 - iOS: `di.firebasePushModule(bridge)`. jvm: `desktopFirebasePushProvider(…)`, `di.firebasePushModule()`.
 

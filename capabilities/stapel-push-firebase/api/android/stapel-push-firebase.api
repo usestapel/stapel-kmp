@@ -34,17 +34,6 @@ public final class stapel/push/firebase/FirebasePushProviderKt {
 	public static synthetic fun firebasePushProvider$default (Lstapel/push/firebase/FirebasePushBridge;Lstapel/push/DevicePlatform;Lstapel/runtime/StapelDispatchers;Lstapel/runtime/StapelLogger;ILjava/lang/Object;)Lstapel/push/PushProvider;
 }
 
-public final class stapel/push/firebase/StapelFirebaseMessagingService : com/google/firebase/messaging/FirebaseMessagingService {
-	public fun <init> ()V
-	public fun onMessageReceived (Lcom/google/firebase/messaging/RemoteMessage;)V
-	public fun onNewToken (Ljava/lang/String;)V
-}
-
-public final class stapel/push/firebase/StapelPushPermissionActivity : android/app/Activity {
-	public fun <init> ()V
-	public fun onRequestPermissionsResult (I[Ljava/lang/String;[I)V
-}
-
 public final class stapel/push/firebase/di/FirebasePushModuleKt {
 	public static final fun firebasePushModule ()Lorg/koin/core/module/Module;
 }
