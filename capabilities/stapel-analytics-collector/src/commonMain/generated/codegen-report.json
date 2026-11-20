@@ -3,9 +3,9 @@
     "contract": {
         "module": "stapel-analytics",
         "profile": 2,
-        "ref": "d111c0383dba69939c5e59ae08969826b4f4fe48",
-        "schema_sha256": "9efb712df3c47376e6ef63ee7e7dadfd6551554756cd9b6956c7cd59fdb7b1d3",
-        "version": "0.8.3"
+        "ref": "a43548bdb3571cee703e51741fefbcde43a3f67a",
+        "schema_sha256": "b6563494807b2e9efa368d1b650da1a6245b5a72b6902d7a8b64d9404b152b64",
+        "version": "0.8.4"
     },
     "counts": {
         "W-DOC-PARAM": 4,
