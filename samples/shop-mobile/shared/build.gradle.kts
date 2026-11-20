@@ -11,6 +11,9 @@ plugins {
     alias(libs.plugins.stapel.tokens)
 }
 
+// The minimum iOS version of the app (Kotlin/Native binaries and iosApp's IPHONEOS_DEPLOYMENT_TARGET).
+val IOS_FLOOR = "15.0"
+
 // --- the app's environment: stapel.environments.json -> generated AppEnvironment.kt (-Pstapel.env=<name>) ---
 val generateAppEnvironment = tasks.register("generateAppEnvironment") {
     val environmentsFile = rootProject.layout.projectDirectory.file("stapel.environments.json")
@@ -70,6 +73,12 @@ kotlin {
             baseName = "Shared"
             isStatic = true
         }
+        // The iOS floor (15.0): Kotlin/Native's minimum OS for every binary of this target, equal to the
+        // Xcode project's IPHONEOS_DEPLOYMENT_TARGET. Kotlin has no DSL for it; the documented route is
+        // the konan property override.
+        target.binaries.configureEach {
+            freeCompilerArgs += "-Xoverride-konan-properties=osVersionMin.ios_arm64=$IOS_FLOOR;osVersionMin.ios_simulator_arm64=$IOS_FLOOR"
+        }
     }
     jvm { compilerOptions { jvmTarget = JvmTarget.JVM_17 } }
 
@@ -114,6 +123,11 @@ stapelCodegen {
         contractDir.set(rootProject.layout.projectDirectory.dir("contracts/orders"))
         packageName.set("shop.orders.api")
     }
+}
+
+// -Pstapel.ios.simulator=<udid>: the simulator the iOS tests run on (the oldest-runtime CI job picks one).
+providers.gradleProperty("stapel.ios.simulator").orNull?.let { udid ->
+    tasks.withType<org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimulatorTest>().configureEach { device.set(udid) }
 }
 
 tasks.withType<Test>().configureEach {

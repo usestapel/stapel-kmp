@@ -32,17 +32,26 @@ if [[ "${1:-}" == "--uitest" ]]; then UITEST=1; shift; fi
 STAND_URL="${SHOP_STAND_URL:-http://127.0.0.1:18741/}"
 SIGN=(CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM=)
 
+# IOS_SMOKE_RUNTIME=newest (default) | oldest: which installed iOS runtime's iPhone to use when no UDID
+# is given (the oldest-runtime CI job runs the app on the oldest runtime the runner has).
 UDID="${1:-}"
 if [[ -z "$UDID" ]]; then
-    UDID="$(xcrun simctl list devices available -j | python3 -c '
-import json,sys
+    UDID="$(xcrun simctl list devices available -j | IOS_SMOKE_RUNTIME="${IOS_SMOKE_RUNTIME:-newest}" python3 -c '
+import json,os,re,sys
 d=json.load(sys.stdin)["devices"]
-for rt,devs in sorted(d.items(), reverse=True):
-    if "iOS" not in rt: continue
-    for x in devs:
+def ver(rt): return [int(x) for x in re.findall(r"\d+", rt.rsplit("iOS", 1)[-1])]
+rts=sorted((rt for rt in d if ".iOS-" in rt), key=ver, reverse=os.environ["IOS_SMOKE_RUNTIME"] != "oldest")
+for rt in rts:
+    for x in d[rt]:
         if x["name"].startswith("iPhone"): print(x["udid"]); sys.exit()')"
 fi
-echo "[ios-smoke] simulator $UDID"
+RUNTIME="$(xcrun simctl list devices -j | python3 -c '
+import json,sys
+for rt,devs in json.load(sys.stdin)["devices"].items():
+    for x in devs:
+        if x["udid"] == sys.argv[1]: print(rt.rsplit(".", 1)[-1], x["name"])' "$UDID")"
+echo "[ios-smoke] simulator $UDID ($RUNTIME)"
+echo "$RUNTIME" >"$OUT/runtime.txt"
 
 echo "[ios-smoke] xcodebuild"
 xcodebuild -project "$HERE/iosApp/iosApp.xcodeproj" -scheme iosApp -configuration Debug \
@@ -50,6 +59,11 @@ xcodebuild -project "$HERE/iosApp/iosApp.xcodeproj" -scheme iosApp -configuratio
     "${SIGN[@]}" build >"$OUT/xcodebuild.log" 2>&1 || { tail -40 "$OUT/xcodebuild.log"; exit 1; }
 APP="$(find "$DERIVED/Build/Products" -maxdepth 2 -name 'ShopMobile.app' | head -1)"
 [[ -d "$APP" ]] || { echo "[ios-smoke] no ShopMobile.app built"; exit 1; }
+# The app is built for the project's deployment target (the iOS floor; checkIosFloor keeps it there).
+FLOOR="$(sed -n 's/.*IPHONEOS_DEPLOYMENT_TARGET = \([0-9.]*\);.*/\1/p' "$HERE/iosApp/iosApp.xcodeproj/project.pbxproj" | sort -u)"
+MINOS="$(otool -l "$APP/ShopMobile" | awk '/LC_BUILD_VERSION/{b=1} b&&/minos/{print $2; exit}')"
+echo "[ios-smoke] deployment target $FLOOR, app binary minos $MINOS"
+[[ "$MINOS" == "$FLOOR" ]] || { echo "[ios-smoke] the app binary's minos ($MINOS) is not the deployment target ($FLOOR)"; exit 1; }
 
 xcrun simctl boot "$UDID" 2>/dev/null || true
 xcrun simctl bootstatus "$UDID" -b >/dev/null
