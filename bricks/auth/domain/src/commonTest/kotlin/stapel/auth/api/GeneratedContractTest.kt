@@ -119,6 +119,20 @@ class GeneratedContractTest {
     }
 
     @Test
+    fun declaredParamTypesReachTheErrorClasses() {
+        // errors.json `param_types` (core 0.99): the waits are integers, the display is text.
+        val params = mapOf("retry_after" to "90", "retry_after_minutes" to "2", "retry_after_display" to "1:30")
+        val limited = assertIs<AuthApiError.RateLimit>(AuthApiError.decode(envelope("error.429.rate_limit", 429, params)))
+        assertEquals(90, limited.retryAfter)
+        assertEquals(2, limited.retryAfterMinutes)
+        assertEquals("1:30", limited.retryAfterDisplay)
+        val blocked = assertIs<AuthApiError.Blocked>(AuthApiError.decode(envelope("error.422.blocked", 422, params)))
+        assertEquals(90, blocked.retryAfter)
+        val garbled = assertIs<AuthApiError.RateLimit>(AuthApiError.decode(envelope("error.429.rate_limit", 429, mapOf("retry_after" to "soon"))))
+        assertEquals(null, garbled.retryAfter)
+    }
+
+    @Test
     fun boundOperationErrorsNarrowToTheirCodesPlusUnknownAndTransport() {
         val decoder = AuthOperations.emailVerify.errors
         val bound: EmailVerifyError = decoder.domain(envelope("error.409.email_taken", 409))
@@ -164,12 +178,9 @@ class GeneratedContractTest {
 
     private companion object {
         /**
-         * Contract examples that do not match their own schema. The one left is not stapel-auth's own:
-         * stapel-gdpr's data-owner health example, whose falsy `alive` field the backend's docstring reader
-         * drops (fix at the source, then re-pin).
+         * Contract examples that do not match their own schema: none since stapel-auth 0.53.1 (core 0.99
+         * keeps falsy docstring examples, which closed the data-owner health example's missing `alive`).
          */
-        val KNOWN_EXAMPLE_DEFECTS: Set<String> = setOf(
-            "auth_api_v1_owners_health_list response 200 DataOwnerHealthDTO",
-        )
+        val KNOWN_EXAMPLE_DEFECTS: Set<String> = emptySet()
     }
 }

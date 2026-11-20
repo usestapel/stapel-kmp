@@ -86,6 +86,13 @@ class ContractParser(private val set: ContractSet) {
         return set.errors.orEmpty().map { it.jsonObject }.map { e ->
             val declared = e.obj("param_types")?.mapValues { it.value.jsonPrimitive.content }.orEmpty()
             val params = e.arr("params")?.map { it.jsonPrimitive.content }.orEmpty()
+            val pointer = "errors.json#${e.str("code")}"
+            for ((name, type) in declared) {
+                if (type !in ErrorCode.PARAM_TYPES) {
+                    diagnostics.error("E-ERR-PARAM-TYPE", pointer, "param $name has type '$type'; known: ${ErrorCode.PARAM_TYPES.joinToString()}")
+                }
+                if (name !in params) diagnostics.error("E-ERR-PARAM-TYPE", pointer, "param_types names $name, which params does not list")
+            }
             ErrorCode(
                 code = e.str("code")!!,
                 status = e.int("status") ?: 0,

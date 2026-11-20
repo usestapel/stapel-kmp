@@ -35,10 +35,18 @@ stapel-codegen inspect contracts/auth               # census + diagnostics, noth
 stapel-codegen smoke --src <dir of brick clones>    # generate every contract found, report a table
 ```
 
+## Typed error params
+
+`errors.json` entries carry `params` and, from stapel-core 0.99, `param_types` (`string`, `integer`,
+`number`, `boolean`). Each param becomes a nullable property of the code's error class, typed from
+`param_types` (`Int?`, `Double?`, `Boolean?`, `String?`); a param without a declared type stays
+`String?`. A declared type outside that set, or a type for a name `params` does not list, is
+`E-ERR-PARAM-TYPE`.
+
 ## Gates
 
 Hard errors (`E-*`) stop generation: `E-UNION-AMBIGUOUS`, `E-MONEY-AS-DOUBLE`, `E-NAME-COLLISION`,
-`E-ERR-UNKNOWN-CODE`, `E-UNSUPPORTED-KEYWORD`, `E-OVERLAY-STALE`, `E-OVERLAY-REDUNDANT`, `E-CACHE-PLAN`,
+`E-ERR-UNKNOWN-CODE`, `E-ERR-PARAM-TYPE`, `E-UNSUPPORTED-KEYWORD`, `E-OVERLAY-STALE`, `E-OVERLAY-REDUNDANT`, `E-CACHE-PLAN`,
 `E-PIN-DIGEST`, `E-NAME-LOCK`. Warnings (`W-*`, including the undocumented-element codes
 `W-DOC-OPERATION|PARAM|TYPE|PROPERTY`) are counted in `codegen-report.json` and held by the ratchet:
 no count above its baseline, a lower count must be committed as the new baseline, and an undocumented

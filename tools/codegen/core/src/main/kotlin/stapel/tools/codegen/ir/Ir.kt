@@ -216,4 +216,9 @@ data class ErrorCode(
     val remediation: String,
     val en: String,
     val owner: String,
-)
+) {
+    companion object {
+        /** `param_types` values the generator types (errors.json, core >= 0.99); anything else is `E-ERR-PARAM-TYPE`. */
+        val PARAM_TYPES: Set<String> = setOf("string", "integer", "number", "boolean")
+    }
+}

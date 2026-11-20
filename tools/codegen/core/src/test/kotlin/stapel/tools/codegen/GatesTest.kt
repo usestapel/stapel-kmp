@@ -86,6 +86,41 @@ class GatesTest {
         failsWith("E-ERR-UNKNOWN-CODE", dir)
     }
 
+    private fun errorParamContract(paramTypes: String): java.nio.file.Path {
+        val ref = """{"${'$'}ref":"#/components/schemas/Thing"}"""
+        val responses = ""","429":{"description":"","x-stapel-errors":["error.429.rate_limit"]}"""
+        return Fixtures.contract(
+            components = """{"Thing":$obj}""",
+            paths = "{" + Fixtures.post("demo_api_v1_t_create", "t", ref, ref, responses) + "}",
+            errors = """[{"code":"error.429.rate_limit","status":429,"params":["retry_after","retry_after_display","ratio","partial"],
+                "param_types":$paramTypes,"remediation":"wait_and_retry","en":"Wait {retry_after_display}."}]""",
+            profile = 2,
+        )
+    }
+
+    @Test
+    fun declaredErrorParamTypesBecomeTypedProperties() {
+        val files = Fixtures.generate(
+            "demo",
+            errorParamContract("""{"retry_after":"integer","retry_after_display":"string","ratio":"number","partial":"boolean"}"""),
+        ).files
+        val errors = files.getValue("kotlin/stapel/demo/api/error/DemoApiError.kt")
+        assertTrue("public val retryAfter: Int?" in errors, errors)
+        assertTrue("get() = envelope.params.int(\"retry_after\")" in errors)
+        assertTrue("public val retryAfterDisplay: String?" in errors)
+        assertTrue("public val ratio: Double?" in errors)
+        assertTrue("public val partial: Boolean?" in errors)
+        // Undeclared params stay text, as before profile 2 carried types.
+        val untyped = Fixtures.generate("demo", errorParamContract("{}")).files.getValue("kotlin/stapel/demo/api/error/DemoApiError.kt")
+        assertTrue("public val retryAfter: String?" in untyped, untyped)
+    }
+
+    @Test
+    fun anUnknownOrStrayErrorParamTypeIsAnError() {
+        failsWith("E-ERR-PARAM-TYPE", errorParamContract("""{"retry_after":"duration"}"""))
+        failsWith("E-ERR-PARAM-TYPE", errorParamContract("""{"not_a_param":"integer"}"""))
+    }
+
     @Test
     fun unsupportedTypeIsAnError() {
         val dir = Fixtures.contract(

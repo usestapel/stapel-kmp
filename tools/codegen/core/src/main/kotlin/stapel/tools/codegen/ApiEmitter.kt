@@ -1,7 +1,9 @@
 package stapel.tools.codegen
 
+import com.squareup.kotlinpoet.BOOLEAN
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
+import com.squareup.kotlinpoet.DOUBLE
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.INT
 import com.squareup.kotlinpoet.KModifier
@@ -408,11 +410,16 @@ internal class ApiEmitter(
             for (param in spec.params) {
                 var n = Names.member(param)
                 if (n in taken) n += "Param"
-                val integer = spec.paramTypes[param] == "integer"
+                val (type, read, what) = when (spec.paramTypes[param]) {
+                    "integer" -> Triple(INT, "return envelope.params.int(%S)", " as an integer")
+                    "number" -> Triple(DOUBLE, "return envelope.params[%S]?.trim()?.toDoubleOrNull()", " as a number")
+                    "boolean" -> Triple(BOOLEAN, "return envelope.params[%S]?.trim()?.toBooleanStrictOrNull()", " as a boolean")
+                    else -> Triple(STRING, "return envelope.params[%S]", "")
+                }
                 cls.addProperty(
-                    PropertySpec.builder(n, (if (integer) INT else STRING).copy(nullable = true), KModifier.PUBLIC)
-                        .addKdoc("%L", "Envelope param `$param`" + (if (integer) " as an integer" else "") + ", when present.")
-                        .getter(FunSpec.getterBuilder().addStatement(if (integer) "return envelope.params.int(%S)" else "return envelope.params[%S]", param).build())
+                    PropertySpec.builder(n, type.copy(nullable = true), KModifier.PUBLIC)
+                        .addKdoc("%L", "Envelope param `$param`$what, when present.")
+                        .getter(FunSpec.getterBuilder().addStatement(read, param).build())
                         .build(),
                 )
             }

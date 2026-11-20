@@ -1,0 +1,25 @@
+{
+    "files": {
+        "capabilities.json": {
+            "sha256": "96e90937b09d53bcd1db1cf4636a703ae42853da1df1c37aa24c73a95ffda1bd",
+            "source": "docs/capabilities.json"
+        },
+        "errors.json": {
+            "sha256": "e46be6c46143c66202917b53636e35e4f5c518021d6bf5fe832c44365ea4c014",
+            "source": "docs/errors.json"
+        },
+        "flows.json": {
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "source": "docs/flows.json"
+        },
+        "schema.json": {
+            "sha256": "2c53e42b18f500ef65bc66cc195091757e0fc6a9c78f5173c28ba3403d09ad29",
+            "source": "docs/schema.v2.json"
+        }
+    },
+    "module": "stapel-profiles",
+    "ref": "14a98f2ebffa3ad1bf058c462b2824da142dda61",
+    "repo": "https://github.com/usestapel/stapel-profiles",
+    "tag": "v0.23.1",
+    "version": "0.23.1"
+}

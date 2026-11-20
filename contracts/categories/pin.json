@@ -1,0 +1,25 @@
+{
+    "files": {
+        "capabilities.json": {
+            "sha256": "73fe494737f81d498a38ea07f8d772bc8e396fed445feb1257ee791028fd743a",
+            "source": "docs/capabilities.json"
+        },
+        "errors.json": {
+            "sha256": "85c27e9e3c31a994f72b9b8b6da302b5a90503ecbb8a9edef01b443e4e4fb7ad",
+            "source": "docs/errors.json"
+        },
+        "flows.json": {
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "source": "docs/flows.json"
+        },
+        "schema.json": {
+            "sha256": "8ace0564f26db133622be0a6b227c5c49b7fd4faf60f42f2871ef07d783083fc",
+            "source": "docs/schema.v2.json"
+        }
+    },
+    "module": "stapel-categories",
+    "ref": "a2c9ac64439478e648513b97cc726a88870f4e19",
+    "repo": "https://github.com/usestapel/stapel-categories",
+    "tag": "v0.25.1",
+    "version": "0.25.1"
+}

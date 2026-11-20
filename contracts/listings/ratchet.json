@@ -1,0 +1,8 @@
+{
+    "diagnostics": {
+        "W-DOC-PROPERTY": 179,
+        "W-DOC-TYPE": 27,
+        "W-UNTYPED-UNION": 7
+    },
+    "overlay_entries": 0
+}

@@ -421,9 +421,9 @@ public final class stapel/auth/api/error/AuthApiError$AccountLocked : stapel/aut
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
-	public final fun getRetryAfter ()Ljava/lang/String;
+	public final fun getRetryAfter ()Ljava/lang/Integer;
 	public final fun getRetryAfterDisplay ()Ljava/lang/String;
-	public final fun getRetryAfterMinutes ()Ljava/lang/String;
+	public final fun getRetryAfterMinutes ()Ljava/lang/Integer;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -485,9 +485,9 @@ public final class stapel/auth/api/error/AuthApiError$Blocked : stapel/auth/api/
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
-	public final fun getRetryAfter ()Ljava/lang/String;
+	public final fun getRetryAfter ()Ljava/lang/Integer;
 	public final fun getRetryAfterDisplay ()Ljava/lang/String;
-	public final fun getRetryAfterMinutes ()Ljava/lang/String;
+	public final fun getRetryAfterMinutes ()Ljava/lang/Integer;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -2038,9 +2038,9 @@ public final class stapel/auth/api/error/AuthApiError$RateLimit : stapel/auth/ap
 	public fun getEnvelope ()Lstapel/result/ErrorEnvelope;
 	public fun getParams ()Lstapel/result/ErrorParams;
 	public fun getRemediation ()Lstapel/result/Remediation;
-	public final fun getRetryAfter ()Ljava/lang/String;
+	public final fun getRetryAfter ()Ljava/lang/Integer;
 	public final fun getRetryAfterDisplay ()Ljava/lang/String;
-	public final fun getRetryAfterMinutes ()Ljava/lang/String;
+	public final fun getRetryAfterMinutes ()Ljava/lang/Integer;
 	public fun getStatus ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;

@@ -1,0 +1,586 @@
+[
+  {
+    "code": "error.400.avatar_gravatar_hash",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Gravatar avatar must be an email hash (32 or 64 hex characters)",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.avatar_not_found",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Avatar not found on CDN",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.avatar_source_mismatch",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Avatar reference is a CDN reference but avatar_source says otherwise — send avatar_source=\"cdn\" with it, or omit avatar_source and it will be derived from the reference",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.avatar_url_host",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Avatar URL host is not allowed here",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.avatar_url_scheme",
+    "status": 400,
+    "params": [
+      "schemes"
+    ],
+    "remediation": "fix_input",
+    "en": "Avatar URL must use one of: {schemes}",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.bad_request",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Bad request",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.cannot_block_self",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Cannot block yourself",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.cannot_follow_self",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Cannot follow yourself",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.captcha_invalid",
+    "status": 400,
+    "params": [],
+    "remediation": "retry",
+    "en": "Captcha verification failed. Please try again.",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.captcha_required",
+    "status": 400,
+    "params": [],
+    "remediation": "retry",
+    "en": "Captcha token is required.",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.contacts_code_expired",
+    "status": 400,
+    "params": [],
+    "remediation": "retry",
+    "en": "That code is no longer valid. Ask for a new one.",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.contacts_invalid_code",
+    "status": 400,
+    "params": [
+      "attempts_remaining"
+    ],
+    "remediation": "fix_input",
+    "en": "Wrong code. {attempts_remaining} attempt(s) left.",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.contacts_invalid_phone",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Enter the phone number in international form, starting with +",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.contacts_invalid_policy",
+    "status": 400,
+    "params": [
+      "policies"
+    ],
+    "remediation": "fix_input",
+    "en": "Unknown visibility policy. Allowed here: {policies}",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.display_name_emoji",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Display name cannot contain emoji",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.display_name_forbidden_chars",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Display name contains forbidden characters",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.display_name_invisible_chars",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Display name contains invisible characters",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.display_name_too_short",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Display name must be at least 2 characters",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.expected_list",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Expected a list of items",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.blank",
+    "status": 400,
+    "params": [
+      "field"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} may not be blank",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.does_not_exist",
+    "status": 400,
+    "params": [
+      "field"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} does not exist",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.invalid",
+    "status": 400,
+    "params": [
+      "field"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} is invalid",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.invalid_choice",
+    "status": 400,
+    "params": [
+      "field"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} is not a valid choice",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.max_length",
+    "status": 400,
+    "params": [
+      "field",
+      "max_length"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} must be at most {max_length} characters",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.max_value",
+    "status": 400,
+    "params": [
+      "field",
+      "max_value"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} must be at most {max_value}",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.min_length",
+    "status": 400,
+    "params": [
+      "field",
+      "min_length"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} must be at least {min_length} characters",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.min_value",
+    "status": 400,
+    "params": [
+      "field",
+      "min_value"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} must be at least {min_value}",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.null",
+    "status": 400,
+    "params": [
+      "field"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} may not be null",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.required",
+    "status": 400,
+    "params": [
+      "field"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} is required",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.field.unique",
+    "status": 400,
+    "params": [
+      "field"
+    ],
+    "remediation": "fix_input",
+    "en": "{field} must be unique",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.invalid_ad_id",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Invalid advertisement ID",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.invalid_avatar_format",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Invalid avatar reference format. Expected: avatar/<hash>",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.invalid_currency",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Invalid currency code",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.too_many_ids",
+    "status": 400,
+    "params": [
+      "requested",
+      "limit"
+    ],
+    "remediation": "fix_input",
+    "en": "Too many ids: {requested} requested, at most {limit} per batch request",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.400.validation_error",
+    "status": 400,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Validation error",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.verification_failed",
+    "status": 400,
+    "params": [],
+    "remediation": "verify",
+    "en": "Verification failed",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.400.verification_invalid_factor",
+    "status": 400,
+    "params": [],
+    "remediation": "verify",
+    "en": "This verification factor is not available",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.401.unauthorized",
+    "status": 401,
+    "params": [],
+    "remediation": "reauthenticate",
+    "en": "Authentication required",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.402.payment_required",
+    "status": 402,
+    "params": [],
+    "remediation": "retry",
+    "en": "Payment required",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.403.contacts_registration_required",
+    "status": 403,
+    "params": [],
+    "remediation": "reauthenticate",
+    "en": "Register an account to see a seller's phone number",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.403.forbidden",
+    "status": 403,
+    "params": [],
+    "remediation": "retry",
+    "en": "You do not have permission to perform this action",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.403.network_blocked",
+    "status": 403,
+    "params": [],
+    "remediation": "contact_support",
+    "en": "Requests from this network are not allowed",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.403.verification_enrollment_required",
+    "status": 403,
+    "params": [],
+    "remediation": "verify",
+    "en": "Verification factor enrollment required",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.403.verification_required",
+    "status": 403,
+    "params": [],
+    "remediation": "verify",
+    "en": "Additional verification required",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.404.ad_not_found",
+    "status": 404,
+    "params": [],
+    "remediation": "retry",
+    "en": "Listing not found",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.404.contact_not_found",
+    "status": 404,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Contact not found",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.404.not_found",
+    "status": 404,
+    "params": [],
+    "remediation": "retry",
+    "en": "Requested resource not found",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.404.profile_not_found",
+    "status": 404,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Profile not found",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.404.verification_challenge_not_found",
+    "status": 404,
+    "params": [],
+    "remediation": "verify",
+    "en": "Verification challenge not found or expired",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.405.method_not_allowed",
+    "status": 405,
+    "params": [],
+    "remediation": "retry",
+    "en": "Method not allowed",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.406.not_acceptable",
+    "status": 406,
+    "params": [],
+    "remediation": "retry",
+    "en": "Not acceptable",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.408.request_timeout",
+    "status": 408,
+    "params": [],
+    "remediation": "retry",
+    "en": "Request timeout",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.409.conflict",
+    "status": 409,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "Resource already exists",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.409.contacts_duplicate",
+    "status": 409,
+    "params": [],
+    "remediation": "fix_input",
+    "en": "You have already added this number",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.410.gone",
+    "status": 410,
+    "params": [],
+    "remediation": "retry",
+    "en": "Resource has been permanently removed",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.413.payload_too_large",
+    "status": 413,
+    "params": [],
+    "remediation": "retry",
+    "en": "Request body is too large",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.415.unsupported_media_type",
+    "status": 415,
+    "params": [],
+    "remediation": "retry",
+    "en": "Unsupported media type",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.422.unprocessable_entity",
+    "status": 422,
+    "params": [],
+    "remediation": "wait_and_retry",
+    "en": "Unprocessable entity",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.423.locked",
+    "status": 423,
+    "params": [],
+    "remediation": "wait_and_retry",
+    "en": "Resource is locked",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.423.verification_locked",
+    "status": 423,
+    "params": [],
+    "remediation": "wait_and_retry",
+    "en": "Too many failed attempts — verification locked",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.429.contacts_code_rate",
+    "status": 429,
+    "params": [
+      "retry_after"
+    ],
+    "remediation": "wait_and_retry",
+    "en": "Too many attempts. Try again in {retry_after} seconds.",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.429.contacts_reveal_budget",
+    "status": 429,
+    "params": [
+      "retry_after"
+    ],
+    "remediation": "wait_and_retry",
+    "en": "Too many phone lookups. Try again in {retry_after} seconds.",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.429.rate_limit",
+    "status": 429,
+    "params": [
+      "retry_after_display",
+      "retry_after",
+      "retry_after_minutes"
+    ],
+    "remediation": "wait_and_retry",
+    "en": "Too many attempts. Try again in {retry_after_display} ({retry_after} s, about {retry_after_minutes} min).",
+    "owner": "stapel_core",
+    "param_types": {
+      "retry_after": "integer",
+      "retry_after_display": "string",
+      "retry_after_minutes": "integer"
+    }
+  },
+  {
+    "code": "error.429.too_many_requests",
+    "status": 429,
+    "params": [],
+    "remediation": "wait_and_retry",
+    "en": "Too many requests. Please try again later.",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.500.internal",
+    "status": 500,
+    "params": [],
+    "remediation": "contact_support",
+    "en": "Something went wrong",
+    "owner": "stapel_core"
+  },
+  {
+    "code": "error.503.contacts_code_unavailable",
+    "status": 503,
+    "params": [],
+    "remediation": "retry",
+    "en": "The code could not be sent right now. Try again shortly.",
+    "owner": "stapel_profiles"
+  },
+  {
+    "code": "error.503.mandate_unavailable",
+    "status": 503,
+    "params": [],
+    "remediation": "retry",
+    "en": "Cannot verify workspace mandate right now",
+    "owner": "stapel_core"
+  }
+]

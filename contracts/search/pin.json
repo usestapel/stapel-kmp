@@ -1,0 +1,25 @@
+{
+    "files": {
+        "capabilities.json": {
+            "sha256": "8c51fea36d42b88dffdd9a1734b215255bd8322940ead659403d7b436298c7b0",
+            "source": "docs/capabilities.json"
+        },
+        "errors.json": {
+            "sha256": "4119135b5162125e1d899cfee832faf9d00fef87db8d07732ab9a77772800386",
+            "source": "docs/errors.json"
+        },
+        "flows.json": {
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "source": "docs/flows.json"
+        },
+        "schema.json": {
+            "sha256": "2f28bb8a1a3e92f514bf59baf214480edeae38b69cf787839a0f3c107547e02e",
+            "source": "docs/schema.v2.json"
+        }
+    },
+    "module": "stapel-search",
+    "ref": "6ebe8e5567c2102028b8199b1b6fc7c26912f3e4",
+    "repo": "https://github.com/usestapel/stapel-search",
+    "tag": "v0.18.3",
+    "version": "0.18.3"
+}

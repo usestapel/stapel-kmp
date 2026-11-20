@@ -1,0 +1,183 @@
+{
+  "module": "stapel-profiles",
+  "version": "0.23.1",
+  "provides": "User profiles and social graph: display name, avatar, locale/currency/measurement preferences, notification opt-outs, and follow/unfollow/block relationships between users, with a relationship-status lookup. Publishes the fleet's server-side block check (profiles.relationships — is there a block between these two, in either direction) and the public profile card (profiles.public_cards — name, avatar with CDN render metadata, member-since, seller type), and the graph a read-time feed fans in from (profiles.social_graph — whom a user follows, whom to hide), so blocks are enforced by servers rather than by clients hiding a button, and a counterparty renders the same way everywhere.",
+  "axes": [
+    {
+      "key": "PROFILES_AVATAR_CHECK",
+      "kind": "enum",
+      "default": "comm",
+      "group": "profiles.avatar",
+      "gates": {
+        "operations": [],
+        "co_gates": []
+      },
+      "curated": {
+        "summary": "Controls how the profile service confirms an uploaded avatar reference actually exists on the CDN before saving it: through the internal comm bus (default) or skipped entirely (only the reference format is still validated).",
+        "business_label": "Avatar existence verification method"
+      }
+    }
+  ],
+  "extension_points": [
+    {
+      "name": "serializer_seams",
+      "kind": "class_override",
+      "summary": "Every profile/relationship view declares request/response serializer seams (the canonical stapel_core.django.api.views.SerializerSeamMixin, via StapelAPIView) — subclass the view, override the attribute, remount the URL; keep calling super() in serializer overrides so profile.changed keeps publishing."
+    },
+    {
+      "name": "profile_extras_relation",
+      "kind": "app_layer_model",
+      "summary": "Extend the profile without a fork: an app-layer model with a OneToOne to profiles.Profile (or keyed by the same user_id UUID), exposed through the serializer seams — models here are deliberately not swappable."
+    },
+    {
+      "name": "profile.changed",
+      "kind": "comm_event",
+      "summary": "The primary hook for syncing derived data: emitted on every profile mutation (keyed by user_id) — subscribe with @on_action from any module or the host app, no import of this package."
+    }
+  ],
+  "surface": [
+    {
+      "name": "publish_profile_changed",
+      "kind": "factory",
+      "path": "stapel_profiles.events.publish_profile_changed",
+      "intent": "Emit profile.changed for a mutated profile row — the payload shape (schemas/emits/profile.changed.json) and the best-effort savepoint isolation that keeps a broker failure from 500-ing the request both live inside. Call it after ANY profile write that does not go through this module's serializers (a data migration, an admin action, a product's own service function), or every downstream consumer of the event quietly desyncs.",
+      "instead_of": [
+        "stapel_core.comm.emit"
+      ]
+    },
+    {
+      "name": "assemble_profile_fields",
+      "kind": "factory",
+      "path": "stapel_profiles.field_defs.assemble_profile_fields",
+      "intent": "The manifest → {field_name: Django field} primitive under build_profile_model, failing loudly at assembly time on an unknown identity preset or standard-field name instead of with a confusing system check later. Call it directly only when splicing profile fields into a model you already own; if you want a Profile, call build_profile_model."
+    },
+    {
+      "name": "build_profile_model",
+      "kind": "factory",
+      "path": "stapel_profiles.field_defs.build_profile_model",
+      "intent": "Assemble a project's extended, swappable Profile subclass from a field manifest (identity preset + standard fields + custom ProfileFieldDefs) — call it once in your OWN app's models.py and point STAPEL_SWAP[\"PROFILES_PROFILE_MODEL\"] at the result, so the extra columns and their migration live in the project rather than in this package."
+    },
+    {
+      "name": "declared_languages",
+      "kind": "predicate",
+      "path": "stapel_profiles.models.declared_languages",
+      "intent": "Answer which languages this deployment actually DECLARED (it set LANGUAGES itself), as {code: name} — Django's 100-entry default answers {} because nobody claimed it. Reach for it wherever a language code must be validated or offered; reading settings.LANGUAGES directly cannot tell a declaration from Django's default and turns an unconfigured project into one that claims a hundred languages.",
+      "instead_of": [
+        "django.conf.settings.LANGUAGES"
+      ]
+    },
+    {
+      "name": "ensure_declared_languages",
+      "kind": "factory",
+      "path": "stapel_profiles.models.ensure_declared_languages",
+      "intent": "Make the Language reference table agree with the declaration: materialise a row for every declared code that has none. Reach for it before listing or validating languages in a deployment that never ran `sync_languages` — without it the picker is empty and every app_language write 400s, so no user can ever state a language and every notification downstream has to guess at its recipient's.",
+      "instead_of": [
+        "stapel_profiles.management.commands.sync_languages"
+      ]
+    },
+    {
+      "name": "get_profile_model",
+      "kind": "factory",
+      "path": "stapel_profiles.models.get_profile_model",
+      "intent": "THE way to reach the profile DAO: resolves STAPEL_SWAP[\"PROFILES_PROFILE_MODEL\"], so a host that assembled its own extended Profile (build_profile_model) is honoured. Views, serializers, admin, GDPR providers and product code all go through it — a direct `from stapel_profiles.models import Profile` pins the zero-field default and silently ignores the swap, which is exactly what the SWAP001 lint flags.",
+      "instead_of": [
+        "stapel_profiles.models.Profile"
+      ]
+    },
+    {
+      "name": "is_cdn_avatar_reference",
+      "kind": "gate_function",
+      "path": "stapel_profiles.models.is_cdn_avatar_reference",
+      "intent": "Answer whether an avatar value IS a stapel-cdn reference (`avatar/<64-hex>`) — the single discriminator behind the avatar/avatar_source pair invariant. Reach for it when you have a ref and need to know where it came from; matching the prefix or the slash by hand is how a `product/<hash>` ref or a path-like upload key gets mistaken for a CDN avatar."
+    },
+    {
+      "name": "resolve_avatar_source",
+      "kind": "gate_function",
+      "path": "stapel_profiles.models.resolve_avatar_source",
+      "intent": "The avatar_source that MUST accompany a given avatar value — returns the declared source unchanged unless the value is unmistakably a CDN ref tagged otherwise. Call it in any writer that sets an avatar outside this module's serializers; storing the ref and letting the model default choose the tag is exactly how a live stand ended up serving 500s from a cosmetic avatar."
+    },
+    {
+      "name": "validate_avatar_reference",
+      "kind": "gate_function",
+      "path": "stapel_profiles.models.validate_avatar_reference",
+      "intent": "Format-check an avatar value against its declared avatar_source before storing it — the source taxonomy (file/url/gravatar/cdn) lives here, and only `cdn` has a fixed `avatar/<64-hex>` wire shape. Reach for it from any serializer seam that accepts an avatar; validating with the core CDN checker directly instead rejects every non-CDN source a project is allowed to pick.",
+      "instead_of": [
+        "stapel_core.django.cdn.fields.validate_cdn_reference"
+      ]
+    },
+    {
+      "name": "avatar_image",
+      "kind": "factory",
+      "path": "stapel_profiles.serializers.avatar_image",
+      "intent": "The renderable StapelImage for a profile's avatar — variant ladder plus blur-up — mapping this module's avatar_source taxonomy onto the matching media provider. A custom profile presenter or serializer seam must call this rather than hand the raw ref to the media builder with a guessed provider: a pil-default deployment describing CDN refs is how a client shipped an empty variant ladder.",
+      "instead_of": [
+        "stapel_core.media.image"
+      ]
+    },
+    {
+      "name": "avatar_url_allowed_hosts",
+      "kind": "factory",
+      "path": "stapel_profiles.validators.avatar_url_allowed_hosts",
+      "intent": "The external avatar host allowlist (PROFILES_AVATAR_URL_ALLOWED_HOSTS, normalized; empty = no external host trusted, [\"*\"] = any host). Same reason as the schemes accessor: one reading of the policy, not two."
+    },
+    {
+      "name": "avatar_url_allowed_schemes",
+      "kind": "factory",
+      "path": "stapel_profiles.validators.avatar_url_allowed_schemes",
+      "intent": "The schemes this deployment accepts for external avatars (PROFILES_AVATAR_URL_ALLOWED_SCHEMES, normalized). Read the policy from here rather than hardcoding \"https\" in a second place that will not follow when a host changes it."
+    },
+    {
+      "name": "is_gravatar_hash",
+      "kind": "factory",
+      "path": "stapel_profiles.validators.is_gravatar_hash",
+      "intent": "Predicate form of the gravatar rule, for read paths deciding whether a stored value may be turned into a URL."
+    },
+    {
+      "name": "is_safe_avatar_url",
+      "kind": "gate_function",
+      "path": "stapel_profiles.validators.is_safe_avatar_url",
+      "intent": "The read half of the same boundary, as a predicate: whether a stored avatar URL may still be handed to a client. Use it before rendering an avatar reference that did not come from this module's serializers — an old row is not evidence that today's policy allows it."
+    },
+    {
+      "name": "validate_avatar_url",
+      "kind": "gate_function",
+      "path": "stapel_profiles.validators.validate_avatar_url",
+      "intent": "The import half of the avatar URL boundary: refuses an external avatar whose scheme this deployment does not accept (https only by default) or whose host is outside PROFILES_AVATAR_URL_ALLOWED_HOSTS. Any writer that stores an avatar without passing through this module's serializer must call it, or a user-controlled active-scheme string reaches every consumer that renders a profile."
+    },
+    {
+      "name": "validate_display_name",
+      "kind": "gate_function",
+      "path": "stapel_profiles.validators.validate_display_name",
+      "intent": "This module's display-name canon — minimum length, control/invisible characters and emoji, raising StapelValidationError with the module's own error keys so the frontend gets a translatable key rather than a sentence. Any host onboarding form, admin action or importer that writes a name must run it through here instead of inventing a second, differently-strict regex; the user.registered pre-fill already does."
+    },
+    {
+      "name": "validate_gravatar_hash",
+      "kind": "gate_function",
+      "path": "stapel_profiles.validators.validate_gravatar_hash",
+      "intent": "Refuse a gravatar avatar that is not an email hash. The value is interpolated into a gravatar URL, so a 'hash' carrying a path or a query is an arbitrary destination wearing a hash's name."
+    }
+  ],
+  "operations_total": 24,
+  "requires": [
+    {
+      "module": "stapel-core",
+      "optional": false,
+      "reason": "comm bus (events/functions), JWT authentication, GDPR provider registry, AppSettings config layer"
+    },
+    {
+      "module": "stapel-auth",
+      "optional": true,
+      "reason": "consumes the user.registered / user.deleted comm events (OAuth avatar import, GDPR erasure on account deletion) that stapel-auth emits; decoupled via the comm bus, not a hard import dependency"
+    },
+    {
+      "module": "stapel-cdn",
+      "optional": true,
+      "reason": "avatar storage/existence checks (PROFILES_AVATAR_CHECK=comm calls cdn.media_exists) and OAuth avatar import (cdn.import_from_url) go through stapel_core.comm to a CDN provider"
+    },
+    {
+      "module": "stapel-gdpr",
+      "optional": true,
+      "reason": "surfaces this module's registered GDPR provider (profile section export/erase) through DSR endpoints; the registration itself only needs stapel-core.gdpr"
+    }
+  ]
+}

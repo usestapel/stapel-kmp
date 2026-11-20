@@ -1,0 +1,25 @@
+{
+    "files": {
+        "capabilities.json": {
+            "sha256": "34addafc820c788799380c2b9245f5ce8b4073e1ba35554498e2baff727c5320",
+            "source": "docs/capabilities.json"
+        },
+        "errors.json": {
+            "sha256": "04ac7b5389d61566a7e8ff44a8a7418a81c287bb43ef8871f7453fe2e634c134",
+            "source": "docs/errors.json"
+        },
+        "flows.json": {
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "source": "docs/flows.json"
+        },
+        "schema.json": {
+            "sha256": "a39904738be670214cc73995cf88dd0f2378423ba68fdab8f0d4500e4658fcb2",
+            "source": "docs/schema.v2.json"
+        }
+    },
+    "module": "stapel-listings",
+    "ref": "2173a65e546060732b30dadfac9c8de092851588",
+    "repo": "https://github.com/usestapel/stapel-listings",
+    "tag": "v0.30.1",
+    "version": "0.30.1"
+}
